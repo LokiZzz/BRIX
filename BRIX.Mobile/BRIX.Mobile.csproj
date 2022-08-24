@@ -52,4 +52,10 @@
 	  <None Include="..\.editorconfig" Link=".editorconfig" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="View\HealDamageEffectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

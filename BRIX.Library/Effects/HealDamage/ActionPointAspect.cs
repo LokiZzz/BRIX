@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BRIX.Library.Effects.Base;
 
-namespace BRIX.Library
+namespace BRIX.Library.Effects.HealDamage
 {
     public class ActionPointAspect : AspectBase
     {
+        public override bool IsEnabled { get; set; } = true;
+
         private int _minActionPoints = 1;
         private int _maxActionPoints = 50;
 
@@ -17,7 +20,7 @@ namespace BRIX.Library
             get => _actionPoints;
             set
             {
-                if(value < _minActionPoints || _maxActionPoints < value)
+                if (value < _minActionPoints || _maxActionPoints < value)
                 {
                     throw new ArgumentException("Способность может тратить от 1 до 50 очков действий.");
                 }
@@ -30,13 +33,13 @@ namespace BRIX.Library
         {
             int percents;
 
-            switch(ActionPoints)
+            switch (ActionPoints)
             {
                 case <= 5:
-                    percents = (ActionPoints - 1) * 5 ;
+                    percents = (ActionPoints - 1) * 5;
                     break;
                 default:
-                    percents = ActionPoints + 15 ;
+                    percents = ActionPoints + 15;
                     break;
             }
 

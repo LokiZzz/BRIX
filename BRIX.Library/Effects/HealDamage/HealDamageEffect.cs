@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BRIX.Library.DiceValue;
+using BRIX.Library.Effects.Base;
 using BRIX.Library.Extensions;
 
-namespace BRIX.Library
+namespace BRIX.Library.Effects.HealDamage
 {
     public class HealOrDamageEffect : EffectBase
     {
@@ -19,7 +20,8 @@ namespace BRIX.Library
 
         public override List<AspectBase> Aspects => new List<AspectBase>
         {
-            new ActionPointAspect(), 
+            new ActionPointAspect(), new TargetSelectionAspect(), new ObstacleAspect(),
+            new TargetSelectionRestrictionsApsect(), new CooldownAspect(), new ActivationConditionsAspect()
         };
     }
 }

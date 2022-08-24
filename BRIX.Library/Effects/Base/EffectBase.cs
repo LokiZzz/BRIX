@@ -1,6 +1,6 @@
 ﻿using BRIX.Library.Extensions;
 
-namespace BRIX.Library
+namespace BRIX.Library.Effects.Base
 {
     public abstract class EffectBase
     {
@@ -12,7 +12,7 @@ namespace BRIX.Library
         {
             double resultingCost = BaseExpCost();
 
-            foreach(AspectBase aspect in Aspects)
+            foreach (AspectBase aspect in Aspects)
             {
                 double coeficient = aspect.GetCoefficient();
                 resultingCost = resultingCost * coeficient;

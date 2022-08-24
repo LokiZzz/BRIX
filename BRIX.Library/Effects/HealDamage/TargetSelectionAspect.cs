@@ -1,22 +1,21 @@
-﻿using BRIX.Library.Mathematics;
+﻿using BRIX.Library.Effects.Base;
+using BRIX.Library.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BRIX.Library
+namespace BRIX.Library.Effects.HealDamage
 {
-    public class TargetAspect : AspectBase
+    public class TargetSelectionAspect : AspectBase
     {
         public ETargetType Strategy { get; set; }
 
         public override double GetCoefficient()
         {
-            switch(Strategy)
+            switch (Strategy)
             {
-                case ETargetType.Point:
-                    return GetPointCoeficient();
                 case ETargetType.Area:
                     return GetAreaCoeficient();
                 case ETargetType.NTargetsAtDistanсeL:
@@ -26,28 +25,51 @@ namespace BRIX.Library
             }
         }
 
+        public bool IsChainEnabled { get; set; }
+        public int MaxDistanceBetweenTargets { get; set; }
+        public int MaxTargetsCount { get; set; }
+
+        public double GetChainCoefficient()
+        {
+            if (IsChainEnabled)
+            {
+                return ((75 + MaxDistanceBetweenTargets) * MaxTargetsCount).ToPositiveCoeficient();
+            }
+            else
+            {
+                return 1;
+            }    
+        }
+
         public NTADSettings NTAD { get; set; } = new NTADSettings();
 
         private double GetNTADCoeficient()
         {
-            double distanceCoef = new ThrasholdCoefConverter((1, 0), (2, 20), (3, 10), (21, 5), (101, 2), (1001, 1))
-                .Convert(NTAD.DistanceInMeters)
-                / 100 + 1;
             double countCoef = new ThrasholdCoefConverter((1, 100), (6, 50), (11, 10), (101, 5), (101, 1))
                 .Convert(NTAD.TargetsCount)
-                / 100 + 1;
+                .ToPositiveCoeficient();
 
-            return distanceCoef * countCoef;
+            return GetDistanceCoef() 
+                * countCoef 
+                * GetChainCoefficient();
         }
+
+        public AreaSettings Area { get; set; }
 
         private double GetAreaCoeficient()
         {
-            throw new NotImplementedException();
+            int areaPercents = Area.Shape.GetVolume() * 5;
+
+            return GetDistanceCoef() 
+                * areaPercents.ToPositiveCoeficient() 
+                * GetChainCoefficient();
         }
 
-        private double GetPointCoeficient()
+        private double GetDistanceCoef()
         {
-            throw new NotImplementedException();
+            return new ThrasholdCoefConverter((1, 0), (2, 20), (3, 10), (21, 5), (101, 2), (1001, 1))
+                .Convert(NTAD.DistanceInMeters)
+                .ToPositiveCoeficient();
         }
     }
 
@@ -60,14 +82,16 @@ namespace BRIX.Library
 
     public class AreaSettings
     {
+        public int DistanceToAreaInMeters { get; set; }
+
         private EAreaType _areaType;
         public EAreaType AreaType
         {
-            get => _areaType; 
-            set 
-            { 
-                _areaType = value; 
-                switch(_areaType)
+            get => _areaType;
+            set
+            {
+                _areaType = value;
+                switch (_areaType)
                 {
                     case EAreaType.Brick:
                         Shape = new Brick();
@@ -102,8 +126,7 @@ namespace BRIX.Library
 
     public enum ETargetType
     {
-        Point = 0,
-        Area = 1,
-        NTargetsAtDistanсeL = 2
+        Area = 0,
+        NTargetsAtDistanсeL = 1
     }
 }
