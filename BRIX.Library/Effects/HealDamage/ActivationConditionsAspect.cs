@@ -14,6 +14,11 @@ namespace BRIX.Library.Effects.HealDamage
 
         public override double GetCoefficient()
         {
+            if (!Conditions.Any())
+            {
+                return 1;
+            }
+
             double coeficient = ((int)Conditions.First()).ToNegativeCoeficient();
 
             foreach (EActivationCodition condition in Conditions.Skip(1))

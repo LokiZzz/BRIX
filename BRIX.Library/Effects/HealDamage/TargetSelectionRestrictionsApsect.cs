@@ -14,6 +14,11 @@ namespace BRIX.Library.Effects.HealDamage
 
         public override double GetCoefficient()
         {
+            if(!Restrictions.Any())
+            {
+                return 1;
+            }
+
             double coeficient = ((int)Restrictions.First()).ToNegativeCoeficient();
 
             foreach(ETargetSelectionRestrictions restriction in Restrictions.Skip(1))

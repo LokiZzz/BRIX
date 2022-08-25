@@ -21,16 +21,16 @@ namespace BRIX.Library.Effects.Base
             return resultingCost.Round();
         }
 
-        //public T GetAspect<T>() where T : AspectBase
-        //{
-        //    AspectBase aspect = Aspects.FirstOrDefault(x => x is T);
+        public T GetAspect<T>() where T : AspectBase
+        {
+            AspectBase aspect = Aspects.FirstOrDefault(x => x is T);
 
-        //    if(aspect == null)
-        //    {
-        //        throw new ArgumentException($"У эффекта {GetType()} нет аспекта {typeof(T)}");
-        //    }
+            if (aspect == null)
+            {
+                throw new ArgumentException($"У эффекта {GetType()} нет аспекта {typeof(T)}");
+            }
 
-        //    return (T)aspect;
-        //}
+            return (T)aspect;
+        }
     }
 }

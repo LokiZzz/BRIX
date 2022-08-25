@@ -49,26 +49,26 @@ namespace BRIX.Library.Effects.HealDamage
                 .Convert(NTAD.TargetsCount)
                 .ToPositiveCoeficient();
 
-            return GetDistanceCoef() 
+            return GetDistanceCoef(NTAD.DistanceInMeters) 
                 * countCoef 
                 * GetChainCoefficient();
         }
 
-        public AreaSettings Area { get; set; }
+        public AreaSettings Area { get; set; } = new AreaSettings();
 
         private double GetAreaCoeficient()
         {
             int areaPercents = Area.Shape.GetVolume() * 5;
 
-            return GetDistanceCoef() 
+            return GetDistanceCoef(Area.DistanceToAreaInMeters) 
                 * areaPercents.ToPositiveCoeficient() 
                 * GetChainCoefficient();
         }
 
-        private double GetDistanceCoef()
+        private double GetDistanceCoef(int distance)
         {
             return new ThrasholdCoefConverter((1, 0), (2, 20), (3, 10), (21, 5), (101, 2), (1001, 1))
-                .Convert(NTAD.DistanceInMeters)
+                .Convert(distance)
                 .ToPositiveCoeficient();
         }
     }
@@ -126,7 +126,8 @@ namespace BRIX.Library.Effects.HealDamage
 
     public enum ETargetType
     {
-        Area = 0,
-        NTargetsAtDistanсeL = 1
+        None = 0,
+        Area = 1,
+        NTargetsAtDistanсeL = 2
     }
 }

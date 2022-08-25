@@ -7,11 +7,23 @@
     <ContentPage.BindingContext>
         <vm:HealDamageEffectVM/>
     </ContentPage.BindingContext>
-    
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <Grid RowDefinitions="*,auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout>
+                <Label Text="{Binding Damage, StringFormat='Урон: {0}'}"/>
+                <Slider Minimum="1" Maximum="400" Value="{Binding Damage}"/>
+                <Label Text="{Binding ActionPoints, StringFormat='Очки действий: {0}'}"/>
+                <Slider Minimum="1" Maximum="50" Value="{Binding ActionPoints}"/>
+                <Label Text="{Binding MaxTargetDistance, StringFormat='Дистанция: {0}'}"/>
+                <Slider Minimum="1" Maximum="1000" Value="{Binding MaxTargetDistance}"/>
+                <Label Text="{Binding TargetCount, StringFormat='Количество целей: {0}'}"/>
+                <Slider Minimum="1" Maximum="1000" Value="{Binding TargetCount}"/>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid Grid.Row="1" BackgroundColor="Black">
+            <Label Text="{Binding ExperienceCost}" TextColor="White" FontSize="Large"/>
+        </Grid>
+    </Grid>
 </ContentPage>
