@@ -18,7 +18,7 @@
                 <Label Text="{Binding MaxTargetDistance, StringFormat='Дистанция: {0}'}"/>
                 <Slider Minimum="1" Maximum="1000" Value="{Binding MaxTargetDistance}"/>
                 <Label Text="{Binding TargetCount, StringFormat='Количество целей: {0}'}"/>
-                <Slider Minimum="1" Maximum="1000" Value="{Binding TargetCount}"/>
+                <Slider Minimum="1" Maximum="150" Value="{Binding TargetCount}"/>
             </VerticalStackLayout>
         </ScrollView>
 

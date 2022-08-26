@@ -4,7 +4,7 @@ namespace BRIX.Library.Effects.Base
 {
     public abstract class EffectBase
     {
-        public abstract List<AspectBase> Aspects { get; }
+        public List<AspectBase> Aspects;
 
         public abstract int BaseExpCost();
 

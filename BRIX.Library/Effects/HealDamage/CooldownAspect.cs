@@ -8,11 +8,21 @@ using System.Threading.Tasks;
 
 namespace BRIX.Library.Effects.HealDamage
 {
-    public class CooldownAspect : AspectBase
+    public class CooldownAspect : SingleConditionAspect<ECooldownOption> 
     {
-        public ECooldownOption Cooldown { get; set; }
-
-        public override double GetCoefficient() => ((int)Cooldown).ToNegativeCoeficient();
+        public override Dictionary<ECooldownOption, int> ConditionToCoeficientMap => new Dictionary<ECooldownOption, int>
+        {
+            { ECooldownOption.None, 0 },
+            { ECooldownOption.Minute, -10 },
+            { ECooldownOption.Hour, -15 },
+            { ECooldownOption.Day, -20 },
+            { ECooldownOption.Week, -25 },
+            { ECooldownOption.Month, -30 },
+            { ECooldownOption.Year, -35 },
+            { ECooldownOption.TenYears, -40 },
+            { ECooldownOption.HundredYears, -45 },
+            { ECooldownOption.CannotReset, -70 }
+        };
     }
 
     public enum ECooldownOption

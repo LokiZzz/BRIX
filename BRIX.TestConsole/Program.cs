@@ -3,9 +3,7 @@ using BRIX.Library;
 using BRIX.Library.DiceValue;
 using BRIX.Library.Mathematics;
 
-Console.WriteLine("Hello, World!");
 
-ThrasholdCoefConverter converter = new((1, 0), (2, 20), (3, 10), (21, 5), (101, 2), (1001, 1));
+new ThrasholdCoefConverter((1, 0), (2, 100), (6, 50), (11, 10), (101, 5), (101, 1)).Convert(6);
 
-int coef = converter.Convert(10000);
 Console.WriteLine("Hello, World!");

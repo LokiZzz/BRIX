@@ -8,19 +8,21 @@ namespace BRIX.Library.Mathematics
 {
     public static class NumbersExtension
     {
-        public static double ToPositiveCoeficient(this int percents)
+        public static double ToCoeficient(this int percents)
         {
-            return 1 + percents / 100;
-        }
-
-        public static double ToNegativeCoeficient(this int percents)
-        {
-            if(percents > 100)
+            if (percents >= 0)
             {
-                throw new ArgumentException("Негативный коэффициент должен находится между 0 и 1.");
+                return 1 + (double)percents / 100;
             }
+            else
+            {
+                if (percents > 100)
+                {
+                    throw new ArgumentException("Негативный коэффициент должен находится между 0 и 1.");
+                }
 
-            return percents / 100;
+                return (double)percents / 100;
+            }
         }
     }
 }

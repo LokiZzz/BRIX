@@ -21,7 +21,7 @@ namespace BRIX.Library.Effects.HealDamage
                 case ETargetType.NTargetsAtDistanсeL:
                     return GetNTADCoeficient();
                 default:
-                    return default;
+                    return 1;
             }
         }
 
@@ -33,7 +33,7 @@ namespace BRIX.Library.Effects.HealDamage
         {
             if (IsChainEnabled)
             {
-                return ((75 + MaxDistanceBetweenTargets) * MaxTargetsCount).ToPositiveCoeficient();
+                return ((75 + MaxDistanceBetweenTargets) * MaxTargetsCount).ToCoeficient();
             }
             else
             {
@@ -45,9 +45,9 @@ namespace BRIX.Library.Effects.HealDamage
 
         private double GetNTADCoeficient()
         {
-            double countCoef = new ThrasholdCoefConverter((1, 100), (6, 50), (11, 10), (101, 5), (101, 1))
+            double countCoef = new ThrasholdCoefConverter((1, 0), (2, 100), (6, 50), (11, 10), (101, 5), (101, 1))
                 .Convert(NTAD.TargetsCount)
-                .ToPositiveCoeficient();
+                .ToCoeficient();
 
             return GetDistanceCoef(NTAD.DistanceInMeters) 
                 * countCoef 
@@ -61,7 +61,7 @@ namespace BRIX.Library.Effects.HealDamage
             int areaPercents = Area.Shape.GetVolume() * 5;
 
             return GetDistanceCoef(Area.DistanceToAreaInMeters) 
-                * areaPercents.ToPositiveCoeficient() 
+                * areaPercents.ToCoeficient() 
                 * GetChainCoefficient();
         }
 
@@ -69,7 +69,7 @@ namespace BRIX.Library.Effects.HealDamage
         {
             return new ThrasholdCoefConverter((1, 0), (2, 20), (3, 10), (21, 5), (101, 2), (1001, 1))
                 .Convert(distance)
-                .ToPositiveCoeficient();
+                .ToCoeficient();
         }
     }
 

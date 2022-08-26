@@ -8,38 +8,42 @@ using System.Threading.Tasks;
 
 namespace BRIX.Library.Effects.HealDamage
 {
-    public class TargetSelectionRestrictionsApsect : AspectBase
+    public class TargetSelectionRestrictionsApsect : MultiConditionalAspect<ETargetSelectionRestrictions>
     {
-        public List<ETargetSelectionRestrictions> Restrictions { get; set; } = new List<ETargetSelectionRestrictions>();
-
-        public override double GetCoefficient()
+        public override Dictionary<ETargetSelectionRestrictions, int> ConditionToCoeficientMap => new Dictionary<ETargetSelectionRestrictions, int>
         {
-            if(!Restrictions.Any())
-            {
-                return 1;
-            }
+            { ETargetSelectionRestrictions.NeedToSeeTarget, 10 },
+            { ETargetSelectionRestrictions.NeedToTargetSees, 5 },
 
-            double coeficient = ((int)Restrictions.First()).ToNegativeCoeficient();
+            { ETargetSelectionRestrictions.NeedToHearTarget, 15 },
+            { ETargetSelectionRestrictions.NeedToTargetHears, 10 },
 
-            foreach(ETargetSelectionRestrictions restriction in Restrictions.Skip(1))
-            {
-                coeficient *= ((int)restriction).ToNegativeCoeficient();
-            }
+            { ETargetSelectionRestrictions.NeedToDetermineTarget, 20 },
+            { ETargetSelectionRestrictions.NeedToTargetDetermines, 25 },
 
-            return coeficient;
-        }
+            { ETargetSelectionRestrictions.TargetMustBeOrganicOrNotOrganic, 20 },
+            { ETargetSelectionRestrictions.TargetMustHaveSoul, 20 },
+
+            { ETargetSelectionRestrictions.TargetMustHaveLowRarityProperty, 10 },
+            { ETargetSelectionRestrictions.TargetMustHaveMediumRarityProperty, 20 },
+            { ETargetSelectionRestrictions.TargetMustHaveHighRarityProperty, 30 },
+        };
     }
 
     public enum ETargetSelectionRestrictions
     {
         NeedToSeeTarget = 10,
         NeedToTargetSees = 5,
+
         NeedToHearTarget = 15,
         NeedToTargetHears = 10,
+
         NeedToDetermineTarget = 20,
         NeedToTargetDetermines = 25,
+
         TargetMustBeOrganicOrNotOrganic = 20,
         TargetMustHaveSoul = 20,
+
         TargetMustHaveLowRarityProperty = 10,
         TargetMustHaveMediumRarityProperty = 20,
         TargetMustHaveHighRarityProperty = 30
