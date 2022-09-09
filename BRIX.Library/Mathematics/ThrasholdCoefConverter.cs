@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace BRIX.Library.Mathematics
 {
-    /// <summary>
-    /// Класс позволяющий конвертировать значения показателя в очки опыта с прогрессивной
-    /// шкалой стоимости за единицу. Например, перевод расстояния в стоимость за метр может
-    /// меняться в соответсвии со значением расстояниея, где до 20 метров каждый метр будет
-    /// стоить 5 очков, а начиная с 21 и до 100 метров каждый метр будет стоить уже 2 очка.
-    /// </summary>
+    
     public class ThrasholdCoefConverter
     {
         public ThrasholdCoefConverter(params (int, int)[] steps)
@@ -56,27 +51,27 @@ namespace BRIX.Library.Mathematics
             return converted;
         }
 
-        private void AddSteps((int, int)[] steps)
+        private void AddSteps((int Thrashold, int Delta)[] steps)
         {
             steps = steps.OrderBy(x => x.Item1).ToArray();
 
             LinkedListNode<ThresholdStep> current = new(
                 new ThresholdStep
                 {
-                    Thrashold = steps.First().Item1,
-                    Delta = steps.First().Item2
+                    Thrashold = steps.First().Thrashold,
+                    Delta = steps.First().Delta
                 }
             );
 
             Steps.AddFirst(current);
 
-            foreach ((int, int) step in steps.Skip(1))
+            foreach ((int Thrashold, int Delta) step in steps.Skip(1))
             {
                 LinkedListNode<ThresholdStep> next = new(
                     new ThresholdStep
                     {
-                        Thrashold = step.Item1,
-                        Delta = step.Item2
+                        Thrashold = step.Thrashold,
+                        Delta = step.Delta
                     }
                 );
 
