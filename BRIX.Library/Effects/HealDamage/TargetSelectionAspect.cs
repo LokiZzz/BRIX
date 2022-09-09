@@ -25,45 +25,19 @@ namespace BRIX.Library.Effects.HealDamage
             }
         }
 
-        public bool IsChainEnabled { get; set; }
-        public int MaxDistanceBetweenTargets { get; set; }
-        public int MaxTargetsCount { get; set; }
-
-        public double GetChainCoefficient()
-        {
-            if (IsChainEnabled)
-            {
-                return ((75 + MaxDistanceBetweenTargets) * MaxTargetsCount).ToCoeficient();
-            }
-            else
-            {
-                return 1;
-            }    
-        }
-
         public NTADSettings NTAD { get; set; } = new NTADSettings();
 
-        private double GetNTADCoeficient()
-        {
-            double countCoef = new ThrasholdCoefConverter((1, 0), (2, 100), (6, 50), (11, 10), (101, 5), (101, 1))
+        public double GetNTADCoeficient() => GetNTADDistanceCoef() * GetNTADCountCoeficient();
+        public double GetNTADDistanceCoef() => GetDistanceCoef(NTAD.DistanceInMeters);
+        public double GetNTADCountCoeficient() => new ThrasholdCoefConverter((1, 0), (2, 100), (6, 50), (11, 10), (101, 1))
                 .Convert(NTAD.TargetsCount)
                 .ToCoeficient();
 
-            return GetDistanceCoef(NTAD.DistanceInMeters) 
-                * countCoef 
-                * GetChainCoefficient();
-        }
-
         public AreaSettings Area { get; set; } = new AreaSettings();
 
-        private double GetAreaCoeficient()
-        {
-            int areaPercents = Area.Shape.GetVolume() * 5;
-
-            return GetDistanceCoef(Area.DistanceToAreaInMeters) 
-                * areaPercents.ToCoeficient() 
-                * GetChainCoefficient();
-        }
+        private double GetAreaCoeficient() => GetAreaDistanceCoeficient() * GetAreaVolumeCoeficient();
+        public double GetAreaDistanceCoeficient() => GetDistanceCoef(Area.DistanceToAreaInMeters);
+        public double GetAreaVolumeCoeficient() => (Area.Shape.GetVolume() * 5).ToCoeficient();
 
         private double GetDistanceCoef(int distance)
         {

@@ -26,6 +26,5 @@ namespace BRIX.Library.Effects.HealDamage
         {
             return Math.Pow(Impact.Average(), 2).Round();
         }
-            
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BRIX.Library.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,13 @@ namespace BRIX.Library.Mathematics
 
                 return (double)percents / 100;
             }
+        }
+
+        public static int ToPercent(this double coeficient)
+        {
+            int percent = (coeficient * 100).Round();
+
+            return percent - 100;
         }
     }
 }

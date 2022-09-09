@@ -43,7 +43,7 @@ namespace BRIX.Library.Effects.HealDamage
                     break;
             }
 
-            return 1 - percents / 100;
+            return 1 - (double)percents / 100;
         }
     }
 }

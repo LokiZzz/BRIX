@@ -8,16 +8,19 @@
         <vm:HealDamageEffectVM/>
     </ContentPage.BindingContext>
 
-    <Grid RowDefinitions="*,auto">
+    <Grid RowDefinitions="*,auto" Margin="200,0">
         <ScrollView Grid.Row="0">
             <VerticalStackLayout>
                 <Label Text="{Binding Damage, StringFormat='Урон: {0}'}"/>
                 <Slider Minimum="1" Maximum="400" Value="{Binding Damage}"/>
                 <Label Text="{Binding ActionPoints, StringFormat='Очки действий: {0}'}"/>
+                <Label Text="{Binding ActionPointsModifierString, StringFormat='Модификатор: {0}'}"/>
                 <Slider Minimum="1" Maximum="50" Value="{Binding ActionPoints}"/>
                 <Label Text="{Binding MaxTargetDistance, StringFormat='Дистанция: {0}'}"/>
+                <Label Text="{Binding MaxTargetDistanceModifierString, StringFormat='Модификатор: {0}'}"/>
                 <Slider Minimum="1" Maximum="1000" Value="{Binding MaxTargetDistance}"/>
                 <Label Text="{Binding TargetCount, StringFormat='Количество целей: {0}'}"/>
+                <Label Text="{Binding MaxTargetCountModifierString, StringFormat='Модификатор: {0}'}"/>
                 <Slider Minimum="1" Maximum="150" Value="{Binding TargetCount}"/>
             </VerticalStackLayout>
         </ScrollView>
