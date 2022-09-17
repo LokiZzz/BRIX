@@ -20,6 +20,8 @@ namespace BRIX.Library.Effects.HealDamage
             };
         }
 
+        public bool IsDamage { get; set; } = true;
+
         public DicePool Impact { get; set; } = new DicePool(0);
 
         public override int BaseExpCost()

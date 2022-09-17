@@ -10,6 +10,7 @@ namespace BRIX.Library.Effects.HealDamage
 {
     public class TargetSelectionRestrictionsApsect : MultiConditionalAspect<ETargetSelectionRestrictions>
     {
+        //ЗДЕСЬ ОШИБКА, ПРОЦЕНТЫ ДОЛЖНЫ БЫТЬ НЕГАТИВНЫМИ, ПРОВЕРИТЬ ТО ЖЕ САМОЕ НА ДРУГИХ АСПЕКТАХ
         public override Dictionary<ETargetSelectionRestrictions, int> ConditionToCoeficientMap => new Dictionary<ETargetSelectionRestrictions, int>
         {
             { ETargetSelectionRestrictions.NeedToSeeTarget, 10 },
