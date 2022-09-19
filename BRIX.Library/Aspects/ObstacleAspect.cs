@@ -1,12 +1,6 @@
-﻿using BRIX.Library.Effects.Base;
-using BRIX.Library.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BRIX.Library.Mathematics;
 
-namespace BRIX.Library.Effects.HealDamage
+namespace BRIX.Library.Aspects
 {
     public class ObstacleAspect : AspectBase
     {
@@ -35,12 +29,12 @@ namespace BRIX.Library.Effects.HealDamage
 
     public enum EObstacleEquivalent
     {
-        None = 0,
-        Paper = 1,
-        From1To3mmSteel = 2,
-        From4To10mmSteel = 3,
-        From11To100mmSteel = 4,
-        From101To1000mmSteel = 5,
-        MuchMorePowerfullObstacle = 6
+        None,
+        Paper,
+        From1To3mmSteel,
+        From4To10mmSteel,
+        From11To100mmSteel,
+        From101To1000mmSteel,
+        MuchMorePowerfullObstacle
     }
 }

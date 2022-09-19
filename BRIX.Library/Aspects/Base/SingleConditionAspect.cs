@@ -1,12 +1,6 @@
-﻿using BRIX.Library.Effects.HealDamage;
-using BRIX.Library.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BRIX.Library.Mathematics;
 
-namespace BRIX.Library.Effects.Base
+namespace BRIX.Library.Aspects
 {
     public abstract class SingleConditionAspect<T> : AspectBase where T : Enum
     {

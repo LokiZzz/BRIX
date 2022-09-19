@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BRIX.Library.Effects.Base;
-
-namespace BRIX.Library.Effects.HealDamage
+﻿namespace BRIX.Library.Aspects
 {
     public class ActionPointAspect : AspectBase
     {

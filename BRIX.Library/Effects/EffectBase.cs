@@ -1,6 +1,7 @@
-﻿using BRIX.Library.Extensions;
+﻿using BRIX.Library.Aspects;
+using BRIX.Library.Extensions;
 
-namespace BRIX.Library.Effects.Base
+namespace BRIX.Library.Effects
 {
     public abstract class EffectBase
     {

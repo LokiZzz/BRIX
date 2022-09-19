@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Effects.HealDamage;
+﻿using BRIX.Library.Aspects;
+using BRIX.Library.Effects.HealDamage;
 using BRIX.Library.Mathematics;
 using BRIX.Mobile.ViewModel.Base;
 using System;

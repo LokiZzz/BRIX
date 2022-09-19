@@ -1,12 +1,4 @@
-﻿using BRIX.Library.Effects.Base;
-using BRIX.Library.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BRIX.Library.Effects.HealDamage
+﻿namespace BRIX.Library.Aspects
 {
     public class ActivationConditionsAspect : MultiConditionalAspect<EActivationCondition>
     {

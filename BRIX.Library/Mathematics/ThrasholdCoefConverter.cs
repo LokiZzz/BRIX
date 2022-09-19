@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BRIX.Library.Mathematics
+﻿namespace BRIX.Library.Mathematics
 {
-    
     public class ThrasholdCoefConverter
     {
         public ThrasholdCoefConverter(params (int, int)[] steps)
