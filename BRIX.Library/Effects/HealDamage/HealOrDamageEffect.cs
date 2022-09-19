@@ -11,7 +11,8 @@ namespace BRIX.Library.Effects.HealDamage
             Aspects = new List<AspectBase> 
             {
                 new ActionPointAspect(), new TargetSelectionAspect(), new ObstacleAspect(),
-                new TargetSelectionRestrictionsApsect(), new CooldownAspect(), new ActivationConditionsAspect()
+                new TargetSelectionRestrictionsApsect(), new CooldownAspect(), new ActivationConditionsAspect(),
+                new TargetSizeAspect()
             };
         }
 
