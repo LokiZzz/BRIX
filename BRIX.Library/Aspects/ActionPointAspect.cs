@@ -1,4 +1,6 @@
-﻿namespace BRIX.Library.Aspects
+﻿using BRIX.Library.Mathematics;
+
+namespace BRIX.Library.Aspects
 {
     public class ActionPointAspect : AspectBase
     {
@@ -36,7 +38,7 @@
                     break;
             }
 
-            return 1 - (double)percents / 100;
+            return percents.ToCoeficient();
         }
     }
 }
