@@ -6,6 +6,6 @@
 
         public abstract double GetCoefficient();
 
-        public abstract void ConcordAspects(List<AspectBase> sameAspects);
+        public abstract AspectBase ConcordAspects(List<AspectBase> sameAspects);
     }
 }
