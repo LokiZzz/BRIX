@@ -1,11 +1,12 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Extensions;
+using System.Collections.ObjectModel;
 
 namespace BRIX.Library.Effects
 {
     public abstract class EffectBase
     {
-        public List<AspectBase> Aspects;
+        public ReadOnlyCollection<AspectBase> Aspects;
 
         public abstract int BaseExpCost();
 

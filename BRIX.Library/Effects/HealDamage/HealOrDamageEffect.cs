@@ -8,12 +8,14 @@ namespace BRIX.Library.Effects.HealDamage
     {
         public HealOrDamageEffect()
         {
-            Aspects = new List<AspectBase> 
+            List<AspectBase> AspectsList = new () 
             {
                 new ActionPointAspect(), new TargetSelectionAspect(), new ObstacleAspect(),
                 new TargetSelectionRestrictionsApsect(), new CooldownAspect(), new ActivationConditionsAspect(),
                 new TargetSizeAspect()
             };
+
+            Aspects = AspectsList.AsReadOnly();
         }
 
         public bool IsDamage { get; set; } = true;

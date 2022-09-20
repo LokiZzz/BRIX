@@ -1,4 +1,6 @@
-﻿namespace BRIX.Library.Aspects
+﻿using System;
+
+namespace BRIX.Library.Aspects
 {
     public abstract class AspectBase
     {
@@ -6,6 +8,6 @@
 
         public abstract double GetCoefficient();
 
-        public abstract AspectBase ConcordAspects(List<AspectBase> sameAspects);
+        public abstract AspectBase Concord(List<AspectBase> sameAspects);
     }
 }
