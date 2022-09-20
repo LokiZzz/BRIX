@@ -34,5 +34,15 @@ namespace BRIX.Library.Effects
 
             return (T)aspect;
         }
+
+        public override int GetHashCode()
+        {
+            return GetType().GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj.GetType() == GetType();
+        }
     }
 }

@@ -13,109 +13,81 @@ namespace BRIX.Library.Ability
 {
     public class Ability
     {
+        private readonly HashSet<EffectBase> _effects = new();
+
         public string Name { get; set; }
-
         public string Description { get; set; }
+        public IReadOnlyCollection<EffectBase> Effects => _effects;
+        //В методе конкорд необходимо убедиться, что в коллекции лежит
+        //новый экземпляр аспекта, а не ссылка на один из аспектов одного из эффектов.
+        public IReadOnlyCollection<AspectBase> ConcordedAspects => Concord(_effects);
 
-        private List<EffectBase> EffectsInternal { get; } = new List<EffectBase>();
-        public ReadOnlyCollection<EffectBase> Effects => EffectsInternal.AsReadOnly();
-
-        private List<AspectBase> ConcordedAspectsInternal { get; } = new List<AspectBase>();
-        public ReadOnlyCollection<AspectBase> ConcordedAspects => ConcordedAspectsInternal.AsReadOnly();
-
-        /// <summary>
-        /// Итоговая стоимость способности. Равна сумме стоимости всех эффектов, которые её составляют
-        /// и увлеичивается на 20% за каждый эффект начиная со второго.
-        /// </summary>
         public double ExpCost()
         {
             double effectsCountPenaltyCoef = 1;
 
-            if (EffectsInternal.Count() > 1)
+            if (_effects.Count() > 1)
             {
-                effectsCountPenaltyCoef += (EffectsInternal.Count() - 1) * 0.2;
+                effectsCountPenaltyCoef += (_effects.Count() - 1) * 0.2;
             }
 
-            return EffectsInternal.Sum(effect => effect.GetExpCost()) * effectsCountPenaltyCoef; 
+            return _effects.Sum(effect => effect.GetExpCost()) * effectsCountPenaltyCoef;
         }
 
-        public void Add(EffectBase effect)
+        public void AddEffect(EffectBase effect)
         {
-            if(Contains(effect))
+            if (!_effects.Add(effect))
             {
                 throw new AbilityLogicException("Эффект такого типа уже есть в способности.");
             }
-
-            EffectsInternal.Add(effect);
-            Concord(effect);
         }
 
         public T? GetEffect<T>() where T : EffectBase
         {
-            return EffectsInternal.FirstOrDefault(x => x is T) as T;
+            return _effects.FirstOrDefault(x => x is T) as T;
         }
 
         public void Clear()
         {
-            EffectsInternal.Clear();
-            ConcordedAspectsInternal.Clear();
+            _effects.Clear();
         }
-            
-        public void Remove(EffectBase item)
+
+        public void RemoveEffect(EffectBase item)
         {
-            EffectsInternal.Remove(item);
-            Concord();
+            _effects.Remove(item);
         }
 
-        public void Remove<T>() where T : EffectBase
+        public void RemoveEffect<T>() where T : EffectBase
         {
-            EffectBase? effectToRemove = EffectsInternal.FirstOrDefault(x => x is T);
-
-            if(effectToRemove != null)
-            {
-                EffectsInternal.Remove(effectToRemove);
-                Concord();
-            }
+            _effects.RemoveWhere(x => x is T);
         }
 
-        /// <summary>
-        /// Содержит ли способность данный экземпляр эффекта или эффект такого же типа.
-        /// </summary>
         public bool Contains(EffectBase item)
         {
-            return ContainsObject(item) || ContainsType(item);
+            return _effects.Contains(item);
         }
 
-        private bool ContainsObject(EffectBase item) => EffectsInternal.Contains(item);
-
-        private bool ContainsType(EffectBase item) => EffectsInternal.Any(x => x.GetType().Equals(item.GetType()));
-
-        private void Concord(EffectBase initiatingEffect)
+        private List<AspectBase> Concord(IEnumerable<EffectBase> effects)
         {
-            ConcordedAspectsInternal.Clear();
-
-            if (EffectsInternal.Count() > 1)
+            List<AspectBase> aspects = new();
+            if (effects.Any())
             {
-                foreach (AspectBase aspect in initiatingEffect.Aspects)
+                if (effects.Count() > 1)
                 {
-                    List<AspectBase> sameAspects = GetSameAspects(aspect);
-                    AspectBase concordedAspect = aspect.Concord(sameAspects);
-                    ConcordedAspectsInternal.Add(concordedAspect);
+                    foreach (AspectBase aspect in effects.First().Aspects)
+                    {
+                        List<AspectBase> sameAspects = GetSameAspects(effects, aspect);
+                        AspectBase concordedAspect = aspect.Concord(sameAspects);
+                        aspects.Add(concordedAspect);
+                    }
                 }
             }
+            return aspects;
         }
 
-        private void Concord()
+        private List<AspectBase> GetSameAspects(IEnumerable<EffectBase> effects, AspectBase aspect)
         {
-            if (EffectsInternal.Any())
-            {
-                Concord(EffectsInternal.First());
-            }
-        }
-
-        private List<AspectBase> GetSameAspects(AspectBase aspect)
-        {
-            return EffectsInternal.SelectMany(x => x.Aspects)
+            return effects.SelectMany(x => x.Aspects)
                 .Where(x => x.GetType().Equals(aspect.GetType()))
                 .ToList();
         }
