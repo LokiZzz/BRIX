@@ -6,6 +6,10 @@ namespace BRIX.Library.Aspects
     {
         public ETargetType Strategy { get; set; }
 
+        public bool IsTargetSelectionIsRandom { get; set; }
+
+        public double RandomSelectionCoef => IsTargetSelectionIsRandom ? 1 : 0.8;
+
         public override double GetCoefficient()
         {
             switch (Strategy)
@@ -21,7 +25,7 @@ namespace BRIX.Library.Aspects
 
         public NTADSettings NTAD { get; set; } = new NTADSettings();
 
-        public double GetNTADCoeficient() => GetNTADDistanceCoef() * GetNTADCountCoeficient();
+        public double GetNTADCoeficient() => GetNTADDistanceCoef() * GetNTADCountCoeficient() * RandomSelectionCoef;
         public double GetNTADDistanceCoef() => GetDistanceCoef(NTAD.DistanceInMeters);
         public double GetNTADCountCoeficient() => new ThrasholdCoefConverter((1, 0), (2, 100), (6, 50), (11, 10), (101, 1))
                 .Convert(NTAD.TargetsCount)
@@ -29,7 +33,7 @@ namespace BRIX.Library.Aspects
 
         public AreaSettings Area { get; set; } = new AreaSettings();
 
-        private double GetAreaCoeficient() => GetAreaDistanceCoeficient() * GetAreaVolumeCoeficient();
+        private double GetAreaCoeficient() => GetAreaDistanceCoeficient() * GetAreaVolumeCoeficient() * RandomSelectionCoef;
         public double GetAreaDistanceCoeficient() => GetDistanceCoef(Area.DistanceToAreaInMeters);
         public double GetAreaVolumeCoeficient() => (Area.Shape.GetVolume() * 5).ToCoeficient();
 
