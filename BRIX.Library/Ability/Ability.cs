@@ -70,16 +70,14 @@ namespace BRIX.Library.Ability
         private List<AspectBase> Concord(IEnumerable<EffectBase> effects)
         {
             List<AspectBase> aspects = new();
-            if (effects.Any())
+
+            if (effects.Count() > 1)
             {
-                if (effects.Count() > 1)
+                foreach (AspectBase aspect in effects.First().Aspects)
                 {
-                    foreach (AspectBase aspect in effects.First().Aspects)
-                    {
-                        List<AspectBase> sameAspects = GetSameAspects(effects, aspect);
-                        AspectBase concordedAspect = aspect.Concord(sameAspects);
-                        aspects.Add(concordedAspect);
-                    }
+                    List<AspectBase> sameAspects = GetSameAspects(effects, aspect);
+                    AspectBase concordedAspect = aspect.Concord(sameAspects);
+                    aspects.Add(concordedAspect);
                 }
             }
             return aspects;
