@@ -6,7 +6,7 @@ namespace BRIX.Library.Effects
 {
     public abstract class EffectBase
     {
-        public ReadOnlyCollection<AspectBase> Aspects;
+        public List<AspectBase> Aspects;
 
         public abstract int BaseExpCost();
 
@@ -35,14 +35,48 @@ namespace BRIX.Library.Effects
             return (T)aspect;
         }
 
+        public bool TryGetAspect(Type aspectType, out AspectBase? aspect)
+        {
+            aspect = Aspects.FirstOrDefault(x => x.GetType() == aspectType);
+
+            return aspect != null;
+        }
+
+        public void Concord(AspectBase sourceAspect)
+        {
+            if(TryGetAspect(sourceAspect.GetType(), out AspectBase aspectToConcord))
+            {
+                if(aspectToConcord != null)
+                {
+                    int index = Aspects.FindIndex(x => x.GetType().Equals(aspectToConcord.GetType()));
+                    Aspects[index] = sourceAspect;
+                    Aspects[index].IsConcording = true;
+                }
+            }
+        }
+
+        public void Discord(Type sourceAspect)
+        {
+            if (TryGetAspect(sourceAspect, out AspectBase aspectToDiscord))
+            {
+                if (aspectToDiscord != null)
+                {
+                    //TODO: Возможно тут придётся класть в аспект его deep-copy,
+                    //т.к. в методе Concord аспект для синхронизации передаётся по ссылке,
+                    //а не копируется
+                    aspectToDiscord.IsConcording = false;
+                }
+            }
+        }
+
         public override int GetHashCode()
         {
             return GetType().GetHashCode();
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            return obj.GetType() == GetType();
+            return obj?.GetType() == GetType();
         }
     }
 }

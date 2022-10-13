@@ -1,5 +1,5 @@
 ﻿using BRIX.Library.Aspects;
-using BRIX.Library.Effects.HealDamage;
+using BRIX.Library.Effects;
 using BRIX.Library.Mathematics;
 using BRIX.Mobile.ViewModel.Base;
 using System;
@@ -12,11 +12,11 @@ namespace BRIX.Mobile.ViewModel
 {
     public class HealDamageEffectVM : ViewModelBase
     {
-        private HealOrDamageEffect _effect;
+        private HealDamageEffect _effect;
 
         public HealDamageEffectVM()
         {
-            _effect = new HealOrDamageEffect();
+            _effect = new HealDamageEffect();
             _effect.GetAspect<TargetSelectionAspect>().Strategy = ETargetType.NTargetsAtDistanсeL;
 
             Damage = 10;

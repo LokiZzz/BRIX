@@ -1,4 +1,6 @@
-﻿namespace BRIX.Library.Aspects
+﻿using BRIX.Library.Aspects.Base;
+
+namespace BRIX.Library.Aspects
 {
     public class ActivationConditionsAspect : MultiConditionalAspect<EActivationCondition>
     {
@@ -9,9 +11,9 @@
             { EActivationCondition.NeedToMoveBothArms, -15 },
             { EActivationCondition.NeedToAbleToTalk, -10 },
 
-            { EActivationCondition.EasyCondition, -10 },
-            { EActivationCondition.MediumCondition, -20 },
-            { EActivationCondition.HardCondition, -40 }
+            { EActivationCondition.EasyCondition, -20 },
+            { EActivationCondition.MediumCondition, -40 },
+            { EActivationCondition.HardCondition, -60 }
         };
     }
 

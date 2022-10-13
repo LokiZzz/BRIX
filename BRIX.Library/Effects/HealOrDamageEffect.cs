@@ -2,20 +2,18 @@
 using BRIX.Library.DiceValue;
 using BRIX.Library.Extensions;
 
-namespace BRIX.Library.Effects.HealDamage
+namespace BRIX.Library.Effects
 {
-    public class HealOrDamageEffect : EffectBase
+    public class HealDamageEffect : EffectBase
     {
-        public HealOrDamageEffect()
+        public HealDamageEffect()
         {
-            List<AspectBase> AspectsList = new () 
+            Aspects = new()
             {
                 new ActionPointAspect(), new TargetSelectionAspect(), new ObstacleAspect(),
                 new TargetSelectionRestrictionsApsect(), new CooldownAspect(), new ActivationConditionsAspect(),
                 new TargetSizeAspect()
             };
-
-            Aspects = AspectsList.AsReadOnly();
         }
 
         public bool IsDamage { get; set; } = true;

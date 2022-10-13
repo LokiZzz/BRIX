@@ -15,6 +15,10 @@
             { ECooldownOption.HundredYears, -45 },
             { ECooldownOption.CannotReset, -70 }
         };
+
+        public int UsesCount { get; set; } = 1;
+
+        public override double GetCoefficient() => base.GetCoefficient() / UsesCount;
     }
 
     public enum ECooldownOption

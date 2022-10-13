@@ -1,26 +1,26 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Effects;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using BRIX.Library.Extensions;
 
 namespace BRIX.Library.Ability
 {
     public class Ability
     {
         private readonly HashSet<EffectBase> _effects = new();
+        public IReadOnlyCollection<EffectBase> Effects => _effects;
 
         public string Name { get; set; }
         public string Description { get; set; }
-        public IReadOnlyCollection<EffectBase> Effects => _effects;
-        //В методе конкорд необходимо убедиться, что в коллекции лежит
-        //новый экземпляр аспекта, а не ссылка на один из аспектов одного из эффектов.
-        public IReadOnlyCollection<AspectBase> ConcordedAspects => Concord(_effects);
+
+        /// <summary>
+        /// Постоянное материальное обеспечение.
+        /// </summary>
+        public AbilityMaterialSupport MaterialSupport { get; set; } = new();
+
+        /// <summary>
+        /// Расходуемое материальное обеспечение.
+        /// </summary>
+        public AbilityMaterialSupport Consumables { get; set; } = new();
 
         public double ExpCost()
         {
@@ -31,7 +31,9 @@ namespace BRIX.Library.Ability
                 effectsCountPenaltyCoef += (_effects.Count() - 1) * 0.2;
             }
 
-            return _effects.Sum(effect => effect.GetExpCost()) * effectsCountPenaltyCoef;
+            double expCost = _effects.Sum(effect => effect.GetExpCost()) * effectsCountPenaltyCoef;
+
+            return (expCost - MaterialSupport.Coins / 10 - Consumables.Coins * 10).Round();
         }
 
         public void AddEffect(EffectBase effect)
@@ -39,6 +41,29 @@ namespace BRIX.Library.Ability
             if (!_effects.Add(effect))
             {
                 throw new AbilityLogicException("Эффект такого типа уже есть в способности.");
+            }
+
+            foreach (AspectBase aspect in effect.Aspects)
+            {
+                AspectBase sourceAspect = SearchSourceAspect(aspect.GetType());
+
+                if (sourceAspect != null && (sourceAspect.IsConcording || sourceAspect is ActionPointAspect) )
+                {
+                    effect.Concord(sourceAspect);
+                }
+            }
+
+            AspectBase? SearchSourceAspect(Type aspectType)
+            {
+                foreach(EffectBase effect in _effects)
+                {
+                    if (effect.TryGetAspect(aspectType, out AspectBase? aspectToConcord))
+                    {
+                        return aspectToConcord;
+                    }
+                }
+
+                return null;
             }
         }
 
@@ -67,29 +92,30 @@ namespace BRIX.Library.Ability
             return _effects.Contains(item);
         }
 
-        private List<AspectBase> Concord(IEnumerable<EffectBase> effects)
+        /// <summary>
+        /// Дёргать этот метод после любых изменений в любом из аспектов с синхронизацией
+        /// </summary>
+        /// <param name="sourceAspect"></param>
+        public void Concord(AspectBase sourceAspect)
         {
-            List<AspectBase> aspects = new();
-            if (effects.Any())
+            if (_effects.Count() > 1)
             {
-                if (effects.Count() > 1)
+                foreach(EffectBase effect in _effects)
                 {
-                    foreach (AspectBase aspect in effects.First().Aspects)
-                    {
-                        List<AspectBase> sameAspects = GetSameAspects(effects, aspect);
-                        AspectBase concordedAspect = aspect.Concord(sameAspects);
-                        aspects.Add(concordedAspect);
-                    }
+                    effect.Concord(sourceAspect);
                 }
             }
-            return aspects;
         }
 
-        private List<AspectBase> GetSameAspects(IEnumerable<EffectBase> effects, AspectBase aspect)
+        public void Discord(Type sourceAspectType)
         {
-            return effects.SelectMany(x => x.Aspects)
-                .Where(x => x.GetType().Equals(aspect.GetType()))
-                .ToList();
+            if (_effects.Count() > 1)
+            {
+                foreach (EffectBase effect in _effects)
+                {
+                    effect.Discord(sourceAspectType);
+                }
+            }
         }
     }
 }
