@@ -42,29 +42,25 @@ namespace BRIX.Library.Effects
             return aspect != null;
         }
 
-        public void Concord(AspectBase sourceAspect)
+        public void Concord(AspectBase sourceAspect) => SetConcordance(sourceAspect, true);
+
+        public void Discord(AspectBase sourceAspect) => SetConcordance(sourceAspect, false);
+
+        private void SetConcordance(AspectBase sourceAspect, bool isConcording)
         {
-            if(TryGetAspect(sourceAspect.GetType(), out AspectBase aspectToConcord))
+            if (TryGetAspect(sourceAspect.GetType(), out AspectBase aspectToConcord))
             {
-                if(aspectToConcord != null)
+                if (aspectToConcord != null)
                 {
                     int index = Aspects.FindIndex(x => x.GetType().Equals(aspectToConcord.GetType()));
-                    Aspects[index] = sourceAspect;
-                    Aspects[index].IsConcording = true;
-                }
-            }
-        }
 
-        public void Discord(Type sourceAspect)
-        {
-            if (TryGetAspect(sourceAspect, out AspectBase aspectToDiscord))
-            {
-                if (aspectToDiscord != null)
-                {
-                    //TODO: Возможно тут придётся класть в аспект его deep-copy,
-                    //т.к. в методе Concord аспект для синхронизации передаётся по ссылке,
-                    //а не копируется
-                    aspectToDiscord.IsConcording = false;
+                    if (isConcording)
+                    {
+                        Aspects[index] = sourceAspect;
+                    }
+                    //TODO: else { Aspects[index] = UtilityHuility.GetDeepCopy(Aspects[index]); }
+
+                    Aspects[index].IsConcording = isConcording;
                 }
             }
         }

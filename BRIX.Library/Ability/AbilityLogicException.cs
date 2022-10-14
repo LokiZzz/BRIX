@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BRIX.Library.Ability
+namespace BRIX.Library
 {
     public class AbilityLogicException : Exception 
     {

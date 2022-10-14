@@ -2,7 +2,7 @@
 using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
 
-namespace BRIX.Library.Ability
+namespace BRIX.Library
 {
     public class Ability
     {
@@ -20,9 +20,19 @@ namespace BRIX.Library.Ability
         /// <summary>
         /// Расходуемое материальное обеспечение.
         /// </summary>
-        public AbilityMaterialSupport Consumables { get; set; } = new();
+        public AbilityConsumables Consumables { get; set; } = new();
 
-        public double ExpCost()
+        public bool CanActivate() => MaterialSupport.IsProvided && Consumables.IsProvided;
+
+        public void Activate()
+        {
+            if(CanActivate())
+            {
+                Consumables.Spend();
+            }
+        }
+
+        public int ExpCost()
         {
             double effectsCountPenaltyCoef = 1;
 
@@ -33,16 +43,11 @@ namespace BRIX.Library.Ability
 
             double expCost = _effects.Sum(effect => effect.GetExpCost()) * effectsCountPenaltyCoef;
 
-            return (expCost - MaterialSupport.Coins / 10 - Consumables.Coins * 10).Round();
+            return (expCost - MaterialSupport.CoinsPrice / 10 - Consumables.CoinsPrice * 10).Round();
         }
 
         public void AddEffect(EffectBase effect)
         {
-            if (!_effects.Add(effect))
-            {
-                throw new AbilityLogicException("Эффект такого типа уже есть в способности.");
-            }
-
             foreach (AspectBase aspect in effect.Aspects)
             {
                 AspectBase sourceAspect = SearchSourceAspect(aspect.GetType());
@@ -51,6 +56,11 @@ namespace BRIX.Library.Ability
                 {
                     effect.Concord(sourceAspect);
                 }
+            }
+
+            if (!_effects.Add(effect))
+            {
+                throw new AbilityLogicException("Эффект такого типа уже есть в способности.");
             }
 
             AspectBase? SearchSourceAspect(Type aspectType)
@@ -93,9 +103,9 @@ namespace BRIX.Library.Ability
         }
 
         /// <summary>
-        /// Дёргать этот метод после любых изменений в любом из аспектов с синхронизацией
+        /// Включение синхронизации аспекта в эффектах и синхронизация данных аспекта.
+        /// Все аспекты будут синхронизированы с переданным.
         /// </summary>
-        /// <param name="sourceAspect"></param>
         public void Concord(AspectBase sourceAspect)
         {
             if (_effects.Count() > 1)
@@ -107,7 +117,10 @@ namespace BRIX.Library.Ability
             }
         }
 
-        public void Discord(Type sourceAspectType)
+        /// <summary>
+        /// Отключение синхронизации аспекта в эффектах
+        /// </summary>
+        public void Discord(AspectBase sourceAspectType)
         {
             if (_effects.Count() > 1)
             {

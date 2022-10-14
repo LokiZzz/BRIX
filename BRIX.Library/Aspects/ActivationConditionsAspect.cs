@@ -1,6 +1,4 @@
-﻿using BRIX.Library.Aspects.Base;
-
-namespace BRIX.Library.Aspects
+﻿namespace BRIX.Library.Aspects
 {
     public class ActivationConditionsAspect : MultiConditionalAspect<EActivationCondition>
     {
