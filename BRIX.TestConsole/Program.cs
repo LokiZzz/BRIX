@@ -5,16 +5,14 @@ using BRIX.Library.DiceValue;
 using BRIX.Library.Mathematics;
 
 
-new ThrasholdCoefConverter((1, 0), (2, 100), (6, 50), (11, 10), (101, 5), (101, 1)).Convert(6);
+ThrasholdCoefConverter thrasholdConverter = new((1, 20), (2, 30), (3, 50), (4, 500), (7, 300), (21, 150), (101, 50));
 
-int exp = ExperienceCalculator.GetExpForLevel(1);
-exp = ExperienceCalculator.GetExpForLevel(2);
-exp = ExperienceCalculator.GetExpForLevel(3);
-exp = ExperienceCalculator.GetExpForLevel(4);
-exp = ExperienceCalculator.GetExpForLevel(5);
-exp = ExperienceCalculator.GetExpForLevel(25);
+List<int> ints = new() { 1, 2, 3, 4, 7, 25, 100 };
 
-int expToLevelUp = ExperienceCalculator.GetExpToLevelUp(47000);
+foreach(int elem in ints)
+{
+    Console.WriteLine(thrasholdConverter.Convert(elem));
+}
 
-Console.WriteLine("Hello, World!");
+Console.ReadLine();
 
