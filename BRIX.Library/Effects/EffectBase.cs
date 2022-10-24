@@ -43,14 +43,19 @@ namespace BRIX.Library.Effects
             return aspect != null;
         }
 
-        public void Concord(AspectBase sourceAspect) => SetConcordance(sourceAspect, true);
+        public void Concord(FreeConcordanceAspect sourceAspect) => SetConcordance(sourceAspect, true);
 
-        public void Discord(AspectBase sourceAspect) => SetConcordance(sourceAspect, false);
+        public void Discord(FreeConcordanceAspect sourceAspect) => SetConcordance(sourceAspect, false);
 
-        private void SetConcordance(AspectBase sourceAspect, bool isConcording)
+        private void SetConcordance(FreeConcordanceAspect sourceAspect, bool isConcording)
         {
             if (TryGetAspect(sourceAspect.GetType(), out AspectBase aspectToConcord))
             {
+                if(aspectToConcord is FreeConcordanceAspect)
+                {
+                    throw new AbilityLogicException("Данный аспект не поддерживает смену режим согласования.");
+                }
+
                 if (aspectToConcord != null)
                 {
                     int index = Aspects.FindIndex(x => x.GetType().Equals(aspectToConcord.GetType()));
@@ -58,7 +63,8 @@ namespace BRIX.Library.Effects
                     Aspects[index] = isConcording
                         ? sourceAspect
                         : DeepCopyUtility.GetDeepCopy(Aspects[index]);
-                    Aspects[index].IsConcording = isConcording;
+
+                    (Aspects[index] as FreeConcordanceAspect)?.SetConcordance(isConcording);
                 }
             }
         }
