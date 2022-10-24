@@ -6,6 +6,8 @@ namespace BRIX.Library.Aspects
     {
         public override bool IsEnabled { get; set; } = true;
 
+        public override bool IsConcording => true;
+
         private int _minActionPoints = 1;
         private int _maxActionPoints = 50;
 

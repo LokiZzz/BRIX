@@ -2,7 +2,7 @@
 
 namespace BRIX.Library.Aspects
 {
-    public class ObstacleAspect : AspectBase
+    public class ObstacleAspect : FreeConcordanceAspect
     {
         public EObstacleEquivalent BetweenCharacterAndTargetOrArea { get; set; }
         public EObstacleEquivalent BetweenEpicenterAndTarget { get; set; }

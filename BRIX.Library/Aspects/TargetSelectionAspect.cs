@@ -2,7 +2,7 @@
 
 namespace BRIX.Library.Aspects
 {
-    public class TargetSelectionAspect : AspectBase
+    public class TargetSelectionAspect : FreeConcordanceAspect
     {
         public ETargetType Strategy { get; set; }
 

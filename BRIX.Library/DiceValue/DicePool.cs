@@ -13,6 +13,15 @@
             SetDice(dice);
         }
 
+        /// <summary>
+        /// Конструктор для набора костей.
+        /// </summary>
+        /// <param name="dice">Кости, добавляются в традиционном формате, например 3d6 => (3, 6).</param>
+        public DicePool(params (int, int)[] dice)
+        {
+            SetDice(dice);
+        }
+
         public List<Dice> Dice { get; set; } = new List<Dice>();
 
         public int Modifier { get; set; }

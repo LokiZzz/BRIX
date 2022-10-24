@@ -1,18 +1,30 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using BRIX.Library;
+using BRIX.Library.Aspects;
 using BRIX.Library.Character;
 using BRIX.Library.DiceValue;
+using BRIX.Library.Effects;
 using BRIX.Library.Mathematics;
 
+Ability chargeAbility = new Ability();
 
-ThrasholdCoefConverter thrasholdConverter = new((1, 20), (2, 30), (3, 50), (4, 500), (7, 300), (21, 150), (101, 50));
-
-List<int> ints = new() { 1, 2, 3, 4, 7, 25, 100 };
-
-foreach(int elem in ints)
+HealDamageEffect effDamage = new ()
 {
-    Console.WriteLine(thrasholdConverter.Convert(elem));
-}
+    IsDamage = true,
+    Impact = new DicePool((3, 6))
+};
+
+ActionPointAspect damageAPA = effDamage.GetAspect<ActionPointAspect>();
+damageAPA.ActionPoints = 5;
+
+MoveTargetEffect effSmash = new ()
+{
+    DistanceInMeters = 3,
+    TargetPath = EMoveTargetPath.StraightBCaT,
+    DirectionRestriction = EMoveTargetDirectionRestriction.OnlyHorizontalSurface
+};
+
+
 
 Console.ReadLine();
 

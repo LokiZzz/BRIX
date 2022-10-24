@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +15,8 @@ namespace BRIX.Library
 
         public abstract bool IsAvailable { get; }
 
+        public abstract double ToExpModifier { get; }
+
         public bool IsProvided => CoinsPrice == default || IsAvailable;
     }
 
@@ -26,6 +29,8 @@ namespace BRIX.Library
         /// Если нет — способность не может быть использована.
         /// </summary>
         public override bool IsAvailable => _isAvailable;
+
+        public override double ToExpModifier => 0.1;
 
         public void SetIsAvailable(bool isAvailable) => _isAvailable = isAvailable;
     }
@@ -43,6 +48,16 @@ namespace BRIX.Library
         /// </summary>
         public override bool IsAvailable => ConsumablesStock >= CoinsPrice;
 
+        public override double ToExpModifier => 10;
+
         public void Spend() => ConsumablesStock -= CoinsPrice;
+    }
+
+    public static class MatirealSupportExtensions
+    {
+        public static double ToExpEquivalent(this MaterialSupport matSupport) 
+        {
+            return matSupport.CoinsPrice* matSupport.ToExpModifier;
+        }
     }
 }

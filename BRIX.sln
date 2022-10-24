@@ -12,7 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BRIX.TestConsole", "BRIX.TestConsole\BRIX.TestConsole.csproj", "{E510D84B-8BFF-47F2-A52A-BD503D012516}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BRIX.TestConsole", "BRIX.TestConsole\BRIX.TestConsole.csproj", "{E510D84B-8BFF-47F2-A52A-BD503D012516}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BRIX.Utility", "..\BRIX.Utility\BRIX.Utility\BRIX.Utility.csproj", "{F5627422-A7DC-4840-A627-0E3FB3009D43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +36,10 @@ Global
 		{E510D84B-8BFF-47F2-A52A-BD503D012516}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E510D84B-8BFF-47F2-A52A-BD503D012516}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E510D84B-8BFF-47F2-A52A-BD503D012516}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5627422-A7DC-4840-A627-0E3FB3009D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5627422-A7DC-4840-A627-0E3FB3009D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5627422-A7DC-4840-A627-0E3FB3009D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5627422-A7DC-4840-A627-0E3FB3009D43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

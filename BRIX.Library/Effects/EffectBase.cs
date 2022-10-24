@@ -1,5 +1,6 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Extensions;
+using BRIX.Utility.DeepCopy;
 using System.Collections.ObjectModel;
 
 namespace BRIX.Library.Effects
@@ -54,25 +55,12 @@ namespace BRIX.Library.Effects
                 {
                     int index = Aspects.FindIndex(x => x.GetType().Equals(aspectToConcord.GetType()));
 
-                    if (isConcording)
-                    {
-                        Aspects[index] = sourceAspect;
-                    }
-                    //TODO: else { Aspects[index] = UtilityHuility.GetDeepCopy(Aspects[index]); }
-
+                    Aspects[index] = isConcording
+                        ? sourceAspect
+                        : DeepCopyUtility.GetDeepCopy(Aspects[index]);
                     Aspects[index].IsConcording = isConcording;
                 }
             }
-        }
-
-        public override int GetHashCode()
-        {
-            return GetType().GetHashCode();
-        }
-
-        public override bool Equals(object? obj)
-        {
-            return obj?.GetType() == GetType();
         }
     }
 }

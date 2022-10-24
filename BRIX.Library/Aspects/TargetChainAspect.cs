@@ -2,7 +2,7 @@
 
 namespace BRIX.Library.Aspects
 {
-    public class TargetChainAspect : AspectBase
+    public class TargetChainAspect : FreeConcordanceAspect
     {
         public bool IsChainEnabled { get; set; }
         public int MaxDistanceBetweenTargets { get; set; }

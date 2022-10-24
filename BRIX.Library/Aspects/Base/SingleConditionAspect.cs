@@ -2,7 +2,7 @@
 
 namespace BRIX.Library.Aspects
 {
-    public abstract class SingleConditionAspect<T> : AspectBase where T : Enum
+    public abstract class SingleConditionAspect<T> : FreeConcordanceAspect where T : Enum
     {
         public T Condition { get; set; }
 

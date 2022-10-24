@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\BRIX.Utility\BRIX.Utility\BRIX.Utility.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -6,7 +6,7 @@ namespace BRIX.Library
 {
     public class Ability
     {
-        private readonly HashSet<EffectBase> _effects = new();
+        private readonly List<EffectBase> _effects = new();
         public IReadOnlyCollection<EffectBase> Effects => _effects;
 
         public string Name { get; set; }
@@ -35,15 +35,16 @@ namespace BRIX.Library
         public int ExpCost()
         {
             double effectsCountPenaltyCoef = 1;
+            double deltaPerEffect = 0.2;
 
             if (_effects.Count() > 1)
             {
-                effectsCountPenaltyCoef += (_effects.Count() - 1) * 0.2;
+                effectsCountPenaltyCoef += (_effects.Count() - 1) * deltaPerEffect;
             }
 
             double expCost = _effects.Sum(effect => effect.GetExpCost()) * effectsCountPenaltyCoef;
 
-            return (expCost - MaterialSupport.CoinsPrice / 10 - Consumables.CoinsPrice * 10).Round();
+            return (expCost - MaterialSupport.ToExpEquivalent() - Consumables.ToExpEquivalent()).Round();
         }
 
         public void AddEffect(EffectBase effect)
@@ -58,10 +59,7 @@ namespace BRIX.Library
                 }
             }
 
-            if (!_effects.Add(effect))
-            {
-                throw new AbilityLogicException("Эффект такого типа уже есть в способности.");
-            }
+            _effects.Add(effect);
 
             AspectBase? SearchSourceAspect(Type aspectType)
             {
@@ -77,9 +75,17 @@ namespace BRIX.Library
             }
         }
 
+        /// <summary>
+        /// Получить первый эффект способности по типу.
+        /// </summary>
         public T? GetEffect<T>() where T : EffectBase
         {
             return _effects.FirstOrDefault(x => x is T) as T;
+        }
+
+        public IEnumerable<T?> GetEffects<T>() where T : EffectBase
+        {
+            return _effects.Where(x => x is T).Select(x => x as T);
         }
 
         public void Clear()
@@ -87,14 +93,12 @@ namespace BRIX.Library
             _effects.Clear();
         }
 
+        /// <summary>
+        /// Удалить эффект можно только передав ссылку на него.
+        /// </summary>
         public void RemoveEffect(EffectBase item)
         {
             _effects.Remove(item);
-        }
-
-        public void RemoveEffect<T>() where T : EffectBase
-        {
-            _effects.RemoveWhere(x => x is T);
         }
 
         public bool Contains(EffectBase item)
