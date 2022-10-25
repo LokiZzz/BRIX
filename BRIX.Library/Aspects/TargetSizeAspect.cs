@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BRIX.Library.Aspects
 {
-    public class TargetSizeAspect : FreeConcordanceAspect
+    public class TargetSizeAspect : AspectBase
     {
         public List<ETargetSizes> AllowedTargetSizes = new List<ETargetSizes>();
 

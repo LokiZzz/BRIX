@@ -10,19 +10,8 @@ namespace BRIX.Library.Aspects
         /// <summary>
         /// Показывает, синхронизируется ли аспект с другими аспектами того же типа в других эффектах способности.
         /// </summary>
-        public abstract bool IsConcording { get; }
+        public bool IsConcording { get; set; }
 
         public abstract double GetCoefficient();
-    }
-
-    public abstract class FreeConcordanceAspect : AspectBase
-    {
-        private bool _isConcording;
-        public override bool IsConcording => _isConcording;
-
-        public void SetConcordance(bool isConcording)
-        {
-            _isConcording = isConcording;
-        }
     }
 }

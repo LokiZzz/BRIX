@@ -53,7 +53,7 @@ namespace BRIX.Library
             {
                 AspectBase sourceAspect = SearchSourceAspect(aspect.GetType());
 
-                if (sourceAspect != null && (sourceAspect.IsConcording || sourceAspect is ActionPointAspect) )
+                if (sourceAspect != null && sourceAspect.IsConcording && sourceAspect is ActionPointAspect)
                 {
                     effect.Concord(sourceAspect);
                 }
