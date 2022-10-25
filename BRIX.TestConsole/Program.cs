@@ -16,6 +16,12 @@ HealDamageEffect effDamage = new ()
 
 ActionPointAspect damageAPA = effDamage.GetAspect<ActionPointAspect>();
 damageAPA.ActionPoints = 5;
+TargetSelectionAspect damageTSA = effDamage.GetAspect<TargetSelectionAspect>();
+damageTSA.IsTargetSelectionIsRandom = true;
+damageTSA.Strategy = ETargetType.Area;
+damageTSA.Area.AreaType = AreaSettings.EAreaType.Sphere;
+
+damageTSA.IsConcording = true;
 
 MoveTargetEffect effSmash = new ()
 {
@@ -24,7 +30,16 @@ MoveTargetEffect effSmash = new ()
     DirectionRestriction = EMoveTargetDirectionRestriction.OnlyHorizontalSurface
 };
 
+chargeAbility.AddEffect(effDamage);
+chargeAbility.AddEffect(effSmash);
 
+damageTSA = effDamage.GetAspect<TargetSelectionAspect>();
+damageTSA.Area.AreaType = AreaSettings.EAreaType.Brick;
+
+chargeAbility.Detach(damageTSA);
+
+damageTSA = effDamage.GetAspect<TargetSelectionAspect>();
+damageTSA.Area.AreaType = AreaSettings.EAreaType.Cylinder;
 
 Console.ReadLine();
 

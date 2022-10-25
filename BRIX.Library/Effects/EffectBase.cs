@@ -51,18 +51,13 @@ namespace BRIX.Library.Effects
         {
             if (TryGetAspect(sourceAspect.GetType(), out AspectBase aspectToConcord))
             {
-                if(aspectToConcord is AspectBase)
-                {
-                    throw new AbilityLogicException("Данный аспект не поддерживает смену режим согласования.");
-                }
-
                 if (aspectToConcord != null)
                 {
                     int index = Aspects.FindIndex(x => x.GetType().Equals(aspectToConcord.GetType()));
 
                     Aspects[index] = isConcording
                         ? sourceAspect
-                        : DeepCopyUtility.GetDeepCopy(Aspects[index]);
+                        : Aspects[index].Copy();
 
                     Aspects[index].IsConcording = isConcording;
                 }

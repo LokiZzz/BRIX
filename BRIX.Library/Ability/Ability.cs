@@ -49,11 +49,11 @@ namespace BRIX.Library
 
         public void AddEffect(EffectBase effect)
         {
-            foreach (AspectBase aspect in effect.Aspects)
+            foreach (AspectBase aspect in effect.Aspects.ToList())
             {
                 AspectBase sourceAspect = SearchSourceAspect(aspect.GetType());
 
-                if (sourceAspect != null && sourceAspect.IsConcording && sourceAspect is ActionPointAspect)
+                if (sourceAspect != null && sourceAspect.IsConcording || sourceAspect is ActionPointAspect)
                 {
                     effect.Concord(sourceAspect);
                 }
@@ -108,7 +108,7 @@ namespace BRIX.Library
 
         /// <summary>
         /// Включение синхронизации аспекта в эффектах и синхронизация данных аспекта.
-        /// Все аспекты будут синхронизированы с переданным.
+        /// Все аспекты будут синхронизированы с переданным, то есть ссылаться на один и тот же объект.
         /// </summary>
         public void Concord(AspectBase sourceAspect)
         {
@@ -122,9 +122,9 @@ namespace BRIX.Library
         }
 
         /// <summary>
-        /// Отключение синхронизации аспекта в эффектах
+        /// Отключение синхронизации аспекта во всех эффектах и «отключение» экземпляра аспекта от способности.
         /// </summary>
-        public void Discord(AspectBase sourceAspectType)
+        public void Detach(AspectBase sourceAspectType)
         {
             if (_effects.Count() > 1)
             {

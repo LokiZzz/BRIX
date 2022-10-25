@@ -25,17 +25,17 @@ namespace BRIX.Library.Aspects
 
         public NTADSettings NTAD { get; set; } = new NTADSettings();
 
-        public double GetNTADCoeficient() => GetNTADDistanceCoef() * GetNTADCountCoeficient() * RandomSelectionCoef;
-        public double GetNTADDistanceCoef() => GetDistanceCoef(NTAD.DistanceInMeters);
-        public double GetNTADCountCoeficient() => new ThrasholdCoefConverter((1, 0), (2, 100), (6, 50), (11, 10), (101, 1))
+        private double GetNTADCoeficient() => GetNTADDistanceCoef() * GetNTADCountCoeficient() * RandomSelectionCoef;
+        private double GetNTADDistanceCoef() => GetDistanceCoef(NTAD.DistanceInMeters);
+        private double GetNTADCountCoeficient() => new ThrasholdCoefConverter((1, 0), (2, 100), (6, 50), (11, 10), (101, 1))
                 .Convert(NTAD.TargetsCount)
                 .ToCoeficient();
 
         public AreaSettings Area { get; set; } = new AreaSettings();
 
         private double GetAreaCoeficient() => GetAreaDistanceCoeficient() * GetAreaVolumeCoeficient() * RandomSelectionCoef;
-        public double GetAreaDistanceCoeficient() => GetDistanceCoef(Area.DistanceToAreaInMeters);
-        public double GetAreaVolumeCoeficient() => (Area.Shape.GetVolume() * 5).ToCoeficient();
+        private double GetAreaDistanceCoeficient() => GetDistanceCoef(Area.DistanceToAreaInMeters);
+        private double GetAreaVolumeCoeficient() => (Area.Shape.GetVolume() * 5).ToCoeficient();
 
         private double GetDistanceCoef(int distance)
         {
