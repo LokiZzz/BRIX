@@ -35,6 +35,10 @@ chargeAbility.AddEffect(effSmash);
 
 damageTSA = effDamage.GetAspect<TargetSelectionAspect>();
 damageTSA.Area.AreaType = AreaSettings.EAreaType.Brick;
+Brick? shape = damageTSA.Area.Shape as Brick;
+shape.A = 3;
+shape.B = 2;
+shape.C = 5;
 
 chargeAbility.Detach(damageTSA);
 

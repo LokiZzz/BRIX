@@ -55,9 +55,19 @@ namespace BRIX.Library.Effects
                 {
                     int index = Aspects.FindIndex(x => x.GetType().Equals(aspectToConcord.GetType()));
 
-                    Aspects[index] = isConcording
-                        ? sourceAspect
-                        : Aspects[index].Copy();
+                    if(isConcording)
+                    {
+                        Aspects[index] = sourceAspect;
+                    }
+                    else
+                    {
+                        AspectBase? aspectCopy = Aspects[index].Copy();
+
+                        if (aspectCopy != null)
+                        {
+                            Aspects[index] = aspectCopy;
+                        }
+                    }
 
                     Aspects[index].IsConcording = isConcording;
                 }
