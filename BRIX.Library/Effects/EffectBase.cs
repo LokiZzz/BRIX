@@ -1,6 +1,6 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Extensions;
-using BRIX.Utility.DeepCopy;
+using BRIX.Utility.Extensions;
 using System.Collections.ObjectModel;
 
 namespace BRIX.Library.Effects
@@ -43,33 +43,43 @@ namespace BRIX.Library.Effects
             return aspect != null;
         }
 
-        public void Concord(AspectBase sourceAspect) => SetConcordance(sourceAspect, true);
-
-        public void Discord(AspectBase sourceAspect) => SetConcordance(sourceAspect, false);
-
-        private void SetConcordance(AspectBase sourceAspect, bool isConcording)
+        /// <summary>
+        /// Устанавливает эффекту аспект по ссылке.
+        /// Специально для синхронизации аспектов в разных эффектах.
+        /// </summary>
+        /// <param name="sourceAspect">Аспект, на который ссылаются несколько эффектов.</param>
+        public void Attach(AspectBase sourceAspect)
         {
             if (TryGetAspect(sourceAspect.GetType(), out AspectBase aspectToConcord))
             {
                 if (aspectToConcord != null)
                 {
                     int index = Aspects.FindIndex(x => x.GetType().Equals(aspectToConcord.GetType()));
+                    Aspects[index] = sourceAspect;
+                    Aspects[index].IsConcording = true;
+                }
+            }
+        }
 
-                    if(isConcording)
+        /// <summary>
+        /// Рассинхронизирует эффект с установленным аспектом, заменяя текущую ссылку на копию.
+        /// Передаваемый экземпляр не имеет значения, важен лишь его тип.
+        /// </summary>
+        /// <param name="sourceAspect">Любой экземпляр необходимого типа.</param>
+        public void Detach(AspectBase aspectToDetach)
+        {
+            if (TryGetAspect(aspectToDetach.GetType(), out AspectBase aspectToConcord))
+            {
+                if (aspectToConcord != null)
+                {
+                    int index = Aspects.FindIndex(x => x.GetType().Equals(aspectToConcord.GetType()));
+                    AspectBase? aspectCopy = Aspects[index].Copy();
+
+                    if (aspectCopy != null)
                     {
-                        Aspects[index] = sourceAspect;
+                        Aspects[index] = aspectCopy;
+                        Aspects[index].IsConcording = false;
                     }
-                    else
-                    {
-                        AspectBase? aspectCopy = Aspects[index].Copy();
-
-                        if (aspectCopy != null)
-                        {
-                            Aspects[index] = aspectCopy;
-                        }
-                    }
-
-                    Aspects[index].IsConcording = isConcording;
                 }
             }
         }

@@ -1,6 +1,7 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
+using BRIX.Utility.Extensions;
 
 namespace BRIX.Library
 {
@@ -51,36 +52,21 @@ namespace BRIX.Library
         {
             foreach (AspectBase aspect in effect.Aspects.ToList())
             {
-                AspectBase sourceAspect = SearchSourceAspect(aspect.GetType());
+                AspectBase existingAspect = SynchronizingAspects.FirstOrDefault(
+                    x => x.GetType().Equals(SynchronizingAspects.GetType())
+                );
 
-                if (sourceAspect != null && sourceAspect.IsConcording || sourceAspect is ActionPointAspect)
+                if (existingAspect != null)
                 {
-                    effect.Concord(sourceAspect);
+                    effect.Attach(existingAspect);
+                }
+                else if(aspect is ActionPointAspect)
+                {
+                    SynchronizingAspects.Add(aspect);
                 }
             }
 
             _effects.Add(effect);
-
-            AspectBase? SearchSourceAspect(Type aspectType)
-            {
-                foreach(EffectBase effect in _effects)
-                {
-                    if (effect.TryGetAspect(aspectType, out AspectBase? aspectToConcord))
-                    {
-                        return aspectToConcord;
-                    }
-                }
-
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Получить первый эффект способности по типу.
-        /// </summary>
-        public T? GetEffect<T>() where T : EffectBase
-        {
-            return _effects.FirstOrDefault(x => x is T) as T;
         }
 
         public IEnumerable<T?> GetEffects<T>() where T : EffectBase
@@ -93,9 +79,6 @@ namespace BRIX.Library
             _effects.Clear();
         }
 
-        /// <summary>
-        /// Удалить эффект можно только передав ссылку на него.
-        /// </summary>
         public void RemoveEffect(EffectBase item)
         {
             _effects.Remove(item);
@@ -106,17 +89,21 @@ namespace BRIX.Library
             return _effects.Contains(item);
         }
 
+        private HashSet<AspectBase> SynchronizingAspects = new();
+
         /// <summary>
         /// Включение синхронизации аспекта в эффектах и синхронизация данных аспекта.
         /// Все аспекты будут синхронизированы с переданным, то есть ссылаться на один и тот же объект.
         /// </summary>
         public void Concord(AspectBase sourceAspect)
         {
+            SynchronizingAspects.Add(sourceAspect);
+
             if (_effects.Count() > 1)
             {
                 foreach(EffectBase effect in _effects)
                 {
-                    effect.Concord(sourceAspect);
+                    effect.Attach(sourceAspect);
                 }
             }
         }
@@ -124,14 +111,25 @@ namespace BRIX.Library
         /// <summary>
         /// Отключение синхронизации аспекта во всех эффектах и «отключение» экземпляра аспекта от способности.
         /// </summary>
-        public void Detach(AspectBase sourceAspectType)
+        public void Discord(AspectBase sourceAspectType)
         {
-            if (_effects.Count() > 1)
+            if (sourceAspectType is not ActionPointAspect)
             {
-                foreach (EffectBase effect in _effects)
+                SynchronizingAspects.RemoveWhere(x => 
+                    x.GetType().Equals(sourceAspectType.GetType())
+                );
+
+                if (_effects.Count() > 1)
                 {
-                    effect.Discord(sourceAspectType);
+                    foreach (EffectBase effect in _effects)
+                    {
+                        effect.Detach(sourceAspectType);
+                    }
                 }
+            }
+            else
+            {
+                throw new AbilityLogicException("Нельзя рассинхронизировать аспект очков действий.");
             }
         }
     }
