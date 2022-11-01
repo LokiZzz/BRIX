@@ -64,6 +64,7 @@ namespace BRIX.Library
                 }
                 else if(aspect is ActionPointAspect)
                 {
+                    aspect.IsConcording = true;
                     SynchronizingAspects.Add(aspect);
                 }
             }
