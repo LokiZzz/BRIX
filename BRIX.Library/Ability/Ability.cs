@@ -10,6 +10,8 @@ namespace BRIX.Library
         private readonly List<EffectBase> _effects = new();
         public IReadOnlyCollection<EffectBase> Effects => _effects;
 
+        private HashSet<AspectBase> SynchronizingAspects = new();
+
         public string Name { get; set; }
         public string Description { get; set; }
 
@@ -88,8 +90,6 @@ namespace BRIX.Library
         {
             return _effects.Contains(item);
         }
-
-        private HashSet<AspectBase> SynchronizingAspects = new();
 
         /// <summary>
         /// Включение синхронизации аспекта в эффектах и синхронизация данных аспекта.
