@@ -1,7 +1,6 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
-using BRIX.Utility.Extensions;
 
 namespace BRIX.Library
 {

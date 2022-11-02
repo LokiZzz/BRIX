@@ -57,7 +57,7 @@ namespace BRIX.Library
     {
         public static double ToExpEquivalent(this MaterialSupport matSupport) 
         {
-            return matSupport.CoinsPrice* matSupport.ToExpModifier;
+            return matSupport.CoinsPrice * matSupport.ToExpModifier;
         }
     }
 }

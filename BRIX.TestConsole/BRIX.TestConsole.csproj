@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BRIX.Library\BRIX.Library.csproj" />
+    <ProjectReference Include="..\BRIX.Utility\BRIX.Utility.csproj" />
   </ItemGroup>
 
 </Project>

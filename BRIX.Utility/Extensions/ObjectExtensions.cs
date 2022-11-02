@@ -105,7 +105,8 @@ namespace BRIX.Utility.Extensions
                 fieldInfo.SetValue(cloneObject, clonedFieldValue);
             }
         }
-        public static T? Copy<T>(this T original)
+
+        public static T? Copy<T>(this T? original)
         {
             return (T?)Copy((object?)original);
         }

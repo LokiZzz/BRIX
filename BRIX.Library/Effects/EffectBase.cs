@@ -68,11 +68,11 @@ namespace BRIX.Library.Effects
         /// <param name="sourceAspect">Любой экземпляр необходимого типа.</param>
         public void Detach(AspectBase aspectToDetach)
         {
-            if (TryGetAspect(aspectToDetach.GetType(), out AspectBase aspectToConcord))
+            if (TryGetAspect(aspectToDetach.GetType(), out AspectBase searchingAspect))
             {
-                if (aspectToConcord != null)
+                if (searchingAspect != null)
                 {
-                    int index = Aspects.FindIndex(x => x.GetType().Equals(aspectToConcord.GetType()));
+                    int index = Aspects.FindIndex(x => x.GetType().Equals(searchingAspect.GetType()));
                     AspectBase? aspectCopy = Aspects[index].Copy();
 
                     if (aspectCopy != null)
