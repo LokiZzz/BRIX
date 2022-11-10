@@ -5,15 +5,15 @@
         public override Dictionary<ECooldownOption, int> ConditionToCoeficientMap => new Dictionary<ECooldownOption, int>
         {
             { ECooldownOption.None, 0 },
-            { ECooldownOption.Minute, -10 },
-            { ECooldownOption.Hour, -15 },
-            { ECooldownOption.Day, -20 },
-            { ECooldownOption.Week, -25 },
-            { ECooldownOption.Month, -30 },
-            { ECooldownOption.Year, -35 },
-            { ECooldownOption.TenYears, -40 },
-            { ECooldownOption.HundredYears, -45 },
-            { ECooldownOption.CannotReset, -70 }
+            { ECooldownOption.Minute, -20 },
+            { ECooldownOption.Hour, -30 },
+            { ECooldownOption.Day, -40 },
+            { ECooldownOption.Week, -50 },
+            { ECooldownOption.Month, -60 },
+            { ECooldownOption.Year, -70 },
+            { ECooldownOption.TenYears, -80 },
+            { ECooldownOption.HundredYears, -90 },
+            { ECooldownOption.CannotReset, -95 }
         };
 
         public int UsesCount { get; set; } = 1;

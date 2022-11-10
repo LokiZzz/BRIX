@@ -53,11 +53,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\BRIX.Library\BRIX.Library.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="View\HealDamageEffectPage.xaml">
+	  <MauiXaml Update="View\Account\SignInPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
