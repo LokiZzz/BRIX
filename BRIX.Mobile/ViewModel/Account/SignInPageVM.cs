@@ -20,20 +20,6 @@ namespace BRIX.Mobile.ViewModel.Account
             _accountService = accountService;
         }
 
-        private async Task InitializeAsync()
-        {
-            RememberMe = Preferences.Get(Settings.Account.RememberMe, false);
-
-            // Set properties & automatically go through this page to the character page
-            if (RememberMe)
-            {
-                Login = Preferences.Get(Settings.Account.Login, string.Empty);
-                Password = Preferences.Get(Settings.Account.Password, string.Empty);
-
-                await SignIn();
-            }
-        }
-
         [ObservableProperty]
         private string _login;
 
@@ -61,7 +47,16 @@ namespace BRIX.Mobile.ViewModel.Account
 
         public override async Task OnNavigatedAsync()
         {
-            await InitializeAsync();
+            RememberMe = Preferences.Get(Settings.Account.RememberMe, false);
+
+            // Set properties & automatically go through this page to the character page
+            if (RememberMe)
+            {
+                Login = Preferences.Get(Settings.Account.Login, string.Empty);
+                Password = Preferences.Get(Settings.Account.Password, string.Empty);
+
+                await Navigation.NavigateAsync($"//{nameof(CurrentCharacterPage)}");
+            }
         }
     }
 }
