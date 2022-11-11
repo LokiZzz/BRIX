@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Character
 {
-    public class CurrentCharacterPageVM : BusyVMBase
+    public class CurrentCharacterPageVM : ViewModelBase
     {
     }
 }

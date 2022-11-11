@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Account
 {
-    public partial class SignInPageVM : BusyVMBase
+    public partial class SignInPageVM : ViewModelBase
     {
         private readonly IAccountService _accountService;
 
@@ -56,8 +56,7 @@ namespace BRIX.Mobile.ViewModel.Account
                     Preferences.Set(Settings.Account.Password, _password);
                 }
 
-                // Navigate to main page!
-                await Shell.Current.GoToAsync($"//{nameof(CurrentCharacterPage)}");
+                await Navigation.NavigateAsync($"//{nameof(CurrentCharacterPage)}");
             }
         }
     }

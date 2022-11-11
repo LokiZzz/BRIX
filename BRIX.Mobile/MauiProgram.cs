@@ -27,6 +27,7 @@ public static class MauiProgram
     public static void RegisterServices(this MauiAppBuilder builder)
     {
         builder.Services.AddSingleton<IAccountService, AccountServiceMoq>();
+        builder.Services.AddSingleton<INavigationService, NavigationService>();
     }
 
     public static void RegisterViews(this MauiAppBuilder builder)
