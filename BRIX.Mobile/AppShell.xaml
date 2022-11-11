@@ -3,11 +3,23 @@
     x:Class="BRIX.Mobile.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:view="clr-namespace:BRIX.Mobile.View">
+    xmlns:char="clr-namespace:BRIX.Mobile.View.Character"
+    xmlns:account="clr-namespace:BRIX.Mobile.View.Account">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate view:HealDamageEffectPage}"
-        Route="MainPage" />
+    <ShellContent 
+        Title="Login"
+        ContentTemplate="{DataTemplate account:SignInPage}"
+        Route="SignInPageVM"
+        FlyoutItemIsVisible="False" 
+        Shell.FlyoutBehavior="Disabled" />
+
+    <FlyoutItem Title="Game">
+        <Tab>
+            <ShellContent
+                Title="Character"
+                ContentTemplate="{DataTemplate char:CurrentCharacterPage}"
+                Route="CurrentCharacterPage" />
+        </Tab>
+    </FlyoutItem>
 
 </Shell>

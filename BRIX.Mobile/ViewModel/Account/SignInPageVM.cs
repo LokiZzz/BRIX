@@ -1,4 +1,5 @@
 ﻿using BRIX.Mobile.Services;
+using BRIX.Mobile.View.Character;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -22,10 +23,15 @@ namespace BRIX.Mobile.ViewModel.Account
 
         private void Initialize()
         {
-            if(Preferences.Get(Settings.Account.RememberMe, false))
+            RememberMe = Preferences.Get(Settings.Account.RememberMe, false);
+
+            // Set properties & automatically go through this page to the character page
+            if (RememberMe)
             {
-                Login = Preferences.Get(Settings.Account.RememberMe, "Login");
-                Password = Preferences.Get(Settings.Account.RememberMe, "Password");
+                Login = Preferences.Get(Settings.Account.Login, string.Empty);
+                Password = Preferences.Get(Settings.Account.Password, string.Empty);
+
+                //await SignIn();
             }
         }
 
@@ -43,14 +49,15 @@ namespace BRIX.Mobile.ViewModel.Account
         {
             if(await _accountService.SignInAsync(_login, Password))
             {
-                if (Preferences.Get(Settings.Account.RememberMe, false))
+                if (RememberMe)
                 {
-                    Preferences.Set(Settings.Account.RememberMe, _login);
-                    Preferences.Set(Settings.Account.RememberMe, _password);
+                    Preferences.Set(Settings.Account.RememberMe, true);
+                    Preferences.Set(Settings.Account.Login, _login);
+                    Preferences.Set(Settings.Account.Password, _password);
                 }
 
                 // Navigate to main page!
-                await AppConstant
+                await Shell.Current.GoToAsync($"//{nameof(CurrentCharacterPage)}");
             }
         }
     }
