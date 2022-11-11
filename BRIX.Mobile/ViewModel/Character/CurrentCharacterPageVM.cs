@@ -9,5 +9,11 @@ namespace BRIX.Mobile.ViewModel.Character
 {
     public class CurrentCharacterPageVM : ViewModelBase
     {
+        public override Task OnNavigatedAsync()
+        {
+            string stop = string.Empty;
+
+            return base.OnNavigatedAsync();
+        }
     }
 }

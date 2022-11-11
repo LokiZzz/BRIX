@@ -21,5 +21,7 @@ namespace BRIX.Mobile.ViewModel.Base
 
         [ObservableProperty]
         private bool _isBusy;
+
+        public virtual Task OnNavigatedAsync() => Task.CompletedTask;
     }
 }

@@ -18,10 +18,9 @@ namespace BRIX.Mobile.ViewModel.Account
         public SignInPageVM(IAccountService accountService)
         {
             _accountService = accountService;
-            Initialize();
         }
 
-        private void Initialize()
+        private async Task InitializeAsync()
         {
             RememberMe = Preferences.Get(Settings.Account.RememberMe, false);
 
@@ -31,7 +30,7 @@ namespace BRIX.Mobile.ViewModel.Account
                 Login = Preferences.Get(Settings.Account.Login, string.Empty);
                 Password = Preferences.Get(Settings.Account.Password, string.Empty);
 
-                //await SignIn();
+                await SignIn();
             }
         }
 
@@ -58,6 +57,11 @@ namespace BRIX.Mobile.ViewModel.Account
 
                 await Navigation.NavigateAsync($"//{nameof(CurrentCharacterPage)}");
             }
+        }
+
+        public override async Task OnNavigatedAsync()
+        {
+            await InitializeAsync();
         }
     }
 }
