@@ -3,80 +3,73 @@ using System.Text.Json;
 
 namespace BRIX.Mobile.Services
 {
-    public interface ICharachterService
+    public interface ICharacterService
     {
-        public Task<Character> CreateAsync(Character character);
+        public Task<Character> AddAsync(Character character);
         public Task<Character> GetAsync(Guid id);
         public Task<List<Character>> GetAllAsync();
+        public Task<Character> UpdateAsync(Character character);
         public Task RemoveAsync(Guid id);
         public Task RemoveAllAsync();
     }
 
-    public class JsonCharacterService : ICharachterService
+    public class JsonCharacterService : ICharacterService
     {
+        private readonly ILocalStorage _storage;
         private readonly string _path;
         private readonly JsonSerializerOptions _jsonOptions;
 
-        public JsonCharacterService(string path)
+        public JsonCharacterService(ILocalStorage storage)
         {
-            _path = path;
+            _storage = storage;
+            _path = storage.GetAppDataPath();
             _jsonOptions = new JsonSerializerOptions
             {
                 WriteIndented = true,
+                
             };
-
-            if (!File.Exists(path))
-            {
-                string json = JsonSerializer.Serialize(new List<Character>(), _jsonOptions);
-                File.WriteAllText(_path, json);
-            }
         }
 
-        public async Task<Character> CreateAsync(Character character)
+        public async Task<Character> AddAsync(Character character)
         {
-            List<Character> characters = await ReadAsync();
+            List<Character> characters = await _storage.ReadJsonCollectionAsync<Character>(_path, _jsonOptions);
             character.Id = Guid.NewGuid();
             characters.Add(character);
-            await SaveAsync(characters);
+            await _storage.WriteJsonCollectionAsync(_path, characters, _jsonOptions);
+
             return character;
         }
 
         public async Task<List<Character>> GetAllAsync()
         {
-            return await ReadAsync();
+            return await _storage.ReadJsonCollectionAsync<Character>(_path, _jsonOptions);
         }
 
         public async Task<Character> GetAsync(Guid id)
         {
-            List<Character> characters = await ReadAsync();
+            List<Character> characters = await _storage.ReadJsonCollectionAsync<Character>(_path, _jsonOptions);
+
             return characters.Single(charater => charater.Id == id);
         }
 
         public async Task RemoveAsync(Guid id)
         {
-            List<Character> characters = await ReadAsync();
+            List<Character> characters = await _storage.ReadJsonCollectionAsync<Character>(_path, _jsonOptions);
             Character character = characters.Single(character => character.Id == id);
             characters.Remove(character);
-            await SaveAsync(characters);
+            await _storage.WriteJsonCollectionAsync(_path, characters, _jsonOptions);
         }
 
         public async Task RemoveAllAsync()
         {
-            await SaveAsync(new List<Character>());
+            await _storage.WriteJsonCollectionAsync(_path, new List<Character>(), _jsonOptions);
         }
 
-        private async Task<List<Character>> ReadAsync()
+        public async Task<Character> UpdateAsync(Character character)
         {
-            using (FileStream fs = File.Open(_path, FileMode.OpenOrCreate, FileAccess.ReadWrite))
-            {
-                return await JsonSerializer.DeserializeAsync<List<Character>>(fs, _jsonOptions) ?? new List<Character>();
-            }
-        }
-
-        private async Task SaveAsync(List<Character> characters)
-        {
-            string json = JsonSerializer.Serialize(characters, _jsonOptions);
-            await File.WriteAllTextAsync(_path, json);
+            await RemoveAsync(character.Id);
+            await AddAsync(character);
+            return character;
         }
     }
 }
