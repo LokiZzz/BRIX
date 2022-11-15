@@ -34,14 +34,38 @@ namespace BRIX.Mobile.Services
 
         public async Task<Character> CreateAsync(Character character)
         {
-            List<Character> characters = await Read();
+            List<Character> characters = await ReadAsync();
             character.Id = Guid.NewGuid();
             characters.Add(character);
-            await Save(characters);
+            await SaveAsync(characters);
             return character;
         }
 
-        private async Task<List<Character>> Read()
+        public async Task<List<Character>> GetAllAsync()
+        {
+            return await ReadAsync();
+        }
+
+        public async Task<Character> GetAsync(Guid id)
+        {
+            List<Character> characters = await ReadAsync();
+            return characters.Single(charater => charater.Id == id);
+        }
+
+        public async Task RemoveAsync(Guid id)
+        {
+            List<Character> characters = await ReadAsync();
+            Character character = characters.Single(character => character.Id == id);
+            characters.Remove(character);
+            await SaveAsync(characters);
+        }
+
+        public async Task RemoveAllAsync()
+        {
+            await SaveAsync(new List<Character>());
+        }
+
+        private async Task<List<Character>> ReadAsync()
         {
             using (FileStream fs = File.Open(_path, FileMode.OpenOrCreate, FileAccess.ReadWrite))
             {
@@ -49,34 +73,10 @@ namespace BRIX.Mobile.Services
             }
         }
 
-        private async Task Save(List<Character> characters)
+        private async Task SaveAsync(List<Character> characters)
         {
             string json = JsonSerializer.Serialize(characters, _jsonOptions);
             await File.WriteAllTextAsync(_path, json);
-        }
-
-        public async Task<List<Character>> GetAllAsync()
-        {
-            return await Read();
-        }
-
-        public async Task<Character> GetAsync(Guid id)
-        {
-            List<Character> characters = await Read();
-            return characters.Single(charater => charater.Id == id);
-        }
-
-        public async Task RemoveAsync(Guid id)
-        {
-            List<Character> characters = await Read();
-            Character character = characters.Single(character => character.Id == id);
-            characters.Remove(character);
-            await Save(characters);
-        }
-
-        public async Task RemoveAllAsync()
-        {
-            await Save(new List<Character>());
         }
     }
 }
