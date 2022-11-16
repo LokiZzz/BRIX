@@ -7,8 +7,9 @@
     <ControlTemplate x:Key="BusyPageTemplate" x:DataType="vm:ViewModelBase">
         <Grid BindingContext="{Binding Source={RelativeSource TemplatedParent}}">
             <ContentPresenter/>
-            <Frame 
-                Background="#000000"
+            <Border 
+                BackgroundColor="Black"
+                Opacity="0.55"
                 HorizontalOptions="Fill" 
                 VerticalOptions="Fill"
                 IsVisible="{TemplateBinding BindingContext.IsBusy}"/>
