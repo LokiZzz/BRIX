@@ -26,7 +26,6 @@ namespace BRIX.Mobile.Services
             _jsonOptions = new JsonSerializerOptions
             {
                 WriteIndented = true,
-                
             };
         }
 
