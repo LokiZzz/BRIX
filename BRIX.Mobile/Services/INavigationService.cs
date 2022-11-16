@@ -37,4 +37,9 @@ namespace BRIX.Mobile.Services
             }
         }
     }
+
+    public static class NavigationParameters
+    {
+        public const string Character = nameof(Character);
+    }
 }

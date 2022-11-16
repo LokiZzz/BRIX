@@ -5,53 +5,41 @@ namespace BRIX.Mobile.Services
     public interface ILocalStorage
     {
         string GetAppDataPath();
-        Task<bool> FileExistsAsync(string path);
-        Task WriteAllTextAsync(string path, string text);
-        Task<string> ReadAllTextAsync(string path);
-        Task<T?> ReadJson<T>(string path, JsonSerializerOptions options = default) where T : class, new();
-        Task<List<T>> ReadJsonCollectionAsync<T>(string path, JsonSerializerOptions options = default) where T : class, new();
-        Task WriteJsonAsync<T>(string path, T collection, JsonSerializerOptions options = default) where T : class, new();
-        Task WriteJsonCollectionAsync<T>(string path, List<T> collection, JsonSerializerOptions options = default) where T : class, new();
+        bool FileExists(string fileName);
+        Task WriteAllTextAsync(string fileName, string text);
+        Task<string> ReadAllTextAsync(string fileName);
+        Task<T?> ReadJson<T>(string fileName, JsonSerializerOptions options = default) where T : class, new();
+        Task<List<T>> ReadJsonCollectionAsync<T>(string fileName, JsonSerializerOptions options = default) where T : class, new();
+        Task WriteJsonAsync<T>(string fileName, T collection, JsonSerializerOptions options = default) where T : class, new();
+        Task WriteJsonCollectionAsync<T>(string fileName, List<T> collection, JsonSerializerOptions options = default) where T : class, new();
     }
 
     public class LocalStorage : ILocalStorage
     {
         public string GetAppDataPath() => FileSystem.AppDataDirectory;
 
-        public Task<bool> FileExistsAsync(string path)
+        public bool FileExists(string fileName)
         {
-            return FileSystem.AppPackageFileExistsAsync(path);
+            string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
+            return File.Exists(path);
         }
 
-        public async Task<string> ReadAllTextAsync(string path)
+        public Task<string> ReadAllTextAsync(string fileName)
         {
-            using (Stream fs = await FileSystem.OpenAppPackageFileAsync(path))
-            {
-                if (fs.Length == 0)
-                {
-                    return default;
-                }
-
-                using (StreamReader sr = new StreamReader(fs))
-                {
-                    return await sr.ReadToEndAsync();
-                }
-            }
+            string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
+            return File.ReadAllTextAsync(path);
         }
 
-        public async Task WriteAllTextAsync(string path, string text)
+        public Task WriteAllTextAsync(string fileName, string text)
         {
-            using (Stream fs = await FileSystem.OpenAppPackageFileAsync(path))
-            using (StreamWriter sw = new StreamWriter(fs))
-            {
-                fs.SetLength(0);
-                sw.Write(text);
-            }
+            string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
+            return File.WriteAllTextAsync(path, text);
         }
 
-        public async Task<T?> ReadJson<T>(string path, JsonSerializerOptions options = default) where T : class, new()
+        public async Task<T?> ReadJson<T>(string fileName, JsonSerializerOptions options = default) where T : class, new()
         {
-            using (Stream fs = await FileSystem.OpenAppPackageFileAsync(path))
+            string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
+            using (Stream fs = File.Open(path, FileMode.OpenOrCreate, FileAccess.Read))
             {
                 if (fs.Length == 0)
                 {
@@ -62,9 +50,10 @@ namespace BRIX.Mobile.Services
             }
         }
 
-        public async Task<List<T>> ReadJsonCollectionAsync<T>(string path, JsonSerializerOptions options = default) where T : class, new()
+        public async Task<List<T>> ReadJsonCollectionAsync<T>(string fileName, JsonSerializerOptions options = default) where T : class, new()
         {
-            using (Stream fs = await FileSystem.OpenAppPackageFileAsync(path))
+            string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
+            using (Stream fs = File.Open(path, FileMode.OpenOrCreate, FileAccess.Read))
             {
                 if (fs.Length == 0)
                 {
@@ -77,20 +66,14 @@ namespace BRIX.Mobile.Services
 
         public async Task WriteJsonAsync<T>(string path, T collection, JsonSerializerOptions options = default) where T : class, new()
         {
-            using (Stream fs = await FileSystem.OpenAppPackageFileAsync(path))
-            {
-                string json = JsonSerializer.Serialize(collection, options);
-                await WriteAllTextAsync(path, json);
-            }
+            string json = JsonSerializer.Serialize(collection, options);
+            await WriteAllTextAsync(path, json);
         }
 
         public async Task WriteJsonCollectionAsync<T>(string path, List<T> collection, JsonSerializerOptions options = default) where T : class, new()
         {
-            using (Stream fs = await FileSystem.OpenAppPackageFileAsync(path))
-            {
-                string json = JsonSerializer.Serialize(collection, options);
-                await WriteAllTextAsync(path, json);
-            }
+            string json = JsonSerializer.Serialize(collection, options);
+            await WriteAllTextAsync(path, json);
         }
     }
 }

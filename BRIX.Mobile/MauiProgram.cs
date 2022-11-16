@@ -28,12 +28,16 @@ public static class MauiProgram
     {
         builder.Services.AddSingleton<IAccountService, AccountServiceMoq>();
         builder.Services.AddSingleton<INavigationService, NavigationService>();
+        builder.Services.AddSingleton<ICharacterService, JsonCharacterService>();
+        builder.Services.AddSingleton<ILocalStorage, LocalStorage>();
     }
 
     public static void RegisterViews(this MauiAppBuilder builder)
 	{
         builder.RegisterView<SignInPage, SignInPageVM>();
         builder.RegisterView<CurrentCharacterPage, CurrentCharacterPageVM>();
+        builder.RegisterView<CharacterListPage, CharacterListPageVM>();
+        builder.RegisterView<AddOrEditCharacterPage, AddOrEditCharacterPageVM>();
     }
 
     private static void RegisterView<TView, TViewModel>(this MauiAppBuilder builder) 

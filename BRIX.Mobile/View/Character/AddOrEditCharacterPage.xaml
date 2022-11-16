@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BRIX.Mobile.View.Character.AddOrEditCharacterPage"
+             Title="Character Page">
+    <VerticalStackLayout>
+        <StackLayout>
+            <Label Text="Name"/>
+            <Entry Text="{Binding Character.Name}"/>
+            <Label Text="Backstory"/>
+            <Entry Text="{Binding Character.Backstory}"/>
+            <Label Text="Appearance"/>
+            <Entry Text="{Binding Character.Appearance}"/>
+
+            <Button Text="Save" Command="{Binding SaveCommand}"/>
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>

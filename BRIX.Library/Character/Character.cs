@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BRIX.Library;
-
-namespace BRIX.Library.Character
+﻿namespace BRIX.Library.Character
 {
     public class Character
     {
@@ -13,6 +6,8 @@ namespace BRIX.Library.Character
         public string Name { get; set; }
         public List<Ability> Abilities { get; set; } = new();
         public int Experience { get; set; }
+        public string Backstory { get; set; }
+        public string Appearance { get; set; }
 
         public int Level => ExperienceCalculator.GetLevelFromExp(Experience);
         public int ExpToLevelUp => ExperienceCalculator.GetExpToLevelUp(Experience);

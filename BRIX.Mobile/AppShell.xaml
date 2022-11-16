@@ -22,4 +22,12 @@
         </Tab>
     </FlyoutItem>
 
+    <FlyoutItem Title="Characters">
+        <Tab Title="Characters">
+            <ShellContent
+                Title="Characters"
+                ContentTemplate="{DataTemplate char:CharacterListPage}"
+                Route="CharacterListPage" />
+        </Tab>
+    </FlyoutItem>
 </Shell>
