@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BRIX.Mobile.ViewModel.Account"
              x:Class="BRIX.Mobile.View.Account.SignInPage"
+             ControlTemplate="{StaticResource BusyPageTemplate}"
              Title="SignInPage"
              x:DataType="local:SignInPageVM">
     <VerticalStackLayout>

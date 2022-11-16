@@ -22,6 +22,9 @@ namespace BRIX.Mobile.ViewModel.Base
         [ObservableProperty]
         private bool _isBusy;
 
+        [ObservableProperty]
+        private string _simpleText = "Not changed";
+
         public virtual Task OnNavigatedAsync() => Task.CompletedTask;
     }
 }

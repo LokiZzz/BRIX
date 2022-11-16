@@ -13,11 +13,12 @@ namespace BRIX.Mobile.Services
 
     public class AccountServiceMoq : IAccountService
     {
-        public Task<bool> SignInAsync(string login, string password)
+        public async Task<bool> SignInAsync(string login, string password)
         {
             bool isSuccess = !string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password);
+            await Task.Delay(2000);
 
-            return Task.FromResult(isSuccess);
+            return await Task.FromResult(isSuccess);
         }
     }
 }

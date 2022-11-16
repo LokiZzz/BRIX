@@ -29,10 +29,14 @@ namespace BRIX.Mobile.ViewModel.Account
         [ObservableProperty]
         private bool _rememberMe;
 
-        [RelayCommand]
+        [RelayCommand(AllowConcurrentExecutions = true)]
         private async Task SignIn()
         {
-            if(await _accountService.SignInAsync(_login, Password))
+            IsBusy = true;
+
+            bool successfullSignIn = await _accountService.SignInAsync(_login, Password);
+
+            if (successfullSignIn)
             {
                 if (RememberMe)
                 {
@@ -41,8 +45,10 @@ namespace BRIX.Mobile.ViewModel.Account
                     Preferences.Set(Settings.Account.Password, _password);
                 }
 
-                await Navigation.NavigateAsync($"//{nameof(CurrentCharacterPage)}");
+                //await Navigation.NavigateAsync($"//{nameof(CurrentCharacterPage)}");
             }
+
+            IsBusy = false;
         }
 
         public override async Task OnNavigatedAsync()
@@ -55,7 +61,7 @@ namespace BRIX.Mobile.ViewModel.Account
                 Login = Preferences.Get(Settings.Account.Login, string.Empty);
                 Password = Preferences.Get(Settings.Account.Password, string.Empty);
 
-                await Navigation.NavigateAsync($"//{nameof(CurrentCharacterPage)}");
+                //await Navigation.NavigateAsync($"//{nameof(CurrentCharacterPage)}");
             }
         }
     }

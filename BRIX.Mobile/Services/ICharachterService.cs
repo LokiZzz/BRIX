@@ -26,7 +26,6 @@ namespace BRIX.Mobile.Services
             _jsonOptions = new JsonSerializerOptions
             {
                 WriteIndented = true,
-                
             };
         }
 
@@ -35,7 +34,7 @@ namespace BRIX.Mobile.Services
             List<Character> characters = await _storage.ReadJsonCollectionAsync<Character>(_path, _jsonOptions);
             character.Id = Guid.NewGuid();
             characters.Add(character);
-            await _storage.WriteJsonCollectionAsync(_path, characters, _jsonOptions);
+            await _storage.WriteJsonAsync(_path, characters, _jsonOptions);
 
             return character;
         }
@@ -57,18 +56,19 @@ namespace BRIX.Mobile.Services
             List<Character> characters = await _storage.ReadJsonCollectionAsync<Character>(_path, _jsonOptions);
             Character character = characters.Single(character => character.Id == id);
             characters.Remove(character);
-            await _storage.WriteJsonCollectionAsync(_path, characters, _jsonOptions);
+            await _storage.WriteJsonAsync(_path, characters, _jsonOptions);
         }
 
         public async Task RemoveAllAsync()
         {
-            await _storage.WriteJsonCollectionAsync(_path, new List<Character>(), _jsonOptions);
+            await _storage.WriteJsonAsync(_path, new List<Character>(), _jsonOptions);
         }
 
         public async Task<Character> UpdateAsync(Character character)
         {
             await RemoveAsync(character.Id);
             await AddAsync(character);
+
             return character;
         }
     }
