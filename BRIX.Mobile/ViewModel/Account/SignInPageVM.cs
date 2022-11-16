@@ -45,7 +45,7 @@ namespace BRIX.Mobile.ViewModel.Account
                     Preferences.Set(Settings.Account.Password, _password);
                 }
 
-                //await Navigation.NavigateAsync($"//{nameof(CurrentCharacterPage)}");
+                await Navigation.NavigateAsync($"//{nameof(CurrentCharacterPage)}");
             }
 
             IsBusy = false;

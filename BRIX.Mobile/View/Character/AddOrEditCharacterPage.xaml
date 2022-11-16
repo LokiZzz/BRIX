@@ -12,7 +12,9 @@
             <Label Text="Appearance"/>
             <Entry Text="{Binding Character.Appearance}"/>
 
-            <Button Text="Save" Command="{Binding SaveCommand}"/>
+            <Button Text="Save" 
+                    Command="{Binding SaveCommand}"
+                    CommandParameter="{Binding Character}"/>
         </StackLayout>
     </VerticalStackLayout>
 </ContentPage>
