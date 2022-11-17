@@ -2,17 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BRIX.Mobile.View.Characters.AddOrEditCharacterPage"
-             Title="Character Page">
+             xmlns:localization="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             Title="{localization:Translate AddOrEditCharacterPageTitle}">
     <VerticalStackLayout>
         <StackLayout>
-            <Label Text="Name"/>
+            <Label Text="{localization:Translate CharacterName}"/>
             <Entry Text="{Binding Character.Name}"/>
-            <Label Text="Backstory"/>
+            <Label Text="{localization:Translate CharacterBackstory}"/>
             <Entry Text="{Binding Character.Backstory}"/>
-            <Label Text="Appearance"/>
+            <Label Text="{localization:Translate CharacterAppearance}"/>
             <Entry Text="{Binding Character.Appearance}"/>
 
-            <Button Text="Save" 
+            <Button Text="{localization:Translate SaveCharacter}" 
                     Command="{Binding SaveCommand}"
                     CommandParameter="{Binding Character}"/>
         </StackLayout>

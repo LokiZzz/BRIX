@@ -4,7 +4,8 @@
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Characters"
              x:Class="BRIX.Mobile.View.Characters.CurrentCharacterPage"
              x:DataType="vm:CurrentCharacterPageVM"
-             Title="Active character">
+             xmlns:localization="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             Title="{localization:Translate CurrentCharacterPageTitle}">
     <Grid>
         
         <!--In case of empty character pool-->
@@ -14,15 +15,15 @@
         
         <!--In case of player have at leatst one character-->
         <VerticalStackLayout IsVisible="{Binding PlayerHaveCharacter}">
-            <Label Text="Name:"/>
+            <Label Text="{localization:Translate CharacterName}"/>
             <Label Text="{Binding Character.Name}"/>
-            <Label Text="Backstory:"/>
+            <Label Text="{localization:Translate CharacterBackstory}"/>
             <Label Text="{Binding Character.Backstory}"/>
-            <Label Text="Appearance:"/>
+            <Label Text="{localization:Translate CharacterAppearance}"/>
             <Label Text="{Binding Character.Appearance}"/>
             <HorizontalStackLayout>
-                <Button Text="Switch" Command="{Binding SwitchCommand}"/>
-                <Button Text="Edit" Command="{Binding EditCommand}"/>
+                <Button Text="{localization:Translate SwitchCharacter}" Command="{Binding SwitchCommand}"/>
+                <Button Text="{localization:Translate EditCharacter}" Command="{Binding EditCommand}"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
             

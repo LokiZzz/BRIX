@@ -4,7 +4,8 @@
              xmlns:local="clr-namespace:BRIX.Mobile.ViewModel.Account"
              x:Class="BRIX.Mobile.View.Account.SignInPage"
              ControlTemplate="{StaticResource BusyPageTemplate}"
-             Title="SignInPage"
+             xmlns:localization="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             Title="{localization:Translate SignInPageTitle}"
              x:DataType="local:SignInPageVM">
     <VerticalStackLayout>
         <Label Text="Login:"/>

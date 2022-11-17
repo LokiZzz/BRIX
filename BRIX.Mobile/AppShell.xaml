@@ -14,7 +14,7 @@
         FlyoutItemIsVisible="False" 
         Shell.FlyoutBehavior="Disabled" />
 
-    <FlyoutItem Title="{localization:Translate NavigationGame}">
+    <FlyoutItem Title="{localization:Translate NavigationCharacter}">
         <ShellContent
             Title="Character"
             ContentTemplate="{DataTemplate characters:CurrentCharacterPage}"
