@@ -4,7 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:char="clr-namespace:BRIX.Mobile.View.Character"
-    xmlns:account="clr-namespace:BRIX.Mobile.View.Account">
+    xmlns:account="clr-namespace:BRIX.Mobile.View.Account"
+    xmlns:localization="clr-namespace:BRIX.Mobile.Resources.Localizations">
 
     <ShellContent 
         Title="Login"
@@ -13,7 +14,7 @@
         FlyoutItemIsVisible="False" 
         Shell.FlyoutBehavior="Disabled" />
 
-    <FlyoutItem Title="Game">
+    <FlyoutItem Title="{localization:Translate NavigationGame}">
         <Tab>
             <ShellContent
                 Title="Character"
@@ -22,8 +23,8 @@
         </Tab>
     </FlyoutItem>
 
-    <FlyoutItem Title="Characters">
-        <Tab Title="Characters">
+    <FlyoutItem Title="{localization:Translate NavigationCharacterList}">
+        <Tab>
             <ShellContent
                 Title="Characters"
                 ContentTemplate="{DataTemplate char:CharacterListPage}"
