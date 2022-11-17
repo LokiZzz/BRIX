@@ -5,17 +5,20 @@
              xmlns:account="clr-namespace:BRIX.Mobile.ViewModel.Account"
              x:Class="BRIX.Mobile.Resources.Controls.ControlTemplates">
     <ControlTemplate x:Key="BusyPageTemplate" x:DataType="vm:ViewModelBase">
-        <Grid BindingContext="{Binding Source={RelativeSource TemplatedParent}}">
+        <Grid BindingContext="{Binding Source={RelativeSource TemplatedParent}}" >
             <ContentPresenter/>
             <Border 
                 BackgroundColor="Black"
                 Opacity="0.55"
                 HorizontalOptions="Fill" 
                 VerticalOptions="Fill"
+                Margin="-5"
                 IsVisible="{TemplateBinding BindingContext.IsBusy}"/>
             <ActivityIndicator
                 IsRunning="True"
-                IsVisible="{TemplateBinding BindingContext.IsBusy}"/>
+                IsVisible="{TemplateBinding BindingContext.IsBusy}"
+                HorizontalOptions="Center" 
+                VerticalOptions="Center"/>
         </Grid>
     </ControlTemplate>
 </ResourceDictionary>

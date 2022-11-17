@@ -1,8 +1,9 @@
 ﻿using BRIX.Mobile.Services;
+using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Account;
-using BRIX.Mobile.View.Character;
+using BRIX.Mobile.View.Characters;
 using BRIX.Mobile.ViewModel.Account;
-using BRIX.Mobile.ViewModel.Character;
+using BRIX.Mobile.ViewModel.Characters;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BRIX.Mobile;
@@ -36,17 +37,21 @@ public static class MauiProgram
     public static void RegisterViews(this MauiAppBuilder builder)
 	{
         builder.RegisterView<SignInPage, SignInPageVM>();
-        builder.RegisterView<CurrentCharacterPage, CurrentCharacterPageVM>();
+        builder.RegisterView<CurrentCharacterPage, CurrentCharacterPageVM>(false);
         builder.RegisterView<CharacterListPage, CharacterListPageVM>();
         builder.RegisterView<AddOrEditCharacterPage, AddOrEditCharacterPageVM>();
         builder.RegisterView<SelectLanguagePage, SelectLanguagePageVM>();
     }
 
-    private static void RegisterView<TView, TViewModel>(this MauiAppBuilder builder) 
+    private static void RegisterView<TView, TViewModel>(this MauiAppBuilder builder, bool registerRoute = true)
         where TView : ContentPage where TViewModel : ObservableObject
     {
         builder.Services.AddTransient<TView>();
         builder.Services.AddTransient<TViewModel>();
-        Routing.RegisterRoute(typeof(TView).Name, typeof(TView));
+
+        if (registerRoute)
+        {
+            Routing.RegisterRoute(typeof(TView).Name, typeof(TView));
+        }
     }
 }

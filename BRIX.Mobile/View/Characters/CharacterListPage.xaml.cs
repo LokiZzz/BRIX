@@ -1,6 +1,6 @@
-using BRIX.Mobile.ViewModel.Character;
+using BRIX.Mobile.ViewModel.Characters;
 
-namespace BRIX.Mobile.View.Character;
+namespace BRIX.Mobile.View.Characters;
 
 public partial class CharacterListPage : ContentPage
 {

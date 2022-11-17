@@ -65,19 +65,22 @@
 	  <MauiXaml Update="Resources\Controls\ControlTemplates.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Resources\Converters\ConvertersCollection.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\Account\SelectLanguagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Account\SignInPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Character\AddOrEditCharacterPage.xaml">
+	  <MauiXaml Update="View\Characters\AddOrEditCharacterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Character\CharacterListPage.xaml">
+	  <MauiXaml Update="View\Characters\CharacterListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Character\CurrentCharacterPage.xaml">
+	  <MauiXaml Update="View\Characters\CurrentCharacterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
@@ -88,7 +91,7 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>BrixApp.resx</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\Character\AddOrEditCharacterPage.xaml.cs">
+	  <Compile Update="View\Characters\AddOrEditCharacterPage.xaml.cs">
 	    <DependentUpon>AddOrEditCharacterPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>

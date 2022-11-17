@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BRIX.Library.Character
+namespace BRIX.Library.Characters
 {
     /// <summary>
     /// Персонаж на первом уровне имеет 100 очков опыта.

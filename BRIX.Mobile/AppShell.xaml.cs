@@ -1,5 +1,6 @@
 ﻿using BRIX.Mobile.Services;
-using BRIX.Mobile.View.Character;
+using BRIX.Mobile.Services.Navigation;
+using BRIX.Mobile.View.Characters;
 using BRIX.Mobile.ViewModel.Base;
 
 namespace BRIX.Mobile;

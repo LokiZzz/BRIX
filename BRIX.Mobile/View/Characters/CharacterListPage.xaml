@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BRIX.Mobile.View.Characters.CharacterListPage"
+             Title="CharacterListPage">
+    <VerticalStackLayout>
+        <CollectionView 
+            x:Name="listView"
+            ItemsSource="{Binding Characters}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItems Mode="Execute">
+                                <SwipeItem 
+                                    Text="Edit"
+                                    BackgroundColor="LightGreen"
+                                    Command="{Binding Source={x:Reference listView}, Path= BindingContext.EditCommand}"
+                                    CommandParameter="{Binding}"/>
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+                        <SwipeView.RightItems>
+                            <SwipeItems Mode="Execute">
+                                <SwipeItem 
+                                    Text="Remove"
+                                    BackgroundColor="LightPink"
+                                    Command="{Binding Source={x:Reference listView}, Path= BindingContext.RemoveCommand}"
+                                    CommandParameter="{Binding}"/>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        
+                        <Grid>
+                            <Border>
+                                <Label Text="{Binding Name}"/>
+                            </Border>
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <HorizontalStackLayout>
+            <Button Text="Add" Command="{Binding AddCommand}"/>
+            <Button Text="Clear" Command="{Binding ClearCommand}"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

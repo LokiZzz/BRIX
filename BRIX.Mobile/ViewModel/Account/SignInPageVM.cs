@@ -1,5 +1,5 @@
 ﻿using BRIX.Mobile.Services;
-using BRIX.Mobile.View.Character;
+using BRIX.Mobile.View.Characters;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -45,7 +45,7 @@ namespace BRIX.Mobile.ViewModel.Account
                     Preferences.Set(Settings.Account.Password, _password);
                 }
 
-                await Navigation.NavigateAsync($"//{nameof(CurrentCharacterPage)}");
+                await Navigation.NavigateAsync<CurrentCharacterPage>(ENavigationMode.Absolute);
             }
 
             IsBusy = false;
@@ -61,7 +61,7 @@ namespace BRIX.Mobile.ViewModel.Account
                 Login = Preferences.Get(Settings.Account.Login, string.Empty);
                 Password = Preferences.Get(Settings.Account.Password, string.Empty);
 
-                //await Navigation.NavigateAsync($"//{nameof(CurrentCharacterPage)}");
+                await Navigation.NavigateAsync<CurrentCharacterPage>(ENavigationMode.Absolute);
             }
         }
     }

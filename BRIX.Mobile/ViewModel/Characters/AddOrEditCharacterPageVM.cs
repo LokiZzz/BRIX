@@ -1,13 +1,14 @@
-﻿using BRIX.Mobile.Models.Character;
+﻿using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.Services;
-using BRIX.Mobile.View.Character;
+using BRIX.Mobile.Services.Navigation;
+using BRIX.Mobile.View.Characters;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Linq;
-using CharacterBM = BRIX.Library.Character.Character;
+using CharacterBM = BRIX.Library.Characters.Character;
 
-namespace BRIX.Mobile.ViewModel.Character
+namespace BRIX.Mobile.ViewModel.Characters
 {
     public partial class AddOrEditCharacterPageVM : ViewModelBase, IQueryAttributable
     {
@@ -34,7 +35,7 @@ namespace BRIX.Mobile.ViewModel.Character
                 await _characterService.AddAsync(character.Character);
             }
 
-            await Navigation.NavigateAsync($"..");
+            await Navigation.Back();
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
