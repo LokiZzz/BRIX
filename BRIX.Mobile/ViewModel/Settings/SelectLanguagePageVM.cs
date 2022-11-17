@@ -2,15 +2,10 @@
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BRIX.Mobile.ViewModel.Account
+namespace BRIX.Mobile.ViewModel.Settings
 {
     public partial class SelectLanguagePageVM : ViewModelBase
     {
@@ -32,7 +27,7 @@ namespace BRIX.Mobile.ViewModel.Account
         [RelayCommand]
         private Task SelectCulture(CultureInfo culture)
         {
-            Preferences.Set(Settings.Account.Culture, culture.Name);
+            Preferences.Set(Mobile.Settings.Account.Culture, culture.Name);
             _localization.SetCulture(culture);
 
             return Task.CompletedTask;

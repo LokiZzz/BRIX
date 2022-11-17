@@ -14,16 +14,16 @@
         </VerticalStackLayout>
         
         <!--In case of player have at leatst one character-->
-        <VerticalStackLayout IsVisible="{Binding PlayerHaveCharacter}">
-            <Label Text="{localization:Translate CharacterName}"/>
+        <VerticalStackLayout IsVisible="{Binding PlayerHaveCharacter }">
+            <Label Text="{localization:Translate Name}"/>
             <Label Text="{Binding Character.Name}"/>
-            <Label Text="{localization:Translate CharacterBackstory}"/>
+            <Label Text="{localization:Translate Backstory}"/>
             <Label Text="{Binding Character.Backstory}"/>
-            <Label Text="{localization:Translate CharacterAppearance}"/>
+            <Label Text="{localization:Translate Appearance}"/>
             <Label Text="{Binding Character.Appearance}"/>
             <HorizontalStackLayout>
-                <Button Text="{localization:Translate SwitchCharacter}" Command="{Binding SwitchCommand}"/>
-                <Button Text="{localization:Translate EditCharacter}" Command="{Binding EditCommand}"/>
+                <Button Text="{localization:Translate Switch}" Command="{Binding SwitchCommand}"/>
+                <Button Text="{localization:Translate Edit}" Command="{Binding EditCommand}"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
             

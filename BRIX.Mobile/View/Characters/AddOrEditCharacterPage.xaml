@@ -6,14 +6,14 @@
              Title="{localization:Translate AddOrEditCharacterPageTitle}">
     <VerticalStackLayout>
         <StackLayout>
-            <Label Text="{localization:Translate CharacterName}"/>
+            <Label Text="{localization:Translate Name}"/>
             <Entry Text="{Binding Character.Name}"/>
-            <Label Text="{localization:Translate CharacterBackstory}"/>
+            <Label Text="{localization:Translate Backstory}"/>
             <Entry Text="{Binding Character.Backstory}"/>
-            <Label Text="{localization:Translate CharacterAppearance}"/>
+            <Label Text="{localization:Translate Appearance}"/>
             <Entry Text="{Binding Character.Appearance}"/>
 
-            <Button Text="{localization:Translate SaveCharacter}" 
+            <Button Text="{localization:Translate Save}" 
                     Command="{Binding SaveCommand}"
                     CommandParameter="{Binding Character}"/>
         </StackLayout>

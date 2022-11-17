@@ -1,6 +1,6 @@
-using BRIX.Mobile.ViewModel.Account;
+using BRIX.Mobile.ViewModel.Settings;
 
-namespace BRIX.Mobile.View.Account;
+namespace BRIX.Mobile.View.Settings;
 
 public partial class SelectLanguagePage : ContentPage
 {

@@ -63,9 +63,9 @@ namespace BRIX.Mobile.Resources.Localizations {
         /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
-        internal static string AddCharacter {
+        internal static string Add {
             get {
-                return ResourceManager.GetString("AddCharacter", resourceCulture);
+                return ResourceManager.GetString("Add", resourceCulture);
             }
         }
         
@@ -81,18 +81,27 @@ namespace BRIX.Mobile.Resources.Localizations {
         /// <summary>
         ///   Looks up a localized string similar to Appearance.
         /// </summary>
-        internal static string CharacterAppearance {
+        internal static string Appearance {
             get {
-                return ResourceManager.GetString("CharacterAppearance", resourceCulture);
+                return ResourceManager.GetString("Appearance", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Backstory.
         /// </summary>
-        internal static string CharacterBackstory {
+        internal static string Backstory {
             get {
-                return ResourceManager.GetString("CharacterBackstory", resourceCulture);
+                return ResourceManager.GetString("Backstory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Character.
+        /// </summary>
+        internal static string Character {
+            get {
+                return ResourceManager.GetString("Character", resourceCulture);
             }
         }
         
@@ -106,20 +115,11 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
-        /// </summary>
-        internal static string CharacterName {
-            get {
-                return ResourceManager.GetString("CharacterName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
-        internal static string ClearCharacters {
+        internal static string Clear {
             get {
-                return ResourceManager.GetString("ClearCharacters", resourceCulture);
+                return ResourceManager.GetString("Clear", resourceCulture);
             }
         }
         
@@ -135,45 +135,72 @@ namespace BRIX.Mobile.Resources.Localizations {
         /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
-        internal static string EditCharacter {
+        internal static string Edit {
             get {
-                return ResourceManager.GetString("EditCharacter", resourceCulture);
+                return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Character.
+        ///   Looks up a localized string similar to Language.
         /// </summary>
-        internal static string NavigationCharacter {
+        internal static string Language {
             get {
-                return ResourceManager.GetString("NavigationCharacter", resourceCulture);
+                return ResourceManager.GetString("Language", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change language.
+        ///   Looks up a localized string similar to Login.
         /// </summary>
-        internal static string NavigationSelectLanguage {
+        internal static string Login {
             get {
-                return ResourceManager.GetString("NavigationSelectLanguage", resourceCulture);
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember me.
+        /// </summary>
+        internal static string RememberMe {
+            get {
+                return ResourceManager.GetString("RememberMe", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Remove.
         /// </summary>
-        internal static string RemoveCharacter {
+        internal static string Remove {
             get {
-                return ResourceManager.GetString("RemoveCharacter", resourceCulture);
+                return ResourceManager.GetString("Remove", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
-        internal static string SaveCharacter {
+        internal static string Save {
             get {
-                return ResourceManager.GetString("SaveCharacter", resourceCulture);
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
         
@@ -183,6 +210,42 @@ namespace BRIX.Mobile.Resources.Localizations {
         internal static string SelectLanguagePageTitle {
             get {
                 return ResourceManager.GetString("SelectLanguagePageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string SettingsPageTitle {
+            get {
+                return ResourceManager.GetString("SettingsPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign In.
+        /// </summary>
+        internal static string SignIn {
+            get {
+                return ResourceManager.GetString("SignIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go.
+        /// </summary>
+        internal static string SignInButton {
+            get {
+                return ResourceManager.GetString("SignInButton", resourceCulture);
             }
         }
         
@@ -198,9 +261,9 @@ namespace BRIX.Mobile.Resources.Localizations {
         /// <summary>
         ///   Looks up a localized string similar to Switch.
         /// </summary>
-        internal static string SwitchCharacter {
+        internal static string Switch {
             get {
-                return ResourceManager.GetString("SwitchCharacter", resourceCulture);
+                return ResourceManager.GetString("Switch", resourceCulture);
             }
         }
     }

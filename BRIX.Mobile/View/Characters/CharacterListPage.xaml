@@ -14,7 +14,7 @@
                         <SwipeView.LeftItems>
                             <SwipeItems Mode="Execute">
                                 <SwipeItem 
-                                    Text="{localization:Translate EditCharacter}"
+                                    Text="{localization:Translate Edit}"
                                     BackgroundColor="LightGreen"
                                     Command="{Binding Source={x:Reference listView}, Path= BindingContext.EditCommand}"
                                     CommandParameter="{Binding}"/>
@@ -23,7 +23,7 @@
                         <SwipeView.RightItems>
                             <SwipeItems Mode="Execute">
                                 <SwipeItem 
-                                    Text="{localization:Translate RemoveCharacter}"
+                                    Text="{localization:Translate Remove}"
                                     BackgroundColor="LightPink"
                                     Command="{Binding Source={x:Reference listView}, Path= BindingContext.RemoveCommand}"
                                     CommandParameter="{Binding}"/>
@@ -41,8 +41,8 @@
         </CollectionView>
 
         <HorizontalStackLayout>
-            <Button Text="{localization:Translate AddCharacter}" Command="{Binding AddCommand}"/>
-            <Button Text="{localization:Translate ClearCharacters}" Command="{Binding ClearCommand}"/>
+            <Button Text="{localization:Translate Add}" Command="{Binding AddCommand}"/>
+            <Button Text="{localization:Translate Clear}" Command="{Binding ClearCommand}"/>
         </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
