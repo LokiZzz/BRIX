@@ -1,4 +1,5 @@
 ﻿using BRIX.Mobile.Services;
+using BRIX.Mobile.Services.Navigation;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;

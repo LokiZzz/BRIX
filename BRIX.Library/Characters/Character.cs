@@ -1,4 +1,4 @@
-﻿namespace BRIX.Library.Character
+﻿namespace BRIX.Library.Characters
 {
     public class Character
     {

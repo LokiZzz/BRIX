@@ -1,13 +1,14 @@
-﻿using BRIX.Mobile.Models.Character;
+﻿using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.Services;
-using BRIX.Mobile.View.Character;
+using BRIX.Mobile.Services.Navigation;
+using BRIX.Mobile.View.Characters;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using CharacterBM = BRIX.Library.Character.Character;
+using CharacterBM = BRIX.Library.Characters.Character;
 
-namespace BRIX.Mobile.ViewModel.Character
+namespace BRIX.Mobile.ViewModel.Characters
 {
     public partial class CharacterListPageVM : ViewModelBase
     {
@@ -24,18 +25,13 @@ namespace BRIX.Mobile.ViewModel.Character
         [RelayCommand]
         private async Task Add()
         {
-            await Navigation.NavigateAsync($"/{nameof(AddOrEditCharacterPage)}");
+            await Navigation.NavigateAsync<AddOrEditCharacterPage>();
         }
 
         [RelayCommand]
         private async Task Edit(CharacterModel character)
         {
-            Dictionary<string, object> parameters = new Dictionary<string, object>
-            {
-                { NavigationParameters.Character, character }
-            };
-
-            await Navigation.NavigateAsync($"/{nameof(AddOrEditCharacterPage)}", parameters);
+            await Navigation.NavigateAsync<AddOrEditCharacterPage>((NavigationParameters.Character, character));
         }
 
         [RelayCommand]

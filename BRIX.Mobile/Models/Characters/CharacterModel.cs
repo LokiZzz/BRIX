@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CharacterBM = BRIX.Library.Character.Character;
+using BRIX.Library.Characters;
 
-namespace BRIX.Mobile.Models.Character
+namespace BRIX.Mobile.Models.Characters
 {
     public class CharacterModel : ObservableObject
     {
-        public CharacterModel() : this(new CharacterBM()) { }
+        public CharacterModel() : this(new Character()) { }
 
-        public CharacterModel(CharacterBM character) => Character = character;
+        public CharacterModel(Character character) => Character = character;
 
-        public CharacterBM Character { get; }
+        public Character Character { get; }
 
         public Guid Id
         {

@@ -8,7 +8,7 @@ namespace BRIX.Mobile.Services
         bool FileExists(string fileName);
         Task WriteAllTextAsync(string fileName, string text);
         Task<string> ReadAllTextAsync(string fileName);
-        Task<T?> ReadJson<T>(string fileName, JsonSerializerOptions options = default) where T : class, new();
+        Task<T> ReadJson<T>(string fileName, JsonSerializerOptions options = default) where T : class, new();
         Task<List<T>> ReadJsonCollectionAsync<T>(string fileName, JsonSerializerOptions options = default) where T : class, new();
         Task WriteJsonAsync<T>(string fileName, T collection, JsonSerializerOptions options = default) where T : class, new();
         Task WriteJsonCollectionAsync<T>(string fileName, List<T> collection, JsonSerializerOptions options = default) where T : class, new();
@@ -36,7 +36,7 @@ namespace BRIX.Mobile.Services
             return File.WriteAllTextAsync(path, text);
         }
 
-        public async Task<T?> ReadJson<T>(string fileName, JsonSerializerOptions options = default) where T : class, new()
+        public async Task<T> ReadJson<T>(string fileName, JsonSerializerOptions options = default) where T : class, new()
         {
             string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
             using (Stream fs = File.Open(path, FileMode.OpenOrCreate, FileAccess.Read))

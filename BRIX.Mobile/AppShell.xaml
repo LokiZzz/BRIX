@@ -3,7 +3,7 @@
     x:Class="BRIX.Mobile.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:char="clr-namespace:BRIX.Mobile.View.Character"
+    xmlns:char="clr-namespace:BRIX.Mobile.View.Characters"
     xmlns:account="clr-namespace:BRIX.Mobile.View.Account">
 
     <ShellContent 
@@ -14,20 +14,22 @@
         Shell.FlyoutBehavior="Disabled" />
 
     <FlyoutItem Title="Game">
-        <Tab>
-            <ShellContent
-                Title="Character"
-                ContentTemplate="{DataTemplate char:CurrentCharacterPage}"
-                Route="CurrentCharacterPage" />
-        </Tab>
+        <ShellContent
+            Title="Character"
+            ContentTemplate="{DataTemplate char:CurrentCharacterPage}"
+            Route="CurrentCharacterPage" />
+        <!--<ShellContent
+            Title="Knowledge" />
+        <ShellContent
+            Title="About" />-->
     </FlyoutItem>
 
-    <FlyoutItem Title="Characters">
+    <!--<FlyoutItem Title="Characters">
         <Tab Title="Characters">
             <ShellContent
                 Title="Characters"
                 ContentTemplate="{DataTemplate char:CharacterListPage}"
                 Route="CharacterListPage" />
         </Tab>
-    </FlyoutItem>
+    </FlyoutItem>-->
 </Shell>

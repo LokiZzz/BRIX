@@ -1,4 +1,4 @@
-﻿using BRIX.Library.Character;
+﻿using BRIX.Library.Characters;
 using System.Text.Json;
 
 namespace BRIX.Mobile.Services
