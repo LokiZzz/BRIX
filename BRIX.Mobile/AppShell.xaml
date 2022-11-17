@@ -20,10 +20,10 @@
             ContentTemplate="{DataTemplate characters:CurrentCharacterPage}"
             Route="CurrentCharacterPage" />
     </FlyoutItem>
-
-    <FlyoutItem Title="{localization:Translate NavigationCharacterList}">
+    
+    <FlyoutItem Title="{localization:Translate NavigationSelectLanguage}">
         <Tab>
-            <ShellContent
+            <ShellContent 
                 Title="Languages"
                 ContentTemplate="{DataTemplate account:SelectLanguagePage}"
                 Route="SelectLanguagePage" />

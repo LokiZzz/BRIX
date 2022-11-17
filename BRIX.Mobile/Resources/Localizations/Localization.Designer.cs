@@ -22,14 +22,14 @@ namespace BRIX.Mobile.Resources.Localizations {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class BrixApp {
+    internal class Localization {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal BrixApp() {
+        internal Localization() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BRIX.Mobile.Resources.Localizations.BrixApp", typeof(BrixApp).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BRIX.Mobile.Resources.Localizations.Localization", typeof(Localization).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,20 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Character List.
-        /// </summary>
-        internal static string NavigationCharacterList {
-            get {
-                return ResourceManager.GetString("NavigationCharacterList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Game.
         /// </summary>
         internal static string NavigationGame {
             get {
                 return ResourceManager.GetString("NavigationGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change language.
+        /// </summary>
+        internal static string NavigationSelectLanguage {
+            get {
+                return ResourceManager.GetString("NavigationSelectLanguage", resourceCulture);
             }
         }
     }

@@ -5,13 +5,15 @@
              Title="SelectLanguagePage">
     <VerticalStackLayout>
         <CollectionView x:Name="collection"
-                        ItemsSource="{Binding Cultures}">
+                        ItemsSource="{Binding Cultures}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedCulture}"
+                        SelectionChangedCommandParameter="{Binding SelectedCulture}"
+                        SelectionChangedCommand="{Binding SelectCultureCommand}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border>
-                        <Button Text="{Binding DisplayName}"
-                                Command="{Binding Source={x:Reference collection}, Path= BindingContext.SelectCultureCommand}"
-                                CommandParameter="{Binding}"/>
+                        <Label Text="{Binding NativeName}"/>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

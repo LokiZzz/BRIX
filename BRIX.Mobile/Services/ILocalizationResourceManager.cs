@@ -6,6 +6,8 @@ namespace BRIX.Mobile.Services
     public interface ILocalizationResourceManager
     {
         public object this[string resourceKey] { get; }
+        CultureInfo CurrentCulture { get; }
+        List<CultureInfo> Cultures { get; }
         void SetCulture(CultureInfo culture);
     }
 
@@ -14,14 +16,22 @@ namespace BRIX.Mobile.Services
         public LocalizationResourceManager()
         {
             string culture = Preferences.Get(Settings.Account.Culture, CultureInfo.CurrentCulture.Name);
-            BrixApp.Culture = CultureInfo.GetCultureInfo(culture);
+            Localization.Culture = CultureInfo.GetCultureInfo(culture);
         }
 
-        public object this[string resourceKey] => BrixApp.ResourceManager.GetObject(resourceKey, BrixApp.Culture) ?? Array.Empty<byte>();
+        public object this[string resourceKey] => Localization.ResourceManager.GetObject(resourceKey, Localization.Culture) ?? Array.Empty<byte>();
+
+        public CultureInfo CurrentCulture => Localization.Culture;
+
+        public List<CultureInfo> Cultures { get; } = new()
+        {
+            CultureInfo.GetCultureInfo("ru"),
+            CultureInfo.GetCultureInfo("en")
+        };
 
         public void SetCulture(CultureInfo culture)
         {
-            BrixApp.Culture = culture;
+            Localization.Culture = culture;
             OnPropertyChanged(null);
         }
     }

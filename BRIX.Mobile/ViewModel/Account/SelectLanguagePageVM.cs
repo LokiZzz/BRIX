@@ -19,14 +19,12 @@ namespace BRIX.Mobile.ViewModel.Account
         public SelectLanguagePageVM(ILocalizationResourceManager localization)
         {
             _localization = localization;
+            _selectedCulture = _localization.CurrentCulture;
+            _cultures = new(_localization.Cultures);
         }
 
         [ObservableProperty]
-        private ObservableCollection<CultureInfo> _cultures = new ObservableCollection<CultureInfo>
-        {
-            CultureInfo.GetCultureInfo("ru"),
-            CultureInfo.GetCultureInfo("en")
-        };
+        private ObservableCollection<CultureInfo> _cultures;
 
         [ObservableProperty]
         private CultureInfo _selectedCulture;
