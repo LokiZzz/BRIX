@@ -13,7 +13,8 @@ namespace BRIX.Mobile.Services
     {
         public LocalizationResourceManager()
         {
-            BrixApp.Culture = CultureInfo.CurrentCulture;
+            string culture = Preferences.Get(Settings.Account.Culture, CultureInfo.CurrentCulture.Name);
+            BrixApp.Culture = CultureInfo.GetCultureInfo(culture);
         }
 
         public object this[string resourceKey] => BrixApp.ResourceManager.GetObject(resourceKey, BrixApp.Culture) ?? Array.Empty<byte>();

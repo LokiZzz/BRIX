@@ -31,4 +31,13 @@
                 Route="CharacterListPage" />
         </Tab>
     </FlyoutItem>
+
+    <FlyoutItem Title="{localization:Translate NavigationCharacterList}">
+        <Tab>
+            <ShellContent
+                Title="Languages"
+                ContentTemplate="{DataTemplate account:SelectLanguagePage}"
+                Route="SelectLanguagePage" />
+        </Tab>
+    </FlyoutItem>
 </Shell>

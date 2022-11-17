@@ -4,7 +4,7 @@
              x:Class="BRIX.Mobile.View.Character.CharacterListPage"
              Title="CharacterListPage">
     <VerticalStackLayout>
-        <CollectionView x:Name="listView"
+        <CollectionView x:Name="collection"
                   ItemsSource="{Binding Characters}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -13,11 +13,11 @@
                             <SwipeItems>
                                 <SwipeItem Text="Edit"
                                                BackgroundColor="LightGreen"
-                                               Command="{Binding Source={x:Reference listView}, Path= BindingContext.EditCommand}"
+                                               Command="{Binding Source={x:Reference collection}, Path= BindingContext.EditCommand}"
                                                CommandParameter="{Binding}"/>
                                 <SwipeItem Text="Remove"
                                                BackgroundColor="LightPink"
-                                               Command="{Binding Source={x:Reference listView}, Path= BindingContext.RemoveCommand}"
+                                               Command="{Binding Source={x:Reference collection}, Path= BindingContext.RemoveCommand}"
                                                CommandParameter="{Binding}"/>
                             </SwipeItems>
                         </SwipeView.LeftItems>
@@ -27,11 +27,11 @@
                                    Text="{Binding Name}"/>
                             <Button Grid.Column="1"
                                     Text="Edit"
-                                    Command="{Binding Source={x:Reference listView}, Path= BindingContext.EditCommand}"
+                                    Command="{Binding Source={x:Reference collection}, Path= BindingContext.EditCommand}"
                                     CommandParameter="{Binding}"/>
                             <Button Grid.Column="2"
                                     Text="Remove"
-                                    Command="{Binding Source={x:Reference listView}, Path= BindingContext.RemoveCommand}"
+                                    Command="{Binding Source={x:Reference collection}, Path= BindingContext.RemoveCommand}"
                                     CommandParameter="{Binding}"/>
                         </Grid>
                     </SwipeView>
