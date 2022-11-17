@@ -42,6 +42,7 @@ public static class MauiProgram
         builder.RegisterView<AddOrEditCharacterPage, AddOrEditCharacterPageVM>();
     }
 
+    /// <param name="registerRoute"> Set false if view already registered in AppShell.xaml </param>
     private static void RegisterView<TView, TViewModel>(this MauiAppBuilder builder, bool registerRoute = true)
         where TView : ContentPage where TViewModel : ObservableObject
     {
