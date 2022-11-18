@@ -16,9 +16,12 @@ public static class MauiProgram
 		builder.UseMauiApp<App>()
 			.ConfigureFonts(fonts =>
 			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+				fonts.AddFont("EBGaramond-Regular.ttf", "Garamond");
+				fonts.AddFont("SourceSansPro-Regular.ttf", "SourceSansPro");
+				fonts.AddFont("Font Awesome 6 Free-Solid-900.otf", "Awesome");
+				fonts.AddFont("Font Awesome 6 Brands-Regular-400.otf", "AwesomeBrands");
+				fonts.AddFont("rpgawesome-webfont.ttf", "AwesomeRPG");
+            });
         builder.RegisterServices();
         builder.RegisterViews();
 

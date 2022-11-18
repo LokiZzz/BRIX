@@ -2,8 +2,12 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Base"
+             xmlns:local="clr-namespace:BRIX.Mobile.Resources.Controls"
              xmlns:account="clr-namespace:BRIX.Mobile.ViewModel.Account"
              x:Class="BRIX.Mobile.Resources.Controls.ControlTemplates">
+
+    <local:TitleView x:Key="TitleView"/>
+
     <ControlTemplate x:Key="BusyPageTemplate" x:DataType="vm:ViewModelBase">
         <Grid BindingContext="{Binding Source={RelativeSource TemplatedParent}}" >
             <ContentPresenter/>
