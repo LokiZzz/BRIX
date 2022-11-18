@@ -38,7 +38,7 @@
                 <Label FontSize="12" FontFamily="SourceSansPro" Text="Font test! Dictum lacinia cursus platea faucibus. Integer et malesuada nulla efficitur amet, ornare in nunc ut. Nulla mauris ipsum non vitae malesuada pellentesque nec in faucibus. Efficitur ornare pulvinar sed cursus ut. Vestibulum amet est. Nisi adipiscing vestibulum ex."/>
                 <Label FontSize="36" FontFamily="Awesome" Text="{x:Static icons:Awesome.Fire}"/>
                 <Label FontSize="36" FontFamily="AwesomeBrands" Text="{x:Static icons:AwesomeBrands.Vk}"/>
-                <Label FontSize="120" FontFamily="AwesomeRPG" Text="{x:Static icons:AwesomeRPG.Icon74}"/>
+                <Label FontSize="120" FontFamily="AwesomeRPG" Text="{x:Static icons:AwesomeRPG.Sword}"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
             
