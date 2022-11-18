@@ -86,7 +86,7 @@ namespace BRIX.Mobile.View.IconFonts
         public const string Icon71 = "\ue943";
         public const string Icon72 = "\ue944";
         public const string Icon73 = "\ue945";
-        public const string Icon74 = "\ue946";
+        public const string Sword = "\ue946";
         public const string Icon75 = "\ue947";
         public const string Icon76 = "\ue948";
         public const string Icon77 = "\ue949";
