@@ -117,10 +117,73 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NavigationCharacterList" xml:space="preserve">
-    <value>Character List</value>
+  <data name="Add" xml:space="preserve">
+    <value>Добавить</value>
   </data>
-  <data name="NavigationGame" xml:space="preserve">
-    <value>Game</value>
+  <data name="AddOrEditCharacterPageTitle" xml:space="preserve">
+    <value>Персонаж</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Внешность</value>
+  </data>
+  <data name="Backstory" xml:space="preserve">
+    <value>Предыстория</value>
+  </data>
+  <data name="Character" xml:space="preserve">
+    <value>Персонаж</value>
+  </data>
+  <data name="CharacterListPageTitle" xml:space="preserve">
+    <value>Персонажи</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Очистить</value>
+  </data>
+  <data name="CurrentCharacterPageTitle" xml:space="preserve">
+    <value>Персонаж</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Править</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Запомнить меня</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="SelectLanguagePageTitle" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="SettingsPageTitle" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Авторизоваться</value>
+  </data>
+  <data name="SignInButton" xml:space="preserve">
+    <value>Вперед</value>
+  </data>
+  <data name="SignInPageTitle" xml:space="preserve">
+    <value>Авторизация</value>
+  </data>
+  <data name="Switch" xml:space="preserve">
+    <value>Сменить</value>
   </data>
 </root>

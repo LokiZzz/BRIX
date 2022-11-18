@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:localization="clr-namespace:BRIX.Mobile.Resources.Localizations"
              x:Class="BRIX.Mobile.View.Characters.CharacterListPage"
-             Title="CharacterListPage">
+             Title="{localization:Translate CharacterListPageTitle}">
     <VerticalStackLayout>
         <CollectionView 
             x:Name="listView"
@@ -13,7 +14,7 @@
                         <SwipeView.LeftItems>
                             <SwipeItems Mode="Execute">
                                 <SwipeItem 
-                                    Text="Edit"
+                                    Text="{localization:Translate Edit}"
                                     BackgroundColor="LightGreen"
                                     Command="{Binding Source={x:Reference listView}, Path= BindingContext.EditCommand}"
                                     CommandParameter="{Binding}"/>
@@ -22,7 +23,7 @@
                         <SwipeView.RightItems>
                             <SwipeItems Mode="Execute">
                                 <SwipeItem 
-                                    Text="Remove"
+                                    Text="{localization:Translate Remove}"
                                     BackgroundColor="LightPink"
                                     Command="{Binding Source={x:Reference listView}, Path= BindingContext.RemoveCommand}"
                                     CommandParameter="{Binding}"/>
@@ -40,8 +41,8 @@
         </CollectionView>
 
         <HorizontalStackLayout>
-            <Button Text="Add" Command="{Binding AddCommand}"/>
-            <Button Text="Clear" Command="{Binding ClearCommand}"/>
+            <Button Text="{localization:Translate Add}" Command="{Binding AddCommand}"/>
+            <Button Text="{localization:Translate Clear}" Command="{Binding ClearCommand}"/>
         </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

@@ -5,19 +5,27 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:characters="clr-namespace:BRIX.Mobile.View.Characters"
     xmlns:account="clr-namespace:BRIX.Mobile.View.Account"
+    xmlns:settings="clr-namespace:BRIX.Mobile.View.Settings"
     xmlns:localization="clr-namespace:BRIX.Mobile.Resources.Localizations">
 
     <ShellContent 
-        Title="Login"
+        Title="{localization:Translate SignIn}"
         ContentTemplate="{DataTemplate account:SignInPage}"
         Route="SignInPageVM"
         FlyoutItemIsVisible="False" 
         Shell.FlyoutBehavior="Disabled" />
 
-    <FlyoutItem Title="{localization:Translate NavigationGame}">
+    <FlyoutItem Title="{localization:Translate Character}">
         <ShellContent
-            Title="Character"
+            Title="{localization:Translate Character}"
             ContentTemplate="{DataTemplate characters:CurrentCharacterPage}"
             Route="CurrentCharacterPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="{localization:Translate Settings}">
+        <ShellContent 
+            Title="{localization:Translate Settings}"
+            ContentTemplate="{DataTemplate settings:SettingsPage}"
+            Route="SettingsPage" />
     </FlyoutItem>
 </Shell>

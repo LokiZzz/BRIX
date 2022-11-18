@@ -77,6 +77,9 @@
 	  <MauiXaml Update="Resources\Converters\ConvertersCollection.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Settings\SelectLanguagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\Account\SignInPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -89,13 +92,16 @@
 	  <MauiXaml Update="View\Characters\CurrentCharacterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Settings\SettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Resources\Localizations\BrixApp.Designer.cs">
+	  <Compile Update="Resources\Localizations\Localization.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
-	    <DependentUpon>BrixApp.resx</DependentUpon>
+	    <DependentUpon>Localization.resx</DependentUpon>
 	  </Compile>
 	  <Compile Update="View\Characters\AddOrEditCharacterPage.xaml.cs">
 	    <DependentUpon>AddOrEditCharacterPage.xaml</DependentUpon>
@@ -103,9 +109,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Update="Resources\Localizations\BrixApp.resx">
+	  <EmbeddedResource Update="Resources\Localizations\Localization.resx">
 	    <Generator>ResXFileCodeGenerator</Generator>
-	    <LastGenOutput>BrixApp.Designer.cs</LastGenOutput>
+	    <LastGenOutput>Localization.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
 	</ItemGroup>
 

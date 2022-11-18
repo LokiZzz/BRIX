@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BRIX.Mobile.View.Settings.SelectLanguagePage"
+             xmlns:localization="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             Title="{localization:Translate SelectLanguagePageTitle}">
+    <VerticalStackLayout>
+        <CollectionView x:Name="collection"
+                        ItemsSource="{Binding Cultures}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedCulture}"
+                        SelectionChangedCommandParameter="{Binding SelectedCulture}"
+                        SelectionChangedCommand="{Binding SelectCultureCommand}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border>
+                        <Label Text="{Binding NativeName}"/>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

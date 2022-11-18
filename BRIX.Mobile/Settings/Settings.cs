@@ -11,5 +11,6 @@ namespace BRIX.Mobile.Settings
         public const string RememberMe = nameof(RememberMe);
         public const string Login = nameof(Login);
         public const string Password = nameof(Password);
+        public const string Culture = nameof(Culture);
     }
 }

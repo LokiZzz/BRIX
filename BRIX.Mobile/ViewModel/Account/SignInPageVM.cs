@@ -3,11 +3,6 @@ using BRIX.Mobile.View.Characters;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Account
 {
@@ -40,9 +35,9 @@ namespace BRIX.Mobile.ViewModel.Account
             {
                 if (RememberMe)
                 {
-                    Preferences.Set(Settings.Account.RememberMe, true);
-                    Preferences.Set(Settings.Account.Login, _login);
-                    Preferences.Set(Settings.Account.Password, _password);
+                    Preferences.Set(Mobile.Settings.Account.RememberMe, true);
+                    Preferences.Set(Mobile.Settings.Account.Login, _login);
+                    Preferences.Set(Mobile.Settings.Account.Password, _password);
                 }
 
                 await Navigation.NavigateAsync<CurrentCharacterPage>(ENavigationMode.Absolute);
@@ -53,13 +48,13 @@ namespace BRIX.Mobile.ViewModel.Account
 
         public override async Task OnNavigatedAsync()
         {
-            RememberMe = Preferences.Get(Settings.Account.RememberMe, false);
+            RememberMe = Preferences.Get(Mobile.Settings.Account.RememberMe, false);
 
             // Set properties & automatically go through this page to the character page
             if (RememberMe)
             {
-                Login = Preferences.Get(Settings.Account.Login, string.Empty);
-                Password = Preferences.Get(Settings.Account.Password, string.Empty);
+                Login = Preferences.Get(Mobile.Settings.Account.Login, string.Empty);
+                Password = Preferences.Get(Mobile.Settings.Account.Password, string.Empty);
 
                 await Navigation.NavigateAsync<CurrentCharacterPage>(ENavigationMode.Absolute);
             }

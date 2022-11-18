@@ -2,8 +2,10 @@
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Account;
 using BRIX.Mobile.View.Characters;
+using BRIX.Mobile.View.Settings;
 using BRIX.Mobile.ViewModel.Account;
 using BRIX.Mobile.ViewModel.Characters;
+using BRIX.Mobile.ViewModel.Settings;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BRIX.Mobile;
@@ -43,6 +45,8 @@ public static class MauiProgram
         builder.RegisterView<CurrentCharacterPage, CurrentCharacterPageVM>(false);
         builder.RegisterView<CharacterListPage, CharacterListPageVM>();
         builder.RegisterView<AddOrEditCharacterPage, AddOrEditCharacterPageVM>();
+        builder.RegisterView<SettingsPage, SettingsPageVM>();
+        builder.RegisterView<SelectLanguagePage, SelectLanguagePageVM>();
     }
 
     /// <param name="registerRoute"> Set false if view already registered in AppShell.xaml </param>
