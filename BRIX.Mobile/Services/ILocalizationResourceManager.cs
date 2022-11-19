@@ -16,7 +16,8 @@ namespace BRIX.Mobile.Services
         public LocalizationResourceManager()
         {
             string cultureName = Preferences.Get(Settings.Account.Culture, CultureInfo.CurrentCulture.Name);
-            Localization.Culture = Cultures.Single(culture => culture == CultureInfo.GetCultureInfo(cultureName));
+            CultureInfo fromSettings = Cultures.FirstOrDefault(culture => culture == CultureInfo.GetCultureInfo(cultureName));
+            Localization.Culture = fromSettings ?? Cultures.First();
         }
 
         public object this[string resourceKey] => Localization.ResourceManager.GetObject(resourceKey, Localization.Culture) ?? Array.Empty<byte>();
@@ -25,8 +26,8 @@ namespace BRIX.Mobile.Services
 
         public List<CultureInfo> Cultures { get; } = new()
         {
+            CultureInfo.GetCultureInfo("en-US"),
             CultureInfo.GetCultureInfo("ru-RU"),
-            CultureInfo.GetCultureInfo("en-US")
         };
 
         public void SetCulture(CultureInfo culture)
