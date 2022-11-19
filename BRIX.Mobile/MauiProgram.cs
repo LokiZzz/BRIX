@@ -45,7 +45,7 @@ public static class MauiProgram
         builder.RegisterView<CurrentCharacterPage, CurrentCharacterPageVM>(false);
         builder.RegisterView<CharacterListPage, CharacterListPageVM>();
         builder.RegisterView<AddOrEditCharacterPage, AddOrEditCharacterPageVM>();
-        builder.RegisterView<SettingsPage, SettingsPageVM>();
+        builder.RegisterView<SettingsPage, SettingsPageVM>(false);
         builder.RegisterView<SelectLanguagePage, SelectLanguagePageVM>();
     }
 

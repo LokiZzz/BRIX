@@ -25,8 +25,8 @@ namespace BRIX.Mobile.Services
 
         public List<CultureInfo> Cultures { get; } = new()
         {
-            CultureInfo.GetCultureInfo("ru"),
-            CultureInfo.GetCultureInfo("en")
+            CultureInfo.GetCultureInfo("ru-RU"),
+            CultureInfo.GetCultureInfo("en-US")
         };
 
         public void SetCulture(CultureInfo culture)

@@ -37,7 +37,7 @@ namespace BRIX.Mobile.Services.Navigation
                     break;
             }
 
-            if (parameters != null)
+            if (parameters.Any())
             {
                 await Shell.Current.GoToAsync(route, parameters.ToParametersDictionary());
             }
