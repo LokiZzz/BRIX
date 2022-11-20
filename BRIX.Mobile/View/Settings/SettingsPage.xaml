@@ -3,8 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BRIX.Mobile.View.Settings.SettingsPage"
              xmlns:localization="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              xmlns:local="clr-namespace:BRIX.Mobile.View.Settings"
              Title="{localization:Translate SettingsPageTitle}">
+    
+    <Shell.TitleView>
+        <controls:TitleView/>
+    </Shell.TitleView>
+    
     <VerticalStackLayout>
         <Button Text="{localization:Translate Language}"
                 Command="{Binding SelectLanguageCommand}"/>

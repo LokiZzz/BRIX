@@ -32,14 +32,14 @@
                 <Button Text="Edit" Command="{Binding EditCommand}"/>
             </HorizontalStackLayout>
 
-            <VerticalStackLayout Margin="20" Spacing="5">
+            <!--<VerticalStackLayout Spacing="5">
                 <Label FontSize="24" FontFamily="Garamond" Text="Test — тест"/>
                 <Label FontSize="12" FontFamily="SourceSansPro" Text="Тест шрифтов! Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях."/>
                 <Label FontSize="12" FontFamily="SourceSansPro" Text="Font test! Dictum lacinia cursus platea faucibus. Integer et malesuada nulla efficitur amet, ornare in nunc ut. Nulla mauris ipsum non vitae malesuada pellentesque nec in faucibus. Efficitur ornare pulvinar sed cursus ut. Vestibulum amet est. Nisi adipiscing vestibulum ex."/>
                 <Label FontSize="36" FontFamily="Awesome" Text="{x:Static icons:Awesome.Fire}"/>
                 <Label FontSize="36" FontFamily="AwesomeBrands" Text="{x:Static icons:AwesomeBrands.Vk}"/>
                 <Label FontSize="120" FontFamily="AwesomeRPG" Text="{x:Static icons:AwesomeRPG.Sword}"/>
-            </VerticalStackLayout>
+            </VerticalStackLayout>-->
         </VerticalStackLayout>
             
     </Grid>

@@ -6,6 +6,7 @@ using BRIX.Mobile.View.Settings;
 using BRIX.Mobile.ViewModel.Account;
 using BRIX.Mobile.ViewModel.Characters;
 using BRIX.Mobile.ViewModel.Settings;
+using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BRIX.Mobile;
@@ -16,6 +17,7 @@ public static class MauiProgram
 	{
 		MauiAppBuilder builder = MauiApp.CreateBuilder();
 		builder.UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("EBGaramond-Regular.ttf", "Garamond");
