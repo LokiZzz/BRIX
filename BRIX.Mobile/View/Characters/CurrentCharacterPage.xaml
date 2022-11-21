@@ -6,41 +6,95 @@
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              x:Class="BRIX.Mobile.View.Characters.CurrentCharacterPage"
              x:DataType="vm:CurrentCharacterPageVM"
-             Title="Active character">
+             x:Name="CharacterContentPage"
+             Title="Character">
 
+    <ContentPage.Resources>
+        <Style TargetType="Label" x:Key="BlockTitleLabel">
+            <Setter Property="FontFamily" Value="Garamond"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="TextColor" Value="{StaticResource BRIXWhite}"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Border" x:Key="BlockBorder">
+            <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
+            <Setter Property="StrokeThickness" Value="0"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource BRIXMedium}"/>
+        </Style>
+        <Style TargetType="Border" x:Key="NameLevelBorder">
+            <Setter Property="StrokeShape" Value="RoundRectangle 5"/>
+            <Setter Property="StrokeThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource BRIXMedium}"/>
+            <Setter Property="Opacity" Value=".9"/>
+        </Style>
+    </ContentPage.Resources>
+    
     <Shell.TitleView>
-        <controls:TitleView/>
+        <Grid ColumnDefinitions="*,auto,auto" ColumnSpacing="10" Padding="0,10,15,10">
+            <Label 
+                Grid.Column="0"
+                Style="{StaticResource NavigationBarTitle}"
+                Text="Character"/>
+            <Button Grid.Column="1" Text="Switch"/>
+            <Button Grid.Column="2" Text="?"/>
+        </Grid>
     </Shell.TitleView>
 
     <Grid>
-        
         <!--In case of empty character pool-->
         <VerticalStackLayout IsVisible="{Binding PlayerHaveCharacter, Converter={StaticResource NotConverter}}">
             <Button Text="Create new character" Command="{Binding CreateCommand}"/>
         </VerticalStackLayout>
         
         <!--In case of player have at leatst one character-->
-        <VerticalStackLayout IsVisible="{Binding PlayerHaveCharacter}">
-            <Label Text="Name:"/>
-            <Label Text="{Binding Character.Name}"/>
-            <Label Text="Backstory:"/>
-            <Label Text="{Binding Character.Backstory}"/>
-            <Label Text="Appearance:"/>
-            <Label Text="{Binding Character.Appearance}"/>
-            <HorizontalStackLayout>
-                <Button Text="Switch" Command="{Binding SwitchCommand}"/>
-                <Button Text="Edit" Command="{Binding EditCommand}"/>
-            </HorizontalStackLayout>
+        <VerticalStackLayout IsVisible="{Binding PlayerHaveCharacter}" Spacing="10">
+            <Border 
+                Style="{StaticResource BlockBorder}"
+                HeightRequest="250" 
+                StrokeShape="RoundRectangle 10,50,50,10">
+                <Grid Margin="-20">
+                    <Image 
+                        Grid.RowSpan="2"
+                        Source="fox_character_moq.jpeg"
+                        Aspect="AspectFill"/>
+                    <Grid Margin="10" RowDefinitions="*,*">
+                        <Border 
+                            Style="{StaticResource NameLevelBorder}"
+                            Grid.Row="0"
+                            VerticalOptions="Start"
+                            HorizontalOptions="Start">
+                            <Label Style="{StaticResource BlockTitleLabel}" Text="Character name" />
+                        </Border>
+                        <Border 
+                            Style="{StaticResource NameLevelBorder}"
+                            Grid.Row="1"
+                            VerticalOptions="End"
+                            HorizontalOptions="End">
+                            <Label Style="{StaticResource BlockTitleLabel}" Text="Level 12"/>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Border>
 
-            <!--<VerticalStackLayout Spacing="5">
-                <Label FontSize="24" FontFamily="Garamond" Text="Test — тест"/>
-                <Label FontSize="12" FontFamily="SourceSansPro" Text="Тест шрифтов! Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях."/>
-                <Label FontSize="12" FontFamily="SourceSansPro" Text="Font test! Dictum lacinia cursus platea faucibus. Integer et malesuada nulla efficitur amet, ornare in nunc ut. Nulla mauris ipsum non vitae malesuada pellentesque nec in faucibus. Efficitur ornare pulvinar sed cursus ut. Vestibulum amet est. Nisi adipiscing vestibulum ex."/>
-                <Label FontSize="36" FontFamily="Awesome" Text="{x:Static icons:Awesome.Fire}"/>
-                <Label FontSize="36" FontFamily="AwesomeBrands" Text="{x:Static icons:AwesomeBrands.Vk}"/>
-                <Label FontSize="120" FontFamily="AwesomeRPG" Text="{x:Static icons:AwesomeRPG.Sword}"/>
-            </VerticalStackLayout>-->
+            <Border Style="{StaticResource BlockBorder}">
+                <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
+                    <Label Text="Health" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="0"/>
+                    <Label Text="107/120" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="1" Margin="0,0,15,0"/>
+                    <Button
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Text="Edit"/>
+                    <ProgressBar 
+                        Margin="0,5,0,-5"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="3"
+                        Progress=".92"
+                        ProgressColor="{StaticResource BRIXLime}"/>
+                </Grid>
+            </Border>
+
         </VerticalStackLayout>
-            
     </Grid>
 </ContentPage>

@@ -29,7 +29,7 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
         <Setter Property="FontFamily" Value="SourceSansPro"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="CornerRadius" Value="5"/>
         <Setter Property="Padding" Value="14,10"/>
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
@@ -352,7 +352,7 @@
     </Style>
 
     <Style TargetType="Page" ApplyToDerivedTypes="True">
-        <Setter Property="Padding" Value="20,0,20,20"/>
+        <Setter Property="Padding" Value="15,0,15,15"/>
         <Setter Property="BackgroundColor" Value="{StaticResource BRIXDark}" />
     </Style>
 
@@ -389,4 +389,14 @@
         <Setter Property="SelectedTabColor" Value="{StaticResource BRIXMedium}" />
     </Style>
 
+    <Style TargetType="Label" x:Key="NavigationBarTitle">
+        <Setter Property="FontFamily" Value="Garamond" />
+        <Setter Property="TextColor" Value="{StaticResource BRIXWhite}" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+    
 </ResourceDictionary>
