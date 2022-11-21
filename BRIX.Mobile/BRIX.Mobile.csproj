@@ -60,6 +60,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\BRIX.Library\BRIX.Library.csproj" />
+    <ProjectReference Include="..\BRIX.SourceGenerator\BRIX.SourceGenerator.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -105,7 +106,7 @@
 
 	<ItemGroup>
 	  <EmbeddedResource Update="Resources\Localizations\Localization.resx">
-	    <Generator>ResXFileCodeGenerator</Generator>
+	    <Generator>PublicResXFileCodeGenerator</Generator>
 	    <LastGenOutput>Localization.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
 	</ItemGroup>
