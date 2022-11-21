@@ -44,10 +44,13 @@
     <Color x:Key="Blue300Accent">#A7CBF6</Color>
 
     <Color x:Key="BRIXWhite">#FFFFFE</Color>
-    <Color x:Key="BRIXDim">#CBD9EB</Color>
     <Color x:Key="BRIXDark">#16161A</Color>
     <Color x:Key="BRIXMedium">#242629</Color>
+    <Color x:Key="BRIXDim">#78808A</Color>
+    <Color x:Key="BRIXLight">#CBD9EB</Color>
     <Color x:Key="BRIXViolet">#7F5AF0</Color>
+    <Color x:Key="BRIXOrange">#E9C46A</Color>
+    <Color x:Key="BRIXPink">#FF4F79</Color>
     <Color x:Key="BRIXLime">#CAFF8A</Color>
     <Color x:Key="BRIXRed">#F71735</Color>
 

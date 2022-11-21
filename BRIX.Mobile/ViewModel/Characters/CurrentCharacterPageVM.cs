@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,9 @@ namespace BRIX.Mobile.ViewModel.Characters
         [ObservableProperty]
         private bool _playerHaveCharacter;
 
+        [ObservableProperty]
+        private ObservableCollection<string> _exp;
+        
         [RelayCommand]
         public async Task Create()
         {
@@ -56,6 +60,8 @@ namespace BRIX.Mobile.ViewModel.Characters
             {
                 Character = new CharacterModel(characters.FirstOrDefault());
             }
+
+            Exp = new ObservableCollection<string>(new List<string> { "1", "2" });
         }
     }
 }

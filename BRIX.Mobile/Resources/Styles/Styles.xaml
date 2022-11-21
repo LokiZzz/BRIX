@@ -102,7 +102,7 @@
     </Style>
 
     <Style TargetType="Entry">
-        <Setter Property="TextColor" Value="{StaticResource BRIXDim}" />
+        <Setter Property="TextColor" Value="{StaticResource BRIXLight}" />
         <Setter Property="BackgroundColor" Value="{StaticResource BRIXDark}" />
         <Setter Property="FontFamily" Value="SourceSansPro"/>
         <Setter Property="FontSize" Value="14" />
@@ -147,7 +147,7 @@
     </Style>
 
     <Style TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource BRIXDim}" />
+        <Setter Property="TextColor" Value="{StaticResource BRIXLight}" />
         <Setter Property="FontFamily" Value="SourceSansPro" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="VisualStateManager.VisualStateGroups">
@@ -366,7 +366,7 @@
 
         <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource BRIXWhite}" />
         <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource BRIXWhite}" />
-        <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource BRIXDim}" />
+        <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource BRIXLight}" />
         <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource BRIXDark}" />
     </Style>
 
