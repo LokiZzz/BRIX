@@ -135,6 +135,18 @@
   <data name="CharacterListPageTitle" xml:space="preserve">
     <value>Персонажи</value>
   </data>
+  <data name="CharacterTab" xml:space="preserve">
+    <value>Персонаж</value>
+  </data>
+  <data name="CharacterTabAbilities" xml:space="preserve">
+    <value>Способности</value>
+  </data>
+  <data name="CharacterTabDetails" xml:space="preserve">
+    <value>Детали</value>
+  </data>
+  <data name="CharacterTabInventory" xml:space="preserve">
+    <value>Инвентарь</value>
+  </data>
   <data name="Clear" xml:space="preserve">
     <value>Очистить</value>
   </data>

@@ -115,6 +115,42 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Character.
+        /// </summary>
+        internal static string CharacterTab {
+            get {
+                return ResourceManager.GetString("CharacterTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abilities.
+        /// </summary>
+        internal static string CharacterTabAbilities {
+            get {
+                return ResourceManager.GetString("CharacterTabAbilities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        internal static string CharacterTabDetails {
+            get {
+                return ResourceManager.GetString("CharacterTabDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inventory.
+        /// </summary>
+        internal static string CharacterTabInventory {
+            get {
+                return ResourceManager.GetString("CharacterTabInventory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
         internal static string Clear {

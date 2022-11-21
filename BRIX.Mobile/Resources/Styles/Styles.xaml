@@ -362,12 +362,12 @@
         <Setter Property="Shell.TitleColor" Value="{StaticResource BRIXWhite}" />
         <Setter Property="Shell.DisabledColor" Value="{StaticResource BRIXMedium}" />
         <Setter Property="Shell.UnselectedColor" Value="{StaticResource BRIXDark}" />
-        <Setter Property="Shell.NavBarHasShadow" Value="false" />
-        <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource BRIXDark}" />
+        <Setter Property="Shell.FlyoutBackgroundColor" Value="{StaticResource BRIXDark}" />-->
+
         <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource BRIXWhite}" />
         <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource BRIXWhite}" />
-        <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource BRIXDark}" />
-        <Setter Property="Shell.FlyoutBackgroundColor" Value="{StaticResource BRIXDark}" />-->
+        <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource BRIXDim}" />
+        <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource BRIXDark}" />
     </Style>
 
     <Style TargetType="Label" Class="FlyoutItemLabelStyle">

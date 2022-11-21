@@ -44,9 +44,14 @@ public static class MauiProgram
     public static void RegisterViews(this MauiAppBuilder builder)
 	{
         builder.RegisterView<SignInPage, SignInPageVM>();
+
         builder.RegisterView<CurrentCharacterPage, CurrentCharacterPageVM>(false);
+        builder.RegisterView<CharacterAbilitiesPage, CharacterAbilitiesPageVM>(false);
+        builder.RegisterView<CharacterInventoryPage, CharacterInventoryPageVM>(false);
+        builder.RegisterView<CharacterDetailsPage, CharacterDetailsPageVM>(false);
         builder.RegisterView<CharacterListPage, CharacterListPageVM>();
         builder.RegisterView<AddOrEditCharacterPage, AddOrEditCharacterPageVM>();
+
         builder.RegisterView<SettingsPage, SettingsPageVM>(false);
         builder.RegisterView<SelectLanguagePage, SelectLanguagePageVM>();
     }

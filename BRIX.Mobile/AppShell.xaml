@@ -7,6 +7,7 @@
     xmlns:account="clr-namespace:BRIX.Mobile.View.Account"
     xmlns:settings="clr-namespace:BRIX.Mobile.View.Settings"
     xmlns:localization="clr-namespace:BRIX.Mobile.Resources.Localizations"
+    xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
     BackgroundColor="{StaticResource BRIXDark}"
     FlyoutBackgroundColor="{StaticResource BRIXDark}">
 
@@ -19,9 +20,25 @@
 
     <FlyoutItem Title="{localization:Translate Character}">
         <ShellContent
-            Title="{localization:Translate Character}"
+            Icon="{FontImage FontFamily=AwesomeRPG, Glyph={x:Static icons:AwesomeRPG.CloakAndDagger}}"
+            Title="{localization:Translate CharacterTab}"
             ContentTemplate="{DataTemplate characters:CurrentCharacterPage}"
             Route="CurrentCharacterPage" />
+        <ShellContent
+            Icon="{FontImage FontFamily=AwesomeRPG, Glyph={x:Static icons:AwesomeRPG.BurningEmbers}}"
+            Title="{localization:Translate CharacterTabAbilities}"
+            ContentTemplate="{DataTemplate characters:CharacterAbilitiesPage}"
+            Route="CharacterAbilitiesPage" />
+        <ShellContent
+            Icon="{FontImage FontFamily=AwesomeRPG, Glyph={x:Static icons:AwesomeRPG.Sapphire}}"
+            Title="{localization:Translate CharacterTabInventory}"
+            ContentTemplate="{DataTemplate characters:CharacterInventoryPage}"
+            Route="CharacterInventoryPage" />
+        <ShellContent
+            Icon="{FontImage FontFamily=AwesomeRPG, Glyph={x:Static icons:AwesomeRPG.ScrollUnfurled}}"
+            Title="{localization:Translate CharacterTabDetails}"
+            ContentTemplate="{DataTemplate characters:CharacterDetailsPage}"
+            Route="CharacterDetailsPage" />
     </FlyoutItem>
 
     <FlyoutItem Title="{localization:Translate Settings}">
