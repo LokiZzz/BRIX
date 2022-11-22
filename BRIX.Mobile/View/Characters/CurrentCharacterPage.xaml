@@ -25,9 +25,8 @@
         <Style TargetType="Border" x:Key="NameLevelBorder">
             <Setter Property="StrokeShape" Value="RoundRectangle 5"/>
             <Setter Property="StrokeThickness" Value="0"/>
-            <Setter Property="Padding" Value="10,5"/>
             <Setter Property="BackgroundColor" Value="{StaticResource BRIXMedium}"/>
-            <Setter Property="Opacity" Value=".9"/>
+            <Setter Property="Opacity" Value=".75"/>
         </Style>
     </ContentPage.Resources>
     
@@ -61,20 +60,14 @@
                             Source="fox_character_moq.jpeg"
                             Aspect="AspectFill"/>
                         <Grid Margin="10" RowDefinitions="*,*">
-                            <Border 
-                                Style="{StaticResource NameLevelBorder}"
-                                Grid.Row="0"
-                                VerticalOptions="Start"
-                                HorizontalOptions="Start">
+                            <Grid Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
+                                <Border Style="{StaticResource NameLevelBorder}" Margin="-10,-5"/>
                                 <Label Style="{StaticResource BlockTitleLabel}" Text="Character name" />
-                            </Border>
-                            <Border 
-                                Style="{StaticResource NameLevelBorder}"
-                                Grid.Row="1"
-                                VerticalOptions="End"
-                                HorizontalOptions="End">
+                            </Grid>
+                            <Grid Grid.Row="1" VerticalOptions="End" HorizontalOptions="End" Padding="10,5">
+                                <Border Style="{StaticResource NameLevelBorder}" Margin="-10,-5"/>
                                 <Label Style="{StaticResource BlockTitleLabel}" Text="Level 12"/>
-                            </Border>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Border>
