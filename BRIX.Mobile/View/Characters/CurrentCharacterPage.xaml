@@ -42,100 +42,104 @@
         </Grid>
     </Shell.TitleView>
 
-    <Grid>
-        <!--In case of empty character pool-->
-        <VerticalStackLayout IsVisible="{Binding PlayerHaveCharacter, Converter={StaticResource NotConverter}}">
-            <Button Text="Create new character" Command="{Binding CreateCommand}"/>
-        </VerticalStackLayout>
+    <ScrollView>
+        <Grid>
+            <!--In case of empty character pool-->
+            <VerticalStackLayout IsVisible="{Binding PlayerHaveCharacter, Converter={StaticResource NotConverter}}">
+                <Button Text="Create new character" Command="{Binding CreateCommand}"/>
+            </VerticalStackLayout>
         
-        <!--In case of player have at leatst one character-->
-        <VerticalStackLayout IsVisible="{Binding PlayerHaveCharacter}" Spacing="10">
-            <Border 
-                Style="{StaticResource BlockBorder}"
-                HeightRequest="250" 
-                StrokeShape="RoundRectangle 10,50,50,10">
-                <Grid Margin="-20">
-                    <Image 
-                        Grid.RowSpan="2"
-                        Source="fox_character_moq.jpeg"
-                        Aspect="AspectFill"/>
-                    <Grid Margin="10" RowDefinitions="*,*">
-                        <Border 
-                            Style="{StaticResource NameLevelBorder}"
-                            Grid.Row="0"
-                            VerticalOptions="Start"
-                            HorizontalOptions="Start">
-                            <Label Style="{StaticResource BlockTitleLabel}" Text="Character name" />
-                        </Border>
-                        <Border 
-                            Style="{StaticResource NameLevelBorder}"
-                            Grid.Row="1"
-                            VerticalOptions="End"
-                            HorizontalOptions="End">
-                            <Label Style="{StaticResource BlockTitleLabel}" Text="Level 12"/>
-                        </Border>
+            <!--In case of player have at leatst one character-->
+            <VerticalStackLayout IsVisible="{Binding PlayerHaveCharacter}" Spacing="10">
+                <Border 
+                    Style="{StaticResource BlockBorder}"
+                    HeightRequest="250" 
+                    StrokeShape="RoundRectangle 10,50,50,10">
+                    <Grid Margin="-20">
+                        <Image 
+                            Grid.RowSpan="2"
+                            Source="fox_character_moq.jpeg"
+                            Aspect="AspectFill"/>
+                        <Grid Margin="10" RowDefinitions="*,*">
+                            <Border 
+                                Style="{StaticResource NameLevelBorder}"
+                                Grid.Row="0"
+                                VerticalOptions="Start"
+                                HorizontalOptions="Start">
+                                <Label Style="{StaticResource BlockTitleLabel}" Text="Character name" />
+                            </Border>
+                            <Border 
+                                Style="{StaticResource NameLevelBorder}"
+                                Grid.Row="1"
+                                VerticalOptions="End"
+                                HorizontalOptions="End">
+                                <Label Style="{StaticResource BlockTitleLabel}" Text="Level 12"/>
+                            </Border>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Border>
+                </Border>
 
-            <Border Style="{StaticResource BlockBorder}">
-                <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
-                    <Label Text="Health" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="0"/>
-                    <Label Text="107 / 120" TextColor="{StaticResource BRIXLime}" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="1" Margin="0,0,15,0"/>
-                    <Button
-                        Grid.Row="0"
-                        Grid.Column="2"
-                        Text="Edit"/>
-                    <ProgressBar 
-                        Margin="0,5,0,-5"
-                        Grid.Row="1"
-                        Grid.ColumnSpan="3"
-                        Progress=".92"
-                        ProgressColor="{StaticResource BRIXLime}"/>
-                </Grid>
-            </Border>
+                <Border Style="{StaticResource BlockBorder}">
+                    <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
+                        <Label Text="Health" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="0"/>
+                        <Label Text="107 / 120" TextColor="{StaticResource BRIXLime}" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="1" Margin="0,0,15,0"/>
+                        <Button
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Text="Edit"/>
+                        <ProgressBar 
+                            Margin="0,5,0,-5"
+                            Grid.Row="1"
+                            Grid.ColumnSpan="3"
+                            Progress=".92"
+                            ProgressColor="{StaticResource BRIXLime}"/>
+                    </Grid>
+                </Border>
 
-            <CarouselView ItemsSource="{Binding Exp}" Margin="-15,0" Loop="False" IndicatorView="experienceCarouselIndicator">
-                <CarouselView.ItemTemplate>
-                    <DataTemplate>
-                        <Border Style="{StaticResource BlockBorder}" Margin="15,0">
-                            <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
-                                <Label Text="Expirience" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="0"/>
-                                <Label Text="1007 / 1200" TextColor="{StaticResource BRIXOrange}" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="1" Margin="0,0,15,0"/>
-                                <Button
-                                    Grid.Row="0"
-                                    Grid.Column="2"
-                                    Text="Edit"/>
-                                <ProgressBar 
-                                    Margin="0,5,0,-5"
-                                    Grid.Row="1"
-                                    Grid.ColumnSpan="3"
-                                    Progress=".92"
-                                    ProgressColor="{StaticResource BRIXOrange}"/>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
+                <CarouselView ItemsSource="{Binding Exp}" Margin="-15,0" Loop="False" IndicatorView="experienceCarouselIndicator">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource BlockBorder}" Margin="15,0">
+                                <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
+                                    <Label Text="Expirience" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="0"/>
+                                    <Label Text="1007 / 1200" TextColor="{StaticResource BRIXOrange}" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="1" Margin="0,0,15,0"/>
+                                    <Button
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        Text="Edit"/>
+                                    <ProgressBar 
+                                        Margin="0,5,0,-5"
+                                        Grid.Row="1"
+                                        Grid.ColumnSpan="3"
+                                        Progress=".92"
+                                        ProgressColor="{StaticResource BRIXOrange}"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
 
-            <IndicatorView 
-                x:Name="experienceCarouselIndicator"
-                IndicatorColor="{StaticResource BRIXDim}"
-                SelectedIndicatorColor="{StaticResource BRIXWhite}"
-                HorizontalOptions="Center"/>
+                <IndicatorView 
+                    x:Name="experienceCarouselIndicator"
+                    IndicatorColor="{StaticResource BRIXDim}"
+                    SelectedIndicatorColor="{StaticResource BRIXWhite}"
+                    HorizontalOptions="Center"/>
 
-            <Border Style="{StaticResource BlockBorder}">
-                <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
-                    <Label Text="Tags" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="0"/>
-                </Grid>
-            </Border>
+                <Border Style="{StaticResource BlockBorder}">
+                    <Grid RowDefinitions="auto,auto,auto,auto" ColumnDefinitions="*,auto,auto">
+                        <Label Text="Tags" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="0"/>
+                        <controls:FramedEntry Grid.Row="1" Placeholder="Login"/>
+                        <controls:FramedEntry Grid.Row="2" Placeholder="Password" IsPassword="True"/>
+                    </Grid>
+                </Border>
 
-            <Border Style="{StaticResource BlockBorder}">
-                <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
-                    <Label Text="Abilities" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="0"/>
-                </Grid>
-            </Border>
+                <Border Style="{StaticResource BlockBorder}">
+                    <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
+                        <Label Text="Abilities" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="0"/>
+                    </Grid>
+                </Border>
 
-        </VerticalStackLayout>
-    </Grid>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>
