@@ -10,18 +10,6 @@
              Title="Character">
 
     <ContentPage.Resources>
-        <Style TargetType="Label" x:Key="BlockTitleLabel">
-            <Setter Property="FontFamily" Value="Garamond"/>
-            <Setter Property="FontSize" Value="24"/>
-            <Setter Property="TextColor" Value="{StaticResource BRIXWhite}"/>
-            <Setter Property="VerticalTextAlignment" Value="Center"/>
-        </Style>
-        <Style TargetType="Border" x:Key="BlockBorder">
-            <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
-            <Setter Property="StrokeThickness" Value="0"/>
-            <Setter Property="Padding" Value="15"/>
-            <Setter Property="BackgroundColor" Value="{StaticResource BRIXMedium}"/>
-        </Style>
         <Style TargetType="Border" x:Key="NameLevelBorder">
             <Setter Property="StrokeShape" Value="RoundRectangle 5"/>
             <Setter Property="StrokeThickness" Value="0"/>
@@ -76,10 +64,7 @@
                     <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
                         <Label Text="Health" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="0"/>
                         <Label Text="107 / 120" TextColor="{StaticResource BRIXLime}" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="1" Margin="0,0,15,0"/>
-                        <Button
-                            Grid.Row="0"
-                            Grid.Column="2"
-                            Text="Edit"/>
+                        <Button Grid.Row="0" Grid.Column="2" Text="Edit" Command="{Binding EditHealthCommand}"/>
                         <ProgressBar 
                             Margin="0,5,0,-5"
                             Grid.Row="1"

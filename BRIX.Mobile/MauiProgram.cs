@@ -2,11 +2,14 @@
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Account;
 using BRIX.Mobile.View.Characters;
+using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.View.Settings;
 using BRIX.Mobile.ViewModel.Account;
 using BRIX.Mobile.ViewModel.Characters;
+using BRIX.Mobile.ViewModel.Popups;
 using BRIX.Mobile.ViewModel.Settings;
 using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BRIX.Mobile;
@@ -54,11 +57,13 @@ public static class MauiProgram
 
         builder.RegisterView<SettingsPage, SettingsPageVM>(false);
         builder.RegisterView<SelectLanguagePage, SelectLanguagePageVM>();
+
+        builder.RegisterPopup<NumericEditorPopup, NumericEditorPopupVM>();
     }
 
     /// <param name="registerRoute"> Set false if view already registered in AppShell.xaml </param>
     private static void RegisterView<TView, TViewModel>(this MauiAppBuilder builder, bool registerRoute = true)
-        where TView : ContentPage where TViewModel : ObservableObject
+        where TView : Page where TViewModel : ObservableObject
     {
         builder.Services.AddTransient<TView>();
         builder.Services.AddTransient<TViewModel>();
@@ -67,5 +72,12 @@ public static class MauiProgram
         {
             Routing.RegisterRoute(typeof(TView).Name, typeof(TView));
         }
+    }
+
+    private static void RegisterPopup<TView, TViewModel>(this MauiAppBuilder builder)
+        where TView : Popup where TViewModel : ObservableObject
+    {
+        builder.Services.AddTransient<TView>();
+        builder.Services.AddTransient<TViewModel>();
     }
 }

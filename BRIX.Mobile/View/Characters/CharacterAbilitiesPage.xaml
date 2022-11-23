@@ -1,12 +1,50 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Characters"
+             xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              x:Class="BRIX.Mobile.View.Characters.CharacterAbilitiesPage"
+             x:DataType="vm:CharacterAbilitiesPageVM"
              Title="CharacterAbilitiesPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome abilities!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ContentPage.Resources>
+        <Style TargetType="Button" x:Key="NumericButton">
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="BorderColor" Value="{StaticResource BRIXLight}"/>
+            <Setter Property="BorderWidth" Value="1"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="TextColor" Value="{StaticResource BRIXLight}"/>
+        </Style>
+    </ContentPage.Resources>
+    
+    <Border Style="{StaticResource BlockBorder}" VerticalOptions="Start">
+        <Grid RowDefinitions="auto,*,*,*,*,*" ColumnDefinitions="*,*,*" ColumnSpacing="10" RowSpacing="10">
+            <controls:FramedEntry 
+                Grid.Row="0" 
+                Grid.ColumnSpan="3" 
+                Placeholder="Health"
+                Text="{Binding Value}"
+                IsReadOnly="True"/>
+
+            <Button Style="{StaticResource NumericButton}" Text="7" Grid.Row="1" Grid.Column="0" Command="{Binding EnterNumberCommand}" CommandParameter="7"/>
+            <Button Style="{StaticResource NumericButton}" Text="8" Grid.Row="1" Grid.Column="1" Command="{Binding EnterNumberCommand}" CommandParameter="8"/>
+            <Button Style="{StaticResource NumericButton}" Text="9" Grid.Row="1" Grid.Column="2" Command="{Binding EnterNumberCommand}" CommandParameter="9"/>
+
+            <Button Style="{StaticResource NumericButton}" Text="4" Grid.Row="2" Grid.Column="0" Command="{Binding EnterNumberCommand}" CommandParameter="4"/>
+            <Button Style="{StaticResource NumericButton}" Text="5" Grid.Row="2" Grid.Column="1" Command="{Binding EnterNumberCommand}" CommandParameter="5"/>
+            <Button Style="{StaticResource NumericButton}" Text="6" Grid.Row="2" Grid.Column="2" Command="{Binding EnterNumberCommand}" CommandParameter="6"/>
+
+            <Button Style="{StaticResource NumericButton}" Text="1" Grid.Row="3" Grid.Column="0" Command="{Binding EnterNumberCommand}" CommandParameter="1"/>
+            <Button Style="{StaticResource NumericButton}" Text="2" Grid.Row="3" Grid.Column="1" Command="{Binding EnterNumberCommand}" CommandParameter="2"/>
+            <Button Style="{StaticResource NumericButton}" Text="3" Grid.Row="3" Grid.Column="2" Command="{Binding EnterNumberCommand}" CommandParameter="3"/>
+
+            <Button Style="{StaticResource NumericButton}" Text="x" Grid.Row="4" Grid.Column="0" Command="{Binding ClearCommand}"/>
+            <Button Style="{StaticResource NumericButton}" Text="0" Grid.Row="4" Grid.Column="1" Command="{Binding EnterNumberCommand}" CommandParameter="0"/>
+            <Button Style="{StaticResource NumericButton}" Text="Bck" Grid.Row="4" Grid.Column="2" Command="{Binding BackspaceCommand}"/>
+
+            <Button Text="-" Grid.Row="5" Grid.Column="0"/>
+            <Button Text="=" Grid.Row="6" Grid.Column="1"/>
+            <Button Text="+" Grid.Row="7" Grid.Column="2"/>
+        </Grid>
+    </Border>
 </ContentPage>

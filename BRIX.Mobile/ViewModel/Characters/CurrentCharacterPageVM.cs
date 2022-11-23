@@ -3,6 +3,7 @@ using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Characters;
+using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -49,6 +50,12 @@ namespace BRIX.Mobile.ViewModel.Characters
         public async Task Switch()
         {
             await Navigation.NavigateAsync(nameof(CharacterListPage));
+        }
+
+        [RelayCommand]
+        public async Task EditHealth()
+        {
+            await ShowPopupAsync<NumericEditorPopup>();
         }
 
         public override async Task OnNavigatedAsync()

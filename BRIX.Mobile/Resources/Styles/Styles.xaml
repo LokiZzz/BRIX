@@ -352,7 +352,7 @@
     </Style>
 
     <Style TargetType="Page" ApplyToDerivedTypes="True">
-        <Setter Property="Padding" Value="15,0,15,15"/>
+        <Setter Property="Padding" Value="15,0"/>
         <Setter Property="BackgroundColor" Value="{StaticResource BRIXDark}" />
     </Style>
 
@@ -398,5 +398,19 @@
         <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
     </Style>
-    
+
+    <Style TargetType="Label" x:Key="BlockTitleLabel">
+        <Setter Property="FontFamily" Value="Garamond"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="TextColor" Value="{StaticResource BRIXWhite}"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="Border" x:Key="BlockBorder">
+        <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
+        <Setter Property="StrokeThickness" Value="0"/>
+        <Setter Property="Padding" Value="15"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource BRIXMedium}"/>
+    </Style>
+
 </ResourceDictionary>

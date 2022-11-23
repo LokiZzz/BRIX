@@ -49,28 +49,66 @@ public partial class FramedEntry : Grid
         set => SetValue(IsPasswordProperty, value);
     }
 
+    public static readonly BindableProperty IsReadOnlyProperty = BindableProperty.Create(
+        propertyName: nameof(IsReadOnly),
+        returnType: typeof(bool),
+        declaringType: typeof(FramedEntry),
+        defaultValue: false,
+        defaultBindingMode: BindingMode.OneWay
+    );
+
+    public new bool IsReadOnly
+    {
+        get => (bool)GetValue(IsReadOnlyProperty);
+        set => SetValue(IsReadOnlyProperty, value);
+    }
+
     private void Entry_Focused(object sender, FocusEventArgs e)
     {
-        lblPlaceholder.FontSize = 13;
-        lblPlaceholder.TranslateTo(0, -25, 100, Easing.BounceIn);
+        Up();
     }
 
     private void Entry_Unfocused(object sender, FocusEventArgs e)
     {
         if (string.IsNullOrEmpty(Text))
         {
-            lblPlaceholder.FontSize = 15;
-            lblPlaceholder.TranslateTo(0, 0, 100, Easing.BounceIn);
+            Down();
         }
         else
         {
-            lblPlaceholder.FontSize = 13;
-            lblPlaceholder.TranslateTo(0, -25, 100, Easing.BounceIn);
+            Up();
         }
     }
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
         entry.Focus();
+    }
+
+    private void Entry_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(Text))
+        {
+            if (!entry.IsFocused)
+            {
+                Down();
+            }
+        }
+        else
+        {
+            Up();
+        }
+    }
+
+    private void Down()
+    {
+        lblPlaceholder.FontSize = 15;
+        lblPlaceholder.TranslateTo(0, 0, 100, Easing.BounceIn);
+    }
+
+    private void Up()
+    {
+        lblPlaceholder.FontSize = 13;
+        lblPlaceholder.TranslateTo(0, -25, 100, Easing.BounceIn);
     }
 }
