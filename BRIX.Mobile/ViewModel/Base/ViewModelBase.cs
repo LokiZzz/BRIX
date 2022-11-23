@@ -1,5 +1,6 @@
 ﻿using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,20 @@ namespace BRIX.Mobile.ViewModel.Base
         [ObservableProperty]
         private bool _isBusy;
 
-        [ObservableProperty]
-        private string _simpleText = "Not changed";
-
         public virtual Task OnNavigatedAsync() => Task.CompletedTask;
+
+        protected async Task<TResult> ShowPopupAsync<TPopup, TResult>() where TPopup : Popup where TResult : class
+        {
+            Popup popupToShow = ServicePool.GetService<TPopup>();
+            object result = await Application.Current.MainPage.ShowPopupAsync(popupToShow);
+
+            return (TResult)result;
+        }
+
+        protected async Task ShowPopupAsync<TPopup>() where TPopup : Popup
+        {
+            Popup popupToShow = ServicePool.GetService<TPopup>();
+            await Application.Current.MainPage.ShowPopupAsync(popupToShow);
+        }
     }
 }

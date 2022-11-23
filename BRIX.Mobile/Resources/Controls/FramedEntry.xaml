@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Grid 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:handlers="clr-namespace:BRIX.Mobile.Resources.Handlers"
+    x:Class="BRIX.Mobile.Resources.Controls.FramedEntry"
+    x:Name="this"
+    
+    RowDefinitions="50" Margin="0,10,0,0">
+
+    <Border  
+        Grid.Row="0" 
+        Padding="15,4" 
+        StrokeThickness="1"
+        BackgroundColor="Transparent"
+        StrokeShape="RoundRectangle 5">
+        <Border.Stroke>
+            <SolidColorBrush Color="{StaticResource BRIXLight}"/>
+
+            <!--<LinearGradientBrush EndPoint="0,1">
+                <GradientStop Color="{StaticResource BRIXLime}"
+                          Offset="0.1" />
+                <GradientStop Color="{StaticResource BRIXViolet}"
+                          Offset="1.0" />
+            </LinearGradientBrush>-->
+        </Border.Stroke>
+        <handlers:BorderlessEntry 
+            x:Name="entry"
+            
+            Text="{Binding Source={x:Reference this}, Path=Text}"
+            IsPassword="{Binding Source={x:Reference this}, Path=IsPassword}"
+            IsReadOnly="{Binding Source={x:Reference this}, Path=IsReadOnly}"
+            
+            BackgroundColor="{StaticResource BRIXMedium}"
+            FontSize="15"
+            TextColor="{StaticResource BRIXLight}"
+            
+            Focused="Entry_Focused"
+            Unfocused="Entry_Unfocused"
+            TextChanged="Entry_TextChanged"/>
+    </Border>
+
+    <Label 
+        x:Name="lblPlaceholder"
+        Grid.Row="0" 
+        Margin="10,0" 
+        FontSize="15"
+        TextColor="{StaticResource BRIXLight}"
+        VerticalOptions="CenterAndExpand"
+        VerticalTextAlignment="Center"
+        HorizontalOptions="StartAndExpand"
+        BackgroundColor="{StaticResource BRIXMedium}"
+        Text="{Binding Source={x:Reference this}, Path=Placeholder}"/>
+
+    <Grid.GestureRecognizers>
+        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+    </Grid.GestureRecognizers>
+</Grid>

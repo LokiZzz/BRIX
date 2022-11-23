@@ -14,6 +14,6 @@
         <Entry Text="{Binding Password}" IsPassword="True"/>
         <Label Text="{localization:Translate RememberMe}"/>
         <Switch IsToggled="{Binding RememberMe}"/>
-        <Button Text="{localization:Translate SignInButton}" Command="{Binding SignInCommand}"/>
+        <Button Text="{localization:Translate Name={x:Reference local}}" Command="{Binding SignInCommand}"/>
     </VerticalStackLayout>
 </ContentPage>

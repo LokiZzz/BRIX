@@ -3,11 +3,13 @@ using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Characters;
+using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +31,9 @@ namespace BRIX.Mobile.ViewModel.Characters
         [ObservableProperty]
         private bool _playerHaveCharacter;
 
+        [ObservableProperty]
+        private ObservableCollection<string> _exp;
+        
         [RelayCommand]
         public async Task Create()
         {
@@ -47,6 +52,12 @@ namespace BRIX.Mobile.ViewModel.Characters
             await Navigation.NavigateAsync(nameof(CharacterListPage));
         }
 
+        [RelayCommand]
+        public async Task EditHealth()
+        {
+            await ShowPopupAsync<NumericEditorPopup>();
+        }
+
         public override async Task OnNavigatedAsync()
         {
             List<Character> characters = await _characterService.GetAllAsync();
@@ -56,6 +67,8 @@ namespace BRIX.Mobile.ViewModel.Characters
             {
                 Character = new CharacterModel(characters.FirstOrDefault());
             }
+
+            Exp = new ObservableCollection<string>(new List<string> { "1", "2" });
         }
     }
 }

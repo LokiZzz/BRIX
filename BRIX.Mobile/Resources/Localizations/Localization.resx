@@ -135,6 +135,18 @@
   <data name="CharacterListPageTitle" xml:space="preserve">
     <value>Characters</value>
   </data>
+  <data name="CharacterTab" xml:space="preserve">
+    <value>Character</value>
+  </data>
+  <data name="CharacterTabAbilities" xml:space="preserve">
+    <value>Abilities</value>
+  </data>
+  <data name="CharacterTabDetails" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="CharacterTabInventory" xml:space="preserve">
+    <value>Inventory</value>
+  </data>
   <data name="Clear" xml:space="preserve">
     <value>Clear</value>
   </data>

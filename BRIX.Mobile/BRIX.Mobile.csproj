@@ -78,10 +78,25 @@
 	  <MauiXaml Update="Resources\Controls\ControlTemplates.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Resources\Controls\FramedEntry.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Resources\Controls\TitleView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Converters\ConvertersCollection.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Characters\CharacterAbilitiesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Characters\CharacterDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Characters\CharacterInventoryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Popups\NumericEditorPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Settings\SelectLanguagePage.xaml">
@@ -105,6 +120,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Resources\Controls\FramedEntry.xaml.cs">
+	    <DependentUpon>FramedEntry.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Resources\Localizations\Localization.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
