@@ -5,7 +5,8 @@
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              x:Class="BRIX.Mobile.View.Characters.CharacterAbilitiesPage"
              x:DataType="vm:CharacterAbilitiesPageVM"
-             Title="CharacterAbilitiesPage">
+             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CharacterAbilitiesPageTitle}}">
 
     <ContentPage.Resources>
         <Style TargetType="Button" x:Key="NumericButton">

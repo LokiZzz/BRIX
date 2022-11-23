@@ -61,6 +61,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Abilities.
+        /// </summary>
+        public static string Abilities {
+            get {
+                return ResourceManager.GetString("Abilities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
         public static string Add {
@@ -106,6 +115,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Abilities.
+        /// </summary>
+        public static string CharacterAbilitiesPageTitle {
+            get {
+                return ResourceManager.GetString("CharacterAbilitiesPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Characters.
         /// </summary>
         public static string CharacterListPageTitle {
@@ -115,9 +133,18 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Character name.
+        /// </summary>
+        public static string CharacterName {
+            get {
+                return ResourceManager.GetString("CharacterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Character.
         /// </summary>
-        internal static string CharacterTab {
+        public static string CharacterTab {
             get {
                 return ResourceManager.GetString("CharacterTab", resourceCulture);
             }
@@ -126,7 +153,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         /// <summary>
         ///   Looks up a localized string similar to Abilities.
         /// </summary>
-        internal static string CharacterTabAbilities {
+        public static string CharacterTabAbilities {
             get {
                 return ResourceManager.GetString("CharacterTabAbilities", resourceCulture);
             }
@@ -135,7 +162,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         /// <summary>
         ///   Looks up a localized string similar to Details.
         /// </summary>
-        internal static string CharacterTabDetails {
+        public static string CharacterTabDetails {
             get {
                 return ResourceManager.GetString("CharacterTabDetails", resourceCulture);
             }
@@ -144,7 +171,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         /// <summary>
         ///   Looks up a localized string similar to Inventory.
         /// </summary>
-        internal static string CharacterTabInventory {
+        public static string CharacterTabInventory {
             get {
                 return ResourceManager.GetString("CharacterTabInventory", resourceCulture);
             }
@@ -169,11 +196,38 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Level {0}.
+        /// </summary>
+        public static string CurrentLevelFormat {
+            get {
+                return ResourceManager.GetString("CurrentLevelFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expirience.
+        /// </summary>
+        public static string Expirience {
+            get {
+                return ResourceManager.GetString("Expirience", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Health.
+        /// </summary>
+        public static string Health {
+            get {
+                return ResourceManager.GetString("Health", resourceCulture);
             }
         }
         
@@ -300,6 +354,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Switch {
             get {
                 return ResourceManager.GetString("Switch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tags.
+        /// </summary>
+        public static string Tags {
+            get {
+                return ResourceManager.GetString("Tags", resourceCulture);
             }
         }
     }

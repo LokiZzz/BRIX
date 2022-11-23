@@ -50,10 +50,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Remove="Resources\Localizations\Localization.resx" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <AdditionalFiles Include="Resources\Localizations\Localization.resx">
 	    <Generator>PublicResXFileCodeGenerator</Generator>
 	    <LastGenOutput>Localization.Designer.cs</LastGenOutput>

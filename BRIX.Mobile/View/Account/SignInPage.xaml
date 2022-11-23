@@ -4,16 +4,16 @@
              xmlns:local="clr-namespace:BRIX.Mobile.ViewModel.Account"
              x:Class="BRIX.Mobile.View.Account.SignInPage"
              ControlTemplate="{StaticResource BusyPageTemplate}"
-             xmlns:localization="clr-namespace:BRIX.Mobile.Resources.Localizations"
-             Title="{localization:Translate SignInPageTitle}"
+             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.SignInPageTitle}}"
              x:DataType="local:SignInPageVM">
     <VerticalStackLayout>
-        <Label Text="{localization:Translate Login}"/>
+        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Login}}"/>
         <Entry Text="{Binding Login}"/>
-        <Label Text="{localization:Translate Password}"/>
+        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Password}}"/>
         <Entry Text="{Binding Password}" IsPassword="True"/>
-        <Label Text="{localization:Translate RememberMe}"/>
+        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.RememberMe}}"/>
         <Switch IsToggled="{Binding RememberMe}"/>
-        <Button Text="{localization:Translate Name={x:Reference local}}" Command="{Binding SignInCommand}"/>
+        <Button Text="{lcz:Translate Name={x:Reference local}}" Command="{Binding SignInCommand}"/>
     </VerticalStackLayout>
 </ContentPage>
