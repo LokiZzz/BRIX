@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BRIX.SourceGenerator": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\BRIX.Mobile\\BRIX.Mobile.csproj"
+    }
+  }
+}
