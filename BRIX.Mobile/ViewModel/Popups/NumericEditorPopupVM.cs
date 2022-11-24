@@ -1,4 +1,5 @@
-﻿using BRIX.Mobile.ViewModel.Base;
+﻿using BRIX.Mobile.View.Popups;
+using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -11,6 +12,8 @@ namespace BRIX.Mobile.ViewModel.Popups
 {
     public partial class NumericEditorPopupVM : ViewModelBase
     {
+        public NumericEditorPopup View;
+
         [ObservableProperty]
         private string _value;
 
@@ -34,5 +37,43 @@ namespace BRIX.Mobile.ViewModel.Popups
         {
             Value = string.Empty;
         }
+
+        [RelayCommand]
+        private void Add()
+        {
+            View.Close(new NumericEditorResult(ENumericEditorResult.Add, int.Parse(Value)));
+        }
+
+        [RelayCommand]
+        private void Set()
+        {
+            View.Close(new NumericEditorResult(ENumericEditorResult.Set, int.Parse(Value)));
+        }
+
+        [RelayCommand]
+        private void Substract()
+        {
+            View.Close(new NumericEditorResult(ENumericEditorResult.Substract, int.Parse(Value)));
+        }
+    }
+
+    public class NumericEditorResult
+    {
+        public NumericEditorResult(ENumericEditorResult action, int enteredValue)
+        {
+            Action = action;
+            EnteredValue = enteredValue;
+        }
+
+        public ENumericEditorResult Action { get; set; }
+        public int EnteredValue { get; set; }
+    }
+
+    public enum ENumericEditorResult
+    {
+        None = 0,
+        Add = 1,
+        Set = 2,
+        Substract = 3
     }
 }

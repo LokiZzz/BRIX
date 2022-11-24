@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BRIX.Library.Characters;
+using System.ComponentModel;
 
 namespace BRIX.Mobile.Models.Characters
 {
@@ -41,5 +42,22 @@ namespace BRIX.Mobile.Models.Characters
         }
 
         public int Level => Character.Level;
+
+        public int MaxHealth => Character.MaxHealth;
+
+        public int CurrentHealth
+        {
+            get => Character.CurrentHealth;
+            set
+            {
+                SetProperty(Character.CurrentHealth, value, Character, (character, health) => character.CurrentHealth = health);
+                OnPropertyChanged(nameof(HealthPercent));
+            }
+        }
+
+        public double HealthPercent
+        {
+            get => CurrentHealth / (double)MaxHealth;
+        }
     }
 }

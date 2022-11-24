@@ -5,6 +5,7 @@ using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Characters;
 using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
+using BRIX.Mobile.ViewModel.Popups;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -33,7 +34,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         [ObservableProperty]
         private ObservableCollection<string> _exp;
-        
+
         [RelayCommand]
         public async Task Create()
         {
@@ -55,7 +56,38 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task EditHealth()
         {
-            await ShowPopupAsync<NumericEditorPopup>();
+            NumericEditorResult result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult>();
+
+            if(result != null)
+            {
+                int newHealthValue = Character.CurrentHealth;
+
+                switch(result.Action)
+                {
+                    case ENumericEditorResult.Add:
+                        newHealthValue += result.EnteredValue;
+                        break;
+                    case ENumericEditorResult.Set:
+                        newHealthValue = result.EnteredValue;
+                        break;
+                    case ENumericEditorResult.Substract:
+                        newHealthValue -= result.EnteredValue;
+                        break;
+                }
+
+                if(newHealthValue > Character.CurrentHealth)
+                {
+                    Character.CurrentHealth = Character.MaxHealth;
+                }
+                else if(newHealthValue < 0)
+                {
+                    Character.CurrentHealth = 0;
+                }
+                else
+                {
+                    Character.CurrentHealth = newHealthValue;
+                }
+            }
         }
 
         public override async Task OnNavigatedAsync()
