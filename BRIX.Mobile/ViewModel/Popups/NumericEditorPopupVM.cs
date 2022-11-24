@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Popups
 {
-    public class NumericEditorPopupVM : ViewModelBase
+    public partial class NumericEditorPopupVM : ViewModelBase
     {
         [ObservableProperty]
         private string _value;
