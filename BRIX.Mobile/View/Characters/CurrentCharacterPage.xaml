@@ -57,7 +57,7 @@
                             </Grid>
                             <Grid Grid.Row="1" VerticalOptions="End" HorizontalOptions="End" Padding="10,5">
                                 <Border Style="{StaticResource NameLevelBorder}" Margin="-10,-5"/>
-                                <Label Style="{StaticResource BlockTitleLabel}" Text="Level 12"/>
+                                <Label Style="{StaticResource BlockTitleLabel}" Text="{lcz:Format ValuePath=Character.Level, FormatPath={x:Static lcz:LocalizationKeys.LevelFormat}}"/>
                             </Grid>
                         </Grid>
                     </Grid>

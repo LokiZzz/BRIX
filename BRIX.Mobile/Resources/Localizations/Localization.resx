@@ -162,9 +162,6 @@
   <data name="CurrentCharacterPageTitle" xml:space="preserve">
     <value>Character</value>
   </data>
-  <data name="CurrentLevelFormat" xml:space="preserve">
-    <value>Level {0}</value>
-  </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
@@ -176,6 +173,9 @@
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
+  </data>
+  <data name="LevelFormat" xml:space="preserve">
+    <value>Level {0}</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>

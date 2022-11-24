@@ -162,9 +162,6 @@
   <data name="CurrentCharacterPageTitle" xml:space="preserve">
     <value>Персонаж</value>
   </data>
-  <data name="CurrentLevelFormat" xml:space="preserve">
-    <value>Уровень {0}</value>
-  </data>
   <data name="Edit" xml:space="preserve">
     <value>Править</value>
   </data>
@@ -176,6 +173,9 @@
   </data>
   <data name="Language" xml:space="preserve">
     <value>Язык</value>
+  </data>
+  <data name="LevelFormat" xml:space="preserve">
+    <value>Уровень {0}</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Логин</value>

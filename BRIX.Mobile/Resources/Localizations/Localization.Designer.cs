@@ -196,15 +196,6 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Level {0}.
-        /// </summary>
-        public static string CurrentLevelFormat {
-            get {
-                return ResourceManager.GetString("CurrentLevelFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string Edit {
@@ -237,6 +228,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Language {
             get {
                 return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level {0}.
+        /// </summary>
+        public static string LevelFormat {
+            get {
+                return ResourceManager.GetString("LevelFormat", resourceCulture);
             }
         }
         
