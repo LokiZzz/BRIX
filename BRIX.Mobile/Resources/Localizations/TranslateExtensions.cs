@@ -6,6 +6,7 @@ namespace BRIX.Mobile.Resources.Localizations
     public class TranslateExtension : IMarkupExtension<BindingBase>
     {
         public string Name { get; set; }
+        public string StringFormat { get; set; }
 
         public BindingBase ProvideValue(IServiceProvider serviceProvider)
         {
@@ -13,7 +14,8 @@ namespace BRIX.Mobile.Resources.Localizations
             {
                 Mode = BindingMode.OneWay,
                 Path = $"[{Name}]",
-                Source = ServicePool.GetService<ILocalizationResourceManager>()
+                Source = ServicePool.GetService<ILocalizationResourceManager>(),
+                StringFormat = StringFormat
             };
         }
 

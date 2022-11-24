@@ -39,5 +39,7 @@ namespace BRIX.Mobile.Models.Characters
             get => Character.Appearance;
             set => SetProperty(Character.Appearance, value, Character, (character, appearance) => character.Appearance = appearance);
         }
+
+        public int Level => Character.Level;
     }
 }

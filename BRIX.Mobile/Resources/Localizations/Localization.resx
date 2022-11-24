@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Abilities" xml:space="preserve">
+    <value>Abilities</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>New</value>
   </data>
@@ -132,8 +135,14 @@
   <data name="Character" xml:space="preserve">
     <value>Character</value>
   </data>
+  <data name="CharacterAbilitiesPageTitle" xml:space="preserve">
+    <value>Abilities</value>
+  </data>
   <data name="CharacterListPageTitle" xml:space="preserve">
     <value>Characters</value>
+  </data>
+  <data name="CharacterName" xml:space="preserve">
+    <value>Character name</value>
   </data>
   <data name="CharacterTab" xml:space="preserve">
     <value>Character</value>
@@ -156,8 +165,17 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="Expirience" xml:space="preserve">
+    <value>Expirience</value>
+  </data>
+  <data name="Health" xml:space="preserve">
+    <value>Health</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
+  </data>
+  <data name="LevelFormat" xml:space="preserve">
+    <value>Level {0}</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
@@ -197,5 +215,8 @@
   </data>
   <data name="Switch" xml:space="preserve">
     <value>Switch</value>
+  </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Tags</value>
   </data>
 </root>

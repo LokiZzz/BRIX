@@ -50,6 +50,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AdditionalFiles Include="Resources\Localizations\Localization.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Localization.Designer.cs</LastGenOutput>
+	  </AdditionalFiles>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Include="..\.editorconfig" Link=".editorconfig" />
 	</ItemGroup>
 
@@ -60,6 +67,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\BRIX.Library\BRIX.Library.csproj" />
+    <ProjectReference Include="..\BRIX.SourceGenerator\BRIX.SourceGenerator.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -119,13 +127,6 @@
 	  <Compile Update="View\Characters\AddOrEditCharacterPage.xaml.cs">
 	    <DependentUpon>AddOrEditCharacterPage.xaml</DependentUpon>
 	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Update="Resources\Localizations\Localization.resx">
-	    <Generator>ResXFileCodeGenerator</Generator>
-	    <LastGenOutput>Localization.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
 	</ItemGroup>
 
 </Project>
