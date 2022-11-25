@@ -41,8 +41,6 @@ namespace BRIX.Mobile.Models.Characters
             set => SetProperty(Character.Appearance, value, Character, (character, appearance) => character.Appearance = appearance);
         }
 
-        public int Level => Character.Level;
-
         public int MaxHealth => Character.MaxHealth;
 
         public int CurrentHealth
@@ -51,13 +49,38 @@ namespace BRIX.Mobile.Models.Characters
             set
             {
                 SetProperty(Character.CurrentHealth, value, Character, (character, health) => character.CurrentHealth = health);
-                OnPropertyChanged(nameof(HealthPercent));
+                OnPropertyChanged(nameof(CurrentHealth));
             }
         }
 
-        public double HealthPercent
+        public double HealthPercent => CurrentHealth / (double)MaxHealth;
+
+        public int Level => Character.Level;
+
+        public int Experience
         {
-            get => CurrentHealth / (double)MaxHealth;
+            get => Character.Experience;
+            set
+            {
+                SetProperty(Character.Experience, value, Character, (character, exp) => character.Experience = exp);
+                OnPropertyChanged(nameof(MaxHealth));
+                OnPropertyChanged(nameof(HealthPercent));
+                OnPropertyChanged(nameof(Level));
+                OnPropertyChanged(nameof(ExperienceToLevelUp));
+                OnPropertyChanged(nameof(LevelUpProgress));
+            }
+        }
+
+        public int ExperienceToLevelUp => ExperienceCalculator.GetExpToLevelUp(Experience);
+
+        public double LevelUpProgress
+        {
+            get
+            {
+                int absProgress = Experience - ExperienceCalculator.GetExpForLevel(Level);
+
+                return absProgress / (double)ExperienceToLevelUp;
+            }
         }
     }
 }

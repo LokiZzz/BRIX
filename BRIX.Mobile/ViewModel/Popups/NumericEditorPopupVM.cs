@@ -1,4 +1,5 @@
-﻿using BRIX.Mobile.View.Popups;
+﻿using BRIX.Library.Characters;
+using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -67,6 +68,24 @@ namespace BRIX.Mobile.ViewModel.Popups
 
         public ENumericEditorResult Action { get; set; }
         public int EnteredValue { get; set; }
+
+        public int ToValue(int oldValue)
+        {
+            switch (Action)
+            {
+                case ENumericEditorResult.Add:
+                    oldValue += EnteredValue;
+                    break;
+                case ENumericEditorResult.Set:
+                    oldValue = EnteredValue;
+                    break;
+                case ENumericEditorResult.Substract:
+                    oldValue -= EnteredValue;
+                    break;
+            }
+
+            return oldValue;
+        }
     }
 
     public enum ENumericEditorResult

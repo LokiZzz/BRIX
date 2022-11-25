@@ -17,6 +17,14 @@
             <Setter Property="BackgroundColor" Value="{StaticResource BRIXMedium}"/>
             <Setter Property="Opacity" Value=".75"/>
         </Style>
+        <Style TargetType="Button" x:Key="CardActionButton">
+            <Setter Property="FontFamily" Value="Awesome"/>
+            <Setter Property="Text" Value="{x:Static icons:Awesome.Calculator}"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="WidthRequest" Value="35"/>
+            <Setter Property="HeightRequest" Value="35"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
     </ContentPage.Resources>
     
     <Shell.TitleView>
@@ -75,32 +83,43 @@
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                        <Button Grid.Row="0" Grid.Column="2" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Edit}}" Command="{Binding EditHealthCommand}"/>
+                        <Button
+                            Grid.Row="0" Grid.Column="2" 
+                            Style="{StaticResource CardActionButton}"
+                            Command="{Binding EditHealthCommand}"/>
                         <ProgressBar 
                             Margin="0,5,0,-5"
-                            Grid.Row="1"
-                            Grid.ColumnSpan="3"
+                            Grid.Row="1" Grid.ColumnSpan="3"
                             Progress="{Binding Character.HealthPercent}"
                             ProgressColor="{StaticResource BRIXLime}"/>
                     </Grid>
                 </Border>
 
-                <CarouselView ItemsSource="{Binding Exp}" Margin="-15,0" Loop="False" IndicatorView="experienceCarouselIndicator">
+                <CarouselView ItemsSource="{Binding ExpCards}" Margin="-15,0" Loop="False" IndicatorView="experienceCarouselIndicator">
                     <CarouselView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="vm:ExperienceInfoVM">
                             <Border Style="{StaticResource BlockBorder}" Margin="15,0">
                                 <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
-                                    <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Expirience}}" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="0"/>
-                                    <Label Text="1007 / 1200" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="1" Margin="0,0,15,0"/>
-                                    <Button
-                                        Grid.Row="0"
-                                        Grid.Column="2"
-                                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Edit}}"/>
+                                    <Label Text="{Binding Title}" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="0"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Margin="0,0,15,0" VerticalTextAlignment="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Style="{StaticResource BlockTitleLabel}" Text="{Binding Current}"/>
+                                                <Span Style="{StaticResource BlockTitleLabel}" Text=" / "/>
+                                                <Span Style="{StaticResource BlockTitleLabel}" Text="{Binding Target}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Button 
+                                        Grid.Row="0" Grid.Column="2" 
+                                        Style="{StaticResource CardActionButton}"
+                                        FontFamily="{Binding IconFont}"
+                                        Text="{Binding Icon}" 
+                                        Command="{Binding DoCardActionCommand}"/>
                                     <ProgressBar 
                                         Margin="0,5,0,-5"
-                                        Grid.Row="1"
-                                        Grid.ColumnSpan="3"
-                                        Progress=".92"
+                                        Grid.Row="1" Grid.ColumnSpan="3"
+                                        Progress="{Binding Percent}"
                                         ProgressColor="{StaticResource BRIXOrange}"/>
                                 </Grid>
                             </Border>

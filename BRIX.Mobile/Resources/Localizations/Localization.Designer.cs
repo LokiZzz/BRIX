@@ -205,11 +205,11 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Expirience.
+        ///   Looks up a localized string similar to Experience.
         /// </summary>
-        public static string Expirience {
+        public static string Experience {
             get {
-                return ResourceManager.GetString("Expirience", resourceCulture);
+                return ResourceManager.GetString("Experience", resourceCulture);
             }
         }
         

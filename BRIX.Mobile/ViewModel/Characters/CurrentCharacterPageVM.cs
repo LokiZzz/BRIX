@@ -3,6 +3,7 @@ using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Characters;
+using BRIX.Mobile.View.IconFonts;
 using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
 using BRIX.Mobile.ViewModel.Popups;
@@ -20,10 +21,12 @@ namespace BRIX.Mobile.ViewModel.Characters
     public partial class CurrentCharacterPageVM : ViewModelBase
     {
         private readonly ICharacterService _characterService;
+        private readonly ILocalizationResourceManager _localization;
 
-        public CurrentCharacterPageVM(ICharacterService characterService)
+        public CurrentCharacterPageVM(ICharacterService characterService, ILocalizationResourceManager localization)
         {
             _characterService = characterService;
+            _localization = localization;
         }
 
         [ObservableProperty]
@@ -33,7 +36,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         private bool _playerHaveCharacter;
 
         [ObservableProperty]
-        private ObservableCollection<string> _exp;
+        private ObservableCollection<ExperienceInfoVM> _expCards;
 
         [RelayCommand]
         public async Task Create()
@@ -58,28 +61,15 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             NumericEditorResult result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult>();
 
-            if(result != null)
+            if (result != null)
             {
-                int newHealthValue = Character.CurrentHealth;
+                int newHealthValue = result.ToValue(Character.CurrentHealth);
 
-                switch(result.Action)
-                {
-                    case ENumericEditorResult.Add:
-                        newHealthValue += result.EnteredValue;
-                        break;
-                    case ENumericEditorResult.Set:
-                        newHealthValue = result.EnteredValue;
-                        break;
-                    case ENumericEditorResult.Substract:
-                        newHealthValue -= result.EnteredValue;
-                        break;
-                }
-
-                if(newHealthValue > Character.CurrentHealth)
+                if (newHealthValue > Character.CurrentHealth)
                 {
                     Character.CurrentHealth = Character.MaxHealth;
                 }
-                else if(newHealthValue < 0)
+                else if (newHealthValue < 0)
                 {
                     Character.CurrentHealth = 0;
                 }
@@ -88,6 +78,28 @@ namespace BRIX.Mobile.ViewModel.Characters
                     Character.CurrentHealth = newHealthValue;
                 }
             }
+        }
+
+        [RelayCommand]
+        public async Task EditExperience()
+        {
+            NumericEditorResult result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult>();
+
+            if (result != null)
+            {
+                int newEXPValue = result.ToValue(Character.Experience);
+
+                if (newEXPValue < 0)
+                {
+                    Character.CurrentHealth = 0;
+                }
+            }
+        }
+
+        [RelayCommand]
+        private async Task GoToAbilities()
+        {
+            await Navigation.NavigateAsync<CharacterAbilitiesPage>();
         }
 
         public override async Task OnNavigatedAsync()
@@ -100,7 +112,67 @@ namespace BRIX.Mobile.ViewModel.Characters
                 Character = new CharacterModel(characters.FirstOrDefault());
             }
 
-            Exp = new ObservableCollection<string>(new List<string> { "1", "2" });
+            UpdateExpCards();
         }
+
+        /// <summary>
+        /// В данном случае коллекция ExpCards — это модель представления для двух карточек, отображающих разные 
+        /// метрики. Одна показывает опыт до следующего уровня, а вторая непотраченный опыт.
+        /// </summary>
+        private void UpdateExpCards()
+        {
+            if (ExpCards == null || !ExpCards.Any())
+            {
+                ExpCards = new ObservableCollection<ExperienceInfoVM>
+                {
+                    new ExperienceInfoVM
+                    {
+                        //Title = _localization[Resources.Localizations.LocalizationKeys.Experience] as string,
+                        Title = "Exp to level up",
+                        Icon = Awesome.Calculator,
+                        IconFont = "Awesome",
+                        DoCardActionCommand = new RelayCommand(async () => await EditExperience())
+                    },
+                    new ExperienceInfoVM
+                    {
+                        //Title = _localization[Resources.Localizations.LocalizationKeys.Experience] as string,
+                        Title = "Free exp",
+                        Icon = AwesomeRPG.BurningEmbers,
+                        IconFont = "AwesomeRPG",
+                        DoCardActionCommand = new RelayCommand(async () => await GoToAbilities())
+                    },
+                };
+            }
+
+            ExpCards.First().Current = 120;
+            ExpCards.First().Target = 300;
+
+            ExpCards.Last().Current = 20;
+            ExpCards.Last().Target = 120;
+        }
+    }
+
+    public partial class ExperienceInfoVM : ObservableObject
+    {
+        [ObservableProperty]
+        private string _title;
+
+        [ObservableProperty]
+        private string _icon;
+
+        [ObservableProperty]
+        private string _iconFont;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Percent))]
+        private int _current;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Percent))]
+        private int _target;
+
+        public double Percent => Current / (double)Target;
+
+        public RelayCommand DoCardActionCommand { get; set; }
     }
 }
