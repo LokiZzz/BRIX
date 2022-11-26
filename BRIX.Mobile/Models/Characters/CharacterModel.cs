@@ -13,56 +13,56 @@ namespace BRIX.Mobile.Models.Characters
     {
         public CharacterModel() : this(new Character()) { }
 
-        public CharacterModel(Character character) => Character = character;
+        public CharacterModel(Character character) => InternalModel = character;
 
-        public Character Character { get; }
+        public Character InternalModel { get; }
 
         public Guid Id
         {
-            get => Character.Id;
-            set => SetProperty(Character.Id, value, Character, (character, id) => character.Id = id);
+            get => InternalModel.Id;
+            set => SetProperty(InternalModel.Id, value, InternalModel, (character, id) => character.Id = id);
         }
 
         public string Name
         {
-            get => Character.Name;
-            set => SetProperty(Character.Name, value, Character, (character, name) => character.Name = name);
+            get => InternalModel.Name;
+            set => SetProperty(InternalModel.Name, value, InternalModel, (character, name) => character.Name = name);
         }
 
         public string Backstory
         {
-            get => Character.Backstory;
-            set => SetProperty(Character.Backstory, value, Character, (character, backstory) => character.Backstory = backstory);
+            get => InternalModel.Backstory;
+            set => SetProperty(InternalModel.Backstory, value, InternalModel, (character, backstory) => character.Backstory = backstory);
         }
 
         public string Appearance
         {
-            get => Character.Appearance;
-            set => SetProperty(Character.Appearance, value, Character, (character, appearance) => character.Appearance = appearance);
+            get => InternalModel.Appearance;
+            set => SetProperty(InternalModel.Appearance, value, InternalModel, (character, appearance) => character.Appearance = appearance);
         }
 
-        public int MaxHealth => Character.MaxHealth;
+        public int MaxHealth => InternalModel.MaxHealth;
 
         public int CurrentHealth
         {
-            get => Character.CurrentHealth;
+            get => InternalModel.CurrentHealth;
             set
             {
-                SetProperty(Character.CurrentHealth, value, Character, (character, health) => character.CurrentHealth = health);
+                SetProperty(InternalModel.CurrentHealth, value, InternalModel, (character, health) => character.CurrentHealth = health);
                 OnPropertyChanged(nameof(CurrentHealth));
             }
         }
 
         public double HealthPercent => CurrentHealth / (double)MaxHealth;
 
-        public int Level => Character.Level;
+        public int Level => InternalModel.Level;
 
         public int Experience
         {
-            get => Character.Experience;
+            get => InternalModel.Experience;
             set
             {
-                SetProperty(Character.Experience, value, Character, (character, exp) => character.Experience = exp);
+                SetProperty(InternalModel.Experience, value, InternalModel, (character, exp) => character.Experience = exp);
                 OnPropertyChanged(nameof(MaxHealth));
                 OnPropertyChanged(nameof(HealthPercent));
                 OnPropertyChanged(nameof(Level));
@@ -82,5 +82,7 @@ namespace BRIX.Mobile.Models.Characters
                 return absProgress / (double)ExperienceToLevelUp;
             }
         }
+
+        public int SpentExperience => InternalModel.SpentExp;
     }
 }

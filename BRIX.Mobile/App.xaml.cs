@@ -1,4 +1,5 @@
 ﻿using BRIX.Mobile.Resources.Handlers;
+using BRIX.Mobile.Services;
 using Microsoft.Maui.Platform;
 
 namespace BRIX.Mobile;
@@ -23,6 +24,6 @@ public partial class App : Application
             }
         });
 
-        MainPage = new AppShell();
+        MainPage = ServicePool.GetService<AppShell>();
 	}
 }

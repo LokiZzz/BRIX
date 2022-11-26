@@ -8,8 +8,11 @@
     xmlns:settings="clr-namespace:BRIX.Mobile.View.Settings"
     xmlns:localization="clr-namespace:BRIX.Mobile.Resources.Localizations"
     xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+    xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel"
+    x:DataType="vm:AppShellVM"
     BackgroundColor="{StaticResource BRIXDark}"
-    FlyoutBackgroundColor="{StaticResource BRIXDark}">
+    FlyoutBackgroundColor="{StaticResource BRIXDark}"
+    Shell.DisabledColor="{StaticResource BRIXDim}">
 
     <ShellContent 
         Title="{localization:Translate SignIn}"
@@ -19,26 +22,35 @@
         Shell.FlyoutBehavior="Disabled" />
 
     <FlyoutItem Title="{localization:Translate Character}">
-        <ShellContent
+        <Tab
             Icon="{FontImage FontFamily=AwesomeRPG, Glyph={x:Static icons:AwesomeRPG.CloakAndDagger}}"
-            Title="{localization:Translate CharacterTab}"
-            ContentTemplate="{DataTemplate characters:CurrentCharacterPage}"
-            Route="CurrentCharacterPage" />
-        <ShellContent
+            Title="{localization:Translate CharacterTab}">
+            <ShellContent
+                ContentTemplate="{DataTemplate characters:CurrentCharacterPage}"
+                Route="CurrentCharacterPage" />
+        </Tab>
+        <Tab
             Icon="{FontImage FontFamily=AwesomeRPG, Glyph={x:Static icons:AwesomeRPG.BurningEmbers}}"
-            Title="{localization:Translate CharacterTabAbilities}"
-            ContentTemplate="{DataTemplate characters:CharacterAbilitiesPage}"
-            Route="CharacterAbilitiesPage" />
-        <ShellContent
+            Title="{localization:Translate CharacterTabAbilities}">
+            <ShellContent
+                ContentTemplate="{DataTemplate characters:CharacterAbilitiesPage}"
+                Route="CharacterAbilitiesPage" />
+        </Tab>
+        <Tab
             Icon="{FontImage FontFamily=AwesomeRPG, Glyph={x:Static icons:AwesomeRPG.Sapphire}}"
-            Title="{localization:Translate CharacterTabInventory}"
-            ContentTemplate="{DataTemplate characters:CharacterInventoryPage}"
-            Route="CharacterInventoryPage" />
-        <ShellContent
+            Title="{localization:Translate CharacterTabInventory}">
+            <ShellContent
+                ContentTemplate="{DataTemplate characters:CharacterInventoryPage}"
+                Route="CharacterInventoryPage" />
+        </Tab>
+        <Tab
             Icon="{FontImage FontFamily=AwesomeRPG, Glyph={x:Static icons:AwesomeRPG.ScrollUnfurled}}"
-            Title="{localization:Translate CharacterTabDetails}"
-            ContentTemplate="{DataTemplate characters:CharacterDetailsPage}"
-            Route="CharacterDetailsPage" />
+            Title="{localization:Translate CharacterTabDetails}">
+            <ShellContent
+                ContentTemplate="{DataTemplate characters:CharacterDetailsPage}"
+                Route="CharacterDetailsPage"/>
+        </Tab>
+        
     </FlyoutItem>
 
     <FlyoutItem Title="{localization:Translate Settings}">

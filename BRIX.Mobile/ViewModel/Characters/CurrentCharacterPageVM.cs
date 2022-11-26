@@ -56,6 +56,18 @@ namespace BRIX.Mobile.ViewModel.Characters
             await Navigation.NavigateAsync(nameof(CharacterListPage));
         }
 
+
+        /// <summary>
+        /// Только для удобства тестирования.
+        /// </summary>
+        /// <returns></returns>
+        [RelayCommand]
+        public async Task KillThemAll()
+        {
+            await _characterService.RemoveAllAsync();
+            await OnNavigatedAsync();
+        }
+
         [RelayCommand]
         public async Task EditHealth()
         {
@@ -77,6 +89,8 @@ namespace BRIX.Mobile.ViewModel.Characters
                 {
                     Character.CurrentHealth = newHealthValue;
                 }
+
+                await SaveChanges();
             }
         }
 
@@ -89,9 +103,10 @@ namespace BRIX.Mobile.ViewModel.Characters
             {
                 int newEXPValue = result.ToValue(Character.Experience);
 
-                if (newEXPValue < 0)
+                if (newEXPValue >= 0)
                 {
-                    Character.CurrentHealth = 0;
+                    Character.Experience = newEXPValue;
+                    await SaveChanges();
                 }
             }
         }
@@ -110,9 +125,8 @@ namespace BRIX.Mobile.ViewModel.Characters
             if (PlayerHaveCharacter)
             {
                 Character = new CharacterModel(characters.FirstOrDefault());
+                UpdateExpCards();
             }
-
-            UpdateExpCards();
         }
 
         /// <summary>
@@ -144,11 +158,16 @@ namespace BRIX.Mobile.ViewModel.Characters
                 };
             }
 
-            ExpCards.First().Current = 120;
-            ExpCards.First().Target = 300;
+            ExpCards.First().Current = Character.Experience;
+            ExpCards.First().Target = Character.ExperienceToLevelUp;
 
-            ExpCards.Last().Current = 20;
-            ExpCards.Last().Target = 120;
+            ExpCards.Last().Current = Character.SpentExperience;
+            ExpCards.Last().Target = Character.Experience;
+        }
+
+        private async Task SaveChanges()
+        {
+            await _characterService.UpdateAsync(Character.InternalModel);
         }
     }
 
