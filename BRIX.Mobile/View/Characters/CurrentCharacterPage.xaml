@@ -84,7 +84,7 @@
                         <Grid Margin="10" RowDefinitions="*,*">
                             <Grid Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
                                 <Border Style="{StaticResource NameLevelBorder}" Margin="-10,-5"/>
-                                <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CharacterName}}" />
+                                <Label Style="{StaticResource TitleLabel}" Text="{Binding Character.Name}" />
                             </Grid>
                             <Grid Grid.Row="1" VerticalOptions="End" HorizontalOptions="End" Padding="10,5">
                                 <Border Style="{StaticResource NameLevelBorder}" Margin="-10,-5"/>
@@ -143,7 +143,7 @@
                                         Margin="0,5,0,-5"
                                         Grid.Row="1" Grid.ColumnSpan="3"
                                         Progress="{Binding Percent}"
-                                        ProgressColor="{StaticResource BRIXOrange}"/>
+                                        ProgressColor="{StaticResource BRIXLime}"/>
                                 </Grid>
                             </Border>
                         </DataTemplate>
@@ -159,8 +159,6 @@
                 <Border Style="{StaticResource BlockBorder}">
                     <Grid RowDefinitions="auto,auto,auto,auto" ColumnDefinitions="*,auto,auto">
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Tags}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
-                        <controls:FramedEntry Grid.Row="1" Placeholder="Login"/>
-                        <controls:FramedEntry Grid.Row="2" Placeholder="Password" IsPassword="True"/>
                     </Grid>
                 </Border>
 

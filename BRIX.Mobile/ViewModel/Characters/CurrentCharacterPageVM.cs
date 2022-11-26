@@ -77,7 +77,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             {
                 int newHealthValue = result.ToValue(Character.CurrentHealth);
 
-                if (newHealthValue > Character.CurrentHealth)
+                if (newHealthValue > Character.MaxHealth)
                 {
                     Character.CurrentHealth = Character.MaxHealth;
                 }
@@ -106,6 +106,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                 if (newEXPValue >= 0)
                 {
                     Character.Experience = newEXPValue;
+                    UpdateExpCards();
                     await SaveChanges();
                 }
             }
@@ -163,9 +164,9 @@ namespace BRIX.Mobile.ViewModel.Characters
             }
 
             ExpCards.First().Current = Character.Experience;
-            ExpCards.First().Target = Character.ExperienceToLevelUp;
+            ExpCards.First().Target = Character.ExperienceForNextLevel;
 
-            ExpCards.Last().Current = Character.SpentExperience;
+            ExpCards.Last().Current = Character.FreeExperience;
             ExpCards.Last().Target = Character.Experience;
         }
 
@@ -194,7 +195,13 @@ namespace BRIX.Mobile.ViewModel.Characters
         [NotifyPropertyChangedFor(nameof(Percent))]
         private int _target;
 
-        public double Percent => Current / (double)Target;
+        public double Percent
+        {
+            get
+            {
+                return Current / (double)Target;
+            }
+        }
 
         public RelayCommand DoCardActionCommand { get; set; }
     }

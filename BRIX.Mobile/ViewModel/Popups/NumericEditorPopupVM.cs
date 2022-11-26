@@ -42,19 +42,28 @@ namespace BRIX.Mobile.ViewModel.Popups
         [RelayCommand]
         private void Add()
         {
-            View.Close(new NumericEditorResult(ENumericEditorResult.Add, int.Parse(Value)));
+            if (!string.IsNullOrEmpty(Value))
+            {
+                View.Close(new NumericEditorResult(ENumericEditorResult.Add, int.Parse(Value)));
+            }
         }
 
         [RelayCommand]
         private void Set()
         {
-            View.Close(new NumericEditorResult(ENumericEditorResult.Set, int.Parse(Value)));
+            if (!string.IsNullOrEmpty(Value))
+            {
+                View.Close(new NumericEditorResult(ENumericEditorResult.Set, int.Parse(Value)));
+            }
         }
 
         [RelayCommand]
         private void Substract()
         {
-            View.Close(new NumericEditorResult(ENumericEditorResult.Substract, int.Parse(Value)));
+            if (!string.IsNullOrEmpty(Value))
+            {
+                View.Close(new NumericEditorResult(ENumericEditorResult.Substract, int.Parse(Value)));
+            }
         }
     }
 
