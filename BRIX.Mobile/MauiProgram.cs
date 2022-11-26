@@ -49,7 +49,7 @@ public static class MauiProgram
 	{
         builder.RegisterView<AppShell, AppShellVM>();
 
-        builder.RegisterView<SignInPage, SignInPageVM>();
+        builder.RegisterView<SignInPage, SignInPageVM>(false);
 
         builder.RegisterView<CurrentCharacterPage, CurrentCharacterPageVM>(false);
         builder.RegisterView<CharacterAbilitiesPage, CharacterAbilitiesPageVM>(false);

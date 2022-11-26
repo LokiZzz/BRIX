@@ -42,8 +42,8 @@
                     Text="{x:Static icons:Awesome.PeopleArrows}"
                     Command="{Binding SwitchCommand}"/>
                 <Button Style="{StaticResource CardActionButton}" Grid.Column="1" 
-                    Text="{x:Static icons:Awesome.PeopleArrows}"
-                    Command="{Binding }"/>
+                    Text="{x:Static icons:Awesome.Skull}"
+                    Command="{Binding KillThemAllCommand}"/>
             </HorizontalStackLayout>
             
         </Grid>

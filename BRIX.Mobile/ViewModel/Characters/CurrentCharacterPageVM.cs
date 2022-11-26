@@ -114,7 +114,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         private async Task GoToAbilities()
         {
-            await Navigation.NavigateAsync<CharacterAbilitiesPage>();
+            await Navigation.NavigateAsync<CharacterAbilitiesPage>(mode: ENavigationMode.Absolute);
         }
 
         public override async Task OnNavigatedAsync()
@@ -126,6 +126,10 @@ namespace BRIX.Mobile.ViewModel.Characters
             {
                 Character = new CharacterModel(characters.FirstOrDefault());
                 UpdateExpCards();
+            }
+            else
+            {
+                Character = null;
             }
         }
 

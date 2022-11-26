@@ -17,7 +17,7 @@
     <ShellContent 
         Title="{localization:Translate SignIn}"
         ContentTemplate="{DataTemplate account:SignInPage}"
-        Route="SignInPageVM"
+        Route="SignInPage"
         FlyoutItemIsVisible="False" 
         Shell.FlyoutBehavior="Disabled" />
 
