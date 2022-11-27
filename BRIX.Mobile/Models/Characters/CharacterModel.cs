@@ -50,10 +50,29 @@ namespace BRIX.Mobile.Models.Characters
             {
                 SetProperty(InternalModel.CurrentHealth, value, InternalModel, (character, health) => character.CurrentHealth = health);
                 OnPropertyChanged(nameof(HealthPercent));
+                OnPropertyChanged(nameof(HealthState));
             }
         }
 
         public double HealthPercent => CurrentHealth / (double)MaxHealth;
+
+        public EHealthState HealthState
+        {
+            get
+            {
+                switch (HealthPercent)
+                {
+                    case > .50:
+                        return EHealthState.Fine;
+                    case < .50 and >= .25:
+                        return EHealthState.Bad;
+                    case < .25:
+                        return EHealthState.Critical;
+                    default:
+                        return EHealthState.Fine;
+                }
+            }
+        }
 
         public int Level => InternalModel.Level;
 
@@ -88,5 +107,12 @@ namespace BRIX.Mobile.Models.Characters
         public int SpentExperience => InternalModel.SpentExp;
 
         public int FreeExperience => Experience - InternalModel.SpentExp;
+    }
+
+    public enum EHealthState
+    {
+        Fine = 0,
+        Bad = 1,
+        Critical
     }
 }

@@ -136,7 +136,8 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         /// <summary>
         /// В данном случае коллекция ExpCards — это модель представления для двух карточек, отображающих разные 
-        /// метрики. Одна показывает опыт до следующего уровня, а вторая непотраченный опыт.
+        /// метрики. Первая показывает опыт до следующего уровня, а вторая непотраченный опыт. К сожалению CarouselView
+        /// не умеет вмещать в себя элементы без ItemSource, поэтому применено такое решеиние.
         /// </summary>
         private void UpdateExpCards()
         {
@@ -195,13 +196,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         [NotifyPropertyChangedFor(nameof(Percent))]
         private int _target;
 
-        public double Percent
-        {
-            get
-            {
-                return Current / (double)Target;
-            }
-        }
+        public double Percent => Current / (double)Target;
 
         public RelayCommand DoCardActionCommand { get; set; }
     }
