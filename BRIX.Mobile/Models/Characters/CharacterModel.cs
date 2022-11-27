@@ -51,6 +51,7 @@ namespace BRIX.Mobile.Models.Characters
                 SetProperty(InternalModel.CurrentHealth, value, InternalModel, (character, health) => character.CurrentHealth = health);
                 OnPropertyChanged(nameof(HealthPercent));
                 OnPropertyChanged(nameof(HealthState));
+                OnPropertyChanged(nameof(IsOnVergeOfLifeAndDeath));
             }
         }
 
@@ -73,6 +74,8 @@ namespace BRIX.Mobile.Models.Characters
                 }
             }
         }
+
+        public bool IsOnVergeOfLifeAndDeath => CurrentHealth == 0;
 
         public int Level => InternalModel.Level;
 

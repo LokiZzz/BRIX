@@ -95,6 +95,13 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         [RelayCommand]
+        public async Task RestoreHealth()
+        {
+            Character.CurrentHealth = Character.MaxHealth;
+            await SaveChanges();
+        }
+
+        [RelayCommand]
         public async Task EditExperience()
         {
             NumericEditorResult result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult>();
@@ -147,16 +154,13 @@ namespace BRIX.Mobile.ViewModel.Characters
                 {
                     new ExperienceInfoVM
                     {
-                        //Title = _localization[Resources.Localizations.LocalizationKeys.Experience] as string,
-                        Title = "Exp to level up",
                         Icon = Awesome.Calculator,
                         IconFont = "Awesome",
                         DoCardActionCommand = new RelayCommand(async () => await EditExperience())
                     },
                     new ExperienceInfoVM
                     {
-                        //Title = _localization[Resources.Localizations.LocalizationKeys.Experience] as string,
-                        Title = "Free exp",
+                        Title = _localization[Resources.Localizations.LocalizationKeys.FreeExperience] as string,
                         Icon = AwesomeRPG.BurningEmbers,
                         IconFont = "AwesomeRPG",
                         DoCardActionCommand = new RelayCommand(async () => await GoToAbilities())
@@ -166,9 +170,11 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             ExpCards.First().Current = Character.Experience;
             ExpCards.First().Target = Character.ExperienceForNextLevel;
+            ExpCards.First().Title = _localization[Resources.Localizations.LocalizationKeys.ExperienceToLevelup] as string;
 
             ExpCards.Last().Current = Character.FreeExperience;
             ExpCards.Last().Target = Character.Experience;
+            ExpCards.Last().Title = _localization[Resources.Localizations.LocalizationKeys.FreeExperience] as string;
         }
 
         private async Task SaveChanges()

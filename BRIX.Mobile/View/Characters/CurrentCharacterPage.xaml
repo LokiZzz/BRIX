@@ -56,8 +56,8 @@
                 IsVisible="{Binding PlayerHaveCharacter, Converter={StaticResource NotConverter}}"
                 RowDefinitions="*,*,auto">
                 <VerticalStackLayout Grid.Row="0">
-                    <Label Style="{StaticResource ParagraphTitleLabel}" Text="Nothing..." />
-                    <Label Text="Looks like you don't gave any character yet. It is a good reason to create one. Fortunately, there is a button at the bottom of this page specifically for such cases."/>
+                    <Label Style="{StaticResource ParagraphTitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.PlayerHaveNoCharacterTitle}}" />
+                    <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.PlayerHaveNoCharacter}}"/>
                 </VerticalStackLayout>
                 <Label 
                     Grid.Row="1"
@@ -67,7 +67,7 @@
                     Text="{x:Static icons:AwesomeRPG.CloakAndDagger}"
                     HorizontalOptions="Center"
                     Margin="0,-60,0,0"/>
-                <Button Grid.Row="2" Text="Create new character" Command="{Binding CreateCommand}" Margin="0,0,0,10"/>
+                <Button Grid.Row="2" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CreateNewCharacter}}" Command="{Binding CreateCommand}" Margin="0,0,0,10"/>
             </Grid>
         
             <!--In case of player have at leatst one character-->
@@ -91,6 +91,16 @@
                                 <Label Style="{StaticResource TitleLabel}" Text="{lcz:Format ValuePath=Character.Level, FormatPath={x:Static lcz:LocalizationKeys.LevelFormat}}"/>
                             </Grid>
                         </Grid>
+                        <Label 
+                            IsVisible="{Binding Character.IsOnVergeOfLifeAndDeath}"
+                            FontFamily="Awesome" 
+                            FontSize="120" 
+                            TextColor="{StaticResource BRIXMedium}" 
+                            Text="{x:Static icons:Awesome.Skull}"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Margin="0,-20,0,0"
+                            Opacity=".75"/>
                     </Grid>
                 </Border>
 
@@ -106,10 +116,16 @@
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                        <Button
-                            Grid.Row="0" Grid.Column="2" 
-                            Style="{StaticResource CardActionButton}"
-                            Command="{Binding EditHealthCommand}"/>
+                        <HorizontalStackLayout Grid.Row="0" Grid.Column="2" Spacing="10">
+                            <Button
+                                Style="{StaticResource CardActionButton}"
+                                Text="{x:Static icons:Awesome.HeartCirclePlus}"
+                                Command="{Binding RestoreHealthCommand}"/>
+                            <Button
+                                Style="{StaticResource CardActionButton}"
+                                Command="{Binding EditHealthCommand}"/>
+                        </HorizontalStackLayout>
+                        
                         <ProgressBar 
                             Margin="0,5,0,-5"
                             Grid.Row="1" Grid.ColumnSpan="3"
