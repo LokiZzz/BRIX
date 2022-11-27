@@ -71,7 +71,9 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task EditHealth()
         {
-            NumericEditorResult result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult>();
+            NumericEditorResult result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(
+                new NumericEditorParameters { Title = "It is working fine" }
+            );
 
             if (result != null)
             {

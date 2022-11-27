@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Characters;
+using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -11,9 +12,17 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Popups
 {
-    public partial class NumericEditorPopupVM : ViewModelBase
+    public partial class NumericEditorPopupVM : PopupViewModelBase<NumericEditorParameters>
     {
+        public NumericEditorPopupVM()
+        {
+            EditorTitle = PassInParameters.Title;
+        }
+
         public NumericEditorPopup View;
+
+        [ObservableProperty]
+        private string _editorTitle;
 
         [ObservableProperty]
         private string _value;
@@ -103,5 +112,10 @@ namespace BRIX.Mobile.ViewModel.Popups
         Add = 1,
         Set = 2,
         Substract = 3
+    }
+
+    public class NumericEditorParameters
+    {
+        public string Title { get; set; }
     }
 }
