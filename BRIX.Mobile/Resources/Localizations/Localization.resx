@@ -141,9 +141,6 @@
   <data name="CharacterListPageTitle" xml:space="preserve">
     <value>Characters</value>
   </data>
-  <data name="CharacterName" xml:space="preserve">
-    <value>Character name</value>
-  </data>
   <data name="CharacterTab" xml:space="preserve">
     <value>Character</value>
   </data>
@@ -159,14 +156,23 @@
   <data name="Clear" xml:space="preserve">
     <value>Clear</value>
   </data>
+  <data name="CreateNewCharacter" xml:space="preserve">
+    <value>Create new character</value>
+  </data>
   <data name="CurrentCharacterPageTitle" xml:space="preserve">
     <value>Character</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="Expirience" xml:space="preserve">
-    <value>Expirience</value>
+  <data name="Experience" xml:space="preserve">
+    <value>Experience</value>
+  </data>
+  <data name="ExperienceToLevelup" xml:space="preserve">
+    <value>EXP to level up</value>
+  </data>
+  <data name="FreeExperience" xml:space="preserve">
+    <value>Free EXP</value>
   </data>
   <data name="Health" xml:space="preserve">
     <value>Health</value>
@@ -185,6 +191,12 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="PlayerHaveNoCharacter" xml:space="preserve">
+    <value>Looks like you haven't created any character yet. It is a good reason to create one. Fortunately, there is a button at the bottom of this page specifically for such cases.</value>
+  </data>
+  <data name="PlayerHaveNoCharacterTitle" xml:space="preserve">
+    <value>Nothing...</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me</value>

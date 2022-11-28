@@ -3,9 +3,11 @@ using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Characters;
+using BRIX.Mobile.View.IconFonts;
 using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
 using BRIX.Mobile.ViewModel.Popups;
+using BRIX.Mobile.Resources.Localizations;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -20,10 +22,12 @@ namespace BRIX.Mobile.ViewModel.Characters
     public partial class CurrentCharacterPageVM : ViewModelBase
     {
         private readonly ICharacterService _characterService;
+        private readonly ILocalizationResourceManager _localization;
 
-        public CurrentCharacterPageVM(ICharacterService characterService)
+        public CurrentCharacterPageVM(ICharacterService characterService, ILocalizationResourceManager localization)
         {
             _characterService = characterService;
+            _localization = localization;
         }
 
         [ObservableProperty]
@@ -33,7 +37,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         private bool _playerHaveCharacter;
 
         [ObservableProperty]
-        private ObservableCollection<string> _exp;
+        private ObservableCollection<ExperienceInfoVM> _expCards;
 
         [RelayCommand]
         public async Task Create()
@@ -53,33 +57,34 @@ namespace BRIX.Mobile.ViewModel.Characters
             await Navigation.NavigateAsync(nameof(CharacterListPage));
         }
 
+
+        /// <summary>
+        /// Только для удобства тестирования.
+        /// </summary>
+        /// <returns></returns>
+        [RelayCommand]
+        public async Task KillThemAll()
+        {
+            await _characterService.RemoveAllAsync();
+            await OnNavigatedAsync();
+        }
+
         [RelayCommand]
         public async Task EditHealth()
         {
-            NumericEditorResult result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult>();
+            NumericEditorResult result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(
+                new NumericEditorParameters { Title = _localization[LocalizationKeys.Health] as string }
+            );
 
-            if(result != null)
+            if (result != null)
             {
-                int newHealthValue = Character.CurrentHealth;
+                int newHealthValue = result.ToValue(Character.CurrentHealth);
 
-                switch(result.Action)
-                {
-                    case ENumericEditorResult.Add:
-                        newHealthValue += result.EnteredValue;
-                        break;
-                    case ENumericEditorResult.Set:
-                        newHealthValue = result.EnteredValue;
-                        break;
-                    case ENumericEditorResult.Substract:
-                        newHealthValue -= result.EnteredValue;
-                        break;
-                }
-
-                if(newHealthValue > Character.CurrentHealth)
+                if (newHealthValue > Character.MaxHealth)
                 {
                     Character.CurrentHealth = Character.MaxHealth;
                 }
-                else if(newHealthValue < 0)
+                else if (newHealthValue < 0)
                 {
                     Character.CurrentHealth = 0;
                 }
@@ -87,7 +92,42 @@ namespace BRIX.Mobile.ViewModel.Characters
                 {
                     Character.CurrentHealth = newHealthValue;
                 }
+
+                await SaveChanges();
             }
+        }
+
+        [RelayCommand]
+        public async Task RestoreHealth()
+        {
+            Character.CurrentHealth = Character.MaxHealth;
+            await SaveChanges();
+        }
+
+        [RelayCommand]
+        public async Task EditExperience()
+        {
+            NumericEditorResult result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(
+                new NumericEditorParameters { Title = _localization[LocalizationKeys.Experience] as string }
+            );
+
+            if (result != null)
+            {
+                int newEXPValue = result.ToValue(Character.Experience);
+
+                if (newEXPValue >= 0)
+                {
+                    Character.Experience = newEXPValue;
+                    UpdateExpCards();
+                    await SaveChanges();
+                }
+            }
+        }
+
+        [RelayCommand]
+        private async Task GoToAbilities()
+        {
+            await Navigation.NavigateAsync<CharacterAbilitiesPage>(mode: ENavigationMode.Absolute);
         }
 
         public override async Task OnNavigatedAsync()
@@ -98,9 +138,77 @@ namespace BRIX.Mobile.ViewModel.Characters
             if (PlayerHaveCharacter)
             {
                 Character = new CharacterModel(characters.FirstOrDefault());
+                UpdateExpCards();
+            }
+            else
+            {
+                Character = null;
+            }
+        }
+
+        /// <summary>
+        /// В данном случае коллекция ExpCards — это модель представления для двух карточек, отображающих разные 
+        /// метрики. Первая показывает опыт до следующего уровня, а вторая непотраченный опыт. К сожалению CarouselView
+        /// не умеет вмещать в себя элементы без ItemSource, поэтому применено такое решеиние.
+        /// </summary>
+        private void UpdateExpCards()
+        {
+            if (ExpCards == null || !ExpCards.Any())
+            {
+                ExpCards = new ObservableCollection<ExperienceInfoVM>
+                {
+                    new ExperienceInfoVM
+                    {
+                        Icon = Awesome.Calculator,
+                        IconFont = "Awesome",
+                        DoCardActionCommand = new RelayCommand(async () => await EditExperience())
+                    },
+                    new ExperienceInfoVM
+                    {
+                        Title = _localization[LocalizationKeys.FreeExperience] as string,
+                        Icon = AwesomeRPG.BurningEmbers,
+                        IconFont = "AwesomeRPG",
+                        DoCardActionCommand = new RelayCommand(async () => await GoToAbilities())
+                    },
+                };
             }
 
-            Exp = new ObservableCollection<string>(new List<string> { "1", "2" });
+            ExpCards.First().Current = Character.Experience;
+            ExpCards.First().Target = Character.ExperienceForNextLevel;
+            ExpCards.First().Title = _localization[LocalizationKeys.ExperienceToLevelup] as string;
+
+            ExpCards.Last().Current = Character.FreeExperience;
+            ExpCards.Last().Target = Character.Experience;
+            ExpCards.Last().Title = _localization[LocalizationKeys.FreeExperience] as string;
         }
+
+        private async Task SaveChanges()
+        {
+            await _characterService.UpdateAsync(Character.InternalModel);
+        }
+    }
+
+    public partial class ExperienceInfoVM : ObservableObject
+    {
+        [ObservableProperty]
+        private string _title;
+
+        [ObservableProperty]
+        private string _icon;
+
+        [ObservableProperty]
+        private string _iconFont;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Percent))]
+        private int _current;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(Percent))]
+        private int _target;
+
+        public double Percent => Current / (double)Target;
+
+        public RelayCommand DoCardActionCommand { get; set; }
     }
 }

@@ -17,27 +17,58 @@
             <Setter Property="BackgroundColor" Value="{StaticResource BRIXMedium}"/>
             <Setter Property="Opacity" Value=".75"/>
         </Style>
+        <Style TargetType="Button" x:Key="CardActionButton">
+            <Setter Property="FontFamily" Value="Awesome"/>
+            <Setter Property="Text" Value="{x:Static icons:Awesome.Calculator}"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="WidthRequest" Value="35"/>
+            <Setter Property="HeightRequest" Value="35"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
     </ContentPage.Resources>
     
     <Shell.TitleView>
-        <Grid ColumnDefinitions="*,auto,auto" ColumnSpacing="10" Padding="0,10,15,10">
+        <Grid ColumnDefinitions="*,auto" ColumnSpacing="10" Padding="0,10,15,10">
             <Label 
                 Grid.Column="0"
                 Style="{StaticResource NavigationBarTitle}"
                 Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Character}}"/>
-            <Button Grid.Column="1" 
-                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Switch}}"
+
+            <HorizontalStackLayout Grid.Column="1" Spacing="10" IsVisible="{Binding PlayerHaveCharacter}">
+                <Button Style="{StaticResource CardActionButton}"  
+                    Text="{x:Static icons:Awesome.SquarePen}"
+                    Command="{Binding EditCommand}"/>
+                <Button Style="{StaticResource CardActionButton}" Grid.Column="1" 
+                    Text="{x:Static icons:Awesome.PeopleArrows}"
                     Command="{Binding SwitchCommand}"/>
-            <Button Grid.Column="2" Text="?"/>
+                <Button Style="{StaticResource CardActionButton}" Grid.Column="1" 
+                    Text="{x:Static icons:Awesome.Skull}"
+                    Command="{Binding KillThemAllCommand}"/>
+            </HorizontalStackLayout>
+            
         </Grid>
     </Shell.TitleView>
 
     <ScrollView>
         <Grid>
             <!--In case of empty character pool-->
-            <VerticalStackLayout IsVisible="{Binding PlayerHaveCharacter, Converter={StaticResource NotConverter}}">
-                <Button Text="Create new character" Command="{Binding CreateCommand}"/>
-            </VerticalStackLayout>
+            <Grid 
+                IsVisible="{Binding PlayerHaveCharacter, Converter={StaticResource NotConverter}}"
+                RowDefinitions="*,*,auto">
+                <VerticalStackLayout Grid.Row="0">
+                    <Label Style="{StaticResource ParagraphTitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.PlayerHaveNoCharacterTitle}}" />
+                    <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.PlayerHaveNoCharacter}}"/>
+                </VerticalStackLayout>
+                <Label 
+                    Grid.Row="1"
+                    FontFamily="AwesomeRPG" 
+                    FontSize="160" 
+                    TextColor="{StaticResource BRIXMedium}" 
+                    Text="{x:Static icons:AwesomeRPG.CloakAndDagger}"
+                    HorizontalOptions="Center"
+                    Margin="0,-60,0,0"/>
+                <Button Grid.Row="2" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CreateNewCharacter}}" Command="{Binding CreateCommand}" Margin="0,0,0,10"/>
+            </Grid>
         
             <!--In case of player have at leatst one character-->
             <VerticalStackLayout IsVisible="{Binding PlayerHaveCharacter}" Spacing="10">
@@ -53,55 +84,94 @@
                         <Grid Margin="10" RowDefinitions="*,*">
                             <Grid Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
                                 <Border Style="{StaticResource NameLevelBorder}" Margin="-10,-5"/>
-                                <Label Style="{StaticResource BlockTitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CharacterName}}" />
+                                <Label Style="{StaticResource TitleLabel}" Text="{Binding Character.Name}" />
                             </Grid>
                             <Grid Grid.Row="1" VerticalOptions="End" HorizontalOptions="End" Padding="10,5">
                                 <Border Style="{StaticResource NameLevelBorder}" Margin="-10,-5"/>
-                                <Label Style="{StaticResource BlockTitleLabel}" Text="{lcz:Format ValuePath=Character.Level, FormatPath={x:Static lcz:LocalizationKeys.LevelFormat}}"/>
+                                <Label Style="{StaticResource TitleLabel}" Text="{lcz:Format ValuePath=Character.Level, FormatPath={x:Static lcz:LocalizationKeys.LevelFormat}}"/>
                             </Grid>
                         </Grid>
+                        <Label 
+                            IsVisible="{Binding Character.IsOnVergeOfLifeAndDeath}"
+                            FontFamily="Awesome" 
+                            FontSize="120" 
+                            TextColor="{StaticResource BRIXMedium}" 
+                            Text="{x:Static icons:Awesome.Skull}"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Margin="0,-20,0,0"
+                            Opacity=".75"/>
                     </Grid>
                 </Border>
 
                 <Border Style="{StaticResource BlockBorder}">
                     <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
-                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Health}}" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="0"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Health}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
                         <Label Grid.Row="0" Grid.Column="1" Margin="0,0,15,0" VerticalTextAlignment="Center">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Style="{StaticResource BlockTitleLabel}" Text="{Binding Character.CurrentHealth}"/>
-                                    <Span Style="{StaticResource BlockTitleLabel}" Text=" / "/>
-                                    <Span Style="{StaticResource BlockTitleLabel}" Text="{Binding Character.MaxHealth}"/>
+                                    <Span Style="{StaticResource TitleLabel}" Text="{Binding Character.CurrentHealth}"/>
+                                    <Span Style="{StaticResource TitleLabel}" Text=" / "/>
+                                    <Span Style="{StaticResource TitleLabel}" Text="{Binding Character.MaxHealth}"/>
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                        <Button Grid.Row="0" Grid.Column="2" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Edit}}" Command="{Binding EditHealthCommand}"/>
+                        <HorizontalStackLayout Grid.Row="0" Grid.Column="2" Spacing="10">
+                            <Button
+                                Style="{StaticResource CardActionButton}"
+                                Text="{x:Static icons:Awesome.HeartCirclePlus}"
+                                Command="{Binding RestoreHealthCommand}"/>
+                            <Button
+                                Style="{StaticResource CardActionButton}"
+                                Command="{Binding EditHealthCommand}"/>
+                        </HorizontalStackLayout>
+                        
                         <ProgressBar 
                             Margin="0,5,0,-5"
-                            Grid.Row="1"
-                            Grid.ColumnSpan="3"
+                            Grid.Row="1" Grid.ColumnSpan="3"
                             Progress="{Binding Character.HealthPercent}"
-                            ProgressColor="{StaticResource BRIXLime}"/>
+                            ProgressColor="{StaticResource BRIXLime}">
+                            <ProgressBar.Triggers>
+                                <DataTrigger TargetType="ProgressBar" Binding="{Binding Character.HealthState}" Value="0">
+                                    <Setter Property="ProgressColor" Value="{StaticResource BRIXLime}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="ProgressBar" Binding="{Binding Character.HealthState}" Value="1">
+                                    <Setter Property="ProgressColor" Value="{StaticResource BRIXOrange}" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="ProgressBar" Binding="{Binding Character.HealthState}" Value="2">
+                                    <Setter Property="ProgressColor" Value="{StaticResource BRIXRed}" />
+                                </DataTrigger>
+                            </ProgressBar.Triggers>
+                        </ProgressBar>
                     </Grid>
                 </Border>
 
-                <CarouselView ItemsSource="{Binding Exp}" Margin="-15,0" Loop="False" IndicatorView="experienceCarouselIndicator">
+                <CarouselView ItemsSource="{Binding ExpCards}" Margin="-15,0" Loop="False" IndicatorView="experienceCarouselIndicator">
                     <CarouselView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="vm:ExperienceInfoVM">
                             <Border Style="{StaticResource BlockBorder}" Margin="15,0">
                                 <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
-                                    <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Expirience}}" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="0"/>
-                                    <Label Text="1007 / 1200" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="1" Margin="0,0,15,0"/>
-                                    <Button
-                                        Grid.Row="0"
-                                        Grid.Column="2"
-                                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Edit}}"/>
+                                    <Label Text="{Binding Title}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Margin="0,0,15,0" VerticalTextAlignment="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Style="{StaticResource TitleLabel}" Text="{Binding Current}"/>
+                                                <Span Style="{StaticResource TitleLabel}" Text=" / "/>
+                                                <Span Style="{StaticResource TitleLabel}" Text="{Binding Target}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Button 
+                                        Grid.Row="0" Grid.Column="2" 
+                                        Style="{StaticResource CardActionButton}"
+                                        FontFamily="{Binding IconFont}"
+                                        Text="{Binding Icon}" 
+                                        Command="{Binding DoCardActionCommand}"/>
                                     <ProgressBar 
                                         Margin="0,5,0,-5"
-                                        Grid.Row="1"
-                                        Grid.ColumnSpan="3"
-                                        Progress=".92"
-                                        ProgressColor="{StaticResource BRIXOrange}"/>
+                                        Grid.Row="1" Grid.ColumnSpan="3"
+                                        Progress="{Binding Percent}"
+                                        ProgressColor="{StaticResource BRIXLime}"/>
                                 </Grid>
                             </Border>
                         </DataTemplate>
@@ -116,15 +186,13 @@
 
                 <Border Style="{StaticResource BlockBorder}">
                     <Grid RowDefinitions="auto,auto,auto,auto" ColumnDefinitions="*,auto,auto">
-                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Tags}}" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="0"/>
-                        <controls:FramedEntry Grid.Row="1" Placeholder="Login"/>
-                        <controls:FramedEntry Grid.Row="2" Placeholder="Password" IsPassword="True"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Tags}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
                     </Grid>
                 </Border>
 
                 <Border Style="{StaticResource BlockBorder}">
                     <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
-                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Abilities}}" Style="{StaticResource BlockTitleLabel}" Grid.Row="0" Grid.Column="0"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Abilities}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
                     </Grid>
                 </Border>
 

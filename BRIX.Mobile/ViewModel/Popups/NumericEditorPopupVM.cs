@@ -1,4 +1,6 @@
-﻿using BRIX.Mobile.View.Popups;
+﻿using BRIX.Library.Characters;
+using BRIX.Mobile.Services.Navigation;
+using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -10,9 +12,17 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Popups
 {
-    public partial class NumericEditorPopupVM : ViewModelBase
+    public partial class NumericEditorPopupVM : ParametrizedPopupVMBase<NumericEditorParameters>
     {
+        protected override void HandleParameters()
+        {
+            EditorTitle = PassInParameters?.Title;
+        }
+
         public NumericEditorPopup View;
+
+        [ObservableProperty]
+        private string _editorTitle;
 
         [ObservableProperty]
         private string _value;
@@ -41,19 +51,28 @@ namespace BRIX.Mobile.ViewModel.Popups
         [RelayCommand]
         private void Add()
         {
-            View.Close(new NumericEditorResult(ENumericEditorResult.Add, int.Parse(Value)));
+            if (!string.IsNullOrEmpty(Value))
+            {
+                View.Close(new NumericEditorResult(ENumericEditorResult.Add, int.Parse(Value)));
+            }
         }
 
         [RelayCommand]
         private void Set()
         {
-            View.Close(new NumericEditorResult(ENumericEditorResult.Set, int.Parse(Value)));
+            if (!string.IsNullOrEmpty(Value))
+            {
+                View.Close(new NumericEditorResult(ENumericEditorResult.Set, int.Parse(Value)));
+            }
         }
 
         [RelayCommand]
         private void Substract()
         {
-            View.Close(new NumericEditorResult(ENumericEditorResult.Substract, int.Parse(Value)));
+            if (!string.IsNullOrEmpty(Value))
+            {
+                View.Close(new NumericEditorResult(ENumericEditorResult.Substract, int.Parse(Value)));
+            }
         }
     }
 
@@ -67,6 +86,24 @@ namespace BRIX.Mobile.ViewModel.Popups
 
         public ENumericEditorResult Action { get; set; }
         public int EnteredValue { get; set; }
+
+        public int ToValue(int oldValue)
+        {
+            switch (Action)
+            {
+                case ENumericEditorResult.Add:
+                    oldValue += EnteredValue;
+                    break;
+                case ENumericEditorResult.Set:
+                    oldValue = EnteredValue;
+                    break;
+                case ENumericEditorResult.Substract:
+                    oldValue -= EnteredValue;
+                    break;
+            }
+
+            return oldValue;
+        }
     }
 
     public enum ENumericEditorResult
@@ -75,5 +112,10 @@ namespace BRIX.Mobile.ViewModel.Popups
         Add = 1,
         Set = 2,
         Substract = 3
+    }
+
+    public class NumericEditorParameters
+    {
+        public string Title { get; set; }
     }
 }

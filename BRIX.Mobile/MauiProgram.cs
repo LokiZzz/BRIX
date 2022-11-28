@@ -4,6 +4,7 @@ using BRIX.Mobile.View.Account;
 using BRIX.Mobile.View.Characters;
 using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.View.Settings;
+using BRIX.Mobile.ViewModel;
 using BRIX.Mobile.ViewModel.Account;
 using BRIX.Mobile.ViewModel.Characters;
 using BRIX.Mobile.ViewModel.Popups;
@@ -46,7 +47,9 @@ public static class MauiProgram
 
     public static void RegisterViews(this MauiAppBuilder builder)
 	{
-        builder.RegisterView<SignInPage, SignInPageVM>();
+        builder.RegisterView<AppShell, AppShellVM>();
+
+        builder.RegisterView<SignInPage, SignInPageVM>(false);
 
         builder.RegisterView<CurrentCharacterPage, CurrentCharacterPageVM>(false);
         builder.RegisterView<CharacterAbilitiesPage, CharacterAbilitiesPageVM>(false);

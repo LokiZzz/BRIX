@@ -13,53 +13,111 @@ namespace BRIX.Mobile.Models.Characters
     {
         public CharacterModel() : this(new Character()) { }
 
-        public CharacterModel(Character character) => Character = character;
+        public CharacterModel(Character character) => InternalModel = character;
 
-        public Character Character { get; }
+        public Character InternalModel { get; }
 
         public Guid Id
         {
-            get => Character.Id;
-            set => SetProperty(Character.Id, value, Character, (character, id) => character.Id = id);
+            get => InternalModel.Id;
+            set => SetProperty(InternalModel.Id, value, InternalModel, (character, id) => character.Id = id);
         }
 
         public string Name
         {
-            get => Character.Name;
-            set => SetProperty(Character.Name, value, Character, (character, name) => character.Name = name);
+            get => InternalModel.Name;
+            set => SetProperty(InternalModel.Name, value, InternalModel, (character, name) => character.Name = name);
         }
 
         public string Backstory
         {
-            get => Character.Backstory;
-            set => SetProperty(Character.Backstory, value, Character, (character, backstory) => character.Backstory = backstory);
+            get => InternalModel.Backstory;
+            set => SetProperty(InternalModel.Backstory, value, InternalModel, (character, backstory) => character.Backstory = backstory);
         }
 
         public string Appearance
         {
-            get => Character.Appearance;
-            set => SetProperty(Character.Appearance, value, Character, (character, appearance) => character.Appearance = appearance);
+            get => InternalModel.Appearance;
+            set => SetProperty(InternalModel.Appearance, value, InternalModel, (character, appearance) => character.Appearance = appearance);
         }
 
-        public int Level => Character.Level;
-
-        public int MaxHealth => Character.MaxHealth;
+        public int MaxHealth => InternalModel.MaxHealth;
 
         public int CurrentHealth
         {
-            get => Character.CurrentHealth;
+            get => InternalModel.CurrentHealth;
             set
             {
-                SetProperty(Character.CurrentHealth, value, Character, (character, health) => character.CurrentHealth = health);
+                SetProperty(InternalModel.CurrentHealth, value, InternalModel, (character, health) => character.CurrentHealth = health);
                 OnPropertyChanged(nameof(HealthPercent));
+                OnPropertyChanged(nameof(HealthState));
+                OnPropertyChanged(nameof(IsOnVergeOfLifeAndDeath));
             }
         }
 
-        public double HealthPercent
+        public double HealthPercent => CurrentHealth / (double)MaxHealth;
+
+        public EHealthState HealthState
         {
-            get => CurrentHealth / (double)MaxHealth;
+            get
+            {
+                switch (HealthPercent)
+                {
+                    case > .50:
+                        return EHealthState.Fine;
+                    case < .50 and >= .25:
+                        return EHealthState.Bad;
+                    case < .25:
+                        return EHealthState.Critical;
+                    default:
+                        return EHealthState.Fine;
+                }
+            }
         }
 
+        public bool IsOnVergeOfLifeAndDeath => CurrentHealth == 0;
+
+        public int Level => InternalModel.Level;
+
+        public int Experience
+        {
+            get => InternalModel.Experience;
+            set
+            {
+                SetProperty(InternalModel.Experience, value, InternalModel, (character, exp) => character.Experience = exp);
+                OnPropertyChanged(nameof(MaxHealth));
+                OnPropertyChanged(nameof(HealthPercent));
+                OnPropertyChanged(nameof(Level));
+                OnPropertyChanged(nameof(ExperienceForNextLevel));
+                OnPropertyChanged(nameof(LevelUpProgress));
+                OnPropertyChanged(nameof(SpentExperience));
+                OnPropertyChanged(nameof(FreeExperience));
+            }
+        }
+
+        public int ExperienceForNextLevel => ExperienceCalculator.GetExpForLevel(Level + 1);
+
+        public double LevelUpProgress
+        {
+            get
+            {
+                int absProgress = Experience - ExperienceCalculator.GetExpForLevel(Level);
+
+                return absProgress / (double)ExperienceForNextLevel;
+            }
+        }
+
+        public int SpentExperience => InternalModel.SpentExp;
+
+        public int FreeExperience => Experience - InternalModel.SpentExp;
+
         public string ImagePath => "fox_character_moq.jpeg";
+    }
+
+    public enum EHealthState
+    {
+        Fine = 0,
+        Bad = 1,
+        Critical
     }
 }

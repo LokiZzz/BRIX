@@ -1,4 +1,5 @@
 ﻿using BRIX.Mobile.ViewModel.Base;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
 namespace BRIX.Mobile.Services.Navigation
@@ -7,7 +8,7 @@ namespace BRIX.Mobile.Services.Navigation
     {
         public async Task Back()
         {
-            await NavigateAsync($"..", ENavigationMode.None);
+            await NavigateAsync("..", ENavigationMode.None);
         }
 
         public async Task NavigateAsync<T>(params (string, object)[] parameters) where T : Page

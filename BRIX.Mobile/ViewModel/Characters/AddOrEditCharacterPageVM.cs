@@ -27,12 +27,12 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             if (character.Id != default)
             {
-                await _characterService.UpdateAsync(character.Character);
+                await _characterService.UpdateAsync(character.InternalModel);
             }
             else
             {
                 character.Id = Guid.NewGuid();
-                await _characterService.AddAsync(character.Character);
+                await _characterService.AddAsync(character.InternalModel);
             }
 
             await Navigation.Back();

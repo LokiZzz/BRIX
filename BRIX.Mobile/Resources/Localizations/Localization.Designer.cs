@@ -133,15 +133,6 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Character name.
-        /// </summary>
-        public static string CharacterName {
-            get {
-                return ResourceManager.GetString("CharacterName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Character.
         /// </summary>
         public static string CharacterTab {
@@ -187,6 +178,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create new character.
+        /// </summary>
+        public static string CreateNewCharacter {
+            get {
+                return ResourceManager.GetString("CreateNewCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Character.
         /// </summary>
         public static string CurrentCharacterPageTitle {
@@ -205,11 +205,29 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Expirience.
+        ///   Looks up a localized string similar to Experience.
         /// </summary>
-        public static string Expirience {
+        public static string Experience {
             get {
-                return ResourceManager.GetString("Expirience", resourceCulture);
+                return ResourceManager.GetString("Experience", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EXP to level up.
+        /// </summary>
+        public static string ExperienceToLevelup {
+            get {
+                return ResourceManager.GetString("ExperienceToLevelup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Free EXP.
+        /// </summary>
+        public static string FreeExperience {
+            get {
+                return ResourceManager.GetString("FreeExperience", resourceCulture);
             }
         }
         
@@ -264,6 +282,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Looks like you haven&apos;t created any character yet. It is a good reason to create one. Fortunately, there is a button at the bottom of this page specifically for such cases..
+        /// </summary>
+        public static string PlayerHaveNoCharacter {
+            get {
+                return ResourceManager.GetString("PlayerHaveNoCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nothing....
+        /// </summary>
+        public static string PlayerHaveNoCharacterTitle {
+            get {
+                return ResourceManager.GetString("PlayerHaveNoCharacterTitle", resourceCulture);
             }
         }
         
