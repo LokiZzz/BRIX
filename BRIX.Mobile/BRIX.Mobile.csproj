@@ -74,6 +74,9 @@
 	  <MauiXaml Update="Resources\Controls\ControlTemplates.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Resources\Controls\CropImage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Resources\Controls\FramedEntry.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -124,9 +127,8 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>Localization.resx</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\Characters\AddOrEditCharacterPage.xaml.cs">
-	    <DependentUpon>AddOrEditCharacterPage.xaml</DependentUpon>
-	  </Compile>
+    <Compile Update="Resources\Controls\ZoomContainer.cs">
+      <DependentUpon>CropImage.xaml</DependentUpon>
+    </Compile>
 	</ItemGroup>
-
 </Project>

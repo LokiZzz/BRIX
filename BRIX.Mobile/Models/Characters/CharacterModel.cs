@@ -59,5 +59,7 @@ namespace BRIX.Mobile.Models.Characters
         {
             get => CurrentHealth / (double)MaxHealth;
         }
+
+        public string ImagePath => "fox_character_moq.jpeg";
     }
 }
