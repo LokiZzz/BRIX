@@ -7,6 +7,7 @@ using BRIX.Mobile.View.IconFonts;
 using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
 using BRIX.Mobile.ViewModel.Popups;
+using BRIX.Mobile.Resources.Localizations;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -72,7 +73,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         public async Task EditHealth()
         {
             NumericEditorResult result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(
-                new NumericEditorParameters { Title = "It is working fine" }
+                new NumericEditorParameters { Title = _localization[LocalizationKeys.Health] as string }
             );
 
             if (result != null)
@@ -106,7 +107,9 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task EditExperience()
         {
-            NumericEditorResult result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult>();
+            NumericEditorResult result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(
+                new NumericEditorParameters { Title = _localization[LocalizationKeys.Experience] as string }
+            );
 
             if (result != null)
             {
@@ -162,7 +165,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                     },
                     new ExperienceInfoVM
                     {
-                        Title = _localization[Resources.Localizations.LocalizationKeys.FreeExperience] as string,
+                        Title = _localization[LocalizationKeys.FreeExperience] as string,
                         Icon = AwesomeRPG.BurningEmbers,
                         IconFont = "AwesomeRPG",
                         DoCardActionCommand = new RelayCommand(async () => await GoToAbilities())
@@ -172,11 +175,11 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             ExpCards.First().Current = Character.Experience;
             ExpCards.First().Target = Character.ExperienceForNextLevel;
-            ExpCards.First().Title = _localization[Resources.Localizations.LocalizationKeys.ExperienceToLevelup] as string;
+            ExpCards.First().Title = _localization[LocalizationKeys.ExperienceToLevelup] as string;
 
             ExpCards.Last().Current = Character.FreeExperience;
             ExpCards.Last().Target = Character.Experience;
-            ExpCards.Last().Title = _localization[Resources.Localizations.LocalizationKeys.FreeExperience] as string;
+            ExpCards.Last().Title = _localization[LocalizationKeys.FreeExperience] as string;
         }
 
         private async Task SaveChanges()

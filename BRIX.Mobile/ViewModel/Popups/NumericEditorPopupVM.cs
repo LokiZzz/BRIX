@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Popups
 {
-    public partial class NumericEditorPopupVM : PopupViewModelBase<NumericEditorParameters>
+    public partial class NumericEditorPopupVM : ParametrizedPopupVMBase<NumericEditorParameters>
     {
-        public NumericEditorPopupVM()
+        protected override void HandleParameters()
         {
-            EditorTitle = PassInParameters.Title;
+            EditorTitle = PassInParameters?.Title;
         }
 
         public NumericEditorPopup View;

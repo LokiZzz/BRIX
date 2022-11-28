@@ -28,10 +28,12 @@ namespace BRIX.Mobile.ViewModel.Base
         public virtual Task OnNavigatedAsync() => Task.CompletedTask;
 
         protected async Task<TResult> ShowPopupAsync<TPopup, TResult, TParams>(TParams parameters) 
-            where TPopup : ParametrizedPopup<TParams> where TResult : class where TParams : class
+            where TPopup : Popup where TResult : class where TParams : class
         {
             TPopup popupToShow = ServicePool.GetService<TPopup>();
-            popupToShow.Parameters = parameters;
+            ParametrizedPopupVMBase<TParams> viewModel = 
+                popupToShow.BindingContext as ParametrizedPopupVMBase<TParams>;
+            viewModel.PassInParameters = parameters;
             object result = await Application.Current.MainPage.ShowPopupAsync(popupToShow);
 
             return (TResult)result;
