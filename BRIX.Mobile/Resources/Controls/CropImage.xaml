@@ -2,16 +2,25 @@
 <Grid xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
       xmlns:local="clr-namespace:BRIX.Mobile.Resources.Controls"
-      x:Class="BRIX.Mobile.Resources.Controls.CropImage">
+      x:Class="BRIX.Mobile.Resources.Controls.CropImage"
+      x:Name="this">
 
-    <Image x:Name="img" Source="{Binding Source={x:Reference this}, Path=Source}"/>
-    <local:ZoomContainer Image="{x:Reference img}">
-        <Rectangle 
-            BackgroundColor="Black"
-            Opacity="0.8"
-            WidthRequest="50"
-            HeightRequest="50"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"/>
-    </local:ZoomContainer>
+    <Grid.RowDefinitions>
+        <RowDefinition/>
+        <RowDefinition/>
+    </Grid.RowDefinitions>
+    
+    <Image x:Name="Image" 
+           Source="{Binding Source={x:Reference this}, Path=Source}" 
+           Aspect="AspectFill"
+           Opacity="0.15"/>
+
+    <local:ZoomContainer Area="{x:Reference Image}" 
+                         Content="{Binding Source={x:Reference this}, Path=Zoom}"
+                         ZoomUpdated="OnZoomUpdated"/>
+
+    <Image Source="{Binding Source={x:Reference this}, Path=Source}" 
+           Aspect="AspectFill"
+           Clip="{Binding Source={x:Reference this}, Path=Selection}">
+    </Image>
 </Grid>

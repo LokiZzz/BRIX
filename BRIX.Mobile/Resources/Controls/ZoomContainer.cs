@@ -1,8 +1,7 @@
-using CommunityToolkit.Maui.Views;
+using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Shapes;
 
 namespace BRIX.Mobile.Resources.Controls;
-
 
 public class ZoomContainer : ContentView
 {
@@ -22,57 +21,67 @@ public class ZoomContainer : ContentView
         GestureRecognizers.Add(panGesture);
     }
 
-    public static readonly BindableProperty ImageProperty = BindableProperty.Create(nameof(Image), typeof(Image), typeof(ZoomContainer));
-    public Image Image
+    public static readonly BindableProperty AreaProperty = BindableProperty.Create(nameof(Area), typeof(VisualElement), typeof(ZoomContainer));
+    public VisualElement Area
     {
-        get => (Image)GetValue(ImageProperty);
-        set => SetValue(ImageProperty, value);
+        get => (VisualElement)GetValue(AreaProperty);
+        set => SetValue(AreaProperty, value);
     }
+
+    public event EventHandler<Shape> ZoomUpdated;
 
     void OnPinchUpdated(object sender, PinchGestureUpdatedEventArgs e)
     {
-        if (e.Status == GestureStatus.Started)
+        switch (e.Status)
         {
-            // Store the current scale factor applied to the wrapped user interface element,
-            // and zero the components for the center point of the translate transform.
-            startScale = Content.Scale;
-            Content.AnchorX = 0;
-            Content.AnchorY = 0;
-        }
-        if (e.Status == GestureStatus.Running)
-        {
-            // Calculate the scale factor to be applied.
-            currentScale += (e.Scale - 1) * startScale;
-            currentScale = Math.Max(1, currentScale);
+            case GestureStatus.Started:
+                // Store the current scale factor applied to the wrapped user interface element,
+                // and zero the components for the center point of the translate transform.
+                startScale = Content.Scale;
+                Content.AnchorX = 0;
+                Content.AnchorY = 0;
+                break;
 
-            // The ScaleOrigin is in relative coordinates to the wrapped user interface element,
-            // so get the X pixel coordinate.
-            double renderedX = Content.X + xOffset;
-            double deltaX = renderedX / Width;
-            double deltaWidth = Width / (Content.Width * startScale);
-            double originX = (e.ScaleOrigin.X - deltaX) * deltaWidth;
+            case GestureStatus.Running:
+                // Calculate the scale factor to be applied.
+                currentScale = Math.Max(1, currentScale + (e.Scale - 1) * startScale);
+                // Ensure we don't pinch beyond the border
+                currentScale = Math.Min(currentScale, Math.Min(Area.Height / Content.Height, Area.Width / Content.Width));
 
-            // The ScaleOrigin is in relative coordinates to the wrapped user interface element,
-            // so get the Y pixel coordinate.
-            double renderedY = Content.Y + yOffset;
-            double deltaY = renderedY / Height;
-            double deltaHeight = Height / (Content.Height * startScale);
-            double originY = (e.ScaleOrigin.Y - deltaY) * deltaHeight;
+                // The ScaleOrigin is in relative coordinates to the wrapped user interface element,
+                // so get the X pixel coordinate.
+                double renderedX = Content.X + xOffset; // где сейчас находится фигура
+                double deltaX = renderedX / Width; // что за ебанина?
+                double deltaWidth = Width / (Content.Width * startScale);
+                double originX = (e.ScaleOrigin.X - deltaX) * deltaWidth;
 
-            // Calculate the transformed element pixel coordinates.
-            double targetX = xOffset - (originX * Content.Width) * (currentScale - startScale);
-            double targetY = yOffset - (originY * Content.Height) * (currentScale - startScale);
+                // The ScaleOrigin is in relative coordinates to the wrapped user interface element,
+                // so get the Y pixel coordinate.
+                double renderedY = Content.Y + yOffset;
+                double deltaY = renderedY / Height;
+                double deltaHeight = Height / (Content.Height * startScale);
+                double originY = (e.ScaleOrigin.Y - deltaY) * deltaHeight;
 
-            // Apply translation based on the change in origin.
-            Content.TranslationX = Math.Clamp(targetX, -Content.Width * (currentScale - 1), 0);
-            Content.TranslationY = Math.Clamp(targetY, -Content.Height * (currentScale - 1), 0);
+                // Calculate the transformed element pixel coordinates.
+                double targetX = xOffset - (originX * Content.Width) * (currentScale - startScale);
+                double targetY = yOffset - (originY * Content.Height) * (currentScale - startScale);
 
-            Content.Scale = currentScale;
-        }
-        if (e.Status == GestureStatus.Completed)
-        {
-            xOffset = Content.TranslationX;
-            yOffset = Content.TranslationY;
+                // Apply translation based on the change in origin.
+                var newXPosition = Math.Clamp(Content.X + xOffset + targetX, Area.Frame.Left, Area.Frame.Right - Content.Width * Content.Scale);
+                var newYPosition = Math.Clamp(Content.Y + yOffset + targetY, Area.Frame.Top, Area.Frame.Bottom - Content.Height * Content.Scale);
+                Content.TranslationX = newXPosition - Content.X;
+                Content.TranslationY = newYPosition - Content.Y;
+
+                // Apply scale factor
+                Content.Scale = currentScale;
+                ZoomUpdated?.Invoke(this, Content as Shape);
+                break;
+
+            case GestureStatus.Completed:
+                // Store the translation delta's of the wrapped user interface element.
+                xOffset = Content.TranslationX;
+                yOffset = Content.TranslationY;
+                break;
         }
     }
 
@@ -81,19 +90,12 @@ public class ZoomContainer : ContentView
         switch (e.StatusType)
         {
             case GestureStatus.Running:
-
-
                 // Translate and ensure we don't pan beyond the wrapped user interface element bounds.
-                var newXPosition = Math.Clamp(Content.X + xOffset + e.TotalX, Image.Frame.Left, Image.Frame.Right - Content.Width * Content.Scale);
+                var newXPosition = Math.Clamp(Content.X + xOffset + e.TotalX, Area.Frame.Left, Area.Frame.Right - Content.Width * Content.Scale);
+                var newYPosition = Math.Clamp(Content.Y + yOffset + e.TotalY, Area.Frame.Top, Area.Frame.Bottom - Content.Height * Content.Scale);
                 Content.TranslationX = newXPosition - Content.X;
-
-                var newYPosition = Math.Clamp(Content.Y + yOffset + e.TotalY, Image.Frame.Top, Image.Frame.Bottom - Content.Height * Content.Scale);
                 Content.TranslationY = newYPosition - Content.Y;
-
-
-                var path = Content as Microsoft.Maui.Controls.Shapes.Path;
-                path.TranslationX = newXPosition - Content.X;
-                path.TranslationY = newYPosition - Content.Y;
+                ZoomUpdated?.Invoke(this, Content as Shape);
                 break;
 
             case GestureStatus.Completed:
