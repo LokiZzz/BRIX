@@ -64,21 +64,24 @@
                 BorderColor="{StaticResource BRIXRed}" 
                 TextColor="{StaticResource BRIXRed}" 
                 Grid.Row="5" Grid.Column="0" 
-                Command="{Binding SubstractCommand}"/>
+                Command="{Binding SubstractCommand}"
+                Margin="0,0,0,2"/>
             <Button 
                 Style="{StaticResource ImageButton}" 
                 Text="{x:Static icons:Awesome.CircleCheck}" 
                 BorderColor="{StaticResource BRIXViolet}" 
                 TextColor="{StaticResource BRIXViolet}" 
                 Grid.Row="6" Grid.Column="1" 
-                Command="{Binding SetCommand}"/>
+                Command="{Binding SetCommand}"
+                Margin="0,0,0,2"/>
             <Button 
                 Style="{StaticResource ImageButton}" 
                 Text="{x:Static icons:Awesome.CirclePlus}" 
                 BorderColor="{StaticResource BRIXLime}" 
                 TextColor="{StaticResource BRIXLime}" 
                 Grid.Row="7" Grid.Column="2" 
-                Command="{Binding AddCommand}"/>
+                Command="{Binding AddCommand}"
+                Margin="0,0,0,2"/>
         </Grid>
     </Border>
 </mct:Popup>
