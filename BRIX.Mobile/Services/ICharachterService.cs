@@ -59,6 +59,11 @@ namespace BRIX.Mobile.Services
             Character character = characters.Single(character => character.Id == id);
             characters.Remove(character);
             await _storage.WriteJsonCollectionAsync(_fileName, characters, _jsonOptions);
+            
+            if(!characters.Any())
+            {
+                await SelectCurrentCharacter(null);
+            }
         }
 
         public async Task RemoveAllAsync()

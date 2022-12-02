@@ -139,11 +139,9 @@ namespace BRIX.Mobile.ViewModel.Characters
                 Character = characters.Any() ? new CharacterModel(characters.First()) : null;
             }
 
-            if(Character != null)
-            {
-                PlayerHaveCharacter = true;
-                UpdateExpCards();
-            }
+            PlayerHaveCharacter = Character != null;
+
+            if (PlayerHaveCharacter) UpdateExpCards();
         }
 
         /// <summary>

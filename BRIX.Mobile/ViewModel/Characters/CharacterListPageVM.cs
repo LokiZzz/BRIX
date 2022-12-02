@@ -72,6 +72,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             {
                 await _characterService.RemoveAsync(character.Id);
                 Characters.Remove(character);
+
             }
         }
 
