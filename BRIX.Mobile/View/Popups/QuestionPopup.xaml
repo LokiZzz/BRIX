@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Popups"
+    x:DataType="vm:QuestionPopupVM"
+    x:Class="BRIX.Mobile.View.Popups.QuestionPopup"
+    Color="Transparent">
+    
+    <Border Style="{StaticResource BlockBorder}" WidthRequest="350">
+        <VerticalStackLayout>
+            <Label Style="{StaticResource ParagraphTitleLabel}" Text="{Binding Title}"/>
+            <Label Text="{Binding Message}" LineBreakMode="WordWrap"/>
+            <HorizontalStackLayout Margin="0,20,0,0" Spacing="10" HorizontalOptions="End">
+                <Button Text="{Binding Yes}" Command="{Binding FireYesCommand}" WidthRequest="100" Style="{StaticResource SmallerButton}"/>
+                <Button Text="{Binding No}" Command="{Binding FireNoCommand}" WidthRequest="100" Style="{StaticResource SmallerButton}"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Border>
+    
+</mct:Popup>

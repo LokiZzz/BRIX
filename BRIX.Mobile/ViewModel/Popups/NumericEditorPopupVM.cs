@@ -16,10 +16,8 @@ namespace BRIX.Mobile.ViewModel.Popups
     {
         protected override void HandleParameters()
         {
-            EditorTitle = PassInParameters?.Title;
+            EditorTitle = Parameters?.Title;
         }
-
-        public NumericEditorPopup View;
 
         [ObservableProperty]
         private string _editorTitle;

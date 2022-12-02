@@ -87,6 +87,7 @@ namespace BRIX.Mobile.Models.Characters
                 SetProperty(InternalModel.Experience, value, InternalModel, (character, exp) => character.Experience = exp);
                 OnPropertyChanged(nameof(MaxHealth));
                 OnPropertyChanged(nameof(HealthPercent));
+                OnPropertyChanged(nameof(HealthState));
                 OnPropertyChanged(nameof(Level));
                 OnPropertyChanged(nameof(ExperienceForNextLevel));
                 OnPropertyChanged(nameof(LevelUpProgress));

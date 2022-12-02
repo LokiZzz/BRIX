@@ -62,6 +62,7 @@ public static class MauiProgram
         builder.RegisterView<SelectLanguagePage, SelectLanguagePageVM>();
 
         builder.RegisterPopup<NumericEditorPopup, NumericEditorPopupVM>();
+        builder.RegisterPopup<QuestionPopup, QuestionPopupVM>();
     }
 
     /// <param name="registerRoute"> Set false if view already registered in AppShell.xaml </param>
