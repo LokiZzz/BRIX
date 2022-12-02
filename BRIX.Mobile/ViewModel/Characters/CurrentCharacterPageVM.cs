@@ -132,17 +132,22 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         public override async Task OnNavigatedAsync()
         {
-            List<Character> characters = await _characterService.GetAllAsync();
-            PlayerHaveCharacter = characters.Any();
+            Character character = await _characterService.GetCurrentCharacter();
 
-            if (PlayerHaveCharacter)
+            if(character != null)
             {
-                Character = new CharacterModel(characters.FirstOrDefault());
-                UpdateExpCards();
+                Character = new CharacterModel(character);
             }
             else
             {
-                Character = null;
+                List<Character> characters = await _characterService.GetAllAsync();
+                Character = characters.Any() ? new CharacterModel(characters.First()) : null;
+            }
+
+            if(Character != null)
+            {
+                PlayerHaveCharacter = true;
+                UpdateExpCards();
             }
         }
 

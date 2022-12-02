@@ -22,6 +22,23 @@ namespace BRIX.Mobile.ViewModel.Characters
         [ObservableProperty]
         private ObservableCollection<CharacterModel> _characters = new();
 
+        [ObservableProperty]
+        private bool _showHelp;
+
+        [RelayCommand]
+        private void HideHelp()
+        {
+            ShowHelp = false;
+            Preferences.Set(Mobile.Settings.Help.ShowCharactersListHelp, false);
+        }
+
+        [RelayCommand]
+        private async Task Select(CharacterModel characterToSelect)
+        {
+            await _characterService.SelectCurrentCharacter(characterToSelect.InternalModel);
+            await Navigation.Back();
+        }
+
         [RelayCommand]
         private async Task Add()
         {
@@ -55,6 +72,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             _characters.Clear();
             List<CharacterBM> characters = await _characterService.GetAllAsync();
             Characters = new(characters.Select(character => new CharacterModel(character)));
+            ShowHelp = Preferences.Get(Mobile.Settings.Help.ShowCharactersListHelp, true);
         }
     }
 }

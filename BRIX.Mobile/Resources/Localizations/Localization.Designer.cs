@@ -169,6 +169,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ok, hide message.
+        /// </summary>
+        public static string CharListHelpButton {
+            get {
+                return ResourceManager.GetString("CharListHelpButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tap to select, swipe right to edit and swipe left to delete..
+        /// </summary>
+        public static string CharListHelpText {
+            get {
+                return ResourceManager.GetString("CharListHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
         public static string Clear {
@@ -237,6 +255,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Health {
             get {
                 return ResourceManager.GetString("Health", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        public static string Help {
+            get {
+                return ResourceManager.GetString("Help", resourceCulture);
             }
         }
         

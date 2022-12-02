@@ -10,23 +10,6 @@
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Character}}">
 
-    <ContentPage.Resources>
-        <Style TargetType="Border" x:Key="NameLevelBorder">
-            <Setter Property="StrokeShape" Value="RoundRectangle 5"/>
-            <Setter Property="StrokeThickness" Value="0"/>
-            <Setter Property="BackgroundColor" Value="{StaticResource BRIXMedium}"/>
-            <Setter Property="Opacity" Value=".75"/>
-        </Style>
-        <Style TargetType="Button" x:Key="CardActionButton">
-            <Setter Property="FontFamily" Value="Awesome"/>
-            <Setter Property="Text" Value="{x:Static icons:Awesome.Calculator}"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="WidthRequest" Value="35"/>
-            <Setter Property="HeightRequest" Value="35"/>
-            <Setter Property="Padding" Value="0"/>
-        </Style>
-    </ContentPage.Resources>
-    
     <Shell.TitleView>
         <Grid ColumnDefinitions="*,auto" ColumnSpacing="10" Padding="0,10,15,10">
             <Label 
@@ -35,13 +18,13 @@
                 Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Character}}"/>
 
             <HorizontalStackLayout Grid.Column="1" Spacing="10" IsVisible="{Binding PlayerHaveCharacter}">
-                <Button Style="{StaticResource CardActionButton}"  
+                <Button Style="{StaticResource SquareIconButton}"  
                     Text="{x:Static icons:Awesome.SquarePen}"
                     Command="{Binding EditCommand}"/>
-                <Button Style="{StaticResource CardActionButton}" Grid.Column="1" 
+                <Button Style="{StaticResource SquareIconButton}" Grid.Column="1" 
                     Text="{x:Static icons:Awesome.PeopleArrows}"
                     Command="{Binding SwitchCommand}"/>
-                <Button Style="{StaticResource CardActionButton}" Grid.Column="1" 
+                <Button Style="{StaticResource SquareIconButton}" Grid.Column="1" 
                     Text="{x:Static icons:Awesome.Skull}"
                     Command="{Binding KillThemAllCommand}"/>
             </HorizontalStackLayout>
@@ -83,11 +66,11 @@
                             Aspect="AspectFill"/>
                         <Grid Margin="10" RowDefinitions="*,*">
                             <Grid Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
-                                <Border Style="{StaticResource NameLevelBorder}" Margin="-10,-5"/>
+                                <Border Style="{StaticResource TransparentBorder}" Margin="-10,-5"/>
                                 <Label Style="{StaticResource TitleLabel}" Text="{Binding Character.Name}" />
                             </Grid>
                             <Grid Grid.Row="1" VerticalOptions="End" HorizontalOptions="End" Padding="10,5">
-                                <Border Style="{StaticResource NameLevelBorder}" Margin="-10,-5"/>
+                                <Border Style="{StaticResource TransparentBorder}" Margin="-10,-5"/>
                                 <Label Style="{StaticResource TitleLabel}" Text="{lcz:Format ValuePath=Character.Level, FormatPath={x:Static lcz:LocalizationKeys.LevelFormat}}"/>
                             </Grid>
                         </Grid>
@@ -118,11 +101,11 @@
                         </Label>
                         <HorizontalStackLayout Grid.Row="0" Grid.Column="2" Spacing="10">
                             <Button
-                                Style="{StaticResource CardActionButton}"
+                                Style="{StaticResource SquareIconButton}"
                                 Text="{x:Static icons:Awesome.HeartCirclePlus}"
                                 Command="{Binding RestoreHealthCommand}"/>
                             <Button
-                                Style="{StaticResource CardActionButton}"
+                                Style="{StaticResource SquareIconButton}"
                                 Command="{Binding EditHealthCommand}"/>
                         </HorizontalStackLayout>
                         
@@ -163,7 +146,7 @@
                                     </Label>
                                     <Button 
                                         Grid.Row="0" Grid.Column="2" 
-                                        Style="{StaticResource CardActionButton}"
+                                        Style="{StaticResource SquareIconButton}"
                                         FontFamily="{Binding IconFont}"
                                         Text="{Binding Icon}" 
                                         Command="{Binding DoCardActionCommand}"/>

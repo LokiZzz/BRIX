@@ -153,6 +153,12 @@
   <data name="CharacterTabInventory" xml:space="preserve">
     <value>Inventory</value>
   </data>
+  <data name="CharListHelpButton" xml:space="preserve">
+    <value>Ok, hide message</value>
+  </data>
+  <data name="CharListHelpText" xml:space="preserve">
+    <value>Tap to select, swipe right to edit and swipe left to delete.</value>
+  </data>
   <data name="Clear" xml:space="preserve">
     <value>Clear</value>
   </data>
@@ -176,6 +182,9 @@
   </data>
   <data name="Health" xml:space="preserve">
     <value>Health</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
