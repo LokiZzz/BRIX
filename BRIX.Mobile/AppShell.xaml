@@ -8,11 +8,53 @@
     xmlns:settings="clr-namespace:BRIX.Mobile.View.Settings"
     xmlns:localization="clr-namespace:BRIX.Mobile.Resources.Localizations"
     xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+    xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
     xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel"
     x:DataType="vm:AppShellVM"
-    BackgroundColor="{StaticResource BRIXDark}"
     FlyoutBackgroundColor="{StaticResource BRIXDark}"
-    Shell.DisabledColor="{StaticResource BRIXDim}">
+    Shell.UnselectedColor="{StaticResource BRIXLight}"
+    Shell.ForegroundColor="{StaticResource BRIXWhite}"
+    Shell.BackgroundColor="{StaticResource BRIXDark}">
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions="auto,*" x:DataType="controls:IconFontFlyoutItem">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource BRIXLight}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource BRIXMedium}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource BRIXWhite}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+
+                <Label 
+                    x:Name="FlyoutItemIcon"
+                    FontFamily="{Binding GlyphFont}"
+                    Text="{Binding Glyph}"
+                    TextColor="{Binding Source={x:Reference FlyoutItemLabel} ,Path=TextColor}"
+                    FontSize="30"
+                    Margin="20,10"/>
+                <Label 
+                    x:Name="FlyoutItemLabel"
+                    Grid.Column="1" 
+                    Text="{Binding Title}"
+                    FontFamily="Garamond"
+                    FontSize="24"
+                    VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
 
     <ShellContent 
         Title="{localization:Translate SignIn}"
@@ -21,7 +63,10 @@
         FlyoutItemIsVisible="False" 
         Shell.FlyoutBehavior="Disabled" />
 
-    <FlyoutItem Title="{localization:Translate Character}">
+    <controls:IconFontFlyoutItem 
+        Title="{localization:Translate Character}"
+        GlyphFont="AwesomeRPG"
+        Glyph="{x:Static icons:AwesomeRPG.CloakAndDagger}">
         <Tab
             Icon="{FontImage FontFamily=AwesomeRPG, Glyph={x:Static icons:AwesomeRPG.CloakAndDagger}}"
             Title="{localization:Translate CharacterTab}">
@@ -51,12 +96,15 @@
                 Route="CharacterDetailsPage"/>
         </Tab>
         
-    </FlyoutItem>
+    </controls:IconFontFlyoutItem>
 
-    <FlyoutItem Title="{localization:Translate Settings}">
+    <controls:IconFontFlyoutItem 
+        Title="{localization:Translate Settings}"
+        GlyphFont="Awesome"
+        Glyph="{x:Static icons:Awesome.Gear}">
         <ShellContent 
             Title="{localization:Translate Settings}"
             ContentTemplate="{DataTemplate settings:SettingsPage}"
             Route="SettingsPage" />
-    </FlyoutItem>
+    </controls:IconFontFlyoutItem>
 </Shell>

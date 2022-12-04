@@ -380,13 +380,6 @@
     </Style>
 
     <Style TargetType="Shell" ApplyToDerivedTypes="True">
-        <!--<Setter Property="Shell.BackgroundColor" Value="{StaticResource BRIXDark}" />
-        <Setter Property="Shell.ForegroundColor" Value="{StaticResource BRIXWhite}" />
-        <Setter Property="Shell.TitleColor" Value="{StaticResource BRIXWhite}" />
-        <Setter Property="Shell.DisabledColor" Value="{StaticResource BRIXMedium}" />
-        <Setter Property="Shell.UnselectedColor" Value="{StaticResource BRIXDark}" />
-        <Setter Property="Shell.FlyoutBackgroundColor" Value="{StaticResource BRIXDark}" />-->
-
         <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource BRIXWhite}" />
         <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource BRIXWhite}" />
         <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource BRIXLight}" />

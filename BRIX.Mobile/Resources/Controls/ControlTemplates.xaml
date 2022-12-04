@@ -6,9 +6,6 @@
              xmlns:account="clr-namespace:BRIX.Mobile.ViewModel.Account"
              x:Class="BRIX.Mobile.Resources.Controls.ControlTemplates">
 
-    <local:TitleView x:Key="TitleView"/>
-    <local:FramedEntry x:Key="FramedEntry"/>
-
     <ControlTemplate x:Key="BusyPageTemplate" x:DataType="vm:ViewModelBase">
         <Grid BindingContext="{Binding Source={RelativeSource TemplatedParent}}" >
             <ContentPresenter/>
