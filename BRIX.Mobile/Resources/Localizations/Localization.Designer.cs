@@ -70,6 +70,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tap arrow up to upgrade, swipe right to edit and swipe left to delete..
+        /// </summary>
+        public static string AbilitiesListHelpText {
+            get {
+                return ResourceManager.GetString("AbilitiesListHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
         public static string Add {
@@ -124,7 +133,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Characters.
+        ///   Looks up a localized string similar to Character list.
         /// </summary>
         public static string CharacterListPageTitle {
             get {
@@ -165,15 +174,6 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string CharacterTabInventory {
             get {
                 return ResourceManager.GetString("CharacterTabInventory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ok, hide message.
-        /// </summary>
-        public static string CharListHelpButton {
-            get {
-                return ResourceManager.GetString("CharListHelpButton", resourceCulture);
             }
         }
         
@@ -273,6 +273,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Help {
             get {
                 return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok, hide message.
+        /// </summary>
+        public static string HideTooltip {
+            get {
+                return ResourceManager.GetString("HideTooltip", resourceCulture);
             }
         }
         

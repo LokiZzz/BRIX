@@ -2,9 +2,91 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Characters"
+             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+             xmlns:lib="clr-namespace:BRIX.Library;assembly=BRIX.Library"
              x:Class="BRIX.Mobile.View.Characters.CharacterAbilitiesPage"
              x:DataType="vm:CharacterAbilitiesPageVM"
-             Title="CharacterAbilitiesPage">
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CharacterAbilitiesPageTitle}}">
+
+    <Shell.TitleView>
+        <controls:TitleView/>
+    </Shell.TitleView>
+
+    <Grid RowDefinitions="auto,auto,*" RowSpacing="10">
+        <Border Grid.Row="0" Style="{StaticResource BlockBorder}" Margin="10,0" IsVisible="{Binding ShowHelp}">
+            <VerticalStackLayout>
+                <Label Style="{StaticResource ParagraphTitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Help}}"/>
+                <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AbilitiesListHelpText}}"/>
+                <Button 
+                    Style="{StaticResource LightButton}" 
+                    HorizontalOptions="End" 
+                    Margin="0,20,0,0"
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.HideTooltip}}"
+                    Command="{Binding HideHelpCommand}"/>
+            </VerticalStackLayout>
+        </Border>
+
+        <Grid Grid.Row="2">
+            <CollectionView
+                x:Name="listView"
+                ItemsSource="{Binding Abilities}"
+                HorizontalOptions="Fill">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="lib:Ability">
+                        <SwipeView Threshold="130">
+                            <SwipeView.LeftItems>
+                                <SwipeItems Mode="Execute">
+                                    <SwipeItemView
+                                        Command="{Binding Source={x:Reference listView}, Path= BindingContext.EditCommand}"
+                                        CommandParameter="{Binding}">
+                                        <Border Style="{StaticResource SwipeViewBorder}">
+                                            <Label Style="{StaticResource SwipeViewLabel}" Text="{x:Static icons:Awesome.SquarePen}"/>
+                                        </Border>
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Execute">
+                                    <SwipeItemView
+                                        Command="{Binding Source={x:Reference listView}, Path= BindingContext.RemoveCommand}"
+                                        CommandParameter="{Binding}">
+                                        <Border Style="{StaticResource SwipeViewBorder}">
+                                            <Label Style="{StaticResource SwipeViewLabel}" Text="{x:Static icons:Awesome.Skull}" TextColor="{StaticResource BRIXRed}"/>
+                                        </Border>
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Grid>
+                                <Border Style="{StaticResource BlockBorder}" HeightRequest="75">
+                                    <Label Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
+                                </Border>
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference listView}, Path= BindingContext.SelectCommand}" CommandParameter="{Binding .}"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <Button
+            Grid.Row="1"
+            Style="{StaticResource LightButton}" 
+            BackgroundColor="{StaticResource BRIXDark}"
+            CornerRadius="10" 
+            HeightRequest="75"
+            FontFamily="Awesome"
+            FontSize="36"
+            Text="{x:Static icons:Awesome.CirclePlus}"
+            Command="{Binding AddCommand}"/>
+
+    </Grid>
+
 </ContentPage>

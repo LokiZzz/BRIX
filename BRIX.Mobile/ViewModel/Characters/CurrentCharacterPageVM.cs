@@ -141,7 +141,11 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             PlayerHaveCharacter = Character != null;
 
-            if (PlayerHaveCharacter) UpdateExpCards();
+            if (PlayerHaveCharacter)
+            {
+                UpdateExpCards();
+                await _characterService.SelectCurrentCharacter(Character.InternalModel);
+            }
         }
 
         /// <summary>

@@ -120,6 +120,9 @@
   <data name="Abilities" xml:space="preserve">
     <value>Abilities</value>
   </data>
+  <data name="AbilitiesListHelpText" xml:space="preserve">
+    <value>Tap arrow up to upgrade, swipe right to edit and swipe left to delete.</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>New</value>
   </data>
@@ -139,7 +142,7 @@
     <value>Abilities</value>
   </data>
   <data name="CharacterListPageTitle" xml:space="preserve">
-    <value>Characters</value>
+    <value>Character list</value>
   </data>
   <data name="CharacterTab" xml:space="preserve">
     <value>Character</value>
@@ -152,9 +155,6 @@
   </data>
   <data name="CharacterTabInventory" xml:space="preserve">
     <value>Inventory</value>
-  </data>
-  <data name="CharListHelpButton" xml:space="preserve">
-    <value>Ok, hide message</value>
   </data>
   <data name="CharListHelpText" xml:space="preserve">
     <value>Tap to select, swipe right to edit and swipe left to delete.</value>
@@ -188,6 +188,9 @@
   </data>
   <data name="Help" xml:space="preserve">
     <value>Help</value>
+  </data>
+  <data name="HideTooltip" xml:space="preserve">
+    <value>Ok, hide message</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>

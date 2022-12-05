@@ -17,5 +17,6 @@ namespace BRIX.Mobile.Settings
     public static class Help
     {
         public const string ShowCharactersListHelp = nameof(ShowCharactersListHelp);
+        public const string ShowAbilitiesListHelp = nameof(ShowAbilitiesListHelp);
     }
 }

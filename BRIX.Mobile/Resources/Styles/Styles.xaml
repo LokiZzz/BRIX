@@ -440,4 +440,21 @@
         <Setter Property="Opacity" Value=".75"/>
     </Style>
 
+    <Style TargetType="Label" x:Key="SwipeViewLabel">
+        <Setter Property="TextColor" Value="{StaticResource BRIXLime}"/>
+        <Setter Property="FontFamily" Value="Awesome"/>
+        <Setter Property="FontSize" Value="48"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+    </Style>
+    
+    <Style TargetType="Border" x:Key="SwipeViewBorder" BasedOn="{StaticResource BlockBorder}">
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="WidthRequest" Value="80"/>
+        <Setter Property="HeightRequest" Value="80"/>
+    </Style>
+
 </ResourceDictionary>
