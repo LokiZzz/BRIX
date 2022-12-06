@@ -214,6 +214,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the ability?.
+        /// </summary>
+        public static string DeleteAbilityQuestion {
+            get {
+                return ResourceManager.GetString("DeleteAbilityQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the character?.
         /// </summary>
         public static string DeleteCharacterQuestion {

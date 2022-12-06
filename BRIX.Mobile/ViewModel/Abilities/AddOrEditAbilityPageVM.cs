@@ -1,4 +1,8 @@
-﻿using BRIX.Mobile.ViewModel.Base;
+﻿using BRIX.Library;
+using BRIX.Library.Characters;
+using BRIX.Mobile.Services.Navigation;
+using BRIX.Mobile.ViewModel.Base;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +11,26 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {
-    public partial class AddOrEditAbilityPageVM : ViewModelBase
+    public partial class AddOrEditAbilityPageVM : ViewModelBase, IQueryAttributable
     {
+        [ObservableProperty]
+        private Ability _ability;
+
+        [ObservableProperty]
+        private EAbilityEditMode _mode;
+
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            Ability = query.GetParameterOrDefault<Ability>(NavigationParameters.Ability);
+            Mode = query.GetParameterOrDefault<EAbilityEditMode>(NavigationParameters.EditMode);
+        }
+    }
+
+    public enum EAbilityEditMode
+    {
+        None = 0,
+        Add = 1,
+        Edit = 2,
+        Upgrade = 3
     }
 }

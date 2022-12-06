@@ -441,7 +441,7 @@
     </Style>
 
     <Style TargetType="Label" x:Key="SwipeViewLabel">
-        <Setter Property="TextColor" Value="{StaticResource BRIXLime}"/>
+        <Setter Property="TextColor" Value="{StaticResource BRIXWhite}"/>
         <Setter Property="FontFamily" Value="Awesome"/>
         <Setter Property="FontSize" Value="48"/>
         <Setter Property="VerticalOptions" Value="Center"/>
@@ -451,6 +451,7 @@
     </Style>
     
     <Style TargetType="Border" x:Key="SwipeViewBorder" BasedOn="{StaticResource BlockBorder}">
+        <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
         <Setter Property="VerticalOptions" Value="Center"/>
         <Setter Property="HorizontalOptions" Value="Center"/>
         <Setter Property="WidthRequest" Value="80"/>

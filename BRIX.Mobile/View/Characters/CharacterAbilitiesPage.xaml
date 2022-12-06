@@ -8,14 +8,26 @@
              xmlns:lib="clr-namespace:BRIX.Library;assembly=BRIX.Library"
              x:Class="BRIX.Mobile.View.Characters.CharacterAbilitiesPage"
              x:DataType="vm:CharacterAbilitiesPageVM"
-             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CharacterAbilitiesPageTitle}}">
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CharacterAbilitiesPageTitle}}"
+             Padding="0">
 
+    <ContentPage.Resources>
+        <Style TargetType="Border" x:Key="AbilitiesSwipeViewBorder" BasedOn="{StaticResource SwipeViewBorder}">
+            <Setter Property="WidthRequest" Value="60"/>
+            <Setter Property="HeightRequest" Value="60"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+        <Style TargetType="Label" x:Key="AbilitiesSwipeViewLabel" BasedOn="{StaticResource SwipeViewLabel}">
+            <Setter Property="FontSize" Value="36"/>
+        </Style>
+    </ContentPage.Resources>
+    
     <Shell.TitleView>
         <controls:TitleView/>
     </Shell.TitleView>
 
     <Grid RowDefinitions="auto,auto,*" RowSpacing="10">
-        <Border Grid.Row="0" Style="{StaticResource BlockBorder}" Margin="10,0" IsVisible="{Binding ShowHelp}">
+        <Border Grid.Row="0" Style="{StaticResource BlockBorder}" Margin="10" IsVisible="{Binding ShowHelp}">
             <VerticalStackLayout>
                 <Label Style="{StaticResource ParagraphTitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Help}}"/>
                 <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AbilitiesListHelpText}}"/>
@@ -38,14 +50,14 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="lib:Ability">
-                        <SwipeView Threshold="130">
+                        <SwipeView Threshold="100">
                             <SwipeView.LeftItems>
                                 <SwipeItems Mode="Execute">
                                     <SwipeItemView
                                         Command="{Binding Source={x:Reference listView}, Path= BindingContext.EditCommand}"
                                         CommandParameter="{Binding}">
-                                        <Border Style="{StaticResource SwipeViewBorder}">
-                                            <Label Style="{StaticResource SwipeViewLabel}" Text="{x:Static icons:Awesome.SquarePen}"/>
+                                        <Border Style="{StaticResource AbilitiesSwipeViewBorder}">
+                                            <Label Style="{StaticResource AbilitiesSwipeViewLabel}" Text="{x:Static icons:Awesome.SquarePen}"/>
                                         </Border>
                                     </SwipeItemView>
                                 </SwipeItems>
@@ -55,13 +67,13 @@
                                     <SwipeItemView
                                         Command="{Binding Source={x:Reference listView}, Path= BindingContext.RemoveCommand}"
                                         CommandParameter="{Binding}">
-                                        <Border Style="{StaticResource SwipeViewBorder}">
-                                            <Label Style="{StaticResource SwipeViewLabel}" Text="{x:Static icons:Awesome.Skull}" TextColor="{StaticResource BRIXRed}"/>
+                                        <Border Style="{StaticResource AbilitiesSwipeViewBorder}">
+                                            <Label Style="{StaticResource AbilitiesSwipeViewLabel}" Text="{x:Static icons:Awesome.Skull}" TextColor="{StaticResource BRIXRed}"/>
                                         </Border>
                                     </SwipeItemView>
                                 </SwipeItems>
                             </SwipeView.RightItems>
-                            <Grid>
+                            <Grid Margin="10,0">
                                 <Border Style="{StaticResource BlockBorder}" HeightRequest="75">
                                     <Label Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
                                 </Border>
@@ -84,6 +96,7 @@
             HeightRequest="75"
             FontFamily="Awesome"
             FontSize="36"
+            Margin="10,0"
             Text="{x:Static icons:Awesome.CirclePlus}"
             Command="{Binding AddCommand}"/>
 

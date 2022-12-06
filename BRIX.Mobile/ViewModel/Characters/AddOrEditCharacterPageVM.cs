@@ -40,10 +40,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            if (query.ContainsKey(NavigationParameters.Character))
-            {
-                Character = query[NavigationParameters.Character] as CharacterModel;
-            }
+            Character = query.GetParameterOrDefault<CharacterModel>(NavigationParameters.Character);
         }
     }
 }

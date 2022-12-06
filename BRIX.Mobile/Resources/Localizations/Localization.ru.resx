@@ -168,6 +168,9 @@
   <data name="CurrentCharacterPageTitle" xml:space="preserve">
     <value>Персонаж</value>
   </data>
+  <data name="DeleteAbilityQuestion" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить способность?</value>
+  </data>
   <data name="DeleteCharacterQuestion" xml:space="preserve">
     <value>Вы уверены, что хотите удалить этого персонажа?</value>
   </data>
