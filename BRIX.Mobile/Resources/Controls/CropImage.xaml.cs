@@ -9,11 +9,11 @@ public partial class CropImage : Grid
         InitializeComponent();
     }
 
-    public static readonly BindableProperty ZoomProperty = BindableProperty.Create(nameof(Zoom), typeof(Shape), typeof(CropImage));
-    public Shape Zoom
+    public static readonly BindableProperty CropBoundsProperty = BindableProperty.Create(nameof(CropBounds), typeof(Shape), typeof(CropImage), null, BindingMode.TwoWay);
+    public Shape CropBounds
     {
-        get => (Shape)GetValue(ZoomProperty);
-        set => SetValue(ZoomProperty, value);
+        get => (Shape)GetValue(CropBoundsProperty);
+        set => SetValue(CropBoundsProperty, value);
     }
 
     public static readonly BindableProperty SourceProperty = BindableProperty.Create(nameof(Source), typeof(ImageSource), typeof(CropImage));
@@ -23,32 +23,32 @@ public partial class CropImage : Grid
         set => SetValue(SourceProperty, value);
     }
 
-    public static readonly BindableProperty SelectionProperty = BindableProperty.Create(nameof(Selection), typeof(Geometry), typeof(CropImage));
-    public Geometry Selection
+    public static readonly BindableProperty ClipGeometryProperty = BindableProperty.Create(nameof(ClipGeometry), typeof(Geometry), typeof(CropImage));
+    public Geometry ClipGeometry
     {
-        get => (Geometry)GetValue(SelectionProperty);
-        set => SetValue(SelectionProperty, value);
+        get => (Geometry)GetValue(ClipGeometryProperty);
+        set => SetValue(ClipGeometryProperty, value);
     }
 
-    private Geometry Map(Shape shape)
+    private void OnCropBoundsUpdated(object sender, Shape cropBounds)
+    {
+        ClipGeometry = Map(cropBounds);
+    }
+
+    Geometry Map(Shape shape)
     {
         switch (shape)
         {
             case Rectangle rectangle:
                 Rect rect = new Rect(
-                    rectangle.X + rectangle.TranslationX,
-                    rectangle.Y + rectangle.TranslationY,
-                    rectangle.Width * rectangle.Scale,
-                    rectangle.Height * rectangle.Scale);
+                    rectangle.Frame.X + rectangle.TranslationX,
+                    rectangle.Frame.Y + rectangle.TranslationY,
+                    rectangle.Frame.Width * rectangle.Scale,
+                    rectangle.Frame.Height * rectangle.Scale);
                 return new RectangleGeometry(rect);
 
-            default: 
+            default:
                 return null;
         }
-    }
-
-    private void OnZoomUpdated(object sender, Shape zoom)
-    {
-        Selection = Map(zoom);
     }
 }

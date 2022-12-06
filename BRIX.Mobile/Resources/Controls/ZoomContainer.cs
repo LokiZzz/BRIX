@@ -1,4 +1,3 @@
-using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Shapes;
 
 namespace BRIX.Mobile.Resources.Controls;
@@ -28,7 +27,7 @@ public class ZoomContainer : ContentView
         set => SetValue(AreaProperty, value);
     }
 
-    public event EventHandler<Shape> ZoomUpdated;
+    public event EventHandler<Shape> CropBoundsUpdated;
 
     void OnPinchUpdated(object sender, PinchGestureUpdatedEventArgs e)
     {
@@ -67,14 +66,11 @@ public class ZoomContainer : ContentView
                 double targetY = yOffset - (originY * Content.Height) * (currentScale - startScale);
 
                 // Apply translation based on the change in origin.
-                var newXPosition = Math.Clamp(Content.X + xOffset + targetX, Area.Frame.Left, Area.Frame.Right - Content.Width * Content.Scale);
-                var newYPosition = Math.Clamp(Content.Y + yOffset + targetY, Area.Frame.Top, Area.Frame.Bottom - Content.Height * Content.Scale);
-                Content.TranslationX = newXPosition - Content.X;
-                Content.TranslationY = newYPosition - Content.Y;
-
+                UpdateTranslation(xOffset + targetX, yOffset + targetY);
+                
                 // Apply scale factor
                 Content.Scale = currentScale;
-                ZoomUpdated?.Invoke(this, Content as Shape);
+                CropBoundsUpdated?.Invoke(this, Content as Shape);
                 break;
 
             case GestureStatus.Completed:
@@ -85,17 +81,23 @@ public class ZoomContainer : ContentView
         }
     }
 
+    void UpdateTranslation(double xOffset, double yOffset)
+    {
+        // Translate and ensure we don't pan beyond the wrapped user interface element bounds.
+        var newXPosition = Math.Clamp(Content.X + xOffset, Area.Frame.Left, Math.Max(0, Area.Frame.Right - Content.Width * Content.Scale));
+        var newYPosition = Math.Clamp(Content.Y + yOffset, Area.Frame.Top, Math.Max(0, Area.Frame.Bottom - Content.Height * Content.Scale));
+        Content.TranslationX = newXPosition - Content.X;
+        Content.TranslationY = newYPosition - Content.Y;
+    }
+
     void OnPanUpdated(object sender, PanUpdatedEventArgs e)
     {
         switch (e.StatusType)
         {
             case GestureStatus.Running:
-                // Translate and ensure we don't pan beyond the wrapped user interface element bounds.
-                var newXPosition = Math.Clamp(Content.X + xOffset + e.TotalX, Area.Frame.Left, Area.Frame.Right - Content.Width * Content.Scale);
-                var newYPosition = Math.Clamp(Content.Y + yOffset + e.TotalY, Area.Frame.Top, Area.Frame.Bottom - Content.Height * Content.Scale);
-                Content.TranslationX = newXPosition - Content.X;
-                Content.TranslationY = newYPosition - Content.Y;
-                ZoomUpdated?.Invoke(this, Content as Shape);
+
+                UpdateTranslation(xOffset + e.TotalX, yOffset + e.TotalY);
+                CropBoundsUpdated?.Invoke(this, Content as Shape);
                 break;
 
             case GestureStatus.Completed:

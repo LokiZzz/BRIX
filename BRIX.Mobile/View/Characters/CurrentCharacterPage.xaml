@@ -10,19 +10,7 @@
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Character}}">
 
-    <Grid>
-        <controls:CropImage Source="fox_character_moq.jpeg">
-            <controls:CropImage.Zoom>
-                <Rectangle
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
-                        HeightRequest="100"
-                        WidthRequest="100"/>
-            </controls:CropImage.Zoom>
-        </controls:CropImage>
-    </Grid>
-
-    <!--<ContentPage.Resources>
+    <ContentPage.Resources>
         <Style TargetType="Border" x:Key="NameLevelBorder">
             <Setter Property="StrokeShape" Value="RoundRectangle 5"/>
             <Setter Property="StrokeThickness" Value="0"/>
@@ -63,7 +51,7 @@
 
     <ScrollView>
         <Grid>
-            --><!--In case of empty character pool--><!--
+            <!--In case of empty character pool-->
             <Grid 
                 IsVisible="{Binding PlayerHaveCharacter, Converter={StaticResource NotConverter}}"
                 RowDefinitions="*,*,auto">
@@ -82,7 +70,7 @@
                 <Button Grid.Row="2" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CreateNewCharacter}}" Command="{Binding CreateCommand}" Margin="0,0,0,10"/>
             </Grid>
         
-            --><!--In case of player have at leatst one character--><!--
+            <!--In case of player have at leatst one character-->
             <VerticalStackLayout IsVisible="{Binding PlayerHaveCharacter}" Spacing="10">
                 <Border 
                     Style="{StaticResource BlockBorder}"
@@ -210,5 +198,5 @@
 
             </VerticalStackLayout>
         </Grid>
-    </ScrollView>-->
+    </ScrollView>
 </ContentPage>

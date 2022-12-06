@@ -5,22 +5,17 @@
       x:Class="BRIX.Mobile.Resources.Controls.CropImage"
       x:Name="this">
 
-    <Grid.RowDefinitions>
-        <RowDefinition/>
-        <RowDefinition/>
-    </Grid.RowDefinitions>
-    
     <Image x:Name="Image" 
            Source="{Binding Source={x:Reference this}, Path=Source}" 
            Aspect="AspectFill"
            Opacity="0.15"/>
 
-    <local:ZoomContainer Area="{x:Reference Image}" 
-                         Content="{Binding Source={x:Reference this}, Path=Zoom}"
-                         ZoomUpdated="OnZoomUpdated"/>
-
     <Image Source="{Binding Source={x:Reference this}, Path=Source}" 
            Aspect="AspectFill"
-           Clip="{Binding Source={x:Reference this}, Path=Selection}">
+           Clip="{Binding Source={x:Reference this}, Path=ClipGeometry}">
     </Image>
+
+    <local:ZoomContainer Area="{x:Reference Image}" 
+                         Content="{Binding Source={x:Reference this}, Path=CropBounds}"
+                         CropBoundsUpdated="OnCropBoundsUpdated"/>
 </Grid>
