@@ -33,7 +33,7 @@ namespace BRIX.Mobile.ViewModel.Base
             TPopup popupToShow = ServicePool.GetService<TPopup>();
             ParametrizedPopupVMBase<TParams> viewModel = 
                 popupToShow.BindingContext as ParametrizedPopupVMBase<TParams>;
-            viewModel.PassInParameters = parameters;
+            viewModel.Parameters = parameters;
             object result = await Application.Current.MainPage.ShowPopupAsync(popupToShow);
 
             return (TResult)result;

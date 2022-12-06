@@ -1,10 +1,12 @@
 ﻿using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
+using BRIX.Mobile.View.Abilities;
 using BRIX.Mobile.View.Account;
 using BRIX.Mobile.View.Characters;
 using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.View.Settings;
 using BRIX.Mobile.ViewModel;
+using BRIX.Mobile.ViewModel.Abilities;
 using BRIX.Mobile.ViewModel.Account;
 using BRIX.Mobile.ViewModel.Characters;
 using BRIX.Mobile.ViewModel.Popups;
@@ -57,11 +59,13 @@ public static class MauiProgram
         builder.RegisterView<CharacterDetailsPage, CharacterDetailsPageVM>(false);
         builder.RegisterView<CharacterListPage, CharacterListPageVM>();
         builder.RegisterView<AddOrEditCharacterPage, AddOrEditCharacterPageVM>();
+        builder.RegisterView<AddOrEditAbilityPage, AddOrEditAbilityPageVM>();
 
         builder.RegisterView<SettingsPage, SettingsPageVM>(false);
         builder.RegisterView<SelectLanguagePage, SelectLanguagePageVM>();
 
         builder.RegisterPopup<NumericEditorPopup, NumericEditorPopupVM>();
+        builder.RegisterPopup<QuestionPopup, QuestionPopupVM>();
     }
 
     /// <param name="registerRoute"> Set false if view already registered in AppShell.xaml </param>

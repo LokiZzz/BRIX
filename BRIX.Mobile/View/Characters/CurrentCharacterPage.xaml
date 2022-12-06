@@ -8,22 +8,11 @@
              x:DataType="vm:CurrentCharacterPageVM"
              x:Name="CharacterContentPage"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
-             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Character}}">
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Character}}" Padding="0">
 
     <ContentPage.Resources>
-        <Style TargetType="Border" x:Key="NameLevelBorder">
-            <Setter Property="StrokeShape" Value="RoundRectangle 5"/>
-            <Setter Property="StrokeThickness" Value="0"/>
-            <Setter Property="BackgroundColor" Value="{StaticResource BRIXMedium}"/>
-            <Setter Property="Opacity" Value=".75"/>
-        </Style>
-        <Style TargetType="Button" x:Key="CardActionButton">
-            <Setter Property="FontFamily" Value="Awesome"/>
-            <Setter Property="Text" Value="{x:Static icons:Awesome.Calculator}"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="WidthRequest" Value="35"/>
-            <Setter Property="HeightRequest" Value="35"/>
-            <Setter Property="Padding" Value="0"/>
+        <Style TargetType="Border" x:Key="CurrentCharacterBlockBorder" BasedOn="{StaticResource BlockBorder}">
+            <Setter Property="Margin" Value="10,0"/>
         </Style>
     </ContentPage.Resources>
     
@@ -35,13 +24,13 @@
                 Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Character}}"/>
 
             <HorizontalStackLayout Grid.Column="1" Spacing="10" IsVisible="{Binding PlayerHaveCharacter}">
-                <Button Style="{StaticResource CardActionButton}"  
+                <Button Style="{StaticResource SquareIconButton}"  
                     Text="{x:Static icons:Awesome.SquarePen}"
                     Command="{Binding EditCommand}"/>
-                <Button Style="{StaticResource CardActionButton}" Grid.Column="1" 
+                <Button Style="{StaticResource SquareIconButton}" Grid.Column="1" 
                     Text="{x:Static icons:Awesome.PeopleArrows}"
                     Command="{Binding SwitchCommand}"/>
-                <Button Style="{StaticResource CardActionButton}" Grid.Column="1" 
+                <Button Style="{StaticResource SquareIconButton}" Grid.Column="1" 
                     Text="{x:Static icons:Awesome.Skull}"
                     Command="{Binding KillThemAllCommand}"/>
             </HorizontalStackLayout>
@@ -73,7 +62,7 @@
             <!--In case of player have at leatst one character-->
             <VerticalStackLayout IsVisible="{Binding PlayerHaveCharacter}" Spacing="10">
                 <Border 
-                    Style="{StaticResource BlockBorder}"
+                    Style="{StaticResource CurrentCharacterBlockBorder}"
                     HeightRequest="250" 
                     StrokeShape="RoundRectangle 10,50,50,10">
                     <Grid Margin="-20">
@@ -83,11 +72,11 @@
                             Aspect="AspectFill"/>
                         <Grid Margin="10" RowDefinitions="*,*">
                             <Grid Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
-                                <Border Style="{StaticResource NameLevelBorder}" Margin="-10,-5"/>
+                                <Border Style="{StaticResource TransparentBorder}" Margin="-10,-5"/>
                                 <Label Style="{StaticResource TitleLabel}" Text="{Binding Character.Name}" />
                             </Grid>
                             <Grid Grid.Row="1" VerticalOptions="End" HorizontalOptions="End" Padding="10,5">
-                                <Border Style="{StaticResource NameLevelBorder}" Margin="-10,-5"/>
+                                <Border Style="{StaticResource TransparentBorder}" Margin="-10,-5"/>
                                 <Label Style="{StaticResource TitleLabel}" Text="{lcz:Format ValuePath=Character.Level, FormatPath={x:Static lcz:LocalizationKeys.LevelFormat}}"/>
                             </Grid>
                         </Grid>
@@ -104,7 +93,7 @@
                     </Grid>
                 </Border>
 
-                <Border Style="{StaticResource BlockBorder}">
+                <Border Style="{StaticResource CurrentCharacterBlockBorder}">
                     <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Health}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
                         <Label Grid.Row="0" Grid.Column="1" Margin="0,0,15,0" VerticalTextAlignment="Center">
@@ -118,11 +107,11 @@
                         </Label>
                         <HorizontalStackLayout Grid.Row="0" Grid.Column="2" Spacing="10">
                             <Button
-                                Style="{StaticResource CardActionButton}"
+                                Style="{StaticResource SquareIconButton}"
                                 Text="{x:Static icons:Awesome.HeartCirclePlus}"
                                 Command="{Binding RestoreHealthCommand}"/>
                             <Button
-                                Style="{StaticResource CardActionButton}"
+                                Style="{StaticResource SquareIconButton}"
                                 Command="{Binding EditHealthCommand}"/>
                         </HorizontalStackLayout>
                         
@@ -146,12 +135,19 @@
                     </Grid>
                 </Border>
 
-                <CarouselView ItemsSource="{Binding ExpCards}" Margin="-15,0" Loop="False" IndicatorView="experienceCarouselIndicator">
+                <CarouselView ItemsSource="{Binding ExpCards}" Loop="False" IndicatorView="experienceCarouselIndicator">
+                    <CarouselView.ItemsLayout>
+                        <LinearItemsLayout 
+                            Orientation="Horizontal" 
+                            ItemSpacing="20" 
+                            SnapPointsAlignment="Start" 
+                            SnapPointsType="MandatorySingle"/>
+                    </CarouselView.ItemsLayout>
                     <CarouselView.ItemTemplate>
                         <DataTemplate x:DataType="vm:ExperienceInfoVM">
-                            <Border Style="{StaticResource BlockBorder}" Margin="15,0">
+                            <Border Style="{StaticResource BlockBorder}">
                                 <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
-                                    <Label Text="{Binding Title}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
+                                    <Label Text="{Binding Title}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="0" Grid.Column="1" Margin="0,0,15,0" VerticalTextAlignment="Center">
                                         <Label.FormattedText>
                                             <FormattedString>
@@ -163,7 +159,7 @@
                                     </Label>
                                     <Button 
                                         Grid.Row="0" Grid.Column="2" 
-                                        Style="{StaticResource CardActionButton}"
+                                        Style="{StaticResource SquareIconButton}"
                                         FontFamily="{Binding IconFont}"
                                         Text="{Binding Icon}" 
                                         Command="{Binding DoCardActionCommand}"/>
@@ -184,13 +180,13 @@
                     SelectedIndicatorColor="{StaticResource BRIXWhite}"
                     HorizontalOptions="Center"/>
 
-                <Border Style="{StaticResource BlockBorder}">
+                <Border Style="{StaticResource CurrentCharacterBlockBorder}">
                     <Grid RowDefinitions="auto,auto,auto,auto" ColumnDefinitions="*,auto,auto">
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Tags}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
                     </Grid>
                 </Border>
 
-                <Border Style="{StaticResource BlockBorder}">
+                <Border Style="{StaticResource CurrentCharacterBlockBorder}">
                     <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Abilities}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
                     </Grid>

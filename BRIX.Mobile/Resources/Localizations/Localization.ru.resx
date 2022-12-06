@@ -120,6 +120,9 @@
   <data name="Abilities" xml:space="preserve">
     <value>Способности</value>
   </data>
+  <data name="AbilitiesListHelpText" xml:space="preserve">
+    <value>Сдвиньте карточку способности вправо, чтобы редактировать способность или сдвиньте карточку влево, чтобы её удалить. Кнопка со стрелкой вверх позволяет улучшить способность.</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>Добавить</value>
   </data>
@@ -139,7 +142,7 @@
     <value>Способности</value>
   </data>
   <data name="CharacterListPageTitle" xml:space="preserve">
-    <value>Персонажи</value>
+    <value>Список персонажей</value>
   </data>
   <data name="CharacterTab" xml:space="preserve">
     <value>Персонаж</value>
@@ -153,6 +156,9 @@
   <data name="CharacterTabInventory" xml:space="preserve">
     <value>Инвентарь</value>
   </data>
+  <data name="CharListHelpText" xml:space="preserve">
+    <value>Коснитесь карточки персонажа, чтобы выбрать его, сдвиньте карточку вправо, чтобы редактировать персонажа или сдвиньте карточку влево, чтобы его удалить.</value>
+  </data>
   <data name="Clear" xml:space="preserve">
     <value>Очистить</value>
   </data>
@@ -161,6 +167,9 @@
   </data>
   <data name="CurrentCharacterPageTitle" xml:space="preserve">
     <value>Персонаж</value>
+  </data>
+  <data name="DeleteCharacterQuestion" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить этого персонажа?</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Править</value>
@@ -177,6 +186,12 @@
   <data name="Health" xml:space="preserve">
     <value>Здоровье</value>
   </data>
+  <data name="Help" xml:space="preserve">
+    <value>Помощь</value>
+  </data>
+  <data name="HideTooltip" xml:space="preserve">
+    <value>Скрыть подсказку</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Язык</value>
   </data>
@@ -188,6 +203,9 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>Имя</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Нет</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
@@ -230,5 +248,11 @@
   </data>
   <data name="Tags" xml:space="preserve">
     <value>Тэги</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Внимание</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
   </data>
 </root>

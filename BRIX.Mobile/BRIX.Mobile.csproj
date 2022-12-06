@@ -66,7 +66,7 @@
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#16161A" />
 		
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#16161A" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#16161A" BaseSize="32,32" />
 		
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -119,6 +119,9 @@
 	  <MauiXaml Update="Resources\Converters\ConvertersCollection.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\AddOrEditAbilityPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\Characters\CharacterAbilitiesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -129,6 +132,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Popups\NumericEditorPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Popups\QuestionPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Settings\SelectLanguagePage.xaml">
@@ -159,6 +165,12 @@
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>Localization.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Abilities\AddOrEditAbilityPage.xaml.cs">
+	    <DependentUpon>AddOrEditAbilityPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Characters\AddOrEditCharacterPage.xaml.cs">
+	    <DependentUpon>AddOrEditCharacterPage.xaml</DependentUpon>
 	  </Compile>
     <Compile Update="Resources\Controls\ZoomContainer.cs">
       <DependentUpon>CropImage.xaml</DependentUpon>

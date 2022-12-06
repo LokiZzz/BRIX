@@ -13,4 +13,10 @@ namespace BRIX.Mobile.Settings
         public const string Password = nameof(Password);
         public const string Culture = nameof(Culture);
     }
+
+    public static class Help
+    {
+        public const string ShowCharactersListHelp = nameof(ShowCharactersListHelp);
+        public const string ShowAbilitiesListHelp = nameof(ShowAbilitiesListHelp);
+    }
 }

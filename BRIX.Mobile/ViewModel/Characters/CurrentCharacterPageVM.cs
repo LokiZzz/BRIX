@@ -10,12 +10,7 @@ using BRIX.Mobile.ViewModel.Popups;
 using BRIX.Mobile.Resources.Localizations;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
@@ -132,17 +127,24 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         public override async Task OnNavigatedAsync()
         {
-            List<Character> characters = await _characterService.GetAllAsync();
-            PlayerHaveCharacter = characters.Any();
+            Character character = await _characterService.GetCurrentCharacter();
 
-            if (PlayerHaveCharacter)
+            if(character != null)
             {
-                Character = new CharacterModel(characters.FirstOrDefault());
-                UpdateExpCards();
+                Character = new CharacterModel(character);
             }
             else
             {
-                Character = null;
+                List<Character> characters = await _characterService.GetAllAsync();
+                Character = characters.Any() ? new CharacterModel(characters.First()) : null;
+            }
+
+            PlayerHaveCharacter = Character != null;
+
+            if (PlayerHaveCharacter)
+            {
+                UpdateExpCards();
+                await _characterService.SelectCurrentCharacter(Character.InternalModel);
             }
         }
 

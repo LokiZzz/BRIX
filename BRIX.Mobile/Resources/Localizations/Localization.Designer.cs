@@ -70,6 +70,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tap arrow up to upgrade, swipe right to edit and swipe left to delete..
+        /// </summary>
+        public static string AbilitiesListHelpText {
+            get {
+                return ResourceManager.GetString("AbilitiesListHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
         public static string Add {
@@ -124,7 +133,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Characters.
+        ///   Looks up a localized string similar to Character list.
         /// </summary>
         public static string CharacterListPageTitle {
             get {
@@ -169,6 +178,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tap to select, swipe right to edit and swipe left to delete..
+        /// </summary>
+        public static string CharListHelpText {
+            get {
+                return ResourceManager.GetString("CharListHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
         public static string Clear {
@@ -192,6 +210,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string CurrentCharacterPageTitle {
             get {
                 return ResourceManager.GetString("CurrentCharacterPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the character?.
+        /// </summary>
+        public static string DeleteCharacterQuestion {
+            get {
+                return ResourceManager.GetString("DeleteCharacterQuestion", resourceCulture);
             }
         }
         
@@ -241,6 +268,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        public static string Help {
+            get {
+                return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok, hide message.
+        /// </summary>
+        public static string HideTooltip {
+            get {
+                return ResourceManager.GetString("HideTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Language {
@@ -273,6 +318,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
             }
         }
         
@@ -399,6 +453,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Tags {
             get {
                 return ResourceManager.GetString("Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        public static string Warning {
+            get {
+                return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }
