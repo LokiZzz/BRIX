@@ -111,8 +111,6 @@ namespace BRIX.Mobile.Models.Characters
         public int SpentExperience => InternalModel.SpentExp;
 
         public int FreeExperience => Experience - InternalModel.SpentExp;
-
-        public string ImagePath => "fox_character_moq.jpeg";
     }
 
     public enum EHealthState
