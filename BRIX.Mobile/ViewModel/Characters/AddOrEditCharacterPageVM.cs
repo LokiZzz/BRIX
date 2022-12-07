@@ -5,8 +5,6 @@ using BRIX.Mobile.View.Characters;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Linq;
-using CharacterBM = BRIX.Library.Characters.Character;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
@@ -36,6 +34,12 @@ namespace BRIX.Mobile.ViewModel.Characters
             }
 
             await Navigation.Back();
+        }
+
+        [RelayCommand]
+        public async Task EditImage()
+        {
+            await Navigation.NavigateAsync<AddOrEditCharacterImagePage>((NavigationParameters.Character, Character));
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)

@@ -12,6 +12,7 @@ namespace BRIX.Mobile.Services
         Task<List<T>> ReadJsonCollectionAsync<T>(string fileName, JsonSerializerOptions options = default) where T : class, new();
         Task WriteJsonAsync<T>(string fileName, T collection, JsonSerializerOptions options = default) where T : class, new();
         Task WriteJsonCollectionAsync<T>(string fileName, List<T> collection, JsonSerializerOptions options = default) where T : class, new();
+        Task<string> CopyFileAsync(FileResult file);
     }
 
     public class LocalStorage : ILocalStorage
@@ -74,6 +75,20 @@ namespace BRIX.Mobile.Services
         {
             string json = JsonSerializer.Serialize(collection, options);
             await WriteAllTextAsync(path, json);
+        }
+
+        public async Task<string> CopyFileAsync(FileResult file)
+        {
+            string ext = Path.GetExtension(file.FullPath);
+            Guid guid = Guid.NewGuid();
+            string filePath = Path.Combine(FileSystem.AppDataDirectory, guid.ToString(), ext);
+
+            using (Stream sourceStream = await file.OpenReadAsync())
+            using (FileStream fs = File.OpenWrite(filePath))
+            {
+                await sourceStream.CopyToAsync(fs);
+                return filePath;
+            }
         }
     }
 }
