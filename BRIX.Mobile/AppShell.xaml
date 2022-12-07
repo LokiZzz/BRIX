@@ -14,7 +14,8 @@
     FlyoutBackgroundColor="{StaticResource BRIXDark}"
     Shell.UnselectedColor="{StaticResource BRIXLight}"
     Shell.ForegroundColor="{StaticResource BRIXWhite}"
-    Shell.BackgroundColor="{StaticResource BRIXDark}">
+    Shell.BackgroundColor="{StaticResource BRIXDark}"
+    BackgroundColor="{StaticResource BRIXDark}">
 
     <Shell.ItemTemplate>
         <DataTemplate>
