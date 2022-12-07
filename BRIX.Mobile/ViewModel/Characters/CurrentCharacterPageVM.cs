@@ -11,6 +11,7 @@ using BRIX.Mobile.Resources.Localizations;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
@@ -146,12 +147,15 @@ namespace BRIX.Mobile.ViewModel.Characters
                 UpdateExpCards();
                 await _characterService.SelectCurrentCharacter(Character.InternalModel);
             }
+
+            // Возможно такие вызовы уползут в CharacterService, но пока что достаточно этого.
+            WeakReferenceMessenger.Default.Send(new ShowCharacterTabsChanged(PlayerHaveCharacter));
         }
 
         /// <summary>
         /// В данном случае коллекция ExpCards — это модель представления для двух карточек, отображающих разные 
         /// метрики. Первая показывает опыт до следующего уровня, а вторая непотраченный опыт. К сожалению CarouselView
-        /// не умеет вмещать в себя элементы без ItemSource, поэтому применено такое решеиние.
+        /// не умеет вмещать в себя элементы без ItemSource, поэтому применено такое решение.
         /// </summary>
         private void UpdateExpCards()
         {

@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities"
              x:Class="BRIX.Mobile.View.Abilities.AddOrEditAbilityPage"
-             Title="AddOrEditAbility">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to add or edit ability!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:DataType="vm:AddOrEditAbilityPageVM"
+             Title="Ability editing">
+
+    <Shell.TitleView>
+        <controls:TitleView/>
+    </Shell.TitleView>
+
+    <ScrollView>
+        <Grid RowDefinitions="*,auto" RowSpacing="10">
+            <Border Style="{StaticResource BlockBorder}" Grid.Row="0" VerticalOptions="Start">
+                <VerticalStackLayout Spacing="10">
+                    <controls:FramedEntry
+                        Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Name}}"
+                        Text="{Binding Ability.Name}"/>
+                    <controls:FramedEntry
+                        Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Description}}"
+                        Text="{Binding Ability.Description}"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Button 
+                Grid.Row="1"
+                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" 
+                Command="{Binding SaveCommand}"
+                Margin="0,0,0,10"/>
+        </Grid>
+    </ScrollView>
 </ContentPage>

@@ -20,19 +20,19 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         [ObservableProperty]
-        private CharacterModel _character = new();
+        private CharacterModel _character;
 
         [RelayCommand]
-        public async Task Save(CharacterModel character)
+        public async Task Save()
         {
-            if (character.Id != default)
+            if (Character.Id != default)
             {
-                await _characterService.UpdateAsync(character.InternalModel);
+                await _characterService.UpdateAsync(Character.InternalModel);
             }
             else
             {
-                character.Id = Guid.NewGuid();
-                await _characterService.AddAsync(character.InternalModel);
+                Character.Id = Guid.NewGuid();
+                await _characterService.AddAsync(Character.InternalModel);
             }
 
             await Navigation.Back();
@@ -40,7 +40,8 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            Character = query.GetParameterOrDefault<CharacterModel>(NavigationParameters.Character);
+            Character = query.GetParameterOrDefault<CharacterModel>(NavigationParameters.Character)
+                ?? new CharacterModel();
         }
     }
 }

@@ -30,9 +30,6 @@
                 <Button Style="{StaticResource SquareIconButton}" Grid.Column="1" 
                     Text="{x:Static icons:Awesome.PeopleArrows}"
                     Command="{Binding SwitchCommand}"/>
-                <Button Style="{StaticResource SquareIconButton}" Grid.Column="1" 
-                    Text="{x:Static icons:Awesome.Skull}"
-                    Command="{Binding KillThemAllCommand}"/>
             </HorizontalStackLayout>
             
         </Grid>
@@ -43,7 +40,8 @@
             <!--In case of empty character pool-->
             <Grid 
                 IsVisible="{Binding PlayerHaveCharacter, Converter={StaticResource NotConverter}}"
-                RowDefinitions="*,*,auto">
+                RowDefinitions="*,*,auto"
+                Margin="10,0">
                 <VerticalStackLayout Grid.Row="0">
                     <Label Style="{StaticResource ParagraphTitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.PlayerHaveNoCharacterTitle}}" />
                     <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.PlayerHaveNoCharacter}}"/>

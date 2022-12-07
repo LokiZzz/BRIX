@@ -76,21 +76,24 @@
         </Tab>
         <Tab
             Icon="{FontImage FontFamily=AwesomeRPG, Glyph={x:Static icons:AwesomeRPG.BurningEmbers}}"
-            Title="{localization:Translate CharacterTabAbilities}">
+            Title="{localization:Translate CharacterTabAbilities}"
+            IsVisible="{Binding ShowCharacterTabs}">
             <ShellContent
                 ContentTemplate="{DataTemplate characters:CharacterAbilitiesPage}"
                 Route="CharacterAbilitiesPage" />
         </Tab>
         <Tab
             Icon="{FontImage FontFamily=AwesomeRPG, Glyph={x:Static icons:AwesomeRPG.Sapphire}}"
-            Title="{localization:Translate CharacterTabInventory}">
+            Title="{localization:Translate CharacterTabInventory}"
+            IsVisible="{Binding ShowCharacterTabs}">
             <ShellContent
                 ContentTemplate="{DataTemplate characters:CharacterInventoryPage}"
                 Route="CharacterInventoryPage" />
         </Tab>
         <Tab
             Icon="{FontImage FontFamily=AwesomeRPG, Glyph={x:Static icons:AwesomeRPG.ScrollUnfurled}}"
-            Title="{localization:Translate CharacterTabDetails}">
+            Title="{localization:Translate CharacterTabDetails}"
+            IsVisible="{Binding ShowCharacterTabs}">
             <ShellContent
                 ContentTemplate="{DataTemplate characters:CharacterDetailsPage}"
                 Route="CharacterDetailsPage"/>

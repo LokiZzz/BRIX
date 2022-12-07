@@ -11,6 +11,11 @@ namespace BRIX.Mobile.Services.Navigation
             await NavigateAsync("..", ENavigationMode.None);
         }
 
+        public async Task Back(params (string, object)[] parameters)
+        {
+            await NavigateAsync("..", ENavigationMode.None, parameters);
+        }
+
         public async Task NavigateAsync<T>(params (string, object)[] parameters) where T : Page
         {
             await NavigateAsync(typeof(T).Name, ENavigationMode.Push, parameters);
