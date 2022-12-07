@@ -94,6 +94,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             await HandleBackFromEditing(query);
+            query.Clear();
         }
 
         private async Task HandleBackFromEditing(IDictionary<string, object> query)
