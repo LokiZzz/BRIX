@@ -12,6 +12,7 @@ using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Abilities;
 using BRIX.Mobile.Models.Abilities;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
@@ -26,6 +27,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             _characterService = characterService;
             _localization = localization;
+
+            WeakReferenceMessenger.Default.Register<CurrentCharacterChanged>(
+                this, 
+                async (r, m) => await Initialize(true)
+            );
         }
 
         [ObservableProperty]
@@ -82,20 +88,25 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         public override async Task OnNavigatedAsync()
         {
+            await Initialize();
+
+            ShowHelp = Preferences.Get(Mobile.Settings.Help.ShowAbilitiesListHelp, true);
+        }
+
+        private async Task Initialize(bool force = false)
+        {
             Character currentCharacter = await _characterService.GetCurrentCharacter();
 
             if (currentCharacter != null)
             {
                 _currentCharacter = currentCharacter;
-            }
 
-            if(!_initialized)
-            {
-                Abilities = new(currentCharacter.Abilities.Select(x => new AbilityModel(x)));
-                _initialized = true;
+                if (!_initialized || force)
+                {
+                    Abilities = new(currentCharacter.Abilities.Select(x => new AbilityModel(x)));
+                    _initialized = true;
+                }
             }
-
-            ShowHelp = Preferences.Get(Mobile.Settings.Help.ShowAbilitiesListHelp, true);
         }
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)

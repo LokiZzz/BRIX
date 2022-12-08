@@ -11,6 +11,8 @@ using System.Collections.ObjectModel;
 using BRIX.Mobile.Resources.Localizations;
 using CharacterBM = BRIX.Library.Characters.Character;
 using BRIX.Library.Characters;
+using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
@@ -44,6 +46,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         private async Task Select(CharacterModel characterToSelect)
         {
             await _characterService.SelectCurrentCharacter(characterToSelect.InternalModel);
+            WeakReferenceMessenger.Default.Send(new CurrentCharacterChanged(characterToSelect));
             await Navigation.Back();
         }
 
@@ -110,5 +113,10 @@ namespace BRIX.Mobile.ViewModel.Characters
                 }
             }
         }
+    }
+
+    public class CurrentCharacterChanged : ValueChangedMessage<CharacterModel>
+    {
+        public CurrentCharacterChanged(CharacterModel character) : base(character) { }
     }
 }
