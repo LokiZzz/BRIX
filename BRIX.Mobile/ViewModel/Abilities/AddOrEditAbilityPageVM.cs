@@ -33,6 +33,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 ?? new AbilityModel(new Ability());
 
             Mode = query.GetParameterOrDefault<EAbilityEditMode>(NavigationParameters.EditMode);
+            query.Clear();
         }
     }
 

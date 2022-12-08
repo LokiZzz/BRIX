@@ -42,6 +42,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             Character = query.GetParameterOrDefault<CharacterModel>(NavigationParameters.Character)
                 ?? new CharacterModel();
+            query.Clear();
         }
     }
 }
