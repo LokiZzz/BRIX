@@ -10,10 +10,11 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using BRIX.Mobile.Resources.Localizations;
 using CharacterBM = BRIX.Library.Characters.Character;
+using BRIX.Library.Characters;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
-    public partial class CharacterListPageVM : ViewModelBase
+    public partial class CharacterListPageVM : ViewModelBase, IQueryAttributable
     {
         private readonly ICharacterService _characterService;
         private readonly ILocalizationResourceManager _localization;
@@ -23,6 +24,8 @@ namespace BRIX.Mobile.ViewModel.Characters
             _characterService = characterService;
             _localization = localization;
         }
+
+        private bool _initialized = false;
 
         [ObservableProperty]
         private ObservableCollection<CharacterModel> _characters = new();
@@ -75,20 +78,37 @@ namespace BRIX.Mobile.ViewModel.Characters
             }
         }
 
-        [RelayCommand]
-        private async Task Clear()
-        {
-            //TODO: вывести предупредительное сообщение
-            await _characterService.RemoveAllAsync();
-            Characters.Clear();
-        }
-
         public override async Task OnNavigatedAsync()
         {
-            _characters.Clear();
-            List<CharacterBM> characters = await _characterService.GetAllAsync();
-            Characters = new(characters.Select(character => new CharacterModel(character)));
+            if (!_initialized)
+            {
+                List<CharacterBM> characters = await _characterService.GetAllAsync();
+                Characters = new(characters.Select(character => new CharacterModel(character)));
+                _initialized = true;
+            }
+
             ShowHelp = Preferences.Get(Mobile.Settings.Help.ShowCharactersListHelp, true);
+        }
+
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            HandleBackFromEditing(query);
+            query.Clear();
+        }
+
+        private void HandleBackFromEditing(IDictionary<string, object> query)
+        {
+            CharacterModel character = query.GetParameterOrDefault<CharacterModel>(NavigationParameters.Character);
+
+            if (character != null)
+            {
+                EEditingMode mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
+
+                if(mode == EEditingMode.Add)
+                {
+                    Characters.Add(character);
+                }
+            }
         }
     }
 }

@@ -25,17 +25,22 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task Save()
         {
-            if (Character.Id != default)
+            EEditingMode mode = Character.Id == default ? EEditingMode.Add : EEditingMode.Edit;
+
+            switch(mode)
             {
-                await _characterService.UpdateAsync(Character.InternalModel);
-            }
-            else
-            {
-                Character.Id = Guid.NewGuid();
-                await _characterService.AddAsync(Character.InternalModel);
+                case EEditingMode.Add:
+                    await _characterService.AddAsync(Character.InternalModel);
+                    break;
+                case EEditingMode.Edit:
+                    await _characterService.UpdateAsync(Character.InternalModel);
+                    break;
             }
 
-            await Navigation.Back();
+            await Navigation.Back(
+                (NavigationParameters.Character, Character),
+                (NavigationParameters.EditMode, mode)
+            );
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)

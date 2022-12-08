@@ -31,8 +31,10 @@ namespace BRIX.Mobile.ViewModel.Characters
         [ObservableProperty]
         private bool _showHelp;
 
+        private bool _initialized = false;
+        
         [ObservableProperty]
-        private ObservableCollection<AbilityModel> _abilities;
+        private ObservableCollection<AbilityModel> _abilities = new();
 
         [RelayCommand]
         private void HideHelp()
@@ -45,7 +47,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         private async void Add()
         {
             await Navigation.NavigateAsync<AddOrEditAbilityPage>(
-                (NavigationParameters.EditMode, EAbilityEditMode.Add)
+                (NavigationParameters.EditMode, EEditingMode.Add)
             );
         }
 
@@ -54,7 +56,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             await Navigation.NavigateAsync<AddOrEditAbilityPage>(
                 (NavigationParameters.Ability, ability),
-                (NavigationParameters.EditMode, EAbilityEditMode.Edit)
+                (NavigationParameters.EditMode, EEditingMode.Edit)
             );
         }
 
@@ -84,8 +86,13 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if (currentCharacter != null)
             {
-                Abilities = new(currentCharacter.Abilities.Select(x => new AbilityModel(x)));
                 _currentCharacter = currentCharacter;
+            }
+
+            if(!_initialized)
+            {
+                Abilities = new(currentCharacter.Abilities.Select(x => new AbilityModel(x)));
+                _initialized = true;
             }
 
             ShowHelp = Preferences.Get(Mobile.Settings.Help.ShowAbilitiesListHelp, true);
@@ -103,30 +110,16 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if (editedAbility != null)
             {
-                EAbilityEditMode mode = query.GetParameterOrDefault<EAbilityEditMode>(NavigationParameters.EditMode);
+                EEditingMode mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
 
-                switch(mode)
+                if(mode == EEditingMode.Add)
                 {
-                    case EAbilityEditMode.Add:
-                        await AddAbility(editedAbility);
-                        break;
-                    case EAbilityEditMode.Edit:
-                        await SaveAbility(editedAbility);
-                        break;
+                    _currentCharacter.Abilities.Add(editedAbility.InternalModel);
+                    Abilities.Add(editedAbility);
                 }
+
+                await _characterService.UpdateAsync(_currentCharacter);
             }
-        }
-
-        private async Task AddAbility(AbilityModel ability)
-        {
-            _currentCharacter.Abilities.Add(ability.InternalModel);
-            Abilities.Add(ability);
-            await _characterService.UpdateAsync(_currentCharacter);
-        }
-
-        private async Task SaveAbility(AbilityModel ability)
-        {
-            await _characterService.UpdateAsync(_currentCharacter);
         }
     }
 }

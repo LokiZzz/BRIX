@@ -19,12 +19,15 @@ namespace BRIX.Mobile.ViewModel.Abilities
         private AbilityModel _ability;
 
         [ObservableProperty]
-        private EAbilityEditMode _mode;
+        private EEditingMode _mode;
 
         [RelayCommand]
-        public void Save()
+        public async Task Save()
         {
-            Navigation.Back((NavigationParameters.EditMode, Mode), (NavigationParameters.Ability, Ability));
+            await Navigation.Back(
+                (NavigationParameters.EditMode, Mode), 
+                (NavigationParameters.Ability, Ability)
+            );
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -32,16 +35,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
             Ability = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability)
                 ?? new AbilityModel(new Ability());
 
-            Mode = query.GetParameterOrDefault<EAbilityEditMode>(NavigationParameters.EditMode);
+            Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
             query.Clear();
         }
-    }
-
-    public enum EAbilityEditMode
-    {
-        None = 0,
-        Add = 1,
-        Edit = 2,
-        Upgrade = 3
     }
 }
