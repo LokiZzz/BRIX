@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities"
              x:Class="BRIX.Mobile.View.Abilities.AddOrEditAbilityPage"
              x:DataType="vm:AddOrEditAbilityPageVM"
-             Title="Ability editing">
+             Title="{Binding Title}">
 
     <Shell.TitleView>
         <controls:TitleView/>

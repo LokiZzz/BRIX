@@ -126,7 +126,19 @@
   <data name="Add" xml:space="preserve">
     <value>Добавить</value>
   </data>
-  <data name="AddOrEditCharacterPageTitle" xml:space="preserve">
+  <data name="AddOrEditAbilityPageTitle_Add" xml:space="preserve">
+    <value>Новая способность</value>
+  </data>
+  <data name="AddOrEditAbilityPageTitle_Edit" xml:space="preserve">
+    <value>Изменить способность</value>
+  </data>
+  <data name="AddOrEditAbilityPageTitle_Upgrade" xml:space="preserve">
+    <value>Улучшить способность</value>
+  </data>
+  <data name="AddOrEditCharacterPageTitle_Add" xml:space="preserve">
+    <value>Новый персонаж</value>
+  </data>
+  <data name="AddOrEditCharacterPageTitle_Edit" xml:space="preserve">
     <value>Персонаж</value>
   </data>
   <data name="Appearance" xml:space="preserve">

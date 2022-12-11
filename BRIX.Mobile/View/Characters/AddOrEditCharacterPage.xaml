@@ -6,7 +6,7 @@
              x:DataType="vm:AddOrEditCharacterPageVM"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
-             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AddOrEditCharacterPageTitle}}">
+             Title="{Binding Title}">
 
     <Shell.TitleView>
         <controls:TitleView/>

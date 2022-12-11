@@ -1,26 +1,30 @@
 ﻿using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
-using BRIX.Mobile.View.Characters;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Linq;
-using CharacterBM = BRIX.Library.Characters.Character;
+using BRIX.Mobile.Resources.Localizations;
+
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
     public partial class AddOrEditCharacterPageVM : ViewModelBase, IQueryAttributable
     {
         private readonly ICharacterService _characterService;
+        private readonly ILocalizationResourceManager _localization;
 
-        public AddOrEditCharacterPageVM(ICharacterService characterService)
+        public AddOrEditCharacterPageVM(ICharacterService characterService, ILocalizationResourceManager localization)
         {
             _characterService = characterService;
+            _localization = localization;
         }
 
         [ObservableProperty]
         private CharacterModel _character;
+
+        [ObservableProperty]
+        private string _title;
 
         [RelayCommand]
         public async Task Save()
@@ -48,6 +52,13 @@ namespace BRIX.Mobile.ViewModel.Characters
             Character = query.GetParameterOrDefault<CharacterModel>(NavigationParameters.Character)
                 ?? new CharacterModel();
             query.Clear();
+        }
+
+        public override async Task OnNavigatedAsync()
+        {
+            Title = Character.Id == default
+                ? _localization[LocalizationKeys.AddOrEditCharacterPageTitle_Add].ToString()
+                : _localization[LocalizationKeys.AddOrEditCharacterPageTitle_Edit].ToString();
         }
     }
 }

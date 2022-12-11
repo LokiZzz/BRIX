@@ -126,8 +126,20 @@
   <data name="Add" xml:space="preserve">
     <value>New</value>
   </data>
-  <data name="AddOrEditCharacterPageTitle" xml:space="preserve">
-    <value>Character</value>
+  <data name="AddOrEditAbilityPageTitle_Add" xml:space="preserve">
+    <value>Add ability</value>
+  </data>
+  <data name="AddOrEditAbilityPageTitle_Edit" xml:space="preserve">
+    <value>Edit ability</value>
+  </data>
+  <data name="AddOrEditAbilityPageTitle_Upgrade" xml:space="preserve">
+    <value>Upgrade ability</value>
+  </data>
+  <data name="AddOrEditCharacterPageTitle_Add" xml:space="preserve">
+    <value>Add character</value>
+  </data>
+  <data name="AddOrEditCharacterPageTitle_Edit" xml:space="preserve">
+    <value>Edit character</value>
   </data>
   <data name="Appearance" xml:space="preserve">
     <value>Appearance</value>

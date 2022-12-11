@@ -88,11 +88,47 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Character.
+        ///   Looks up a localized string similar to Add ability.
         /// </summary>
-        public static string AddOrEditCharacterPageTitle {
+        public static string AddOrEditAbilityPageTitle_Add {
             get {
-                return ResourceManager.GetString("AddOrEditCharacterPageTitle", resourceCulture);
+                return ResourceManager.GetString("AddOrEditAbilityPageTitle_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit ability.
+        /// </summary>
+        public static string AddOrEditAbilityPageTitle_Edit {
+            get {
+                return ResourceManager.GetString("AddOrEditAbilityPageTitle_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upgrade ability.
+        /// </summary>
+        public static string AddOrEditAbilityPageTitle_Upgrade {
+            get {
+                return ResourceManager.GetString("AddOrEditAbilityPageTitle_Upgrade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add character.
+        /// </summary>
+        public static string AddOrEditCharacterPageTitle_Add {
+            get {
+                return ResourceManager.GetString("AddOrEditCharacterPageTitle_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit character.
+        /// </summary>
+        public static string AddOrEditCharacterPageTitle_Edit {
+            get {
+                return ResourceManager.GetString("AddOrEditCharacterPageTitle_Edit", resourceCulture);
             }
         }
         
