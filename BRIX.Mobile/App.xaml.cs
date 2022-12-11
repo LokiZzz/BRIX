@@ -23,6 +23,20 @@ public partial class App : Application
                 #endif
             }
         });
+        Microsoft.Maui.Handlers.EditorHandler.Mapper.AppendToMapping(nameof(BorderlessEditor), (handler, view) =>
+        {
+            if (view is BorderlessEditor)
+            {
+                #if __ANDROID__
+                handler.PlatformView.SetBackgroundColor(Colors.Transparent.ToPlatform());
+                #elif __IOS__
+                handler.PlatformView.BorderStyle = UIKit.UITextBorderStyle.None;
+                #elif WINDOWS
+                handler.PlatformView.FontWeight = Microsoft.UI.Text.FontWeights.Thin;
+                #endif
+            }
+        });
+
 
         MainPage = ServicePool.GetService<AppShell>();
 	}

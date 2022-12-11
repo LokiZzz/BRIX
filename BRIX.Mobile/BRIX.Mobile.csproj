@@ -107,6 +107,9 @@
 	  <MauiXaml Update="Resources\Controls\ControlTemplates.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Resources\Controls\FramedEditor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Resources\Controls\FramedEntry.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -155,6 +158,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Resources\Controls\FramedEditor.xaml.cs">
+	    <DependentUpon>FramedEditor.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Resources\Controls\FramedEntry.xaml.cs">
 	    <DependentUpon>FramedEntry.xaml</DependentUpon>
 	  </Compile>

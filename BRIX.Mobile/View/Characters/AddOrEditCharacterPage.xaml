@@ -17,14 +17,18 @@
             <Border Style="{StaticResource BlockBorder}" Grid.Row="0" VerticalOptions="Start">
                 <VerticalStackLayout Spacing="10">
                     <controls:FramedEntry
-                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Name}}"
-                    Text="{Binding Character.Name}"/>
-                    <controls:FramedEntry
-                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Backstory}}"
-                    Text="{Binding Character.Backstory}"/>
-                    <controls:FramedEntry
-                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Appearance}}"
-                    Text="{Binding Character.Appearance}"/>
+                        Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Name}}"
+                        Text="{Binding Character.Name}"/>
+                    <controls:FramedEditor
+                        Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Backstory}}"
+                        Text="{Binding Character.Backstory}"
+                        MaxLength="1000" />
+                    <controls:FramedEditor
+                        Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Appearance}}"
+                        Text="{Binding Character.Appearance}"
+                        MaxLength="1000"/>
+                    
+                    
                 </VerticalStackLayout>
             </Border>
 
