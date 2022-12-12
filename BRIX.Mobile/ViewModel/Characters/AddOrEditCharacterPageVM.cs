@@ -54,11 +54,13 @@ namespace BRIX.Mobile.ViewModel.Characters
             query.Clear();
         }
 
-        public override async Task OnNavigatedAsync()
+        public override Task OnNavigatedAsync()
         {
             Title = Character.Id == default
                 ? _localization[LocalizationKeys.AddOrEditCharacterPageTitle_Add].ToString()
                 : _localization[LocalizationKeys.AddOrEditCharacterPageTitle_Edit].ToString();
+
+            return Task.CompletedTask;
         }
     }
 }

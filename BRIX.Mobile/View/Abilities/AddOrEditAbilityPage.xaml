@@ -4,32 +4,47 @@
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities"
+             xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              x:Class="BRIX.Mobile.View.Abilities.AddOrEditAbilityPage"
              x:DataType="vm:AddOrEditAbilityPageVM"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             Padding="0">
 
     <Shell.TitleView>
         <controls:TitleView/>
     </Shell.TitleView>
 
-    <ScrollView>
-        <Grid RowDefinitions="*,auto" RowSpacing="10">
-            <Border Style="{StaticResource BlockBorder}" Grid.Row="0" VerticalOptions="Start">
-                <VerticalStackLayout Spacing="10">
-                    <controls:FramedEntry
-                        Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Name}}"
-                        Text="{Binding Ability.Name}"/>
-                    <controls:FramedEntry
-                        Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Description}}"
-                        Text="{Binding Ability.Description}"/>
-                </VerticalStackLayout>
-            </Border>
+    <Grid RowDefinitions="auto,*,auto" RowSpacing="10">
+        <Border Style="{StaticResource BlockBorder}" Grid.Row="0" VerticalOptions="Start" Margin="10,0">
+            <VerticalStackLayout Spacing="10">
+                <controls:FramedEntry
+                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Name}}"
+                    Text="{Binding Ability.Name}"/>
+                <controls:FramedEntry
+                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Description}}"
+                    Text="{Binding Ability.Description}"/>
+            </VerticalStackLayout>
+        </Border>
 
-            <Button 
-                Grid.Row="1"
-                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" 
-                Command="{Binding SaveCommand}"
-                Margin="0,0,0,10"/>
-        </Grid>
-    </ScrollView>
+        <VerticalStackLayout Grid.Row="1" Margin="10,0">
+            <Label Style="{StaticResource TitleLabel}" Text="{x:Static lcz:LocalizationKeys.Effects}" Margin="10,5,10,15"/>
+            <Button
+                Style="{StaticResource LightButton}" 
+                BackgroundColor="{StaticResource BRIXDark}"
+                CornerRadius="10" 
+                HeightRequest="75"
+                FontFamily="Awesome"
+                FontSize="36"
+                Text="{x:Static icons:Awesome.CirclePlus}"/>
+            <CollectionView>
+
+            </CollectionView>
+        </VerticalStackLayout>
+
+        <Button 
+            Grid.Row="2"
+            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" 
+            Command="{Binding SaveCommand}"
+            Margin="10"/>
+    </Grid>
 </ContentPage>

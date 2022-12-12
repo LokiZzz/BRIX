@@ -30,7 +30,8 @@ public partial class App : Application
                 #if __ANDROID__
                 handler.PlatformView.SetBackgroundColor(Colors.Transparent.ToPlatform());
                 #elif __IOS__
-                handler.PlatformView.BorderStyle = UIKit.UITextBorderStyle.None;
+                //handler.PlatformView.Layer.BorderWidth = 0;
+                //handler.PlatformView.BorderStyle = UIKit.UITextBorderStyle.None;
                 #elif WINDOWS
                 handler.PlatformView.FontWeight = Microsoft.UI.Text.FontWeights.Thin;
                 #endif

@@ -286,6 +286,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Effects.
+        /// </summary>
+        public static string Effects {
+            get {
+                return ResourceManager.GetString("Effects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Experience.
         /// </summary>
         public static string Experience {

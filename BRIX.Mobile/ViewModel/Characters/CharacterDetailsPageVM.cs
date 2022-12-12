@@ -18,6 +18,9 @@ namespace BRIX.Mobile.ViewModel.Characters
             );
         }
 
-        private async Task Initialize(bool force = false) { }
+        private Task Initialize(bool force = false) 
+        {
+            return Task.CompletedTask;
+        }
     }
 }

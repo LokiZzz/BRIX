@@ -51,7 +51,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             query.Clear();
         }
 
-        public override async Task OnNavigatedAsync()
+        public override Task OnNavigatedAsync()
         {
             switch(Mode)
             {
@@ -65,6 +65,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
                     Title = _localization[LocalizationKeys.AddOrEditAbilityPageTitle_Upgrade].ToString();
                     break;
             }
+
+            return Task.CompletedTask;
         }
     }
 }
