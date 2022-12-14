@@ -6,7 +6,7 @@ using BRIX.Library.Effects;
 using BRIX.Library.Mathematics;
 
 Ability smash = new Ability();
-EffectBase damage = new HealDamageEffect();
+EffectBase damage = new DamageEffect();
 smash.AddEffect(damage);
 
 Console.ReadLine();

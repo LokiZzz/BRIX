@@ -192,6 +192,12 @@
   <data name="Edit" xml:space="preserve">
     <value>Править</value>
   </data>
+  <data name="EffectDamage" xml:space="preserve">
+    <value>Урон</value>
+  </data>
+  <data name="EffectHeal" xml:space="preserve">
+    <value>Лечение</value>
+  </data>
   <data name="Effects" xml:space="preserve">
     <value>Эффекты</value>
   </data>

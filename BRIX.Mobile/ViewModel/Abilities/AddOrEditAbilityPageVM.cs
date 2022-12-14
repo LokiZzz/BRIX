@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BRIX.Mobile.Resources.Localizations;
+using BRIX.Mobile.View.Abilities;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {
@@ -40,6 +41,12 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 (NavigationParameters.EditMode, Mode), 
                 (NavigationParameters.Ability, Ability)
             );
+        }
+
+        [RelayCommand]
+        public async Task AddEffect()
+        {
+            await Navigation.NavigateAsync<ChooseEffectPage>();
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)

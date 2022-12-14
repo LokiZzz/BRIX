@@ -286,6 +286,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Damage.
+        /// </summary>
+        public static string EffectDamage {
+            get {
+                return ResourceManager.GetString("EffectDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heal.
+        /// </summary>
+        public static string EffectHeal {
+            get {
+                return ResourceManager.GetString("EffectHeal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Effects.
         /// </summary>
         public static string Effects {

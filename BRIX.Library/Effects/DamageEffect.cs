@@ -4,9 +4,9 @@ using BRIX.Library.Extensions;
 
 namespace BRIX.Library.Effects
 {
-    public class HealDamageEffect : EffectBase
+    public class DamageEffect : EffectBase
     {
-        public HealDamageEffect()
+        public DamageEffect()
         {
             Aspects = new()
             {
@@ -15,8 +15,6 @@ namespace BRIX.Library.Effects
                 new CooldownAspect(), new ActivationConditionsAspect(),
             };
         }
-
-        public bool IsDamage { get; set; } = true;
 
         public DicePool Impact { get; set; } = new DicePool(0);
 
