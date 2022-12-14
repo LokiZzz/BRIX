@@ -67,6 +67,15 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         [RelayCommand]
+        private async void Upgrade(AbilityModel ability)
+        {
+            await Navigation.NavigateAsync<AddOrEditAbilityPage>(
+                (NavigationParameters.Ability, ability),
+                (NavigationParameters.EditMode, EEditingMode.Upgrade)
+            );
+        }
+
+        [RelayCommand]
         private async Task Remove(AbilityModel ability)
         {
             QuestionPopupResult result = await ShowPopupAsync<QuestionPopup, QuestionPopupResult, QuestionPopupParameters>(

@@ -75,7 +75,20 @@
                             </SwipeView.RightItems>
                             <Grid Margin="10,0">
                                 <Border Style="{StaticResource BlockBorder}" HeightRequest="75">
-                                    <Label Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
+                                    <Grid ColumnDefinitions="*,auto">
+                                        <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
+                                        <Button 
+                                            Style="{StaticResource BigSquareIconButton}"
+                                            Text="{x:Static icons:Awesome.CircleArrowUp}"
+                                            BackgroundColor="Transparent"
+                                            BorderWidth="1"
+                                            BorderColor="{StaticResource BRIXOrange}"
+                                            TextColor="{StaticResource BRIXOrange}"
+                                            Margin="1"
+                                            Grid.Column="1"
+                                            Command="{Binding Source={x:Reference listView}, Path= BindingContext.UpgradeCommand}"
+                                            CommandParameter="{Binding}"/>
+                                    </Grid>
                                 </Border>
 
                                 <Grid.GestureRecognizers>
