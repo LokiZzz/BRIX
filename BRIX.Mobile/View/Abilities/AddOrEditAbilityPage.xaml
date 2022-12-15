@@ -20,7 +20,8 @@
                 <controls:FramedEntry
                     Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Name}}"
                     Text="{Binding Ability.Name}"/>
-                <controls:FramedEntry
+                <controls:FramedEditor
+                    MaxLength="400"
                     Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Description}}"
                     Text="{Binding Ability.Description}"/>
             </VerticalStackLayout>
@@ -35,7 +36,8 @@
                 HeightRequest="75"
                 FontFamily="Awesome"
                 FontSize="36"
-                Text="{x:Static icons:Awesome.CirclePlus}"/>
+                Text="{x:Static icons:Awesome.CirclePlus}"
+                Command="{Binding AddEffectCommand}"/>
             <CollectionView>
 
             </CollectionView>
