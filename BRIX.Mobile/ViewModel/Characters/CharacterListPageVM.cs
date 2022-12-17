@@ -66,12 +66,13 @@ namespace BRIX.Mobile.ViewModel.Characters
         private async Task Remove(CharacterModel character)
         {
             QuestionPopupResult result = await ShowPopupAsync<QuestionPopup, QuestionPopupResult, QuestionPopupParameters>(
-                new QuestionPopupParameters(
-                    title: _localization[LocalizationKeys.Warning].ToString(),
-                    message: _localization[LocalizationKeys.DeleteCharacterQuestion].ToString(),
-                    yesText: _localization[LocalizationKeys.Yes].ToString(),
-                    noText: _localization[LocalizationKeys.No].ToString()
-                )
+                new QuestionPopupParameters 
+                {
+                    Title = _localization[LocalizationKeys.Warning].ToString(),
+                    Message = _localization[LocalizationKeys.DeleteCharacterQuestion].ToString(),
+                    YesText = _localization[LocalizationKeys.Yes].ToString(),
+                    NoText = _localization[LocalizationKeys.No].ToString()
+                }
             );
 
             if (result?.Answer == EQuestionPopupResult.Yes)

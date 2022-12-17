@@ -46,18 +46,10 @@ namespace BRIX.Mobile.ViewModel.Popups
 
     public class QuestionPopupParameters
     {
-        public QuestionPopupParameters(string title, string message, string yesText, string noText)
-        {
-            Title = title;
-            Message = message;
-            YesText = yesText;
-            NoText = noText;
-        }
-
-        public string Title { get; set; }
-        public string Message { get; set; }
-        public string YesText { get; set; }
-        public string NoText { get; set; }
+        public string Title { get; init; }
+        public string Message { get; init; }
+        public string YesText { get; init; }
+        public string NoText { get; init; }
     }
 
     public enum EQuestionPopupResult

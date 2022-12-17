@@ -14,9 +14,9 @@
         <VerticalStackLayout>
             <Label Style="{StaticResource ParagraphTitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DiceValuePopupTitle}}"/>
             <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DiceValuePopupHint}}" LineBreakMode="WordWrap"/>
-            <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DiceValuePopupPlaceholder}}"/>
+            <controls:FramedEntry Text="{Binding Formula}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DiceValuePopupPlaceholder}}"/>
             <HorizontalStackLayout Margin="0,20,0,0" Spacing="10" HorizontalOptions="End">
-                <Button Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Set}}" Command="{Binding FireYesCommand}" WidthRequest="100" Style="{StaticResource SmallerButton}"/>
+                <Button Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Set}}" Command="{Binding SetCommand}" WidthRequest="100" Style="{StaticResource SmallerButton}"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </Border>
