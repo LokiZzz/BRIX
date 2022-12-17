@@ -1,5 +1,6 @@
 ﻿using BRIX.Library.Extensions;
 using BRIX.Utility.Extensions;
+using System.Text.RegularExpressions;
 
 namespace BRIX.Library.DiceValue
 {
@@ -26,6 +27,20 @@ namespace BRIX.Library.DiceValue
         public static int Max(this DicePool dicePool)
         {
             return dicePool.Dice.Sum(x => x.NumberOfFaces * x.Count) + dicePool.Modifier;
+        }
+
+        public static bool IsValidDicePool(this string input)
+        {
+            input = input.Replace(" ", string.Empty);
+            string[] splittedInput = input.Split('+', StringSplitOptions.RemoveEmptyEntries);
+
+            
+
+            return splittedInput.All(x =>
+                DicePool.DiceRegex.IsMatch(x) 
+                || DicePool.MultiDiceRegex.IsMatch(x)
+                || DicePool.ModRegex.IsMatch(x)
+            );
         }
     }
 }

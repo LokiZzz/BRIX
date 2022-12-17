@@ -4,9 +4,14 @@ using BRIX.Library.Aspects;
 using BRIX.Library.DiceValue;
 using BRIX.Library.Effects;
 using BRIX.Library.Mathematics;
+using System.Runtime.Intrinsics.Arm;
 
-Ability smash = new Ability();
-EffectBase damage = new DamageEffect();
-smash.AddEffect(damage);
+string input = string.Empty;
 
-Console.ReadLine();
+while(input != "stop")
+{
+    input = Console.ReadLine() ?? string.Empty;
+    bool parsed = DicePool.TryParse(input, out DicePool dp);
+
+    Console.WriteLine($"Parsed: {parsed}\nInput: {input}\nToString(): {dp}");
+}

@@ -5,6 +5,7 @@
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities.Effects"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+             x:DataType="vm:DamageEffectPageVM"
              x:Class="BRIX.Mobile.View.Abilities.Effects.DamageEffectPage"
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectDamage}}">
 
@@ -20,7 +21,11 @@
             <Grid RowDefinitions="auto,auto,auto,auto,auto,auto,auto" RowSpacing="10">
                 <Grid Grid.Row="0" ColumnDefinitions="*, auto">
                     <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Damage}}"/>
-                    <Button Grid.Column="1" Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.PenToSquare}"/>
+                    <Button 
+                        Grid.Column="1" 
+                        Style="{StaticResource SquareIconButton}" 
+                        Text="{x:Static icons:Awesome.PenToSquare}"
+                        Command="{Binding EditFormulaCommand}"/>
                 </Grid>
                 <Label Grid.Row="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DamageEffectPageHint}}"/>
                 <CollectionView Grid.Row="2" ItemsSource="{Binding Damage}">
@@ -52,7 +57,7 @@
                     <Label Grid.Row="1" Grid.Column="1" Text="8"/>
                 </Grid>
                 <Label Grid.Row="4" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.FastAdjustment}}"/>
-                <Grid Grid.Row="5" RowDefinitions="auto,auto" ColumnDefinitions="auto,*,auto">
+                <Grid Grid.Row="5" RowDefinitions="auto,auto" ColumnDefinitions="auto,*,auto" Margin="0,0,0,10">
                     <Label Grid.Row="0" Grid.Column="0" Text="-50%" HorizontalOptions="Start"/>
                     <Label Grid.Row="0" Grid.Column="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DamageEffectCurrentAdjustment}}" HorizontalOptions="Center"/>
                     <Label Grid.Row="0" Grid.Column="2" Text="+50%" HorizontalOptions="End"/>

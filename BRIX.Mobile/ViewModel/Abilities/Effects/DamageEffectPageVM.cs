@@ -1,6 +1,9 @@
 ﻿using BRIX.Library.DiceValue;
+using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
+using BRIX.Mobile.ViewModel.Popups;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,6 +17,14 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
     {
         [ObservableProperty]
         private ObservableCollection<DamageChunkVM> _damage;
+
+        [RelayCommand]
+        private async Task EditFormula()
+        {
+            DiceValuePopupResult result = await ShowPopupAsync<DiceValuePopup, DiceValuePopupResult, DiceValuePopupParameters>(
+                new DiceValuePopupParameters { Formula = "" }
+            );
+        }
 
         public override Task OnNavigatedAsync()
         {
@@ -46,9 +57,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
             return chunks;
         }
-
-
-
     }
 
     /// <summary>

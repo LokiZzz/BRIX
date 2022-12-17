@@ -187,7 +187,7 @@
     <value>Персонаж</value>
   </data>
   <data name="Damage" xml:space="preserve">
-    <value>Damage</value>
+    <value>Урон</value>
   </data>
   <data name="DamageEffectCurrentAdjustment" xml:space="preserve">
     <value>Сейчас (+0%)</value>
@@ -205,7 +205,7 @@
     <value>Описание</value>
   </data>
   <data name="DiceValuePopupHint" xml:space="preserve">
-    <value>Введите значение в формате,обычно используемом для формул с игральными костями. Например, 3d6 + 2d4 + 5. В таких формулах число перед «d» означает количество костей, а число после «d» — количество граней на костях. Вы можете использовать нестандартные кости, такие как d11 или d19, если хотите.</value>
+    <value>Введите значение в формате, обычно используемом для формул с игральными костями. Например, 3d6 + 2d4 + 5. В таких формулах число перед «d» означает количество костей, а число после «d» — количество граней на костях. Вы можете использовать нестандартные кости, такие как d11 или d19, если хотите.</value>
   </data>
   <data name="DiceValuePopupPlaceholder" xml:space="preserve">
     <value>Формула</value>

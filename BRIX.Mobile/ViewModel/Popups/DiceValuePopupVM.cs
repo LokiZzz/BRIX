@@ -19,6 +19,14 @@ namespace BRIX.Mobile.ViewModel.Popups
         [RelayCommand]
         private void Set()
         {
+            //if(Formula.IsValidDicePool())
+            //{
+            //    View.Close(new DiceValuePopupResult { DicePool = Formula.ToDicePool() });
+            //}
+            //else
+            //{
+            //    PlayInvalidFormulaAnimation();
+            //}
         }
 
         protected override void HandleParameters()
@@ -31,7 +39,7 @@ namespace BRIX.Mobile.ViewModel.Popups
     {
         public string Formula { get; init; }
     }
-
+    
     public class DiceValuePopupResult
     {
         public DicePool DicePool { get; set; }
