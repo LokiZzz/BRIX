@@ -30,6 +30,9 @@
                 <Button Style="{StaticResource SquareIconButton}" Grid.Column="1" 
                     Text="{x:Static icons:Awesome.PeopleArrows}"
                     Command="{Binding SwitchCommand}"/>
+                <Button Style="{StaticResource SquareIconButton}" Grid.Column="1" 
+                    Text="{x:Static icons:Awesome.Fire}"
+                    Command="{Binding TestCommand}"/>
             </HorizontalStackLayout>
             
         </Grid>

@@ -17,17 +17,21 @@ namespace BRIX.Mobile.ViewModel.Popups
         private string _formula;
 
         [RelayCommand]
-        private void Set()
+        private async Task Set()
         {
-            //if(Formula.IsValidDicePool())
+            OnInvalidFormulaEntered(this, null);
+
+            //if (DicePool.TryParse(Formula, out DicePool? parsed))
             //{
-            //    View.Close(new DiceValuePopupResult { DicePool = Formula.ToDicePool() });
+            //    View.Close(new DiceValuePopupResult { DicePool = parsed });
             //}
             //else
             //{
-            //    PlayInvalidFormulaAnimation();
+            //    OnInvalidFormulaEntered(this, null);
             //}
         }
+
+        public event EventHandler OnInvalidFormulaEntered;
 
         protected override void HandleParameters()
         {

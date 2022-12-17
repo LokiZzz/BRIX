@@ -5,9 +5,34 @@ public partial class FramedEntry : Grid
 	public FramedEntry()
 	{
 		InitializeComponent();
-	}
 
-	public static readonly BindableProperty TextProperty = BindableProperty.Create(
+        Application.Current.Resources.TryGetValue("BRIXLight", out object colorResource);
+
+        if(colorResource != null && colorResource is Color entryColor)
+        {
+            EntryColor = entryColor;
+        }
+    }
+
+    public static readonly BindableProperty EntryColorProperty = BindableProperty.Create(
+        propertyName: nameof(EntryColor),
+        returnType: typeof(Color),
+        declaringType: typeof(FramedEntry),
+        defaultValue: Colors.White,
+        defaultBindingMode: BindingMode.TwoWay
+    );
+
+    public Color EntryColor
+    {
+        get => (Color)GetValue(EntryColorProperty);
+        set
+        {
+            SetValue(EntryColorProperty, value);
+            entryBorder.Stroke = new SolidColorBrush(value);
+        }
+    }
+
+    public static readonly BindableProperty TextProperty = BindableProperty.Create(
 		propertyName: nameof(Text),
 		returnType: typeof(string),
 		declaringType: typeof(FramedEntry),

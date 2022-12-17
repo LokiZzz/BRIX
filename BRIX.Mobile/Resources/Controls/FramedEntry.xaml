@@ -9,20 +9,21 @@
     RowDefinitions="50" Margin="0,10,0,0">
 
     <Border  
+        x:Name="entryBorder"
         Grid.Row="0" 
         Padding="15,4" 
         StrokeThickness="1"
         BackgroundColor="Transparent"
         StrokeShape="RoundRectangle 5">
-        <Border.Stroke>
-            <SolidColorBrush Color="{StaticResource BRIXLight}"/>
-            <!--<LinearGradientBrush EndPoint="0,1">
+        <!--<Border.Stroke>
+            <SolidColorBrush Color="{Binding Source={x:Reference this}, Path=EntryColor}"/>
+            --><!--<LinearGradientBrush EndPoint="0,1">
                 <GradientStop Color="{StaticResource BRIXLight}"
                           Offset="0.1" />
                 <GradientStop Color="{StaticResource BRIXViolet}"
                           Offset="1.0" />
-            </LinearGradientBrush>-->
-        </Border.Stroke>
+            </LinearGradientBrush>--><!--
+        </Border.Stroke>-->
         <handlers:BorderlessEntry 
             x:Name="entry"
             
@@ -32,7 +33,7 @@
             
             BackgroundColor="{StaticResource BRIXMedium}"
             FontSize="15"
-            TextColor="{StaticResource BRIXLight}"
+            TextColor="{Binding Source={x:Reference this}, Path=EntryColor}"
             
             Focused="Entry_Focused"
             Unfocused="Entry_Unfocused"
@@ -44,7 +45,7 @@
         Grid.Row="0" 
         Margin="10,0" 
         FontSize="15"
-        TextColor="{StaticResource BRIXLight}"
+        TextColor="{Binding Source={x:Reference this}, Path=EntryColor}"
         VerticalOptions="Center"
         VerticalTextAlignment="Center"
         HorizontalOptions="Start"

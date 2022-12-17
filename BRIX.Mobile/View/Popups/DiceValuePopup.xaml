@@ -10,12 +10,16 @@
     x:Class="BRIX.Mobile.View.Popups.DiceValuePopup"
     Color="Transparent">
 
-    <Border Style="{StaticResource BlockBorder}" WidthRequest="350">
-        <VerticalStackLayout>
-            <Label Style="{StaticResource ParagraphTitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DiceValuePopupTitle}}"/>
-            <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DiceValuePopupHint}}" LineBreakMode="WordWrap"/>
-            <controls:FramedEntry Text="{Binding Formula}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DiceValuePopupPlaceholder}}"/>
-            <HorizontalStackLayout Margin="0,20,0,0" Spacing="10" HorizontalOptions="End">
+    <Border Style="{StaticResource BlockBorder}" WidthRequest="350" Padding="0">
+        <VerticalStackLayout Margin="0,15">
+            <Label Style="{StaticResource ParagraphTitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DiceValuePopupTitle}}" Margin="15,0"/>
+            <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DiceValuePopupHint}}" LineBreakMode="WordWrap" Margin="15,0"/>
+            <controls:FramedEntry 
+                x:Name="formulaEntry"
+                Text="{Binding Formula}" 
+                Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DiceValuePopupPlaceholder}}"
+                Margin="15"/>
+            <HorizontalStackLayout Margin="0,0,15,0" Spacing="10" HorizontalOptions="End">
                 <Button Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Set}}" Command="{Binding SetCommand}" WidthRequest="100" Style="{StaticResource SmallerButton}"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>

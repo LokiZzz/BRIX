@@ -59,10 +59,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         /// </summary>
         /// <returns></returns>
         [RelayCommand]
-        public async Task KillThemAll()
+        public async Task Test()
         {
-            await _characterService.RemoveAllAsync();
-            await OnNavigatedAsync();
+            DiceValuePopupResult result = await ShowPopupAsync<DiceValuePopup, DiceValuePopupResult, DiceValuePopupParameters>(
+                new DiceValuePopupParameters { Formula = "" }
+            );
         }
 
         [RelayCommand]
