@@ -144,6 +144,12 @@
   <data name="Appearance" xml:space="preserve">
     <value>Appearance</value>
   </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="Average" xml:space="preserve">
+    <value>Average:</value>
+  </data>
   <data name="Backstory" xml:space="preserve">
     <value>Backstory</value>
   </data>
@@ -180,6 +186,15 @@
   <data name="CurrentCharacterPageTitle" xml:space="preserve">
     <value>Character</value>
   </data>
+  <data name="Damage" xml:space="preserve">
+    <value>Damage</value>
+  </data>
+  <data name="DamageEffectCurrentAdjustment" xml:space="preserve">
+    <value>Current (+0%)</value>
+  </data>
+  <data name="DamageEffectPageHint" xml:space="preserve">
+    <value>Here is the set of dice or value you should use to decide how much damage your ability dealt.</value>
+  </data>
   <data name="DeleteAbilityQuestion" xml:space="preserve">
     <value>Are you sure you want to delete the ability?</value>
   </data>
@@ -188,6 +203,15 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
+  </data>
+  <data name="DiceValuePopupHint" xml:space="preserve">
+    <value>Enter the value in the format commonly used for dice formulas. For example, 3d6 + 2d4 + 5. In such formulas, the number before «d» means the number of dice, the number after «d» - the number of faces on the dice of this type. You can use custom dice like d11 or d19 if you like.</value>
+  </data>
+  <data name="DiceValuePopupPlaceholder" xml:space="preserve">
+    <value>Dice formula</value>
+  </data>
+  <data name="DiceValuePopupTitle" xml:space="preserve">
+    <value>Dice value</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
@@ -206,6 +230,9 @@
   </data>
   <data name="ExperienceToLevelup" xml:space="preserve">
     <value>EXP to level up</value>
+  </data>
+  <data name="FastAdjustment" xml:space="preserve">
+    <value>Fast adjustment</value>
   </data>
   <data name="FreeExperience" xml:space="preserve">
     <value>Free EXP</value>
@@ -249,11 +276,17 @@
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>
   </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
   <data name="SelectLanguagePageTitle" xml:space="preserve">
     <value>Select language</value>
+  </data>
+  <data name="Set" xml:space="preserve">
+    <value>Set</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
@@ -269,6 +302,9 @@
   </data>
   <data name="SignInPageTitle" xml:space="preserve">
     <value>Sign In</value>
+  </data>
+  <data name="Spread" xml:space="preserve">
+    <value>Spread:</value>
   </data>
   <data name="Switch" xml:space="preserve">
     <value>Switch</value>

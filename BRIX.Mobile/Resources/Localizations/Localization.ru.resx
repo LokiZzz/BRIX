@@ -144,6 +144,12 @@
   <data name="Appearance" xml:space="preserve">
     <value>Внешность</value>
   </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Применить</value>
+  </data>
+  <data name="Average" xml:space="preserve">
+    <value>Среднее:</value>
+  </data>
   <data name="Backstory" xml:space="preserve">
     <value>Предыстория</value>
   </data>
@@ -180,6 +186,15 @@
   <data name="CurrentCharacterPageTitle" xml:space="preserve">
     <value>Персонаж</value>
   </data>
+  <data name="Damage" xml:space="preserve">
+    <value>Damage</value>
+  </data>
+  <data name="DamageEffectCurrentAdjustment" xml:space="preserve">
+    <value>Сейчас (+0%)</value>
+  </data>
+  <data name="DamageEffectPageHint" xml:space="preserve">
+    <value>Каждый раз, когда вы используете свою способность, вы будете бросать набор костей, указанный ниже, чтобы определить, сколько урона нанесла способность.</value>
+  </data>
   <data name="DeleteAbilityQuestion" xml:space="preserve">
     <value>Вы уверены, что хотите удалить способность?</value>
   </data>
@@ -188,6 +203,15 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>Описание</value>
+  </data>
+  <data name="DiceValuePopupHint" xml:space="preserve">
+    <value>Введите значение в формате,обычно используемом для формул с игральными костями. Например, 3d6 + 2d4 + 5. В таких формулах число перед «d» означает количество костей, а число после «d» — количество граней на костях. Вы можете использовать нестандартные кости, такие как d11 или d19, если хотите.</value>
+  </data>
+  <data name="DiceValuePopupPlaceholder" xml:space="preserve">
+    <value>Формула</value>
+  </data>
+  <data name="DiceValuePopupTitle" xml:space="preserve">
+    <value>Кости</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Править</value>
@@ -206,6 +230,9 @@
   </data>
   <data name="ExperienceToLevelup" xml:space="preserve">
     <value>Опыт до уровня</value>
+  </data>
+  <data name="FastAdjustment" xml:space="preserve">
+    <value>Быстрая настройка</value>
   </data>
   <data name="FreeExperience" xml:space="preserve">
     <value>Свободный опыт</value>
@@ -249,11 +276,17 @@
   <data name="Remove" xml:space="preserve">
     <value>Удалить</value>
   </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Сбросить</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>
   </data>
   <data name="SelectLanguagePageTitle" xml:space="preserve">
     <value>Язык</value>
+  </data>
+  <data name="Set" xml:space="preserve">
+    <value>Установить</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Настройки</value>
@@ -269,6 +302,9 @@
   </data>
   <data name="SignInPageTitle" xml:space="preserve">
     <value>Авторизация</value>
+  </data>
+  <data name="Spread" xml:space="preserve">
+    <value>Разброс:</value>
   </data>
   <data name="Switch" xml:space="preserve">
     <value>Сменить</value>

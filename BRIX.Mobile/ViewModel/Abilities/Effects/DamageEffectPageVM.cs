@@ -27,6 +27,28 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             return base.OnNavigatedAsync();
         }
 
+        private List<DamageChunkVM> GetChunks(DicePool dicePool)
+        {
+            List<DamageChunkVM> chunks = new();
+
+            if(dicePool != null)
+            {
+                if(dicePool.Dice.Any())
+                {
+                    chunks.AddRange(dicePool.Dice.Select(x => new DamageChunkVM { Dice = x }));
+                }
+
+                if(dicePool.Modifier > 0)
+                {
+                    chunks.Add(new DamageChunkVM { Modifier = dicePool.Modifier });
+                }
+            }
+
+            return chunks;
+        }
+
+
+
     }
 
     /// <summary>

@@ -140,6 +140,9 @@
 	  <MauiXaml Update="View\Popups\NumericEditorPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Popups\DiceValuePopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\Popups\QuestionPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -180,6 +183,9 @@
 	  </Compile>
 	  <Compile Update="View\Characters\AddOrEditCharacterPage.xaml.cs">
 	    <DependentUpon>AddOrEditCharacterPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Popups\DiceValuePopup.xaml.cs">
+	    <DependentUpon>DiceValuePopup.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 

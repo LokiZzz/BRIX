@@ -142,6 +142,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply.
+        /// </summary>
+        public static string Apply {
+            get {
+                return ResourceManager.GetString("Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average:.
+        /// </summary>
+        public static string Average {
+            get {
+                return ResourceManager.GetString("Average", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Backstory.
         /// </summary>
         public static string Backstory {
@@ -250,6 +268,33 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Damage.
+        /// </summary>
+        public static string Damage {
+            get {
+                return ResourceManager.GetString("Damage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current (+0%).
+        /// </summary>
+        public static string DamageEffectCurrentAdjustment {
+            get {
+                return ResourceManager.GetString("DamageEffectCurrentAdjustment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here is the set of dice or value you should use to decide how much damage your ability dealt..
+        /// </summary>
+        public static string DamageEffectPageHint {
+            get {
+                return ResourceManager.GetString("DamageEffectPageHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the ability?.
         /// </summary>
         public static string DeleteAbilityQuestion {
@@ -273,6 +318,33 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Description {
             get {
                 return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the value in the format commonly used for dice formulas. For example, 3d6 + 2d4 + 5. In such formulas, the number before «d» means the number of dice, the number after «d» - the number of faces on the dice of this type. You can use custom dice like d11 or d19 if you like..
+        /// </summary>
+        public static string DiceValuePopupHint {
+            get {
+                return ResourceManager.GetString("DiceValuePopupHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dice formula.
+        /// </summary>
+        public static string DiceValuePopupPlaceholder {
+            get {
+                return ResourceManager.GetString("DiceValuePopupPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dice value.
+        /// </summary>
+        public static string DiceValuePopupTitle {
+            get {
+                return ResourceManager.GetString("DiceValuePopupTitle", resourceCulture);
             }
         }
         
@@ -327,6 +399,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string ExperienceToLevelup {
             get {
                 return ResourceManager.GetString("ExperienceToLevelup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fast adjustment.
+        /// </summary>
+        public static string FastAdjustment {
+            get {
+                return ResourceManager.GetString("FastAdjustment", resourceCulture);
             }
         }
         
@@ -457,6 +538,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Save {
@@ -471,6 +561,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string SelectLanguagePageTitle {
             get {
                 return ResourceManager.GetString("SelectLanguagePageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set.
+        /// </summary>
+        public static string Set {
+            get {
+                return ResourceManager.GetString("Set", resourceCulture);
             }
         }
         
@@ -516,6 +615,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string SignInPageTitle {
             get {
                 return ResourceManager.GetString("SignInPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spread:.
+        /// </summary>
+        public static string Spread {
+            get {
+                return ResourceManager.GetString("Spread", resourceCulture);
             }
         }
         
