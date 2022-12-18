@@ -6,6 +6,8 @@ using BRIX.Library.Effects;
 using BRIX.Library.Mathematics;
 using System.Runtime.Intrinsics.Arm;
 
+DicePool breakedDown = DicePool.FromValue(40, 0.25);
+
 string input = string.Empty;
 
 while(input != "stop")

@@ -34,8 +34,6 @@ namespace BRIX.Library.DiceValue
             input = input.Replace(" ", string.Empty);
             string[] splittedInput = input.Split('+', StringSplitOptions.RemoveEmptyEntries);
 
-            
-
             return splittedInput.All(x =>
                 DicePool.DiceRegex.IsMatch(x) 
                 || DicePool.MultiDiceRegex.IsMatch(x)

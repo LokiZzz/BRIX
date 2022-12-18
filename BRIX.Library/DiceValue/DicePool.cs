@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using BRIX.Library.Extensions;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace BRIX.Library.DiceValue
@@ -154,6 +157,61 @@ namespace BRIX.Library.DiceValue
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Раскладывает числовое значение на набор костей с заданным разбросом. Разброс задаётся в процентах от исходного 
+        /// значения. Таким образом 10 с разбросом 0.2 дадут диапазон 8-12. Любого заданного разброса метод будет 
+        /// пытаться достичь при помощи стандартных костей (1к4, 1к6, 1к8, 1к10, 1к12, 1к20), стараясь не выходить за 20 штук.
+        /// </summary>
+        /// <param name="value">Значение, раскладываемое на кости.</param>
+        /// <param name="desiredSpreadPercent">Желаемый разброс значений в диапазоне от 0 до 1.</param>
+        /// <returns></returns>
+        public static DicePool FromValue(int value, double desiredSpreadPercent, bool includeD2 = false, int maxDiceCount = 20)
+        {
+            if (desiredSpreadPercent < 0 || desiredSpreadPercent > 1)
+            {
+                throw new ArgumentException("Разброс должен быть задан значением от 0 до 1.");
+            }
+
+            DicePool resultDicePool = new();
+
+            if (desiredSpreadPercent != 0)
+            {
+                int lower = (value * (1 - desiredSpreadPercent)).Round();
+                int upper = (value * (1 + desiredSpreadPercent)).Round();
+                int spreadSize = upper - lower;
+
+                List<int> standartDiceSet = Enum.GetValues<EStandartDice>()
+                    .Select(x => (int)x)
+                    .Where(x => x > 2 || includeD2)
+                    .ToList();
+                int diceCount = 0;
+                int diceFaces = 0;
+
+                foreach (int dice in standartDiceSet)
+                {
+                    if(spreadSize % (dice - 1) == 0)
+                    {
+                        diceCount = spreadSize / (dice - 1);
+                        diceFaces = dice;
+                        resultDicePool.Add(new Dice(diceFaces, diceCount));
+                        resultDicePool.Modifier = lower - diceCount;
+
+                        break;
+                    }
+
+                    // Найти ближайший вариант, если идеальных не будет
+
+                    // Если дайсов слишком много (больше 30-ти), то всё лишнее сливать в модификатор.
+                }
+            }
+            else
+            {
+                resultDicePool.Modifier = value;
+            }
+
+            return resultDicePool;
         }
     }
 }
