@@ -6,14 +6,16 @@ using BRIX.Library.Effects;
 using BRIX.Library.Mathematics;
 using System.Runtime.Intrinsics.Arm;
 
-DicePool breakedDown = DicePool.FromValue(40, 0.25);
-
 string input = string.Empty;
 
 while(input != "stop")
 {
     input = Console.ReadLine() ?? string.Empty;
-    bool parsed = DicePool.TryParse(input, out DicePool dp);
+    string[] splitted = input.Split('-');
+    int from = int.Parse(splitted[0]);
+    int to = int.Parse(splitted[1]);
 
-    Console.WriteLine($"Parsed: {parsed}\nInput: {input}\nToString(): {dp}");
+    DicePool dicePool = DicePool.FromRange(from, to);
+
+    Console.WriteLine(dicePool);
 }

@@ -181,29 +181,45 @@ namespace BRIX.Library.DiceValue
                 int lower = (value * (1 - desiredSpreadPercent)).Round();
                 int upper = (value * (1 + desiredSpreadPercent)).Round();
                 int spreadSize = upper - lower;
+                int diceCount = 0;
+                int diceFaces = 0;
 
                 List<int> standartDiceSet = Enum.GetValues<EStandartDice>()
                     .Select(x => (int)x)
                     .Where(x => x > 2 || includeD2)
+                    .OrderByDescending(x => x)
                     .ToList();
-                int diceCount = 0;
-                int diceFaces = 0;
+
+                (int Dice, int Count, int Remainder) nearestNonPerfect = (default, default, default);
+                bool perfectFound = false;
 
                 foreach (int dice in standartDiceSet)
                 {
-                    if(spreadSize % (dice - 1) == 0)
+                    int spreadRemainder = spreadSize % (dice - 1);
+
+                    if (spreadRemainder == 0 && spreadSize / (dice - 1) <= lower)
                     {
                         diceCount = spreadSize / (dice - 1);
                         diceFaces = dice;
                         resultDicePool.Add(new Dice(diceFaces, diceCount));
                         resultDicePool.Modifier = lower - diceCount;
+                        perfectFound = true;
 
                         break;
                     }
+                    else
+                    {
+                        if(nearestNonPerfect.Dice == default || spreadRemainder < nearestNonPerfect.Remainder)
+                        {
+                            nearestNonPerfect = (dice, Math.Max(spreadSize / (dice - 1), 1), spreadRemainder);
+                        }
+                    }
+                }
 
-                    // Найти ближайший вариант, если идеальных не будет
-
-                    // Если дайсов слишком много (больше 30-ти), то всё лишнее сливать в модификатор.
+                if(!perfectFound)
+                {
+                    resultDicePool.Add(new Dice(nearestNonPerfect.Dice, nearestNonPerfect.Count));
+                    resultDicePool.Modifier = lower - nearestNonPerfect.Count;
                 }
             }
             else
@@ -212,6 +228,19 @@ namespace BRIX.Library.DiceValue
             }
 
             return resultDicePool;
+        }
+
+        public static DicePool FromRange(int from, int to)
+        {
+            if(to < from || from <= 0 || to <= 0)
+            {
+                throw new ArgumentException("Оба края диапазона должны быть больше нуля, а левый край должен быть больше правого.");
+            }
+
+            double average = ((double)from + to) / 2;
+            double spread = (average - from) / average;
+
+            return FromValue(average.Round(), spread);
         }
     }
 }
