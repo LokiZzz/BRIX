@@ -30,13 +30,7 @@
         <VerticalStackLayout Grid.Row="1" Margin="10,0">
             <Label Style="{StaticResource TitleLabel}" Text="{x:Static lcz:LocalizationKeys.Effects}" Margin="10,5,10,15"/>
             <Button
-                Style="{StaticResource LightButton}" 
-                BackgroundColor="{StaticResource BRIXDark}"
-                CornerRadius="10" 
-                HeightRequest="75"
-                FontFamily="Awesome"
-                FontSize="36"
-                Text="{x:Static icons:Awesome.CirclePlus}"
+                Style="{StaticResource LightPlusButton}" 
                 Command="{Binding AddEffectCommand}"/>
             <CollectionView>
 

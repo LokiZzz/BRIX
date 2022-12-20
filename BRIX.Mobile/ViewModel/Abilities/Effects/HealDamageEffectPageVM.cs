@@ -1,5 +1,6 @@
 ﻿using BRIX.Library.DiceValue;
 using BRIX.Library.Effects;
+using BRIX.Library.Extensions;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Popups;
@@ -39,6 +40,29 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             }
         }
 
+        private DicePool _dicePoolResetTo = null;
+
+        [RelayCommand]
+        private void Adjust(string percentInput)
+        {
+            int percent = int.Parse(percentInput);
+            _dicePoolResetTo = _dicePoolResetTo == null ? HealDamage.Impact : _dicePoolResetTo;
+            HealDamage.Impact = DicePool.FromAdjusted(HealDamage.Impact, percent);
+        }
+
+
+        [RelayCommand]
+        private void ApplyAdjustment()
+        {
+            _dicePoolResetTo = null;
+        }
+
+        [RelayCommand]
+        private void ResetAdjustment()
+        {
+            HealDamage.Impact = _dicePoolResetTo;
+        }
+
         public override Task OnNavigatedAsync()
         {
             return Task.CompletedTask;
@@ -48,6 +72,11 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         {
             Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
             HealDamage = query.GetParameterOrDefault<HealDamageEffectModel>(NavigationParameters.HealDamageEffect) ?? new();
+
+            if (HealDamage.Impact.IsEmpty)
+            {
+                HealDamage.Impact = new DicePool((1, 4));
+            }
 
             query.Clear();
         }

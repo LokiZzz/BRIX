@@ -32,6 +32,8 @@ namespace BRIX.Library.DiceValue
 
         public int Modifier { get; set; }
 
+        public bool IsEmpty => !Dice.Any() && Modifier == default;
+
         /// <summary>
         /// Добавляет в пул копию переданных костей.
         /// </summary>
@@ -241,6 +243,21 @@ namespace BRIX.Library.DiceValue
             double spread = (average - from) / average;
 
             return FromValue(average.Round(), spread);
+        }
+
+        public static DicePool FromAdjusted(DicePool dicePoolToAdjust, int percent)
+        {
+            if (percent < -100)
+            {
+                throw new ArgumentOutOfRangeException("Нельзя уменьшить на процент больший 100%");
+            }
+
+            int average = dicePoolToAdjust.Average();
+            double spread = (double)(average - dicePoolToAdjust.Min()) / average;
+
+            int newAverage = (average + average * ((double)percent / 100)).Round();
+
+            return FromValue(newAverage, spread);
         }
     }
 }
