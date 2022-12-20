@@ -1,0 +1,36 @@
+﻿using BRIX.Library;
+using BRIX.Library.DiceValue;
+using BRIX.Library.Effects;
+using BRIX.Mobile.ViewModel.Abilities;
+using CommunityToolkit.Mvvm.ComponentModel;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BRIX.Mobile.Models.Abilities.Effects
+{
+    public partial class HealDamageEffectModel : ObservableObject
+    {
+        public HealDamageEffectModel() : this(new HealDamageEffect()) { }
+
+        public HealDamageEffectModel(HealDamageEffect effect) => InternalModel = effect;
+
+        public HealDamageEffect InternalModel { get; }
+
+        public DicePool Impact
+        {
+            get => InternalModel.Impact;
+            set
+            {
+                SetProperty(InternalModel.Impact, value, InternalModel, (model, prop) => model.Impact = prop);
+                DiceChunks = new(DiceFormulaChunkVM.GetChunks(value));
+            }
+        }
+
+        [ObservableProperty]
+        private ObservableCollection<DiceFormulaChunkVM> _diceChunks = new();
+    }
+}

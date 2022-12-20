@@ -48,25 +48,25 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 {
                     Name = _localization[LocalizationKeys.EffectDamage].ToString(),
                     Icon = AwesomeRPG.Sword,
-                    EditPage = typeof(DamageEffectPage)
+                    EditPage = typeof(HealDamageEffectPage)
                 },
                 new()
                 {
                     Name = _localization[LocalizationKeys.EffectHeal].ToString(),
                     Icon = AwesomeRPG.HealthIncrease,
-                    EditPage = typeof(DamageEffectPage) //временно
+                    EditPage = typeof(HealDamageEffectPage) //временно
                 },
                 new()
                 {
                     Name = "Just win",
                     Icon = AwesomeRPG.FireballSword,
-                    EditPage = typeof(DamageEffectPage) //временно
+                    EditPage = typeof(HealDamageEffectPage) //временно
                 },
                 new()
                 {
                     Name = "Win another way",
                     Icon = AwesomeRPG.PoisonCloud,
-                    EditPage = typeof(DamageEffectPage) //временно
+                    EditPage = typeof(HealDamageEffectPage) //временно
                 },
             };
 

@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             xmlns:abvm="clr-namespace:BRIX.Mobile.ViewModel.Abilities"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities.Effects"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
-             x:DataType="vm:DamageEffectPageVM"
-             x:Class="BRIX.Mobile.View.Abilities.Effects.DamageEffectPage"
+             x:DataType="vm:HealDamageEffectPageVM"
+             x:Class="BRIX.Mobile.View.Abilities.Effects.HealDamageEffectPage"
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectDamage}}">
 
     <ContentPage.Resources>
@@ -28,17 +29,16 @@
                         Command="{Binding EditFormulaCommand}"/>
                 </Grid>
                 <Label Grid.Row="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DamageEffectPageHint}}"/>
-                <CollectionView Grid.Row="2" ItemsSource="{Binding Damage}">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical" Span="4" HorizontalItemSpacing="10" VerticalItemSpacing="10"/>
-                    </CollectionView.ItemsLayout>
+                <!--Здесь Margin у коллекции компенсирует лишний Margin у элемента, это workaround бага MAUI-->
+                <CollectionView Grid.Row="2" ItemsSource="{Binding HealDamage.DiceChunks}" ItemsLayout="VerticalGrid, 4" Margin="-5">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="vm:DamageChunkVM">
+                        <DataTemplate x:DataType="abvm:DiceFormulaChunkVM">
                             <Border 
                                 Style="{StaticResource BlockBorder}" 
                                 BackgroundColor="{StaticResource BRIXDim}"
                                 StrokeShape="RoundRectangle 5"
-                                Padding="7">
+                                Padding="7"
+                                Margin="5">
                                 <Label 
                                     Style="{StaticResource TitleLabel}" 
                                     Text="{Binding ChunkText}" 

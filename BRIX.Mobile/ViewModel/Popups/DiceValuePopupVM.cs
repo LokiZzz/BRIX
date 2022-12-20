@@ -17,9 +17,9 @@ namespace BRIX.Mobile.ViewModel.Popups
         private string _formula;
 
         [RelayCommand]
-        private async Task Set()
+        private void Set()
         {
-            if (DicePool.TryParse(Formula, out DicePool? parsed))
+            if (DicePool.TryParse(Formula, out DicePool parsed))
             {
                 View.Close(new DiceValuePopupResult { DicePool = parsed });
             }

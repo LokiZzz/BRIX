@@ -2,9 +2,9 @@ using BRIX.Mobile.ViewModel.Abilities.Effects;
 
 namespace BRIX.Mobile.View.Abilities.Effects;
 
-public partial class DamageEffectPage : ContentPage
+public partial class HealDamageEffectPage : ContentPage
 {
-	public DamageEffectPage(DamageEffectPageVM context)
+	public HealDamageEffectPage(HealDamageEffectPageVM context)
 	{
 		InitializeComponent();
 		BindingContext = context;
