@@ -17,9 +17,23 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         public int Modifier { get; set; }
 
-        public string ChunkText => Dice != null && Dice.Count > 0
-            ? $"{Dice.Count}d{Dice.NumberOfFaces}"
-            : $"+{Modifier}";
+        public string ChunkText 
+        {
+            get
+            {
+                if (Dice != null && Dice.Count > 0)
+                {
+                    return $"{Dice.Count}d{Dice.NumberOfFaces}";
+                }
+                else
+                {
+                    if (Modifier > 0) return $"+{Modifier}";
+                    if (Modifier < 0) return $"—{Math.Abs(Modifier)}";
+
+                    return string.Empty;
+                }
+            }
+        }
 
         public static ObservableCollection<DiceFormulaChunkVM> GetChunks(DicePool dicePool)
         {
@@ -32,7 +46,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                     chunks.AddRange(dicePool.Dice.Select(x => new DiceFormulaChunkVM { Dice = x }));
                 }
 
-                if (dicePool.Modifier > 0)
+                if (dicePool.Modifier != 0)
                 {
                     chunks.Add(new DiceFormulaChunkVM { Modifier = dicePool.Modifier });
                 }

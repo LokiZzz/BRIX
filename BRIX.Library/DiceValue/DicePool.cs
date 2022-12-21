@@ -239,32 +239,32 @@ namespace BRIX.Library.DiceValue
             return resultDicePool;
         }
 
-        //public static DicePool FromRange(int from, int to)
-        //{
-        //    if (to < from || from <= 0 || to <= 0)
-        //    {
-        //        throw new ArgumentException("Оба края диапазона должны быть больше нуля, а левый край должен быть больше правого.");
-        //    }
+        public static DicePool FromValue(int value, double spread)
+        {
+            if (value <= 0 || spread < 0 || spread >= 1)
+            {
+                throw new ArgumentException("Оба края диапазона должны быть больше нуля, а левый край должен быть больше правого.");
+            }
 
-        //    double average = ((double)from + to) / 2;
-        //    double spread = (average - from) / average;
+            int from = (value - value * spread).Round();
+            int to = (value + value * spread).Round();
 
-        //    return FromValue(average.Round(), spread);
-        //}
+            return FromRange(from, to);
+        }
 
-        //public static DicePool FromAdjusted(DicePool dicePoolToAdjust, int percent)
-        //{
-        //    if (percent < -100)
-        //    {
-        //        throw new ArgumentOutOfRangeException("Нельзя уменьшить на процент больший 100%");
-        //    }
+        public static DicePool FromAdjusted(DicePool dicePoolToAdjust, int percent)
+        {
+            if (percent < -100)
+            {
+                throw new ArgumentOutOfRangeException("Нельзя уменьшить на процент больший 100%");
+            }
 
-        //    int average = dicePoolToAdjust.Average();
-        //    double spread = (double)(average - dicePoolToAdjust.Min()) / average;
+            int average = dicePoolToAdjust.Average();
+            double spread = (double)(average - dicePoolToAdjust.Min()) / average;
 
-        //    int newAverage = (average + average * ((double)percent / 100)).Round();
+            int newAverage = (average + average * ((double)percent / 100)).Round();
 
-        //    return FromValue(newAverage, spread);
-        //}
+            return FromValue(newAverage, spread);
+        }
     }
 }

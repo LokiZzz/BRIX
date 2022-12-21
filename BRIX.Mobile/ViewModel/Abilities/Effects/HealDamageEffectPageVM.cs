@@ -59,7 +59,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             }
         }
 
-        [RelayCommand]
         private void Adjust(int percent)
         {
             if(_doNotAdjustOnce)
@@ -70,7 +69,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             }
 
             _dicePoolToReset = _dicePoolToReset == null ? HealDamage.Impact.Copy() : _dicePoolToReset;
-            //HealDamage.Impact = DicePool.FromAdjusted(_dicePoolToReset, percent);
+            HealDamage.Impact = DicePool.FromAdjusted(_dicePoolToReset, percent);
         }
 
 
