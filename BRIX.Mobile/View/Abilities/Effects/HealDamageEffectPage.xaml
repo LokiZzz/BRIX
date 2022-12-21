@@ -65,20 +65,31 @@
                     </CollectionView>
                     <Grid Grid.Row="3" RowDefinitions="*,*" ColumnDefinitions="auto,*" ColumnSpacing="20">
                         <Label Grid.Row="0" Grid.Column="0" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Spread}}"/>
-                        <Label Grid.Row="0" Grid.Column="1" Text="1 — 15"/>
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding HealDamage.SpreadText}"/>
                         <Label Grid.Row="1" Grid.Column="0" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Average}}"/>
-                        <Label Grid.Row="1" Grid.Column="1" Text="8"/>
+                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding HealDamage.Average}"/>
                     </Grid>
-                    <Label Grid.Row="4" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.FastAdjustment}}"/>
-                    <Grid Grid.Row="5" ColumnDefinitions="*,*,*,*" ColumnSpacing="10">
-                        <Button Grid.Column="0" Style="{StaticResource LightButton}" Text="-100%" Command="{Binding AdjustCommand}" CommandParameter="-100"/>
-                        <Button Grid.Column="1" Style="{StaticResource LightButton}" Text="-50%" Command="{Binding AdjustCommand}" CommandParameter="-50"/>
-                        <Button Grid.Column="2" Style="{StaticResource LightButton}" Text="+50%" Command="{Binding AdjustCommand}" CommandParameter="50"/>
-                        <Button Grid.Column="3" Style="{StaticResource LightButton}" Text="+100%" Command="{Binding AdjustCommand}" CommandParameter="100"/>
-                    </Grid>
-                    <Grid Grid.Row="6" ColumnDefinitions="*,*" ColumnSpacing="10" Margin="1">
+                    <!--Быстрая настройка!-->
+                    <!--<Label Grid.Row="4" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.FastAdjustment}}"/>
+                    <Grid Grid.Row="5" ColumnDefinitions="*,*" ColumnSpacing="10" Margin="1">
+                        <Button Grid.Column="0" Style="{StaticResource LightButton}" Text="-50%" Command="{Binding AdjustCommand}" CommandParameter="-50"/>
+                        <Button Grid.Column="1" Style="{StaticResource LightButton}" Text="+50%" Command="{Binding AdjustCommand}" CommandParameter="50"/>
+                    </Grid>-->
+                    <!--<Grid Grid.Row="6" ColumnDefinitions="*,*" ColumnSpacing="10" Margin="1">
                         <Button Grid.Column="0" Style="{StaticResource LightButton}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Reset}}" Command="{Binding ApplyAdjustmentCommand}"/>
                         <Button Grid.Column="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Apply}}" Command="{Binding ResetAdjustmentCommand}"/>
+                    </Grid>-->
+
+                    <Label Grid.Row="4" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.FastAdjustment}}"/>
+                    <Grid Grid.Row="5" RowDefinitions="auto,auto" ColumnDefinitions="auto,*,auto" Margin="0,0,0,10">
+                        <Label Grid.Row="0" Grid.Column="0" Text="-50%" HorizontalOptions="Start"/>
+                        <Label Grid.Row="0" Grid.Column="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DamageEffectCurrentAdjustment}}" HorizontalOptions="Center"/>
+                        <Label Grid.Row="0" Grid.Column="2" Text="+50%" HorizontalOptions="End"/>
+                        <Slider Grid.Row="1" Grid.ColumnSpan="3" Minimum="-5" Maximum="5" Value="{Binding Adjustment, Mode=TwoWay}"/>
+                    </Grid>
+                    <Grid Grid.Row="6" ColumnDefinitions="*,*" ColumnSpacing="10" Margin="1">
+                        <Button Grid.Column="0" Style="{StaticResource LightButton}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Reset}}" Command="{Binding ResetAdjustmentCommand}"/>
+                        <Button Grid.Column="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Apply}}" Command="{Binding ApplyAdjustmentCommand}"/>
                     </Grid>
                 </Grid>
             </Border>

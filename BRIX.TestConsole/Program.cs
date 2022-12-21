@@ -17,5 +17,5 @@ while(input != "stop")
 
     DicePool dicePool = DicePool.FromRange(from, to);
 
-    Console.WriteLine(dicePool);
+    Console.WriteLine($"{dicePool}: {dicePool.Min()}—{dicePool.Max()}");
 }

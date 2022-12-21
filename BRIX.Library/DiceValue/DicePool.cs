@@ -91,7 +91,11 @@ namespace BRIX.Library.DiceValue
                 builder.Append($"{dice.Count}d{dice.NumberOfFaces}");
             }
 
-            if (Modifier > 0)
+            if (Modifier < 0)
+            {
+                builder.Append($"{Modifier}");
+            }
+            else if (Modifier > 0)
             {
                 builder.Append($"+{Modifier}");
             }
@@ -169,19 +173,17 @@ namespace BRIX.Library.DiceValue
         /// <param name="value">Значение, раскладываемое на кости.</param>
         /// <param name="desiredSpreadPercent">Желаемый разброс значений в диапазоне от 0 до 1.</param>
         /// <returns></returns>
-        public static DicePool FromValue(int value, double desiredSpreadPercent, bool includeD2 = false, int maxDiceCount = 20)
+        public static DicePool FromRange(int lower, int upper, bool includeD2 = false, int maxDiceCount = 20)
         {
-            if (desiredSpreadPercent < 0 || desiredSpreadPercent > 1)
+            if (lower < 1 || lower > upper)
             {
-                throw new ArgumentException("Разброс должен быть задан значением от 0 до 1.");
+                throw new ArgumentException("Lower must be >= 1, and lower must be > upper.");
             }
 
             DicePool resultDicePool = new();
 
-            if (desiredSpreadPercent != 0)
+            if (lower != upper)
             {
-                int lower = (value * (1 - desiredSpreadPercent)).Round();
-                int upper = (value * (1 + desiredSpreadPercent)).Round();
                 int spreadSize = upper - lower;
                 int diceCount = 0;
                 int diceFaces = 0;
@@ -211,7 +213,12 @@ namespace BRIX.Library.DiceValue
                     }
                     else
                     {
-                        if(nearestNonPerfect.Dice == default || spreadRemainder < nearestNonPerfect.Remainder)
+                        bool noNearest = nearestNonPerfect.Dice == default;
+                        bool reminderIsLess = spreadRemainder < nearestNonPerfect.Remainder;
+                        bool diffBtwDiceAndReminderIsLess = Math.Abs(spreadRemainder - dice)
+                            < Math.Abs(nearestNonPerfect.Remainder - nearestNonPerfect.Dice);
+
+                        if (noNearest || reminderIsLess || diffBtwDiceAndReminderIsLess)
                         {
                             nearestNonPerfect = (dice, Math.Max(spreadSize / (dice - 1), 1), spreadRemainder);
                         }
@@ -226,38 +233,38 @@ namespace BRIX.Library.DiceValue
             }
             else
             {
-                resultDicePool.Modifier = value;
+                resultDicePool.Modifier = lower;
             }
 
             return resultDicePool;
         }
 
-        public static DicePool FromRange(int from, int to)
-        {
-            if(to < from || from <= 0 || to <= 0)
-            {
-                throw new ArgumentException("Оба края диапазона должны быть больше нуля, а левый край должен быть больше правого.");
-            }
+        //public static DicePool FromRange(int from, int to)
+        //{
+        //    if (to < from || from <= 0 || to <= 0)
+        //    {
+        //        throw new ArgumentException("Оба края диапазона должны быть больше нуля, а левый край должен быть больше правого.");
+        //    }
 
-            double average = ((double)from + to) / 2;
-            double spread = (average - from) / average;
+        //    double average = ((double)from + to) / 2;
+        //    double spread = (average - from) / average;
 
-            return FromValue(average.Round(), spread);
-        }
+        //    return FromValue(average.Round(), spread);
+        //}
 
-        public static DicePool FromAdjusted(DicePool dicePoolToAdjust, int percent)
-        {
-            if (percent < -100)
-            {
-                throw new ArgumentOutOfRangeException("Нельзя уменьшить на процент больший 100%");
-            }
+        //public static DicePool FromAdjusted(DicePool dicePoolToAdjust, int percent)
+        //{
+        //    if (percent < -100)
+        //    {
+        //        throw new ArgumentOutOfRangeException("Нельзя уменьшить на процент больший 100%");
+        //    }
 
-            int average = dicePoolToAdjust.Average();
-            double spread = (double)(average - dicePoolToAdjust.Min()) / average;
+        //    int average = dicePoolToAdjust.Average();
+        //    double spread = (double)(average - dicePoolToAdjust.Min()) / average;
 
-            int newAverage = (average + average * ((double)percent / 100)).Round();
+        //    int newAverage = (average + average * ((double)percent / 100)).Round();
 
-            return FromValue(newAverage, spread);
-        }
+        //    return FromValue(newAverage, spread);
+        //}
     }
 }

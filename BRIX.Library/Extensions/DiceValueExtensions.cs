@@ -9,9 +9,9 @@ namespace BRIX.Library.DiceValue
         public static int Average(this Dice dice)
         {
             double n = dice.NumberOfFaces;
-            double average = (1 + n) / 2;
+            double average = (double)(1 + n) / 2;
 
-            return average.Round() * dice.Count;
+            return (average * dice.Count).Round();
         }
 
         public static int Average(this DicePool dicePool)

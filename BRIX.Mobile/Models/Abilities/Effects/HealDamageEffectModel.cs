@@ -27,10 +27,15 @@ namespace BRIX.Mobile.Models.Abilities.Effects
             {
                 SetProperty(InternalModel.Impact, value, InternalModel, (model, prop) => model.Impact = prop);
                 DiceChunks = new(DiceFormulaChunkVM.GetChunks(value));
+                OnPropertyChanged(nameof(SpreadText));
+                OnPropertyChanged(nameof(Average));
             }
         }
 
         [ObservableProperty]
         private ObservableCollection<DiceFormulaChunkVM> _diceChunks = new();
+
+        public string SpreadText => $"{Impact.Min()} — {Impact.Max()}";
+        public int Average => Impact.Average();
     }
 }

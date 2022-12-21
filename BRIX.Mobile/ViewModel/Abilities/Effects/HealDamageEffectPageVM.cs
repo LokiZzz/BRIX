@@ -6,6 +6,7 @@ using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
 using BRIX.Mobile.ViewModel.Popups;
+using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -37,30 +38,57 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             if (result != null)
             {
                 HealDamage.Impact = result.DicePool;
+                _dicePoolToReset = null;
             }
         }
 
-        private DicePool _dicePoolResetTo = null;
+        private DicePool _dicePoolToReset = null;
+        private bool _doNotAdjustOnce = false;
+
+        private double _adjustment = 0;
+        public double Adjustment
+        {
+            get => _adjustment;
+            set
+            {
+                if(Math.Abs(_adjustment - value) >= 1)
+                {
+                    SetProperty(ref _adjustment, value);
+                    Adjust(value.Round() * 10);
+                }
+            }
+        }
 
         [RelayCommand]
-        private void Adjust(string percentInput)
+        private void Adjust(int percent)
         {
-            int percent = int.Parse(percentInput);
-            _dicePoolResetTo = _dicePoolResetTo == null ? HealDamage.Impact : _dicePoolResetTo;
-            HealDamage.Impact = DicePool.FromAdjusted(HealDamage.Impact, percent);
+            if(_doNotAdjustOnce)
+            {
+                _doNotAdjustOnce = false;
+
+                return;
+            }
+
+            _dicePoolToReset = _dicePoolToReset == null ? HealDamage.Impact.Copy() : _dicePoolToReset;
+            //HealDamage.Impact = DicePool.FromAdjusted(_dicePoolToReset, percent);
         }
 
 
         [RelayCommand]
         private void ApplyAdjustment()
         {
-            _dicePoolResetTo = null;
+            _dicePoolToReset = null;
+            _doNotAdjustOnce = true;
+            Adjustment = 0;
         }
 
         [RelayCommand]
         private void ResetAdjustment()
         {
-            HealDamage.Impact = _dicePoolResetTo;
+            HealDamage.Impact = _dicePoolToReset;
+            _dicePoolToReset = null;
+            _doNotAdjustOnce = true;
+            Adjustment = 0;
         }
 
         public override Task OnNavigatedAsync()
