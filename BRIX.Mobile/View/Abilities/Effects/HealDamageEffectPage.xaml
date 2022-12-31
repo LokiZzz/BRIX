@@ -17,82 +17,113 @@
         <controls:TitleView/>
     </Shell.TitleView>
 
-    <ScrollView>
-        <Grid RowDefinitions="auto,auto" RowSpacing="10">
-            <Border Grid.Row="0" Style="{StaticResource BlockBorder}">
-                <Grid RowDefinitions="auto,auto,*,auto,auto,auto,auto" RowSpacing="10">
-                    <Grid Grid.Row="0" ColumnDefinitions="*, auto">
-                        <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Damage}}"/>
-                        <Button 
-                            Grid.Column="1" 
-                            Style="{StaticResource SquareIconButton}" 
-                            Text="{x:Static icons:Awesome.PenToSquare}"
-                            Command="{Binding EditFormulaCommand}"/>
-                    </Grid>
-                    <Label Grid.Row="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DamageEffectPageHint}}"/>
-                    <!--Здесь Margin у коллекции компенсирует лишний Margin у элемента, это workaround бага MAUI, 
-                    который не позволяет нормально установить ItemsLayout через тег (если так сделать, то CollectionView сломается)-->
-                    <CollectionView Grid.Row="2" ItemsSource="{Binding HealDamage.DiceChunks}" ItemsLayout="VerticalGrid, 4" Margin="-5">
-                        <!--Сколько ещё вещей в мауи не работает, лол?-->
-                        <!--<CollectionView.EmptyView>
-                            <ContentView>
-                                <VerticalStackLayout BackgroundColor="Red">
-                                    <Button
-                                    Style="{StaticResource LightPlusButton}" 
-                                    BackgroundColor="{StaticResource BRIXMedium}"
-                                    Command="{Binding EditFormulaCommand}"/>
-                                </VerticalStackLayout>
-                            </ContentView>
-                        </CollectionView.EmptyView>-->
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="abvm:DiceFormulaChunkVM">
-                                <Border 
-                                    Style="{StaticResource BlockBorder}" 
-                                    BackgroundColor="{StaticResource BRIXDim}"
-                                    StrokeShape="RoundRectangle 5"
-                                    Padding="7"
-                                    Margin="5">
-                                    <Label 
-                                        Style="{StaticResource TitleLabel}" 
-                                        Text="{Binding ChunkText}" 
-                                        HorizontalOptions="Center" 
-                                        HorizontalTextAlignment="Center"
-                                        Margin="-3,0,0,0"/>
-                                    <!--Margin здесь — это визуальная компенсация якорности текста-->
-                                </Border>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                    <Grid Grid.Row="3" RowDefinitions="*,*" ColumnDefinitions="auto,*" ColumnSpacing="20">
-                        <Label Grid.Row="0" Grid.Column="0" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Spread}}"/>
-                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding HealDamage.SpreadText}"/>
-                        <Label Grid.Row="1" Grid.Column="0" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Average}}"/>
-                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding HealDamage.Average}"/>
-                    </Grid>
-                    <!--Быстрая настройка!-->
-                    <!--<Label Grid.Row="4" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.FastAdjustment}}"/>
-                    <Grid Grid.Row="5" ColumnDefinitions="*,*" ColumnSpacing="10" Margin="1">
-                        <Button Grid.Column="0" Style="{StaticResource LightButton}" Text="-50%" Command="{Binding AdjustCommand}" CommandParameter="-50"/>
-                        <Button Grid.Column="1" Style="{StaticResource LightButton}" Text="+50%" Command="{Binding AdjustCommand}" CommandParameter="50"/>
-                    </Grid>-->
-                    <!--<Grid Grid.Row="6" ColumnDefinitions="*,*" ColumnSpacing="10" Margin="1">
-                        <Button Grid.Column="0" Style="{StaticResource LightButton}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Reset}}" Command="{Binding ApplyAdjustmentCommand}"/>
-                        <Button Grid.Column="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Apply}}" Command="{Binding ResetAdjustmentCommand}"/>
-                    </Grid>-->
+    <Grid RowDefinitions="*,auto">
+        <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never" >
+            <VerticalStackLayout Spacing="10" Margin="0,0,0,10">
+                <Border Style="{StaticResource BlockBorder}">
+                    <Grid RowDefinitions="auto,auto,*,auto,auto,auto,auto" RowSpacing="10">
+                        <Grid Grid.Row="0" ColumnDefinitions="*, auto">
+                            <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Damage}}"/>
+                            <Button 
+                                Grid.Column="1" 
+                                Style="{StaticResource SquareIconButton}" 
+                                Text="{x:Static icons:Awesome.PenToSquare}"
+                                Command="{Binding EditFormulaCommand}"/>
+                        </Grid>
+                        <Label Grid.Row="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DamageEffectPageHint}}"/>
+                        <!--Здесь Margin у коллекции компенсирует лишний Margin у элемента, это workaround бага MAUI, 
+                        который не позволяет нормально установить ItemsLayout через тег (если так сделать, то CollectionView сломается)-->
+                        <CollectionView Grid.Row="2" ItemsSource="{Binding HealDamage.DiceChunks}" ItemsLayout="VerticalGrid, 4" Margin="-5">
+                            <!--Сколько ещё вещей в мауи не работает, лол?-->
+                            <!--<CollectionView.EmptyView>
+                                <ContentView>
+                                    <VerticalStackLayout BackgroundColor="Red">
+                                        <Button
+                                        Style="{StaticResource LightPlusButton}" 
+                                        BackgroundColor="{StaticResource BRIXMedium}"
+                                        Command="{Binding EditFormulaCommand}"/>
+                                    </VerticalStackLayout>
+                                </ContentView>
+                            </CollectionView.EmptyView>-->
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="abvm:DiceFormulaChunkVM">
+                                    <Border 
+                                        Style="{StaticResource BlockBorder}" 
+                                        BackgroundColor="{StaticResource BRIXDim}"
+                                        StrokeShape="RoundRectangle 5"
+                                        Padding="7"
+                                        Margin="5">
+                                        <Label 
+                                            Style="{StaticResource TitleLabel}" 
+                                            Text="{Binding ChunkText}" 
+                                            HorizontalOptions="Center" 
+                                            HorizontalTextAlignment="Center"
+                                            Margin="-3,0,0,0"/>
+                                        <!--Margin здесь — это визуальная компенсация якорности текста-->
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <Grid Grid.Row="3" RowDefinitions="*,*" ColumnDefinitions="auto,*" ColumnSpacing="20">
+                            <Label Grid.Row="0" Grid.Column="0" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Spread}}"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding HealDamage.SpreadText}"/>
+                            <Label Grid.Row="1" Grid.Column="0" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Average}}"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding HealDamage.Average}"/>
+                        </Grid>
+                        <!--Быстрая настройка!-->
+                        <!--<Label Grid.Row="4" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.FastAdjustment}}"/>
+                        <Grid Grid.Row="5" ColumnDefinitions="*,*" ColumnSpacing="10" Margin="1">
+                            <Button Grid.Column="0" Style="{StaticResource LightButton}" Text="-50%" Command="{Binding AdjustCommand}" CommandParameter="-50"/>
+                            <Button Grid.Column="1" Style="{StaticResource LightButton}" Text="+50%" Command="{Binding AdjustCommand}" CommandParameter="50"/>
+                        </Grid>-->
+                        <!--<Grid Grid.Row="6" ColumnDefinitions="*,*" ColumnSpacing="10" Margin="1">
+                            <Button Grid.Column="0" Style="{StaticResource LightButton}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Reset}}" Command="{Binding ApplyAdjustmentCommand}"/>
+                            <Button Grid.Column="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Apply}}" Command="{Binding ResetAdjustmentCommand}"/>
+                        </Grid>-->
 
-                    <Label Grid.Row="4" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.FastAdjustment}}"/>
-                    <Grid Grid.Row="5" RowDefinitions="auto,auto" ColumnDefinitions="auto,*,auto" Margin="0,0,0,10">
-                        <Label Grid.Row="0" Grid.Column="0" Text="-50%" HorizontalOptions="Start"/>
-                        <Label Grid.Row="0" Grid.Column="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DamageEffectCurrentAdjustment}}" HorizontalOptions="Center"/>
-                        <Label Grid.Row="0" Grid.Column="2" Text="+50%" HorizontalOptions="End"/>
-                        <Slider Grid.Row="1" Grid.ColumnSpan="3" Minimum="-5" Maximum="5" Value="{Binding Adjustment, Mode=TwoWay}"/>
+                        <Label Grid.Row="4" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.FastAdjustment}}"/>
+                        <Grid Grid.Row="5" RowDefinitions="auto,auto" ColumnDefinitions="auto,*,auto" Margin="0,0,0,10">
+                            <Label Grid.Row="0" Grid.Column="0" Text="-50%" HorizontalOptions="Start"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DamageEffectCurrentAdjustment}}" HorizontalOptions="Center"/>
+                            <Label Grid.Row="0" Grid.Column="2" Text="+50%" HorizontalOptions="End"/>
+                            <Slider Grid.Row="1" Grid.ColumnSpan="3" Minimum="-5" Maximum="5" Value="{Binding Adjustment, Mode=TwoWay}"/>
+                        </Grid>
+                        <Grid Grid.Row="6" ColumnDefinitions="*,*" ColumnSpacing="10" Margin="1">
+                            <Button Grid.Column="0" Style="{StaticResource LightButton}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Reset}}" Command="{Binding ResetAdjustmentCommand}"/>
+                            <Button Grid.Column="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Apply}}" Command="{Binding ApplyAdjustmentCommand}"/>
+                        </Grid>
                     </Grid>
-                    <Grid Grid.Row="6" ColumnDefinitions="*,*" ColumnSpacing="10" Margin="1">
-                        <Button Grid.Column="0" Style="{StaticResource LightButton}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Reset}}" Command="{Binding ResetAdjustmentCommand}"/>
-                        <Button Grid.Column="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Apply}}" Command="{Binding ApplyAdjustmentCommand}"/>
-                    </Grid>
-                </Grid>
-            </Border>
-        </Grid>
-    </ScrollView>
+                </Border>
+                <Border Style="{StaticResource BlockBorder}" HeightRequest="50"/>
+                <Border Style="{StaticResource BlockBorder}" HeightRequest="150"/>
+                <Border Style="{StaticResource BlockBorder}" HeightRequest="100"/>
+            </VerticalStackLayout>
+        </ScrollView>
+        <Border Grid.Row="1" BackgroundColor="{StaticResource BRIXDark}" Margin="-20,-2">
+            <Border.Shadow>
+                <Shadow 
+                        Brush="Black"
+                        Offset="0,-50"
+                        Radius="20"
+                        Opacity="0.8" />
+            </Border.Shadow>
+            <Grid RowDefinitions="auto,auto,auto,auto" Margin="20,10,20,0">
+                <!--<Rectangle Grid.Row="0" Margin="-20,0" HeightRequest="15">
+                    <Rectangle.Background>
+                        --><!-- StartPoint defaults to (0,0) --><!--
+                        <LinearGradientBrush EndPoint="0,1">
+                            <GradientStop Color="Transparent"
+                              Offset="0.1" />
+                            <GradientStop Color="Black"
+                              Offset="1" />
+                        </LinearGradientBrush>
+                    </Rectangle.Background>
+                </Rectangle>-->
+                <Label Grid.Row="1" Style="{StaticResource TitleLabel}" Text="Ability cost:" />
+                <Label Grid.Row="1" Style="{StaticResource TitleLabel}" Text="3650 EXP" HorizontalOptions="End"/>
+                <ProgressBar Grid.Row="2"/>
+                <Button Grid.Row="3" Text="Save" Margin="0,10"/>
+            </Grid>
+        </Border>
+    </Grid>
 </ContentPage>
