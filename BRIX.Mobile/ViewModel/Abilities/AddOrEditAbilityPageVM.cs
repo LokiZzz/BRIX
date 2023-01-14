@@ -14,6 +14,8 @@ using System.Threading.Tasks;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.View.Abilities;
 using BRIX.Utility.Extensions;
+using BRIX.Library.Effects;
+using BRIX.Mobile.Models.Abilities.Effects;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {
@@ -39,6 +41,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
         public async Task Save()
         {
             await Navigation.Back(
+                stepsBack: 1,
                 (NavigationParameters.EditMode, Mode), 
                 (NavigationParameters.Ability, Ability)
             );
@@ -50,13 +53,23 @@ namespace BRIX.Mobile.ViewModel.Abilities
             await Navigation.NavigateAsync<ChooseEffectPage>((NavigationParameters.Ability, Ability.Copy()));
         }
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             Ability = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability)
                 ?? new AbilityModel(new Ability());
-
             Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
+            await HandleBackFromEditing(query);
             query.Clear();
+        }
+
+        private async Task HandleBackFromEditing(IDictionary<string, object> query)
+        {
+            EffectBase editedEffect = query.GetParameterOrDefault<EffectBase>(NavigationParameters.Effect);
+
+            if(editedEffect != null)
+            {
+                Ability.InternalModel.AddEffect(editedEffect);
+            }
         }
 
         public override Task OnNavigatedAsync()

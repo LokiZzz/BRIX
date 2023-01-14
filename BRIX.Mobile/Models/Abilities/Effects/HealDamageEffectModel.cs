@@ -12,14 +12,8 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.Models.Abilities.Effects
 {
-    public partial class HealDamageEffectModel : ObservableObject
+    public partial class HealDamageEffectModel : EffectModelBase<HealDamageEffect>
     {
-        public HealDamageEffectModel() : this(new HealDamageEffect()) { }
-
-        public HealDamageEffectModel(HealDamageEffect effect) => InternalModel = effect;
-
-        public HealDamageEffect InternalModel { get; }
-
         public DicePool Impact
         {
             get => InternalModel.Impact;

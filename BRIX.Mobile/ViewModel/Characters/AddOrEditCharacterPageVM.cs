@@ -42,6 +42,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             }
 
             await Navigation.Back(
+                stepsBack: 1,
                 (NavigationParameters.Character, Character),
                 (NavigationParameters.EditMode, mode)
             );

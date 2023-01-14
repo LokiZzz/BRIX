@@ -1,4 +1,5 @@
 ﻿using BRIX.Library;
+using BRIX.Library.Effects;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,19 @@ namespace BRIX.Mobile.Models.Abilities
         {
             get => InternalModel.Description;
             set => SetProperty(InternalModel.Description, value, InternalModel, (ability, desc) => ability.Description = desc);
+        }
+
+        public int Cost => InternalModel.ExpCost();
+
+        public void AddEffect(EffectBase effect)
+        {
+            InternalModel.AddEffect(effect);
+            OnPropertyChanged(nameof(Cost));
+        }
+
+        public void UpdateCost()
+        {
+            OnPropertyChanged(nameof(Cost));
         }
     }
 }

@@ -44,6 +44,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 HealDamage.Impact = result.DicePool;
                 _dicePoolToReset = null;
             }
+
+            Ability.UpdateCost();
         }
 
         private DicePool _dicePoolToReset = null;
@@ -76,7 +78,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             HealDamage.Impact = DicePool.FromAdjusted(_dicePoolToReset, percent);
         }
 
-
         [RelayCommand]
         private void ApplyAdjustment()
         {
@@ -94,6 +95,21 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             Adjustment = 0;
         }
 
+        [RelayCommand]
+        private async Task Save()
+        {
+            switch(Mode)
+            {
+                case EEditingMode.Add:
+                    await Navigation.Back(stepsBack: 2, (NavigationParameters.Effect, HealDamage.InternalModel));
+                    break;
+                case EEditingMode.Edit:
+                case EEditingMode.Upgrade:
+                    await Navigation.Back(stepsBack: 1, (NavigationParameters.Effect, HealDamage.InternalModel));
+                    break;
+            }
+        }
+
         public override Task OnNavigatedAsync()
         {
             return Task.CompletedTask;
@@ -103,9 +119,9 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         {
             Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
             Ability = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability) ?? new();
-            HealDamage = query.GetParameterOrDefault<HealDamageEffectModel>(NavigationParameters.HealDamageEffect) ?? new();
+            HealDamage = query.GetParameterOrDefault<HealDamageEffectModel>(NavigationParameters.Effect) ?? new();
 
-            Ability.InternalModel.AddEffect(HealDamage.InternalModel);
+            Ability.AddEffect(HealDamage.InternalModel);
 
             if (HealDamage.Impact.IsEmpty)
             {

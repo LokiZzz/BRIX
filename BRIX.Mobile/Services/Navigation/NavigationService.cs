@@ -6,14 +6,14 @@ namespace BRIX.Mobile.Services.Navigation
 {
     public class NavigationService : INavigationService
     {
-        public async Task Back()
+        public async Task Back(int stepsBack = 1)
         {
-            await NavigateAsync("..", ENavigationMode.None);
+            await NavigateAsync(GetStepBackPath(stepsBack), ENavigationMode.None);
         }
 
-        public async Task Back(params (string, object)[] parameters)
+        public async Task Back(int stepsBack = 1, params (string, object)[] parameters)
         {
-            await NavigateAsync("..", ENavigationMode.None, parameters);
+            await NavigateAsync(GetStepBackPath(stepsBack), ENavigationMode.None, parameters);
         }
 
         public async Task NavigateAsync<T>(params (string, object)[] parameters) where T : Page
@@ -61,6 +61,18 @@ namespace BRIX.Mobile.Services.Navigation
             {
                 await currentPageVM.OnNavigatedAsync();
             }
+        }
+
+        private static string GetStepBackPath(int stepsBack)
+        {
+            string path = "..";
+
+            for (int steps = stepsBack - 1; stepsBack == 0; steps--)
+            {
+                path += "/..";
+            }
+
+            return path;
         }
     }
 
