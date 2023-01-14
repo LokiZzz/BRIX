@@ -1,4 +1,6 @@
-﻿using BRIX.Library.Effects;
+﻿using BRIX.Library.DiceValue;
+using BRIX.Library.Effects;
+using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
@@ -16,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {
-    public partial class ChooseEffectPageVM : ViewModelBase
+    public partial class ChooseEffectPageVM : ViewModelBase, IQueryAttributable
     {
         private readonly ILocalizationResourceManager _localization;
 
@@ -34,7 +36,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             await Navigation.NavigateAsync(
                 effectToChoose.EditPage.Name,
                 ENavigationMode.Push,
-                (NavigationParameters.EditMode, EEditingMode.Add)
+                (NavigationParameters.EditMode, EEditingMode.Add), (NavigationParameters.Ability, _ability)
             );
         }
 
@@ -71,6 +73,15 @@ namespace BRIX.Mobile.ViewModel.Abilities
             };
 
             return Task.CompletedTask;
+        }
+
+        private AbilityModel _ability;
+
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            _ability = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability);
+
+            query.Clear();
         }
     }
 

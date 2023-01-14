@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.View.Abilities;
+using BRIX.Utility.Extensions;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {
@@ -46,7 +47,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
         [RelayCommand]
         public async Task AddEffect()
         {
-            await Navigation.NavigateAsync<ChooseEffectPage>();
+            await Navigation.NavigateAsync<ChooseEffectPage>((NavigationParameters.Ability, Ability.Copy()));
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)

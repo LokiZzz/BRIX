@@ -1,6 +1,7 @@
 ﻿using BRIX.Library.DiceValue;
 using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
+using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Popups;
@@ -26,6 +27,9 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
         [ObservableProperty]
         private HealDamageEffectModel _healDamage = new();
+
+        [ObservableProperty]
+        private AbilityModel _ability = new();
 
         [RelayCommand]
         private async Task EditFormula()
@@ -98,7 +102,10 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
+            Ability = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability) ?? new();
             HealDamage = query.GetParameterOrDefault<HealDamageEffectModel>(NavigationParameters.HealDamageEffect) ?? new();
+
+            Ability.InternalModel.AddEffect(HealDamage.InternalModel);
 
             if (HealDamage.Impact.IsEmpty)
             {

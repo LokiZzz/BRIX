@@ -79,6 +79,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ability cost:.
+        /// </summary>
+        public static string AbilityCost {
+            get {
+                return ResourceManager.GetString("AbilityCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
         public static string Add {
@@ -381,6 +390,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Effects {
             get {
                 return ResourceManager.GetString("Effects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EXP.
+        /// </summary>
+        public static string EXP {
+            get {
+                return ResourceManager.GetString("EXP", resourceCulture);
             }
         }
         

@@ -123,6 +123,9 @@
   <data name="AbilitiesListHelpText" xml:space="preserve">
     <value>Tap arrow up to upgrade, swipe right to edit and swipe left to delete.</value>
   </data>
+  <data name="AbilityCost" xml:space="preserve">
+    <value>Ability cost:</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>New</value>
   </data>
@@ -224,6 +227,9 @@
   </data>
   <data name="Effects" xml:space="preserve">
     <value>Effects</value>
+  </data>
+  <data name="EXP" xml:space="preserve">
+    <value>EXP</value>
   </data>
   <data name="Experience" xml:space="preserve">
     <value>Experience</value>

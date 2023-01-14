@@ -108,21 +108,13 @@
                         Opacity="0.8" />
             </Border.Shadow>
             <Grid RowDefinitions="auto,auto,auto,auto" Margin="20,10,20,0">
-                <!--<Rectangle Grid.Row="0" Margin="-20,0" HeightRequest="15">
-                    <Rectangle.Background>
-                        --><!-- StartPoint defaults to (0,0) --><!--
-                        <LinearGradientBrush EndPoint="0,1">
-                            <GradientStop Color="Transparent"
-                              Offset="0.1" />
-                            <GradientStop Color="Black"
-                              Offset="1" />
-                        </LinearGradientBrush>
-                    </Rectangle.Background>
-                </Rectangle>-->
                 <Label Grid.Row="1" Style="{StaticResource TitleLabel}" Text="Ability cost:" />
-                <Label Grid.Row="1" Style="{StaticResource TitleLabel}" Text="3650 EXP" HorizontalOptions="End"/>
+                <HorizontalStackLayout Grid.Row="1" >
+                    <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EXP}}" HorizontalOptions="End"/>
+                    <Label Style="{StaticResource TitleLabel}" Text="{Binding }" HorizontalOptions="End"/>
+                </HorizontalStackLayout>
                 <ProgressBar Grid.Row="2"/>
-                <Button Grid.Row="3" Text="Save" Margin="0,10"/>
+                <Button Grid.Row="3" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" Margin="0,10"/>
             </Grid>
         </Border>
     </Grid>
