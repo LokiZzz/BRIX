@@ -6,19 +6,12 @@ namespace BRIX.Library.Mathematics
     {
         public static double ToCoeficient(this int percents)
         {
-            if (percents >= 0)
+            if (percents < -100)
             {
-                return 1 + (double)percents / 100;
+                throw new ArgumentException("Негативный коэффициент должен находится между 0 и 1.");
             }
-            else
-            {
-                if (percents > 100)
-                {
-                    throw new ArgumentException("Негативный коэффициент должен находится между 0 и 1.");
-                }
 
-                return (double)percents / 100;
-            }
+            return 1 + (double)percents / 100;
         }
 
         public static int ToPercent(this double coeficient)

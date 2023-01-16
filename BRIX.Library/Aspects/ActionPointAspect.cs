@@ -4,8 +4,6 @@ namespace BRIX.Library.Aspects
 {
     public class ActionPointAspect : AspectBase
     {
-        public override bool IsEnabled { get; set; } = true;
-
         private int _minActionPoints = 1;
         private int _maxActionPoints = 50;
 

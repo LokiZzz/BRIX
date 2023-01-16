@@ -4,7 +4,7 @@ namespace BRIX.Library.Aspects
 {
     public class TargetSelectionAspect : AspectBase
     {
-        public ETargetType Strategy { get; set; }
+        public ETargetType Strategy { get; set; } = ETargetType.NTargetsAtDistanсeL;
 
         public bool IsTargetSelectionIsRandom { get; set; }
 
@@ -25,16 +25,30 @@ namespace BRIX.Library.Aspects
 
         public NTADSettings NTAD { get; set; } = new NTADSettings();
 
-        private double GetNTADCoeficient() => GetNTADDistanceCoef() * GetNTADCountCoeficient() * RandomSelectionCoef;
+        private double GetNTADCoeficient()
+        {
+            double randomSelectionCoef = IsTargetSelectionIsRandom ? RandomSelectionCoef : 1;
+
+            return GetNTADDistanceCoef() * GetNTADCountCoeficient() * randomSelectionCoef;
+        }
+
         private double GetNTADDistanceCoef() => GetDistanceCoef(NTAD.DistanceInMeters);
+
         private double GetNTADCountCoeficient() => new ThrasholdCoefConverter((1, 0), (2, 100), (6, 50), (11, 10), (101, 1))
                 .Convert(NTAD.TargetsCount)
                 .ToCoeficient();
 
         public AreaSettings Area { get; set; } = new AreaSettings();
 
-        private double GetAreaCoeficient() => GetAreaDistanceCoeficient() * GetAreaVolumeCoeficient() * RandomSelectionCoef;
+        private double GetAreaCoeficient()
+        {
+            double randomSelectionCoef = IsTargetSelectionIsRandom ? RandomSelectionCoef : 1;
+
+            return GetAreaDistanceCoeficient() * GetAreaVolumeCoeficient() * randomSelectionCoef;
+        }
+
         private double GetAreaDistanceCoeficient() => GetDistanceCoef(Area.DistanceToAreaInMeters);
+
         private double GetAreaVolumeCoeficient() => (Area.Shape.GetVolume() * 5).ToCoeficient();
 
         private double GetDistanceCoef(int distance)
@@ -47,22 +61,23 @@ namespace BRIX.Library.Aspects
 
     public class NTADSettings
     {
-        public int TargetsCount { get; set; }
+        public int TargetsCount { get; set; } = 1;
 
-        public int DistanceInMeters { get; set; }
+        public int DistanceInMeters { get; set; } = 1;
     }
 
     public class AreaSettings
     {
-        public int DistanceToAreaInMeters { get; set; }
+        public int DistanceToAreaInMeters { get; set; } = 0;
 
-        private EAreaType _areaType;
+        private EAreaType _areaType = EAreaType.Cylinder;
         public EAreaType AreaType
         {
             get => _areaType;
             set
             {
                 _areaType = value;
+
                 switch (_areaType)
                 {
                     case EAreaType.Brick:
@@ -84,7 +99,7 @@ namespace BRIX.Library.Aspects
             }
         }
 
-        public IShape Shape { get; private set; }
+        public IShape Shape { get; private set; } = new Cylinder();
 
         public enum EAreaType
         {

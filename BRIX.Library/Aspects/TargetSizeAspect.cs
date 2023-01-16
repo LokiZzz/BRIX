@@ -2,6 +2,7 @@
 using BRIX.Library.Mathematics;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,26 @@ namespace BRIX.Library.Aspects
 {
     public class TargetSizeAspect : AspectBase
     {
-        public List<ETargetSizes> AllowedTargetSizes = new List<ETargetSizes>();
+        private List<ETargetSize> _allowedTargetSizes = new () { ETargetSize.Small, ETargetSize.Medium, ETargetSize.Big };
+        public IReadOnlyList<ETargetSize> AllowedTargetSizes => _allowedTargetSizes.AsReadOnly();
+
+        public void AddSize(ETargetSize size)
+        {
+            if (!_allowedTargetSizes.Any(x => x == size))
+            {
+                _allowedTargetSizes.Add(size);
+            }
+        }
+
+        public void RemoveSize(ETargetSize size)
+        {
+            if (_allowedTargetSizes.Any(x => x == size))
+            {
+                _allowedTargetSizes.Remove(
+                    _allowedTargetSizes.First(x => x == size)
+                );
+            }
+        }
 
         public override double GetCoefficient() => 
             SizeCategoriesCountToPercentMap[AllowedTargetSizes.Count()]

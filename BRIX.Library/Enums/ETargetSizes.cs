@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BRIX.Library.Enums
 {
-    public enum ETargetSizes
+    public enum ETargetSize
     {
         Tiny = 1,
         Miniature = 2,

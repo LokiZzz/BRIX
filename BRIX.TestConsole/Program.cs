@@ -6,16 +6,6 @@ using BRIX.Library.Effects;
 using BRIX.Library.Mathematics;
 using System.Runtime.Intrinsics.Arm;
 
-string input = string.Empty;
-
-while(input != "stop")
-{
-    input = Console.ReadLine() ?? string.Empty;
-    string[] splitted = input.Split('-');
-    int from = int.Parse(splitted[0]);
-    int to = int.Parse(splitted[1]);
-
-    DicePool dicePool = DicePool.FromRange(from, to);
-
-    Console.WriteLine($"{dicePool}: {dicePool.Min()}—{dicePool.Max()}");
-}
+HealDamageEffect hdEffect = new() { Impact = new DicePool(1, (1, 4)) };
+int cost = hdEffect.GetExpCost();
+Console.ReadLine();
