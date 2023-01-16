@@ -76,6 +76,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
             _dicePoolToReset = _dicePoolToReset == null ? HealDamage.Impact.Copy() : _dicePoolToReset;
             HealDamage.Impact = DicePool.FromAdjusted(_dicePoolToReset, percent);
+            Ability.UpdateCost();
         }
 
         [RelayCommand]
@@ -112,6 +113,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
         public override Task OnNavigatedAsync()
         {
+            Ability.UpdateCost();
+
             return Task.CompletedTask;
         }
 
