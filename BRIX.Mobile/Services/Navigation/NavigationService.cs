@@ -67,7 +67,7 @@ namespace BRIX.Mobile.Services.Navigation
         {
             string path = "..";
 
-            for (int steps = stepsBack - 1; stepsBack == 0; steps--)
+            for (int steps = stepsBack - 1; steps > 0; steps--)
             {
                 path += "/..";
             }

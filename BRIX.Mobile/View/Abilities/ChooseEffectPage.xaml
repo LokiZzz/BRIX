@@ -6,7 +6,7 @@
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              x:DataType="vm:ChooseEffectPageVM"
-             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Effects}}">
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Effects}}" Padding="10">
 
     <Shell.TitleView>
         <controls:TitleView/>

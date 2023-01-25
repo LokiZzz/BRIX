@@ -55,14 +55,21 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            Ability = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability)
-                ?? new AbilityModel(new Ability());
-            Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
-            await HandleBackFromEditing(query);
+            if (Mode == EEditingMode.None)
+            {
+                Ability = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability)
+                    ?? new AbilityModel(new Ability());
+                Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
+            }
+            else
+            {
+                await HandleBackFromEditing(query);
+            }
+
             query.Clear();
         }
 
-        private async Task HandleBackFromEditing(IDictionary<string, object> query)
+        private Task HandleBackFromEditing(IDictionary<string, object> query)
         {
             EffectBase editedEffect = query.GetParameterOrDefault<EffectBase>(NavigationParameters.Effect);
 
@@ -70,6 +77,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
             {
                 Ability.InternalModel.AddEffect(editedEffect);
             }
+
+            return Task.CompletedTask;
         }
 
         public override Task OnNavigatedAsync()

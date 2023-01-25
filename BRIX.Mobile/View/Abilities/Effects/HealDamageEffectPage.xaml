@@ -114,7 +114,7 @@
                     <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EXP}}" />
                 </HorizontalStackLayout>
                 <ProgressBar Grid.Row="2"/>
-                <Button Grid.Row="3" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" Margin="0,10"/>
+                <Button Grid.Row="3" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" Margin="0,10" Command="{Binding SaveCommand}"/>
             </Grid>
         </Border>
     </Grid>

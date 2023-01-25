@@ -3,6 +3,7 @@ using BRIX.Library.DiceValue;
 using BRIX.Library.Effects;
 using BRIX.Mobile.ViewModel.Abilities;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,8 +13,14 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.Models.Abilities.Effects
 {
-    public partial class HealDamageEffectModel : EffectModelBase<HealDamageEffect>
+    public partial class HealDamageEffectModel : ObservableObject
     {
+        public HealDamageEffectModel() : this(new HealDamageEffect()) { }
+
+        public HealDamageEffectModel(HealDamageEffect character) => InternalModel = character;
+
+        public HealDamageEffect InternalModel { get; }
+
         public DicePool Impact
         {
             get => InternalModel.Impact;
