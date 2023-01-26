@@ -124,7 +124,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             Ability = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability) ?? new();
             HealDamage = query.GetParameterOrDefault<HealDamageEffectModel>(NavigationParameters.Effect) ?? new();
 
-            Ability.AddEffect(HealDamage.InternalModel);
+            Ability.AddEffect(HealDamage);
 
             if (HealDamage.Impact.IsEmpty)
             {

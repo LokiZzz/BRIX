@@ -13,20 +13,20 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.Models.Abilities.Effects
 {
-    public partial class HealDamageEffectModel : ObservableObject
+    public partial class HealDamageEffectModel : EffectModel
     {
         public HealDamageEffectModel() : this(new HealDamageEffect()) { }
 
-        public HealDamageEffectModel(HealDamageEffect character) => InternalModel = character;
+        public HealDamageEffectModel(HealDamageEffect model) => InternalModel = model;
 
-        public HealDamageEffect InternalModel { get; }
+        public HealDamageEffect Internal => GetSpecificEffect<HealDamageEffect>();
 
         public DicePool Impact
         {
-            get => InternalModel.Impact;
+            get => Internal.Impact;
             set
             {
-                SetProperty(InternalModel.Impact, value, InternalModel, (model, prop) => model.Impact = prop);
+                SetProperty(Internal.Impact, value, Internal, (model, prop) => model.Impact = prop);
                 DiceChunks = new(DiceFormulaChunkVM.GetChunks(value));
                 OnPropertyChanged(nameof(SpreadText));
                 OnPropertyChanged(nameof(Average));
@@ -38,5 +38,9 @@ namespace BRIX.Mobile.Models.Abilities.Effects
 
         public string SpreadText => $"{Impact.Min()} — {Impact.Max()}";
         public int Average => Impact.Average();
+
+        public override string EffectString => DiceChunks.GetChunkCollectionText();
+
+        public override List<string> Aspects => new List<string>();
     }
 }

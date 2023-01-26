@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,6 +54,26 @@ namespace BRIX.Mobile.ViewModel.Abilities
             }
 
             return new(chunks);
+        }
+    }
+
+    public static class DiceChunkExtension
+    {
+        public static string GetChunkCollectionText(this IEnumerable<DiceFormulaChunkVM> chunks)
+        {
+            string text = string.Empty;
+
+            foreach (DiceFormulaChunkVM chunk in chunks)
+            {
+                if (!string.IsNullOrEmpty(text))
+                {
+                    text += " + ";
+                }
+
+                text += chunk.ChunkText;
+            }
+
+            return text;
         }
     }
 }

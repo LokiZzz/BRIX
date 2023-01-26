@@ -19,6 +19,8 @@ namespace BRIX.Mobile.Models.Abilities
 
         public Ability InternalModel { get; }
 
+        public ObservableCollection<EffectModel> Effects { get; set; }
+
         public string Name
         {
             get => InternalModel.Name;
@@ -33,9 +35,10 @@ namespace BRIX.Mobile.Models.Abilities
 
         public int Cost => InternalModel.ExpCost();
 
-        public void AddEffect(EffectBase effect)
+        public void AddEffect(EffectModel effect)
         {
-            InternalModel.AddEffect(effect);
+            InternalModel.AddEffect(effect.InternalModel);
+            Effects.Add(effect);
             OnPropertyChanged(nameof(Cost));
         }
 
