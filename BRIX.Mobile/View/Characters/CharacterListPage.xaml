@@ -46,7 +46,7 @@
                                         Command="{Binding Source={x:Reference listView}, Path= BindingContext.EditCommand}"
                                         CommandParameter="{Binding}">
                                         <Border Style="{StaticResource SwipeViewBorder}">
-                                            <Label Style="{StaticResource SwipeViewLabel}" Text="{x:Static icons:Awesome.SquarePen}"/>
+                                            <Label Style="{StaticResource SwipeViewEditLabel}" />
                                         </Border>
                                     </SwipeItemView>
                                 </SwipeItems>
@@ -57,7 +57,7 @@
                                         Command="{Binding Source={x:Reference listView}, Path= BindingContext.RemoveCommand}"
                                         CommandParameter="{Binding}">
                                         <Border Style="{StaticResource SwipeViewBorder}">
-                                            <Label Style="{StaticResource SwipeViewLabel}" Text="{x:Static icons:Awesome.Skull}" TextColor="{StaticResource BRIXRed}"/>
+                                            <Label Style="{StaticResource SwipeViewDeleteLabel}" />
                                         </Border>
                                     </SwipeItemView>
                                 </SwipeItems>

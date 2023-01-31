@@ -19,7 +19,7 @@ namespace BRIX.Mobile.Models.Abilities
 
         public Ability InternalModel { get; }
 
-        public ObservableCollection<EffectModel> Effects { get; set; }
+        public ObservableCollection<EffectModel> Effects { get; set; } = new ObservableCollection<EffectModel>();
 
         public string Name
         {

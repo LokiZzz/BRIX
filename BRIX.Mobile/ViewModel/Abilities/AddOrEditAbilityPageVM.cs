@@ -71,11 +71,11 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         private Task HandleBackFromEditing(IDictionary<string, object> query)
         {
-            EffectBase editedEffect = query.GetParameterOrDefault<EffectBase>(NavigationParameters.Effect);
+            EffectModel editedEffect = query.GetParameterOrDefault<EffectModel>(NavigationParameters.Effect);
 
             if(editedEffect != null)
             {
-                Ability.InternalModel.AddEffect(editedEffect);
+                Ability.AddEffect(editedEffect);
             }
 
             return Task.CompletedTask;

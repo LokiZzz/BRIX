@@ -28,29 +28,24 @@
             </VerticalStackLayout>
         </Border>
 
-        <VerticalStackLayout Grid.Row="1" Margin="10,0">
+        <VerticalStackLayout Grid.Row="1">
             <Label Style="{StaticResource TitleLabel}" Text="{x:Static lcz:LocalizationKeys.Effects}" Margin="10,5,10,15"/>
             <Button
                 Style="{StaticResource LightPlusButton}" 
-                Command="{Binding AddEffectCommand}"/>
-            <CollectionView x:Name="collectionView">
+                Command="{Binding AddEffectCommand}"
+                Margin="10,0,10,10"/>
+            <CollectionView x:Name="collectionView" ItemsSource="{Binding Ability.Effects}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:EffectModel">
-                        <Grid Margin="10,0">
-                            <Border Style="{StaticResource BlockBorder}" HeightRequest="75">
+                        <Grid >
+                            <Border Style="{StaticResource BlockBorder}" HeightRequest="75" Margin="10,0">
                                 <Grid ColumnDefinitions="*,auto">
                                     <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
                                     <Button 
-                                        Style="{StaticResource BigSquareIconButton}"
-                                        Text="{x:Static icons:Awesome.CircleArrowUp}"
-                                        BackgroundColor="Transparent"
-                                        BorderWidth="1"
-                                        BorderColor="{StaticResource BRIXOrange}"
-                                        TextColor="{StaticResource BRIXOrange}"
-                                        Margin="1"
+                                        Style="{StaticResource UpgradeSquareButton}"
                                         Grid.Column="1"
                                         Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.UpgradeCommand}"
                                         CommandParameter="{Binding}"/>

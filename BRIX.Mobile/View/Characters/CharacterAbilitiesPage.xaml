@@ -17,7 +17,11 @@
             <Setter Property="HeightRequest" Value="60"/>
             <Setter Property="Padding" Value="0"/>
         </Style>
-        <Style TargetType="Label" x:Key="AbilitiesSwipeViewLabel" BasedOn="{StaticResource SwipeViewLabel}">
+        <Style TargetType="Label" x:Key="AbilitiesSwipeViewEditLabel" BasedOn="{StaticResource SwipeViewEditLabel}">
+            <Setter Property="FontSize" Value="36"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="AbilitiesSwipeViewDeleteLabel" BasedOn="{StaticResource SwipeViewDeleteLabel}">
             <Setter Property="FontSize" Value="36"/>
         </Style>
     </ContentPage.Resources>
@@ -57,7 +61,7 @@
                                         Command="{Binding Source={x:Reference listView}, Path= BindingContext.EditCommand}"
                                         CommandParameter="{Binding}">
                                         <Border Style="{StaticResource AbilitiesSwipeViewBorder}">
-                                            <Label Style="{StaticResource AbilitiesSwipeViewLabel}" Text="{x:Static icons:Awesome.SquarePen}"/>
+                                            <Label Style="{StaticResource AbilitiesSwipeViewEditLabel}" />
                                         </Border>
                                     </SwipeItemView>
                                 </SwipeItems>
@@ -68,7 +72,7 @@
                                         Command="{Binding Source={x:Reference listView}, Path= BindingContext.RemoveCommand}"
                                         CommandParameter="{Binding}">
                                         <Border Style="{StaticResource AbilitiesSwipeViewBorder}">
-                                            <Label Style="{StaticResource AbilitiesSwipeViewLabel}" Text="{x:Static icons:Awesome.Skull}" TextColor="{StaticResource BRIXRed}"/>
+                                            <Label Style="{StaticResource AbilitiesSwipeViewDeleteLabel}"/>
                                         </Border>
                                     </SwipeItemView>
                                 </SwipeItems>
@@ -78,13 +82,7 @@
                                     <Grid ColumnDefinitions="*,auto">
                                         <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
                                         <Button 
-                                            Style="{StaticResource BigSquareIconButton}"
-                                            Text="{x:Static icons:Awesome.CircleArrowUp}"
-                                            BackgroundColor="Transparent"
-                                            BorderWidth="1"
-                                            BorderColor="{StaticResource BRIXOrange}"
-                                            TextColor="{StaticResource BRIXOrange}"
-                                            Margin="1"
+                                            Style="{StaticResource UpgradeSquareButton}"
                                             Grid.Column="1"
                                             Command="{Binding Source={x:Reference listView}, Path= BindingContext.UpgradeCommand}"
                                             CommandParameter="{Binding}"/>

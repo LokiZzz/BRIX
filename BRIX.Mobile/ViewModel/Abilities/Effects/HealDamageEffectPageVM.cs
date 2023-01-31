@@ -34,7 +34,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         [RelayCommand]
         private async Task EditFormula()
         {
-            string formula = HealDamage?.InternalModel?.Impact?.ToString() ?? string.Empty;
+            string formula = HealDamage?.Internal?.Impact?.ToString() ?? string.Empty;
             DiceValuePopupResult result = await ShowPopupAsync<DiceValuePopup, DiceValuePopupResult, DiceValuePopupParameters>(
                 new DiceValuePopupParameters { Formula = formula }
             );
@@ -102,11 +102,11 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             switch(Mode)
             {
                 case EEditingMode.Add:
-                    await Navigation.Back(stepsBack: 2, (NavigationParameters.Effect, HealDamage.InternalModel));
+                    await Navigation.Back(stepsBack: 2, (NavigationParameters.Effect, HealDamage));
                     break;
                 case EEditingMode.Edit:
                 case EEditingMode.Upgrade:
-                    await Navigation.Back(stepsBack: 1, (NavigationParameters.Effect, HealDamage.InternalModel));
+                    await Navigation.Back(stepsBack: 1, (NavigationParameters.Effect, HealDamage));
                     break;
             }
         }
