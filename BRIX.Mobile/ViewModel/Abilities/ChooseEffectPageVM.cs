@@ -44,33 +44,16 @@ namespace BRIX.Mobile.ViewModel.Abilities
         {
             if (Effects != null) return Task.CompletedTask;
 
-            Effects = new()
-            {
-                new()
-                {
-                    Name = _localization[LocalizationKeys.EffectDamage].ToString(),
-                    Icon = AwesomeRPG.Sword,
-                    EditPage = typeof(HealDamageEffectPage)
-                },
-                new()
-                {
-                    Name = _localization[LocalizationKeys.EffectHeal].ToString(),
-                    Icon = AwesomeRPG.HealthIncrease,
-                    EditPage = typeof(HealDamageEffectPage) //временно
-                },
-                new()
-                {
-                    Name = "Just win",
-                    Icon = AwesomeRPG.FireballSword,
-                    EditPage = typeof(HealDamageEffectPage) //временно
-                },
-                new()
-                {
-                    Name = "Win another way",
-                    Icon = AwesomeRPG.PoisonCloud,
-                    EditPage = typeof(HealDamageEffectPage) //временно
-                },
-            };
+            Effects = new ObservableCollection<EffectToChooseVM>(
+                EffectsDictionary.Collection.Select(x => 
+                    new EffectToChooseVM() 
+                    { 
+                        Name = x.Value.Name, 
+                        EditPage = x.Value.EditPage, 
+                        Icon = x.Value.Icon 
+                    }
+                )
+            );
 
             return Task.CompletedTask;
         }

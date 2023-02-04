@@ -11,21 +11,6 @@
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CharacterAbilitiesPageTitle}}"
              Padding="0">
 
-    <ContentPage.Resources>
-        <Style TargetType="Border" x:Key="AbilitiesSwipeViewBorder" BasedOn="{StaticResource SwipeViewBorder}">
-            <Setter Property="WidthRequest" Value="60"/>
-            <Setter Property="HeightRequest" Value="60"/>
-            <Setter Property="Padding" Value="0"/>
-        </Style>
-        <Style TargetType="Label" x:Key="AbilitiesSwipeViewEditLabel" BasedOn="{StaticResource SwipeViewEditLabel}">
-            <Setter Property="FontSize" Value="36"/>
-        </Style>
-
-        <Style TargetType="Label" x:Key="AbilitiesSwipeViewDeleteLabel" BasedOn="{StaticResource SwipeViewDeleteLabel}">
-            <Setter Property="FontSize" Value="36"/>
-        </Style>
-    </ContentPage.Resources>
-    
     <Shell.TitleView>
         <controls:TitleView/>
     </Shell.TitleView>
@@ -60,8 +45,8 @@
                                     <SwipeItemView
                                         Command="{Binding Source={x:Reference listView}, Path= BindingContext.EditCommand}"
                                         CommandParameter="{Binding}">
-                                        <Border Style="{StaticResource AbilitiesSwipeViewBorder}">
-                                            <Label Style="{StaticResource AbilitiesSwipeViewEditLabel}" />
+                                        <Border Style="{StaticResource MediumSwipeViewBorder}">
+                                            <Label Style="{StaticResource MediumSwipeViewEditLabel}" />
                                         </Border>
                                     </SwipeItemView>
                                 </SwipeItems>
@@ -71,8 +56,8 @@
                                     <SwipeItemView
                                         Command="{Binding Source={x:Reference listView}, Path= BindingContext.RemoveCommand}"
                                         CommandParameter="{Binding}">
-                                        <Border Style="{StaticResource AbilitiesSwipeViewBorder}">
-                                            <Label Style="{StaticResource AbilitiesSwipeViewDeleteLabel}"/>
+                                        <Border Style="{StaticResource MediumSwipeViewBorder}">
+                                            <Label Style="{StaticResource MediumSwipeViewDeleteLabel}"/>
                                         </Border>
                                     </SwipeItemView>
                                 </SwipeItems>

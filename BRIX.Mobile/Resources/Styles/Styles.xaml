@@ -302,4 +302,18 @@
         <Setter Property="HeightRequest" Value="80"/>
     </Style>
 
+    <Style TargetType="Border" x:Key="MediumSwipeViewBorder" BasedOn="{StaticResource SwipeViewBorder}">
+        <Setter Property="WidthRequest" Value="60"/>
+        <Setter Property="HeightRequest" Value="60"/>
+        <Setter Property="Padding" Value="0"/>
+    </Style>
+    
+    <Style TargetType="Label" x:Key="MediumSwipeViewEditLabel" BasedOn="{StaticResource SwipeViewEditLabel}">
+        <Setter Property="FontSize" Value="36"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="MediumSwipeViewDeleteLabel" BasedOn="{StaticResource SwipeViewDeleteLabel}">
+        <Setter Property="FontSize" Value="36"/>
+    </Style>
+
 </ResourceDictionary>

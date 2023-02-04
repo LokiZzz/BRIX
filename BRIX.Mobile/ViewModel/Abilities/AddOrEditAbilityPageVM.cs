@@ -16,6 +16,7 @@ using BRIX.Mobile.View.Abilities;
 using BRIX.Utility.Extensions;
 using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities.Effects;
+using BRIX.Mobile.View.Abilities.Effects;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {
@@ -49,6 +50,23 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         [RelayCommand]
         public async Task AddEffect()
+        {
+            await Navigation.NavigateAsync<ChooseEffectPage>((NavigationParameters.Ability, Ability.Copy()));
+        }
+
+        [RelayCommand]
+        public async Task EditEffect(EffectModel effectToEdit)
+        {
+            await Navigation.NavigateAsync(
+                EffectsDictionary.GetEditPageRoute(effectToEdit.InternalModel),
+                ENavigationMode.Push,
+                (NavigationParameters.EditMode, EEditingMode.Edit), 
+                (NavigationParameters.Ability, Ability.Copy())
+            );
+        }
+
+        [RelayCommand]
+        public async Task DeleteEffect()
         {
             await Navigation.NavigateAsync<ChooseEffectPage>((NavigationParameters.Ability, Ability.Copy()));
         }

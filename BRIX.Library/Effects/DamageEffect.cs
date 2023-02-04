@@ -4,11 +4,9 @@ using BRIX.Library.Extensions;
 
 namespace BRIX.Library.Effects
 {
-    public class HealDamageEffect : EffectBase
+    public class DamageEffect : EffectBase
     {
-        private const double _healPenalty = 1.2;
-
-        public HealDamageEffect()
+        public DamageEffect()
         {
             Aspects = new()
             {
@@ -20,19 +18,6 @@ namespace BRIX.Library.Effects
 
         public DicePool Impact { get; set; } = new DicePool(0);
 
-        public EHPImpact ImpactType = EHPImpact.Damage;
-
-        public override int BaseExpCost()
-        {
-            double modifier = ImpactType == EHPImpact.Heal ? _healPenalty : 1;
-
-            return (Impact.Average() * Impact.Average() * modifier).Round();
-        }
-    }
-
-    public enum EHPImpact
-    {
-        Damage = 0,
-        Heal = 1
+        public override int BaseExpCost() => Impact.Average() * Impact.Average();
     }
 }

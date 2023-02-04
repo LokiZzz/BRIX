@@ -40,22 +40,42 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:EffectModel">
-                        <Grid >
-                            <Border Style="{StaticResource BlockBorder}" HeightRequest="75" Margin="10,0">
-                                <Grid ColumnDefinitions="*,auto">
-                                    <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
-                                    <Button 
-                                        Style="{StaticResource UpgradeSquareButton}"
-                                        Grid.Column="1"
-                                        Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.UpgradeCommand}"
-                                        CommandParameter="{Binding}"/>
-                                </Grid>
-                            </Border>
-
-                            <!--<Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={x:Reference listView}, Path= BindingContext.SelectCommand}" CommandParameter="{Binding .}"/>
-                            </Grid.GestureRecognizers>-->
-                        </Grid>
+                        <SwipeView Threshold="100">
+                            <SwipeView.LeftItems>
+                                <SwipeItems Mode="Execute">
+                                    <SwipeItemView
+                                        Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.EditEffectCommand}"
+                                        CommandParameter="{Binding}">
+                                        <Border Style="{StaticResource MediumSwipeViewBorder}">
+                                            <Label Style="{StaticResource MediumSwipeViewEditLabel}" />
+                                        </Border>
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Execute">
+                                    <SwipeItemView
+                                        Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.RemoveEffectCommand}"
+                                        CommandParameter="{Binding}">
+                                        <Border Style="{StaticResource MediumSwipeViewBorder}">
+                                            <Label Style="{StaticResource MediumSwipeViewDeleteLabel}"/>
+                                        </Border>
+                                    </SwipeItemView>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Grid Margin="10,0">
+                                <Border Style="{StaticResource BlockBorder}" HeightRequest="75" >
+                                    <Grid ColumnDefinitions="*,auto">
+                                        <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
+                                        <Button 
+                                            Style="{StaticResource UpgradeSquareButton}"
+                                            Grid.Column="1"
+                                            Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.UpgradeCommand}"
+                                            CommandParameter="{Binding}"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

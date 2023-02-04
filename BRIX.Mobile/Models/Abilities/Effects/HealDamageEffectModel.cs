@@ -15,11 +15,11 @@ namespace BRIX.Mobile.Models.Abilities.Effects
 {
     public partial class HealDamageEffectModel : EffectModel
     {
-        public HealDamageEffectModel() : this(new HealDamageEffect()) { }
+        public HealDamageEffectModel() : this(new DamageEffect()) { }
 
-        public HealDamageEffectModel(HealDamageEffect model) => InternalModel = model;
+        public HealDamageEffectModel(DamageEffect model) => InternalModel = model;
 
-        public HealDamageEffect Internal => GetSpecificEffect<HealDamageEffect>();
+        public DamageEffect Internal => GetSpecificEffect<DamageEffect>();
 
         public DicePool Impact
         {
