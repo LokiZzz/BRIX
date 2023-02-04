@@ -55,7 +55,7 @@
                             <SwipeView.RightItems>
                                 <SwipeItems Mode="Execute">
                                     <SwipeItemView
-                                        Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.RemoveEffectCommand}"
+                                        Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.DeleteEffectCommand}"
                                         CommandParameter="{Binding}">
                                         <Border Style="{StaticResource MediumSwipeViewBorder}">
                                             <Label Style="{StaticResource MediumSwipeViewDeleteLabel}"/>

@@ -17,6 +17,8 @@ using BRIX.Utility.Extensions;
 using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.View.Abilities.Effects;
+using BRIX.Mobile.ViewModel.Popups;
+using BRIX.Mobile.View.Popups;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {
@@ -66,9 +68,23 @@ namespace BRIX.Mobile.ViewModel.Abilities
         }
 
         [RelayCommand]
-        public async Task DeleteEffect()
+        public async Task DeleteEffect(EffectModel effectToRemove)
         {
-            await Navigation.NavigateAsync<ChooseEffectPage>((NavigationParameters.Ability, Ability.Copy()));
+            QuestionPopupResult result = await ShowPopupAsync<QuestionPopup, QuestionPopupResult, QuestionPopupParameters>(
+                new QuestionPopupParameters
+                {
+                    Title = _localization[LocalizationKeys.Warning].ToString(),
+                    Message = _localization[LocalizationKeys.DeleteEffectQuestion].ToString(),
+                    YesText = _localization[LocalizationKeys.Yes].ToString(),
+                    NoText = _localization[LocalizationKeys.No].ToString()
+                }
+            );
+
+            if (result?.Answer == EQuestionPopupResult.Yes)
+            {
+                Ability.RemoveEffect(effectToRemove);
+            }
+            
         }
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)

@@ -204,6 +204,9 @@
   <data name="DeleteCharacterQuestion" xml:space="preserve">
     <value>Are you sure you want to delete the character?</value>
   </data>
+  <data name="DeleteEffectQuestion" xml:space="preserve">
+    <value>Are you sure you want to delete the effect?</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>

@@ -322,6 +322,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the effect?.
+        /// </summary>
+        public static string DeleteEffectQuestion {
+            get {
+                return ResourceManager.GetString("DeleteEffectQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
