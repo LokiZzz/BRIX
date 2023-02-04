@@ -13,6 +13,7 @@ using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Abilities;
 using BRIX.Mobile.Models.Abilities;
 using CommunityToolkit.Mvvm.Messaging;
+using BRIX.Utility.Extensions;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
@@ -61,7 +62,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         private async void Edit(AbilityModel ability)
         {
             await Navigation.NavigateAsync<AddOrEditAbilityPage>(
-                (NavigationParameters.Ability, ability),
+                (NavigationParameters.Ability, ability.Copy()),
                 (NavigationParameters.EditMode, EEditingMode.Edit)
             );
         }
@@ -70,7 +71,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         private async void Upgrade(AbilityModel ability)
         {
             await Navigation.NavigateAsync<AddOrEditAbilityPage>(
-                (NavigationParameters.Ability, ability),
+                (NavigationParameters.Ability, ability.Copy()),
                 (NavigationParameters.EditMode, EEditingMode.Upgrade)
             );
         }
@@ -133,10 +134,16 @@ namespace BRIX.Mobile.ViewModel.Characters
             {
                 EEditingMode mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
 
-                if(mode == EEditingMode.Add)
+                switch(mode)
                 {
-                    _currentCharacter.Abilities.Add(editedAbility.InternalModel);
-                    Abilities.Add(editedAbility);
+                    case EEditingMode.Add:
+                        _currentCharacter.Abilities.Add(editedAbility.InternalModel);
+                        Abilities.Add(editedAbility);
+                        break;
+                    case EEditingMode.Edit:
+                    case EEditingMode.Upgrade:
+                        // Replace ability with new!
+                        break;
                 }
 
                 await _characterService.UpdateAsync(_currentCharacter);

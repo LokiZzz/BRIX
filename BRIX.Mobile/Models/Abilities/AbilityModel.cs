@@ -42,6 +42,18 @@ namespace BRIX.Mobile.Models.Abilities
             OnPropertyChanged(nameof(Cost));
         }
 
+        public void UpdateEffect(EffectModel effect)
+        {
+            InternalModel.UpdateEffect(effect.InternalModel);
+            EffectModel effectToRemove = Effects.First(x =>
+                x.InternalModel.Number == effect.InternalModel.Number
+                && x.InternalModel.GetType().Equals(effect.GetType())
+            );
+            Effects.Remove(effectToRemove);
+            Effects.Add(effect);
+            OnPropertyChanged(nameof(Cost));
+        }
+
         public void RemoveEffect(EffectModel effect) 
         {
             InternalModel.RemoveEffect(effect.InternalModel);

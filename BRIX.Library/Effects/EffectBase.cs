@@ -7,6 +7,12 @@ namespace BRIX.Library.Effects
 {
     public abstract class EffectBase
     {
+        /// <summary>
+        /// Порядковый номер эффекта среди эффектов того же типа в способности.
+        /// Идентификатор, позволяющий однозначно определять эффект в способности.
+        /// </summary>
+        public int Number { get; set; }
+
         public List<AspectBase> Aspects;
 
         public abstract int BaseExpCost();

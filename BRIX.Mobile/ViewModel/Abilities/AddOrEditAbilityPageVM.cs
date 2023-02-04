@@ -109,7 +109,18 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
             if(editedEffect != null)
             {
-                Ability.AddEffect(editedEffect);
+                EEditingMode mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
+
+                switch (mode)
+                {
+                    case EEditingMode.Add:
+                        Ability.AddEffect(editedEffect);
+                        break;
+                    case EEditingMode.Edit:
+                    case EEditingMode.Upgrade:
+                        Ability.UpdateEffect(editedEffect);
+                        break;
+                }
             }
 
             return Task.CompletedTask;

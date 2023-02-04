@@ -102,11 +102,17 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             switch(Mode)
             {
                 case EEditingMode.Add:
-                    await Navigation.Back(stepsBack: 2, (NavigationParameters.Effect, HealDamage));
+                    await Navigation.Back(stepsBack: 2, 
+                        (NavigationParameters.Effect, HealDamage),
+                        (NavigationParameters.EditMode, Mode)
+                    );
                     break;
                 case EEditingMode.Edit:
                 case EEditingMode.Upgrade:
-                    await Navigation.Back(stepsBack: 1, (NavigationParameters.Effect, HealDamage));
+                    await Navigation.Back(stepsBack: 1,
+                        (NavigationParameters.Effect, HealDamage),
+                        (NavigationParameters.EditMode, Mode)
+                    );
                     break;
             }
         }

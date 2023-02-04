@@ -51,6 +51,13 @@ namespace BRIX.Library
 
         public void AddEffect(EffectBase effect)
         {
+            IEnumerable<EffectBase> effectsWithSameType = _effects.Where(x => x.GetType().Equals(effect.GetType()));
+
+            if (effectsWithSameType.Any())
+            {
+                effect.Number = effectsWithSameType.Count();
+            }
+
             foreach (AspectBase aspect in effect.Aspects.ToList())
             {
                 AspectBase existingAspect = SynchronizingAspects.FirstOrDefault(
@@ -79,6 +86,20 @@ namespace BRIX.Library
         public void Clear()
         {
             _effects.Clear();
+        }
+
+        /// <summary>
+        /// Удобно для обновления эффекта в способности после его редактирования или улучшения.
+        /// Переданный эффект заменит совпавший по типу и полю Number.
+        /// </summary>
+        public void UpdateEffect(EffectBase effectToAdd)
+        {
+            var effectToRemove = _effects.First(x =>
+                x.Number == effectToAdd.Number && x.GetType().Equals(effectToAdd.GetType())
+            );
+
+            RemoveEffect(effectToRemove);
+            AddEffect(effectToAdd);
         }
 
         public void RemoveEffect(EffectBase item)
