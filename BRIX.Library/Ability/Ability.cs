@@ -6,11 +6,17 @@ namespace BRIX.Library
 {
     public class Ability
     {
+        public Ability(Guid? guid = null)
+        {
+            Guid = guid == null ? Guid.NewGuid() : guid.Value;
+        }
+
         private readonly List<EffectBase> _effects = new();
         public IReadOnlyCollection<EffectBase> Effects => _effects;
 
         private HashSet<AspectBase> SynchronizingAspects = new();
 
+        public Guid Guid { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 

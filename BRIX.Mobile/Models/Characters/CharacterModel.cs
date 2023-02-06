@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using BRIX.Library.Characters;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
+using BRIX.Mobile.Models.Abilities;
 
 namespace BRIX.Mobile.Models.Characters
 {
@@ -13,9 +15,15 @@ namespace BRIX.Mobile.Models.Characters
     {
         public CharacterModel() : this(new Character()) { }
 
-        public CharacterModel(Character character) => InternalModel = character;
+        public CharacterModel(Character character)
+        {
+            InternalModel = character;
+            Abilities = new ObservableCollection<AbilityModel>(character.Abilities.Select(x => new AbilityModel(x)));
+        }
 
         public Character InternalModel { get; }
+
+        public ObservableCollection<AbilityModel> Abilities = new ObservableCollection<AbilityModel>();
 
         public Guid Id
         {
@@ -111,6 +119,30 @@ namespace BRIX.Mobile.Models.Characters
         public int SpentExperience => InternalModel.SpentExp;
 
         public int FreeExperience => Experience - InternalModel.SpentExp;
+
+        public void AddAbility(AbilityModel ability)
+        {
+            InternalModel.Abilities.Add(ability.InternalModel);
+            Abilities.Add(ability);
+        }
+
+        /// <summary>
+        /// Заменяет переданной способностью другую, с таким же Guid-ом
+        /// </summary>
+        public void RemoveAbility(Guid abilityGuid)
+        {
+            InternalModel.Abilities.RemoveAll(x => x.Guid == abilityGuid);
+            Abilities.Remove(Abilities.First(x => x.InternalModel.Guid == abilityGuid));
+        }
+
+        /// <summary>
+        /// Заменяет переданной способностью другую, с таким же Guid-ом
+        /// </summary>
+        public void UpdateAbility(AbilityModel ability)
+        {
+            RemoveAbility(ability.InternalModel.Guid);
+            AddAbility(ability);
+        }
     }
 
     public enum EHealthState

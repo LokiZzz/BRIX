@@ -14,6 +14,7 @@ using BRIX.Mobile.ViewModel.Abilities;
 using BRIX.Mobile.Models.Abilities;
 using CommunityToolkit.Mvvm.Messaging;
 using BRIX.Utility.Extensions;
+using BRIX.Mobile.Models.Characters;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
@@ -22,7 +23,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         private readonly ICharacterService _characterService;
         private readonly ILocalizationResourceManager _localization;
 
-        private Character _currentCharacter; 
+        private CharacterModel _currentCharacter; 
 
         public CharacterAbilitiesPageVM(ICharacterService characterService, ILocalizationResourceManager localization)
         {
@@ -39,9 +40,6 @@ namespace BRIX.Mobile.ViewModel.Characters
         private bool _showHelp;
 
         private bool _initialized = false;
-        
-        [ObservableProperty]
-        private ObservableCollection<AbilityModel> _abilities = new();
 
         [RelayCommand]
         private void HideHelp()
@@ -91,9 +89,8 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if (result?.Answer == EQuestionPopupResult.Yes)
             {
-                Abilities.Remove(ability);
-                _currentCharacter.Abilities.Remove(ability.InternalModel);
-                await _characterService.UpdateAsync(_currentCharacter);
+                _currentCharacter.RemoveAbility(ability.InternalModel.Guid);
+                await _characterService.UpdateAsync(_currentCharacter.InternalModel);
             }
         }
 
@@ -110,11 +107,10 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if (currentCharacter != null)
             {
-                _currentCharacter = currentCharacter;
+                _currentCharacter = new CharacterModel(currentCharacter);
 
                 if (!_initialized || force)
                 {
-                    Abilities = new(currentCharacter.Abilities.Select(x => new AbilityModel(x)));
                     _initialized = true;
                 }
             }
@@ -137,16 +133,15 @@ namespace BRIX.Mobile.ViewModel.Characters
                 switch(mode)
                 {
                     case EEditingMode.Add:
-                        _currentCharacter.Abilities.Add(editedAbility.InternalModel);
-                        Abilities.Add(editedAbility);
+                        _currentCharacter.AddAbility(editedAbility);
                         break;
                     case EEditingMode.Edit:
                     case EEditingMode.Upgrade:
-                        // Replace ability with new!
+                        _currentCharacter.UpdateAbility(editedAbility);
                         break;
                 }
 
-                await _characterService.UpdateAsync(_currentCharacter);
+                await _characterService.UpdateAsync(_currentCharacter.InternalModel);
             }
         }
     }
