@@ -15,7 +15,7 @@ namespace BRIX.Mobile.Models.Abilities
     {
         public AbilityModel() : this(new Ability()) { }
 
-        public AbilityModel(Ability character) => InternalModel = character;
+        public AbilityModel(Ability ability) => InternalModel = ability;
 
         public Ability InternalModel { get; }
 

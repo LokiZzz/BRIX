@@ -23,8 +23,6 @@ namespace BRIX.Mobile.ViewModel.Characters
         private readonly ICharacterService _characterService;
         private readonly ILocalizationResourceManager _localization;
 
-        private CharacterModel _currentCharacter; 
-
         public CharacterAbilitiesPageVM(ICharacterService characterService, ILocalizationResourceManager localization)
         {
             _characterService = characterService;
@@ -35,6 +33,9 @@ namespace BRIX.Mobile.ViewModel.Characters
                 async (r, m) => await Initialize(true)
             );
         }
+
+        [ObservableProperty]
+        private CharacterModel _character;
 
         [ObservableProperty]
         private bool _showHelp;
@@ -89,8 +90,8 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if (result?.Answer == EQuestionPopupResult.Yes)
             {
-                _currentCharacter.RemoveAbility(ability.InternalModel.Guid);
-                await _characterService.UpdateAsync(_currentCharacter.InternalModel);
+                _character.RemoveAbility(ability.InternalModel.Guid);
+                await _characterService.UpdateAsync(_character.InternalModel);
             }
         }
 
@@ -107,7 +108,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if (currentCharacter != null)
             {
-                _currentCharacter = new CharacterModel(currentCharacter);
+                Character = new CharacterModel(currentCharacter);
 
                 if (!_initialized || force)
                 {
@@ -133,15 +134,15 @@ namespace BRIX.Mobile.ViewModel.Characters
                 switch(mode)
                 {
                     case EEditingMode.Add:
-                        _currentCharacter.AddAbility(editedAbility);
+                        _character.AddAbility(editedAbility);
                         break;
                     case EEditingMode.Edit:
                     case EEditingMode.Upgrade:
-                        _currentCharacter.UpdateAbility(editedAbility);
+                        _character.UpdateAbility(editedAbility);
                         break;
                 }
 
-                await _characterService.UpdateAsync(_currentCharacter.InternalModel);
+                await _characterService.UpdateAsync(_character.InternalModel);
             }
         }
     }

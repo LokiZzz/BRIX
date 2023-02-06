@@ -32,7 +32,7 @@
         <Grid Grid.Row="2">
             <CollectionView
                 x:Name="listView"
-                ItemsSource="{Binding Abilities}"
+                ItemsSource="{Binding Character.Abilities}"
                 HorizontalOptions="Fill">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>

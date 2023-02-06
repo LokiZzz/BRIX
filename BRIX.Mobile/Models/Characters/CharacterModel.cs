@@ -11,7 +11,7 @@ using BRIX.Mobile.Models.Abilities;
 
 namespace BRIX.Mobile.Models.Characters
 {
-    public class CharacterModel : ObservableObject
+    public partial class CharacterModel : ObservableObject
     {
         public CharacterModel() : this(new Character()) { }
 
@@ -23,7 +23,8 @@ namespace BRIX.Mobile.Models.Characters
 
         public Character InternalModel { get; }
 
-        public ObservableCollection<AbilityModel> Abilities = new ObservableCollection<AbilityModel>();
+        [ObservableProperty]
+        public ObservableCollection<AbilityModel> _abilities;
 
         public Guid Id
         {

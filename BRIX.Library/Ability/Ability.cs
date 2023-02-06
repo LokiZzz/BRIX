@@ -1,14 +1,20 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
+using System;
 
 namespace BRIX.Library
 {
     public class Ability
     {
-        public Ability(Guid? guid = null)
+        public Ability()
         {
-            Guid = guid == null ? Guid.NewGuid() : guid.Value;
+            Guid = Guid.NewGuid();
+        }
+
+        public Ability(Guid guid)
+        {
+            Guid = guid;
         }
 
         private readonly List<EffectBase> _effects = new();
