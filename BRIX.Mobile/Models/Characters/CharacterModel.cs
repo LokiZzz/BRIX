@@ -8,6 +8,8 @@ using BRIX.Library.Characters;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using BRIX.Mobile.Models.Abilities;
+using System.Collections.Specialized;
+using BRIX.Library;
 
 namespace BRIX.Mobile.Models.Characters
 {
@@ -127,9 +129,6 @@ namespace BRIX.Mobile.Models.Characters
             Abilities.Add(ability);
         }
 
-        /// <summary>
-        /// Заменяет переданной способностью другую, с таким же Guid-ом
-        /// </summary>
         public void RemoveAbility(Guid abilityGuid)
         {
             InternalModel.Abilities.RemoveAll(x => x.Guid == abilityGuid);
@@ -141,8 +140,15 @@ namespace BRIX.Mobile.Models.Characters
         /// </summary>
         public void UpdateAbility(AbilityModel ability)
         {
-            RemoveAbility(ability.InternalModel.Guid);
-            AddAbility(ability);
+            int indexOfOldAbility = Abilities.IndexOf(
+                Abilities.First(x => x.InternalModel.Guid == ability.InternalModel.Guid)
+            );
+            Abilities[indexOfOldAbility] = ability;
+
+            indexOfOldAbility = InternalModel.Abilities.IndexOf(
+                InternalModel.Abilities.First(x => x.Guid == ability.InternalModel.Guid)
+            );
+            InternalModel.Abilities[indexOfOldAbility] = ability.InternalModel;
         }
     }
 

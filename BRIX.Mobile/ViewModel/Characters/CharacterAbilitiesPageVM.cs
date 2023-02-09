@@ -40,8 +40,6 @@ namespace BRIX.Mobile.ViewModel.Characters
         [ObservableProperty]
         private bool _showHelp;
 
-        private bool _initialized = false;
-
         [RelayCommand]
         private void HideHelp()
         {
@@ -104,15 +102,13 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         private async Task Initialize(bool force = false)
         {
-            Character currentCharacter = await _characterService.GetCurrentCharacter();
-
-            if (currentCharacter != null)
+            if (_character == null || force)
             {
-                Character = new CharacterModel(currentCharacter);
+                Character currentCharacter = await _characterService.GetCurrentCharacter();
 
-                if (!_initialized || force)
+                if (currentCharacter != null)
                 {
-                    _initialized = true;
+                    Character = new CharacterModel(currentCharacter);
                 }
             }
         }
