@@ -19,7 +19,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         private EEditingMode _mode;
 
         [ObservableProperty]
-        private HealDamageEffectModel _healDamage = new();
+        private DamageEffectModel _damage = new();
 
         [ObservableProperty]
         private AbilityModel _ability = new();
@@ -27,14 +27,14 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         [RelayCommand]
         private async Task EditFormula()
         {
-            string formula = HealDamage?.Internal?.Impact?.ToString() ?? string.Empty;
+            string formula = Damage?.Internal?.Impact?.ToString() ?? string.Empty;
             DiceValuePopupResult result = await ShowPopupAsync<DiceValuePopup, DiceValuePopupResult, DiceValuePopupParameters>(
                 new DiceValuePopupParameters { Formula = formula }
             );
 
             if (result != null)
             {
-                HealDamage.Impact = result.DicePool;
+                Damage.Impact = result.DicePool;
                 _dicePoolToReset = null;
             }
 
@@ -67,8 +67,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 return;
             }
 
-            _dicePoolToReset = _dicePoolToReset == null ? HealDamage.Impact.Copy() : _dicePoolToReset;
-            HealDamage.Impact = DicePool.FromAdjusted(_dicePoolToReset, percent);
+            _dicePoolToReset = _dicePoolToReset == null ? Damage.Impact.Copy() : _dicePoolToReset;
+            Damage.Impact = DicePool.FromAdjusted(_dicePoolToReset, percent);
             Ability.UpdateCost();
         }
 
@@ -83,7 +83,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         [RelayCommand]
         private void ResetAdjustment()
         {
-            HealDamage.Impact = _dicePoolToReset;
+            Damage.Impact = _dicePoolToReset;
             _dicePoolToReset = null;
             _doNotAdjustOnce = true;
             Adjustment = 0;
@@ -96,14 +96,14 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             {
                 case EEditingMode.Add:
                     await Navigation.Back(stepsBack: 2, 
-                        (NavigationParameters.Effect, HealDamage),
+                        (NavigationParameters.Effect, Damage),
                         (NavigationParameters.EditMode, Mode)
                     );
                     break;
                 case EEditingMode.Edit:
                 case EEditingMode.Upgrade:
                     await Navigation.Back(stepsBack: 1,
-                        (NavigationParameters.Effect, HealDamage),
+                        (NavigationParameters.Effect, Damage),
                         (NavigationParameters.EditMode, Mode)
                     );
                     break;
@@ -119,15 +119,32 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
+            // Приходят копии способности и объекта, никак не связанны с экземплярами, существовавшими во вью-модели
+            // страницы, которая вызвала эту. При этом способность и эффект здесь никак не связаны.
+
             Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
             Ability = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability) ?? new();
-            HealDamage = query.GetParameterOrDefault<HealDamageEffectModel>(NavigationParameters.Effect) ?? new();
+            Damage = query.GetParameterOrDefault<DamageEffectModel>(NavigationParameters.Effect) ?? new();
 
-            Ability.AddEffect(HealDamage);
+            // Экземпляр способности здесь существует только для того, чтобы проиллюстрировать изменение её стоимости
+            // на этой страничке. Поэтому отдельно пришедшие в эту страничку копии объектов объединяются по новой в
+            // зависимости от режима работы. Эта страница своим результатом отдаёт исключительно эффект, при чём в
+            // отстранении от способности. Как распорядится этим эффектом решает страница, вызвавшая эту.
 
-            if (HealDamage.Impact.IsEmpty)
+            switch (Mode)
             {
-                HealDamage.Impact = new DicePool((1, 4));
+                case EEditingMode.Add:
+                    Ability.AddEffect(Damage);
+                    break;
+                case EEditingMode.Edit:
+                case EEditingMode.Upgrade:
+                    Ability.UpdateEffect(Damage);
+                    break;
+            }
+
+            if (Damage.Impact.IsEmpty)
+            {
+                Damage.Impact = new DicePool((1, 4));
             }
 
             query.Clear();

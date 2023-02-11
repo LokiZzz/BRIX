@@ -15,7 +15,13 @@ namespace BRIX.Mobile.Models.Abilities
     {
         public AbilityModel() : this(new Ability()) { }
 
-        public AbilityModel(Ability ability) => InternalModel = ability;
+        public AbilityModel(Ability ability)
+        {
+            InternalModel = ability;
+            Effects = new ObservableCollection<EffectModel>(
+                ability.Effects.Select(EffectModelFactory.GetModel)
+            );
+        }
 
         public Ability InternalModel { get; }
 
@@ -47,7 +53,7 @@ namespace BRIX.Mobile.Models.Abilities
             InternalModel.UpdateEffect(effect.InternalModel);
             EffectModel effectToRemove = Effects.First(x =>
                 x.InternalModel.Number == effect.InternalModel.Number
-                && x.InternalModel.GetType().Equals(effect.GetType())
+                && x.InternalModel.GetType().Equals(effect.InternalModel.GetType())
             );
             Effects.Remove(effectToRemove);
             Effects.Add(effect);

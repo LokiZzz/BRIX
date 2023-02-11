@@ -19,48 +19,51 @@ namespace BRIX.Mobile.Services
     {
         private readonly ILocalStorage _storage;
         private readonly string _fileName;
-        private readonly JsonSerializerOptions _jsonOptions;
 
         public JsonCharacterService(ILocalStorage storage)
         {
             _storage = storage;
             _fileName = "Characters.txt";
-            _jsonOptions = new JsonSerializerOptions
-            {
-                WriteIndented = true,
-            };
         }
 
         public async Task<Character> AddAsync(Character character)
         {
-            List<Character> characters = await _storage.ReadJsonCollectionAsync<Character>(_fileName, _jsonOptions);
+            List<Character> characters = await _storage.ReadJson<List<Character>>(_fileName) 
+                ?? new List<Character>();
             character.Id = Guid.NewGuid();
             characters.Add(character);
-            await _storage.WriteJsonCollectionAsync(_fileName, characters, _jsonOptions);
+            await _storage.WriteJsonAsync(_fileName, characters);
 
             return character;
         }
 
         public async Task<List<Character>> GetAllAsync()
         {
-            return await _storage.ReadJsonCollectionAsync<Character>(_fileName, _jsonOptions);
+            return await _storage.ReadJson<List<Character>>(_fileName)
+                ?? new List<Character>();
         }
 
         public async Task<Character> GetAsync(Guid id)
         {
-            List<Character> characters = await _storage.ReadJsonCollectionAsync<Character>(_fileName, _jsonOptions);
+            List<Character> characters = await _storage.ReadJson<List<Character>>(_fileName)
+                ?? new List<Character>();
 
-            return characters.Single(charater => charater.Id == id);
+            return characters?.Single(charater => charater.Id == id);
         }
 
         public async Task RemoveAsync(Guid id)
         {
-            List<Character> characters = await _storage.ReadJsonCollectionAsync<Character>(_fileName, _jsonOptions);
-            Character character = characters.Single(character => character.Id == id);
-            characters.Remove(character);
-            await _storage.WriteJsonCollectionAsync(_fileName, characters, _jsonOptions);
-            
-            if(!characters.Any())
+            List<Character> characters = await _storage.ReadJson<List<Character>>(_fileName)
+                ?? new List<Character>();
+
+            if (characters.Any())
+            {
+                Character character = characters.Single(character => character.Id == id);
+                characters.Remove(character);
+                await _storage.WriteJsonAsync(_fileName, characters);
+            }
+
+            if (!characters.Any())
             {
                 await SelectCurrentCharacter(null);
             }
@@ -68,7 +71,7 @@ namespace BRIX.Mobile.Services
 
         public async Task RemoveAllAsync()
         {
-            await _storage.WriteJsonCollectionAsync(_fileName, new List<Character>(), _jsonOptions);
+            await _storage.WriteJsonAsync(_fileName, new List<Character>());
         }
 
         public async Task<Character> UpdateAsync(Character character)

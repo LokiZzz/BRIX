@@ -15,7 +15,7 @@ namespace BRIX.Mobile.Services
 
         private static Dictionary<Type, string> EffectNamesLocalizationKeys => new Dictionary<Type, string>
         {
-            { typeof(HealDamageEffectModel), LocalizationKeys.EffectDamage }
+            { typeof(DamageEffectModel), LocalizationKeys.EffectDamage }
         };
 
         public static string GetEffectName(EffectModel effectModel)

@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.Models.Abilities.Effects
 {
-    public partial class HealDamageEffectModel : EffectModel
+    public partial class DamageEffectModel : EffectModel
     {
-        public HealDamageEffectModel() : this(new DamageEffect()) { }
+        public DamageEffectModel() : this(new DamageEffect()) { }
 
-        public HealDamageEffectModel(DamageEffect model) => InternalModel = model;
+        public DamageEffectModel(DamageEffect model) => InternalModel = model;
 
         public DamageEffect Internal => GetSpecificEffect<DamageEffect>();
 

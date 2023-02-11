@@ -2,6 +2,8 @@
 {
     public class Dice
     {
+        public Dice() { }
+
         public Dice(int numberOfFaces, int count = 1)
         {
             NumberOfFaces = numberOfFaces;

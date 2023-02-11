@@ -63,7 +63,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 EffectsDictionary.GetEditPageRoute(effectToEdit.InternalModel),
                 ENavigationMode.Push,
                 (NavigationParameters.EditMode, EEditingMode.Edit), 
-                (NavigationParameters.Ability, Ability.Copy())
+                (NavigationParameters.Ability, Ability.Copy()),
+                (NavigationParameters.Effect, effectToEdit.Copy())
             );
         }
 

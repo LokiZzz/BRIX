@@ -33,7 +33,7 @@
                         <Label Grid.Row="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DamageEffectPageHint}}"/>
                         <!--Здесь Margin у коллекции компенсирует лишний Margin у элемента, это workaround бага MAUI, 
                         который не позволяет нормально установить ItemsLayout через тег (если так сделать, то CollectionView сломается)-->
-                        <CollectionView Grid.Row="2" ItemsSource="{Binding HealDamage.DiceChunks}" ItemsLayout="VerticalGrid, 4" Margin="-5">
+                        <CollectionView Grid.Row="2" ItemsSource="{Binding Damage.DiceChunks}" ItemsLayout="VerticalGrid, 4" Margin="-5">
                             <!--Сколько ещё вещей в мауи не работает, лол?-->
                             <!--<CollectionView.EmptyView>
                                 <ContentView>
@@ -66,9 +66,9 @@
                         </CollectionView>
                         <Grid Grid.Row="3" RowDefinitions="*,*" ColumnDefinitions="auto,*" ColumnSpacing="20">
                             <Label Grid.Row="0" Grid.Column="0" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Spread}}"/>
-                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding HealDamage.SpreadText}"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Damage.SpreadText}"/>
                             <Label Grid.Row="1" Grid.Column="0" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Average}}"/>
-                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding HealDamage.Average}"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Damage.Average}"/>
                         </Grid>
                         <!--Быстрая настройка!-->
                         <!--<Label Grid.Row="4" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.FastAdjustment}}"/>
