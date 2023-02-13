@@ -243,7 +243,7 @@ namespace BRIX.Library.DiceValue
         {
             if (value <= 0 || spread < 0 || spread >= 1)
             {
-                throw new ArgumentException("Оба края диапазона должны быть больше нуля, а левый край должен быть больше правого.");
+                throw new ArgumentException("Оба края диапазона должны быть больше нуля, а левый край должен быть меньше правого.");
             }
 
             int from = (value - value * spread).Round();
