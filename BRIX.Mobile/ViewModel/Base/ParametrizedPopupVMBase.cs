@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Base
 {
-    public abstract partial class ParametrizedPopupVMBase<T> : ViewModelBase
+    public abstract partial class PopupVMBase : ViewModelBase
     {
         public Popup View { get; set; }
+    }
 
+    public abstract partial class ParametrizedPopupVMBase<T> : PopupVMBase
+    {
         private T _parameters;
 
         /// <summary>

@@ -66,7 +66,7 @@
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#16161A" />
 		
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#16161A"/>
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#16161A" />
 		
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -160,6 +160,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Characters\CurrentCharacterPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Settings\SelectLanguagePopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Settings\SettingsPage.xaml">

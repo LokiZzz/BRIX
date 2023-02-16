@@ -2,17 +2,45 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BRIX.Mobile.View.Settings.SettingsPage"
+             xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Settings"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              xmlns:local="clr-namespace:BRIX.Mobile.View.Settings"
+             x:DataType="vm:SettingsPageVM"
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.SettingsPageTitle}}">
     
     <Shell.TitleView>
         <controls:TitleView/>
     </Shell.TitleView>
+
+    <ContentPage.Resources>
+        <Style TargetType="VerticalStackLayout">
+            <Setter Property="Spacing" Value="10"/>
+        </Style>
+    </ContentPage.Resources>
     
     <VerticalStackLayout>
-        <Button Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Language}}"
-                Command="{Binding SelectLanguageCommand}"/>
+        <Border Style="{StaticResource BlockBorder}">
+            <VerticalStackLayout>
+                <Label 
+                    Style="{StaticResource TitleLabel}"
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Language}}"/>
+                <HorizontalStackLayout Spacing="5">
+                    <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CurrentLanguage}}"/>
+                    <Label Text="{Binding CurrentLanguage}"/>
+                </HorizontalStackLayout>
+                <Button 
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ChangeLanguage}}"
+                    Command="{Binding SelectLanguageCommand}"/>
+            </VerticalStackLayout>
+            
+        </Border>
+        <Border Style="{StaticResource BlockBorder}">
+            <VerticalStackLayout>
+                <Label 
+                    Style="{StaticResource TitleLabel}"
+                    Text="Other settings"/>
+            </VerticalStackLayout>
+        </Border>
     </VerticalStackLayout>
 </ContentPage>

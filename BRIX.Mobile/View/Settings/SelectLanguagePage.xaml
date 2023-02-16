@@ -11,12 +11,13 @@
     </Shell.TitleView>
 
     <VerticalStackLayout>
-        <CollectionView x:Name="collection"
-                        ItemsSource="{Binding Cultures}"
-                        SelectionMode="Single"
-                        SelectedItem="{Binding SelectedCulture}"
-                        SelectionChangedCommandParameter="{Binding SelectedCulture}"
-                        SelectionChangedCommand="{Binding SelectCultureCommand}">
+        <CollectionView 
+            x:Name="collection"
+            ItemsSource="{Binding Cultures}"
+            SelectionMode="Single"
+            SelectedItem="{Binding SelectedCulture}"
+            SelectionChangedCommandParameter="{Binding SelectedCulture}"
+            SelectionChangedCommand="{Binding SelectCultureCommand}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border>

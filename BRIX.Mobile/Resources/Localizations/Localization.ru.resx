@@ -156,6 +156,9 @@
   <data name="Backstory" xml:space="preserve">
     <value>Предыстория</value>
   </data>
+  <data name="ChangeLanguage" xml:space="preserve">
+    <value>Изменить язык</value>
+  </data>
   <data name="Character" xml:space="preserve">
     <value>Персонаж</value>
   </data>
@@ -180,6 +183,9 @@
   <data name="CharListHelpText" xml:space="preserve">
     <value>Коснитесь карточки персонажа, чтобы выбрать его, сдвиньте карточку вправо, чтобы редактировать персонажа или сдвиньте карточку влево, чтобы его удалить.</value>
   </data>
+  <data name="ChooseLanguage" xml:space="preserve">
+    <value>Выберете язык</value>
+  </data>
   <data name="Clear" xml:space="preserve">
     <value>Очистить</value>
   </data>
@@ -188,6 +194,9 @@
   </data>
   <data name="CurrentCharacterPageTitle" xml:space="preserve">
     <value>Персонаж</value>
+  </data>
+  <data name="CurrentLanguage" xml:space="preserve">
+    <value>Текущий язык:</value>
   </data>
   <data name="Damage" xml:space="preserve">
     <value>Урон</value>
