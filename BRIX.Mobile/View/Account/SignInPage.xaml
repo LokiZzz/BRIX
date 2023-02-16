@@ -3,17 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BRIX.Mobile.ViewModel.Account"
              x:Class="BRIX.Mobile.View.Account.SignInPage"
-             ControlTemplate="{StaticResource BusyPageTemplate}"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
-             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.SignInPageTitle}}"
+             xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+             ControlTemplate="{StaticResource BusyPageTemplate}"
+             Shell.NavBarIsVisible="False"
              x:DataType="local:SignInPageVM">
-    <VerticalStackLayout>
-        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Login}}"/>
-        <Entry Text="{Binding Login}"/>
-        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Password}}"/>
-        <Entry Text="{Binding Password}" IsPassword="True"/>
-        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.RememberMe}}"/>
-        <Switch IsToggled="{Binding RememberMe}"/>
-        <Button Text="{lcz:Translate Name={x:Reference local}}" Command="{Binding SignInCommand}"/>
-    </VerticalStackLayout>
+    <Grid RowDefinitions="auto,*">
+        <Image 
+            Source="brix_logo_crop.svg" 
+            Aspect="Fill" 
+            VerticalOptions="Center"
+            Margin="0,100,0,20"/>
+        <Border Grid.Row="1" Style="{StaticResource BlockBorder}" VerticalOptions="Start">
+            <VerticalStackLayout>
+                <Label 
+                    Style="{StaticResource TitleLabel}"
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.SignIn}}"
+                    Margin="0,0,0,20"/>
+                <controls:FramedEntry
+                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Login}}"
+                    Text="{Binding Login}"/>
+                <controls:FramedEntry
+                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Password}}"
+                    Text="{Binding Password}"
+                    IsPassword="True"/>
+                <HorizontalStackLayout HorizontalOptions="End">
+                    <Label 
+                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.RememberMe}}"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center"/>
+                    <Switch IsToggled="{Binding RememberMe}"/>
+                </HorizontalStackLayout>
+                <Button Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Login}}" Command="{Binding SignInCommand}"/>
+                <Button 
+                    Text="Register" 
+                    Style="{StaticResource LightButton}"
+                    Command="{Binding SignInCommand}"
+                    Margin="0,10,0,0"/>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+    
 </ContentPage>
