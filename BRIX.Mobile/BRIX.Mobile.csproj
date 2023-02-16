@@ -66,7 +66,7 @@
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#16161A" />
 		
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#16161A" BaseSize="32,32" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#16161A"/>
 		
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -94,8 +94,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Maui" Version="3.1.0" />
-	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+	  <PackageReference Include="CommunityToolkit.Maui" Version="4.0.0" />
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 	</ItemGroup>
 
