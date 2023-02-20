@@ -10,9 +10,6 @@
              x:Class="BRIX.Mobile.View.Abilities.Effects.HealDamageEffectPage"
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectDamage}}">
 
-    <ContentPage.Resources>
-    </ContentPage.Resources>
-
     <Shell.TitleView>
         <controls:TitleView/>
     </Shell.TitleView>
@@ -81,15 +78,8 @@
                 <Border Style="{StaticResource BlockBorder}" HeightRequest="100"/>
             </VerticalStackLayout>
         </ScrollView>
-        <Border Grid.Row="1" BackgroundColor="{StaticResource BRIXDark}" Margin="-20,-2">
-            <Border.Shadow>
-                <Shadow 
-                    Brush="Black"
-                    Offset="0,-50"
-                    Radius="20"
-                    Opacity="0.8" />
-            </Border.Shadow>
-            <Grid RowDefinitions="auto,auto,auto,auto" Margin="20,10,20,0">
+        <Border Grid.Row="1" Style="{StaticResource LowBlockWithShadowBorder}">
+            <Grid RowDefinitions="auto,auto,auto,auto">
                 <Label Grid.Row="1" Style="{StaticResource TitleLabel}" Text="Ability cost:" />
                 <HorizontalStackLayout Grid.Row="1" HorizontalOptions="End" Spacing="10">
                     <Label Style="{StaticResource TitleLabel}" Text="{Binding Ability.Cost}"/>

@@ -6,6 +6,10 @@
     xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
     xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts">
 
+    <Style TargetType="ScrollView">
+        <Setter Property="VerticalScrollBarVisibility" Value="Never"/>
+    </Style>
+    
     <Style TargetType="Button">
         <Setter Property="TextColor" Value="{StaticResource BRIXWhite}" />
         <Setter Property="BackgroundColor" Value="{StaticResource BRIXViolet}" />
@@ -273,6 +277,19 @@
         <Setter Property="StrokeThickness" Value="0"/>
         <Setter Property="BackgroundColor" Value="{StaticResource BRIXMedium}"/>
         <Setter Property="Opacity" Value=".75"/>
+    </Style>
+
+    <Style TargetType="Border" x:Key="LowBlockWithShadowBorder">
+        <Setter Property="Shadow" >
+            <Shadow 
+                Brush="Black"
+                Offset="0,-50"
+                Radius="20"
+                Opacity="0.8" />
+        </Setter>
+        <Setter Property="BackgroundColor" Value="{StaticResource BRIXDark}"/>
+        <Setter Property="Margin" Value="-20,-2"/>
+        <Setter Property="Padding" Value="20,10,20,0"/>
     </Style>
 
     <Style TargetType="Label" x:Key="SwipeViewLabel">
