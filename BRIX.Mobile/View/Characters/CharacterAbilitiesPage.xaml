@@ -16,7 +16,7 @@
     </Shell.TitleView>
 
     <Grid RowDefinitions="auto,auto,*" RowSpacing="10">
-        <Border Grid.Row="0" Style="{StaticResource BlockBorder}" Margin="10" IsVisible="{Binding ShowHelp}">
+        <Border Grid.Row="0" Style="{StaticResource BlockBorder}" Margin="10,0" IsVisible="{Binding ShowHelp}">
             <VerticalStackLayout>
                 <Label Style="{StaticResource ParagraphTitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Help}}"/>
                 <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AbilitiesListHelpText}}"/>

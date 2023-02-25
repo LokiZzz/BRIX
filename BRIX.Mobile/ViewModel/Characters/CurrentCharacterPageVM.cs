@@ -33,6 +33,9 @@ namespace BRIX.Mobile.ViewModel.Characters
         private bool _playerHaveCharacter;
 
         [ObservableProperty]
+        private bool _showNoCharacterText;
+
+        [ObservableProperty]
         private ObservableCollection<ExperienceInfoVM> _expCards;
 
         [RelayCommand]
@@ -51,19 +54,6 @@ namespace BRIX.Mobile.ViewModel.Characters
         public async Task Switch()
         {
             await Navigation.NavigateAsync(nameof(CharacterListPage));
-        }
-
-
-        /// <summary>
-        /// Только для удобства тестирования.
-        /// </summary>
-        /// <returns></returns>
-        [RelayCommand]
-        public async Task Test()
-        {
-            DiceValuePopupResult result = await ShowPopupAsync<DiceValuePopup, DiceValuePopupResult, DiceValuePopupParameters>(
-                new DiceValuePopupParameters { Formula = "" }
-            );
         }
 
         [RelayCommand]
@@ -129,6 +119,8 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         public override async Task OnNavigatedAsync()
         {
+            IsBusy = true;
+
             Character character = await _characterService.GetCurrentCharacter();
 
             if(character != null)
@@ -142,6 +134,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             }
 
             PlayerHaveCharacter = Character != null;
+            ShowNoCharacterText = !PlayerHaveCharacter;
 
             if (PlayerHaveCharacter)
             {
@@ -151,12 +144,14 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             // Возможно такие вызовы уползут в CharacterService, но пока что достаточно этого.
             WeakReferenceMessenger.Default.Send(new ShowCharacterTabsChanged(PlayerHaveCharacter));
+
+            IsBusy = false;
         }
 
         /// <summary>
         /// В данном случае коллекция ExpCards — это модель представления для двух карточек, отображающих разные 
-        /// метрики. Первая показывает опыт до следующего уровня, а вторая непотраченный опыт. К сожалению CarouselView
-        /// не умеет вмещать в себя элементы без ItemSource, поэтому применено такое решение.
+        /// метрики. Первая показывает опыт до следующего уровня, а вторая не потраченный опыт. К сожалению 
+        /// CarouselView не умеет вмещать в себя элементы без ItemSource, поэтому применено такое решение.
         /// </summary>
         private void UpdateExpCards()
         {

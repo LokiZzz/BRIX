@@ -29,7 +29,7 @@
         </Border>
 
         <Grid Grid.Row="1" RowDefinitions="auto,auto,*" Margin="0,0,0,-10">
-            <Label Grid.Row="0" Style="{StaticResource TitleLabel}" Text="{x:Static lcz:LocalizationKeys.Effects}" Margin="10,5,10,15"/>
+            <Label Grid.Row="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Effects}}" Margin="10,5,10,15"/>
             <Button
                 Grid.Row="1"
                 Style="{StaticResource LightPlusButton}" 

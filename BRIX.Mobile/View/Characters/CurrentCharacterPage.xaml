@@ -4,10 +4,11 @@
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Characters"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              x:Class="BRIX.Mobile.View.Characters.CurrentCharacterPage"
              x:DataType="vm:CurrentCharacterPageVM"
              x:Name="CharacterContentPage"
-             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             ControlTemplate="{StaticResource BusyPageTemplate}"
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Character}}" Padding="0">
 
     <ContentPage.Resources>
@@ -30,9 +31,6 @@
                 <Button Style="{StaticResource SquareIconButton}" Grid.Column="1" 
                     Text="{x:Static icons:Awesome.PeopleArrows}"
                     Command="{Binding SwitchCommand}"/>
-                <!--<Button Style="{StaticResource SquareIconButton}" Grid.Column="1" 
-                    Text="{x:Static icons:Awesome.Fire}"
-                    Command="{Binding TestCommand}"/>-->
             </HorizontalStackLayout>
             
         </Grid>
@@ -42,7 +40,7 @@
         <Grid>
             <!--In case of empty character pool-->
             <Grid 
-                IsVisible="{Binding PlayerHaveCharacter, Converter={StaticResource NotConverter}}"
+                IsVisible="{Binding ShowNoCharacterText}"
                 RowDefinitions="*,*,auto"
                 Margin="10,0">
                 <VerticalStackLayout Grid.Row="0">
@@ -57,7 +55,11 @@
                     Text="{x:Static icons:AwesomeRPG.CloakAndDagger}"
                     HorizontalOptions="Center"
                     Margin="0,-60,0,0"/>
-                <Button Grid.Row="2" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CreateNewCharacter}}" Command="{Binding CreateCommand}" Margin="0,0,0,10"/>
+                <Button 
+                    Grid.Row="2" 
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CreateNewCharacter}}" 
+                    Command="{Binding CreateCommand}" 
+                    Margin="0,0,0,10"/>
             </Grid>
         
             <!--In case of player have at leatst one character-->
@@ -181,13 +183,13 @@
                     SelectedIndicatorColor="{StaticResource BRIXWhite}"
                     HorizontalOptions="Center"/>
 
-                <Border Style="{StaticResource CurrentCharacterBlockBorder}">
+                <Border Style="{StaticResource CurrentCharacterBlockBorder}" HeightRequest="500">
                     <Grid RowDefinitions="auto,auto,auto,auto" ColumnDefinitions="*,auto,auto">
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Tags}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
                     </Grid>
                 </Border>
 
-                <Border Style="{StaticResource CurrentCharacterBlockBorder}">
+                <Border Style="{StaticResource CurrentCharacterBlockBorder}" HeightRequest="400">
                     <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Abilities}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
                     </Grid>
@@ -196,4 +198,5 @@
             </VerticalStackLayout>
         </Grid>
     </ScrollView>
+
 </ContentPage>
