@@ -42,7 +42,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         }
 
         private DicePool _dicePoolToReset = null;
-        private bool _doNotAdjustOnce = false;
 
         private double _adjustment = 0;
         public double Adjustment
@@ -50,23 +49,32 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             get => _adjustment;
             set
             {
-                if(Math.Abs(_adjustment - value) >= 1)
+                if (value < 1 && value > -1)
                 {
-                    SetProperty(ref _adjustment, value);
-                    Adjust(value.Round() * 10);
+                    if (_dicePoolToReset != null)
+                    {
+                        Damage.Impact = _dicePoolToReset;
+                        _dicePoolToReset = null;
+                    }
                 }
+                else
+                {
+                    bool crossInteger = Math.Abs(Math.Floor(_adjustment) - Math.Floor(value)) >= 1;
+
+                    if (crossInteger || value == -5 || value == 5)
+                    {
+                        SetProperty(ref _adjustment, value);
+                        Adjust(value.Round() * 10);
+                    }
+                }
+
+                _adjustment = value;
+                OnPropertyChanged();
             }
         }
 
         private void Adjust(int percent)
         {
-            if(_doNotAdjustOnce)
-            {
-                _doNotAdjustOnce = false;
-
-                return;
-            }
-
             _dicePoolToReset = _dicePoolToReset == null ? Damage.Impact.Copy() : _dicePoolToReset;
             Damage.Impact = DicePool.FromAdjusted(_dicePoolToReset, percent);
             Ability.UpdateCost();
@@ -76,17 +84,14 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         private void ApplyAdjustment()
         {
             _dicePoolToReset = null;
-            _doNotAdjustOnce = true;
             Adjustment = 0;
         }
 
         [RelayCommand]
         private void ResetAdjustment()
         {
-            Damage.Impact = _dicePoolToReset;
-            _dicePoolToReset = null;
-            _doNotAdjustOnce = true;
             Adjustment = 0;
+            Ability.UpdateCost();
         }
 
         [RelayCommand]

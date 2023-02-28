@@ -60,11 +60,25 @@
                         
                         <!--Быстрая настройка!-->
                         <Label Grid.Row="4" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.FastAdjustment}}"/>
-                        <Grid Grid.Row="5" RowDefinitions="auto,auto" ColumnDefinitions="auto,*,auto" Margin="0,0,0,10">
+                        <Grid Grid.Row="5" RowDefinitions="auto,auto,auto" ColumnDefinitions="auto,*,auto" Margin="0,0,0,10">
                             <Label Grid.Row="0" Grid.Column="0" Text="-50%" HorizontalOptions="Start"/>
                             <Label Grid.Row="0" Grid.Column="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DamageEffectCurrentAdjustment}}" HorizontalOptions="Center"/>
                             <Label Grid.Row="0" Grid.Column="2" Text="+50%" HorizontalOptions="End"/>
                             <Slider Grid.Row="1" Grid.ColumnSpan="3" Minimum="-5" Maximum="5" Value="{Binding Adjustment, Mode=TwoWay}"/>
+                            <Grid Grid.Row="2" Grid.ColumnSpan="3" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*">
+                                <Rectangle Grid.Column="0" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
+                                <Rectangle Grid.Column="1" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
+                                <Rectangle Grid.Column="2" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
+                                <Rectangle Grid.Column="3" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
+                                <Rectangle Grid.Column="4" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
+                                <Rectangle Grid.Column="5" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
+                                <Rectangle Grid.Column="6" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
+                                <Rectangle Grid.Column="7" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
+                                <Rectangle Grid.Column="8" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
+                                <Rectangle Grid.Column="9" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
+                                <Rectangle Grid.Column="10" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
+                                <Rectangle Grid.Column="11" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
+                            </Grid>
                         </Grid>
                         <Grid Grid.Row="6" ColumnDefinitions="*,*" ColumnSpacing="10" Margin="1">
                             <Button Grid.Column="0" Style="{StaticResource LightButton}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Reset}}" Command="{Binding ResetAdjustmentCommand}"/>
