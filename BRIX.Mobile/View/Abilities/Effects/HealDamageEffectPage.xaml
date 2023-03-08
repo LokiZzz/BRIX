@@ -63,6 +63,7 @@
                         <Grid Grid.Row="5" RowDefinitions="auto,auto,auto" ColumnDefinitions="auto,*,auto" Margin="0,0,0,10">
                             <Label Grid.Row="0" Grid.Column="0" Text="-50%" HorizontalOptions="Start"/>
                             <Label Grid.Row="0" Grid.Column="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DamageEffectCurrentAdjustment}}" HorizontalOptions="Center"/>
+                            <!--<Label Grid.Row="0" Grid.Column="1" Text="{Binding Adjustment}" HorizontalOptions="Center"/>-->
                             <Label Grid.Row="0" Grid.Column="2" Text="+50%" HorizontalOptions="End"/>
                             <Slider Grid.Row="1" Grid.ColumnSpan="3" Minimum="-5" Maximum="5" Value="{Binding Adjustment, Mode=TwoWay}"/>
                             <Grid Grid.Row="2" Grid.ColumnSpan="3" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*">

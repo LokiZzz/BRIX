@@ -63,13 +63,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
                     if (crossInteger || value == -5 || value == 5)
                     {
-                        SetProperty(ref _adjustment, value);
-                        Adjust(value.Round() * 10);
+                        int adjustmentPercent = (int)(value > 0 ? Math.Floor(value) : Math.Ceiling(value));
+                        Adjust(adjustmentPercent * 10);
                     }
                 }
 
-                _adjustment = value;
-                OnPropertyChanged();
+                SetProperty(ref _adjustment, value);
             }
         }
 
