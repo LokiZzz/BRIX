@@ -88,8 +88,8 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if (result?.Answer == EQuestionPopupResult.Yes)
             {
-                _character.RemoveAbility(ability.InternalModel.Guid);
-                await _characterService.UpdateAsync(_character.InternalModel);
+                Character.RemoveAbility(ability.InternalModel.Guid);
+                await _characterService.UpdateAsync(Character.InternalModel);
             }
         }
 
@@ -102,7 +102,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         private async Task Initialize(bool force = false)
         {
-            if (_character == null || force)
+            if (Character == null || force)
             {
                 Character currentCharacter = await _characterService.GetCurrentCharacter();
 
@@ -130,15 +130,15 @@ namespace BRIX.Mobile.ViewModel.Characters
                 switch(mode)
                 {
                     case EEditingMode.Add:
-                        _character.AddAbility(editedAbility);
+                        Character.AddAbility(editedAbility);
                         break;
                     case EEditingMode.Edit:
                     case EEditingMode.Upgrade:
-                        _character.UpdateAbility(editedAbility);
+                        Character.UpdateAbility(editedAbility);
                         break;
                 }
 
-                await _characterService.UpdateAsync(_character.InternalModel);
+                await _characterService.UpdateAsync(Character.InternalModel);
             }
         }
     }

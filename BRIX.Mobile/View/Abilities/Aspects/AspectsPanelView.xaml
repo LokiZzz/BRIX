@@ -18,13 +18,14 @@
     </ContentView.Resources>
     
     <Border Style="{StaticResource BlockBorder}">
-        <VerticalStackLayout Spacing="10">
-            <Label Style="{StaticResource TitleLabel}" Text="Аспекты"/>
+        <Grid RowDefinitions="auto,auto,auto" RowSpacing="10">
+            <Label Grid.Row="0" Style="{StaticResource TitleLabel}" Text="Аспекты"/>
             <CollectionView 
+                Grid.Row="1"
                 ItemsSource="{Binding AspectsCollection}" 
                 SelectedItem="{Binding SelectedAspect}" 
                 SelectionMode="Single"
-                BackgroundColor="Yellow">
+                HeightRequest="50">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" Span="7"  VerticalItemSpacing="10" HorizontalItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
@@ -32,9 +33,9 @@
                     <DataTemplate x:DataType="vm:AspectUtilityModel">
                         <Border 
                             StrokeShape="RoundRectangle 5"
-                            HeightRequest="{Binding Source={RelativeSource Self}, Path=Width}"
+                            HeightRequest="{Binding Source={RelativeSource Self}, Path=Width, Mode=OneWay}"
                             BackgroundColor="{StaticResource BRIXDim}"
-                            Margin="1">
+                            Padding="5">
                             <Label 
                                 Style="{StaticResource AspectIcon}" 
                                 Text="{Binding Icon}"/>
@@ -57,9 +58,10 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <Label 
+                Grid.Row="2"
                 Style="{StaticResource AspectIcon}" 
                 FontSize="120"
                 Text="{Binding SelectedAspect.Icon}"/>
-        </VerticalStackLayout>
+        </Grid>
     </Border>
 </ContentView>
