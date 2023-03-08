@@ -91,10 +91,6 @@
                 
                 <!--Aspects-->
                 <view:AspectsPanelView BindingContext="{Binding Aspects}"/>
-
-                <Border Style="{StaticResource BlockBorder}" HeightRequest="150"/>
-                <Border Style="{StaticResource BlockBorder}"/>
-                <Border Style="{StaticResource BlockBorder}" HeightRequest="100"/>
             </VerticalStackLayout>
         </ScrollView>
         <Border Grid.Row="1" Style="{StaticResource LowBlockWithShadowBorder}">

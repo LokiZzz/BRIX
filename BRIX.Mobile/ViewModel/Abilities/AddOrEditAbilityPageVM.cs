@@ -16,9 +16,9 @@ using BRIX.Mobile.View.Abilities;
 using BRIX.Utility.Extensions;
 using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities.Effects;
-using BRIX.Mobile.View.Abilities.Effects;
 using BRIX.Mobile.ViewModel.Popups;
 using BRIX.Mobile.View.Popups;
+using BRIX.Mobile.ViewModel.Abilities.Effects;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {
@@ -57,10 +57,10 @@ namespace BRIX.Mobile.ViewModel.Abilities
         }
 
         [RelayCommand]
-        public async Task EditEffect(EffectModel effectToEdit)
+        public async Task EditEffect(EffectModelBase effectToEdit)
         {
             await Navigation.NavigateAsync(
-                EffectsDictionary.GetEditPageRoute(effectToEdit.InternalModel),
+                EffectsDictionary.GetEditPageRoute(effectToEdit),
                 ENavigationMode.Push,
                 (NavigationParameters.EditMode, EEditingMode.Edit), 
                 (NavigationParameters.Ability, Ability.Copy()),
@@ -69,7 +69,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
         }
 
         [RelayCommand]
-        public async Task DeleteEffect(EffectModel effectToRemove)
+        public async Task DeleteEffect(EffectModelBase effectToRemove)
         {
             QuestionPopupResult result = await ShowPopupAsync<QuestionPopup, QuestionPopupResult, QuestionPopupParameters>(
                 new QuestionPopupParameters
@@ -106,7 +106,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         private Task HandleBackFromEditing(IDictionary<string, object> query)
         {
-            EffectModel editedEffect = query.GetParameterOrDefault<EffectModel>(NavigationParameters.Effect);
+            EffectModelBase editedEffect = query.GetParameterOrDefault<EffectModelBase>(NavigationParameters.Effect);
 
             if(editedEffect != null)
             {

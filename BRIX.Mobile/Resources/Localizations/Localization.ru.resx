@@ -150,6 +150,9 @@
   <data name="Apply" xml:space="preserve">
     <value>Применить</value>
   </data>
+  <data name="AspectActionPoints" xml:space="preserve">
+    <value>Очки действий</value>
+  </data>
   <data name="Average" xml:space="preserve">
     <value>Среднее:</value>
   </data>

@@ -1,6 +1,8 @@
 ﻿using BRIX.Library;
+using BRIX.Library.Aspects;
 using BRIX.Library.DiceValue;
 using BRIX.Library.Effects;
+using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.ViewModel.Abilities;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Maui.Controls;
@@ -14,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.Models.Abilities.Effects
 {
-    public partial class DamageEffectModel : EffectModel
+    public partial class DamageEffectModel : EffectModelBase
     {
         public DamageEffectModel() : this(new DamageEffect()) { }
 
@@ -22,6 +24,7 @@ namespace BRIX.Mobile.Models.Abilities.Effects
         {
             InternalModel = model;
             DiceChunks = new(DiceFormulaChunkVM.GetChunks(Impact));
+            Aspects = model.Aspects.Select(AspectModelFactory.GetAspectModel).ToList();
         }
 
         public DamageEffect Internal => GetSpecificEffect<DamageEffect>();
@@ -46,7 +49,5 @@ namespace BRIX.Mobile.Models.Abilities.Effects
         public int Average => Impact?.Average() ?? 0;
 
         public override string EffectString => DiceChunks.GetChunkCollectionText();
-
-        public override List<string> Aspects => new List<string>();
     }
 }

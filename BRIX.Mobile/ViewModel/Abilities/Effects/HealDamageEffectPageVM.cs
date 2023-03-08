@@ -26,7 +26,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         private AbilityModel _ability = new();
 
         [ObservableProperty]
-        private AspectPanelViewModel _aspects  = new();
+        private AspectPanelViewModel _aspects;
 
         [RelayCommand]
         private async Task EditFormula()
@@ -101,6 +101,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             {
                 Damage.Impact = new DicePool((1, 4));
             }
+
+            Aspects = new(Damage);
 
             query.Clear();
         }

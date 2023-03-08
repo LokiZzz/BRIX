@@ -9,7 +9,7 @@ namespace BRIX.Mobile.Models.Abilities.Effects
 {
     public static class EffectModelFactory
     {
-        public static EffectModel GetModel(EffectBase effect)
+        public static EffectModelBase GetModel(EffectBase effect)
         {
             switch(effect)
             {

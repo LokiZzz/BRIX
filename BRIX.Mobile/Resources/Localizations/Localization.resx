@@ -150,6 +150,9 @@
   <data name="Apply" xml:space="preserve">
     <value>Apply</value>
   </data>
+  <data name="AspectActionPoints" xml:space="preserve">
+    <value>Action points</value>
+  </data>
   <data name="Average" xml:space="preserve">
     <value>Average:</value>
   </data>

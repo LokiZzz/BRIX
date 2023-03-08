@@ -18,14 +18,14 @@ namespace BRIX.Mobile.Models.Abilities
         public AbilityModel(Ability ability)
         {
             InternalModel = ability;
-            Effects = new ObservableCollection<EffectModel>(
+            Effects = new ObservableCollection<EffectModelBase>(
                 ability.Effects.Select(EffectModelFactory.GetModel)
             );
         }
 
         public Ability InternalModel { get; }
 
-        public ObservableCollection<EffectModel> Effects { get; set; } = new ObservableCollection<EffectModel>();
+        public ObservableCollection<EffectModelBase> Effects { get; set; } = new ObservableCollection<EffectModelBase>();
 
         public string Name
         {
@@ -41,17 +41,17 @@ namespace BRIX.Mobile.Models.Abilities
 
         public int Cost => InternalModel.ExpCost();
 
-        public void AddEffect(EffectModel effect)
+        public void AddEffect(EffectModelBase effect)
         {
             InternalModel.AddEffect(effect.InternalModel);
             Effects.Add(effect);
             OnPropertyChanged(nameof(Cost));
         }
 
-        public void UpdateEffect(EffectModel effect)
+        public void UpdateEffect(EffectModelBase effect)
         {
             InternalModel.UpdateEffect(effect.InternalModel);
-            EffectModel effectToRemove = Effects.First(x =>
+            EffectModelBase effectToRemove = Effects.First(x =>
                 x.InternalModel.Number == effect.InternalModel.Number
                 && x.InternalModel.GetType().Equals(effect.InternalModel.GetType())
             );
@@ -60,7 +60,7 @@ namespace BRIX.Mobile.Models.Abilities
             OnPropertyChanged(nameof(Cost));
         }
 
-        public void RemoveEffect(EffectModel effect) 
+        public void RemoveEffect(EffectModelBase effect) 
         {
             InternalModel.RemoveEffect(effect.InternalModel);
             Effects.Remove(effect);

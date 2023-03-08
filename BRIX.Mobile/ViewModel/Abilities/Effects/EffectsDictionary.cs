@@ -2,8 +2,10 @@
 using BRIX.Mobile.Services;
 using BRIX.Mobile.View.IconFonts;
 using BRIX.Mobile.Resources.Localizations;
+using BRIX.Mobile.View.Abilities.Effects;
+using BRIX.Mobile.Models.Abilities.Effects;
 
-namespace BRIX.Mobile.View.Abilities.Effects
+namespace BRIX.Mobile.ViewModel.Abilities.Effects
 {
     public static class EffectsDictionary
     {
@@ -11,7 +13,7 @@ namespace BRIX.Mobile.View.Abilities.Effects
 
         public static Dictionary<Type, EffectUtilityModel> Collection => new()
         {
-            { typeof(DamageEffect), new EffectUtilityModel() {
+            { typeof(DamageEffectModel), new EffectUtilityModel() {
                 Name = _localization[LocalizationKeys.EffectDamage].ToString(),
                 Icon = AwesomeRPG.Sword,
                 EditPage = typeof(HealDamageEffectPage)
@@ -33,7 +35,7 @@ namespace BRIX.Mobile.View.Abilities.Effects
             }},
         };
 
-        public static string GetEditPageRoute(EffectBase effect)
+        public static string GetEditPageRoute(EffectModelBase effect)
         {
             return Collection[effect.GetType()].EditPage.Name.ToString();
         }

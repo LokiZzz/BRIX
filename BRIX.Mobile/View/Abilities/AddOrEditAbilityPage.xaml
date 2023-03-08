@@ -41,7 +41,7 @@
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:EffectModel">
+                        <DataTemplate x:DataType="models:EffectModelBase">
                             <SwipeView Threshold="100">
                                 <SwipeView.LeftItems>
                                     <SwipeItems Mode="Execute">
