@@ -5,6 +5,7 @@ using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Popups;
+using BRIX.Mobile.ViewModel.Abilities.Aspects;
 using BRIX.Mobile.ViewModel.Base;
 using BRIX.Mobile.ViewModel.Popups;
 using BRIX.Utility.Extensions;
@@ -24,6 +25,9 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         [ObservableProperty]
         private AbilityModel _ability = new();
 
+        [ObservableProperty]
+        private AspectPanelViewModel _aspects  = new();
+
         [RelayCommand]
         private async Task EditFormula()
         {
@@ -38,58 +42,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 _dicePoolToReset = null;
             }
 
-            Ability.UpdateCost();
-        }
-
-        private DicePool _dicePoolToReset = null;
-
-        private double _adjustment = 0;
-        public double Adjustment
-        {
-            get => _adjustment;
-            set
-            {
-                if (value < 1 && value > -1)
-                {
-                    if (_dicePoolToReset != null)
-                    {
-                        Damage.Impact = _dicePoolToReset;
-                        _dicePoolToReset = null;
-                    }
-                }
-                else
-                {
-                    bool crossInteger = Math.Abs(Math.Floor(_adjustment) - Math.Floor(value)) >= 1;
-
-                    if (crossInteger || value == -5 || value == 5)
-                    {
-                        int adjustmentPercent = (int)(value > 0 ? Math.Floor(value) : Math.Ceiling(value));
-                        Adjust(adjustmentPercent * 10);
-                    }
-                }
-
-                SetProperty(ref _adjustment, value);
-            }
-        }
-
-        private void Adjust(int percent)
-        {
-            _dicePoolToReset = _dicePoolToReset == null ? Damage.Impact.Copy() : _dicePoolToReset;
-            Damage.Impact = DicePool.FromAdjusted(_dicePoolToReset, percent);
-            Ability.UpdateCost();
-        }
-
-        [RelayCommand]
-        private void ApplyAdjustment()
-        {
-            _dicePoolToReset = null;
-            Adjustment = 0;
-        }
-
-        [RelayCommand]
-        private void ResetAdjustment()
-        {
-            Adjustment = 0;
             Ability.UpdateCost();
         }
 
@@ -152,5 +104,61 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
             query.Clear();
         }
+
+        #region Fast adjustment
+
+        private DicePool _dicePoolToReset = null;
+
+        private double _adjustment = 0;
+        public double Adjustment
+        {
+            get => _adjustment;
+            set
+            {
+                if (value < 1 && value > -1)
+                {
+                    if (_dicePoolToReset != null)
+                    {
+                        Damage.Impact = _dicePoolToReset;
+                        _dicePoolToReset = null;
+                    }
+                }
+                else
+                {
+                    bool crossInteger = Math.Abs(Math.Floor(_adjustment) - Math.Floor(value)) >= 1;
+
+                    if (crossInteger || value == -5 || value == 5)
+                    {
+                        int adjustmentPercent = (int)(value > 0 ? Math.Floor(value) : Math.Ceiling(value));
+                        Adjust(adjustmentPercent * 10);
+                    }
+                }
+
+                SetProperty(ref _adjustment, value);
+            }
+        }
+
+        private void Adjust(int percent)
+        {
+            _dicePoolToReset = _dicePoolToReset == null ? Damage.Impact.Copy() : _dicePoolToReset;
+            Damage.Impact = DicePool.FromAdjusted(_dicePoolToReset, percent);
+            Ability.UpdateCost();
+        }
+
+        [RelayCommand]
+        private void ApplyAdjustment()
+        {
+            _dicePoolToReset = null;
+            Adjustment = 0;
+        }
+
+        [RelayCommand]
+        private void ResetAdjustment()
+        {
+            Adjustment = 0;
+            Ability.UpdateCost();
+        }
+
+        #endregion
     }
 }

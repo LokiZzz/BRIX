@@ -11,8 +11,8 @@ namespace BRIX.Library.Effects
             Aspects = new()
             {
                 new ActionPointAspect(), new TargetSelectionAspect(), new TargetChainAspect(),
-                new ObstacleAspect(), new TargetSelectionRestrictionsApsect(), new TargetSizeAspect(), 
-                new CooldownAspect(), new ActivationConditionsAspect(),
+                new ObstacleAspect(), new TargetSelectionRestrictionsApsect(), new CooldownAspect(), 
+                new ActivationConditionsAspect(),
             };
         }
 

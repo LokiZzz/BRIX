@@ -5,6 +5,7 @@
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:abvm="clr-namespace:BRIX.Mobile.ViewModel.Abilities"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities.Effects"
+             xmlns:view="clr-namespace:BRIX.Mobile.View.Abilities.Aspects"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              x:DataType="vm:HealDamageEffectPageVM"
              x:Class="BRIX.Mobile.View.Abilities.Effects.HealDamageEffectPage"
@@ -87,7 +88,10 @@
                         </Grid>
                     </Grid>
                 </Border>
-                <Border Style="{StaticResource BlockBorder}"/>
+                
+                <!--Aspects-->
+                <view:AspectsPanelView BindingContext="{Binding Aspects}"/>
+
                 <Border Style="{StaticResource BlockBorder}" HeightRequest="150"/>
                 <Border Style="{StaticResource BlockBorder}"/>
                 <Border Style="{StaticResource BlockBorder}" HeightRequest="100"/>
