@@ -10,7 +10,6 @@
             <Setter Property="FontFamily" Value="AwesomeRPG"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="Padding" Value="0"/>
-            <Setter Property="Margin" Value="1"/>
             <Setter Property="FontSize" Value="26"/>
             <Setter Property="TextColor" Value="{StaticResource BRIXWhite}"/>
             <Setter Property="VerticalOptions" Value="Center"/>
@@ -21,7 +20,11 @@
     <Border Style="{StaticResource BlockBorder}">
         <VerticalStackLayout Spacing="10">
             <Label Style="{StaticResource TitleLabel}" Text="Аспекты"/>
-            <CollectionView ItemsSource="{Binding AspectsCollection}" SelectedItem="{Binding SelectedAspect}" SelectionMode="Single">
+            <CollectionView 
+                ItemsSource="{Binding AspectsCollection}" 
+                SelectedItem="{Binding SelectedAspect}" 
+                SelectionMode="Single"
+                BackgroundColor="Yellow">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" Span="7"  VerticalItemSpacing="10" HorizontalItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
@@ -30,7 +33,8 @@
                         <Border 
                             StrokeShape="RoundRectangle 5"
                             HeightRequest="{Binding Source={RelativeSource Self}, Path=Width}"
-                            BackgroundColor="{StaticResource BRIXDim}">
+                            BackgroundColor="{StaticResource BRIXDim}"
+                            Margin="1">
                             <Label 
                                 Style="{StaticResource AspectIcon}" 
                                 Text="{Binding Icon}"/>

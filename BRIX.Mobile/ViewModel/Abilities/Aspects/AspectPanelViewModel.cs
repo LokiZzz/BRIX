@@ -23,14 +23,22 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
         private ObservableCollection<AspectUtilityModel> GetAspects(EffectModelBase effect)
         {
-            List<AspectUtilityModel> aspects = effect.Aspects.Select(GetAspectModel).Where(x => x != null).ToList();
+            List<AspectUtilityModel> aspects = effect.Aspects
+                .Select(GetAspectModel)
+                .Where(x => x != null)
+                .ToList();
 
             return new ObservableCollection<AspectUtilityModel>(aspects);
         }
 
         private AspectUtilityModel GetAspectModel(AspectModelBase aspect)
         {
-            AspectsDictionary.Collection.TryGetValue(aspect.GetType(), out AspectUtilityModel model);
+            AspectUtilityModel model = null;
+
+            if (aspect != null)
+            {
+                AspectsDictionary.Collection.TryGetValue(aspect.GetType(), out model);
+            }
 
             return model;
         }
