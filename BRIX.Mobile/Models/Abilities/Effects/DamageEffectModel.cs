@@ -24,7 +24,11 @@ namespace BRIX.Mobile.Models.Abilities.Effects
         {
             InternalModel = model;
             DiceChunks = new(DiceFormulaChunkVM.GetChunks(Impact));
-            Aspects = model.Aspects.Select(AspectModelFactory.GetAspectModel).ToList();
+            model.ForceAspectInitialize();
+            Aspects = model.Aspects
+                .Select(AspectModelFactory.GetAspectModel)
+                .Where(x => x != null)
+                .ToList();
         }
 
         public DamageEffect Internal => GetSpecificEffect<DamageEffect>();

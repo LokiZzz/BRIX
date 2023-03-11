@@ -63,6 +63,7 @@ namespace BRIX.Library
 
         public void AddEffect(EffectBase effect)
         {
+            effect.ForceAspectInitialize();
             IEnumerable<EffectBase> effectsWithSameType = _effects.Where(x => x.GetType().Equals(effect.GetType()));
 
             if (effectsWithSameType.Any())

@@ -11,15 +11,12 @@ namespace BRIX.Library.Effects
 {
     public class MoveTargetEffect : EffectBase
     {
-        public MoveTargetEffect()
+        public override List<Type> RequiredAspects => new()
         {
-            Aspects = new()
-            {
-                new ActionPointAspect(), new TargetSelectionAspect(), new TargetChainAspect(),
-                new ObstacleAspect(), new TargetSelectionRestrictionsApsect(), new TargetSizeAspect(),
-                new CooldownAspect(), new ActivationConditionsAspect(),
-            };
-        }
+                typeof(ActionPointAspect), typeof(TargetSelectionAspect), typeof(TargetChainAspect),
+                typeof(ObstacleAspect), typeof(TargetSelectionRestrictionsApsect), typeof(TargetSizeAspect),
+                typeof(CooldownAspect), typeof(ActivationConditionsAspect)
+        };
 
         public int DistanceInMeters { get; set; }
         public EMoveTargetPath TargetPath { get; set; }

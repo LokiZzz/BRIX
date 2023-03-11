@@ -7,12 +7,19 @@ using BRIX.Library.Effects;
 using BRIX.Library.Mathematics;
 using Newtonsoft.Json;
 using System.ComponentModel;
+using System.Reflection;
 using System.Runtime.Intrinsics.Arm;
 using System.Text.Json;
 
 Character character = new ();
 Ability ability = new ();
-ability.AddEffect(new DamageEffect() { Impact = new DicePool((3, 6)) });
+DamageEffect damage = new DamageEffect() { Impact = new DicePool((3, 6)) };
+ActionPointAspect apAspect = damage.GetAspect<ActionPointAspect>();
+if (apAspect != null)
+{
+    apAspect.ActionPoints = 4;
+}
+ability.AddEffect(damage);
 character.Abilities.Add(ability);
 
 JsonSerializerSettings settings = new ()

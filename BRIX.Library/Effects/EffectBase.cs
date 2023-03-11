@@ -2,6 +2,7 @@
 using BRIX.Library.Extensions;
 using BRIX.Utility.Extensions;
 using System.Collections.ObjectModel;
+using System.Reflection;
 
 namespace BRIX.Library.Effects
 {
@@ -13,7 +14,9 @@ namespace BRIX.Library.Effects
         /// </summary>
         public int Number { get; set; }
 
-        public List<AspectBase> Aspects;
+        public abstract List<Type> RequiredAspects { get; }
+
+        public List<AspectBase> Aspects = new ();
 
         public abstract int BaseExpCost();
 
@@ -21,32 +24,60 @@ namespace BRIX.Library.Effects
         {
             double resultingCost = BaseExpCost();
 
-            foreach (AspectBase aspect in Aspects)
+            foreach (Type aspectType in RequiredAspects)
             {
-                double coeficient = aspect.GetCoefficient();
-                resultingCost = resultingCost * coeficient;
+                if(!typeof(AspectBase).IsAssignableFrom(aspectType))
+                {
+                    throw new Exception("Невалидный тип экземпляра аспекта в эффекте.");
+                }
+
+                AspectBase aspect = GetAspect(aspectType);
+
+                if (aspect != null)
+                {
+                    double coeficient = aspect.GetCoefficient();
+                    resultingCost = resultingCost * coeficient;
+                }
+                else
+                {
+                    throw new Exception("Ошибка полуения аспекта.");
+                }
             }
 
             return resultingCost.Round();
         }
 
-        public T GetAspect<T>() where T : AspectBase
+        public T? GetAspect<T>() where T : AspectBase
         {
-            AspectBase aspect = Aspects.FirstOrDefault(x => x is T);
-
-            if (aspect == null)
-            {
-                throw new ArgumentException($"У эффекта {GetType()} нет аспекта {typeof(T)}");
-            }
-
-            return (T)aspect;
+            return GetAspect(typeof(T)) as T;
         }
 
-        public bool TryGetAspect(Type aspectType, out AspectBase? aspect)
+        /// <summary>
+        /// Получить аспект указанного типа. Если такого аспекта в эффекте нет, но его тип указан в списке 
+        /// обязательных аспектов, то аспект будет инициализирован и возвращён в out-параметре.
+        /// </summary>
+        public AspectBase? GetAspect(Type aspectType)
         {
-            aspect = Aspects.FirstOrDefault(x => x.GetType() == aspectType);
+            AspectBase aspect = Aspects.FirstOrDefault(x => x.GetType() == aspectType);
 
-            return aspect != null;
+            if(aspect == null)
+            {
+                if (RequiredAspects.Any(x => x.Equals(aspectType)))
+                {
+                    aspect = (AspectBase)Activator.CreateInstance(aspectType);
+
+                    if (aspect != null)
+                    {
+                        Aspects.Add(aspect);
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException($"У эффекта {GetType()} нет аспекта {aspectType.Name}");
+                }
+            }
+
+            return aspect;
         }
 
         /// <summary>
@@ -56,14 +87,13 @@ namespace BRIX.Library.Effects
         /// <param name="sourceAspect">Аспект, на который ссылаются несколько эффектов.</param>
         public void Attach(AspectBase sourceAspect)
         {
-            if (TryGetAspect(sourceAspect.GetType(), out AspectBase aspectToConcord))
+            AspectBase aspectToConcord = GetAspect(sourceAspect.GetType());
+
+            if (aspectToConcord != null)
             {
-                if (aspectToConcord != null)
-                {
-                    int index = Aspects.FindIndex(x => x.GetType().Equals(aspectToConcord.GetType()));
-                    Aspects[index] = sourceAspect;
-                    Aspects[index].IsConcording = true;
-                }
+                int index = Aspects.FindIndex(x => x.GetType().Equals(aspectToConcord.GetType()));
+                Aspects[index] = sourceAspect;
+                Aspects[index].IsConcording = true;
             }
         }
 
@@ -74,20 +104,24 @@ namespace BRIX.Library.Effects
         /// <param name="sourceAspect">Любой экземпляр необходимого типа.</param>
         public void Detach(AspectBase aspectToDetach)
         {
-            if (TryGetAspect(aspectToDetach.GetType(), out AspectBase searchingAspect))
+            AspectBase searchingAspect = GetAspect(aspectToDetach.GetType());
+            
+            if (searchingAspect != null)
             {
-                if (searchingAspect != null)
-                {
-                    int index = Aspects.FindIndex(x => x.GetType().Equals(searchingAspect.GetType()));
-                    AspectBase? aspectCopy = Aspects[index].Copy();
+                int index = Aspects.FindIndex(x => x.GetType().Equals(searchingAspect.GetType()));
+                AspectBase? aspectCopy = Aspects[index].Copy();
 
-                    if (aspectCopy != null)
-                    {
-                        Aspects[index] = aspectCopy;
-                        Aspects[index].IsConcording = false;
-                    }
+                if (aspectCopy != null)
+                {
+                    Aspects[index] = aspectCopy;
+                    Aspects[index].IsConcording = false;
                 }
             }
+        }
+
+        public void ForceAspectInitialize()
+        {
+            RequiredAspects.ForEach(x => GetAspect(x));
         }
     }
 }
