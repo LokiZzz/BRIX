@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {
-    public partial class AspectModelBase : ObservableObject 
+    public abstract partial class AspectModelBase : ObservableObject 
     {
-        public virtual string Name => AspectsDictionary.Collection[GetType()].Name;
+        public string Name => AspectsDictionary.Collection[GetType()].Name;
+
+        public abstract string Description { get; }
     }
 }

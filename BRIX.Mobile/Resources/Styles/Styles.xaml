@@ -35,7 +35,7 @@
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="BorderWidth" Value="1" />
         <Setter Property="BorderColor" Value="{StaticResource BRIXLight}" />
-        <Setter Property="TextColor" Value="{StaticResource BRIXLight}" />
+        <Setter Property="TextColor" Value="{StaticResource BRIXWhite}" />
     </Style>
 
     <Style TargetType="Button" x:Key="LightPlusButton" BasedOn="{StaticResource LightButton}">

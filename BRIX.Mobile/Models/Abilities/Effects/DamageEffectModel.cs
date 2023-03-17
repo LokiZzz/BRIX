@@ -53,5 +53,9 @@ namespace BRIX.Mobile.Models.Abilities.Effects
         public int Average => Impact?.Average() ?? 0;
 
         public override string EffectString => DiceChunks.GetChunkCollectionText();
+
+        internal void UpdateAspect(AspectModelBase aspect)
+        {
+        }
     }
 }

@@ -12,5 +12,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
         }
 
         public ActionPointAspect Internal { get; set; }
+
+        public override string Description => $"Ability spends {Internal.ActionPoints} action points.";
     }
 }

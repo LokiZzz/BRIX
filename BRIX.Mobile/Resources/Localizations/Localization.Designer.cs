@@ -169,6 +169,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aspects.
+        /// </summary>
+        public static string Aspects {
+            get {
+                return ResourceManager.GetString("Aspects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Average:.
         /// </summary>
         public static string Average {

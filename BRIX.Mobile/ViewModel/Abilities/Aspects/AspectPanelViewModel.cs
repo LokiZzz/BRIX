@@ -1,16 +1,33 @@
 ﻿using BRIX.Library.Aspects;
+using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Models.Abilities.Effects;
+using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Base;
+using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 {
     public partial class AspectPanelViewModel : ViewModelBase
     {
-        public AspectPanelViewModel(EffectModelBase effect)
+        private EffectModelBase _aspectOwnerEffect;
+        private AbilityModel _effectOwnerAbiltiy;
+
+        public AspectPanelViewModel(AbilityModel ability, EffectModelBase effect)
         {
+            if(!ability.Effects.Contains(effect))
+            {
+                throw new ArgumentException(
+                    "Инициализируя модель аспекта, необходимо передавать способность и её (!!!) эффект."
+                );
+            }
+
+            _aspectOwnerEffect = effect;
+            _effectOwnerAbiltiy = ability;
+
             AspectsCollection = GetAspects(effect);
             SelectedAspect = AspectsCollection.First();
         }
@@ -20,6 +37,18 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
         [ObservableProperty]
         private AspectUtilityModel _selectedAspect = new();
+
+        [RelayCommand]
+        public async Task NavigateToAspect()
+        {
+            await Navigation.NavigateAsync(
+                SelectedAspect.EditPage.Name,
+                Services.ENavigationMode.Push,
+                (NavigationParameters.Ability, _effectOwnerAbiltiy.Copy()),
+                (NavigationParameters.Effect, _aspectOwnerEffect.Copy()),
+                (NavigationParameters.Aspect, SelectedAspect.Copy())
+            );
+        }
 
         private ObservableCollection<AspectUtilityModel> GetAspects(EffectModelBase effect)
         {
@@ -38,6 +67,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             if (aspect != null)
             {
                 AspectsDictionary.Collection.TryGetValue(aspect.GetType(), out model);
+                model.Description = aspect.Description;
             }
 
             return model;

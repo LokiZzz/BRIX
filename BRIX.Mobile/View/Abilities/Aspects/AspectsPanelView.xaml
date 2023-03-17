@@ -2,6 +2,7 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities.Aspects"
+             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              x:Class="BRIX.Mobile.View.Abilities.Aspects.AspectsPanelView"
              x:DataType="vm:AspectPanelViewModel">
 
@@ -18,8 +19,8 @@
     </ContentView.Resources>
     
     <Border Style="{StaticResource BlockBorder}">
-        <Grid RowDefinitions="auto,auto,auto" RowSpacing="10">
-            <Label Grid.Row="0" Style="{StaticResource TitleLabel}" Text="Аспекты"/>
+        <Grid RowDefinitions="auto,auto,auto" RowSpacing="5">
+            <Label Grid.Row="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Aspects}}"/>
             <CollectionView 
                 Grid.Row="1"
                 ItemsSource="{Binding AspectsCollection}" 
@@ -57,11 +58,21 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Label 
-                Grid.Row="2"
-                Style="{StaticResource AspectIcon}" 
-                FontSize="120"
-                Text="{Binding SelectedAspect.Icon}"/>
+            
+            <Grid RowDefinitions="auto,*,auto" Grid.Row="2">
+                <Label Grid.Row="0" Style="{StaticResource TitleLabel}" Text="{Binding SelectedAspect.Name}"/>
+                <Label Grid.Row="1" Text="{Binding SelectedAspect.Description}"/>
+                <Grid Grid.Row="2" ColumnDefinitions="*,*">
+                    <Button 
+                        Grid.ColumnSpan="2"
+                        Style="{StaticResource LightButton}"
+                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Edit}}" 
+                        Command="{Binding NavigateToAspectCommand}"
+                        Margin="0,10,0,0"/>
+                </Grid>
+                
+            </Grid>
+            
         </Grid>
     </Border>
 </ContentView>

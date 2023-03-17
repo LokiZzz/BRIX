@@ -1,6 +1,7 @@
 ﻿using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Abilities;
+using BRIX.Mobile.View.Abilities.Aspects;
 using BRIX.Mobile.View.Abilities.Effects;
 using BRIX.Mobile.View.Account;
 using BRIX.Mobile.View.Characters;
@@ -8,6 +9,7 @@ using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.View.Settings;
 using BRIX.Mobile.ViewModel;
 using BRIX.Mobile.ViewModel.Abilities;
+using BRIX.Mobile.ViewModel.Abilities.Aspects;
 using BRIX.Mobile.ViewModel.Abilities.Effects;
 using BRIX.Mobile.ViewModel.Account;
 using BRIX.Mobile.ViewModel.Characters;
@@ -63,8 +65,9 @@ public static class MauiProgram
         builder.RegisterView<AddOrEditCharacterPage, AddOrEditCharacterPageVM>();
         builder.RegisterView<AddOrEditAbilityPage, AddOrEditAbilityPageVM>();
         builder.RegisterView<ChooseEffectPage, ChooseEffectPageVM>();
-        builder.RegisterView<HealDamageEffectPage, HealDamageEffectPageVM>();
 
+        builder.RegisterView<HealDamageEffectPage, HealDamageEffectPageVM>();
+        builder.RegisterView<ActionPointAspectPage, ActionPointAspectPageVM>();
 
         builder.RegisterView<SettingsPage, SettingsPageVM>(false);
         builder.RegisterView<SelectLanguagePage, SelectLanguagePageVM>();

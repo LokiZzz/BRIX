@@ -153,6 +153,9 @@
   <data name="AspectActionPoints" xml:space="preserve">
     <value>Action points</value>
   </data>
+  <data name="Aspects" xml:space="preserve">
+    <value>Aspects</value>
+  </data>
   <data name="Average" xml:space="preserve">
     <value>Average:</value>
   </data>

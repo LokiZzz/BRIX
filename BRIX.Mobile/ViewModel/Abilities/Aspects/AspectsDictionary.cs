@@ -21,7 +21,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             { typeof(ActionPointsAspectModel), new AspectUtilityModel() {
                 Name = _localization[Resources.Localizations.LocalizationKeys.AspectActionPoints].ToString(),
                 Icon = AwesomeRPG.BottledBolt,
-                EditPage = typeof(ActionPointAspectPage)
+                EditPage = typeof(ActionPointAspectPage),
             }},
         };
 
@@ -34,6 +34,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
     public class AspectUtilityModel
     {
         public string Name { get; set; }
+        public string Description { get; set; }
         public string Icon { get; set; }
         public Type EditPage { get; set; }
     }

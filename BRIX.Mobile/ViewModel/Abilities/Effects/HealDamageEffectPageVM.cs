@@ -102,7 +102,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 Damage.Impact = new DicePool((1, 4));
             }
 
-            Aspects = new(Damage);
+            Aspects = new(Ability, Damage);
 
             query.Clear();
         }

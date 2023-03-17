@@ -153,6 +153,9 @@
   <data name="AspectActionPoints" xml:space="preserve">
     <value>Очки действий</value>
   </data>
+  <data name="Aspects" xml:space="preserve">
+    <value>Аспект</value>
+  </data>
   <data name="Average" xml:space="preserve">
     <value>Среднее:</value>
   </data>
