@@ -38,13 +38,9 @@ namespace BRIX.Library.Effects
                     double coeficient = aspect.GetCoefficient();
                     resultingCost = resultingCost * coeficient;
                 }
-                else
-                {
-                    throw new Exception("Ошибка полуения аспекта.");
-                }
             }
 
-            return resultingCost.Round();
+            return resultingCost <= 1 ? 1 : resultingCost.Round();
         }
 
         public T? GetAspect<T>() where T : AspectBase
@@ -78,6 +74,22 @@ namespace BRIX.Library.Effects
             }
 
             return aspect;
+        }
+
+        /// <summary>
+        /// Заменит аспект целиком на переданный в аргументах, но если в эффекте не может быть аспекта с таким типом, 
+        /// то выбросит исключение.
+        /// </summary>
+        /// <param name="aspect"></param>
+        public void SetAspect(AspectBase aspect)
+        {
+            AspectBase? aspectToLookFor = GetAspect(aspect.GetType());
+
+            if (aspectToLookFor != null)
+            {
+                int index = Aspects.FindIndex(x => x.GetType().Equals(aspectToLookFor.GetType()));
+                Aspects[index] = aspect;
+            }
         }
 
         /// <summary>

@@ -1,4 +1,6 @@
-﻿using BRIX.Mobile.Services;
+﻿using BRIX.Library.Aspects;
+using BRIX.Library.Effects;
+using BRIX.Mobile.Services;
 using BRIX.Mobile.ViewModel.Abilities.Aspects;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
@@ -11,6 +13,13 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 {
     public abstract partial class AspectModelBase : ObservableObject 
     {
+        public AspectBase InternalModel { get; set; }
+
+        public T GetSpecificAspect<T>() where T : AspectBase
+        {
+            return InternalModel as T;
+        }
+
         public string Name => AspectsDictionary.Collection[GetType()].Name;
 
         public abstract string Description { get; }

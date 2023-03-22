@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Effects;
+﻿using BRIX.Library.Aspects;
+using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.View.Abilities.Aspects;
@@ -22,6 +23,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 Name = _localization[Resources.Localizations.LocalizationKeys.AspectActionPoints].ToString(),
                 Icon = AwesomeRPG.BottledBolt,
                 EditPage = typeof(ActionPointAspectPage),
+                LibraryAspectType = typeof(ActionPointAspect),
             }},
         };
 
@@ -37,5 +39,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         public string Description { get; set; }
         public string Icon { get; set; }
         public Type EditPage { get; set; }
+        public Type LibraryAspectType { get; set; }
     }
 }

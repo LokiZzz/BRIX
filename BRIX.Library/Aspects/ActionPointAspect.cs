@@ -24,19 +24,11 @@ namespace BRIX.Library.Aspects
 
         public override double GetCoefficient()
         {
-            int percents;
+            int percent = new ThrasholdCoefConverter((1, 0), (2, 20), (3, 10), (6, 1))
+                .Convert(ActionPoints);
+            double coef = (-percent).ToCoeficient();
 
-            switch (ActionPoints)
-            {
-                case <= 5:
-                    percents = (ActionPoints - 1) * 5;
-                    break;
-                default:
-                    percents = ActionPoints + 15;
-                    break;
-            }
-
-            return percents.ToCoeficient();
+            return coef;
         }
     }
 }

@@ -126,6 +126,9 @@
   <data name="AbilityCost" xml:space="preserve">
     <value>Стоимость способности:</value>
   </data>
+  <data name="ActionPointAspectHint" xml:space="preserve">
+    <value>Практически любые способности ипользуются посредством траты очков действий. Чем больше очков действий тратит способность, тем дешевле она будет в очках опыта.</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>Добавить</value>
   </data>

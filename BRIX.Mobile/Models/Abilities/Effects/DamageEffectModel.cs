@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,10 +26,7 @@ namespace BRIX.Mobile.Models.Abilities.Effects
             InternalModel = model;
             DiceChunks = new(DiceFormulaChunkVM.GetChunks(Impact));
             model.ForceAspectInitialize();
-            Aspects = model.Aspects
-                .Select(AspectModelFactory.GetAspectModel)
-                .Where(x => x != null)
-                .ToList();
+            UpdateAspects();
         }
 
         public DamageEffect Internal => GetSpecificEffect<DamageEffect>();
@@ -54,8 +52,18 @@ namespace BRIX.Mobile.Models.Abilities.Effects
 
         public override string EffectString => DiceChunks.GetChunkCollectionText();
 
-        internal void UpdateAspect(AspectModelBase aspect)
+        public void UpdateAspect(AspectModelBase aspect)
         {
+            InternalModel.SetAspect(aspect.InternalModel);
+            UpdateAspects();
+        }
+
+        public void UpdateAspects()
+        {
+            Aspects = InternalModel.Aspects
+                .Select(AspectModelFactory.GetAspectModel)
+                .Where(x => x != null)
+                .ToList();
         }
     }
 }

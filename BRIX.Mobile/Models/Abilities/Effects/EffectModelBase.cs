@@ -19,5 +19,10 @@ namespace BRIX.Mobile.Models.Abilities.Effects
         public abstract string EffectString { get; }
 
         public List<AspectModelBase> Aspects { get; protected set; }
+
+        public AspectModelBase GetAspect(Type aspectType)
+        {
+            return Aspects.FirstOrDefault(x => x.InternalModel.GetType() == aspectType);
+        }
     }
 }

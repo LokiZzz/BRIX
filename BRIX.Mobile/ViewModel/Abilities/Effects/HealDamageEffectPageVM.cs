@@ -1,6 +1,4 @@
 ﻿using BRIX.Library.DiceValue;
-using BRIX.Library.Effects;
-using BRIX.Library.Extensions;
 using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Services.Navigation;

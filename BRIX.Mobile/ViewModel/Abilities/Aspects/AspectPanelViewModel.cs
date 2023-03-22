@@ -41,12 +41,14 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         public async Task NavigateToAspect()
         {
+            AspectModelBase aspectToEdit = _aspectOwnerEffect.GetAspect(SelectedAspect.LibraryAspectType);
+
             await Navigation.NavigateAsync(
                 SelectedAspect.EditPage.Name,
                 Services.ENavigationMode.Push,
                 (NavigationParameters.Ability, _effectOwnerAbiltiy.Copy()),
                 (NavigationParameters.Effect, _aspectOwnerEffect.Copy()),
-                (NavigationParameters.Aspect, SelectedAspect.Copy())
+                (NavigationParameters.Aspect, aspectToEdit.Copy())
             );
         }
 

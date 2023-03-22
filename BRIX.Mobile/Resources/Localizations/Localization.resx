@@ -126,6 +126,9 @@
   <data name="AbilityCost" xml:space="preserve">
     <value>Ability cost:</value>
   </data>
+  <data name="ActionPointAspectHint" xml:space="preserve">
+    <value>Almost any ability is used by spending action points. The more action points an ability spends, the cheaper it will be in experience points.</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>New</value>
   </data>
