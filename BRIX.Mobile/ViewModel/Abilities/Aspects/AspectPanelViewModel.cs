@@ -52,6 +52,20 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             );
         }
 
+        public void UpdateAspect(AspectModelBase aspect)
+        {
+            AspectUtilityModel aspectToUpdate = AspectsCollection
+                .FirstOrDefault(x => x.LibraryAspectType == aspect.InternalModel.GetType());
+
+            if (aspectToUpdate != null)
+            {
+                int index = AspectsCollection.IndexOf(aspectToUpdate);
+                AspectUtilityModel newAspectUtilityModel = GetAspectModel(aspect);
+                AspectsCollection[index] = newAspectUtilityModel;
+                SelectedAspect = newAspectUtilityModel;
+            }
+        }
+
         private ObservableCollection<AspectUtilityModel> GetAspects(EffectModelBase effect)
         {
             List<AspectUtilityModel> aspects = effect.Aspects

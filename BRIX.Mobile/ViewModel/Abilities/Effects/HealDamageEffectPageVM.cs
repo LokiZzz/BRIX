@@ -1,5 +1,6 @@
 ﻿using BRIX.Library.DiceValue;
 using BRIX.Mobile.Models.Abilities;
+using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Popups;
@@ -71,7 +72,34 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             return Task.CompletedTask;
         }
 
+        private bool _alreadyInitialized = false;
+
         public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            if (!_alreadyInitialized)
+            {
+                HandleInitial(query);
+            }
+            else
+            {
+                HandleBackFromEditingAspect(query);
+            }
+
+            query.Clear();
+        }
+
+        private void HandleBackFromEditingAspect(IDictionary<string, object> query)
+        {
+            AspectModelBase aspect = query.GetParameterOrDefault<AspectModelBase>(NavigationParameters.Aspect);
+
+            if (aspect != null)
+            {
+                Damage.UpdateAspect(aspect);
+                Aspects.UpdateAspect(aspect);
+            }
+        }
+
+        private void HandleInitial(IDictionary<string, object> query)
         {
             // Приходят копии способности и объекта, никак не связанны с экземплярами, существовавшими во вью-модели
             // страницы, которая вызвала эту. При этом способность и эффект здесь никак не связаны.
@@ -102,7 +130,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
             Aspects = new(Ability, Damage);
 
-            query.Clear();
+            _alreadyInitialized = true;
         }
 
         #region Fast adjustment
