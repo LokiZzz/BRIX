@@ -120,6 +120,9 @@
 	  <MauiXaml Update="Resources\Converters\ConvertersCollection.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\AbilityCostMonitorPanel.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\AddOrEditAbilityPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

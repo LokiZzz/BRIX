@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+             xmlns:v="clr-namespace:BRIX.Mobile.View.Abilities"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities.Aspects"
              x:Class="BRIX.Mobile.View.Abilities.Aspects.ActionPointAspectPage"
              x:DataType="vm:ActionPointAspectPageVM"
@@ -20,9 +21,9 @@
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectActionPoints}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ActionPointAspectHint}}"/>
                         <controls:FramedEntry Text="{Binding ActionPoints}" IsReadOnly="True" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectActionPoints}}"/>
-                        <Grid ColumnDefinitions="auto,*,auto">
+                        <Grid ColumnDefinitions="auto,*,auto" Margin="10">
                             <Label Grid.Column="0" Text="1" VerticalOptions="Center"/>
-                            <Slider Grid.Column="1" Minimum="1" Maximum="50" Value="{Binding ActionPoints, Mode=TwoWay}" Margin="0,10"/>
+                            <Slider Grid.Column="1" Minimum="1" Maximum="50" Value="{Binding ActionPoints, Mode=TwoWay}"/>
                             <Label Grid.Column="2" Text="50" VerticalOptions="Center"/>
                         </Grid>
                         <Grid ColumnDefinitions="*,*,*,*,*" ColumnSpacing="5">
@@ -36,16 +37,8 @@
                 </Border>
             </VerticalStackLayout>
         </ScrollView>
-        <Border Grid.Row="1" Style="{StaticResource LowBlockWithShadowBorder}">
-            <Grid RowDefinitions="auto,auto,auto,auto">
-                <Label Grid.Row="1" Style="{StaticResource TitleLabel}" Text="Ability cost:" />
-                <HorizontalStackLayout Grid.Row="1" HorizontalOptions="End" Spacing="10">
-                    <Label Style="{StaticResource TitleLabel}" Text="{Binding Ability.Cost}"/>
-                    <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EXP}}" />
-                </HorizontalStackLayout>
-                <ProgressBar Grid.Row="2"/>
-                <Button Grid.Row="3" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" Margin="0,10" Command="{Binding SaveCommand}"/>
-            </Grid>
-        </Border>
+        <v:AbilityCostMonitorPanel
+            Grid.Row="1"
+            BindingContext="{Binding CostMonitor}"/>
     </Grid>
 </ContentPage>

@@ -27,6 +27,9 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         [ObservableProperty]
         private AspectPanelViewModel _aspects;
 
+        [ObservableProperty]
+        private AbilityCostMonitorPanelVM _costMonitor;
+
         [RelayCommand]
         private async Task EditFormula()
         {
@@ -128,7 +131,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 Damage.Impact = new DicePool((1, 4));
             }
 
-            Aspects = new(Ability, Damage);
+            Aspects = new AspectPanelViewModel(Ability, Damage);
+            CostMonitor = new AbilityCostMonitorPanelVM(Ability, SaveCommand);
 
             _alreadyInitialized = true;
         }
@@ -149,6 +153,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                     {
                         Damage.Impact = _dicePoolToReset;
                         _dicePoolToReset = null;
+                        Ability.UpdateCost();
                     }
                 }
                 else

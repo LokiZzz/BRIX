@@ -27,6 +27,9 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [ObservableProperty]
         private ActionPointsAspectModel _aspect = new();
 
+        [ObservableProperty]
+        private AbilityCostMonitorPanelVM _costMonitor;
+
         private int _actionPoints = 1;
         public int ActionPoints
         {
@@ -68,6 +71,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
         public override Task OnNavigatedAsync()
         {
+            CostMonitor = new AbilityCostMonitorPanelVM(Ability, SaveCommand);
             Ability.UpdateCost();
 
             return Task.CompletedTask;
