@@ -29,15 +29,15 @@ namespace BRIX.Mobile.ViewModel.Account
         {
             IsBusy = true;
 
-            bool successfullSignIn = await _accountService.SignInAsync(_login, Password);
+            bool successfullSignIn = await _accountService.SignInAsync(Login, Password);
 
             if (successfullSignIn)
             {
                 if (RememberMe)
                 {
                     Preferences.Set(Mobile.Settings.Account.RememberMe, true);
-                    Preferences.Set(Mobile.Settings.Account.Login, _login);
-                    Preferences.Set(Mobile.Settings.Account.Password, _password);
+                    Preferences.Set(Mobile.Settings.Account.Login, Login);
+                    Preferences.Set(Mobile.Settings.Account.Password, Password);
                 }
 
                 await Navigation.NavigateAsync<CurrentCharacterPage>(ENavigationMode.Absolute);

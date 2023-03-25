@@ -22,9 +22,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         private DamageEffectModel _damage = new();
 
         [ObservableProperty]
-        private AbilityModel _ability = new();
-
-        [ObservableProperty]
         private AspectPanelViewModel _aspects;
 
         [ObservableProperty]
@@ -44,7 +41,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 _dicePoolToReset = null;
             }
 
-            Ability.UpdateCost();
+            CostMonitor.Ability.UpdateCost();
         }
 
         [RelayCommand]
@@ -81,7 +78,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 HandleInitial(query);
             }
 
-            Ability.UpdateCost();
+            CostMonitor.Ability.UpdateCost();
 
             query.Clear();
         }
@@ -100,27 +97,23 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         private void HandleInitial(IDictionary<string, object> query)
         {
             Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
-            Ability = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability) ?? new();
+            CostMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
+            CostMonitor.SaveCommand = SaveCommand;
             Damage = query.GetParameterOrDefault<DamageEffectModel>(NavigationParameters.Effect) ?? new();
-
-            if (Damage.Impact.IsEmpty)
-            {
-                Damage.Impact = new DicePool((1, 4));
-            }
 
             switch (Mode)
             {
                 case EEditingMode.Add:
-                    Ability.AddEffect(Damage);
+                    Damage.Impact = new DicePool((1, 4));
+                    CostMonitor.Ability.AddEffect(Damage);
                     break;
                 case EEditingMode.Edit:
                 case EEditingMode.Upgrade:
-                    Ability.UpdateEffect(Damage);
+                    CostMonitor.Ability.UpdateEffect(Damage);
                     break;
             }
 
-            Aspects = new AspectPanelViewModel(Ability, Damage);
-            CostMonitor = new AbilityCostMonitorPanelVM(Ability, SaveCommand);
+            Aspects = new AspectPanelViewModel(CostMonitor, Damage);
 
             _alreadyInitialized = true;
         }
@@ -141,7 +134,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                     {
                         Damage.Impact = _dicePoolToReset;
                         _dicePoolToReset = null;
-                        Ability.UpdateCost();
+                        CostMonitor.Ability.UpdateCost();
                     }
                 }
                 else
@@ -163,7 +156,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         {
             _dicePoolToReset = _dicePoolToReset == null ? Damage.Impact.Copy() : _dicePoolToReset;
             Damage.Impact = DicePool.FromAdjusted(_dicePoolToReset, percent);
-            Ability.UpdateCost();
+            CostMonitor.Ability.UpdateCost();
         }
 
         [RelayCommand]
@@ -177,7 +170,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         private void ResetAdjustment()
         {
             Adjustment = 0;
-            Ability.UpdateCost();
+            CostMonitor.Ability.UpdateCost();
         }
 
         #endregion

@@ -14,11 +14,11 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
     public partial class AspectPanelViewModel : ViewModelBase
     {
         private EffectModelBase _aspectOwnerEffect;
-        private AbilityModel _effectOwnerAbiltiy;
+        private AbilityCostMonitorPanelVM _costMonitor;
 
-        public AspectPanelViewModel(AbilityModel ability, EffectModelBase effect)
+        public AspectPanelViewModel(AbilityCostMonitorPanelVM costMonitor, EffectModelBase effect)
         {
-            if(!ability.Effects.Contains(effect))
+            if(!costMonitor.Ability.Effects.Contains(effect))
             {
                 throw new ArgumentException(
                     "Инициализируя модель аспекта, необходимо передавать способность и её (!!!) эффект."
@@ -26,7 +26,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             }
 
             _aspectOwnerEffect = effect;
-            _effectOwnerAbiltiy = ability;
+            _costMonitor = costMonitor;
 
             AspectsCollection = GetAspects(effect);
             SelectedAspect = AspectsCollection.First();
@@ -46,7 +46,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             await Navigation.NavigateAsync(
                 SelectedAspect.EditPage.Name,
                 Services.ENavigationMode.Push,
-                (NavigationParameters.Ability, _effectOwnerAbiltiy.Copy()),
+                (NavigationParameters.CostMonitor, _costMonitor),
                 (NavigationParameters.Effect, _aspectOwnerEffect.Copy()),
                 (NavigationParameters.Aspect, aspectToEdit.Copy())
             );

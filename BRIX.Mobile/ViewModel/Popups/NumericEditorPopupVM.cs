@@ -34,9 +34,9 @@ namespace BRIX.Mobile.ViewModel.Popups
         [RelayCommand]
         private void Backspace()
         {
-            if (!string.IsNullOrEmpty(_value))
+            if (!string.IsNullOrEmpty(Value))
             {
-                Value = _value.Remove(_value.Length - 1);
+                Value = Value.Remove(Value.Length - 1);
             }
         }
 

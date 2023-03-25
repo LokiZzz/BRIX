@@ -6,6 +6,7 @@
         public const string Ability = nameof(Character);
         public const string Effect = nameof(Effect);
         public const string Aspect = nameof(Aspect);
+        public const string CostMonitor = nameof(CostMonitor);
         public const string EditMode = nameof(EditMode);
     }
 }

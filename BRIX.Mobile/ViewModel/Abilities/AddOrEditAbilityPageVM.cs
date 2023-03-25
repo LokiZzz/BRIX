@@ -56,7 +56,9 @@ namespace BRIX.Mobile.ViewModel.Abilities
         [RelayCommand]
         public async Task AddEffect()
         {
-            await Navigation.NavigateAsync<ChooseEffectPage>((NavigationParameters.Ability, Ability.Copy()));
+            await Navigation.NavigateAsync<ChooseEffectPage>(
+                (NavigationParameters.CostMonitor, CostMonitor)
+            );
         }
 
         [RelayCommand]
@@ -65,9 +67,9 @@ namespace BRIX.Mobile.ViewModel.Abilities
             await Navigation.NavigateAsync(
                 EffectsDictionary.GetEditPageRoute(effectToEdit),
                 ENavigationMode.Push,
-                (NavigationParameters.EditMode, EEditingMode.Edit), 
-                (NavigationParameters.Ability, Ability.Copy()),
-                (NavigationParameters.Effect, effectToEdit.Copy())
+                (NavigationParameters.EditMode, EEditingMode.Edit),
+                (NavigationParameters.Effect, effectToEdit.Copy()),
+                (NavigationParameters.CostMonitor, CostMonitor)
             );
         }
 
