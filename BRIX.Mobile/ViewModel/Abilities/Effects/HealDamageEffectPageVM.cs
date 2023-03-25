@@ -68,25 +68,20 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             }
         }
 
-        public override Task OnNavigatedAsync()
-        {
-            Ability.UpdateCost();
-
-            return Task.CompletedTask;
-        }
-
         private bool _alreadyInitialized = false;
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            if (!_alreadyInitialized)
-            {
-                HandleInitial(query);
-            }
-            else
+            if (_alreadyInitialized)
             {
                 HandleBackFromEditingAspect(query);
             }
+            else
+            {
+                HandleInitial(query);
+            }
+
+            Ability.UpdateCost();
 
             query.Clear();
         }
@@ -104,16 +99,14 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
         private void HandleInitial(IDictionary<string, object> query)
         {
-            // Приходят копии способности и объекта, никак не связанны с экземплярами, существовавшими во вью-модели
-            // страницы, которая вызвала эту. При этом способность и эффект здесь никак не связаны.
-
             Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
             Ability = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability) ?? new();
             Damage = query.GetParameterOrDefault<DamageEffectModel>(NavigationParameters.Effect) ?? new();
 
-            // Экземпляр способности здесь существует только для того, чтобы проиллюстрировать изменение её стоимости
-            // на этой страничке. Поэтому отдельно пришедшие в эту страничку копии способности и эффекта объединяются
-            // по новой в зависимости от режима работы. При этом отдаст эта страница исключительно эффект.
+            if (Damage.Impact.IsEmpty)
+            {
+                Damage.Impact = new DicePool((1, 4));
+            }
 
             switch (Mode)
             {
@@ -124,11 +117,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 case EEditingMode.Upgrade:
                     Ability.UpdateEffect(Damage);
                     break;
-            }
-
-            if (Damage.Impact.IsEmpty)
-            {
-                Damage.Impact = new DicePool((1, 4));
             }
 
             Aspects = new AspectPanelViewModel(Ability, Damage);

@@ -63,18 +63,13 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             Damage = query.GetParameterOrDefault<DamageEffectModel>(NavigationParameters.Effect) ?? new();
             Aspect = query.GetParameterOrDefault<ActionPointsAspectModel>(NavigationParameters.Aspect) ?? new();
 
+            ActionPoints = Aspect.Internal.ActionPoints;
+
             Damage.UpdateAspect(Aspect);
             Ability.UpdateEffect(Damage);
+            CostMonitor = new AbilityCostMonitorPanelVM(Ability, SaveCommand);
 
             query.Clear();
-        }
-
-        public override Task OnNavigatedAsync()
-        {
-            CostMonitor = new AbilityCostMonitorPanelVM(Ability, SaveCommand);
-            Ability.UpdateCost();
-
-            return Task.CompletedTask;
         }
     }
 }

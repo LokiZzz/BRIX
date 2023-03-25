@@ -35,6 +35,9 @@ namespace BRIX.Mobile.ViewModel.Abilities
         private AbilityModel _ability;
 
         [ObservableProperty]
+        private AbilityCostMonitorPanelVM _costMonitor;
+
+        [ObservableProperty]
         private EEditingMode _mode;
 
         [ObservableProperty]
@@ -92,9 +95,10 @@ namespace BRIX.Mobile.ViewModel.Abilities
         {
             if (Mode == EEditingMode.None)
             {
+                Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
                 Ability = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability)
                     ?? new AbilityModel(new Ability());
-                Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
+                CostMonitor = new AbilityCostMonitorPanelVM(Ability, SaveCommand);
             }
             else
             {

@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Aspects;
+using BRIX.Library.DiceValue;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {

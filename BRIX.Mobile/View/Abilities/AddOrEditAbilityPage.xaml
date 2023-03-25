@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             xmlns:v="clr-namespace:BRIX.Mobile.View.Abilities"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities"
              xmlns:models="clr-namespace:BRIX.Mobile.Models.Abilities.Effects"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
@@ -84,12 +85,10 @@
             </ScrollView>
         </Grid>
 
-        <Border Grid.Row="2" Style="{StaticResource LowBlockWithShadowBorder}">
-            <Button 
-                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" 
-                Command="{Binding SaveCommand}"
-                Margin="10,0,10,10"/>
-        </Border>
+        <v:AbilityCostMonitorPanel
+            Grid.Row="2"
+            BindingContext="{Binding CostMonitor}"
+            Margin="10,0"/>
         
     </Grid>
 </ContentPage>
