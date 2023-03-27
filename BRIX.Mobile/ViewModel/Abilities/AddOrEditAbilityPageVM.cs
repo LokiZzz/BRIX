@@ -128,6 +128,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 await HandleBackFromEditing(query);
             }
 
+            CostMonitor.SaveCommand = SaveCommand;
+
             query.Clear();
         }
 

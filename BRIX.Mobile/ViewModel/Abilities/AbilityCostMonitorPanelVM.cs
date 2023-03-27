@@ -31,7 +31,18 @@ namespace BRIX.Mobile.ViewModel.Abilities
         [ObservableProperty]
         private double _percentWithEditingAbility;
 
-        public IAsyncRelayCommand SaveCommand { get; set; }
+        public Guid CommandChangedGuid { get; set; }
+
+        private IAsyncRelayCommand _saveCommand;
+        public IAsyncRelayCommand SaveCommand 
+        {
+            get => _saveCommand;
+            set
+            {
+                SetProperty(ref _saveCommand, value);
+                CommandChangedGuid = Guid.NewGuid();
+            }
+        }
 
         public void UpdateCost()
         {

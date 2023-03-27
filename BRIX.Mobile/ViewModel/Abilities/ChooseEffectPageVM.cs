@@ -37,7 +37,6 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 effectToChoose.EditPage.Name,
                 ENavigationMode.Push,
                 (NavigationParameters.EditMode, EEditingMode.Add), 
-                (NavigationParameters.Ability, _ability),
                 (NavigationParameters.CostMonitor, _costMonitor)
             );
         }
@@ -65,7 +64,6 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            _ability = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability);
             _costMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
             query.Clear();
         }

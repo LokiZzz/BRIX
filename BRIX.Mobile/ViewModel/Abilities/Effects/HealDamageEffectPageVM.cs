@@ -78,6 +78,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 HandleInitial(query);
             }
 
+            CostMonitor.SaveCommand = SaveCommand;
             CostMonitor.UpdateCost();
 
             query.Clear();
@@ -98,7 +99,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         {
             Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
             CostMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
-            CostMonitor.SaveCommand = SaveCommand;
             Damage = query.GetParameterOrDefault<DamageEffectModel>(NavigationParameters.Effect) ?? new();
 
             switch (Mode)
