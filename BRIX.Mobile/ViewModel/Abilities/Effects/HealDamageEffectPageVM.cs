@@ -41,7 +41,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 _dicePoolToReset = null;
             }
 
-            CostMonitor.Ability.UpdateCost();
+            CostMonitor.UpdateCost();
         }
 
         [RelayCommand]
@@ -78,7 +78,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 HandleInitial(query);
             }
 
-            CostMonitor.Ability.UpdateCost();
+            CostMonitor.UpdateCost();
 
             query.Clear();
         }
@@ -134,7 +134,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                     {
                         Damage.Impact = _dicePoolToReset;
                         _dicePoolToReset = null;
-                        CostMonitor.Ability.UpdateCost();
+                        CostMonitor.UpdateCost();
                     }
                 }
                 else
@@ -156,7 +156,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         {
             _dicePoolToReset = _dicePoolToReset == null ? Damage.Impact.Copy() : _dicePoolToReset;
             Damage.Impact = DicePool.FromAdjusted(_dicePoolToReset, percent);
-            CostMonitor.Ability.UpdateCost();
+            CostMonitor.UpdateCost();
         }
 
         [RelayCommand]
@@ -170,7 +170,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         private void ResetAdjustment()
         {
             Adjustment = 0;
-            CostMonitor.Ability.UpdateCost();
+            CostMonitor.UpdateCost();
         }
 
         #endregion

@@ -19,16 +19,19 @@ using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.ViewModel.Popups;
 using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Abilities.Effects;
+using BRIX.Mobile.Models.Characters;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {
     public partial class AddOrEditAbilityPageVM : ViewModelBase, IQueryAttributable
     {
         private readonly ILocalizationResourceManager _localization;
+        private readonly ICharacterService _characterService;
 
-        public AddOrEditAbilityPageVM(ILocalizationResourceManager localization)
+        public AddOrEditAbilityPageVM(ILocalizationResourceManager localization, ICharacterService characterService)
         {
             _localization = localization;
+            _characterService = characterService;
         }
 
         [ObservableProperty]
@@ -93,6 +96,24 @@ namespace BRIX.Mobile.ViewModel.Abilities
             
         }
 
+        public override Task OnNavigatedAsync()
+        {
+            switch (Mode)
+            {
+                case EEditingMode.Add:
+                    Title = _localization[LocalizationKeys.AddOrEditAbilityPageTitle_Add].ToString();
+                    break;
+                case EEditingMode.Edit:
+                    Title = _localization[LocalizationKeys.AddOrEditAbilityPageTitle_Edit].ToString();
+                    break;
+                case EEditingMode.Upgrade:
+                    Title = _localization[LocalizationKeys.AddOrEditAbilityPageTitle_Upgrade].ToString();
+                    break;
+            }
+
+            return Task.CompletedTask;
+        }
+
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (Mode == EEditingMode.None)
@@ -100,7 +121,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
                 Ability = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability)
                     ?? new AbilityModel(new Ability());
-                CostMonitor = new AbilityCostMonitorPanelVM(Ability, SaveCommand);
+                await IntitializeCostMonitor();
             }
             else
             {
@@ -133,22 +154,14 @@ namespace BRIX.Mobile.ViewModel.Abilities
             return Task.CompletedTask;
         }
 
-        public override Task OnNavigatedAsync()
+        private async Task IntitializeCostMonitor()
         {
-            switch(Mode)
-            {
-                case EEditingMode.Add:
-                    Title = _localization[LocalizationKeys.AddOrEditAbilityPageTitle_Add].ToString();
-                    break;
-                case EEditingMode.Edit:
-                    Title = _localization[LocalizationKeys.AddOrEditAbilityPageTitle_Edit].ToString();
-                    break;
-                case EEditingMode.Upgrade:
-                    Title = _localization[LocalizationKeys.AddOrEditAbilityPageTitle_Upgrade].ToString();
-                    break;
-            }
-
-            return Task.CompletedTask;
+            Character currentCharacter = await _characterService.GetCurrentCharacter();
+            CostMonitor = new AbilityCostMonitorPanelVM(
+                Ability, 
+                SaveCommand, 
+                new CharacterModel(currentCharacter)
+            );
         }
     }
 }

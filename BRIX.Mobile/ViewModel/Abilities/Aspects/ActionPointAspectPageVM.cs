@@ -27,7 +27,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 if (SetProperty(ref _actionPoints, value))
                 {
                     Aspect.Internal.ActionPoints = value;
-                    CostMonitor.Ability.UpdateCost();
+                    CostMonitor.UpdateCost();
                 }
             }
         }
