@@ -7,6 +7,7 @@ using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.IconFonts;
 using BRIX.Mobile.ViewModel.Abilities.Effects;
 using BRIX.Mobile.ViewModel.Base;
+using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -37,7 +38,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 effectToChoose.EditPage.Name,
                 ENavigationMode.Push,
                 (NavigationParameters.EditMode, EEditingMode.Add), 
-                (NavigationParameters.CostMonitor, _costMonitor)
+                (NavigationParameters.CostMonitor, _costMonitor.Copy())
             );
         }
 

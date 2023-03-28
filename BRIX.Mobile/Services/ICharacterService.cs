@@ -78,8 +78,15 @@ namespace BRIX.Mobile.Services
 
         public async Task<Character> UpdateAsync(Character character)
         {
+            bool needToReselectCharacter = _currentCharacter != null && _currentCharacter.Id == character.Id;
+
             await RemoveAsync(character.Id);
             await AddAsync(character);
+
+            if (needToReselectCharacter)
+            {
+                await SelectCurrentCharacter(character);
+            }
 
             return character;
         }

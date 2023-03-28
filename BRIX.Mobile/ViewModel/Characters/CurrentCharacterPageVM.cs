@@ -130,7 +130,12 @@ namespace BRIX.Mobile.ViewModel.Characters
             else
             {
                 List<Character> characters = await _characterService.GetAllAsync();
-                Character = characters.Any() ? new CharacterModel(characters.First()) : null;
+
+                if(characters.Any())
+                {
+                    await _characterService.SelectCurrentCharacter(characters.First());
+                    Character = new CharacterModel(await _characterService.GetCurrentCharacter());
+                }
             }
 
             PlayerHaveCharacter = Character != null;
@@ -139,7 +144,6 @@ namespace BRIX.Mobile.ViewModel.Characters
             if (PlayerHaveCharacter)
             {
                 UpdateExpCards();
-                await _characterService.SelectCurrentCharacter(Character.InternalModel);
             }
 
             // Возможно такие вызовы уползут в CharacterService, но пока что достаточно этого.
