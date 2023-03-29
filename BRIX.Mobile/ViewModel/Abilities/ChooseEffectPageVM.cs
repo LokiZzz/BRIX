@@ -38,7 +38,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 effectToChoose.EditPage.Name,
                 ENavigationMode.Push,
                 (NavigationParameters.EditMode, EEditingMode.Add), 
-                (NavigationParameters.CostMonitor, _costMonitor.Copy())
+                (NavigationParameters.CostMonitor, _costMonitor)
             );
         }
 
