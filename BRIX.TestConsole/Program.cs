@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using BRIX.Lexica;
 using BRIX.Library;
 using BRIX.Library.Aspects;
 using BRIX.Library.Characters;
@@ -11,25 +12,9 @@ using System.Reflection;
 using System.Runtime.Intrinsics.Arm;
 using System.Text.Json;
 
-Character character = new ();
-Ability ability = new ();
-DamageEffect damage = new DamageEffect() { Impact = new DicePool((3, 6)) };
-ActionPointAspect apAspect = damage.GetAspect<ActionPointAspect>();
-if (apAspect != null)
+while (true)
 {
-    apAspect.ActionPoints = 4;
+    int number = int.Parse(Console.ReadLine());
+    Console.WriteLine(AspectLexis.Declension(number, "очко"));
 }
-ability.AddEffect(damage);
-character.Abilities.Add(ability);
 
-JsonSerializerSettings settings = new ()
-{
-    Formatting = Formatting.Indented,
-    TypeNameHandling = TypeNameHandling.All,
-};
-
-string json = JsonConvert.SerializeObject(character, settings);
-
-Character deserialized = JsonConvert.DeserializeObject<Character>(json, settings);
-
-Console.ReadLine();

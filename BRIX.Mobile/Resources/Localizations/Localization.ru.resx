@@ -238,7 +238,7 @@
     <value>Кости</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Править</value>
+    <value>Изменить</value>
   </data>
   <data name="EffectDamage" xml:space="preserve">
     <value>Урон</value>

@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Aspects;
+﻿using BRIX.Lexica;
+using BRIX.Library.Aspects;
 using BRIX.Library.Effects;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.ViewModel.Abilities.Aspects;
@@ -22,6 +23,15 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public string Name => AspectsDictionary.Collection[GetType()].Name;
 
-        public abstract string Description { get; }
+        public string Description 
+        {
+            get
+            {
+                ILocalizationResourceManager localization = ServicePool.GetService<ILocalizationResourceManager>();
+                ELexisLanguage language = localization.LexisLanguage;
+
+                return AspectLexis.GetAspectDescription(InternalModel, language);
+            } 
+        }
     }
 }
