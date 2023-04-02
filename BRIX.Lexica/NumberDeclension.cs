@@ -1,4 +1,6 @@
-﻿namespace BRIX.Lexis
+﻿using BRIX.Library.DiceValue;
+
+namespace BRIX.Lexis
 {
     public static class NumberDeclension
     {
@@ -12,9 +14,9 @@
         };
 
         /// <summary>
-        /// Получить склонение от числа
+        /// Получить склонение от числа на русском языке
         /// </summary>
-        public static string RUSDeclension(int number, string nominative, bool addNumber = false)
+        public static string RUSDeclension(int number, string nominative, bool addNumber = true)
         {
             string[] titles = new[]
             {
@@ -41,12 +43,23 @@
                 }
             }
 
-            string result = $"{number} {titles[searchingСaseIndex]}";
+            string result = titles[searchingСaseIndex];
 
             return addNumber ? $"{number} {result}" : result;
         }
 
-        public static string ENGDeclension(int number, string nominative, bool addNumber = false)
+        /// <summary>
+        /// Получить склонение от числительных в формуле костей на русском языке
+        /// </summary>
+        public static string RUSDeclension(DicePool dicePool, string nominative)
+        {
+            return $"{dicePool} {RUSDeclension(dicePool.LastDigit(), nominative, false)}";
+        }
+
+        /// <summary>
+        /// Получить склонение от числа на английском языке
+        /// </summary>
+        public static string ENGDeclension(int number, string nominative, bool addNumber = true)
         {
             string result;
 
@@ -60,6 +73,24 @@
             }
 
             return addNumber ? $"{number} {result}" : result;
+        }
+
+        /// <summary>
+        /// Получить склонение от числительных в формуле костей на английском языке
+        /// </summary>
+        public static string ENGDeclension(DicePool dicePool, string nominative)
+        {
+            return $"{dicePool} {ENGDeclension(dicePool.LastDigit(), nominative, false)}";
+        }
+
+        /// <summary>
+        /// Решающее числительное формулы костей для выбора склонения зависимого слова.
+        /// </summary>
+        public static int LastDigit(this DicePool dicePool)
+        {
+            return dicePool.Dice.Any()
+                ? dicePool.Dice.Last().NumberOfFaces
+                : dicePool.Modifier;
         }
     }
 }

@@ -27,10 +27,10 @@ namespace BRIX.Lexica
             {
                 case ELexisLanguage.English:
                     return $"To use this ability you have to spend " +
-                        $"{aspect.ActionPoints} action {NumberDeclension.ENGDeclension(aspect.ActionPoints, "point")}.";
+                        $"{aspect.ActionPoints} action {NumberDeclension.ENGDeclension(aspect.ActionPoints, "point", false)}.";
                 case ELexisLanguage.Russian:
                     return $"Чтобы использовать эту способность вы должны потратить " +
-                        $"{NumberDeclension.RUSDeclension(aspect.ActionPoints, "очко", true)} действий.";
+                        $"{NumberDeclension.RUSDeclension(aspect.ActionPoints, "очко")} действий.";
                 default:
                     return string.Empty;
             }

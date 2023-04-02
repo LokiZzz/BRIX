@@ -1,5 +1,8 @@
-﻿using BRIX.Library.Effects;
+﻿using BRIX.Lexica;
+using BRIX.Lexis;
+using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities.Aspects;
+using BRIX.Mobile.Services;
 using BRIX.Mobile.ViewModel.Abilities.Effects;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -14,9 +17,18 @@ namespace BRIX.Mobile.Models.Abilities.Effects
             return InternalModel as T;
         }
 
-        public virtual string Name => EffectsDictionary.Collection[GetType()].Name;
+        public string Name => EffectsDictionary.Collection[GetType()].Name;
 
-        public abstract string EffectString { get; }
+        public string Description 
+        {
+            get
+            {
+                ILocalizationResourceManager localization = ServicePool.GetService<ILocalizationResourceManager>();
+                ELexisLanguage language = localization.LexisLanguage;
+
+                return EffectLexis.GetEffectDescription(InternalModel, language);
+            }
+        }
 
         public List<AspectModelBase> Aspects { get; protected set; }
 

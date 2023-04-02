@@ -40,8 +40,6 @@ namespace BRIX.Mobile.Models.Abilities.Effects
         public string SpreadText => $"{Impact?.Min()} — {Impact?.Max()}";
         public int Average => Impact?.Average() ?? 0;
 
-        public override string EffectString => DiceChunks.GetChunkCollectionText();
-
         public void UpdateAspect(AspectModelBase aspect)
         {
             InternalModel.SetAspect(aspect.InternalModel);

@@ -67,14 +67,24 @@
                                     </SwipeItems>
                                 </SwipeView.RightItems>
                                 <Grid Margin="10,0">
-                                    <Border Style="{StaticResource BlockBorder}" HeightRequest="75" >
-                                        <Grid ColumnDefinitions="*,auto">
-                                            <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
-                                            <Button 
-                                            Style="{StaticResource UpgradeSquareButton}"
-                                            Grid.Column="1"
-                                            Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.UpgradeCommand}"
-                                            CommandParameter="{Binding}"/>
+                                    <Border Style="{StaticResource BlockBorder}" >
+                                        <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto" RowSpacing="5">
+                                            <Label 
+                                                Grid.Row="0"
+                                                Grid.Column="0" 
+                                                Style="{StaticResource TitleLabel}" 
+                                                Text="{Binding Name}" />
+                                            <Label 
+                                                Grid.Row="1"
+                                                Grid.Column="0" 
+                                                Text="{Binding Description}" />
+                                            <!--<Button 
+                                                Style="{StaticResource UpgradeSquareButton}"
+                                                Grid.Column="1"
+                                                Grid.RowSpan="2"
+                                                VerticalOptions="Start"
+                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.UpgradeCommand}"
+                                                CommandParameter="{Binding}"/>-->
                                         </Grid>
                                     </Border>
                                 </Grid>
