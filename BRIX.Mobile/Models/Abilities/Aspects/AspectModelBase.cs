@@ -1,14 +1,8 @@
 ﻿using BRIX.Lexica;
 using BRIX.Library.Aspects;
-using BRIX.Library.Effects;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.ViewModel.Abilities.Aspects;
 using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {

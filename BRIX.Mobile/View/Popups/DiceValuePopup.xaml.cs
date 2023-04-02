@@ -1,7 +1,6 @@
 using BRIX.Mobile.ViewModel.Popups;
 using BRIX.Utility.Extensions;
 using CommunityToolkit.Maui.Views;
-using Microsoft.Maui.Controls;
 
 namespace BRIX.Mobile.View.Popups;
 

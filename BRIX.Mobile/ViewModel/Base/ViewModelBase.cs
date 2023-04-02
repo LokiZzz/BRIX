@@ -1,15 +1,7 @@
 ﻿using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
-using BRIX.Mobile.View.Popups;
 using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Base
 {

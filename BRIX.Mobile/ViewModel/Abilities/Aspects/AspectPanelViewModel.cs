@@ -1,6 +1,4 @@
-﻿using BRIX.Library.Aspects;
-using BRIX.Mobile.Models.Abilities;
-using BRIX.Mobile.Models.Abilities.Aspects;
+﻿using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Base;

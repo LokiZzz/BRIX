@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-
-namespace BRIX.Library.Aspects
+﻿namespace BRIX.Library.Aspects
 {
     public abstract class AspectBase
     {

@@ -1,10 +1,5 @@
 ﻿using BRIX.Lexis;
 using BRIX.Library.Aspects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Lexica
 {
@@ -35,12 +30,10 @@ namespace BRIX.Lexica
                         $"{aspect.ActionPoints} action {NumberDeclension.ENGDeclension(aspect.ActionPoints, "point")}.";
                 case ELexisLanguage.Russian:
                     return $"Чтобы использовать эту способность вы должны потратить " +
-                        $"{NumberDeclension.RUSDeclension(aspect.ActionPoints, "очко")} действий.";
+                        $"{NumberDeclension.RUSDeclension(aspect.ActionPoints, "очко", true)} действий.";
                 default:
                     return string.Empty;
             }
         }
-
-        
     }
 }

@@ -1,15 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BRIX.Library.Characters;
-using System.ComponentModel;
 using System.Collections.ObjectModel;
 using BRIX.Mobile.Models.Abilities;
-using System.Collections.Specialized;
-using BRIX.Library;
 
 namespace BRIX.Mobile.Models.Characters
 {

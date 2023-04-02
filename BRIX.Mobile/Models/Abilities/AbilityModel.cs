@@ -1,13 +1,7 @@
 ﻿using BRIX.Library;
-using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities.Effects;
 using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Mobile.Models.Abilities
 {

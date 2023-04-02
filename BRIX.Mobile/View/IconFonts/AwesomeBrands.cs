@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BRIX.Mobile.View.IconFonts
+﻿namespace BRIX.Mobile.View.IconFonts
 {
     // Просмотреть все иконки можно здесь: https://andreinitescu.github.io/IconFont2Code
 

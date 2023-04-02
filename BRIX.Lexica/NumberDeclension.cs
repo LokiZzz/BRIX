@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BRIX.Lexis
+﻿namespace BRIX.Lexis
 {
     public static class NumberDeclension
     {
@@ -20,7 +14,7 @@ namespace BRIX.Lexis
         /// <summary>
         /// Получить склонение от числа
         /// </summary>
-        public static string RUSDeclension(int number, string nominative)
+        public static string RUSDeclension(int number, string nominative, bool addNumber = false)
         {
             string[] titles = new[]
             {
@@ -28,7 +22,6 @@ namespace BRIX.Lexis
                 NumberDeclensions[nominative][1], // Родительный (дня)
                 NumberDeclensions[nominative][2], // Род. п., множественное (дней)
             };
-
             int[] cases = new[] { 2, 0, 1, 1, 1, 2 };
             int searchingСaseIndex;
 
@@ -48,19 +41,25 @@ namespace BRIX.Lexis
                 }
             }
 
-            return $"{number} {titles[searchingСaseIndex]}";
+            string result = $"{number} {titles[searchingСaseIndex]}";
+
+            return addNumber ? $"{number} {result}" : result;
         }
 
         public static string ENGDeclension(int number, string nominative, bool addNumber = false)
         {
+            string result;
+
             if(number != 1)
             {
-                return nominative + "s";
+                result = nominative + "s";
             }
             else
             {
-                return nominative;
+                result = nominative;
             }
+
+            return addNumber ? $"{number} {result}" : result;
         }
     }
 }

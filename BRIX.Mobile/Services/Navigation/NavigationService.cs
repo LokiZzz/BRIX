@@ -1,6 +1,4 @@
 ﻿using BRIX.Mobile.ViewModel.Base;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 
 namespace BRIX.Mobile.Services.Navigation
 {

@@ -10,7 +10,6 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using BRIX.Mobile.Resources.Localizations;
 using CharacterBM = BRIX.Library.Characters.Character;
-using BRIX.Library.Characters;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
 

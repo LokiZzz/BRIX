@@ -1,8 +1,6 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Extensions;
 using BRIX.Utility.Extensions;
-using System.Collections.ObjectModel;
-using System.Reflection;
 
 namespace BRIX.Library.Effects
 {

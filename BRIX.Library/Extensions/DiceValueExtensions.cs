@@ -1,6 +1,4 @@
 ﻿using BRIX.Library.Extensions;
-using BRIX.Utility.Extensions;
-using System.Text.RegularExpressions;
 
 namespace BRIX.Library.DiceValue
 {

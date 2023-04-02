@@ -3,7 +3,6 @@ using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Java.Lang;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {

@@ -1,19 +1,9 @@
-﻿using BRIX.Library;
-using BRIX.Library.Aspects;
-using BRIX.Library.DiceValue;
+﻿using BRIX.Library.DiceValue;
 using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.ViewModel.Abilities;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Microsoft.Maui.Controls;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Mobile.Models.Abilities.Effects
 {

@@ -1,13 +1,5 @@
-﻿using BRIX.Library.Characters;
-using BRIX.Mobile.Services;
-using BRIX.Mobile.ViewModel.Base;
-using BRIX.Mobile.ViewModel.Characters;
+﻿using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Messaging.Messages;
 using CommunityToolkit.Mvvm.Messaging;
 

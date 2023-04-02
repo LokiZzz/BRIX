@@ -1,6 +1,5 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.DiceValue;
-using BRIX.Library.Extensions;
 
 namespace BRIX.Library.Effects
 {

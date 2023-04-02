@@ -1,21 +1,11 @@
-﻿using BRIX.Library.DiceValue;
-using BRIX.Library.Effects;
-using BRIX.Mobile.Models.Abilities;
-using BRIX.Mobile.Resources.Localizations;
+﻿using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
-using BRIX.Mobile.View.IconFonts;
 using BRIX.Mobile.ViewModel.Abilities.Effects;
 using BRIX.Mobile.ViewModel.Base;
-using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {

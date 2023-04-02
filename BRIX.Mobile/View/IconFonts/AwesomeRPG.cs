@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BRIX.Mobile.View.IconFonts
+﻿namespace BRIX.Mobile.View.IconFonts
 {
     // Инструкция (т.к. имён у глифов нет):
     // 1. Подбираешь иконку тут: https://nagoshiashumari.github.io/Rpg-Awesome/

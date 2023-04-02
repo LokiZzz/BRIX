@@ -1,16 +1,13 @@
-﻿using BRIX.Library;
-using BRIX.Library.Characters;
+﻿using BRIX.Library.Characters;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.View.Abilities;
 using BRIX.Mobile.ViewModel.Base;
 using BRIX.Mobile.ViewModel.Popups;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.Services.Navigation;
-using BRIX.Mobile.ViewModel.Abilities;
 using BRIX.Mobile.Models.Abilities;
 using CommunityToolkit.Mvvm.Messaging;
 using BRIX.Utility.Extensions;
