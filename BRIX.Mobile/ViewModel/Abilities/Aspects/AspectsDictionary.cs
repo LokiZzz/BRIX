@@ -19,7 +19,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 EditPage = typeof(ActionPointAspectPage),
                 LibraryAspectType = typeof(ActionPointAspect),
             }},
-            { typeof(TargetSelectionAspect), new AspectUtilityModel() {
+            { typeof(TargetSelectionAspectModel), new AspectUtilityModel() {
                 Name = _localization[Resources.Localizations.LocalizationKeys.AspectTargetSelection].ToString(),
                 Icon = AwesomeRPG.ArcheryTarget,
                 EditPage = typeof(TargetSelectionAspectPage),

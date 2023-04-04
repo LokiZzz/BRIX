@@ -36,5 +36,19 @@ namespace BRIX.Mobile.Models.Abilities.Effects
         {
             return Aspects.FirstOrDefault(x => x.InternalModel.GetType() == aspectType);
         }
+
+        public void UpdateAspect(AspectModelBase aspect)
+        {
+            InternalModel.SetAspect(aspect.InternalModel);
+            UpdateAspects();
+        }
+
+        public void UpdateAspects()
+        {
+            Aspects = InternalModel.Aspects
+                .Select(AspectModelFactory.GetAspectModel)
+                .Where(x => x != null)
+                .ToList();
+        }
     }
 }
