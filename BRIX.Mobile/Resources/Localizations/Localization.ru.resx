@@ -124,7 +124,7 @@
     <value>Сдвиньте карточку способности вправо, чтобы редактировать способность или сдвиньте карточку влево, чтобы её удалить. Кнопка со стрелкой вверх позволяет улучшить способность.</value>
   </data>
   <data name="AbilityCost" xml:space="preserve">
-    <value>Стоимость способности:</value>
+    <value>Стоимость:</value>
   </data>
   <data name="ActionPointAspectHint" xml:space="preserve">
     <value>Практически любые способности ипользуются посредством траты очков действий. Чем больше очков действий тратит способность, тем дешевле она будет в очках опыта.</value>
@@ -157,7 +157,10 @@
     <value>Очки действий</value>
   </data>
   <data name="Aspects" xml:space="preserve">
-    <value>Аспект</value>
+    <value>Аспекты</value>
+  </data>
+  <data name="AspectTargetSelection" xml:space="preserve">
+    <value>Выбор цели</value>
   </data>
   <data name="Average" xml:space="preserve">
     <value>Среднее:</value>

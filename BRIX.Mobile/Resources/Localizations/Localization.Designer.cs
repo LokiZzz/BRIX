@@ -187,6 +187,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Target selection.
+        /// </summary>
+        public static string AspectTargetSelection {
+            get {
+                return ResourceManager.GetString("AspectTargetSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Average:.
         /// </summary>
         public static string Average {
@@ -705,6 +714,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Spread {
             get {
                 return ResourceManager.GetString("Spread", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ability cost:.
+        /// </summary>
+        public static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         

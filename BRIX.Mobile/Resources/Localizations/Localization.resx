@@ -159,6 +159,9 @@
   <data name="Aspects" xml:space="preserve">
     <value>Aspects</value>
   </data>
+  <data name="AspectTargetSelection" xml:space="preserve">
+    <value>Target selection</value>
+  </data>
   <data name="Average" xml:space="preserve">
     <value>Average:</value>
   </data>
@@ -332,6 +335,9 @@
   </data>
   <data name="Spread" xml:space="preserve">
     <value>Spread:</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>Ability cost:</value>
   </data>
   <data name="Switch" xml:space="preserve">
     <value>Switch</value>

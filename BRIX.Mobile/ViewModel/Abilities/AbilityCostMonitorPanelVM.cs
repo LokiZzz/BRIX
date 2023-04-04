@@ -25,6 +25,12 @@ namespace BRIX.Mobile.ViewModel.Abilities
         private int _availiableExp;
 
         [ObservableProperty]
+        private int _exp;
+
+        [ObservableProperty]
+        private int _expSumWithoutEditingAbility;
+
+        [ObservableProperty]
         public double _percentWithoutEditingAbility;
 
         [ObservableProperty]
@@ -51,12 +57,14 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         private void UpdatePercents()
         {
-            int expSumWithoutEditingAbility = _character.Abilities
+            Exp = _character.Experience;
+            ExpSumWithoutEditingAbility = _character.Abilities
                 .Where(x => x.InternalModel.Guid != Ability.InternalModel.Guid)
                 .Sum(x => x.Cost);
-            int expSumWithEditingAbility = expSumWithoutEditingAbility + Ability.Cost;
-            PercentWithoutEditingAbility = (double)expSumWithoutEditingAbility / _character.Experience;
+            int expSumWithEditingAbility = ExpSumWithoutEditingAbility + Ability.Cost;
+            PercentWithoutEditingAbility = (double)ExpSumWithoutEditingAbility / _character.Experience;
             PercentWithEditingAbility = (double)expSumWithEditingAbility / _character.Experience;
+            AvailiableExp = Exp - expSumWithEditingAbility;
         }
     }
 }

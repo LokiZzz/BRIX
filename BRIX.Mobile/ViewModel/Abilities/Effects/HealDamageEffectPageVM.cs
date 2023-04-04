@@ -36,6 +36,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
             if (result != null)
             {
+                ResetAdjustment();
                 Damage.Impact = result.DicePool;
                 _dicePoolToReset = null;
             }
