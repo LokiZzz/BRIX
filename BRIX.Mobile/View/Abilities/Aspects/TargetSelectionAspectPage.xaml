@@ -1,21 +1,97 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:v="clr-namespace:BRIX.Mobile.View.Abilities"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities.Aspects"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              x:Class="BRIX.Mobile.View.Abilities.Aspects.TargetSelectionAspectPage"
              x:DataType="vm:TargetSelectionAspectPageVM"
-             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Aspects}}">
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectTargetSelection}}">
 
     <Shell.TitleView>
         <controls:TitleView/>
     </Shell.TitleView>
+
+    <ContentPage.Resources>
+        <Style TargetType="Label" x:Key="StrategyLabel">
+            <Setter Property="TextColor" Value="{StaticResource BRIXWhite}"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="15,0,0,0"/>
+        </Style>
+        <Style TargetType="CheckBox" x:Key="StrategyCheckBox">
+            <Setter Property="HorizontalOptions" Value="End"/>
+            <Setter Property="Margin" Value="0,0,2,0"/>
+            <Setter Property="Color" Value="{StaticResource BRIXWhite}"/>
+        </Style>
+        <Style TargetType="Button" x:Key="StrategyButton">
+            <Setter Property="HeightRequest" Value="35"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource BRIXDim}"/>
+        </Style>
+    </ContentPage.Resources>
     
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid RowDefinitions="*,auto">
+        <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never" >
+            <VerticalStackLayout Spacing="10">
+                <!--Strategy-->
+                <Border Style="{StaticResource BlockBorder}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource TitleLabel}" Text="Стратегия"/>
+                        <Label Text="Необходимо выбрать стратегию выбора цели, всего их две:"/>
+                        <Grid>
+                            <Button Style="{StaticResource StrategyButton}" Command="{Binding SetNTADCommand}">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding IsNTAD}" Value="True">
+                                        <Setter Property="BackgroundColor" Value="{StaticResource BRIXOrange}" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                            <Label Text="Несколько целей на расстоянии" Style="{StaticResource StrategyLabel}" InputTransparent="True"/>
+                            <CheckBox IsChecked="{Binding IsNTAD}" Style="{StaticResource StrategyCheckBox}"  InputTransparent="True"/>
+                        </Grid>
+                        <Grid>
+                            <Button Style="{StaticResource StrategyButton}" Command="{Binding SetAREACommand}">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding IsAREA}" Value="True">
+                                        <Setter Property="BackgroundColor" Value="{StaticResource BRIXOrange}" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                            <Label Text="Все цели в области" Style="{StaticResource StrategyLabel}"  InputTransparent="True"/>
+                            <CheckBox IsChecked="{Binding IsAREA}" Style="{StaticResource StrategyCheckBox}" InputTransparent="True"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+                <!--NTAD-->
+                <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding IsNTAD}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource TitleLabel}" Text="Несколько целей на расстоянии"/>
+                        <Label Text="С этой стратегией эффект применяется на ограниченное количество целей, которые распологаются не далее чем на заданном расстоянии."/>
+                        <controls:FramedEntry Placeholder="Количество целей" Text="{Binding NTADTargetsCount}"/>
+                        <controls:FramedEntry Placeholder="Расстояние в метрах" Text="{Binding NTADDistance}"/>
+                    </VerticalStackLayout>
+                </Border>
+                <!--AREA-->
+                <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding IsAREA}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource TitleLabel}" Text="Все цели в области"/>
+                        <Label Text="С этой стратегией эффект применяется на располагающиеся в заданной области цели."/>
+                    </VerticalStackLayout>
+                </Border>
+                <!--Random-->
+                <!--<Border Style="{StaticResource BlockBorder}" IsVisible="true">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource TitleLabel}" Text="Стратегия"/>
+                        <Label Text="Необходимо выбрать стратегию выбора цели, всего их две:"/>
+                        <Grid>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>-->
+            </VerticalStackLayout>
+        </ScrollView>
+        <v:AbilityCostMonitorPanel
+            Grid.Row="1"
+            BindingContext="{Binding CostMonitor}"/>
+    </Grid>
 </ContentPage>

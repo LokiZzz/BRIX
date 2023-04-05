@@ -7,16 +7,13 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 {
-    public partial class ActionPointAspectPageVM : ViewModelBase, IQueryAttributable
+    public partial class ActionPointAspectPageVM : AspectViewModelBase
     {
         [ObservableProperty]
         private DamageEffectModel _damage = new();
 
         [ObservableProperty]
         private ActionPointsAspectModel _aspect = new();
-
-        [ObservableProperty]
-        private AbilityCostMonitorPanelVM _costMonitor;
 
         private int _actionPoints = 1;
         public int ActionPoints
@@ -45,7 +42,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             ActionPoints = intPoints;
         }
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        public override void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             CostMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
             CostMonitor.SaveCommand = SaveCommand;
