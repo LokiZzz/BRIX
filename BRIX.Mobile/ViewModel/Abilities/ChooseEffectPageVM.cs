@@ -50,7 +50,6 @@ namespace BRIX.Mobile.ViewModel.Abilities
             return Task.CompletedTask;
         }
 
-        private AbilityModel _ability;
         private AbilityCostMonitorPanelVM _costMonitor;
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)

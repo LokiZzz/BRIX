@@ -1,4 +1,7 @@
-﻿using BRIX.Mobile.ViewModel.Base;
+﻿using BRIX.Mobile.Models.Abilities.Aspects;
+using BRIX.Mobile.Models.Abilities.Effects;
+using BRIX.Mobile.Services.Navigation;
+using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -9,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 {
-    public partial class TargetSelectionAspectPageVM : AspectViewModelBase
+    public partial class TargetSelectionAspectPageVM : AspectPageVMBase<TargetSelectionAspectModel>
     {
         [ObservableProperty]
         private bool _isNTAD = true;
@@ -37,7 +40,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             IsAREA = true;
         }
 
-        public override void ApplyQueryAttributes(IDictionary<string, object> query)
+        public override void Initialize(IDictionary<string, object> query)
         {
         }
     }
