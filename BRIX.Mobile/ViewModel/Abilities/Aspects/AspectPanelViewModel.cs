@@ -53,7 +53,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         public void UpdateAspect(AspectModelBase aspect)
         {
             AspectUtilityModel aspectToUpdate = AspectsCollection
-                .FirstOrDefault(x => x.LibraryAspectType == aspect.InternalModel.GetType());
+                .FirstOrDefault(x => x.LibraryAspectType == aspect.InternalBase.GetType());
 
             if (aspectToUpdate != null)
             {

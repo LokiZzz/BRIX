@@ -35,8 +35,9 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             CostMonitor.SaveCommand = SaveCommand;
             Effect = query.GetParameterOrDefault<DamageEffectModel>(NavigationParameters.Effect);
             Aspect = query.GetParameterOrDefault<T>(NavigationParameters.Aspect);
+            Aspect.CostMonitor = CostMonitor;
 
-            Initialize(query);
+            Initialize();
 
             Effect.UpdateAspect(Aspect);
             CostMonitor.Ability.UpdateEffect(Effect);
@@ -44,6 +45,9 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             query.Clear();
         }
 
-        public abstract void Initialize(IDictionary<string, object> query);
+        /// <summary>
+        /// Метод для дополнительной инициализации деталей интерфейса.
+        /// </summary>
+        public virtual void Initialize() { }
     }
 }

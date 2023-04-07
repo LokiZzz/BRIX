@@ -34,12 +34,12 @@ namespace BRIX.Mobile.Models.Abilities.Effects
 
         public AspectModelBase GetAspect(Type aspectType)
         {
-            return Aspects.FirstOrDefault(x => x.InternalModel.GetType() == aspectType);
+            return Aspects.FirstOrDefault(x => x.InternalBase.GetType() == aspectType);
         }
 
         public void UpdateAspect(AspectModelBase aspect)
         {
-            InternalModel.SetAspect(aspect.InternalModel);
+            InternalModel.SetAspect(aspect.InternalBase);
             UpdateAspects();
         }
 

@@ -20,10 +20,10 @@
                     <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectActionPoints}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ActionPointAspectHint}}"/>
-                        <controls:FramedEntry Text="{Binding ActionPoints}" IsReadOnly="True" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectActionPoints}}"/>
+                        <controls:FramedEntry Text="{Binding Aspect.ActionPoints}" IsReadOnly="True" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectActionPoints}}"/>
                         <Grid ColumnDefinitions="auto,*,auto" Margin="10">
                             <Label Grid.Column="0" Text="1" VerticalOptions="Center"/>
-                            <Slider Grid.Column="1" Minimum="1" Maximum="50" Value="{Binding ActionPoints, Mode=TwoWay}"/>
+                            <Slider Grid.Column="1" Minimum="1" Maximum="50" Value="{Binding Aspect.ActionPoints, Mode=TwoWay}"/>
                             <Label Grid.Column="2" Text="50" VerticalOptions="Center"/>
                         </Grid>
                         <Grid ColumnDefinitions="*,*,*,*,*" ColumnSpacing="5">

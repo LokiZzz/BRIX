@@ -68,8 +68,8 @@
                     <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="Несколько целей на расстоянии"/>
                         <Label Text="С этой стратегией эффект применяется на ограниченное количество целей, которые распологаются не далее чем на заданном расстоянии."/>
-                        <controls:FramedEntry Placeholder="Количество целей" Text="{Binding NTADTargetsCount}"/>
-                        <controls:FramedEntry Placeholder="Расстояние в метрах" Text="{Binding NTADDistance}"/>
+                        <controls:FramedEntry Placeholder="Количество целей" Text="{Binding Aspect.NTADCount}"/>
+                        <controls:FramedEntry Placeholder="Расстояние в метрах" Text="{Binding Aspect.NTADistance}"/>
                     </VerticalStackLayout>
                 </Border>
                 <!--AREA-->

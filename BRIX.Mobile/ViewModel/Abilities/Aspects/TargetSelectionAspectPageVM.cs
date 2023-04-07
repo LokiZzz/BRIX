@@ -1,4 +1,5 @@
-﻿using BRIX.Mobile.Models.Abilities.Aspects;
+﻿using BRIX.Library.Aspects;
+using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Base;
@@ -20,17 +21,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [ObservableProperty]
         private bool _isAREA = false;
 
-        [ObservableProperty]
-        private int _NTADTargetsCount = 1;
-
-        [ObservableProperty]
-        private int _NTADDistance = 1;
-
         [RelayCommand]
         public void SetNTAD()
         {
             IsAREA = false;
             IsNTAD = true;
+            Aspect.Strategy = ETargetSelectionStrategy.NTargetsAtDistanсeL;
         }
 
         [RelayCommand]
@@ -38,10 +34,19 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         {
             IsNTAD = false;
             IsAREA = true;
+            Aspect.Strategy = ETargetSelectionStrategy.Area;
         }
 
-        public override void Initialize(IDictionary<string, object> query)
+        public override void Initialize()
         {
+            if (Aspect.Internal.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
+            {
+                SetNTAD();
+            } 
+            else
+            {
+                SetAREA();
+            }
         }
     }
 }

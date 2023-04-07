@@ -93,6 +93,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 Damage.UpdateAspect(aspect);
                 Aspects.UpdateAspect(aspect);
             }
+
+            CostMonitor.UpdateCost();
         }
 
         private void HandleInitial(IDictionary<string, object> query)

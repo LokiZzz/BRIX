@@ -4,7 +4,7 @@ namespace BRIX.Library.Aspects
 {
     public class TargetSelectionAspect : AspectBase
     {
-        public ETargetType Strategy { get; set; } = ETargetType.NTargetsAtDistanсeL;
+        public ETargetSelectionStrategy Strategy { get; set; } = ETargetSelectionStrategy.NTargetsAtDistanсeL;
 
         public bool IsTargetSelectionIsRandom { get; set; }
 
@@ -14,9 +14,9 @@ namespace BRIX.Library.Aspects
         {
             switch (Strategy)
             {
-                case ETargetType.Area:
+                case ETargetSelectionStrategy.Area:
                     return GetAreaCoeficient();
-                case ETargetType.NTargetsAtDistanсeL:
+                case ETargetSelectionStrategy.NTargetsAtDistanсeL:
                     return GetNTADCoeficient();
                 default:
                     return 1;
@@ -111,7 +111,7 @@ namespace BRIX.Library.Aspects
         }
     }
 
-    public enum ETargetType
+    public enum ETargetSelectionStrategy
     {
         None = 0,
         Area = 1,
