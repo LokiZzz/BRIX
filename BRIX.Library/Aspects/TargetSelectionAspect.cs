@@ -99,7 +99,7 @@ namespace BRIX.Library.Aspects
             }
         }
 
-        public IShape Shape { get; private set; } = new Cylinder();
+        public IShape Shape { get; private set; } = new Brick();
 
         public enum EAreaType
         {
@@ -113,8 +113,7 @@ namespace BRIX.Library.Aspects
 
     public enum ETargetSelectionStrategy
     {
-        None = 0,
-        Area = 1,
-        NTargetsAtDistanсeL = 2
+        NTargetsAtDistanсeL = 0,
+        Area = 1
     }
 }

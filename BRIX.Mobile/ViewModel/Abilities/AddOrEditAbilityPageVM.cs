@@ -54,7 +54,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
         public async Task AddEffect()
         {
             await Navigation.NavigateAsync<ChooseEffectPage>(
-                (NavigationParameters.CostMonitor, CostMonitor)
+                (NavigationParameters.CostMonitor, CostMonitor.Copy())
             );
         }
 

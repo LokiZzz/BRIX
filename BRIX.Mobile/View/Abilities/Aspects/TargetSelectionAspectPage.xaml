@@ -29,10 +29,20 @@
             <Setter Property="HeightRequest" Value="35"/>
             <Setter Property="BackgroundColor" Value="{StaticResource BRIXDim}"/>
         </Style>
+        <Style TargetType="Button" x:Key="ShapeButton">
+            <Setter Property="BackgroundColor" Value="{StaticResource BRIXDim}"/>
+            <Setter Property="HeightRequest" Value="55"/>
+            <Setter Property="WidthRequest" Value="55"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+        <Style TargetType="Image" x:Key="ShapeScheme">
+            <Setter Property="HeightRequest" Value="150"/>
+            <Setter Property="Margin" Value="0,10"/>
+        </Style>
     </ContentPage.Resources>
     
     <Grid RowDefinitions="*,auto">
-        <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never" >
+        <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never" Margin="0,0,0,10">
             <VerticalStackLayout Spacing="10">
                 <!--Strategy-->
                 <Border Style="{StaticResource BlockBorder}">
@@ -76,18 +86,104 @@
                 <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding IsAREA}">
                     <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="Все цели в области"/>
-                        <Label Text="С этой стратегией эффект применяется на располагающиеся в заданной области цели."/>
+                        <Label Text="С этой стратегией эффект применяется на располагающиеся в заданной области цели. Все параметры области указываются в метрах. Область может быть размещена под любым углом относительно персонажа, а расстояние до области — это расстояние от персонажа до ближайшей точки этой области."/>
+                        <controls:FramedEntry Placeholder="Расстояние до области (метры)" Text="{Binding Aspect.AreaDistance}"/>
+                        <Label Style="{StaticResource TitleLabel}" Text="Область"/>
+                        <FlexLayout JustifyContent="SpaceBetween">
+                            <Button 
+                                Style="{StaticResource ShapeButton}" 
+                                Text="Br" 
+                                Command="{Binding SetShapeCommand}" 
+                                CommandParameter="Brick" 
+                                BackgroundColor="{Binding IsBrick, Converter={StaticResource SelectedToColorConverter}}"/>
+                            <Button 
+                                Style="{StaticResource ShapeButton}" 
+                                Text="Sp" 
+                                Command="{Binding SetShapeCommand}" 
+                                CommandParameter="Sphere"
+                                BackgroundColor="{Binding IsSphere, Converter={StaticResource SelectedToColorConverter}}"/>
+                            <Button 
+                                Style="{StaticResource ShapeButton}" 
+                                Text="Ci" 
+                                Command="{Binding SetShapeCommand}" 
+                                CommandParameter="Cylinder"
+                                BackgroundColor="{Binding IsCylinder, Converter={StaticResource SelectedToColorConverter}}"/>
+                            <Button 
+                                Style="{StaticResource ShapeButton}" 
+                                Text="Co" 
+                                Command="{Binding SetShapeCommand}" 
+                                CommandParameter="Cone"
+                                BackgroundColor="{Binding IsCone, Converter={StaticResource SelectedToColorConverter}}"/>
+                            <Button 
+                                Style="{StaticResource ShapeButton}" 
+                                Text="Vo" 
+                                Command="{Binding SetShapeCommand}" 
+                                CommandParameter="Arbitrary"
+                                BackgroundColor="{Binding IsArbitrary, Converter={StaticResource SelectedToColorConverter}}"/>
+                        </FlexLayout>
+                        
+                        <Grid>
+                            <!--Brick-->
+                            <Grid RowDefinitions="auto,*" ColumnDefinitions="*,*,*" ColumnSpacing="10" IsVisible="{Binding IsBrick}">
+                                <Image 
+                                    Grid.Row="0" Grid.ColumnSpan="3" 
+                                    Style="{StaticResource ShapeScheme}"
+                                    Source="https://www.transparentpng.com/thumb/cube/SmP6mi-cube-hd-photo-png.png"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.A}" Placeholder="Длина (А)"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.B}" Placeholder="Ширина (B)"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="2" Text="{Binding Aspect.C}" Placeholder="Высота (C)"/>
+                            </Grid>
+                            <!--Sphere-->
+                            <Grid RowDefinitions="auto,*" ColumnSpacing="10" IsVisible="{Binding IsSphere}">
+                                <Image 
+                                    Grid.Row="0"  
+                                    Style="{StaticResource ShapeScheme}"
+                                    Source="https://pnglib.nyc3.cdn.digitaloceanspaces.com/uploads/2021/02/white-ball_60221de72a294.png"/>
+                                <controls:FramedEntry Grid.Row="1" Text="{Binding Aspect.R}" Placeholder="Радиус (R)"/>
+                            </Grid>
+                            <!--Cylinder-->
+                            <Grid RowDefinitions="auto,*" ColumnDefinitions="*,*" ColumnSpacing="10" IsVisible="{Binding IsCylinder}">
+                                <Image 
+                                    Grid.Row="0" Grid.ColumnSpan="2" 
+                                    Style="{StaticResource ShapeScheme}"
+                                    Source="https://www.pngmart.com/files/7/Cylinder-Transparent-Images-PNG.png"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.H}" Placeholder="Высота (H)"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.R}" Placeholder="Радиус (R)"/>
+                            </Grid>
+                            <!--Cone-->
+                            <Grid RowDefinitions="auto,*" ColumnDefinitions="*,*" ColumnSpacing="10" IsVisible="{Binding IsCone}">
+                                <Image 
+                                    Grid.Row="0" Grid.ColumnSpan="2" 
+                                    Style="{StaticResource ShapeScheme}"
+                                    Source="https://cdn-icons-png.flaticon.com/512/5854/5854059.png"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.H}" Placeholder="Высота (H)"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.R}" Placeholder="Радиус (R)"/>
+                            </Grid>
+                            <!--Voxel array-->
+                            <Grid RowDefinitions="auto,*" ColumnSpacing="10" IsVisible="{Binding IsArbitrary}">
+                                <Image 
+                                    Grid.Row="0" 
+                                    Style="{StaticResource ShapeScheme}"
+                                    Source="https://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c344.png"/>
+                                <controls:FramedEntry Grid.Row="1" Text="{Binding Aspect.N}" Placeholder="Количество вокселей"/>
+                            </Grid>
+                        </Grid>
                     </VerticalStackLayout>
                 </Border>
                 <!--Random-->
-                <!--<Border Style="{StaticResource BlockBorder}" IsVisible="true">
+                <Border Style="{StaticResource BlockBorder}" IsVisible="true">
                     <VerticalStackLayout Spacing="10">
-                        <Label Style="{StaticResource TitleLabel}" Text="Стратегия"/>
-                        <Label Text="Необходимо выбрать стратегию выбора цели, всего их две:"/>
-                        <Grid>
-                        </Grid>
+                        <Label Style="{StaticResource TitleLabel}" Text="Выбор случайной цели"/>
+                        <Label Text="Если будет выбран режим случайного выбора целей, то игрок при использовании способности будет должен выбирать случайную цель из тех, которые удоволетворяют остальным условиям. Это усложнит планирование действий, но зато сделает способность дешевле."/>
+                        <HorizontalStackLayout Spacing="10">
+                            <CheckBox 
+                                Color="{StaticResource BRIXWhite}"/>
+                            <Label 
+                                Text="Цели выбираются случайным образом"
+                                VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
                     </VerticalStackLayout>
-                </Border>-->
+                </Border>
             </VerticalStackLayout>
         </ScrollView>
         <v:AbilityCostMonitorPanel

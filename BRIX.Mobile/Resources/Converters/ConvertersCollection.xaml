@@ -4,4 +4,5 @@
              xmlns:converters="clr-namespace:BRIX.Mobile.Resources.Converters"
              x:Class="BRIX.Mobile.Resources.Converters.ConvertersCollection">
     <converters:NotConverter x:Key="NotConverter"/>
+    <converters:BoolToSelectedColorConverter x:Key="SelectedToColorConverter"/>
 </ResourceDictionary>
