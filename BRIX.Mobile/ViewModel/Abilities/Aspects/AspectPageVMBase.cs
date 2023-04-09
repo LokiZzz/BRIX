@@ -20,8 +20,16 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [ObservableProperty]
         private EffectModelBase _effect;
 
-        [ObservableProperty]
         private T _aspect;
+        public T Aspect
+        {
+            get => _aspect;
+            set
+            {
+                _aspect = value;
+                OnPropertyChanged(nameof(Aspect));
+            }
+        }
 
         [RelayCommand]
         private async Task Save()
@@ -34,7 +42,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             CostMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
             CostMonitor.SaveCommand = SaveCommand;
             Effect = query.GetParameterOrDefault<DamageEffectModel>(NavigationParameters.Effect);
-            Aspect = query.GetParameterOrDefault<T>(NavigationParameters.Aspect);
+            T temp = query.GetParameterOrDefault<T>(NavigationParameters.Aspect);
+            Aspect = temp;
             Aspect.CostMonitor = CostMonitor;
 
             Initialize();

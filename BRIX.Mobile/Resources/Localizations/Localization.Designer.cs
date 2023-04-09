@@ -169,6 +169,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Area.
+        /// </summary>
+        public static string Area {
+            get {
+                return ResourceManager.GetString("Area", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Action points.
         /// </summary>
         public static string AspectActionPoints {
@@ -718,6 +727,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Strategy.
+        /// </summary>
+        public static string Strategy {
+            get {
+                return ResourceManager.GetString("Strategy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ability cost:.
         /// </summary>
         public static string String1 {
@@ -741,6 +759,159 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Tags {
             get {
                 return ResourceManager.GetString("Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Length (A).
+        /// </summary>
+        public static string TargetSelectionAreaA {
+            get {
+                return ResourceManager.GetString("TargetSelectionAreaA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width (B).
+        /// </summary>
+        public static string TargetSelectionAreaB {
+            get {
+                return ResourceManager.GetString("TargetSelectionAreaB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height (C).
+        /// </summary>
+        public static string TargetSelectionAreaC {
+            get {
+                return ResourceManager.GetString("TargetSelectionAreaC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height (H).
+        /// </summary>
+        public static string TargetSelectionAreaH {
+            get {
+                return ResourceManager.GetString("TargetSelectionAreaH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of voxels (N).
+        /// </summary>
+        public static string TargetSelectionAreaN {
+            get {
+                return ResourceManager.GetString("TargetSelectionAreaN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Radius (R).
+        /// </summary>
+        public static string TargetSelectionAreaR {
+            get {
+                return ResourceManager.GetString("TargetSelectionAreaR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Random target selection.
+        /// </summary>
+        public static string TargetSelectionIsRandom {
+            get {
+                return ResourceManager.GetString("TargetSelectionIsRandom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target selection is random.
+        /// </summary>
+        public static string TargetSelectionIsRandomCheckBox {
+            get {
+                return ResourceManager.GetString("TargetSelectionIsRandomCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the random target selection mode is selected, then the player, when using the ability, will have to select a random target from those that satisfy the other conditions. This will complicate the planning of actions, but it will make the ability cheaper..
+        /// </summary>
+        public static string TargetSelectionIsRandomHint {
+            get {
+                return ResourceManager.GetString("TargetSelectionIsRandomHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All targets in area.
+        /// </summary>
+        public static string TargetSelectionStratedyArea {
+            get {
+                return ResourceManager.GetString("TargetSelectionStratedyArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distance to area in meters.
+        /// </summary>
+        public static string TargetSelectionStratedyAreaDistance {
+            get {
+                return ResourceManager.GetString("TargetSelectionStratedyAreaDistance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With this strategy, the effect is applied to targets located in the specified area. All area parameters are specified in meters. An area can be placed at any angle relative to the character, and the area distance is the distance from the character to the nearest point in that area..
+        /// </summary>
+        public static string TargetSelectionStratedyAreaHint {
+            get {
+                return ResourceManager.GetString("TargetSelectionStratedyAreaHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multiple targets in the distance.
+        /// </summary>
+        public static string TargetSelectionStratedyNTAD {
+            get {
+                return ResourceManager.GetString("TargetSelectionStratedyNTAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of targets.
+        /// </summary>
+        public static string TargetSelectionStratedyNTADCount {
+            get {
+                return ResourceManager.GetString("TargetSelectionStratedyNTADCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distance in meters.
+        /// </summary>
+        public static string TargetSelectionStratedyNTADDistance {
+            get {
+                return ResourceManager.GetString("TargetSelectionStratedyNTADDistance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With this strategy, the effect is applied to a limited number of targets that are no further than the set range..
+        /// </summary>
+        public static string TargetSelectionStratedyNTADHint {
+            get {
+                return ResourceManager.GetString("TargetSelectionStratedyNTADHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It is necessary to choose a target selection strategy, there are only two of them:.
+        /// </summary>
+        public static string TargetSelectionStrategyHint {
+            get {
+                return ResourceManager.GetString("TargetSelectionStrategyHint", resourceCulture);
             }
         }
         

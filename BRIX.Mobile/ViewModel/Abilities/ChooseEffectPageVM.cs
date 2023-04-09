@@ -3,6 +3,7 @@ using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Abilities.Effects;
 using BRIX.Mobile.ViewModel.Base;
+using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -28,7 +29,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 effectToChoose.EditPage.Name,
                 ENavigationMode.Push,
                 (NavigationParameters.EditMode, EEditingMode.Add), 
-                (NavigationParameters.CostMonitor, _costMonitor)
+                (NavigationParameters.CostMonitor, _costMonitor.Copy())
             );
         }
 
@@ -54,7 +55,11 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            _costMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
+            if (_costMonitor == null)
+            {
+                _costMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
+            }
+
             query.Clear();
         }
     }

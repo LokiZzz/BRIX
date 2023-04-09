@@ -8,7 +8,7 @@ namespace BRIX.Library.Aspects
 
         public bool IsTargetSelectionIsRandom { get; set; }
 
-        public double RandomSelectionCoef => IsTargetSelectionIsRandom ? 1 : 0.8;
+        public double RandomSelectionCoef => IsTargetSelectionIsRandom ? 0.8 : 1;
 
         public override double GetCoefficient()
         {
@@ -25,12 +25,7 @@ namespace BRIX.Library.Aspects
 
         public NTADSettings NTAD { get; set; } = new NTADSettings();
 
-        private double GetNTADCoeficient()
-        {
-            double randomSelectionCoef = IsTargetSelectionIsRandom ? RandomSelectionCoef : 1;
-
-            return GetNTADDistanceCoef() * GetNTADCountCoeficient() * randomSelectionCoef;
-        }
+        private double GetNTADCoeficient() => GetNTADDistanceCoef() * GetNTADCountCoeficient() * RandomSelectionCoef;
 
         private double GetNTADDistanceCoef() => GetDistanceCoef(NTAD.DistanceInMeters);
 
@@ -40,12 +35,7 @@ namespace BRIX.Library.Aspects
 
         public AreaSettings Area { get; set; } = new AreaSettings();
 
-        private double GetAreaCoeficient()
-        {
-            double randomSelectionCoef = IsTargetSelectionIsRandom ? RandomSelectionCoef : 1;
-
-            return GetAreaDistanceCoeficient() * GetAreaVolumeCoeficient() * randomSelectionCoef;
-        }
+        private double GetAreaCoeficient() => GetAreaDistanceCoeficient() * GetAreaVolumeCoeficient() * RandomSelectionCoef;
 
         private double GetAreaDistanceCoeficient() => GetDistanceCoef(Area.DistanceToAreaInMeters);
 
@@ -70,7 +60,7 @@ namespace BRIX.Library.Aspects
     {
         public int DistanceToAreaInMeters { get; set; } = 0;
 
-        private EAreaType _areaType = EAreaType.Cylinder;
+        private EAreaType _areaType = EAreaType.Brick;
         public EAreaType AreaType
         {
             get => _areaType;

@@ -153,6 +153,9 @@
   <data name="Apply" xml:space="preserve">
     <value>Применить</value>
   </data>
+  <data name="Area" xml:space="preserve">
+    <value>Область</value>
+  </data>
   <data name="AspectActionPoints" xml:space="preserve">
     <value>Очки действий</value>
   </data>
@@ -336,11 +339,65 @@
   <data name="Spread" xml:space="preserve">
     <value>Разброс:</value>
   </data>
+  <data name="Strategy" xml:space="preserve">
+    <value>Стратегия</value>
+  </data>
   <data name="Switch" xml:space="preserve">
     <value>Сменить</value>
   </data>
   <data name="Tags" xml:space="preserve">
     <value>Тэги</value>
+  </data>
+  <data name="TargetSelectionAreaA" xml:space="preserve">
+    <value>Длина (А)</value>
+  </data>
+  <data name="TargetSelectionAreaB" xml:space="preserve">
+    <value>Ширина (B)</value>
+  </data>
+  <data name="TargetSelectionAreaC" xml:space="preserve">
+    <value>Высота (C)</value>
+  </data>
+  <data name="TargetSelectionAreaH" xml:space="preserve">
+    <value>Высота (H)</value>
+  </data>
+  <data name="TargetSelectionAreaN" xml:space="preserve">
+    <value>Количество вокселей (N)</value>
+  </data>
+  <data name="TargetSelectionAreaR" xml:space="preserve">
+    <value>Радиус (R)</value>
+  </data>
+  <data name="TargetSelectionIsRandom" xml:space="preserve">
+    <value>Выбор случайной цели</value>
+  </data>
+  <data name="TargetSelectionIsRandomCheckBox" xml:space="preserve">
+    <value>Цели выбираются случайным образом</value>
+  </data>
+  <data name="TargetSelectionIsRandomHint" xml:space="preserve">
+    <value>Если будет выбран режим случайного выбора целей, то игрок при использовании способности будет должен выбирать случайную цель из тех, которые удоволетворяют остальным условиям. Это усложнит планирование действий, но зато сделает способность дешевле.</value>
+  </data>
+  <data name="TargetSelectionStratedyArea" xml:space="preserve">
+    <value>Все цели в области</value>
+  </data>
+  <data name="TargetSelectionStratedyAreaDistance" xml:space="preserve">
+    <value>Расстояние до области в метрах</value>
+  </data>
+  <data name="TargetSelectionStratedyAreaHint" xml:space="preserve">
+    <value>С этой стратегией эффект применяется на располагающиеся в заданной области цели. Все параметры области указываются в метрах. Область может быть размещена под любым углом относительно персонажа, а расстояние до области — это расстояние от персонажа до ближайшей точки этой области.</value>
+  </data>
+  <data name="TargetSelectionStratedyNTAD" xml:space="preserve">
+    <value>Несколько целей на расстоянии</value>
+  </data>
+  <data name="TargetSelectionStratedyNTADCount" xml:space="preserve">
+    <value>Количество целей</value>
+  </data>
+  <data name="TargetSelectionStratedyNTADDistance" xml:space="preserve">
+    <value>Расстояние в метрах</value>
+  </data>
+  <data name="TargetSelectionStratedyNTADHint" xml:space="preserve">
+    <value>С этой стратегией эффект применяется на ограниченное количество целей, которые распологаются не далее чем на заданном расстоянии.</value>
+  </data>
+  <data name="TargetSelectionStrategyHint" xml:space="preserve">
+    <value>Необходимо выбрать стратегию выбора цели, всего их две:</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Внимание</value>

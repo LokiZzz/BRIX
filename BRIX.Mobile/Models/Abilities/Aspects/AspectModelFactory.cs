@@ -10,8 +10,8 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             {
                 case ActionPointAspect actionPointAspect:
                     return new ActionPointsAspectModel(actionPointAspect);
-                case TargetSelectionAspect actionPointAspect:
-                    return new TargetSelectionAspectModel(actionPointAspect);
+                case TargetSelectionAspect targetSelectionAspect:
+                    return new TargetSelectionAspectModel(targetSelectionAspect);
                 default: 
                     return null;
             }

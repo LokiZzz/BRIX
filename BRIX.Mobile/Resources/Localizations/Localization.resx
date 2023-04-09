@@ -153,6 +153,9 @@
   <data name="Apply" xml:space="preserve">
     <value>Apply</value>
   </data>
+  <data name="Area" xml:space="preserve">
+    <value>Area</value>
+  </data>
   <data name="AspectActionPoints" xml:space="preserve">
     <value>Action points</value>
   </data>
@@ -336,6 +339,9 @@
   <data name="Spread" xml:space="preserve">
     <value>Spread:</value>
   </data>
+  <data name="Strategy" xml:space="preserve">
+    <value>Strategy</value>
+  </data>
   <data name="String1" xml:space="preserve">
     <value>Ability cost:</value>
   </data>
@@ -344,6 +350,57 @@
   </data>
   <data name="Tags" xml:space="preserve">
     <value>Tags</value>
+  </data>
+  <data name="TargetSelectionAreaA" xml:space="preserve">
+    <value>Length (A)</value>
+  </data>
+  <data name="TargetSelectionAreaB" xml:space="preserve">
+    <value>Width (B)</value>
+  </data>
+  <data name="TargetSelectionAreaC" xml:space="preserve">
+    <value>Height (C)</value>
+  </data>
+  <data name="TargetSelectionAreaH" xml:space="preserve">
+    <value>Height (H)</value>
+  </data>
+  <data name="TargetSelectionAreaN" xml:space="preserve">
+    <value>Number of voxels (N)</value>
+  </data>
+  <data name="TargetSelectionAreaR" xml:space="preserve">
+    <value>Radius (R)</value>
+  </data>
+  <data name="TargetSelectionIsRandom" xml:space="preserve">
+    <value>Random target selection</value>
+  </data>
+  <data name="TargetSelectionIsRandomCheckBox" xml:space="preserve">
+    <value>Target selection is random</value>
+  </data>
+  <data name="TargetSelectionIsRandomHint" xml:space="preserve">
+    <value>If the random target selection mode is selected, then the player, when using the ability, will have to select a random target from those that satisfy the other conditions. This will complicate the planning of actions, but it will make the ability cheaper.</value>
+  </data>
+  <data name="TargetSelectionStratedyArea" xml:space="preserve">
+    <value>All targets in area</value>
+  </data>
+  <data name="TargetSelectionStratedyAreaDistance" xml:space="preserve">
+    <value>Distance to area in meters</value>
+  </data>
+  <data name="TargetSelectionStratedyAreaHint" xml:space="preserve">
+    <value>With this strategy, the effect is applied to targets located in the specified area. All area parameters are specified in meters. An area can be placed at any angle relative to the character, and the area distance is the distance from the character to the nearest point in that area.</value>
+  </data>
+  <data name="TargetSelectionStratedyNTAD" xml:space="preserve">
+    <value>Multiple targets in the distance</value>
+  </data>
+  <data name="TargetSelectionStratedyNTADCount" xml:space="preserve">
+    <value>Number of targets</value>
+  </data>
+  <data name="TargetSelectionStratedyNTADDistance" xml:space="preserve">
+    <value>Distance in meters</value>
+  </data>
+  <data name="TargetSelectionStratedyNTADHint" xml:space="preserve">
+    <value>With this strategy, the effect is applied to a limited number of targets that are no further than the set range.</value>
+  </data>
+  <data name="TargetSelectionStrategyHint" xml:space="preserve">
+    <value>It is necessary to choose a target selection strategy, there are only two of them:</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>

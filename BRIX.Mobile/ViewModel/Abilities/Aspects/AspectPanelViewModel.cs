@@ -44,7 +44,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             await Navigation.NavigateAsync(
                 SelectedAspect.EditPage.Name,
                 Services.ENavigationMode.Push,
-                (NavigationParameters.CostMonitor, _costMonitor),
+                (NavigationParameters.CostMonitor, _costMonitor.Copy()),
                 (NavigationParameters.Effect, _aspectOwnerEffect.Copy()),
                 (NavigationParameters.Aspect, aspectToEdit.Copy())
             );

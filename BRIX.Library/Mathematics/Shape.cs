@@ -18,7 +18,7 @@
     {
         public int R { get; set; } = 1;
 
-        public int GetVolume() => 4 * R * R * R;
+        public int GetVolume() => 4 * R * R * R; // 4/3 * 3.14 * R^3
     }
 
     public class Cylinder : IShape

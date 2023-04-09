@@ -47,8 +47,8 @@
                 <!--Strategy-->
                 <Border Style="{StaticResource BlockBorder}">
                     <VerticalStackLayout Spacing="10">
-                        <Label Style="{StaticResource TitleLabel}" Text="Стратегия"/>
-                        <Label Text="Необходимо выбрать стратегию выбора цели, всего их две:"/>
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Strategy}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStrategyHint}}"/>
                         <Grid>
                             <Button Style="{StaticResource StrategyButton}" Command="{Binding SetNTADCommand}">
                                 <Button.Triggers>
@@ -57,7 +57,7 @@
                                     </DataTrigger>
                                 </Button.Triggers>
                             </Button>
-                            <Label Text="Несколько целей на расстоянии" Style="{StaticResource StrategyLabel}" InputTransparent="True"/>
+                            <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyNTAD}}" Style="{StaticResource StrategyLabel}" InputTransparent="True"/>
                             <CheckBox IsChecked="{Binding IsNTAD}" Style="{StaticResource StrategyCheckBox}"  InputTransparent="True"/>
                         </Grid>
                         <Grid>
@@ -68,7 +68,7 @@
                                     </DataTrigger>
                                 </Button.Triggers>
                             </Button>
-                            <Label Text="Все цели в области" Style="{StaticResource StrategyLabel}"  InputTransparent="True"/>
+                            <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyArea}}" Style="{StaticResource StrategyLabel}"  InputTransparent="True"/>
                             <CheckBox IsChecked="{Binding IsAREA}" Style="{StaticResource StrategyCheckBox}" InputTransparent="True"/>
                         </Grid>
                     </VerticalStackLayout>
@@ -76,19 +76,19 @@
                 <!--NTAD-->
                 <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding IsNTAD}">
                     <VerticalStackLayout Spacing="10">
-                        <Label Style="{StaticResource TitleLabel}" Text="Несколько целей на расстоянии"/>
-                        <Label Text="С этой стратегией эффект применяется на ограниченное количество целей, которые распологаются не далее чем на заданном расстоянии."/>
-                        <controls:FramedEntry Placeholder="Количество целей" Text="{Binding Aspect.NTADCount}"/>
-                        <controls:FramedEntry Placeholder="Расстояние в метрах" Text="{Binding Aspect.NTADistance}"/>
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyNTAD}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyNTADHint}}"/>
+                        <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyNTADCount}}" Text="{Binding Aspect.NTADCount}"/>
+                        <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyNTADDistance}}" Text="{Binding Aspect.NTADistance}"/>
                     </VerticalStackLayout>
                 </Border>
                 <!--AREA-->
                 <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding IsAREA}">
                     <VerticalStackLayout Spacing="10">
-                        <Label Style="{StaticResource TitleLabel}" Text="Все цели в области"/>
-                        <Label Text="С этой стратегией эффект применяется на располагающиеся в заданной области цели. Все параметры области указываются в метрах. Область может быть размещена под любым углом относительно персонажа, а расстояние до области — это расстояние от персонажа до ближайшей точки этой области."/>
-                        <controls:FramedEntry Placeholder="Расстояние до области (метры)" Text="{Binding Aspect.AreaDistance}"/>
-                        <Label Style="{StaticResource TitleLabel}" Text="Область"/>
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyArea}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyAreaHint}}"/>
+                        <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyAreaDistance}}" Text="{Binding Aspect.AreaDistance}"/>
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Area}}"/>
                         <FlexLayout JustifyContent="SpaceBetween">
                             <Button 
                                 Style="{StaticResource ShapeButton}" 
@@ -129,9 +129,9 @@
                                     Grid.Row="0" Grid.ColumnSpan="3" 
                                     Style="{StaticResource ShapeScheme}"
                                     Source="https://www.transparentpng.com/thumb/cube/SmP6mi-cube-hd-photo-png.png"/>
-                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.A}" Placeholder="Длина (А)"/>
-                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.B}" Placeholder="Ширина (B)"/>
-                                <controls:FramedEntry Grid.Row="1" Grid.Column="2" Text="{Binding Aspect.C}" Placeholder="Высота (C)"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.A}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaA}}"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.B}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaB}}"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="2" Text="{Binding Aspect.C}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaC}}"/>
                             </Grid>
                             <!--Sphere-->
                             <Grid RowDefinitions="auto,*" ColumnSpacing="10" IsVisible="{Binding IsSphere}">
@@ -147,8 +147,8 @@
                                     Grid.Row="0" Grid.ColumnSpan="2" 
                                     Style="{StaticResource ShapeScheme}"
                                     Source="https://www.pngmart.com/files/7/Cylinder-Transparent-Images-PNG.png"/>
-                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.H}" Placeholder="Высота (H)"/>
-                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.R}" Placeholder="Радиус (R)"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.H}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaH}}"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.R}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaR}}"/>
                             </Grid>
                             <!--Cone-->
                             <Grid RowDefinitions="auto,*" ColumnDefinitions="*,*" ColumnSpacing="10" IsVisible="{Binding IsCone}">
@@ -156,8 +156,8 @@
                                     Grid.Row="0" Grid.ColumnSpan="2" 
                                     Style="{StaticResource ShapeScheme}"
                                     Source="https://cdn-icons-png.flaticon.com/512/5854/5854059.png"/>
-                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.H}" Placeholder="Высота (H)"/>
-                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.R}" Placeholder="Радиус (R)"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.H}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaH}}"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.R}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaR}}"/>
                             </Grid>
                             <!--Voxel array-->
                             <Grid RowDefinitions="auto,*" ColumnSpacing="10" IsVisible="{Binding IsArbitrary}">
@@ -165,7 +165,7 @@
                                     Grid.Row="0" 
                                     Style="{StaticResource ShapeScheme}"
                                     Source="https://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c344.png"/>
-                                <controls:FramedEntry Grid.Row="1" Text="{Binding Aspect.N}" Placeholder="Количество вокселей"/>
+                                <controls:FramedEntry Grid.Row="1" Text="{Binding Aspect.N}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaN}}"/>
                             </Grid>
                         </Grid>
                     </VerticalStackLayout>
@@ -173,13 +173,14 @@
                 <!--Random-->
                 <Border Style="{StaticResource BlockBorder}" IsVisible="true">
                     <VerticalStackLayout Spacing="10">
-                        <Label Style="{StaticResource TitleLabel}" Text="Выбор случайной цели"/>
-                        <Label Text="Если будет выбран режим случайного выбора целей, то игрок при использовании способности будет должен выбирать случайную цель из тех, которые удоволетворяют остальным условиям. Это усложнит планирование действий, но зато сделает способность дешевле."/>
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionIsRandom}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionIsRandomHint}}"/>
                         <HorizontalStackLayout Spacing="10">
                             <CheckBox 
-                                Color="{StaticResource BRIXWhite}"/>
+                                Color="{StaticResource BRIXWhite}"
+                                IsChecked="{Binding Aspect.IsRandomSelection}"/>
                             <Label 
-                                Text="Цели выбираются случайным образом"
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionIsRandomCheckBox}}"
                                 VerticalOptions="Center"/>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>

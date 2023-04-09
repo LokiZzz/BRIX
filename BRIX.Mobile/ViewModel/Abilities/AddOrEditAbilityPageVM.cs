@@ -66,7 +66,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 ENavigationMode.Push,
                 (NavigationParameters.EditMode, EEditingMode.Edit),
                 (NavigationParameters.Effect, effectToEdit.Copy()),
-                (NavigationParameters.CostMonitor, CostMonitor)
+                (NavigationParameters.CostMonitor, CostMonitor.Copy())
             );
         }
 

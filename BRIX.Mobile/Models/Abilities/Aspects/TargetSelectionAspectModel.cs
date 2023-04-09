@@ -10,6 +10,16 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public TargetSelectionAspect Internal => GetSpecificAspect<TargetSelectionAspect>();
 
+        public bool IsRandomSelection
+        {
+            get => Internal.IsTargetSelectionIsRandom;
+            set
+            {
+                SetProperty(Internal.IsTargetSelectionIsRandom, value, Internal, (model, prop) => model.IsTargetSelectionIsRandom = prop);
+                UpdateCost();
+            }
+        }
+
         public ETargetSelectionStrategy Strategy
         {
             get => Internal.Strategy;
@@ -73,7 +83,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                     case EAreaType.Cone:
                         return ((Cone)Internal.Area.Shape).R;
                     default:
-                        return 0;
+                        return 1;
                 }
             }
             set
@@ -109,7 +119,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                     case EAreaType.Cone:
                         return ((Cone)Internal.Area.Shape).H;
                     default:
-                        return 0;
+                        return 1;
                 }
             }
             set
@@ -132,7 +142,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public int A
         {
-            get => Internal.Area.Shape is Brick brick ? brick.A : 0;
+            get => Internal.Area.Shape is Brick brick ? brick.A : 1;
             set
             {
                 if(Internal.Area.Shape is Brick brick)
@@ -145,7 +155,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public int B
         {
-            get => Internal.Area.Shape is Brick brick ? brick.B : 0;
+            get => Internal.Area.Shape is Brick brick ? brick.B : 1;
             set
             {
                 if (Internal.Area.Shape is Brick brick)
@@ -158,7 +168,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public int C
         {
-            get => Internal.Area.Shape is Brick brick ? brick.C : 0;
+            get => Internal.Area.Shape is Brick brick ? brick.C : 1;
             set
             {
                 if (Internal.Area.Shape is Brick brick)
@@ -171,7 +181,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public int N
         {
-            get => Internal.Area.Shape is VoxelArray voxels ? voxels.N : 0;
+            get => Internal.Area.Shape is VoxelArray voxels ? voxels.N : 1;
             set
             {
                 if (Internal.Area.Shape is VoxelArray voxels)
