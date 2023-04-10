@@ -817,6 +817,33 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Excluded targets count.
+        /// </summary>
+        public static string TargetSelectionEcludeTargetsField {
+            get {
+                return ResourceManager.GetString("TargetSelectionEcludeTargetsField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It is possible to fine-tune the area so that certain targets in the area selected by the character will not be affected. The more such targets a character can exclude, the more expensive the ability..
+        /// </summary>
+        public static string TargetSelectionEcludeTargetsHint {
+            get {
+                return ResourceManager.GetString("TargetSelectionEcludeTargetsHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exclude targets.
+        /// </summary>
+        public static string TargetSelectionExcludeTargets {
+            get {
+                return ResourceManager.GetString("TargetSelectionExcludeTargets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Random target selection.
         /// </summary>
         public static string TargetSelectionIsRandom {

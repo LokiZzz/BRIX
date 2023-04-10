@@ -16,6 +16,8 @@ namespace BRIX.Lexica
             {
                 case ActionPointAspect apa:
                     return GetActionPointAspectLexis(apa, language);
+                case TargetSelectionAspect tsa:
+                    return GetTargetSelectionAspectLexis(tsa, language);
                 default:
                     return string.Empty;
             }
@@ -34,6 +36,11 @@ namespace BRIX.Lexica
                 default:
                     return string.Empty;
             }
+        }
+
+        private static string GetTargetSelectionAspectLexis(TargetSelectionAspect tsa, ELexisLanguage language)
+        {
+            return string.Empty;
         }
     }
 }

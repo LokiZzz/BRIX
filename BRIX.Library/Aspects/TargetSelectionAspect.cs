@@ -6,9 +6,7 @@ namespace BRIX.Library.Aspects
     {
         public ETargetSelectionStrategy Strategy { get; set; } = ETargetSelectionStrategy.NTargetsAtDistanсeL;
 
-        public bool IsTargetSelectionIsRandom { get; set; }
-
-        public double RandomSelectionCoef => IsTargetSelectionIsRandom ? 0.8 : 1;
+        public double RandomSelectionCoef => NTAD?.IsTargetSelectionIsRandom == true ? 0.8 : 1;
 
         public override double GetCoefficient()
         {
@@ -35,7 +33,10 @@ namespace BRIX.Library.Aspects
 
         public AreaSettings Area { get; set; } = new AreaSettings();
 
-        private double GetAreaCoeficient() => GetAreaDistanceCoeficient() * GetAreaVolumeCoeficient() * RandomSelectionCoef;
+        private double GetAreaCoeficient() => 
+            GetAreaDistanceCoeficient() 
+            * GetAreaVolumeCoeficient()
+            * GetExcludedTargetsCoef();
 
         private double GetAreaDistanceCoeficient() => GetDistanceCoef(Area.DistanceToAreaInMeters);
 
@@ -47,6 +48,13 @@ namespace BRIX.Library.Aspects
                 .Convert(distance)
                 .ToCoeficient();
         }
+
+        private double GetExcludedTargetsCoef()
+        {
+            return new ThrasholdCoefConverter((0, 0), (1, 30), (6, 5))
+                .Convert(Area.ExcludedTargetsCount)
+                .ToCoeficient();
+        }
     }
 
     public class NTADSettings
@@ -54,6 +62,8 @@ namespace BRIX.Library.Aspects
         public int TargetsCount { get; set; } = 1;
 
         public int DistanceInMeters { get; set; } = 1;
+
+        public bool IsTargetSelectionIsRandom { get; set; }
     }
 
     public class AreaSettings
@@ -90,6 +100,8 @@ namespace BRIX.Library.Aspects
         }
 
         public IShape Shape { get; private set; } = new Brick();
+
+        public int ExcludedTargetsCount { get; set; } = 0;
 
         public enum EAreaType
         {

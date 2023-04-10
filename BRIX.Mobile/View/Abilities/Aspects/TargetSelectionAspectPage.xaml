@@ -80,6 +80,16 @@
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyNTADHint}}"/>
                         <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyNTADCount}}" Text="{Binding Aspect.NTADCount}"/>
                         <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyNTADDistance}}" Text="{Binding Aspect.NTADistance}"/>
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionIsRandom}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionIsRandomHint}}"/>
+                        <HorizontalStackLayout Spacing="10">
+                            <CheckBox 
+                                Color="{StaticResource BRIXWhite}"
+                                IsChecked="{Binding Aspect.IsRandomSelection}"/>
+                            <Label 
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionIsRandomCheckBox}}"
+                                VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Border>
                 <!--AREA-->
@@ -121,7 +131,7 @@
                                 CommandParameter="Arbitrary"
                                 BackgroundColor="{Binding IsArbitrary, Converter={StaticResource SelectedToColorConverter}}"/>
                         </FlexLayout>
-                        
+
                         <Grid>
                             <!--Brick-->
                             <Grid RowDefinitions="auto,*" ColumnDefinitions="*,*,*" ColumnSpacing="10" IsVisible="{Binding IsBrick}">
@@ -168,21 +178,10 @@
                                 <controls:FramedEntry Grid.Row="1" Text="{Binding Aspect.N}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaN}}"/>
                             </Grid>
                         </Grid>
-                    </VerticalStackLayout>
-                </Border>
-                <!--Random-->
-                <Border Style="{StaticResource BlockBorder}" IsVisible="true">
-                    <VerticalStackLayout Spacing="10">
-                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionIsRandom}}"/>
-                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionIsRandomHint}}"/>
-                        <HorizontalStackLayout Spacing="10">
-                            <CheckBox 
-                                Color="{StaticResource BRIXWhite}"
-                                IsChecked="{Binding Aspect.IsRandomSelection}"/>
-                            <Label 
-                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionIsRandomCheckBox}}"
-                                VerticalOptions="Center"/>
-                        </HorizontalStackLayout>
+
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionExcludeTargets}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionEcludeTargetsHint}}"/>
+                        <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionEcludeTargetsField}}" Text="{Binding Aspect.AreaDistance}"/>
                     </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>

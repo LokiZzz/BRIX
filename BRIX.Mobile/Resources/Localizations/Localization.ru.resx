@@ -366,8 +366,17 @@
   <data name="TargetSelectionAreaR" xml:space="preserve">
     <value>Радиус (R)</value>
   </data>
+  <data name="TargetSelectionEcludeTargetsField" xml:space="preserve">
+    <value>Количество исключённый целей</value>
+  </data>
+  <data name="TargetSelectionEcludeTargetsHint" xml:space="preserve">
+    <value>Существует возможность тонкой настройки области, при которой некоторые, выбранные персонажем, цели в области не будут подвержены эффекту. Чем больше таких целей персонаж может исключить, тем дороже способность.</value>
+  </data>
+  <data name="TargetSelectionExcludeTargets" xml:space="preserve">
+    <value>Исключение целей</value>
+  </data>
   <data name="TargetSelectionIsRandom" xml:space="preserve">
-    <value>Выбор случайной цели</value>
+    <value>Случайный выбор цели</value>
   </data>
   <data name="TargetSelectionIsRandomCheckBox" xml:space="preserve">
     <value>Цели выбираются случайным образом</value>

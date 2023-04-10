@@ -369,6 +369,15 @@
   <data name="TargetSelectionAreaR" xml:space="preserve">
     <value>Radius (R)</value>
   </data>
+  <data name="TargetSelectionEcludeTargetsField" xml:space="preserve">
+    <value>Excluded targets count</value>
+  </data>
+  <data name="TargetSelectionEcludeTargetsHint" xml:space="preserve">
+    <value>It is possible to fine-tune the area so that certain targets in the area selected by the character will not be affected. The more such targets a character can exclude, the more expensive the ability.</value>
+  </data>
+  <data name="TargetSelectionExcludeTargets" xml:space="preserve">
+    <value>Exclude targets</value>
+  </data>
   <data name="TargetSelectionIsRandom" xml:space="preserve">
     <value>Random target selection</value>
   </data>

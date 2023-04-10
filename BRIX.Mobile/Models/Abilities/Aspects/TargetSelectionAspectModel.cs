@@ -12,10 +12,11 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public bool IsRandomSelection
         {
-            get => Internal.IsTargetSelectionIsRandom;
+            get => Internal.NTAD.IsTargetSelectionIsRandom;
             set
             {
-                SetProperty(Internal.IsTargetSelectionIsRandom, value, Internal, (model, prop) => model.IsTargetSelectionIsRandom = prop);
+                SetProperty(Internal.NTAD.IsTargetSelectionIsRandom, value, Internal, 
+                    (model, prop) => model.NTAD.IsTargetSelectionIsRandom = prop);
                 UpdateCost();
             }
         }
@@ -25,7 +26,8 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             get => Internal.Strategy;
             set 
             { 
-                SetProperty(Internal.Strategy, value, Internal, (model, prop) => model.Strategy = prop);
+                SetProperty(Internal.Strategy, value, Internal, 
+                    (model, prop) => model.Strategy = prop);
                 UpdateCost();
             }
         }
@@ -35,7 +37,8 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             get => Internal.NTAD.TargetsCount;
             set
             {
-                SetProperty(Internal.NTAD.TargetsCount, value, Internal, (model, prop) => model.NTAD.TargetsCount = prop); 
+                SetProperty(Internal.NTAD.TargetsCount, value, Internal, 
+                    (model, prop) => model.NTAD.TargetsCount = prop); 
                 UpdateCost();
             }
         }
@@ -45,7 +48,8 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             get => Internal.NTAD.DistanceInMeters;
             set 
             { 
-                SetProperty(Internal.NTAD.DistanceInMeters, value, Internal, (model, prop) => model.NTAD.DistanceInMeters = prop); 
+                SetProperty(Internal.NTAD.DistanceInMeters, value, Internal, 
+                    (model, prop) => model.NTAD.DistanceInMeters = prop); 
                 UpdateCost();
             }
         }
@@ -55,7 +59,8 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             get => Internal.Area.AreaType;
             set
             {
-                SetProperty(Internal.Area.AreaType, value, Internal, (model, prop) => model.Area.AreaType = prop);
+                SetProperty(Internal.Area.AreaType, value, Internal, 
+                    (model, prop) => model.Area.AreaType = prop);
                 UpdateCost();
             }
         }
@@ -65,7 +70,19 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             get => Internal.Area.DistanceToAreaInMeters;
             set
             {
-                SetProperty(Internal.Area.DistanceToAreaInMeters, value, Internal, (model, prop) => model.Area.DistanceToAreaInMeters = prop);
+                SetProperty(Internal.Area.DistanceToAreaInMeters, value, Internal, 
+                    (model, prop) => model.Area.DistanceToAreaInMeters = prop);
+                UpdateCost();
+            }
+        }
+
+        public int ExcludedTargetsCount
+        {
+            get => Internal.Area.ExcludedTargetsCount;
+            set
+            {
+                SetProperty(Internal.Area.ExcludedTargetsCount, value, Internal,
+                    (model, prop) => model.Area.ExcludedTargetsCount = prop);
                 UpdateCost();
             }
         }
