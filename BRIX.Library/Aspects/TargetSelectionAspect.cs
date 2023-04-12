@@ -96,11 +96,11 @@ namespace BRIX.Library.Aspects
             }
         }
 
-        private Brick _brick = new Brick();
-        private Sphere _sphere = new Sphere();
-        private Cylinder _cylinder = new Cylinder();
-        private Cone _cone = new Cone();
-        private VoxelArray _voxelArray = new VoxelArray();
+        private readonly Brick _brick = new Brick();
+        private readonly Sphere _sphere = new Sphere();
+        private readonly Cylinder _cylinder = new Cylinder();
+        private readonly Cone _cone = new Cone();
+        private readonly VoxelArray _voxelArray = new VoxelArray();
 
         public enum EAreaType
         {
