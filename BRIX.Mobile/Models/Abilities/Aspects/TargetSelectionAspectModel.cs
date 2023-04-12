@@ -61,6 +61,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             {
                 SetProperty(Internal.Area.AreaType, value, Internal, 
                     (model, prop) => model.Area.AreaType = prop);
+                OnShapeParametersChanged(value);
                 UpdateCost();
             }
         }
@@ -206,6 +207,29 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                     voxels.N = value;
                     UpdateCost();
                 }
+            }
+        }
+
+        private void OnShapeParametersChanged(EAreaType shape)
+        {
+            switch (shape)
+            {
+                case EAreaType.Brick:
+                    OnPropertyChanged(nameof(A));
+                    OnPropertyChanged(nameof(B));
+                    OnPropertyChanged(nameof(C));
+                    break;
+                case EAreaType.Sphere:
+                    OnPropertyChanged(nameof(R));
+                    break;
+                case EAreaType.Cone:
+                case EAreaType.Cylinder:
+                    OnPropertyChanged(nameof(H));
+                    OnPropertyChanged(nameof(R));
+                    break;
+                case EAreaType.Arbitrary:
+                    OnPropertyChanged(nameof(N));
+                    break;
             }
         }
     }

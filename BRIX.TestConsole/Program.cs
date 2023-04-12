@@ -4,8 +4,6 @@ using BRIX.Library;
 using BRIX.Library.Aspects;
 using BRIX.Library.Effects;
 
-Console.ReadLine();
-
 Ability ability = new Ability();
 DamageEffect effect = new DamageEffect();
 TargetSelectionAspect targetSelectionAspect = new TargetSelectionAspect();

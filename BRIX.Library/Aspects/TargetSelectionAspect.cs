@@ -70,38 +70,37 @@ namespace BRIX.Library.Aspects
     {
         public int DistanceToAreaInMeters { get; set; } = 0;
 
-        private EAreaType _areaType = EAreaType.Brick;
-        public EAreaType AreaType
-        {
-            get => _areaType;
-            set
-            {
-                _areaType = value;
+        public int ExcludedTargetsCount { get; set; } = 0;
 
-                switch (_areaType)
+        public EAreaType AreaType { get; set; } = EAreaType.Brick;
+
+        public IShape? Shape
+        {
+            get
+            {
+                switch (AreaType)
                 {
                     case EAreaType.Brick:
-                        Shape = new Brick();
-                        break;
+                        return _brick;
                     case EAreaType.Sphere:
-                        Shape = new Sphere();
-                        break;
+                        return _sphere;
                     case EAreaType.Cylinder:
-                        Shape = new Cylinder();
-                        break;
+                        return _cylinder;
                     case EAreaType.Cone:
-                        Shape = new Cone();
-                        break;
+                        return _cone;
                     case EAreaType.Arbitrary:
-                        Shape = new VoxelArray();
-                        break;
+                        return _voxelArray;
+                    default:
+                        return null;
                 }
             }
         }
 
-        public IShape Shape { get; private set; } = new Brick();
-
-        public int ExcludedTargetsCount { get; set; } = 0;
+        private Brick _brick = new Brick();
+        private Sphere _sphere = new Sphere();
+        private Cylinder _cylinder = new Cylinder();
+        private Cone _cone = new Cone();
+        private VoxelArray _voxelArray = new VoxelArray();
 
         public enum EAreaType
         {
