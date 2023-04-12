@@ -42,8 +42,8 @@
     </ContentPage.Resources>
     
     <Grid RowDefinitions="*,auto">
-        <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never" Margin="0,0,0,10">
-            <VerticalStackLayout Spacing="10">
+        <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never">
+            <VerticalStackLayout Spacing="10" Margin="0,0,0,10">
                 <!--Strategy-->
                 <Border Style="{StaticResource BlockBorder}">
                     <VerticalStackLayout Spacing="10">
@@ -181,7 +181,7 @@
 
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionExcludeTargets}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionEcludeTargetsHint}}"/>
-                        <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionEcludeTargetsField}}" Text="{Binding Aspect.AreaDistance}"/>
+                        <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionEcludeTargetsField}}" Text="{Binding Aspect.ExcludedTargetsCount}"/>
                     </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>

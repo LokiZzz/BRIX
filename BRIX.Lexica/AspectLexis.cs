@@ -86,7 +86,7 @@ namespace BRIX.Lexica
 
                 if(aspect.Area.ExcludedTargetsCount > 0)
                 {
-                    result += $" При использовании способности персонаж по желанию может исключить " +
+                    result += $" При использовании способности персонаж по желанию может исключить из области " +
                         $"{Numbers.RUSDeclension(aspect.Area.ExcludedTargetsCount, "цель")}.";
                 }
 
@@ -122,7 +122,7 @@ namespace BRIX.Lexica
                 if (aspect.Area.ExcludedTargetsCount > 0)
                 {
                     result += $" When using the ability, the character can optionally exclude " +
-                        $"{Numbers.RUSDeclension(aspect.Area.ExcludedTargetsCount, "target")}.";
+                        $"{Numbers.RUSDeclension(aspect.Area.ExcludedTargetsCount, "target")} from the area.";
                 }
 
                 return result;
