@@ -2,7 +2,7 @@
 
 namespace BRIX.Lexis
 {
-    public static class NumberDeclension
+    public static class Numbers
     {
         /// <summary>
         /// Склонения слов, зависящие от числа.
@@ -11,6 +11,9 @@ namespace BRIX.Lexis
         private static Dictionary<string, string[]> NumberDeclensions = new()
         {
             { "очко", new string[] { "очко", "очка", "очков" } },
+            { "метр", new string[] { "метр", "метра", "метров" } },
+            { "цель", new string[] { "цель", "цели", "целей" } },
+            { "воксель", new string[] { "воксель", "вокселя", "вокселей" } },
         };
 
         /// <summary>

@@ -33,7 +33,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 ILocalizationResourceManager localization = ServicePool.GetService<ILocalizationResourceManager>();
                 ELexisLanguage language = localization.LexisLanguage;
 
-                return AspectLexis.GetAspectDescription(InternalBase, language);
+                return AspectLexis.GetLexis(InternalBase, language);
             } 
         }
 

@@ -29,12 +29,12 @@ namespace BRIX.Lexis
             {
                 case ELexisLanguage.English:
                     return $"Due to this effect, the ability deals " +
-                        $"{NumberDeclension.ENGDeclension(effect.Impact, "point")} " +
+                        $"{Numbers.ENGDeclension(effect.Impact, "point")} " +
                         $"of damage to targets.";
                 case ELexisLanguage.Russian:
                     //
                     return $"Благодаря этому эффекту способность наносит целям " +
-                        $"{NumberDeclension.RUSDeclension(effect.Impact, "очко")} " +
+                        $"{Numbers.RUSDeclension(effect.Impact, "очко")} " +
                         $"урона.";
                 default:
                     return string.Empty;
