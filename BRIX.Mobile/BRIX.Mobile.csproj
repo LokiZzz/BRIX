@@ -79,6 +79,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\Shapes\brick_icon.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <AdditionalFiles Include="Resources\Localizations\Localization.resx">
 	    <Generator>PublicResXFileCodeGenerator</Generator>
 	    <LastGenOutput>Localization.Designer.cs</LastGenOutput>
@@ -210,6 +214,10 @@
 	  <Compile Update="View\Popups\DiceValuePopup.xaml.cs">
 	    <DependentUpon>DiceValuePopup.xaml</DependentUpon>
 	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\Images\Shapes\brick_icon.svg" />
 	</ItemGroup>
 
 </Project>

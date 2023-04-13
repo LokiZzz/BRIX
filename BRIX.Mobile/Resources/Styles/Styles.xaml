@@ -9,7 +9,12 @@
     <Style TargetType="ScrollView">
         <Setter Property="VerticalScrollBarVisibility" Value="Never"/>
     </Style>
-    
+
+    <Style TargetType="ImageButton">
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="Padding" Value="7"/>
+    </Style>
+
     <Style TargetType="Button">
         <Setter Property="TextColor" Value="{StaticResource BRIXWhite}" />
         <Setter Property="BackgroundColor" Value="{StaticResource BRIXViolet}" />

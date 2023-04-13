@@ -29,11 +29,13 @@
             <Setter Property="HeightRequest" Value="35"/>
             <Setter Property="BackgroundColor" Value="{StaticResource BRIXDim}"/>
         </Style>
-        <Style TargetType="Button" x:Key="ShapeButton">
+        <Style TargetType="ImageButton" x:Key="ShapeButton">
             <Setter Property="BackgroundColor" Value="{StaticResource BRIXDim}"/>
-            <Setter Property="HeightRequest" Value="55"/>
-            <Setter Property="WidthRequest" Value="55"/>
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HeightRequest" Value="70"/>
+            <Setter Property="WidthRequest" Value="70"/>
+            <Setter Property="Margin" Value="-3"/> <!--Когда в MAUI пофиксят баги с паддингом ImageButton-а, можно будет это убрать-->
+            <!--https://github.com/dotnet/maui/issues/7927-->
+            <!--https://github.com/dotnet/maui/issues/13101-->
         </Style>
         <Style TargetType="Image" x:Key="ShapeScheme">
             <Setter Property="HeightRequest" Value="150"/>
@@ -100,33 +102,33 @@
                         <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyAreaDistance}}" Text="{Binding Aspect.AreaDistance}"/>
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Area}}"/>
                         <FlexLayout JustifyContent="SpaceBetween">
-                            <Button 
+                            <ImageButton 
                                 Style="{StaticResource ShapeButton}" 
-                                Text="Br" 
+                                Source="Shape/brick_icon.svg"
                                 Command="{Binding SetShapeCommand}" 
                                 CommandParameter="Brick" 
                                 BackgroundColor="{Binding IsBrick, Converter={StaticResource SelectedToColorConverter}}"/>
-                            <Button 
+                            <ImageButton 
                                 Style="{StaticResource ShapeButton}" 
-                                Text="Sp" 
+                                Source="Shape/brick_icon.svg" 
                                 Command="{Binding SetShapeCommand}" 
                                 CommandParameter="Sphere"
                                 BackgroundColor="{Binding IsSphere, Converter={StaticResource SelectedToColorConverter}}"/>
-                            <Button 
+                            <ImageButton 
                                 Style="{StaticResource ShapeButton}" 
-                                Text="Ci" 
+                                Source="Shape/brick_icon.svg" 
                                 Command="{Binding SetShapeCommand}" 
                                 CommandParameter="Cylinder"
                                 BackgroundColor="{Binding IsCylinder, Converter={StaticResource SelectedToColorConverter}}"/>
-                            <Button 
+                            <ImageButton 
                                 Style="{StaticResource ShapeButton}" 
-                                Text="Co" 
+                                Source="Shape/brick_icon.svg" 
                                 Command="{Binding SetShapeCommand}" 
                                 CommandParameter="Cone"
                                 BackgroundColor="{Binding IsCone, Converter={StaticResource SelectedToColorConverter}}"/>
-                            <Button 
+                            <ImageButton 
                                 Style="{StaticResource ShapeButton}" 
-                                Text="Vo" 
+                                Source="Shape/brick_icon.svg" 
                                 Command="{Binding SetShapeCommand}" 
                                 CommandParameter="Arbitrary"
                                 BackgroundColor="{Binding IsArbitrary, Converter={StaticResource SelectedToColorConverter}}"/>
