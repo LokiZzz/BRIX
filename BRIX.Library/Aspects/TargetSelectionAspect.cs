@@ -40,7 +40,7 @@ namespace BRIX.Library.Aspects
 
         private double GetAreaDistanceCoeficient() => GetDistanceCoef(Area.DistanceToAreaInMeters);
 
-        private double GetAreaVolumeCoeficient() => (Area.Shape.GetVolume() * 5).ToCoeficient();
+        private double GetAreaVolumeCoeficient() => (Area?.Shape?.GetVolume() ?? 0 * 5).ToCoeficient();
 
         private double GetDistanceCoef(int distance)
         {
