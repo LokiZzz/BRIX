@@ -388,7 +388,7 @@
     <value>Все цели в области</value>
   </data>
   <data name="TargetSelectionStratedyAreaDistance" xml:space="preserve">
-    <value>Расстояние до области в метрах</value>
+    <value>Расстояние до области в метрах (D)</value>
   </data>
   <data name="TargetSelectionStratedyAreaHint" xml:space="preserve">
     <value>С этой стратегией эффект применяется на располагающиеся в заданной области цели. Все параметры области указываются в метрах. Область может быть размещена под любым углом относительно персонажа, а расстояние до области — это расстояние от персонажа до ближайшей точки этой области.</value>
@@ -407,6 +407,9 @@
   </data>
   <data name="TargetSelectionStrategyHint" xml:space="preserve">
     <value>Необходимо выбрать стратегию выбора цели, всего их две:</value>
+  </data>
+  <data name="TargetSelectionVoxelHint" xml:space="preserve">
+    <value>Воксель — это куб 1х1 метр. Из таких вокселей можно составлять массив — фигуру области, в которой к целям будет применяться эффект. На рисунке в качестве примера составлена область из пяти вокселей.</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Внимание</value>

@@ -391,7 +391,7 @@
     <value>All targets in area</value>
   </data>
   <data name="TargetSelectionStratedyAreaDistance" xml:space="preserve">
-    <value>Distance to area in meters</value>
+    <value>Distance to area in meters (D)</value>
   </data>
   <data name="TargetSelectionStratedyAreaHint" xml:space="preserve">
     <value>With this strategy, the effect is applied to targets located in the specified area. All area parameters are specified in meters. An area can be placed at any angle relative to the character, and the area distance is the distance from the character to the nearest point in that area.</value>
@@ -410,6 +410,9 @@
   </data>
   <data name="TargetSelectionStrategyHint" xml:space="preserve">
     <value>It is necessary to choose a target selection strategy, there are only two of them:</value>
+  </data>
+  <data name="TargetSelectionVoxelHint" xml:space="preserve">
+    <value>A voxel is a 1x1 meter cube. From such voxels, you can make an array — the figure of the area in which the effect will be applied to the targets. In the picture an area of ​​five voxels is composed as an example.</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>

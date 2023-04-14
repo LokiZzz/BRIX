@@ -880,7 +880,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Distance to area in meters.
+        ///   Looks up a localized string similar to Distance to area in meters (D).
         /// </summary>
         public static string TargetSelectionStratedyAreaDistance {
             get {
@@ -939,6 +939,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string TargetSelectionStrategyHint {
             get {
                 return ResourceManager.GetString("TargetSelectionStrategyHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A voxel is a 1x1 meter cube. From such voxels, you can make an array — the figure of the area in which the effect will be applied to the targets. In the picture an area of ​​five voxels is composed as an example..
+        /// </summary>
+        public static string TargetSelectionVoxelHint {
+            get {
+                return ResourceManager.GetString("TargetSelectionVoxelHint", resourceCulture);
             }
         }
         

@@ -79,7 +79,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\Shapes\brick.svg" />
 	  <None Remove="Resources\Images\Shapes\brick_icon.svg" />
+	  <None Remove="Resources\Images\Shapes\brick_scheme.svg" />
+	  <None Remove="Resources\Images\Shapes\cone_icon.svg" />
+	  <None Remove="Resources\Images\Shapes\cone_scheme.svg" />
+	  <None Remove="Resources\Images\Shapes\cross_icon.svg" />
+	  <None Remove="Resources\Images\Shapes\cross_scheme.svg" />
+	  <None Remove="Resources\Images\Shapes\cylinder_icon.svg" />
+	  <None Remove="Resources\Images\Shapes\cylinder_scheme.svg" />
+	  <None Remove="Resources\Images\Shapes\sphere_icon.svg" />
+	  <None Remove="Resources\Images\Shapes\sphere_scheme.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -91,6 +101,19 @@
 
 	<ItemGroup>
 	  <MauiIcon Include="Resources\AppIcon\appicon.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\Images\Shapes\brick_icon.svg" />
+	  <MauiImage Include="Resources\Images\Shapes\brick_scheme.svg" />
+	  <MauiImage Include="Resources\Images\Shapes\cone_icon.svg" />
+	  <MauiImage Include="Resources\Images\Shapes\cone_scheme.svg" />
+	  <MauiImage Include="Resources\Images\Shapes\cross_icon.svg" />
+	  <MauiImage Include="Resources\Images\Shapes\cross_scheme.svg" />
+	  <MauiImage Include="Resources\Images\Shapes\cylinder_icon.svg" />
+	  <MauiImage Include="Resources\Images\Shapes\cylinder_scheme.svg" />
+	  <MauiImage Include="Resources\Images\Shapes\sphere_icon.svg" />
+	  <MauiImage Include="Resources\Images\Shapes\sphere_scheme.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -214,10 +237,6 @@
 	  <Compile Update="View\Popups\DiceValuePopup.xaml.cs">
 	    <DependentUpon>DiceValuePopup.xaml</DependentUpon>
 	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Include="Resources\Images\Shapes\brick_icon.svg" />
 	</ItemGroup>
 
 </Project>

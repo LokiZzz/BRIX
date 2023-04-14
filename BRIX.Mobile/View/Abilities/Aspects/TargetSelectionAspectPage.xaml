@@ -33,6 +33,7 @@
             <Setter Property="BackgroundColor" Value="{StaticResource BRIXDim}"/>
             <Setter Property="HeightRequest" Value="70"/>
             <Setter Property="WidthRequest" Value="70"/>
+            <Setter Property="Padding" Value="10"/>
             <Setter Property="Margin" Value="-3"/> <!--Когда в MAUI пофиксят баги с паддингом ImageButton-а, можно будет это убрать-->
             <!--https://github.com/dotnet/maui/issues/7927-->
             <!--https://github.com/dotnet/maui/issues/13101-->
@@ -110,25 +111,25 @@
                                 BackgroundColor="{Binding IsBrick, Converter={StaticResource SelectedToColorConverter}}"/>
                             <ImageButton 
                                 Style="{StaticResource ShapeButton}" 
-                                Source="Shape/brick_icon.svg" 
+                                Source="Shape/sphere_icon.svg" 
                                 Command="{Binding SetShapeCommand}" 
                                 CommandParameter="Sphere"
                                 BackgroundColor="{Binding IsSphere, Converter={StaticResource SelectedToColorConverter}}"/>
                             <ImageButton 
                                 Style="{StaticResource ShapeButton}" 
-                                Source="Shape/brick_icon.svg" 
+                                Source="Shape/cylinder_icon.svg" 
                                 Command="{Binding SetShapeCommand}" 
                                 CommandParameter="Cylinder"
                                 BackgroundColor="{Binding IsCylinder, Converter={StaticResource SelectedToColorConverter}}"/>
                             <ImageButton 
                                 Style="{StaticResource ShapeButton}" 
-                                Source="Shape/brick_icon.svg" 
+                                Source="Shape/cone_icon.svg" 
                                 Command="{Binding SetShapeCommand}" 
                                 CommandParameter="Cone"
                                 BackgroundColor="{Binding IsCone, Converter={StaticResource SelectedToColorConverter}}"/>
                             <ImageButton 
                                 Style="{StaticResource ShapeButton}" 
-                                Source="Shape/brick_icon.svg" 
+                                Source="Shape/cross_icon.svg" 
                                 Command="{Binding SetShapeCommand}" 
                                 CommandParameter="Arbitrary"
                                 BackgroundColor="{Binding IsArbitrary, Converter={StaticResource SelectedToColorConverter}}"/>
@@ -140,7 +141,7 @@
                                 <Image 
                                     Grid.Row="0" Grid.ColumnSpan="3" 
                                     Style="{StaticResource ShapeScheme}"
-                                    Source="https://www.transparentpng.com/thumb/cube/SmP6mi-cube-hd-photo-png.png"/>
+                                    Source="Shape/brick_scheme.svg"/>
                                 <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.A}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaA}}"/>
                                 <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.B}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaB}}"/>
                                 <controls:FramedEntry Grid.Row="1" Grid.Column="2" Text="{Binding Aspect.C}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaC}}"/>
@@ -150,7 +151,7 @@
                                 <Image 
                                     Grid.Row="0"  
                                     Style="{StaticResource ShapeScheme}"
-                                    Source="https://pnglib.nyc3.cdn.digitaloceanspaces.com/uploads/2021/02/white-ball_60221de72a294.png"/>
+                                    Source="Shape/sphere_scheme.svg"/>
                                 <controls:FramedEntry Grid.Row="1" Text="{Binding Aspect.R}" Placeholder="Радиус (R)"/>
                             </Grid>
                             <!--Cylinder-->
@@ -158,7 +159,7 @@
                                 <Image 
                                     Grid.Row="0" Grid.ColumnSpan="2" 
                                     Style="{StaticResource ShapeScheme}"
-                                    Source="https://www.pngmart.com/files/7/Cylinder-Transparent-Images-PNG.png"/>
+                                    Source="Shape/cylinder_scheme.svg"/>
                                 <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.H}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaH}}"/>
                                 <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.R}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaR}}"/>
                             </Grid>
@@ -167,17 +168,18 @@
                                 <Image 
                                     Grid.Row="0" Grid.ColumnSpan="2" 
                                     Style="{StaticResource ShapeScheme}"
-                                    Source="https://cdn-icons-png.flaticon.com/512/5854/5854059.png"/>
+                                    Source="Shape/cone_scheme.svg"/>
                                 <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.H}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaH}}"/>
                                 <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.R}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaR}}"/>
                             </Grid>
                             <!--Voxel array-->
-                            <Grid RowDefinitions="auto,*" ColumnSpacing="10" IsVisible="{Binding IsArbitrary}">
+                            <Grid RowDefinitions="auto,*,auto" ColumnSpacing="10" IsVisible="{Binding IsArbitrary}">
                                 <Image 
                                     Grid.Row="0" 
                                     Style="{StaticResource ShapeScheme}"
-                                    Source="https://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c344.png"/>
-                                <controls:FramedEntry Grid.Row="1" Text="{Binding Aspect.N}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaN}}"/>
+                                    Source="Shape/cross_scheme.svg"/>
+                                <Label Grid.Row="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionVoxelHint}}" Margin="0,0,0,10"/>
+                                <controls:FramedEntry Grid.Row="2" Text="{Binding Aspect.N}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaN}}"/>
                             </Grid>
                         </Grid>
 
