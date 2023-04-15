@@ -196,6 +196,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Target chain.
+        /// </summary>
+        public static string AspectTargetChain {
+            get {
+                return ResourceManager.GetString("AspectTargetChain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Target selection.
         /// </summary>
         public static string AspectTargetSelection {
@@ -759,6 +768,42 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Tags {
             get {
                 return ResourceManager.GetString("Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable target chain.
+        /// </summary>
+        public static string TargetChainEnable {
+            get {
+                return ResourceManager.GetString("TargetChainEnable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Targets can form chains. This means that once an effect is applied to a target, it can also be applied to the next target at a given distance from the previous one, and so on. The effect can only be applied once to each target within the chain. The distance is indicated in meters. The maximum number of targets in a chain and the distance between targets is limited. The character himself chooses the order of the targets in the chain..
+        /// </summary>
+        public static string TargetChainHint {
+            get {
+                return ResourceManager.GetString("TargetChainHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max count of targets.
+        /// </summary>
+        public static string TargetChainMaxCount {
+            get {
+                return ResourceManager.GetString("TargetChainMaxCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max distance between targets.
+        /// </summary>
+        public static string TargetChainMaxDistance {
+            get {
+                return ResourceManager.GetString("TargetChainMaxDistance", resourceCulture);
             }
         }
         

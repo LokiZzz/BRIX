@@ -25,6 +25,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 EditPage = typeof(TargetSelectionAspectPage),
                 LibraryAspectType = typeof(TargetSelectionAspect),
             }},
+            { typeof(TargetChainAspectModel), new AspectUtilityModel() {
+                Name = _localization[Resources.Localizations.LocalizationKeys.AspectTargetChain].ToString(),
+                Icon = AwesomeRPG.PlayerThunderStruck,
+                EditPage = typeof(TargetChainAspectPage),
+                LibraryAspectType = typeof(TargetChainAspect),
+            }},
         };
 
         public static string GetEditPageRoute(EffectBase effect)

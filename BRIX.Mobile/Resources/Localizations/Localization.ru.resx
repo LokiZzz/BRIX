@@ -162,6 +162,9 @@
   <data name="Aspects" xml:space="preserve">
     <value>Аспекты</value>
   </data>
+  <data name="AspectTargetChain" xml:space="preserve">
+    <value>Цепи целей</value>
+  </data>
   <data name="AspectTargetSelection" xml:space="preserve">
     <value>Выбор цели</value>
   </data>
@@ -347,6 +350,18 @@
   </data>
   <data name="Tags" xml:space="preserve">
     <value>Тэги</value>
+  </data>
+  <data name="TargetChainEnable" xml:space="preserve">
+    <value>Включить цепи целей</value>
+  </data>
+  <data name="TargetChainHint" xml:space="preserve">
+    <value>Цели могут составлять цепи. Это значит, что после того, как к цели применяется эффект, он также может быть применён к следующей цели, на заданном расстоянии от предыдущей и так далее. К каждой цели в рамках цепи эффект может быть применён только один раз. Расстояние указывается в метрах. Максимальное количество целей в цепи и расстояние между целями ограничено. Персонаж сам выбирает порядок целей в цепи.</value>
+  </data>
+  <data name="TargetChainMaxCount" xml:space="preserve">
+    <value>Максимальное количество целей</value>
+  </data>
+  <data name="TargetChainMaxDistance" xml:space="preserve">
+    <value>Максимальное расстояние между целями</value>
   </data>
   <data name="TargetSelectionAreaA" xml:space="preserve">
     <value>Длина (А)</value>

@@ -5,7 +5,7 @@ namespace BRIX.Lexis
 {
     public class ShapeLexis
     {
-        public static string GetLexis(IShape shape, ELexisLanguage language)
+        public static string GetLexis(IShape? shape, ELexisLanguage language)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace BRIX.Lexis
             }
         }
 
-        private static string GetDescriptionRUS(IShape shape)
+        private static string GetDescriptionRUS(IShape? shape)
         {
             switch (shape)
             {
@@ -44,7 +44,7 @@ namespace BRIX.Lexis
             }
         }
 
-        private static string GetDescriptionENG(IShape shape)
+        private static string GetDescriptionENG(IShape? shape)
         {
             switch (shape)
             {

@@ -162,6 +162,9 @@
   <data name="Aspects" xml:space="preserve">
     <value>Aspects</value>
   </data>
+  <data name="AspectTargetChain" xml:space="preserve">
+    <value>Target chain</value>
+  </data>
   <data name="AspectTargetSelection" xml:space="preserve">
     <value>Target selection</value>
   </data>
@@ -350,6 +353,18 @@
   </data>
   <data name="Tags" xml:space="preserve">
     <value>Tags</value>
+  </data>
+  <data name="TargetChainEnable" xml:space="preserve">
+    <value>Enable target chain</value>
+  </data>
+  <data name="TargetChainHint" xml:space="preserve">
+    <value>Targets can form chains. This means that once an effect is applied to a target, it can also be applied to the next target at a given distance from the previous one, and so on. The effect can only be applied once to each target within the chain. The distance is indicated in meters. The maximum number of targets in a chain and the distance between targets is limited. The character himself chooses the order of the targets in the chain.</value>
+  </data>
+  <data name="TargetChainMaxCount" xml:space="preserve">
+    <value>Max count of targets</value>
+  </data>
+  <data name="TargetChainMaxDistance" xml:space="preserve">
+    <value>Max distance between targets</value>
   </data>
   <data name="TargetSelectionAreaA" xml:space="preserve">
     <value>Length (A)</value>

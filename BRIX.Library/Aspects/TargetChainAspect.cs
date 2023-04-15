@@ -5,8 +5,8 @@ namespace BRIX.Library.Aspects
     public class TargetChainAspect : AspectBase
     {
         public bool IsChainEnabled { get; set; }
-        public int MaxDistanceBetweenTargets { get; set; }
-        public int MaxTargetsCount { get; set; }
+        public int MaxDistanceBetweenTargets { get; set; } = 1;
+        public int MaxTargetsCount { get; set; } = 2;
 
         public override double GetCoefficient()
         {

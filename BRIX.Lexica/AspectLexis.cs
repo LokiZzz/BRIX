@@ -21,6 +21,8 @@ namespace BRIX.Lexica
                         return ForActionPoints(apa, language);
                     case TargetSelectionAspect tsa:
                         return ForTargetSelection(tsa, language);
+                    case TargetChainAspect tca:
+                        return ForTargetChain(tca, language);
                     default:
                         return string.Empty;
                 }
@@ -28,6 +30,38 @@ namespace BRIX.Lexica
             catch(NullReferenceException)
             {
                 return string.Empty;
+            }
+        }
+
+        private static string ForTargetChain(TargetChainAspect aspect, ELexisLanguage language)
+        {
+            switch (language)
+            {
+                case ELexisLanguage.English:
+                    if(aspect.IsChainEnabled)
+                    {
+                        
+                        return $"The effect is applied to targets in a chain, with no more than " +
+                            $"{Numbers.ENGDeclension(aspect.MaxDistanceBetweenTargets, "meter")} " +
+                            $"between targets. Maximum number of targets in a chain: {aspect.MaxTargetsCount}";
+                    }
+                    else
+                    {
+                        return "Target chain is not turned on.";
+                    }
+                case ELexisLanguage.Russian:
+                    if (aspect.IsChainEnabled)
+                    {
+                        return $"Эффект применяется к целям по цепочке, в которой между целями должно быть не более, чем " +
+                            $"{Numbers.RUSDeclension(aspect.MaxDistanceBetweenTargets, "метр")}. " +
+                            $"Максимальное количество целей в цепи: {aspect.MaxTargetsCount}.";
+                    }
+                    else
+                    {
+                        return "Цепи целей не включены.";
+                    }
+                default:
+                    return string.Empty;
             }
         }
 
@@ -63,10 +97,10 @@ namespace BRIX.Lexica
         {
             if(aspect.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
             {
-                string result = $"Вы можете выбрать до " +
+                string located = aspect.NTAD.TargetsCount > 1 ? "расположенных" : "расположенную";
+                string result = $"Вы можете выбрать " +
                     $"{Numbers.RUSDeclension(aspect.NTAD.TargetsCount, "цель")}, " +
-                    $"расположенных не далее, чем на расстоянии " +
-                    $"{Numbers.RUSDeclension(aspect.NTAD.DistanceInMeters, "метр")} " +
+                    $"{located} не далее, чем {Numbers.RUSDeclension(aspect.NTAD.DistanceInMeters, "метр")} " +
                     $"от персонажа.";
 
                 if(aspect.NTAD.IsTargetSelectionIsRandom)
@@ -98,7 +132,6 @@ namespace BRIX.Lexica
         {
             if (aspect.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
             {
-                //You can select up to 5 targets located within 3 meters of the character.
                 string result = $"You can select up to " +
                     $"{Numbers.ENGDeclension(aspect.NTAD.TargetsCount, "target")} " +
                     $"located within {Numbers.RUSDeclension(aspect.NTAD.DistanceInMeters, "метр")} " +
