@@ -152,7 +152,7 @@
                                     Grid.Row="0"  
                                     Style="{StaticResource ShapeScheme}"
                                     Source="Shape/sphere_scheme.svg"/>
-                                <controls:FramedEntry Grid.Row="1" Text="{Binding Aspect.R}" Placeholder="Радиус (R)"/>
+                                <controls:FramedEntry Grid.Row="1" Text="{Binding Aspect.R}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaR}}"/>
                             </Grid>
                             <!--Cylinder-->
                             <Grid RowDefinitions="auto,*" ColumnDefinitions="*,*" ColumnSpacing="10" IsVisible="{Binding IsCylinder}">

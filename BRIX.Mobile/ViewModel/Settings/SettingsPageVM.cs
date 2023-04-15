@@ -24,6 +24,7 @@ namespace BRIX.Mobile.ViewModel.Settings
         private async Task SelectLanguage()
         {
             await ShowPopupAsync<SelectLanguagePopup>();
+            Initialize();
         }
 
         private void Initialize()
