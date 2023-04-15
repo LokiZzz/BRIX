@@ -10,6 +10,7 @@
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              x:DataType="effectsvm:HealDamageEffectPageVM"
              x:Class="BRIX.Mobile.View.Abilities.Effects.HealDamageEffectPage"
+             Shell.TabBarIsVisible="False"
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectDamage}}">
 
     <Shell.TitleView>

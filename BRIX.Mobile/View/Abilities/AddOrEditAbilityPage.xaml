@@ -9,6 +9,7 @@
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              x:Class="BRIX.Mobile.View.Abilities.AddOrEditAbilityPage"
              x:DataType="vm:AddOrEditAbilityPageVM"
+             Shell.TabBarIsVisible="False"
              Title="{Binding Title}"
              Padding="0">
 

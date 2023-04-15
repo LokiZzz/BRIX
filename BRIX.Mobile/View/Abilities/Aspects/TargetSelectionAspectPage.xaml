@@ -7,6 +7,7 @@
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              x:Class="BRIX.Mobile.View.Abilities.Aspects.TargetSelectionAspectPage"
              x:DataType="vm:TargetSelectionAspectPageVM"
+             Shell.TabBarIsVisible="False"
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectTargetSelection}}">
 
     <Shell.TitleView>
