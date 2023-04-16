@@ -102,7 +102,15 @@ public partial class PickerButton : Grid
         set
         {
             SetValue(SelectedItemProperty, value);
-            if(value == null) Down(); else Up();
+
+            if (value == null)
+            {
+                Down();
+            }
+            else
+            {
+                Up();
+            }
         }
     }
 
@@ -148,17 +156,6 @@ public partial class PickerButton : Grid
             }
 
         }
-
-        //object response = 
-
-        //if (response != null && !string.IsNullOrEmpty(DisplayMember))
-        //{
-        //    lblSelectedItemText.Text = response
-        //        .GetType()
-        //        .GetProperty(DisplayMember)
-        //        .GetValue(response, null)
-        //        .ToString();
-        //}
     }
 
     public bool IsOpen
@@ -181,6 +178,7 @@ public partial class PickerButton : Grid
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
+        IsOpen = true;
         OpenPickerCommand?.Execute(null);
         OpenPickerEvent?.Invoke(sender, e);
     }
