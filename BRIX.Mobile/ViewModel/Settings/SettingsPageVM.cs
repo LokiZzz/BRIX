@@ -4,6 +4,7 @@ using BRIX.Mobile.ViewModel.Base;
 using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.ViewModel.Settings
 {
@@ -18,18 +19,24 @@ namespace BRIX.Mobile.ViewModel.Settings
         }
 
         [ObservableProperty]
-        public string _currentLanguage;
+        private ObservableCollection<CultureInfoVM> _cultures;
 
-        [RelayCommand]
-        private async Task SelectLanguage()
+        [ObservableProperty]
+        private CultureInfoVM _selectedCulture;
+
+        partial void OnSelectedCultureChanged(CultureInfoVM value)
         {
-            await ShowPopupAsync<SelectLanguagePopup>();
-            Initialize();
+            if (!value.CultureInfo.Equals(_localization.CurrentCulture))
+            {
+                Preferences.Set(Mobile.Settings.Account.Culture, value.CultureInfo.Name);
+                _localization.SetCulture(value.CultureInfo);
+            }
         }
 
         private void Initialize()
         {
-            CurrentLanguage = _localization.CurrentCulture.NativeName.Capitalize();
+            Cultures = new(_localization.Cultures.Select(x => new CultureInfoVM { CultureInfo = x }));
+            SelectedCulture = Cultures.FirstOrDefault(x => x.CultureInfo.Equals(_localization.CurrentCulture));
         }
 
         public override Task OnNavigatedAsync()
