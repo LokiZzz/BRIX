@@ -25,19 +25,11 @@
                 <Label 
                     Style="{StaticResource TitleLabel}"
                     Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Language}}"/>
-                <!--<HorizontalStackLayout Spacing="5">
-                    <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CurrentLanguage}}"/>
-                    <Label Text="{Binding CurrentLanguage}"/>
-                </HorizontalStackLayout>
-                <Button 
-                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ChangeLanguage}}"
-                    Command="{Binding SelectLanguageCommand}"/>-->
-
                 <controls:PickerButton 
                     Placeholder="Language" 
                     DisplayMember="LanguageNativeName"
                     ItemSource="{Binding Cultures}"
-                    SelectedItem="{Binding SelectedCulture}">
+                    SelectedItem="{Binding SelectedCulture, Mode=TwoWay}">
                     <controls:PickerButton.ItemTemplate>
                         <DataTemplate x:DataType="vm:CultureInfoVM">
                             <Label Text="{Binding LanguageNativeName}"/>

@@ -93,6 +93,12 @@ public partial class PickerButton : Grid
                     .GetValue(newValue, null)
                     .ToString();
             }
+
+            control.Up();
+        }
+        else
+        {
+            control.Down();
         }
     }
 

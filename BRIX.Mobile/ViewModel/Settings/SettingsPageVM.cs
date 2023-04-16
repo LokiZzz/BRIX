@@ -36,7 +36,7 @@ namespace BRIX.Mobile.ViewModel.Settings
         private void Initialize()
         {
             Cultures = new(_localization.Cultures.Select(x => new CultureInfoVM { CultureInfo = x }));
-            SelectedCulture = Cultures.FirstOrDefault(x => x.CultureInfo.Equals(_localization.CurrentCulture));
+            //SelectedCulture = Cultures.FirstOrDefault(x => x.CultureInfo.Equals(_localization.CurrentCulture));
         }
 
         public override Task OnNavigatedAsync()
