@@ -187,6 +187,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Obstacles.
+        /// </summary>
+        public static string AspectObstacle {
+            get {
+                return ResourceManager.GetString("AspectObstacle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Aspects.
         /// </summary>
         public static string Aspects {
@@ -228,6 +237,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Backstory {
             get {
                 return ResourceManager.GetString("Backstory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Brick wall.
+        /// </summary>
+        public static string BrickWall {
+            get {
+                return ResourceManager.GetString("BrickWall", resourceCulture);
             }
         }
         
@@ -412,6 +430,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dense vegetation.
+        /// </summary>
+        public static string DenseVegetation {
+            get {
+                return ResourceManager.GetString("DenseVegetation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
@@ -565,6 +592,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Leather armor.
+        /// </summary>
+        public static string LeatherArmor {
+            get {
+                return ResourceManager.GetString("LeatherArmor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Level {0}.
         /// </summary>
         public static string LevelFormat {
@@ -583,6 +619,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Metal armor.
+        /// </summary>
+        public static string MetalArmor {
+            get {
+                return ResourceManager.GetString("MetalArmor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Some very powerful obstacle.
+        /// </summary>
+        public static string MuchMorePowerfullObstacle {
+            get {
+                return ResourceManager.GetString("MuchMorePowerfullObstacle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Name {
@@ -597,6 +651,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to n/a.
+        /// </summary>
+        public static string None {
+            get {
+                return ResourceManager.GetString("None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paper sheet.
+        /// </summary>
+        public static string PaperSheet {
+            get {
+                return ResourceManager.GetString("PaperSheet", resourceCulture);
             }
         }
         
@@ -997,11 +1069,29 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thick steel plate.
+        /// </summary>
+        public static string ThickSteelPlate {
+            get {
+                return ResourceManager.GetString("ThickSteelPlate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Warning.
         /// </summary>
         public static string Warning {
             get {
                 return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wooden plank.
+        /// </summary>
+        public static string WoodenPlank {
+            get {
+                return ResourceManager.GetString("WoodenPlank", resourceCulture);
             }
         }
         

@@ -13,13 +13,14 @@ namespace BRIX.Library.Aspects
         private Dictionary<EObstacleEquivalent, int> EquivalentToPercentMap => new ()
         {
             { EObstacleEquivalent.None, 0 },
-            { EObstacleEquivalent.Paper, -35 },
-            { EObstacleEquivalent.From1mmSteel, -30 },
-            { EObstacleEquivalent.From5mmSteel, -25 },
-            { EObstacleEquivalent.From10mmSteel, -20 },
-            { EObstacleEquivalent.From100mmSteel, -15 },
-            { EObstacleEquivalent.From1000mmSteel, -10 },
-            { EObstacleEquivalent.MuchMorePowerfullObstacle, -5 },
+            { EObstacleEquivalent.PaperSheet, -50 },
+            { EObstacleEquivalent.DenseVegetation, -25 },
+            { EObstacleEquivalent.LeatherArmor, -10 },
+            { EObstacleEquivalent.WoodenPlank, 0 },
+            { EObstacleEquivalent.MetalArmor, 100 },
+            { EObstacleEquivalent.BrickWall, 500 },
+            { EObstacleEquivalent.ThickSteelPlate, 1000 },
+            { EObstacleEquivalent.MuchMorePowerfullObstacle, 5000 },
         };
 
         public override double GetCoefficient()
@@ -34,13 +35,14 @@ namespace BRIX.Library.Aspects
 
     public enum EObstacleEquivalent
     {
-        None,
-        Paper,
-        From1mmSteel,
-        From5mmSteel,
-        From10mmSteel,
-        From100mmSteel,
-        From1000mmSteel,
+        None = 0,
+        PaperSheet,
+        DenseVegetation,
+        LeatherArmor,
+        WoodenPlank,
+        MetalArmor,
+        BrickWall,
+        ThickSteelPlate,
         MuchMorePowerfullObstacle
     }
 }

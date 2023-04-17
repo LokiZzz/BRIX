@@ -14,11 +14,19 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 {
     public abstract partial class AspectPageVMBase<T> : ViewModelBase, IQueryAttributable where T : AspectModelBase
     {
-        [ObservableProperty]
         private AbilityCostMonitorPanelVM _costMonitor;
+        public AbilityCostMonitorPanelVM CostMonitor
+        {
+            get => _costMonitor;
+            set => SetProperty(ref _costMonitor, value);
+        }
 
-        [ObservableProperty]
         private EffectModelBase _effect;
+        public EffectModelBase Effect
+        {
+            get => _effect;
+            set => SetProperty(ref _effect, value);
+        }
 
         private T _aspect;
         public T Aspect
@@ -31,11 +39,9 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             }
         }
 
-        [RelayCommand]
-        private async Task Save()
-        {
+        public IAsyncRelayCommand SaveCommand => new AsyncRelayCommand(async () => {
             await Navigation.Back(stepsBack: 1, (NavigationParameters.Aspect, Aspect));
-        }
+        });
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {

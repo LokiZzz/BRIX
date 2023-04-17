@@ -18,35 +18,54 @@ namespace BRIX.Mobile.ViewModel.Abilities
             UpdatePercents();
         }
 
-        [ObservableProperty]
         private AbilityModel _ability;
+        public AbilityModel Ability
+        {
+            get => _ability;
+            set => SetProperty(ref _ability, value);
+        }
 
-        [ObservableProperty]
         private int _availiableExp;
+        public int AvailiableExp
+        {
+            get => _availiableExp;
+            set => SetProperty(ref _availiableExp, value);
+        }
 
-        [ObservableProperty]
         private int _exp;
+        public int Exp
+        {
+            get => _exp;
+            set => SetProperty(ref _exp, value);
+        }
 
-        [ObservableProperty]
         private int _expSumWithoutEditingAbility;
+        public int ExpSumWithoutEditingAbility
+        {
+            get => _expSumWithoutEditingAbility;
+            set => SetProperty(ref _expSumWithoutEditingAbility, value);
+        }
 
-        [ObservableProperty]
-        public double _percentWithoutEditingAbility;
+        private double _percentWithoutEditingAbility;
+        public double PercentWithoutEditingAbility
+        {
+            get => _percentWithoutEditingAbility;
+            set => SetProperty(ref _percentWithoutEditingAbility, value);
+        }
 
-        [ObservableProperty]
         private double _percentWithEditingAbility;
+        public double PercentWithEditingAbility
+        {
+            get => _percentWithEditingAbility;
+            set => SetProperty(ref _percentWithEditingAbility, value);
+        }
 
-        public Guid CommandChangedGuid { get; set; }
 
         private IAsyncRelayCommand _saveCommand;
         public IAsyncRelayCommand SaveCommand 
         {
             get => _saveCommand;
-            set
-            {
-                SetProperty(ref _saveCommand, value);
-                CommandChangedGuid = Guid.NewGuid();
-            }
+            set => SetProperty(ref _saveCommand, value);
         }
 
         public void UpdateCost()

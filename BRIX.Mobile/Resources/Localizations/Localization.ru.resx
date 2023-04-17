@@ -159,6 +159,9 @@
   <data name="AspectActionPoints" xml:space="preserve">
     <value>Очки действий</value>
   </data>
+  <data name="AspectObstacle" xml:space="preserve">
+    <value>Препятствия</value>
+  </data>
   <data name="Aspects" xml:space="preserve">
     <value>Аспекты</value>
   </data>
@@ -173,6 +176,9 @@
   </data>
   <data name="Backstory" xml:space="preserve">
     <value>Предыстория</value>
+  </data>
+  <data name="BrickWall" xml:space="preserve">
+    <value>Кирпичная стена</value>
   </data>
   <data name="ChangeLanguage" xml:space="preserve">
     <value>Изменить язык</value>
@@ -234,6 +240,9 @@
   <data name="DeleteEffectQuestion" xml:space="preserve">
     <value>Вы точно хотите удалить этот эффект?</value>
   </data>
+  <data name="DenseVegetation" xml:space="preserve">
+    <value>Густая растительность</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Описание</value>
   </data>
@@ -285,17 +294,32 @@
   <data name="Language" xml:space="preserve">
     <value>Язык</value>
   </data>
+  <data name="LeatherArmor" xml:space="preserve">
+    <value>Кожаная броня</value>
+  </data>
   <data name="LevelFormat" xml:space="preserve">
     <value>Уровень {0}</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Логин</value>
   </data>
+  <data name="MetalArmor" xml:space="preserve">
+    <value>Металлический доспех</value>
+  </data>
+  <data name="MuchMorePowerfullObstacle" xml:space="preserve">
+    <value>Какое-то очень мощное препятствие</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Имя</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>Нет</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>n/a</value>
+  </data>
+  <data name="PaperSheet" xml:space="preserve">
+    <value>Лист бумаги</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
@@ -426,8 +450,14 @@
   <data name="TargetSelectionVoxelHint" xml:space="preserve">
     <value>Воксель — это куб 1х1 метр. Из таких вокселей можно составлять массив — фигуру области, в которой к целям будет применяться эффект. На рисунке в качестве примера составлена область из пяти вокселей.</value>
   </data>
+  <data name="ThickSteelPlate" xml:space="preserve">
+    <value>Толстая стальная плита</value>
+  </data>
   <data name="Warning" xml:space="preserve">
     <value>Внимание</value>
+  </data>
+  <data name="WoodenPlank" xml:space="preserve">
+    <value>Деревянная доска</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Да</value>

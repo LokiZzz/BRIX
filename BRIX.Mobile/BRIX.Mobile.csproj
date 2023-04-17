@@ -166,6 +166,9 @@
 	  <MauiXaml Update="View\Abilities\Aspects\AspectsPanelView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Aspects\ObstacleAspectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Aspects\TargetChainAspectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

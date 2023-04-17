@@ -17,8 +17,13 @@ namespace BRIX.Mobile.Models.Characters
 
         public Character InternalModel { get; }
 
-        [ObservableProperty]
-        public ObservableCollection<AbilityModel> _abilities;
+        private ObservableCollection<AbilityModel> _abilities;
+        public ObservableCollection<AbilityModel> Abilities
+        {
+            get => _abilities;
+            set => SetProperty(ref _abilities, value);
+        }
+
 
         public Guid Id
         {

@@ -159,6 +159,9 @@
   <data name="AspectActionPoints" xml:space="preserve">
     <value>Action points</value>
   </data>
+  <data name="AspectObstacle" xml:space="preserve">
+    <value>Obstacles</value>
+  </data>
   <data name="Aspects" xml:space="preserve">
     <value>Aspects</value>
   </data>
@@ -173,6 +176,9 @@
   </data>
   <data name="Backstory" xml:space="preserve">
     <value>Backstory</value>
+  </data>
+  <data name="BrickWall" xml:space="preserve">
+    <value>Brick wall</value>
   </data>
   <data name="ChangeLanguage" xml:space="preserve">
     <value>Change language</value>
@@ -234,6 +240,9 @@
   <data name="DeleteEffectQuestion" xml:space="preserve">
     <value>Are you sure you want to delete the effect?</value>
   </data>
+  <data name="DenseVegetation" xml:space="preserve">
+    <value>Dense vegetation</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
@@ -285,17 +294,32 @@
   <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="LeatherArmor" xml:space="preserve">
+    <value>Leather armor</value>
+  </data>
   <data name="LevelFormat" xml:space="preserve">
     <value>Level {0}</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="MetalArmor" xml:space="preserve">
+    <value>Metal armor</value>
+  </data>
+  <data name="MuchMorePowerfullObstacle" xml:space="preserve">
+    <value>Some very powerful obstacle</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>n/a</value>
+  </data>
+  <data name="PaperSheet" xml:space="preserve">
+    <value>Paper sheet</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
@@ -429,8 +453,14 @@
   <data name="TargetSelectionVoxelHint" xml:space="preserve">
     <value>A voxel is a 1x1 meter cube. From such voxels, you can make an array — the figure of the area in which the effect will be applied to the targets. In the picture an area of ​​five voxels is composed as an example.</value>
   </data>
+  <data name="ThickSteelPlate" xml:space="preserve">
+    <value>Thick steel plate</value>
+  </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>
+  </data>
+  <data name="WoodenPlank" xml:space="preserve">
+    <value>Wooden plank</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
