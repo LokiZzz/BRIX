@@ -5,6 +5,7 @@ using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace BRIX.Mobile.ViewModel.Settings
 {
@@ -15,35 +16,42 @@ namespace BRIX.Mobile.ViewModel.Settings
         public SettingsPageVM(ILocalizationResourceManager localization)
         {
             _localization = localization;
-            Initialize();
         }
 
-        [ObservableProperty]
         private ObservableCollection<CultureInfoVM> _cultures;
-
-        [ObservableProperty]
-        private CultureInfoVM _selectedCulture;
-
-        partial void OnSelectedCultureChanged(CultureInfoVM value)
+        public ObservableCollection<CultureInfoVM> Cultures
         {
-            if (!value.CultureInfo.Equals(_localization.CurrentCulture))
-            {
-                Preferences.Set(Mobile.Settings.Account.Culture, value.CultureInfo.Name);
-                _localization.SetCulture(value.CultureInfo);
-            }
+            get => _cultures;
+            set => SetProperty(ref _cultures, value);
         }
 
-        private void Initialize()
+        private CultureInfoVM _selectedCulture;
+        public CultureInfoVM SelectedCulture
         {
-            Cultures = new(_localization.Cultures.Select(x => new CultureInfoVM { CultureInfo = x }));
-            //SelectedCulture = Cultures.FirstOrDefault(x => x.CultureInfo.Equals(_localization.CurrentCulture));
+            get => _selectedCulture;
+            set
+            {
+                if(SetProperty(ref _selectedCulture, value))
+                {
+                    Preferences.Set(Mobile.Settings.Account.Culture, value.CultureInfo.Name);
+                    _localization.SetCulture(value.CultureInfo);
+                }
+            }
         }
 
         public override Task OnNavigatedAsync()
         {
-            Initialize();
+            Cultures = new(_localization.Cultures.Select(x => new CultureInfoVM { CultureInfo = x }));
+            SelectedCulture = Cultures.FirstOrDefault(x => x.CultureInfo == _localization.CurrentCulture);
 
             return base.OnNavigatedAsync();
         }
+    }
+
+    public class CultureInfoVM
+    {
+        public CultureInfo CultureInfo { get; set; }
+
+        public string LanguageNativeName => CultureInfo == null ? null : CultureInfo.NativeName.Capitalize();
     }
 }

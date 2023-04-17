@@ -9,11 +9,15 @@
 
     <Border Style="{StaticResource BlockBorder}" WidthRequest="350">
         <VerticalStackLayout>
-            <Label x:Name="lblTitle" Style="{StaticResource TitleLabel}"/>
+            <Label x:Name="lblTitle" Style="{StaticResource TitleLabel}" Margin="0,0,0,10"/>
             <CollectionView 
                 x:Name="cvOptions"
                 SelectionMode="Single"
-                SelectionChanged="cvOptions_SelectionChanged"/>
+                SelectionChanged="cvOptions_SelectionChanged">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+            </CollectionView>
         </VerticalStackLayout>
     </Border>
 

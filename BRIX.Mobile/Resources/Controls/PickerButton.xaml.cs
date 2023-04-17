@@ -1,9 +1,6 @@
-using Android.Telephony.Euicc;
-using BRIX.Mobile.Services;
 using BRIX.Mobile.View.Popups;
 using CommunityToolkit.Maui.Views;
 using System.Collections;
-using System.Reflection;
 using System.Windows.Input;
 
 namespace BRIX.Mobile.Resources.Controls;
@@ -57,6 +54,20 @@ public partial class PickerButton : Grid
     {
         get => (string)GetValue(PlaceholderProperty);
         set => SetValue(PlaceholderProperty, value);
+    }
+
+    public static readonly BindableProperty TitleProperty = BindableProperty.Create(
+        propertyName: nameof(Title),
+        returnType: typeof(string),
+        declaringType: typeof(PickerButton),
+        defaultValue: null,
+        defaultBindingMode: BindingMode.OneWay
+    );
+
+    public string Title
+    {
+        get => (string)GetValue(TitleProperty);
+        set => SetValue(TitleProperty, value);
     }
 
     public static readonly BindableProperty ItemSourceProperty = BindableProperty.Create(
@@ -150,7 +161,7 @@ public partial class PickerButton : Grid
             if ((bool)newValue)
             {
                 object response = await Application.Current.MainPage.ShowPopupAsync(
-                    new PickerPopup(control.ItemSource, control.ItemTemplate, control.Placeholder)
+                    new PickerPopup(control.ItemSource, control.ItemTemplate, control.Title)
                 );
 
                 if (response != null)

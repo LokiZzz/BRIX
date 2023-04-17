@@ -349,7 +349,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current language:.
+        ///   Looks up a localized string similar to Current language.
         /// </summary>
         public static string CurrentLanguage {
             get {

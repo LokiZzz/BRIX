@@ -202,7 +202,7 @@
     <value>Коснитесь карточки персонажа, чтобы выбрать его, сдвиньте карточку вправо, чтобы редактировать персонажа или сдвиньте карточку влево, чтобы его удалить.</value>
   </data>
   <data name="ChooseLanguage" xml:space="preserve">
-    <value>Выберете язык</value>
+    <value>Выберите язык</value>
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Очистить</value>
@@ -214,7 +214,7 @@
     <value>Персонаж</value>
   </data>
   <data name="CurrentLanguage" xml:space="preserve">
-    <value>Текущий язык:</value>
+    <value>Текущий язык приложения</value>
   </data>
   <data name="Damage" xml:space="preserve">
     <value>Урон</value>
