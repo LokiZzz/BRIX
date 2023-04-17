@@ -9,7 +9,7 @@
 
     <Border Style="{StaticResource BlockBorder}" WidthRequest="350">
         <VerticalStackLayout>
-            <Label x:Name="lblTitle" Style="{StaticResource TitleLabel}" Margin="0,0,0,10"/>
+            <Label x:Name="lblTitle" Style="{StaticResource TitleLabel}" Margin="0,0,0,5"/>
             <CollectionView 
                 x:Name="cvOptions"
                 SelectionMode="Single"

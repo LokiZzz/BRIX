@@ -4,12 +4,26 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="BRIX.Mobile.Resources.Controls.PickerItem"
     x:Name="this">
-    
+
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="CommonStates">
+            <VisualState x:Name="Normal" />
+            <VisualState x:Name="Selected">
+                <VisualState.Setters>
+                    <Setter TargetName="button" Property="Button.BackgroundColor" Value="{StaticResource BRIXOrange}" />
+                    <Setter TargetName="checkBox" Property="CheckBox.IsChecked" Value="True" />
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+
     <Button 
-        HeightRequest="30"
+        x:Name="button"
+        HeightRequest="35"
         BackgroundColor="{StaticResource BRIXDim}"
         InputTransparent="True"/>
     <Label 
+        x:Name="label"
         Text="{Binding Source={x:Reference this}, Path=Text}" 
         TextColor="{StaticResource BRIXWhite}"
         VerticalOptions="Center"
@@ -17,5 +31,10 @@
         HorizontalOptions="Start"
         HorizontalTextAlignment="Start"
         Margin="10,0,0,0"
-        InputTransparent="True"/> 
+        InputTransparent="True"/>
+    <CheckBox
+        x:Name="checkBox"
+        VerticalOptions="Center"
+        HorizontalOptions="End"
+        Margin="0,0,2,0"/>
 </Grid>

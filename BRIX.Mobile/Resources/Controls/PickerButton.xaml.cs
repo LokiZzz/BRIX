@@ -149,10 +149,10 @@ public partial class PickerButton : Grid
       propertyName: nameof(IsOpen),
       returnType: typeof(bool),
       declaringType: typeof(PickerButton),
-      propertyChanged: IsDisplayPickerControlPropertyChanged,
+      propertyChanged: IsOpenPropertyChanged,
       defaultBindingMode: BindingMode.TwoWay);
 
-    private async static void IsDisplayPickerControlPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+    private async static void IsOpenPropertyChanged(BindableObject bindable, object oldValue, object newValue)
     {
         PickerButton control = (PickerButton)bindable;
 
@@ -161,7 +161,7 @@ public partial class PickerButton : Grid
             if ((bool)newValue)
             {
                 object response = await Application.Current.MainPage.ShowPopupAsync(
-                    new PickerPopup(control.ItemSource, control.ItemTemplate, control.Title)
+                    new PickerPopup(control.ItemSource, control.ItemTemplate, control.Title, control.SelectedItem)
                 );
 
                 if (response != null)
