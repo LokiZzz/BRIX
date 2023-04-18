@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Mathematics;
+﻿using BRIX.Library.Enums;
+using BRIX.Library.Mathematics;
 
 namespace BRIX.Library.Aspects
 {
@@ -23,9 +24,13 @@ namespace BRIX.Library.Aspects
 
         public NTADSettings NTAD { get; set; } = new NTADSettings();
 
-        private double GetNTADCoeficient() => GetNTADDistanceCoef() * GetNTADCountCoeficient() * RandomSelectionCoef;
+        private double GetNTADCoeficient() => 
+            GetNTADDistanceCoef() 
+            * GetNTADCountCoeficient()
+            * EquivalentToPercentMap[NTAD.ObstacleBetweenCharacterAndTarget]
+            * RandomSelectionCoef;
 
-        private double GetNTADDistanceCoef() => GetDistanceCoef(NTAD.DistanceInMeters);
+        private double GetNTADDistanceCoef() => GetDistanceCoeficient(NTAD.DistanceInMeters);
 
         private double GetNTADCountCoeficient() => new ThrasholdCoefConverter((1, 0), (2, 100), (6, 50), (11, 10), (101, 1))
                 .Convert(NTAD.TargetsCount)
@@ -36,43 +41,57 @@ namespace BRIX.Library.Aspects
         private double GetAreaCoeficient() => 
             GetAreaDistanceCoeficient() 
             * GetAreaVolumeCoeficient()
-            * GetExcludedTargetsCoef();
+            * GetExcludedTargetsCoeficient()
+            * EquivalentToPercentMap[Area.ObstacleBetweenCharacterAndArea]
+            * EquivalentToPercentMap[Area.ObstacleBetweenEpicenterAndTarget];
 
-        private double GetAreaDistanceCoeficient() => GetDistanceCoef(Area.DistanceToAreaInMeters);
+        private double GetAreaDistanceCoeficient() => GetDistanceCoeficient(Area.DistanceToAreaInMeters);
 
         private double GetAreaVolumeCoeficient() => (Area?.Shape?.GetVolume() ?? 0 * 5).ToCoeficient();
 
-        private double GetDistanceCoef(int distance)
+        private double GetDistanceCoeficient(int distance)
         {
             return new ThrasholdCoefConverter((1, 0), (2, 20), (3, 10), (21, 5), (101, 2), (1001, 1))
                 .Convert(distance)
                 .ToCoeficient();
         }
 
-        private double GetExcludedTargetsCoef()
+        private double GetExcludedTargetsCoeficient()
         {
             return new ThrasholdCoefConverter((0, 0), (1, 30), (6, 5))
                 .Convert(Area.ExcludedTargetsCount)
                 .ToCoeficient();
         }
+
+        private Dictionary<EObstacleEquivalent, int> EquivalentToPercentMap => new()
+        {
+            { EObstacleEquivalent.None, 0 },
+            { EObstacleEquivalent.PaperSheet, -50 },
+            { EObstacleEquivalent.DenseVegetation, -25 },
+            { EObstacleEquivalent.LeatherArmor, -10 },
+            { EObstacleEquivalent.WoodenPlank, 0 },
+            { EObstacleEquivalent.MetalArmor, 100 },
+            { EObstacleEquivalent.BrickWall, 500 },
+            { EObstacleEquivalent.ThickSteelPlate, 1000 },
+            { EObstacleEquivalent.MuchMorePowerfullObstacle, 5000 },
+        };
     }
 
     public class NTADSettings
     {
         public int TargetsCount { get; set; } = 1;
-
         public int DistanceInMeters { get; set; } = 1;
-
         public bool IsTargetSelectionIsRandom { get; set; }
+        public EObstacleEquivalent ObstacleBetweenCharacterAndTarget { get; set; }
     }
 
     public class AreaSettings
     {
         public int DistanceToAreaInMeters { get; set; } = 0;
-
         public int ExcludedTargetsCount { get; set; } = 0;
-
         public EAreaType AreaType { get; set; } = EAreaType.Brick;
+        public EObstacleEquivalent ObstacleBetweenCharacterAndArea { get; set; } = EObstacleEquivalent.WoodenPlank;
+        public EObstacleEquivalent ObstacleBetweenEpicenterAndTarget { get; set; } = EObstacleEquivalent.WoodenPlank;
 
         public IShape? Shape
         {
@@ -101,20 +120,20 @@ namespace BRIX.Library.Aspects
         private readonly Cylinder _cylinder = new Cylinder();
         private readonly Cone _cone = new Cone();
         private readonly VoxelArray _voxelArray = new VoxelArray();
-
-        public enum EAreaType
-        {
-            Brick = 0,
-            Sphere = 1,
-            Cylinder = 2,
-            Cone = 3,
-            Arbitrary = 4
-        }
     }
 
     public enum ETargetSelectionStrategy
     {
         NTargetsAtDistanсeL = 0,
         Area = 1
+    }
+
+    public enum EAreaType
+    {
+        Brick = 0,
+        Sphere = 1,
+        Cylinder = 2,
+        Cone = 3,
+        Arbitrary = 4
     }
 }

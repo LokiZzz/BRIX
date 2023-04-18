@@ -9,8 +9,8 @@ namespace BRIX.Library.Effects
         public override List<Type> RequiredAspects => new()
         {
                 typeof(ActionPointAspect), typeof(TargetSelectionAspect), typeof(TargetChainAspect),
-                typeof(ObstacleAspect), typeof(TargetSelectionRestrictionsApsect), typeof(TargetSizeAspect),
-                typeof(CooldownAspect), typeof(ActivationConditionsAspect)
+                typeof(TargetSelectionRestrictionsApsect), typeof(TargetSizeAspect), typeof(CooldownAspect), 
+                typeof(ActivationConditionsAspect)
         };
 
         public int DistanceInMeters { get; set; }

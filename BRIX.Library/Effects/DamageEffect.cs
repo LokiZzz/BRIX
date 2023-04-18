@@ -10,8 +10,7 @@ namespace BRIX.Library.Effects
         public override List<Type> RequiredAspects => new() 
         {
                 typeof(ActionPointAspect), typeof(TargetSelectionAspect), typeof(TargetChainAspect),
-                typeof(ObstacleAspect), typeof(TargetSelectionRestrictionsApsect), typeof(CooldownAspect),
-                typeof(ActivationConditionsAspect)
+                typeof(TargetSelectionRestrictionsApsect), typeof(CooldownAspect), typeof(ActivationConditionsAspect)
         };
 
         public override int BaseExpCost() => Impact.Average() * Impact.Average();
