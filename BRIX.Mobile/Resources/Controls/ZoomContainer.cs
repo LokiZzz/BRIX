@@ -83,6 +83,7 @@ public class ZoomContainer : ContentView
             // Store the current scale factor applied to the wrapped user interface element,
             // and zero the components for the center point of the translate transform.
             startScale = ContentScale;
+
         }
         if (e.Status == GestureStatus.Running)
         {
@@ -137,6 +138,8 @@ public class ZoomContainer : ContentView
                 // Store the translation applied during the pan
                 ContentX = Content.TranslationX;
                 ContentY = Content.TranslationY;
+                xOffset = Content.TranslationX;
+                yOffset = Content.TranslationY;
                 break;
         }
     }
@@ -148,5 +151,9 @@ public class ZoomContainer : ContentView
         Content.TranslationX = ContentX;
         Content.TranslationY = ContentY;
         Content.Scale = ContentScale;
+
+        xOffset = ContentX;
+        yOffset = ContentY;
+        currentScale = ContentScale;
     }
 }
