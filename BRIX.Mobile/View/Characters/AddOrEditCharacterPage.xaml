@@ -33,10 +33,17 @@
                 Style="{StaticResource BlockBorder}"
                 HeightRequest="250">
                 <Grid Margin="-15">
-                    <controls:ZoomContainer>
+                    <controls:ZoomContainer x:Name="zoomContainer" ContentX="-331" ContentY="-205" ContentScale="3.07">
                         <Image Source="fox_character_moq.jpeg" IsAnimationPlaying="True"/>
                     </controls:ZoomContainer>
                 </Grid>
+            </Border>
+            <Border Style="{StaticResource BlockBorder}"> 
+                <VerticalStackLayout>
+                    <Label Text="{Binding Source={x:Reference zoomContainer}, Path=ContentX, StringFormat='X:{0}'}"/>
+                    <Label Text="{Binding Source={x:Reference zoomContainer}, Path=ContentY, StringFormat='Y:{0}'}"/>
+                    <Label Text="{Binding Source={x:Reference zoomContainer}, Path=ContentScale, StringFormat='S:{0}'}"/>
+                </VerticalStackLayout>
             </Border>
         </VerticalStackLayout>
         <Button 
