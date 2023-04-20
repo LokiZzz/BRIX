@@ -36,5 +36,6 @@
         x:Name="checkBox"
         VerticalOptions="Center"
         HorizontalOptions="End"
+        InputTransparent="True"
         Margin="0,0,2,0"/>
 </Grid>

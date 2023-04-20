@@ -17,6 +17,68 @@ namespace BRIX.Mobile.ViewModel.Characters
 {
     public partial class CurrentCharacterPageVM : ViewModelBase
     {
+        private Rect _layoutBounds;
+        public Rect LayoutBounds
+        {
+            get => _layoutBounds;
+            set => SetProperty(ref _layoutBounds, value);
+        }
+
+        private Thickness _margin = new();
+        public Thickness Margin
+        {
+            get => _margin;
+            set => SetProperty(ref _margin, value);
+        }
+
+        private double _scale = 1;
+        public double Scale
+        {
+            get => _scale;
+            set
+            {
+                SetProperty(ref _scale, value);
+                UpdateRect();
+            }
+        }
+
+        private double _x = 0;
+        public double X
+        {
+            get => _x;
+            set
+            {
+                SetProperty(ref _x, value);
+                UpdateRect();
+            }
+        }
+
+        private double _y = 0;
+        public double Y
+        {
+            get => _y;
+            set
+            {
+                SetProperty(ref _y, value);
+                UpdateRect();
+            }
+        }
+
+        private void UpdateRect()
+        {
+            LayoutBounds = new Rect(X, Y, Scale, Scale);
+        }
+
+        public void UpdateMargin()
+        {
+            double left = X < 0 ? X : 0;
+            double right = X > 0 ? -X : 0;
+            double bottom = Y < 0 ? Y : 0;
+            double top = Y > 0 ? -Y : 0;
+
+            Margin = new Thickness(left, top, right, bottom);
+        }
+
         private readonly ICharacterService _characterService;
         private readonly ILocalizationResourceManager _localization;
 

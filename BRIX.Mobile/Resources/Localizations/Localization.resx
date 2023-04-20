@@ -318,6 +318,15 @@
   <data name="None" xml:space="preserve">
     <value>n/a</value>
   </data>
+  <data name="ObstacleBetweenTargetsInChain" xml:space="preserve">
+    <value>Obstacles between targets</value>
+  </data>
+  <data name="ObstacleEquivalent" xml:space="preserve">
+    <value>Obstacle equivalent</value>
+  </data>
+  <data name="Obstacles" xml:space="preserve">
+    <value>Obstacles</value>
+  </data>
   <data name="PaperSheet" xml:space="preserve">
     <value>Paper sheet</value>
   </data>
@@ -390,6 +399,9 @@
   <data name="TargetChainMaxDistance" xml:space="preserve">
     <value>Max distance between targets</value>
   </data>
+  <data name="TargetChainObstacleHint" xml:space="preserve">
+    <value>The effect cannot be applied to the next target in the chain if there is an obstacle with the indicated durability equivalent or stronger between it and the previous target.</value>
+  </data>
   <data name="TargetSelectionAreaA" xml:space="preserve">
     <value>Length (A)</value>
   </data>
@@ -404,6 +416,15 @@
   </data>
   <data name="TargetSelectionAreaN" xml:space="preserve">
     <value>Number of voxels (N)</value>
+  </data>
+  <data name="TargetSelectionAreaObstacleCharacterAndArea" xml:space="preserve">
+    <value>Between character and area</value>
+  </data>
+  <data name="TargetSelectionAreaObstacleHint" xml:space="preserve">
+    <value>The effect cannot be applied if there is an obstacle equal to or stronger than the selected equivalent in strength between the character and the nearest point of the area of ​​effect. Also, the effect cannot be applied to the target if there is an obstacle between it and the epicenter of the area of ​​effect that is equal in strength to the equivalent or stronger than it. The strength for these two types of obstacles is configured separately.</value>
+  </data>
+  <data name="TargetSelectionAreaObstacleTargetAndEpicenter" xml:space="preserve">
+    <value>Between target and epicenter</value>
   </data>
   <data name="TargetSelectionAreaR" xml:space="preserve">
     <value>Radius (R)</value>
@@ -425,6 +446,9 @@
   </data>
   <data name="TargetSelectionIsRandomHint" xml:space="preserve">
     <value>If the random target selection mode is selected, then the player, when using the ability, will have to select a random target from those that satisfy the other conditions. This will complicate the planning of actions, but it will make the ability cheaper.</value>
+  </data>
+  <data name="TargetSelectionNTADObstacleHint" xml:space="preserve">
+    <value>The effect cannot be applied to the target if there is an obstacle equal to or stronger than the equivalent durability between it and the character.</value>
   </data>
   <data name="TargetSelectionStratedyArea" xml:space="preserve">
     <value>All targets in area</value>

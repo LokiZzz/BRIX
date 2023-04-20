@@ -84,6 +84,28 @@
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyNTADHint}}"/>
                         <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyNTADCount}}" Text="{Binding Aspect.NTADCount}"/>
                         <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyNTADDistance}}" Text="{Binding Aspect.NTADistance}"/>
+                    </VerticalStackLayout>
+                </Border>
+                <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding IsNTAD}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Obstacles}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionNTADObstacleHint}}"/>
+                        <controls:PickerButton
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleEquivalent}}"
+                            Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleEquivalent}}"
+                            ItemSource="{Binding Aspect.Obstacles}"
+                            SelectedItem="{Binding Aspect.ObstacleBetweenCharacterAndTarget}"
+                            DisplayMember="LocalizedName">
+                            <controls:PickerButton.ItemTemplate>
+                                <DataTemplate x:DataType="vm:ObstacleOptionVM">
+                                    <controls:PickerItem Text="{Binding LocalizedName}"/>
+                                </DataTemplate>
+                            </controls:PickerButton.ItemTemplate>
+                        </controls:PickerButton>
+                    </VerticalStackLayout>
+                </Border>
+                <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding IsNTAD}">
+                    <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionIsRandom}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionIsRandomHint}}"/>
                         <HorizontalStackLayout Spacing="10">
@@ -183,7 +205,40 @@
                                 <controls:FramedEntry Grid.Row="2" Text="{Binding Aspect.N}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaN}}"/>
                             </Grid>
                         </Grid>
-
+                    </VerticalStackLayout>
+                </Border>
+                <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding IsAREA}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Obstacles}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaObstacleHint}}"/>
+                        <controls:PickerButton
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaObstacleCharacterAndArea}}"
+                            Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleEquivalent}}"
+                            ItemSource="{Binding Aspect.Obstacles}"
+                            SelectedItem="{Binding Aspect.ObstacleBetweenCharacterAndArea}"
+                            DisplayMember="LocalizedName">
+                            <controls:PickerButton.ItemTemplate>
+                                <DataTemplate x:DataType="vm:ObstacleOptionVM">
+                                    <controls:PickerItem Text="{Binding LocalizedName}"/>
+                                </DataTemplate>
+                            </controls:PickerButton.ItemTemplate>
+                        </controls:PickerButton>
+                        <controls:PickerButton
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaObstacleTargetAndEpicenter}}"
+                            Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleEquivalent}}"
+                            ItemSource="{Binding Aspect.Obstacles}"
+                            SelectedItem="{Binding Aspect.ObstacleBetweenEpicenterAndTarget}"
+                            DisplayMember="LocalizedName">
+                            <controls:PickerButton.ItemTemplate>
+                                <DataTemplate x:DataType="vm:ObstacleOptionVM">
+                                    <controls:PickerItem Text="{Binding LocalizedName}"/>
+                                </DataTemplate>
+                            </controls:PickerButton.ItemTemplate>
+                        </controls:PickerButton>
+                    </VerticalStackLayout>
+                </Border>
+                <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding IsAREA}">
+                    <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionExcludeTargets}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionEcludeTargetsHint}}"/>
                         <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionEcludeTargetsField}}" Text="{Binding Aspect.ExcludedTargetsCount}"/>

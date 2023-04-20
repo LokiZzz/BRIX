@@ -318,6 +318,15 @@
   <data name="None" xml:space="preserve">
     <value>n/a</value>
   </data>
+  <data name="ObstacleBetweenTargetsInChain" xml:space="preserve">
+    <value>Препятствия между целями</value>
+  </data>
+  <data name="ObstacleEquivalent" xml:space="preserve">
+    <value>Эквивалент препятствия</value>
+  </data>
+  <data name="Obstacles" xml:space="preserve">
+    <value>Препятствия</value>
+  </data>
   <data name="PaperSheet" xml:space="preserve">
     <value>Лист бумаги</value>
   </data>
@@ -387,6 +396,9 @@
   <data name="TargetChainMaxDistance" xml:space="preserve">
     <value>Максимальное расстояние между целями</value>
   </data>
+  <data name="TargetChainObstacleHint" xml:space="preserve">
+    <value>Эффект не может быть применён к следующей цели в цепи, если между ней и предыдущей целью находится препятствие с указанным эквивалентом прочности или прочнее.</value>
+  </data>
   <data name="TargetSelectionAreaA" xml:space="preserve">
     <value>Длина (А)</value>
   </data>
@@ -401,6 +413,15 @@
   </data>
   <data name="TargetSelectionAreaN" xml:space="preserve">
     <value>Количество вокселей (N)</value>
+  </data>
+  <data name="TargetSelectionAreaObstacleCharacterAndArea" xml:space="preserve">
+    <value>Между персонажем и областью</value>
+  </data>
+  <data name="TargetSelectionAreaObstacleHint" xml:space="preserve">
+    <value>Эффект не может быть применён, если между персонажем и ближайшей точкой области действия находится препятствие равное по прочности выбранному эквиваленту или прочнее него. Так же к цели не может быть применён эффект, если между ней и эпицентром области действия находится препятствие равное по прочности эквиваленту или прочнее него. Прочность для этих двух видов препятствий настраивается отдельно.</value>
+  </data>
+  <data name="TargetSelectionAreaObstacleTargetAndEpicenter" xml:space="preserve">
+    <value>Между эпицентром и целью</value>
   </data>
   <data name="TargetSelectionAreaR" xml:space="preserve">
     <value>Радиус (R)</value>
@@ -422,6 +443,9 @@
   </data>
   <data name="TargetSelectionIsRandomHint" xml:space="preserve">
     <value>Если будет выбран режим случайного выбора целей, то игрок при использовании способности будет должен выбирать случайную цель из тех, которые удоволетворяют остальным условиям. Это усложнит планирование действий, но зато сделает способность дешевле.</value>
+  </data>
+  <data name="TargetSelectionNTADObstacleHint" xml:space="preserve">
+    <value>Эффект не может быть применён к цели, если между ней и персонажем находится препятствие равное эквиваленту прочности или прочнее него.</value>
   </data>
   <data name="TargetSelectionStratedyArea" xml:space="preserve">
     <value>Все цели в области</value>

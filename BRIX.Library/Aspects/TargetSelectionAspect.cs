@@ -27,7 +27,7 @@ namespace BRIX.Library.Aspects
         private double GetNTADCoeficient() => 
             GetNTADDistanceCoef() 
             * GetNTADCountCoeficient()
-            * EquivalentToPercentMap[NTAD.ObstacleBetweenCharacterAndTarget]
+            * EquivalentToPercentMap[NTAD.ObstacleBetweenCharacterAndTarget].ToCoeficient()
             * RandomSelectionCoef;
 
         private double GetNTADDistanceCoef() => GetDistanceCoeficient(NTAD.DistanceInMeters);
@@ -42,8 +42,8 @@ namespace BRIX.Library.Aspects
             GetAreaDistanceCoeficient() 
             * GetAreaVolumeCoeficient()
             * GetExcludedTargetsCoeficient()
-            * EquivalentToPercentMap[Area.ObstacleBetweenCharacterAndArea]
-            * EquivalentToPercentMap[Area.ObstacleBetweenEpicenterAndTarget];
+            * EquivalentToPercentMap[Area.ObstacleBetweenCharacterAndArea].ToCoeficient()
+            * EquivalentToPercentMap[Area.ObstacleBetweenEpicenterAndTarget].ToCoeficient();
 
         private double GetAreaDistanceCoeficient() => GetDistanceCoeficient(Area.DistanceToAreaInMeters);
 
@@ -82,7 +82,7 @@ namespace BRIX.Library.Aspects
         public int TargetsCount { get; set; } = 1;
         public int DistanceInMeters { get; set; } = 1;
         public bool IsTargetSelectionIsRandom { get; set; }
-        public EObstacleEquivalent ObstacleBetweenCharacterAndTarget { get; set; }
+        public EObstacleEquivalent ObstacleBetweenCharacterAndTarget { get; set; } = EObstacleEquivalent.WoodenPlank;
     }
 
     public class AreaSettings

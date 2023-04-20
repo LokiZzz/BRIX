@@ -664,6 +664,33 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Obstacles between targets.
+        /// </summary>
+        public static string ObstacleBetweenTargetsInChain {
+            get {
+                return ResourceManager.GetString("ObstacleBetweenTargetsInChain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obstacle equivalent.
+        /// </summary>
+        public static string ObstacleEquivalent {
+            get {
+                return ResourceManager.GetString("ObstacleEquivalent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obstacles.
+        /// </summary>
+        public static string Obstacles {
+            get {
+                return ResourceManager.GetString("Obstacles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Paper sheet.
         /// </summary>
         public static string PaperSheet {
@@ -880,6 +907,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The effect cannot be applied to the next target in the chain if there is an obstacle with the indicated durability equivalent or stronger between it and the previous target..
+        /// </summary>
+        public static string TargetChainObstacleHint {
+            get {
+                return ResourceManager.GetString("TargetChainObstacleHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Length (A).
         /// </summary>
         public static string TargetSelectionAreaA {
@@ -921,6 +957,33 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string TargetSelectionAreaN {
             get {
                 return ResourceManager.GetString("TargetSelectionAreaN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Between character and area.
+        /// </summary>
+        public static string TargetSelectionAreaObstacleCharacterAndArea {
+            get {
+                return ResourceManager.GetString("TargetSelectionAreaObstacleCharacterAndArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The effect cannot be applied if there is an obstacle equal to or stronger than the selected equivalent in strength between the character and the nearest point of the area of ​​effect. Also, the effect cannot be applied to the target if there is an obstacle between it and the epicenter of the area of ​​effect that is equal in strength to the equivalent or stronger than it. The strength for these two types of obstacles is configured separately..
+        /// </summary>
+        public static string TargetSelectionAreaObstacleHint {
+            get {
+                return ResourceManager.GetString("TargetSelectionAreaObstacleHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Between target and epicenter.
+        /// </summary>
+        public static string TargetSelectionAreaObstacleTargetAndEpicenter {
+            get {
+                return ResourceManager.GetString("TargetSelectionAreaObstacleTargetAndEpicenter", resourceCulture);
             }
         }
         
@@ -984,6 +1047,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string TargetSelectionIsRandomHint {
             get {
                 return ResourceManager.GetString("TargetSelectionIsRandomHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The effect cannot be applied to the target if there is an obstacle equal to or stronger than the equivalent durability between it and the character..
+        /// </summary>
+        public static string TargetSelectionNTADObstacleHint {
+            get {
+                return ResourceManager.GetString("TargetSelectionNTADObstacleHint", resourceCulture);
             }
         }
         

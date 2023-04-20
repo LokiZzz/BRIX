@@ -16,7 +16,7 @@
 
     <Grid RowDefinitions="*,auto">
         <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never" >
-            <VerticalStackLayout Spacing="10">
+            <VerticalStackLayout Spacing="10" Margin="0,0,0,10">
                 <Border Style="{StaticResource BlockBorder}">
                     <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectTargetChain}}"/>
@@ -34,6 +34,27 @@
                         <controls:FramedEntry 
                             Text="{Binding Aspect.MaxTargetsCount}" 
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetChainMaxCount}}"/>
+                    </VerticalStackLayout>
+                </Border>
+                <Border Style="{StaticResource BlockBorder}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label 
+                            Style="{StaticResource TitleLabel}" 
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleBetweenTargetsInChain}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetChainObstacleHint}}"/>
+                        <controls:PickerButton
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleEquivalent}}"
+                            Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleEquivalent}}"
+                            ItemSource="{Binding Aspect.Obstacles}"
+                            SelectedItem="{Binding Aspect.ObstacleBetweenTargetsInChain}"
+                            DisplayMember="LocalizedName">
+                            <controls:PickerButton.ItemTemplate>
+                                <DataTemplate x:DataType="vm:ObstacleOptionVM">
+                                    <controls:PickerItem Text="{Binding LocalizedName}"/>
+                                </DataTemplate>
+                            </controls:PickerButton.ItemTemplate>
+                        </controls:PickerButton>
+
                     </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>

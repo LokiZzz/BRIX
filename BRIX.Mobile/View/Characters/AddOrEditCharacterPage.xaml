@@ -13,7 +13,7 @@
     </Shell.TitleView>
 
     <Grid RowDefinitions="*,auto" RowSpacing="10">
-        <ScrollView Grid.Row="0" >
+        <VerticalStackLayout Grid.Row="0" Spacing="10">
             <Border Style="{StaticResource BlockBorder}" VerticalOptions="Start">
                 <VerticalStackLayout Spacing="10">
                     <controls:FramedEntry
@@ -29,7 +29,16 @@
                         MaxLength="1000"/>
                 </VerticalStackLayout>
             </Border>
-        </ScrollView>
+            <Border 
+                Style="{StaticResource BlockBorder}"
+                HeightRequest="250">
+                <Grid Margin="-15">
+                    <controls:ZoomContainer>
+                        <Image Source="fox_character_moq.jpeg" IsAnimationPlaying="True"/>
+                    </controls:ZoomContainer>
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
         <Button 
             Grid.Row="1"
             Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" 

@@ -8,15 +8,15 @@ namespace BRIX.Library.Aspects
         public bool IsChainEnabled { get; set; }
         public int MaxDistanceBetweenTargets { get; set; } = 1;
         public int MaxTargetsCount { get; set; } = 2;
-        public EObstacleEquivalent ObstacleBetweenTargetsInChain { get; set; }
+        public EObstacleEquivalent ObstacleBetweenTargetsInChain { get; set; } = EObstacleEquivalent.WoodenPlank;
 
         public override double GetCoefficient()
         {
             if (IsChainEnabled)
             {
-                int obstacleCoef = EquivalentToPercentMap[ObstacleBetweenTargetsInChain];
+                double obstacleCoef = EquivalentToPercentMap[ObstacleBetweenTargetsInChain].ToCoeficient();
 
-                return ((75 + MaxDistanceBetweenTargets) * MaxTargetsCount * obstacleCoef).ToCoeficient();
+                return ((75 + MaxDistanceBetweenTargets) * MaxTargetsCount).ToCoeficient() * obstacleCoef;
             }
             else
             {

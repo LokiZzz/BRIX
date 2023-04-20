@@ -68,11 +68,16 @@
                     Style="{StaticResource CurrentCharacterBlockBorder}"
                     HeightRequest="250" 
                     StrokeShape="RoundRectangle 10,50,50,10">
-                    <Grid Margin="-20">
-                        <Image 
-                            Grid.RowSpan="2"
-                            Source="fox_character_moq.jpeg"
-                            Aspect="AspectFill"/>
+                    <!--Source="fox_character_moq.jpeg"-->
+                    <Grid Margin="-15">
+                        <AbsoluteLayout Grid.RowSpan="2">
+                            <Image 
+                                AbsoluteLayout.LayoutBounds="{Binding LayoutBounds}"
+                                AbsoluteLayout.LayoutFlags="All"
+                                Source="https://i.pinimg.com/474x/60/21/75/602175aee02ed960d77ca7a291e0fd35.jpg"
+                                IsAnimationPlaying="True"/>
+                        </AbsoluteLayout>
+
                         <Grid Margin="10" RowDefinitions="*,*">
                             <Grid Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
                                 <Border Style="{StaticResource TransparentBorder}" Margin="-10,-5"/>
@@ -95,7 +100,17 @@
                             Opacity=".75"/>
                     </Grid>
                 </Border>
-
+                <Border Style="{StaticResource CurrentCharacterBlockBorder}" >
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="{Binding Scale, StringFormat='Scale: {0}'}"/>
+                        <Slider Minimum="0.1" Maximum="10" Value="{Binding Scale}"/>
+                        <Label Text="{Binding X, StringFormat='X: {0}'}"/>
+                        <Slider Minimum="0" Maximum="1" Value="{Binding X}"/>
+                        <Label Text="{Binding Y, StringFormat='Y: {0}'}"/>
+                        <Slider Minimum="0" Maximum="1" Value="{Binding Y}"/>
+                    </VerticalStackLayout>
+                </Border>
+                
                 <Border Style="{StaticResource CurrentCharacterBlockBorder}">
                     <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Health}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
