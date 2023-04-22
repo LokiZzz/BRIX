@@ -80,12 +80,10 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         private readonly ICharacterService _characterService;
-        private readonly ILocalizationResourceManager _localization;
 
-        public CurrentCharacterPageVM(ICharacterService characterService, ILocalizationResourceManager localization)
+        public CurrentCharacterPageVM(ICharacterService characterService)
         {
             _characterService = characterService;
-            _localization = localization;
         }
 
         [ObservableProperty]
@@ -122,7 +120,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         public async Task EditHealth()
         {
             NumericEditorResult result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(
-                new NumericEditorParameters { Title = _localization[LocalizationKeys.Health] as string }
+                new NumericEditorParameters { Title = Localization.Health }
             );
 
             if (result != null)
@@ -157,7 +155,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         public async Task EditExperience()
         {
             NumericEditorResult result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(
-                new NumericEditorParameters { Title = _localization[LocalizationKeys.Experience] as string }
+                new NumericEditorParameters { Title = Localization.Experience }
             );
 
             if (result != null)
@@ -233,7 +231,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                     },
                     new ExperienceInfoVM
                     {
-                        Title = _localization[LocalizationKeys.FreeExperience] as string,
+                        Title = Localization.FreeExperience,
                         Icon = AwesomeRPG.BurningEmbers,
                         IconFont = "AwesomeRPG",
                         DoCardActionCommand = new RelayCommand(async () => await GoToAbilities())
@@ -243,11 +241,11 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             ExpCards.First().Current = Character.Experience;
             ExpCards.First().Target = Character.ExperienceForNextLevel;
-            ExpCards.First().Title = _localization[LocalizationKeys.ExperienceToLevelup] as string;
+            ExpCards.First().Title = Localization.ExperienceToLevelup;
 
             ExpCards.Last().Current = Character.FreeExperience;
             ExpCards.Last().Target = Character.Experience;
-            ExpCards.Last().Title = _localization[LocalizationKeys.FreeExperience] as string;
+            ExpCards.Last().Title = Localization.FreeExperience;
         }
 
         private async Task SaveChanges()

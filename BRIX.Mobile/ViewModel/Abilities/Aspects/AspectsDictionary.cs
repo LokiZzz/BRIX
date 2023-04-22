@@ -1,6 +1,7 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities.Aspects;
+using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.View.Abilities.Aspects;
 using BRIX.Mobile.View.IconFonts;
@@ -14,19 +15,19 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         public static Dictionary<Type, AspectUtilityModel> Collection => new()
         {
             { typeof(ActionPointsAspectModel), new AspectUtilityModel() {
-                Name = _localization[Resources.Localizations.LocalizationKeys.AspectActionPoints].ToString(),
+                Name = Localization.AspectActionPoints,
                 Icon = AwesomeRPG.BottledBolt,
                 EditPage = typeof(ActionPointAspectPage),
                 LibraryAspectType = typeof(ActionPointAspect),
             }},
             { typeof(TargetSelectionAspectModel), new AspectUtilityModel() {
-                Name = _localization[Resources.Localizations.LocalizationKeys.AspectTargetSelection].ToString(),
+                Name = Localization.AspectTargetSelection,
                 Icon = AwesomeRPG.ArcheryTarget,
                 EditPage = typeof(TargetSelectionAspectPage),
                 LibraryAspectType = typeof(TargetSelectionAspect),
             }},
             { typeof(TargetChainAspectModel), new AspectUtilityModel() {
-                Name = _localization[Resources.Localizations.LocalizationKeys.AspectTargetChain].ToString(),
+                Name = Localization.AspectTargetChain,
                 Icon = AwesomeRPG.PlayerThunderStruck,
                 EditPage = typeof(TargetChainAspectPage),
                 LibraryAspectType = typeof(TargetChainAspect),

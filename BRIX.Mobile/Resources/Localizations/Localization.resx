@@ -177,6 +177,9 @@
   <data name="Backstory" xml:space="preserve">
     <value>Backstory</value>
   </data>
+  <data name="BrickArea" xml:space="preserve">
+    <value>The area is parallelipiped with sides of {0}, {1} and {2} meters</value>
+  </data>
   <data name="BrickWall" xml:space="preserve">
     <value>Brick wall</value>
   </data>
@@ -213,6 +216,9 @@
   <data name="Clear" xml:space="preserve">
     <value>Clear</value>
   </data>
+  <data name="ConeArea" xml:space="preserve">
+    <value>The area is cone with a radius of {0:meter;meters} and height of {1:meter;meters}</value>
+  </data>
   <data name="CreateNewCharacter" xml:space="preserve">
     <value>Create new character</value>
   </data>
@@ -221,6 +227,9 @@
   </data>
   <data name="CurrentLanguage" xml:space="preserve">
     <value>Current language</value>
+  </data>
+  <data name="CylinderArea" xml:space="preserve">
+    <value>The area is cylinder with a radius of {0:meter;meters} and a height of {1:meter;meters}</value>
   </data>
   <data name="Damage" xml:space="preserve">
     <value>Damage</value>
@@ -266,6 +275,9 @@
   </data>
   <data name="Effects" xml:space="preserve">
     <value>Effects</value>
+  </data>
+  <data name="ExcludedTargetsDescription" xml:space="preserve">
+    <value>When using the ability, the character can optionally exclude {0:target;targets} from the area.</value>
   </data>
   <data name="EXP" xml:space="preserve">
     <value>EXP</value>
@@ -318,6 +330,9 @@
   <data name="None" xml:space="preserve">
     <value>n/a</value>
   </data>
+  <data name="NTargetsAtDistanceLDescription" xml:space="preserve">
+    <value>You can select up to {0:target;targets} located within {1:meter;meters} of the character. {2}</value>
+  </data>
   <data name="ObstacleBetweenTargetsInChain" xml:space="preserve">
     <value>Obstacles between targets</value>
   </data>
@@ -338,6 +353,9 @@
   </data>
   <data name="PlayerHaveNoCharacterTitle" xml:space="preserve">
     <value>Nothing...</value>
+  </data>
+  <data name="RandomTargetSelection" xml:space="preserve">
+    <value>The target must chosen randomly.</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me</value>
@@ -371,6 +389,9 @@
   </data>
   <data name="SignInPageTitle" xml:space="preserve">
     <value>Sign In</value>
+  </data>
+  <data name="SphereArea" xml:space="preserve">
+    <value>The area is sphere with radius {0:meter;meters}</value>
   </data>
   <data name="Spread" xml:space="preserve">
     <value>Spread:</value>
@@ -429,6 +450,9 @@
   <data name="TargetSelectionAreaR" xml:space="preserve">
     <value>Radius (R)</value>
   </data>
+  <data name="TargetSelectionDescription" xml:space="preserve">
+    <value>The effect will be applied to all targets in the area. {0}. The area can be placed at any angle. The maximum distance between the character and the closest point of the area to him: {1:meter;meters}. {2}</value>
+  </data>
   <data name="TargetSelectionEcludeTargetsField" xml:space="preserve">
     <value>Excluded targets count</value>
   </data>
@@ -479,6 +503,9 @@
   </data>
   <data name="ThickSteelPlate" xml:space="preserve">
     <value>Thick steel plate</value>
+  </data>
+  <data name="VoxelArrayArea" xml:space="preserve">
+    <value>The area is an arbitrary-shaped array of {0:voxel;voxels}. Voxel is a 1x1 meter cube</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>

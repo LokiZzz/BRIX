@@ -26,7 +26,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public string Name => AspectsDictionary.Collection[GetType()].Name;
 
-        public string Description 
+        public virtual string Description
         {
             get
             {
@@ -34,7 +34,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 ELexisLanguage language = localization.LexisLanguage;
 
                 return AspectLexis.GetLexis(InternalBase, language);
-            } 
+            }
         }
 
         public void UpdateCost() => CostMonitor?.UpdateCost();

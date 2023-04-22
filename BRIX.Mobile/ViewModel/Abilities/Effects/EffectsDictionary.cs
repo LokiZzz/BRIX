@@ -9,17 +9,15 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 {
     public static class EffectsDictionary
     {
-        private static ILocalizationResourceManager _localization => ServicePool.GetService<ILocalizationResourceManager>();
-
         public static Dictionary<Type, EffectUtilityModel> Collection => new()
         {
             { typeof(DamageEffectModel), new EffectUtilityModel() {
-                Name = _localization[LocalizationKeys.EffectDamage].ToString(),
+                Name = Localization.EffectDamage,
                 Icon = AwesomeRPG.Sword,
                 EditPage = typeof(HealDamageEffectPage)
             }},
             { typeof(HealEffect), new EffectUtilityModel() {
-                Name = _localization[LocalizationKeys.EffectHeal].ToString(),
+                Name = Localization.EffectHeal,
                 Icon = AwesomeRPG.HealthIncrease,
                 EditPage = typeof(HealDamageEffectPage) //временно
             }},

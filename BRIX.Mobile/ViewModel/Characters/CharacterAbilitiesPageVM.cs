@@ -18,12 +18,10 @@ namespace BRIX.Mobile.ViewModel.Characters
     public partial class CharacterAbilitiesPageVM : ViewModelBase, IQueryAttributable
     {
         private readonly ICharacterService _characterService;
-        private readonly ILocalizationResourceManager _localization;
 
-        public CharacterAbilitiesPageVM(ICharacterService characterService, ILocalizationResourceManager localization)
+        public CharacterAbilitiesPageVM(ICharacterService characterService)
         {
             _characterService = characterService;
-            _localization = localization;
 
             WeakReferenceMessenger.Default.Register<CurrentCharacterChanged>(
                 this, 
@@ -76,10 +74,10 @@ namespace BRIX.Mobile.ViewModel.Characters
             QuestionPopupResult result = await ShowPopupAsync<QuestionPopup, QuestionPopupResult, QuestionPopupParameters>(
                 new QuestionPopupParameters
                 { 
-                    Title = _localization[LocalizationKeys.Warning].ToString(),
-                    Message = _localization[LocalizationKeys.DeleteAbilityQuestion].ToString(),
-                    YesText = _localization[LocalizationKeys.Yes].ToString(),
-                    NoText = _localization[LocalizationKeys.No].ToString()
+                    Title = Localization.Warning,
+                    Message = Localization.DeleteAbilityQuestion,
+                    YesText = Localization.Yes,
+                    NoText = Localization.No
                 }
             );
 

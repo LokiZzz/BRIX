@@ -1,10 +1,11 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Enums;
 using BRIX.Library.Mathematics;
+using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.ViewModel.Abilities.Aspects;
+using BRIX.Utility.Extensions;
 using System.Collections.ObjectModel;
-using static BRIX.Library.Aspects.AreaSettings;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {
@@ -13,6 +14,33 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
         public TargetSelectionAspectModel(AspectBase model) : base(model) 
         {
             Obstacles = ObstacleOptionHelper.GetOptions(ServicePool.GetService<ILocalizationResourceManager>());
+        }
+
+        public override string Description
+        {
+            get
+            {
+                return Strategy switch
+                {
+                    ETargetSelectionStrategy.NTargetsAtDistanсeL => Localization.NTargetsAtDistanceLDescription.PluralFormat(
+                        NTADCount, 
+                        NTADistance,
+                        IsRandomSelection ? Localization.RandomTargetSelection : string.Empty),
+                    ETargetSelectionStrategy.Area => Localization.TargetSelectionDescription.PluralFormat(
+                        AreaType switch
+                        {
+                            EAreaType.Sphere => Localization.SphereArea.PluralFormat(R),
+                            EAreaType.Brick => Localization.BrickArea.PluralFormat(A, B, C),
+                            EAreaType.Cone => Localization.ConeArea.PluralFormat(R, H),
+                            EAreaType.Cylinder => Localization.CylinderArea.PluralFormat(R, H),
+                            EAreaType.Arbitrary => Localization.VoxelArrayArea.PluralFormat(N),
+                            _ => "Internal error."
+                        }, 
+                        AreaDistance, 
+                        ExcludedTargetsCount == 0 ? string.Empty : Localization.ExcludedTargetsDescription.PluralFormat(ExcludedTargetsCount)),
+                    _ => "Internal error."
+                };
+            }
         }
 
         public TargetSelectionAspect Internal => GetSpecificAspect<TargetSelectionAspect>();

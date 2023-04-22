@@ -19,12 +19,10 @@ namespace BRIX.Mobile.ViewModel.Abilities
 {
     public partial class AddOrEditAbilityPageVM : ViewModelBase, IQueryAttributable
     {
-        private readonly ILocalizationResourceManager _localization;
         private readonly ICharacterService _characterService;
 
-        public AddOrEditAbilityPageVM(ILocalizationResourceManager localization, ICharacterService characterService)
+        public AddOrEditAbilityPageVM(ICharacterService characterService)
         {
-            _localization = localization;
             _characterService = characterService;
         }
 
@@ -76,10 +74,10 @@ namespace BRIX.Mobile.ViewModel.Abilities
             QuestionPopupResult result = await ShowPopupAsync<QuestionPopup, QuestionPopupResult, QuestionPopupParameters>(
                 new QuestionPopupParameters
                 {
-                    Title = _localization[LocalizationKeys.Warning].ToString(),
-                    Message = _localization[LocalizationKeys.DeleteEffectQuestion].ToString(),
-                    YesText = _localization[LocalizationKeys.Yes].ToString(),
-                    NoText = _localization[LocalizationKeys.No].ToString()
+                    Title = Localization.Warning,
+                    Message = Localization.DeleteEffectQuestion,
+                    YesText = Localization.Yes,
+                    NoText = Localization.No
                 }
             );
 
@@ -95,13 +93,13 @@ namespace BRIX.Mobile.ViewModel.Abilities
             switch (Mode)
             {
                 case EEditingMode.Add:
-                    Title = _localization[LocalizationKeys.AddOrEditAbilityPageTitle_Add].ToString();
+                    Title = Localization.AddOrEditAbilityPageTitle_Add;
                     break;
                 case EEditingMode.Edit:
-                    Title = _localization[LocalizationKeys.AddOrEditAbilityPageTitle_Edit].ToString();
+                    Title = Localization.AddOrEditAbilityPageTitle_Edit;
                     break;
                 case EEditingMode.Upgrade:
-                    Title = _localization[LocalizationKeys.AddOrEditAbilityPageTitle_Upgrade].ToString();
+                    Title = Localization.AddOrEditAbilityPageTitle_Upgrade;
                     break;
             }
 

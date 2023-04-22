@@ -177,6 +177,9 @@
   <data name="Backstory" xml:space="preserve">
     <value>Предыстория</value>
   </data>
+  <data name="BrickArea" xml:space="preserve">
+    <value>Область — это сфера с радиусом {0:метр;метра}</value>
+  </data>
   <data name="BrickWall" xml:space="preserve">
     <value>Кирпичная стена</value>
   </data>
@@ -213,6 +216,9 @@
   <data name="Clear" xml:space="preserve">
     <value>Очистить</value>
   </data>
+  <data name="ConeArea" xml:space="preserve">
+    <value>Область — это конус с радиусом  {0:метр;метра} и высотой {1:метр;метра}</value>
+  </data>
   <data name="CreateNewCharacter" xml:space="preserve">
     <value>Создать персонажа</value>
   </data>
@@ -221,6 +227,9 @@
   </data>
   <data name="CurrentLanguage" xml:space="preserve">
     <value>Текущий язык приложения</value>
+  </data>
+  <data name="CylinderArea" xml:space="preserve">
+    <value>Область — это цилиндр с радиусом {0:метр;метра} и высотой {0:метр;метра}.</value>
   </data>
   <data name="Damage" xml:space="preserve">
     <value>Урон</value>
@@ -266,6 +275,9 @@
   </data>
   <data name="Effects" xml:space="preserve">
     <value>Эффекты</value>
+  </data>
+  <data name="ExcludedTargetsDescription" xml:space="preserve">
+    <value>При использовании способности персонаж по желанию может исключить из области {0:цель;целей}.</value>
   </data>
   <data name="EXP" xml:space="preserve">
     <value>EXP</value>
@@ -318,6 +330,9 @@
   <data name="None" xml:space="preserve">
     <value>n/a</value>
   </data>
+  <data name="NTargetsAtDistanceLDescription" xml:space="preserve">
+    <value>Вы можете выбрать {0:цель расположенную;целей расположенных} не далее, чем {1:метр;метров} от персонажа. {2}</value>
+  </data>
   <data name="ObstacleBetweenTargetsInChain" xml:space="preserve">
     <value>Препятствия между целями</value>
   </data>
@@ -338,6 +353,9 @@
   </data>
   <data name="PlayerHaveNoCharacterTitle" xml:space="preserve">
     <value>Здесь ничего нет...</value>
+  </data>
+  <data name="RandomTargetSelection" xml:space="preserve">
+    <value>Цель должна выбираться случайным образом.</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Запомнить меня</value>
@@ -371,6 +389,9 @@
   </data>
   <data name="SignInPageTitle" xml:space="preserve">
     <value>Авторизация</value>
+  </data>
+  <data name="SphereArea" xml:space="preserve">
+    <value>Область — это параллелепипед со сторонами {0:метр;метра}</value>
   </data>
   <data name="Spread" xml:space="preserve">
     <value>Разброс:</value>
@@ -426,6 +447,9 @@
   <data name="TargetSelectionAreaR" xml:space="preserve">
     <value>Радиус (R)</value>
   </data>
+  <data name="TargetSelectionDescription" xml:space="preserve">
+    <value>Эффект будет применён ко всем целям в области. {0}. Область может быть размещена под любым углом. Максимальное расстояние между персонажем и ближайшей к нему точкой области: {1:метр;метров}. {2}</value>
+  </data>
   <data name="TargetSelectionEcludeTargetsField" xml:space="preserve">
     <value>Количество исключённый целей</value>
   </data>
@@ -476,6 +500,9 @@
   </data>
   <data name="ThickSteelPlate" xml:space="preserve">
     <value>Толстая стальная плита</value>
+  </data>
+  <data name="VoxelArrayArea" xml:space="preserve">
+    <value>Область — массив из {0:вокселя;вокселей} произвольной формы. Воксель — это куб 1х1 метр</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Внимание</value>

@@ -12,12 +12,10 @@ namespace BRIX.Mobile.ViewModel.Characters
     public partial class AddOrEditCharacterPageVM : ViewModelBase, IQueryAttributable
     {
         private readonly ICharacterService _characterService;
-        private readonly ILocalizationResourceManager _localization;
 
-        public AddOrEditCharacterPageVM(ICharacterService characterService, ILocalizationResourceManager localization)
+        public AddOrEditCharacterPageVM(ICharacterService characterService)
         {
             _characterService = characterService;
-            _localization = localization;
         }
 
         [ObservableProperty]
@@ -58,8 +56,8 @@ namespace BRIX.Mobile.ViewModel.Characters
         public override Task OnNavigatedAsync()
         {
             Title = Character.Id == default
-                ? _localization[LocalizationKeys.AddOrEditCharacterPageTitle_Add].ToString()
-                : _localization[LocalizationKeys.AddOrEditCharacterPageTitle_Edit].ToString();
+                ? Localization.AddOrEditAbilityPageTitle_Add
+                : Localization.AddOrEditAbilityPageTitle_Edit;
 
             return Task.CompletedTask;
         }

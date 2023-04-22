@@ -241,6 +241,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The area is parallelipiped with sides of {0}, {1} and {2} meters.
+        /// </summary>
+        public static string BrickArea {
+            get {
+                return ResourceManager.GetString("BrickArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brick wall.
         /// </summary>
         public static string BrickWall {
@@ -349,6 +358,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The area is cone with a radius of {0:meter;meters} and height of {1:meter;meters}.
+        /// </summary>
+        public static string ConeArea {
+            get {
+                return ResourceManager.GetString("ConeArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create new character.
         /// </summary>
         public static string CreateNewCharacter {
@@ -372,6 +390,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string CurrentLanguage {
             get {
                 return ResourceManager.GetString("CurrentLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The area is cylinder with a radius of {0:meter;meters} and a height of {1:meter;meters}.
+        /// </summary>
+        public static string CylinderArea {
+            get {
+                return ResourceManager.GetString("CylinderArea", resourceCulture);
             }
         }
         
@@ -507,6 +534,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Effects {
             get {
                 return ResourceManager.GetString("Effects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When using the ability, the character can optionally exclude {0:target;targets} from the area..
+        /// </summary>
+        public static string ExcludedTargetsDescription {
+            get {
+                return ResourceManager.GetString("ExcludedTargetsDescription", resourceCulture);
             }
         }
         
@@ -664,6 +700,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can select up to {0:target;targets} located within {1:meter;meters} of the character. {2}.
+        /// </summary>
+        public static string NTargetsAtDistanceLDescription {
+            get {
+                return ResourceManager.GetString("NTargetsAtDistanceLDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Obstacles between targets.
         /// </summary>
         public static string ObstacleBetweenTargetsInChain {
@@ -723,6 +768,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string PlayerHaveNoCharacterTitle {
             get {
                 return ResourceManager.GetString("PlayerHaveNoCharacterTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The target must chosen randomly..
+        /// </summary>
+        public static string RandomTargetSelection {
+            get {
+                return ResourceManager.GetString("RandomTargetSelection", resourceCulture);
             }
         }
         
@@ -822,6 +876,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string SignInPageTitle {
             get {
                 return ResourceManager.GetString("SignInPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The area is sphere with radius {0:meter;meters}.
+        /// </summary>
+        public static string SphereArea {
+            get {
+                return ResourceManager.GetString("SphereArea", resourceCulture);
             }
         }
         
@@ -997,6 +1060,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The effect will be applied to all targets in the area. {0}. The area can be placed at any angle. The maximum distance between the character and the closest point of the area to him: {1:meter;meters}. {2}.
+        /// </summary>
+        public static string TargetSelectionDescription {
+            get {
+                return ResourceManager.GetString("TargetSelectionDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Excluded targets count.
         /// </summary>
         public static string TargetSelectionEcludeTargetsField {
@@ -1146,6 +1218,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string ThickSteelPlate {
             get {
                 return ResourceManager.GetString("ThickSteelPlate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The area is an arbitrary-shaped array of {0:voxel;voxels}. Voxel is a 1x1 meter cube.
+        /// </summary>
+        public static string VoxelArrayArea {
+            get {
+                return ResourceManager.GetString("VoxelArrayArea", resourceCulture);
             }
         }
         
