@@ -12,7 +12,7 @@
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Character}}" Padding="0">
 
     <ContentPage.Resources>
-        <Style TargetType="Border" x:Key="CurrentCharacterBlockBorder" BasedOn="{StaticResource BlockBorder}">
+        <Style TargetType="Border" BasedOn="{StaticResource BlockBorder}" x:Key="SideMarginBlockBorder">
             <Setter Property="Margin" Value="10,0"/>
         </Style>
     </ContentPage.Resources>
@@ -65,20 +65,18 @@
             <!--In case of player have at leatst one character-->
             <VerticalStackLayout IsVisible="{Binding PlayerHaveCharacter}" Spacing="10">
                 <Border 
-                    Style="{StaticResource CurrentCharacterBlockBorder}"
+                    Style="{StaticResource SideMarginBlockBorder}"
+                    Padding="0"
                     HeightRequest="250" 
                     StrokeShape="RoundRectangle 10,50,50,10">
-                    <!--Source="fox_character_moq.jpeg"-->
-                    <Grid Margin="-15">
-                        <AbsoluteLayout Grid.RowSpan="2">
-                            <Image 
-                                AbsoluteLayout.LayoutBounds="{Binding LayoutBounds}"
-                                AbsoluteLayout.LayoutFlags="All"
-                                Source="https://i.pinimg.com/474x/60/21/75/602175aee02ed960d77ca7a291e0fd35.jpg"
-                                IsAnimationPlaying="True"/>
-                        </AbsoluteLayout>
-
-                        <Grid Margin="10" RowDefinitions="*,*">
+                    <Grid>
+                        <controls:ZoomContainer 
+                            x:Name="zoomContainer" 
+                            BackgroundColor="{StaticResource BRIXMedium}" 
+                            InputTransparent="True">
+                            <Image Source="fox_character_moq.jpeg" IsAnimationPlaying="True"/>
+                        </controls:ZoomContainer>
+                        <Grid Margin="10" RowDefinitions="*,*" InputTransparent="True">
                             <Grid Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
                                 <Border Style="{StaticResource TransparentBorder}" Margin="-10,-5"/>
                                 <Label Style="{StaticResource TitleLabel}" Text="{Binding Character.Name}" />
@@ -100,18 +98,7 @@
                             Opacity=".75"/>
                     </Grid>
                 </Border>
-                <Border Style="{StaticResource CurrentCharacterBlockBorder}" >
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="{Binding Scale, StringFormat='Scale: {0}'}"/>
-                        <Slider Minimum="0.1" Maximum="10" Value="{Binding Scale}"/>
-                        <Label Text="{Binding X, StringFormat='X: {0}'}"/>
-                        <Slider Minimum="0" Maximum="1" Value="{Binding X}"/>
-                        <Label Text="{Binding Y, StringFormat='Y: {0}'}"/>
-                        <Slider Minimum="0" Maximum="1" Value="{Binding Y}"/>
-                    </VerticalStackLayout>
-                </Border>
-                
-                <Border Style="{StaticResource CurrentCharacterBlockBorder}">
+                <Border Style="{StaticResource SideMarginBlockBorder}">
                     <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Health}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
                         <Label Grid.Row="0" Grid.Column="1" Margin="0,0,15,0" VerticalTextAlignment="Center">
@@ -198,13 +185,13 @@
                     SelectedIndicatorColor="{StaticResource BRIXWhite}"
                     HorizontalOptions="Center"/>
 
-                <Border Style="{StaticResource CurrentCharacterBlockBorder}" HeightRequest="500">
+                <Border Style="{StaticResource SideMarginBlockBorder}" HeightRequest="500">
                     <Grid RowDefinitions="auto,auto,auto,auto" ColumnDefinitions="*,auto,auto">
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Tags}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
                     </Grid>
                 </Border>
 
-                <Border Style="{StaticResource CurrentCharacterBlockBorder}" HeightRequest="400">
+                <Border Style="{StaticResource SideMarginBlockBorder}" HeightRequest="400">
                     <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Abilities}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
                     </Grid>

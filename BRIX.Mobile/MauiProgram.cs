@@ -63,6 +63,7 @@ public static class MauiProgram
         builder.RegisterView<CharacterDetailsPage, CharacterDetailsPageVM>(false);
         builder.RegisterView<CharacterListPage, CharacterListPageVM>();
         builder.RegisterView<AddOrEditCharacterPage, AddOrEditCharacterPageVM>();
+        builder.RegisterView<EditCharacterImagePage, EditCharacterImagePageVM>();
         builder.RegisterView<AddOrEditAbilityPage, AddOrEditAbilityPageVM>();
         builder.RegisterView<ChooseEffectPage, ChooseEffectPageVM>();
 

@@ -13,39 +13,54 @@
     </Shell.TitleView>
 
     <Grid RowDefinitions="*,auto" RowSpacing="10">
-        <VerticalStackLayout Grid.Row="0" Spacing="10">
-            <Border Style="{StaticResource BlockBorder}" VerticalOptions="Start">
-                <VerticalStackLayout Spacing="10">
-                    <controls:FramedEntry
-                        Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Name}}"
-                        Text="{Binding Character.Name}"/>
-                    <controls:FramedEditor
-                        Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Backstory}}"
-                        Text="{Binding Character.Backstory}"
-                        MaxLength="1000" />
-                    <controls:FramedEditor
-                        Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Appearance}}"
-                        Text="{Binding Character.Appearance}"
-                        MaxLength="1000"/>
-                </VerticalStackLayout>
-            </Border>
-            <Border 
-                Style="{StaticResource BlockBorder}"
-                HeightRequest="250">
-                <Grid Margin="-15">
-                    <controls:ZoomContainer x:Name="zoomContainer" ContentX="-331" ContentY="-205" ContentScale="3.07">
-                        <Image Source="fox_character_moq.jpeg" IsAnimationPlaying="True"/>
-                    </controls:ZoomContainer>
-                </Grid>
-            </Border>
-            <Border Style="{StaticResource BlockBorder}"> 
-                <VerticalStackLayout>
-                    <Label Text="{Binding Source={x:Reference zoomContainer}, Path=ContentX, StringFormat='X:{0}'}"/>
-                    <Label Text="{Binding Source={x:Reference zoomContainer}, Path=ContentY, StringFormat='Y:{0}'}"/>
-                    <Label Text="{Binding Source={x:Reference zoomContainer}, Path=ContentScale, StringFormat='S:{0}'}"/>
-                </VerticalStackLayout>
-            </Border>
-        </VerticalStackLayout>
+        <ScrollView Grid.Row="0" >
+            <VerticalStackLayout Spacing="10" Margin="0,0,0,10">
+                <Border Style="{StaticResource BlockBorder}" VerticalOptions="Start">
+                    <VerticalStackLayout Spacing="10">
+                        <controls:FramedEntry
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Name}}"
+                            Text="{Binding Character.Name}"/>
+                        <controls:FramedEditor
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Backstory}}"
+                            Text="{Binding Character.Backstory}"
+                            MaxLength="1000" />
+                        <controls:FramedEditor
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Appearance}}"
+                            Text="{Binding Character.Appearance}"
+                            MaxLength="1000"/>
+                    </VerticalStackLayout>
+                </Border>
+                <Border 
+                    Style="{StaticResource BlockBorder}"
+                    Padding="0"
+                    HeightRequest="250" 
+                    StrokeShape="RoundRectangle 10,50,50,10">
+                    <Grid>
+                        <controls:ZoomContainer x:Name="zoomContainer" BackgroundColor="{StaticResource BRIXMedium}">
+                            <Image Source="fox_character_moq.jpeg" IsAnimationPlaying="True"/>
+                        </controls:ZoomContainer>
+                        <Grid Margin="10" RowDefinitions="*,*" InputTransparent="True">
+                            <Grid Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
+                                <Border Style="{StaticResource TransparentBorder}" Margin="-10,-5"/>
+                                <Label Style="{StaticResource TitleLabel}" Text="{Binding Character.Name}" />
+                            </Grid>
+                            <Grid Grid.Row="1" VerticalOptions="End" HorizontalOptions="End" Padding="10,5">
+                                <Border Style="{StaticResource TransparentBorder}" Margin="-10,-5"/>
+                                <Label Style="{StaticResource TitleLabel}" Text="{lcz:Format ValuePath=Character.Level, FormatPath={x:Static lcz:LocalizationKeys.LevelFormat}}"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Border>
+                <Border Style="{StaticResource BlockBorder}">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding Source={x:Reference zoomContainer}, Path=ContentX, StringFormat='X:{0}'}"/>
+                        <Label Text="{Binding Source={x:Reference zoomContainer}, Path=ContentY, StringFormat='Y:{0}'}"/>
+                        <Label Text="{Binding Source={x:Reference zoomContainer}, Path=ContentScale, StringFormat='S:{0}'}"/>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+        
         <Button 
             Grid.Row="1"
             Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" 

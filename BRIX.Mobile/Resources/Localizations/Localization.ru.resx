@@ -339,6 +339,9 @@
   <data name="PlayerHaveNoCharacterTitle" xml:space="preserve">
     <value>Здесь ничего нет...</value>
   </data>
+  <data name="Portrait" xml:space="preserve">
+    <value>Портрет</value>
+  </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Запомнить меня</value>
   </data>

@@ -727,6 +727,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Portrait.
+        /// </summary>
+        public static string Portrait {
+            get {
+                return ResourceManager.GetString("Portrait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remember me.
         /// </summary>
         public static string RememberMe {
