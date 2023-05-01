@@ -18,7 +18,7 @@ public class ZoomContainer : ContentView
     }
 
     public static readonly BindableProperty ContentXProperty = BindableProperty.Create(
-        nameof(ContentX), typeof(double), typeof(ZoomContainer), 0d
+        nameof(ContentX), typeof(double), typeof(ZoomContainer), 0d, BindingMode.TwoWay, propertyChanged: UpdateX
     );
 
     public double ContentX
@@ -36,7 +36,7 @@ public class ZoomContainer : ContentView
     }
 
     public static readonly BindableProperty ContentYProperty = BindableProperty.Create(
-        nameof(ContentY), typeof(double), typeof(ZoomContainer), 0d
+        nameof(ContentY), typeof(double), typeof(ZoomContainer), 0d, BindingMode.TwoWay, propertyChanged: UpdateY
     );
 
     public double ContentY
@@ -54,7 +54,7 @@ public class ZoomContainer : ContentView
     }
 
     public static readonly BindableProperty ContentScaleProperty = BindableProperty.Create(
-        nameof(ContentScale), typeof(double), typeof(ZoomContainer), 1d
+        nameof(ContentScale), typeof(double), typeof(ZoomContainer), 1d, BindingMode.TwoWay, propertyChanged: UpdateS
     );
 
     public double ContentScale
@@ -142,6 +142,24 @@ public class ZoomContainer : ContentView
                 yOffset = Content.TranslationY;
                 break;
         }
+    }
+
+    private static void UpdateX(BindableObject bindable, object oldValue, object newValue)
+    {
+        ZoomContainer thisControl = bindable as ZoomContainer;
+        thisControl.Content.TranslationX = (double)newValue;
+    }
+
+    private static void UpdateY(BindableObject bindable, object oldValue, object newValue)
+    {
+        ZoomContainer thisControl = bindable as ZoomContainer;
+        thisControl.Content.TranslationY = (double)newValue;
+    }
+
+    private static void UpdateS(BindableObject bindable, object oldValue, object newValue)
+    {
+        ZoomContainer thisControl = bindable as ZoomContainer;
+        thisControl.Content.Scale = (double)newValue;
     }
 
     void OnChildAdded(object sender, ElementEventArgs e)

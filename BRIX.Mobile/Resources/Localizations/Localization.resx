@@ -180,6 +180,9 @@
   <data name="BrickWall" xml:space="preserve">
     <value>Brick wall</value>
   </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
   <data name="ChangeLanguage" xml:space="preserve">
     <value>Change language</value>
   </data>
@@ -342,6 +345,12 @@
   <data name="Portrait" xml:space="preserve">
     <value>Portrait</value>
   </data>
+  <data name="PortraitHint" xml:space="preserve">
+    <value>Click the «Browse» button and select a character image. You can customize the portrait by zooming in, zooming out and moving the image in the window below.</value>
+  </data>
+  <data name="PortraitSettings" xml:space="preserve">
+    <value>Portrait settings</value>
+  </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me</value>
   </data>
@@ -353,6 +362,9 @@
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="SelectCharacterPortrait" xml:space="preserve">
+    <value>Select character image</value>
   </data>
   <data name="SelectLanguagePageTitle" xml:space="preserve">
     <value>Select language</value>

@@ -49,6 +49,24 @@ namespace BRIX.Mobile.Models.Characters
             set => SetProperty(InternalModel.Appearance, value, InternalModel, (character, appearance) => character.Appearance = appearance);
         }
 
+        public double PortraitX
+        {
+            get => InternalModel.Portrait.X;
+            set => SetProperty(InternalModel.Portrait.X, value, InternalModel, (character, x) => character.Portrait.X = x);
+        }
+
+        public double PortraitY
+        {
+            get => InternalModel.Portrait.Y;
+            set => SetProperty(InternalModel.Portrait.Y, value, InternalModel, (character, y) => character.Portrait.Y = y);
+        }
+
+        public double PortraitS
+        {
+            get => InternalModel.Portrait.S;
+            set => SetProperty(InternalModel.Portrait.S, value, InternalModel, (character, s) => character.Portrait.S = s);
+        }
+
         public int MaxHealth => InternalModel.MaxHealth;
 
         public int CurrentHealth

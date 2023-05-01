@@ -180,6 +180,9 @@
   <data name="BrickWall" xml:space="preserve">
     <value>Кирпичная стена</value>
   </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Обзор...</value>
+  </data>
   <data name="ChangeLanguage" xml:space="preserve">
     <value>Изменить язык</value>
   </data>
@@ -342,6 +345,12 @@
   <data name="Portrait" xml:space="preserve">
     <value>Портрет</value>
   </data>
+  <data name="PortraitHint" xml:space="preserve">
+    <value>Нажмите кнопку «Обзор» и выберите файл с портретом персонажа. Выбрав изображение, вы можете настроить отображение потрета на странице главного персонажа. Для этого приблизьте, отдалите или переместите изображение в окне, расположенном ниже.</value>
+  </data>
+  <data name="PortraitSettings" xml:space="preserve">
+    <value>Настройка портрета</value>
+  </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Запомнить меня</value>
   </data>
@@ -353,6 +362,9 @@
   </data>
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>
+  </data>
+  <data name="SelectCharacterPortrait" xml:space="preserve">
+    <value>Выберите портрет персонажа</value>
   </data>
   <data name="SelectLanguagePageTitle" xml:space="preserve">
     <value>Язык</value>

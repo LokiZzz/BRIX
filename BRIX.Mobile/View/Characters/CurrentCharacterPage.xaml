@@ -25,12 +25,9 @@
                 Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Character}}"/>
 
             <HorizontalStackLayout Grid.Column="1" Spacing="10" IsVisible="{Binding PlayerHaveCharacter}">
-                <Button Style="{StaticResource SquareIconButton}"  
-                    Text="{x:Static icons:Awesome.SquarePen}"
-                    Command="{Binding EditCommand}"/>
-                <Button Style="{StaticResource SquareIconButton}" Grid.Column="1" 
-                    Text="{x:Static icons:Awesome.PeopleArrows}"
-                    Command="{Binding SwitchCommand}"/>
+                <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.SquarePen}" Command="{Binding EditCommand}"/>
+                <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.FileImage}" Command="{Binding PictureCommand}"/>
+                <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.PeopleArrows}" Command="{Binding SwitchCommand}"/>
             </HorizontalStackLayout>
             
         </Grid>
@@ -68,23 +65,23 @@
                     Style="{StaticResource SideMarginBlockBorder}"
                     Padding="0"
                     HeightRequest="250" 
-                    StrokeShape="RoundRectangle 10,50,50,10">
+                    StrokeShape="RoundRectangle 10,50,30,10">
                     <Grid>
                         <controls:ZoomContainer 
-                            x:Name="zoomContainer" 
                             BackgroundColor="{StaticResource BRIXMedium}" 
-                            InputTransparent="True">
-                            <Image Source="fox_character_moq.jpeg" IsAnimationPlaying="True"/>
+                            InputTransparent="True"
+                            ContentX="{Binding Character.PortraitX}"
+                            ContentY="{Binding Character.PortraitY}"
+                            ContentScale="{Binding Character.PortraitS}">
+                            <Image Source="{Binding Portrait}" IsAnimationPlaying="True"/>
                         </controls:ZoomContainer>
-                        <Grid Margin="10" RowDefinitions="*,*" InputTransparent="True">
-                            <Grid Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
-                                <Border Style="{StaticResource TransparentBorder}" Margin="-10,-5"/>
+                        <Grid Margin="10" RowDefinitions="*,*">
+                            <Border Grid.Row="0" Style="{StaticResource TransparentBorder}" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
                                 <Label Style="{StaticResource TitleLabel}" Text="{Binding Character.Name}" />
-                            </Grid>
-                            <Grid Grid.Row="1" VerticalOptions="End" HorizontalOptions="End" Padding="10,5">
-                                <Border Style="{StaticResource TransparentBorder}" Margin="-10,-5"/>
+                            </Border>
+                            <Border Grid.Row="1" Style="{StaticResource TransparentBorder}" VerticalOptions="End" HorizontalOptions="End" Padding="10,5">
                                 <Label Style="{StaticResource TitleLabel}" Text="{lcz:Format ValuePath=Character.Level, FormatPath={x:Static lcz:LocalizationKeys.LevelFormat}}"/>
-                            </Grid>
+                            </Border>
                         </Grid>
                         <Label 
                             IsVisible="{Binding Character.IsOnVergeOfLifeAndDeath}"

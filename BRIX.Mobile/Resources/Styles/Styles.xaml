@@ -284,8 +284,7 @@
     <Style TargetType="Border" x:Key="TransparentBorder">
         <Setter Property="StrokeShape" Value="RoundRectangle 5"/>
         <Setter Property="StrokeThickness" Value="0"/>
-        <Setter Property="BackgroundColor" Value="{StaticResource BRIXMedium}"/>
-        <Setter Property="Opacity" Value=".75"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource BRIXTranparentMedium}"/>
     </Style>
 
     <Style TargetType="Border" x:Key="LowBlockWithShadowBorder">

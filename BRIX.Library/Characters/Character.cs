@@ -25,5 +25,18 @@
         /// </summary>
         public int MaxHealth => Level * 10;
         public int CurrentHealth { get; set; }
+
+        public CharacterPortrait Portrait { get; set; } = new();
+    }
+
+    public class CharacterPortrait
+    {
+        public string Path { get; set; }
+
+        public double X { get; set; }
+
+        public double Y { get; set; }
+
+        public double S { get; set; }
     }
 }

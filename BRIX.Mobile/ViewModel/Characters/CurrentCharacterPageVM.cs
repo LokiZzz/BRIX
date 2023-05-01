@@ -38,6 +38,13 @@ namespace BRIX.Mobile.ViewModel.Characters
         [ObservableProperty]
         private ObservableCollection<ExperienceInfoVM> _expCards;
 
+        private ImageSource _portrait;
+        public ImageSource Portrait
+        {
+            get => _portrait;
+            set => SetProperty(ref _portrait, value);
+        }
+
         [RelayCommand]
         public async Task Create()
         {
@@ -48,6 +55,12 @@ namespace BRIX.Mobile.ViewModel.Characters
         public async Task Edit()
         {
             await Navigation.NavigateAsync<AddOrEditCharacterPage>((NavigationParameters.Character, Character));
+        }
+
+        [RelayCommand]
+        public async Task Picture()
+        {
+            await Navigation.NavigateAsync<EditCharacterImagePage>((NavigationParameters.Character, Character));
         }
 
         [RelayCommand]
@@ -144,6 +157,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             if (PlayerHaveCharacter)
             {
                 UpdateExpCards();
+                SetPortrait();
             }
 
             // Возможно такие вызовы уползут в CharacterService, но пока что достаточно этого.
@@ -186,6 +200,15 @@ namespace BRIX.Mobile.ViewModel.Characters
             ExpCards.Last().Current = Character.FreeExperience;
             ExpCards.Last().Target = Character.Experience;
             ExpCards.Last().Title = _localization[LocalizationKeys.FreeExperience] as string;
+        }
+        
+        private void SetPortrait()
+        {
+            if (!string.IsNullOrEmpty(Character.InternalModel.Portrait?.Path))
+            {
+                FileResult file = new(Character.InternalModel.Portrait.Path);
+                Portrait = ImageSource.FromStream(async (ct) => await file.OpenReadAsync());
+            }
         }
 
         private async Task SaveChanges()

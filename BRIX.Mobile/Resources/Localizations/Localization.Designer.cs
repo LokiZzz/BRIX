@@ -250,6 +250,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Browse....
+        /// </summary>
+        public static string Browse {
+            get {
+                return ResourceManager.GetString("Browse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change language.
         /// </summary>
         public static string ChangeLanguage {
@@ -736,6 +745,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click the «Browse» button and select a character image. You can customize the portrait by zooming in, zooming out and moving the image in the window below..
+        /// </summary>
+        public static string PortraitHint {
+            get {
+                return ResourceManager.GetString("PortraitHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Portrait settings.
+        /// </summary>
+        public static string PortraitSettings {
+            get {
+                return ResourceManager.GetString("PortraitSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remember me.
         /// </summary>
         public static string RememberMe {
@@ -768,6 +795,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select character image.
+        /// </summary>
+        public static string SelectCharacterPortrait {
+            get {
+                return ResourceManager.GetString("SelectCharacterPortrait", resourceCulture);
             }
         }
         
