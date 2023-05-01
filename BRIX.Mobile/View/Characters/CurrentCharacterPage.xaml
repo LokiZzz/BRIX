@@ -75,11 +75,19 @@
                             ContentScale="{Binding Character.PortraitS}">
                             <Image Source="{Binding Portrait}" IsAnimationPlaying="True"/>
                         </controls:ZoomContainer>
-                        <Grid Margin="10" RowDefinitions="*,*">
-                            <Border Grid.Row="0" Style="{StaticResource TransparentBorder}" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
+                        <Grid Margin="10">
+                            <Label 
+                                FontFamily="Awesome" 
+                                Text="{x:Static icons:Awesome.ImagePortrait}" 
+                                FontSize="120" 
+                                IsVisible="{Binding ShowImagePlaceholder}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                Opacity="0.5"/>
+                            <Border Style="{StaticResource TransparentBorder}" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
                                 <Label Style="{StaticResource TitleLabel}" Text="{Binding Character.Name}" />
                             </Border>
-                            <Border Grid.Row="1" Style="{StaticResource TransparentBorder}" VerticalOptions="End" HorizontalOptions="End" Padding="10,5">
+                            <Border Style="{StaticResource TransparentBorder}" VerticalOptions="End" HorizontalOptions="End" Padding="10,5">
                                 <Label Style="{StaticResource TitleLabel}" Text="{lcz:Format ValuePath=Character.Level, FormatPath={x:Static lcz:LocalizationKeys.LevelFormat}}"/>
                             </Border>
                         </Grid>

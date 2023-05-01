@@ -42,7 +42,18 @@ namespace BRIX.Mobile.ViewModel.Characters
         public ImageSource Portrait
         {
             get => _portrait;
-            set => SetProperty(ref _portrait, value);
+            set
+            {
+                SetProperty(ref _portrait, value);
+                ShowImagePlaceholder = value == null;
+            }
+        }
+
+        private bool _showImagePlaceholder = true;
+        public bool ShowImagePlaceholder
+        {
+            get => _showImagePlaceholder;
+            set => SetProperty(ref _showImagePlaceholder, value);
         }
 
         [RelayCommand]

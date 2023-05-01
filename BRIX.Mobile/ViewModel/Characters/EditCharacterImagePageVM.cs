@@ -32,7 +32,18 @@ namespace BRIX.Mobile.ViewModel.Characters
         public ImageSource Image
         {
             get => _image;
-            set => SetProperty(ref _image, value);
+            set
+            {
+                SetProperty(ref _image, value);
+                ShowPlaceholder = value == null;
+            }
+        }
+
+        private bool _showPlaceholder = true;
+        public bool ShowPlaceholder
+        {
+            get => _showPlaceholder;
+            set => SetProperty(ref _showPlaceholder, value);
         }
 
         private double _contentX;

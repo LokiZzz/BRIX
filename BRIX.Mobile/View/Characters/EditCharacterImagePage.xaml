@@ -6,6 +6,7 @@
              x:DataType="vm:EditCharacterImagePageVM"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+             xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              Shell.TabBarIsVisible="False"
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Portrait}}">
 
@@ -36,6 +37,14 @@
                         <Image Source="{Binding Image}" IsAnimationPlaying="True"/>
                     </controls:ZoomContainer>
                     <Grid Margin="10" InputTransparent="True">
+                        <Label 
+                            FontFamily="Awesome" 
+                            Text="{x:Static icons:Awesome.ImagePortrait}" 
+                            FontSize="120" 
+                            IsVisible="{Binding ShowPlaceholder}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            Opacity="0.5"/>
                         <Border Style="{StaticResource TransparentBorder}" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
                             <Label Style="{StaticResource TitleLabel}" Text="{Binding Character.Name}" />
                         </Border>
@@ -47,18 +56,19 @@
                                 Style="{StaticResource BlockBorder}" 
                                 HeightRequest="70" WidthRequest="70" 
                                 StrokeShape="RoundRectangle 35"
-                                BackgroundColor="{StaticResource BRIXTranparentDim}">
+                                BackgroundColor="{StaticResource BRIXTranparentDim}"
+                                IsVisible="{Binding ShowPlaceholder, Converter={StaticResource NotConverter}}">
                                 <Image Source="zoom.svg"/>
                             </Border>
                             <Border 
                                 Style="{StaticResource BlockBorder}" 
                                 HeightRequest="70" WidthRequest="70" 
                                 StrokeShape="RoundRectangle 35"
-                                BackgroundColor="{StaticResource BRIXTranparentDim}">
+                                BackgroundColor="{StaticResource BRIXTranparentDim}"
+                                IsVisible="{Binding ShowPlaceholder, Converter={StaticResource NotConverter}}">
                                 <Image Source="pan.svg"/>
                             </Border>
                         </HorizontalStackLayout>
-
                     </Grid>
                 </Grid>
             </Border>
