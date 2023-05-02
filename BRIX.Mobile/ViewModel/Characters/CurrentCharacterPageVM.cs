@@ -218,7 +218,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             if (!string.IsNullOrEmpty(Character.InternalModel.Portrait?.Path))
             {
                 FileResult file = new(Character.InternalModel.Portrait.Path);
-                Portrait = ImageSource.FromStream(async (ct) => await file.OpenReadAsync());
+                Portrait = ImageSource.FromFile(file.FullPath);
             }
         }
 

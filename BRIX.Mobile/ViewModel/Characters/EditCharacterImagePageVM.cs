@@ -35,16 +35,12 @@ namespace BRIX.Mobile.ViewModel.Characters
             set
             {
                 SetProperty(ref _image, value);
-                ShowPlaceholder = value == null;
+                OnPropertyChanged(nameof(ShowPlaceholder));
             }
         }
 
-        private bool _showPlaceholder = true;
-        public bool ShowPlaceholder
-        {
-            get => _showPlaceholder;
-            set => SetProperty(ref _showPlaceholder, value);
-        }
+        public bool ShowPlaceholder => Image == null;
+
 
         private double _contentX;
         public double ContentX
@@ -60,7 +56,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             set => SetProperty(ref _contentY, value);
         }
 
-        private double _contentScale;
+        private double _contentScale = 1;
         public double ContentScale
         {
             get => _contentScale;
@@ -82,12 +78,16 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if (result != null)
             {
+                ContentX = 0;
+                ContentY = 0;
+                ContentScale = 1;
+
                 if (result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase)
                     || result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase)
                     || result.FileName.EndsWith("gif", StringComparison.OrdinalIgnoreCase))
                 {
                     _imagePath = result.FullPath;
-                    Image = ImageSource.FromStream(async (ct) => await result.OpenReadAsync());
+                    Image = ImageSource.FromFile(result.FullPath);
                 }
             }
         }
@@ -105,6 +105,16 @@ namespace BRIX.Mobile.ViewModel.Characters
             await Navigation.Back();
         }
 
+        [RelayCommand]
+        public void Clear()
+        {
+            Image = null;
+            _imagePath = string.Empty;
+            ContentX = 0;
+            ContentY = 0;
+            ContentScale = 1;
+        }
+
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             Character = query.GetParameterOrDefault<CharacterModel>(NavigationParameters.Character)
@@ -114,7 +124,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             {
                 _imagePath = Character.InternalModel.Portrait.Path;
                 FileResult file = new(_imagePath);
-                Image = ImageSource.FromStream(async (ct) => await file.OpenReadAsync());
+                Image = ImageSource.FromFile(file.FullPath);
 
                 ContentX = Character.InternalModel.Portrait.X;
                 ContentY = Character.InternalModel.Portrait.Y;
