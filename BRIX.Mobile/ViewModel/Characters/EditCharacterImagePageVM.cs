@@ -117,8 +117,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            Character = query.GetParameterOrDefault<CharacterModel>(NavigationParameters.Character)
-                ?? new CharacterModel();
+            Character = query.GetParameterOrDefault<CharacterModel>(NavigationParameters.Character);
 
             if(!string.IsNullOrEmpty(Character.InternalModel.Portrait?.Path))
             {

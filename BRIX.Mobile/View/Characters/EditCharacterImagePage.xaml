@@ -25,17 +25,17 @@
                             Spacing="40" InputTransparent="True"
                             HeightRequest="100">
                         <Border 
-                                Style="{StaticResource BlockBorder}" 
-                                HeightRequest="70" WidthRequest="70" 
-                                StrokeShape="RoundRectangle 35"
-                                BackgroundColor="{StaticResource BRIXTranparentDim}">
+                            Style="{StaticResource BlockBorder}" 
+                            HeightRequest="70" WidthRequest="70" 
+                            StrokeShape="RoundRectangle 35"
+                            BackgroundColor="{StaticResource BRIXTranparentDim}">
                             <Image Source="zoom.svg"/>
                         </Border>
                         <Border 
-                                Style="{StaticResource BlockBorder}" 
-                                HeightRequest="70" WidthRequest="70" 
-                                StrokeShape="RoundRectangle 35"
-                                BackgroundColor="{StaticResource BRIXTranparentDim}">
+                            Style="{StaticResource BlockBorder}" 
+                            HeightRequest="70" WidthRequest="70" 
+                            StrokeShape="RoundRectangle 35"
+                            BackgroundColor="{StaticResource BRIXTranparentDim}">
                             <Image Source="pan.svg"/>
                         </Border>
                     </HorizontalStackLayout>
@@ -55,27 +55,6 @@
                         ContentScale="{Binding ContentScale}">
                         <Image Source="{Binding Image}" IsAnimationPlaying="True"/>
                     </controls:ZoomContainer>
-                    <!--<HorizontalStackLayout 
-                            x:Name="gesturesHintIconsStack"
-                            VerticalOptions="Center" HorizontalOptions="Center" 
-                            Spacing="40" InputTransparent="True"
-                            HeightRequest="100"
-                            IsVisible="{Binding ShowPlaceholder, Converter={StaticResource NotConverter}}">
-                        <Border 
-                                Style="{StaticResource BlockBorder}" 
-                                HeightRequest="70" WidthRequest="70" 
-                                StrokeShape="RoundRectangle 35"
-                                BackgroundColor="{StaticResource BRIXTranparentDim}">
-                            <Image Source="zoom.svg"/>
-                        </Border>
-                        <Border 
-                                Style="{StaticResource BlockBorder}" 
-                                HeightRequest="70" WidthRequest="70" 
-                                StrokeShape="RoundRectangle 35"
-                                BackgroundColor="{StaticResource BRIXTranparentDim}">
-                            <Image Source="pan.svg"/>
-                        </Border>
-                    </HorizontalStackLayout>-->
                     <Grid Margin="10" InputTransparent="True">
                         <Label 
                             x:Name="portraitPlaceholder"
@@ -89,9 +68,12 @@
                         <Border Style="{StaticResource TransparentBorder}" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
                             <Label Style="{StaticResource TitleLabel}" Text="{Binding Character.Name}" />
                         </Border>
-                        <Border Style="{StaticResource TransparentBorder}" VerticalOptions="End" HorizontalOptions="End" Padding="10,5">
-                            <Label Style="{StaticResource TitleLabel}" Text="{lcz:Format ValuePath=Character.Level, FormatPath={x:Static lcz:LocalizationKeys.LevelFormat}}"/>
+                        <Border Style="{StaticResource TransparentBorder}" VerticalOptions="End" HorizontalOptions="End" >
+                            <Grid ColumnDefinitions="auto">
+                                <Label Style="{StaticResource TitleLabel}" Margin="10,5" Text="{lcz:Format ValuePath=Character.Level, FormatPath={x:Static lcz:LocalizationKeys.LevelFormat}}"/>
+                            </Grid>
                         </Border>
+                        
                     </Grid>
                 </Grid>
             </Border>
