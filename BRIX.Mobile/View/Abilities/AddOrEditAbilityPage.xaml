@@ -70,17 +70,10 @@
                                     </SwipeView.RightItems>
                                     <Grid Margin="10,0">
                                         <Border Style="{StaticResource BlockBorder}" >
-                                            <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto" RowSpacing="5">
-                                                <Label 
-                                                    Grid.Row="0"
-                                                    Grid.Column="0" 
-                                                    Style="{StaticResource TitleLabel}" 
-                                                    Text="{Binding Name}" />
-                                                <Label 
-                                                    Grid.Row="1"
-                                                    Grid.Column="0" 
-                                                    Text="{Binding Description}" />
-                                            </Grid>
+                                            <VerticalStackLayout Spacing="5">
+                                                <Label Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
+                                                <Label Text="{Binding Description}" />
+                                            </VerticalStackLayout>
                                         </Border>
                                     </Grid>
                                 </SwipeView>
