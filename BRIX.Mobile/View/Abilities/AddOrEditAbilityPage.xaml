@@ -17,89 +17,82 @@
         <controls:TitleView/>
     </Shell.TitleView>
 
-    <Grid RowDefinitions="auto,*,auto" RowSpacing="10">
-        <Border Style="{StaticResource BlockBorder}" Grid.Row="0" VerticalOptions="Start" Margin="10,0">
-            <VerticalStackLayout Spacing="10">
-                <controls:FramedEntry
-                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Name}}"
-                    Text="{Binding Ability.Name}"/>
-                <controls:FramedEditor
-                    MaxLength="400"
-                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Description}}"
-                    Text="{Binding Ability.Description}"/>
+    <Grid RowDefinitions="*,auto" RowSpacing="0">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Margin="0,10">
+                <Border Style="{StaticResource BlockBorder}" VerticalOptions="Start" Margin="10,0">
+                    <VerticalStackLayout Spacing="10">
+                        <controls:FramedEntry
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Name}}"
+                            Text="{Binding Ability.Name}"/>
+                        <controls:FramedEditor
+                            MaxLength="400"
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Description}}"
+                            Text="{Binding Ability.Description}"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Grid RowDefinitions="auto,auto,*" Margin="0,0,0,-10">
+                    <Label Grid.Row="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Effects}}" Margin="10,5,10,15"/>
+                    <Button
+                        Grid.Row="1"
+                        Style="{StaticResource LightPlusButton}" 
+                        Command="{Binding AddEffectCommand}"
+                        Margin="10,0,10,10"/>   
+                    <CollectionView Grid.Row="2" x:Name="collectionView" ItemsSource="{Binding Ability.Effects}" Margin="0,0,0,10">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:EffectModelBase">
+                                <SwipeView Threshold="100">
+                                    <SwipeView.LeftItems>
+                                        <SwipeItems Mode="Execute">
+                                            <SwipeItemView
+                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.EditEffectCommand}"
+                                                CommandParameter="{Binding}">   
+                                                <Border Style="{StaticResource MediumSwipeViewBorder}">
+                                                    <Label Style="{StaticResource MediumSwipeViewEditLabel}" />
+                                                </Border>
+                                            </SwipeItemView>
+                                        </SwipeItems>
+                                    </SwipeView.LeftItems>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems Mode="Execute">
+                                            <SwipeItemView
+                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.DeleteEffectCommand}"
+                                                CommandParameter="{Binding}">
+                                                <Border Style="{StaticResource MediumSwipeViewBorder}">
+                                                    <Label Style="{StaticResource MediumSwipeViewDeleteLabel}"/>
+                                                </Border>
+                                            </SwipeItemView>
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <Grid Margin="10,0">
+                                        <Border Style="{StaticResource BlockBorder}" >
+                                            <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto" RowSpacing="5">
+                                                <Label 
+                                                    Grid.Row="0"
+                                                    Grid.Column="0" 
+                                                    Style="{StaticResource TitleLabel}" 
+                                                    Text="{Binding Name}" />
+                                                <Label 
+                                                    Grid.Row="1"
+                                                    Grid.Column="0" 
+                                                    Text="{Binding Description}" />
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
             </VerticalStackLayout>
-        </Border>
-
-        <Grid Grid.Row="1" RowDefinitions="auto,auto,*" Margin="0,0,0,-10">
-            <Label Grid.Row="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Effects}}" Margin="10,5,10,15"/>
-            <Button
-                Grid.Row="1"
-                Style="{StaticResource LightPlusButton}" 
-                Command="{Binding AddEffectCommand}"
-                Margin="10,0,10,10"/>
-            <ScrollView Grid.Row="2">
-                <CollectionView x:Name="collectionView" ItemsSource="{Binding Ability.Effects}" Margin="0,0,0,10">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:EffectModelBase">
-                            <SwipeView Threshold="100">
-                                <SwipeView.LeftItems>
-                                    <SwipeItems Mode="Execute">
-                                        <SwipeItemView
-                                        Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.EditEffectCommand}"
-                                        CommandParameter="{Binding}">
-                                            <Border Style="{StaticResource MediumSwipeViewBorder}">
-                                                <Label Style="{StaticResource MediumSwipeViewEditLabel}" />
-                                            </Border>
-                                        </SwipeItemView>
-                                    </SwipeItems>
-                                </SwipeView.LeftItems>
-                                <SwipeView.RightItems>
-                                    <SwipeItems Mode="Execute">
-                                        <SwipeItemView
-                                        Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.DeleteEffectCommand}"
-                                        CommandParameter="{Binding}">
-                                            <Border Style="{StaticResource MediumSwipeViewBorder}">
-                                                <Label Style="{StaticResource MediumSwipeViewDeleteLabel}"/>
-                                            </Border>
-                                        </SwipeItemView>
-                                    </SwipeItems>
-                                </SwipeView.RightItems>
-                                <Grid Margin="10,0">
-                                    <Border Style="{StaticResource BlockBorder}" >
-                                        <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto" RowSpacing="5">
-                                            <Label 
-                                                Grid.Row="0"
-                                                Grid.Column="0" 
-                                                Style="{StaticResource TitleLabel}" 
-                                                Text="{Binding Name}" />
-                                            <Label 
-                                                Grid.Row="1"
-                                                Grid.Column="0" 
-                                                Text="{Binding Description}" />
-                                            <!--<Button 
-                                                Style="{StaticResource UpgradeSquareButton}"
-                                                Grid.Column="1"
-                                                Grid.RowSpan="2"
-                                                VerticalOptions="Start"
-                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.UpgradeCommand}"
-                                                CommandParameter="{Binding}"/>-->
-                                        </Grid>
-                                    </Border>
-                                </Grid>
-                            </SwipeView>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </ScrollView>
-        </Grid>
-
+        </ScrollView>
         <v:AbilityCostMonitorPanel
             Grid.Row="2"
             BindingContext="{Binding CostMonitor}"
             Margin="10,0"/>
-        
     </Grid>
 </ContentPage>

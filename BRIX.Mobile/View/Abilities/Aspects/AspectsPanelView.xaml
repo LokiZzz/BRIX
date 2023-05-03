@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:v="clr-namespace:BRIX.Mobile.View.Abilities.Aspects"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities.Aspects"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              x:Class="BRIX.Mobile.View.Abilities.Aspects.AspectsPanelView"
              x:DataType="vm:AspectPanelViewModel">
 
-    <ContentView.Resources>
-        <Style TargetType="Label" x:Key="AspectIcon">
-            <Setter Property="FontFamily" Value="AwesomeRPG"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="FontSize" Value="26"/>
-            <Setter Property="TextColor" Value="{StaticResource BRIXWhite}"/>
-            <Setter Property="VerticalOptions" Value="Center"/>
-            <Setter Property="HorizontalOptions" Value="Center"/>
-        </Style>
-    </ContentView.Resources>
-    
     <Border Style="{StaticResource BlockBorder}">
         <Grid RowDefinitions="auto,auto,auto" RowSpacing="5">
             <Label Grid.Row="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Aspects}}"/>
@@ -25,42 +14,36 @@
                 Grid.Row="1"
                 ItemsSource="{Binding AspectsCollection}" 
                 SelectedItem="{Binding SelectedAspect}" 
-                SelectionMode="Single"
-                HeightRequest="50">
+                SelectionMode="Single">
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical" Span="7"  VerticalItemSpacing="10" HorizontalItemSpacing="10"/>
+                    <GridItemsLayout Orientation="Vertical" Span="7"  VerticalItemSpacing="7" HorizontalItemSpacing="7"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="vm:AspectUtilityModel">
-                        <Border 
-                            StrokeShape="RoundRectangle 5"
-                            HeightRequest="{Binding Source={RelativeSource Self}, Path=Width, Mode=OneWay}"
-                            BackgroundColor="{StaticResource BRIXDim}"
-                            Padding="5">
-                            <Label 
-                                Style="{StaticResource AspectIcon}" 
-                                Text="{Binding Icon}"/>
+                        <v:AspectPanelItem>
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup Name="CommonStates">
                                     <VisualState Name="Normal">
                                         <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="{StaticResource BRIXDim}" />
+                                            <Setter Property="ItemBackgroundColor" Value="{StaticResource BRIXDim}" />
+                                            <Setter Property="BackgroundColor" Value="Transparent" />
                                         </VisualState.Setters>
                                     </VisualState>
                                     <VisualState Name="Selected">
                                         <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="{StaticResource BRIXOrange}" />
+                                            <Setter Property="ItemBackgroundColor" Value="{StaticResource BRIXOrange}" />
+                                            <Setter Property="BackgroundColor" Value="Transparent" />
                                         </VisualState.Setters>
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                        </Border>
+                        </v:AspectPanelItem>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
             
             <Grid RowDefinitions="auto,*,auto" Grid.Row="2">
-                <Label Grid.Row="0" Style="{StaticResource TitleLabel}" Text="{Binding SelectedAspect.Name}"/>
+                <Label Grid.Row="0" Style="{StaticResource TitleLabel}" Text="{Binding SelectedAspect.Name}" />
                 <Label Grid.Row="1" Text="{Binding SelectedAspect.Description}"/>
                 <Grid Grid.Row="2" ColumnDefinitions="*,*">
                     <Button 

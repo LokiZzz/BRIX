@@ -88,6 +88,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string AbilityName {
+            get {
+                return ResourceManager.GetString("AbilityName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Almost any ability is used by spending action points. The more action points an ability spends, the cheaper it will be in experience points..
         /// </summary>
         public static string ActionPointAspectHint {

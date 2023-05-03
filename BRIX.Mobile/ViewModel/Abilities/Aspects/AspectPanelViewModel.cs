@@ -27,6 +27,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             _costMonitor = costMonitor;
 
             AspectsCollection = GetAspects(effect);
+
             SelectedAspect = AspectsCollection.First();
         }
 
