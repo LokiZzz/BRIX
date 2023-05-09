@@ -32,38 +32,6 @@ namespace BRIX.Lexica
             }
         }
 
-        private static string ForTargetChain(TargetChainSettings aspect, ELexisLanguage language)
-        {
-            switch (language)
-            {
-                case ELexisLanguage.English:
-                    if(aspect.IsChainEnabled)
-                    {
-                        
-                        return $"The effect is applied to targets in a chain, with no more than " +
-                            $"{Numbers.ENGDeclension(aspect.MaxDistanceBetweenTargets, "meter")} " +
-                            $"between targets. Maximum number of targets in a chain: {aspect.MaxTargetsCount}";
-                    }
-                    else
-                    {
-                        return "Target chain is not turned on.";
-                    }
-                case ELexisLanguage.Russian:
-                    if (aspect.IsChainEnabled)
-                    {
-                        return $"Эффект применяется к целям по цепочке, в которой между целями должно быть не более, чем " +
-                            $"{Numbers.RUSDeclension(aspect.MaxDistanceBetweenTargets, "метр")}. " +
-                            $"Максимальное количество целей в цепи: {aspect.MaxTargetsCount}.";
-                    }
-                    else
-                    {
-                        return "Цепи целей не включены.";
-                    }
-                default:
-                    return string.Empty;
-            }
-        }
-
         private static string ForActionPoints(ActionPointAspect aspect, ELexisLanguage language)
         {
             switch (language)
@@ -96,7 +64,7 @@ namespace BRIX.Lexica
         {
             string result = string.Empty;
 
-            if(aspect.Strategy == ETargetSelectionStrategy.Area)
+            if(aspect.Strategy == ETargetSelectionStrategy.Character)
             {
                 result = "Эффект применяется к самому персонажу.";
             }
@@ -142,7 +110,7 @@ namespace BRIX.Lexica
         {
             string result = string.Empty;
 
-            if (aspect.Strategy == ETargetSelectionStrategy.Area)
+            if (aspect.Strategy == ETargetSelectionStrategy.Character)
             {
                 result = "The effect is applied to the character himself.";
             }
