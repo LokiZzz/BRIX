@@ -14,6 +14,18 @@ namespace BRIX.Library.Effects
                 typeof(CooldownAspect), typeof(ActivationConditionsAspect)
         };
 
-        public override int BaseExpCost() => Impact.Average() * Impact.Average();
+        public override int BaseExpCost()
+        {
+            int damageToHimselfCoef = 1;
+
+            TargetSelectionAspect targetSelection = GetAspect<TargetSelectionAspect>();
+
+            if (targetSelection?.Strategy == ETargetSelectionStrategy.CharacterHimself)
+            {
+                damageToHimselfCoef = -1;
+            }
+
+            return Impact.Average() * Impact.Average() * damageToHimselfCoef;
+        }
     }
 }

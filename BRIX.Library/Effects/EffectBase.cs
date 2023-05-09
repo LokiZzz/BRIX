@@ -38,7 +38,7 @@ namespace BRIX.Library.Effects
                 }
             }
 
-            return resultingCost <= 1 ? 1 : resultingCost.Round();
+            return resultingCost.Round();
         }
 
         public T? GetAspect<T>() where T : AspectBase

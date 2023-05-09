@@ -64,7 +64,7 @@ namespace BRIX.Lexica
         {
             string result = string.Empty;
 
-            if(aspect.Strategy == ETargetSelectionStrategy.Character)
+            if(aspect.Strategy == ETargetSelectionStrategy.CharacterHimself)
             {
                 result = "Эффект применяется к самому персонажу.";
             }
@@ -110,7 +110,7 @@ namespace BRIX.Lexica
         {
             string result = string.Empty;
 
-            if (aspect.Strategy == ETargetSelectionStrategy.Character)
+            if (aspect.Strategy == ETargetSelectionStrategy.CharacterHimself)
             {
                 result = "The effect is applied to the character himself.";
             }

@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Aspects;
+using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
 
@@ -55,9 +56,12 @@ namespace BRIX.Library
                 effectsCountPenaltyCoef += (_effects.Count() - 1) * deltaPerEffect;
             }
 
-            double expCost = _effects.Sum(effect => effect.GetExpCost()) * effectsCountPenaltyCoef;
+            int sumOfEffectsExpCost = _effects.Sum(effect => effect.GetExpCost());
+            int expCost = (sumOfEffectsExpCost * effectsCountPenaltyCoef).Round();
+            expCost -= MaterialSupport.ToExpEquivalent().Round();
+            expCost -= Consumables.ToExpEquivalent().Round();
 
-            return (expCost - MaterialSupport.ToExpEquivalent() - Consumables.ToExpEquivalent()).Round();
+            return expCost <= 1 ? 1 : expCost;
         }
 
         public void AddEffect(EffectBase effect)

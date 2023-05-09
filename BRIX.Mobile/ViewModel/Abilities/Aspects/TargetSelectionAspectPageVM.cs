@@ -32,7 +32,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             IsNTAD = false;
             IsAREA = false;
             IsCharacter = true;
-            Aspect.Strategy = ETargetSelectionStrategy.Character;
+            Aspect.Strategy = ETargetSelectionStrategy.CharacterHimself;
         }
 
         [RelayCommand]

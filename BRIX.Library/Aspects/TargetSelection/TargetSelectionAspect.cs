@@ -14,7 +14,7 @@ namespace BRIX.Library.Aspects.TargetSelection
                     return GetAreaCoeficient();
                 case ETargetSelectionStrategy.NTargetsAtDistanсeL:
                     return GetNTADCoeficient();
-                case ETargetSelectionStrategy.Character:
+                case ETargetSelectionStrategy.CharacterHimself:
                 default:
                     return 1;
             }

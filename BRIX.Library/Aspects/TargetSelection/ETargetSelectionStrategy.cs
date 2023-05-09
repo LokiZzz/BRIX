@@ -4,6 +4,6 @@
     {
         NTargetsAtDistanсeL = 0,
         Area = 1,
-        Character = 2
+        CharacterHimself = 2
     }
 }

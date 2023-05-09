@@ -89,7 +89,7 @@ namespace BRIX.Library.DiceValue
                 builder.Append($"{dice.Count}d{dice.NumberOfFaces}");
             }
 
-            if (Modifier < 0)
+            if (Modifier < 0 || builder.Length == 0)
             {
                 builder.Append($"{Modifier}");
             }
