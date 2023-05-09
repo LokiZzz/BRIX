@@ -6,6 +6,7 @@
              x:DataType="vm:AddOrEditCharacterPageVM"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+             Shell.TabBarIsVisible="False"
              Title="{Binding Title}">
 
     <Shell.TitleView>

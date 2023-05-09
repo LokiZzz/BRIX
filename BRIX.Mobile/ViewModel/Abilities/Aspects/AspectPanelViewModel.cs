@@ -31,11 +31,19 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             SelectedAspect = AspectsCollection.First();
         }
 
-        [ObservableProperty]
         private ObservableCollection<AspectUtilityModel> _aspectsCollection = new();
+        public ObservableCollection<AspectUtilityModel> AspectsCollection
+        {
+            get => _aspectsCollection;
+            set => SetProperty(ref _aspectsCollection, value);
+        }
 
-        [ObservableProperty]
         private AspectUtilityModel _selectedAspect = new();
+        public AspectUtilityModel SelectedAspect
+        {
+            get => _selectedAspect;
+            set => SetProperty(ref _selectedAspect, value);
+        }
 
         [RelayCommand]
         public async Task NavigateToAspect()

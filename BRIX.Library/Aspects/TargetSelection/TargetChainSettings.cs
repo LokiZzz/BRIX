@@ -1,16 +1,16 @@
 ﻿using BRIX.Library.Enums;
 using BRIX.Library.Mathematics;
 
-namespace BRIX.Library.Aspects
+namespace BRIX.Library.Aspects.TargetSelection
 {
-    public class TargetChainAspect : AspectBase
+    public class TargetChainSettings
     {
         public bool IsChainEnabled { get; set; }
         public int MaxDistanceBetweenTargets { get; set; } = 1;
         public int MaxTargetsCount { get; set; } = 2;
         public EObstacleEquivalent ObstacleBetweenTargetsInChain { get; set; } = EObstacleEquivalent.WoodenPlank;
 
-        public override double GetCoefficient()
+        public double GetCoefficient()
         {
             if (IsChainEnabled)
             {

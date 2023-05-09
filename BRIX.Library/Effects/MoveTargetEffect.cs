@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Aspects;
+using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Extensions;
 using BRIX.Library.Mathematics;
 
@@ -8,8 +9,7 @@ namespace BRIX.Library.Effects
     {
         public override List<Type> RequiredAspects => new()
         {
-                typeof(ActionPointAspect), typeof(TargetSelectionAspect), typeof(TargetChainAspect),
-                typeof(TargetSelectionRestrictionsApsect), typeof(TargetSizeAspect), typeof(CooldownAspect), 
+                typeof(ActionPointAspect), typeof(TargetSelectionAspect), typeof(CooldownAspect), 
                 typeof(ActivationConditionsAspect)
         };
 

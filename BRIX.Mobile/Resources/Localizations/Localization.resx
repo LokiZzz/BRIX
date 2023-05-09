@@ -477,6 +477,12 @@
   <data name="TargetSelectionStratedyAreaHint" xml:space="preserve">
     <value>With this strategy, the effect is applied to targets located in the specified area. All area parameters are specified in meters. An area can be placed at any angle relative to the character, and the area distance is the distance from the character to the nearest point in that area.</value>
   </data>
+  <data name="TargetSelectionStratedyCharacter" xml:space="preserve">
+    <value>Character himself</value>
+  </data>
+  <data name="TargetSelectionStratedyCharacterHint" xml:space="preserve">
+    <value>The target is the character himself.</value>
+  </data>
   <data name="TargetSelectionStratedyNTAD" xml:space="preserve">
     <value>Multiple targets in the distance</value>
   </data>

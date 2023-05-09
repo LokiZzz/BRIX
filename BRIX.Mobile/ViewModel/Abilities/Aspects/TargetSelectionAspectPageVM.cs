@@ -1,8 +1,8 @@
 ﻿using BRIX.Library.Aspects;
+using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Mobile.Models.Abilities.Aspects;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using static BRIX.Library.Aspects.AreaSettings;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 {
@@ -13,6 +13,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         {
             IsAREA = false;
             IsNTAD = true;
+            IsCharacter = false;
             Aspect.Strategy = ETargetSelectionStrategy.NTargetsAtDistanсeL;
         }
 
@@ -21,7 +22,17 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         {
             IsNTAD = false;
             IsAREA = true;
+            IsCharacter = false;
             Aspect.Strategy = ETargetSelectionStrategy.Area;
+        }
+
+        [RelayCommand]
+        public void SetCharacter()
+        {
+            IsNTAD = false;
+            IsAREA = false;
+            IsCharacter = true;
+            Aspect.Strategy = ETargetSelectionStrategy.Character;
         }
 
         [RelayCommand]
@@ -46,13 +57,41 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             SetShape(Aspect.AreaType.ToString("G"));
         }
 
-        #region Strategy and Shape visibility flags
-
-        [ObservableProperty]
         private bool _isNTAD = true;
+        public bool IsNTAD
+        {
+            get => _isNTAD;
+            set
+            {
+                SetProperty(ref _isNTAD, value);
+                OnPropertyChanged(nameof(ShowChainSettings));
+            }
+        }
 
-        [ObservableProperty]
-        private bool _isAREA = false;
+
+        private bool _isAREA = true;
+        public bool IsAREA
+        {
+            get => _isAREA;
+            set
+            {
+                SetProperty(ref _isAREA, value);
+                OnPropertyChanged(nameof(ShowChainSettings));
+            }
+        }
+
+        private bool _isCharacter = true;
+        public bool IsCharacter
+        {
+            get => _isCharacter;
+            set
+            {
+                SetProperty(ref _isCharacter, value);
+                OnPropertyChanged(nameof(ShowChainSettings));
+            }
+        }
+
+        public bool ShowChainSettings => IsNTAD || IsAREA;
 
         private EAreaType _shape;
         public EAreaType Shape
@@ -74,7 +113,5 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         public bool IsCylinder => Shape == EAreaType.Cylinder;
         public bool IsSphere => Shape == EAreaType.Sphere;
         public bool IsArbitrary => Shape == EAreaType.Arbitrary;
-
-        #endregion
     }
 }

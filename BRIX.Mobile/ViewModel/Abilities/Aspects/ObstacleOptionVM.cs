@@ -1,13 +1,6 @@
-﻿using AndroidX.AppCompat.View.Menu;
-using BRIX.Library.Enums;
-using BRIX.Mobile.Resources.Localizations;
+﻿using BRIX.Library.Enums;
 using BRIX.Mobile.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 {

@@ -1141,6 +1141,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Character himself.
+        /// </summary>
+        public static string TargetSelectionStratedyCharacter {
+            get {
+                return ResourceManager.GetString("TargetSelectionStratedyCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The target is the character himself..
+        /// </summary>
+        public static string TargetSelectionStratedyCharacterHint {
+            get {
+                return ResourceManager.GetString("TargetSelectionStratedyCharacterHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Multiple targets in the distance.
         /// </summary>
         public static string TargetSelectionStratedyNTAD {

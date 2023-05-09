@@ -1,11 +1,11 @@
 ﻿using BRIX.Library.Enums;
 using BRIX.Library.Mathematics;
 
-namespace BRIX.Library.Aspects
+namespace BRIX.Library.Aspects.TargetSelection
 {
-    public class TargetSizeAspect : AspectBase
+    public class TargetSizeSettings
     {
-        private List<ETargetSize> _allowedTargetSizes = new () { ETargetSize.Small, ETargetSize.Medium, ETargetSize.Big };
+        private List<ETargetSize> _allowedTargetSizes = new() { ETargetSize.Small, ETargetSize.Medium, ETargetSize.Big };
         public IReadOnlyList<ETargetSize> AllowedTargetSizes => _allowedTargetSizes.AsReadOnly();
 
         public void AddSize(ETargetSize size)
@@ -26,7 +26,7 @@ namespace BRIX.Library.Aspects
             }
         }
 
-        public override double GetCoefficient() => 
+        public double GetCoefficient() =>
             SizeCategoriesCountToPercentMap[AllowedTargetSizes.Count()]
             .ToCoeficient();
 

@@ -1,10 +1,10 @@
 ﻿using BRIX.Library.Aspects;
+using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Enums;
 using BRIX.Library.Mathematics;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.ViewModel.Abilities.Aspects;
 using System.Collections.ObjectModel;
-using static BRIX.Library.Aspects.AreaSettings;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {
@@ -17,17 +17,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public TargetSelectionAspect Internal => GetSpecificAspect<TargetSelectionAspect>();
 
-        public bool IsRandomSelection
-        {
-            get => Internal.NTAD.IsTargetSelectionIsRandom;
-            set
-            {
-                SetProperty(Internal.NTAD.IsTargetSelectionIsRandom, value, Internal, 
-                    (model, prop) => model.NTAD.IsTargetSelectionIsRandom = prop);
-                UpdateCost();
-            }
-        }
-
         public ETargetSelectionStrategy Strategy
         {
             get => Internal.Strategy;
@@ -38,6 +27,22 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 UpdateCost();
             }
         }
+
+        private ObservableCollection<ObstacleOptionVM> _obstacles = new();
+        public ObservableCollection<ObstacleOptionVM> Obstacles
+        {
+            get => _obstacles;
+            set
+            {
+                SetProperty(ref _obstacles, value);
+                OnPropertyChanged(nameof(ObstacleBetweenCharacterAndTarget));
+                OnPropertyChanged(nameof(ObstacleBetweenCharacterAndArea));
+                OnPropertyChanged(nameof(ObstacleBetweenEpicenterAndTarget));
+                OnPropertyChanged(nameof(ObstacleBetweenTargetsInChain));
+            }
+        }
+
+        #region NTAD
 
         public int NTADCount
         {
@@ -60,6 +65,38 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 UpdateCost();
             }
         }
+
+        public ObstacleOptionVM ObstacleBetweenCharacterAndTarget
+        {
+            get
+            {
+                EObstacleEquivalent equivalent = Internal.NTAD.ObstacleBetweenCharacterAndTarget;
+
+                return Obstacles.FirstOrDefault(x => x.Equivalent == equivalent);
+            }
+            set
+            {
+                EObstacleEquivalent equivalent = value.Equivalent;
+                SetProperty(Internal.NTAD.ObstacleBetweenCharacterAndTarget, equivalent, Internal,
+                    (model, prop) => model.NTAD.ObstacleBetweenCharacterAndTarget = prop);
+                UpdateCost();
+            }
+        }
+
+        public bool IsRandomSelection
+        {
+            get => Internal.NTAD.IsTargetSelectionIsRandom;
+            set
+            {
+                SetProperty(Internal.NTAD.IsTargetSelectionIsRandom, value, Internal,
+                    (model, prop) => model.NTAD.IsTargetSelectionIsRandom = prop);
+                UpdateCost();
+            }
+        }
+
+        #endregion
+
+        #region Area
 
         public EAreaType AreaType
         {
@@ -240,36 +277,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
         }
 
-        private ObservableCollection<ObstacleOptionVM> _obstacles = new();
-        public ObservableCollection<ObstacleOptionVM> Obstacles
-        {
-            get => _obstacles;
-            set
-            {
-                SetProperty(ref _obstacles, value);
-                OnPropertyChanged(nameof(ObstacleBetweenCharacterAndTarget));
-                OnPropertyChanged(nameof(ObstacleBetweenCharacterAndArea));
-                OnPropertyChanged(nameof(ObstacleBetweenEpicenterAndTarget));
-            }
-        }
-
-        public ObstacleOptionVM ObstacleBetweenCharacterAndTarget
-        {
-            get
-            {
-                EObstacleEquivalent equivalent = Internal.NTAD.ObstacleBetweenCharacterAndTarget;
-
-                return Obstacles.FirstOrDefault(x => x.Equivalent == equivalent);
-            }
-            set
-            {
-                EObstacleEquivalent equivalent = value.Equivalent;
-                SetProperty(Internal.NTAD.ObstacleBetweenCharacterAndTarget, equivalent, Internal,
-                    (model, prop) => model.NTAD.ObstacleBetweenCharacterAndTarget = prop);
-                UpdateCost();
-            }
-        }
-
         public ObstacleOptionVM ObstacleBetweenCharacterAndArea
         {
             get
@@ -303,5 +310,61 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 UpdateCost();
             }
         }
+
+        #endregion
+
+        #region Target chain
+
+        public bool IsChainEnabled
+        {
+            get => Internal.TargetChain.IsChainEnabled;
+            set
+            {
+                SetProperty(Internal.TargetChain.IsChainEnabled, value, Internal,
+                    (model, prop) => model.TargetChain.IsChainEnabled = prop);
+                UpdateCost();
+            }
+        }
+
+        public int MaxDistanceBetweenTargetsInChain
+        {
+            get => Internal.TargetChain.MaxDistanceBetweenTargets;
+            set
+            {
+                SetProperty(Internal.TargetChain.MaxDistanceBetweenTargets, value, Internal,
+                    (model, prop) => model.TargetChain.MaxDistanceBetweenTargets = prop);
+                UpdateCost();
+            }
+        }
+
+        public int MaxTargetsCountInChain
+        {
+            get => Internal.TargetChain.MaxTargetsCount;
+            set
+            {
+                SetProperty(Internal.TargetChain.MaxTargetsCount, value, Internal,
+                    (model, prop) => model.TargetChain.MaxTargetsCount = prop);
+                UpdateCost();
+            }
+        }
+
+        public ObstacleOptionVM ObstacleBetweenTargetsInChain
+        {
+            get
+            {
+                EObstacleEquivalent equivalent = Internal.TargetChain.ObstacleBetweenTargetsInChain;
+
+                return Obstacles.FirstOrDefault(x => x.Equivalent == equivalent);
+            }
+            set
+            {
+                EObstacleEquivalent equivalent = value.Equivalent;
+                SetProperty(Internal.TargetChain.ObstacleBetweenTargetsInChain, equivalent, Internal,
+                    (model, prop) => model.TargetChain.ObstacleBetweenTargetsInChain = prop);
+                UpdateCost();
+            }
+        }
+
+        #endregion
     }
 }

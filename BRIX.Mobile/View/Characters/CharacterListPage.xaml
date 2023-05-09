@@ -8,6 +8,7 @@
              xmlns:m="clr-namespace:BRIX.Mobile.Models.Characters"
              x:Class="BRIX.Mobile.View.Characters.CharacterListPage"
              x:DataType="vm:CharacterListPageVM"
+             Shell.TabBarIsVisible="False"
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CharacterListPageTitle}}"
              Padding="0">
 

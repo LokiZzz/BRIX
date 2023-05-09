@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Aspects;
+using BRIX.Library.Aspects.TargetSelection;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {
@@ -12,8 +13,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                     return new ActionPointsAspectModel(actionPointAspect);
                 case TargetSelectionAspect targetSelectionAspect:
                     return new TargetSelectionAspectModel(targetSelectionAspect);
-                case TargetChainAspect targetChainAspect:
-                    return new TargetChainAspectModel(targetChainAspect);
                 default: 
                     return null;
             }

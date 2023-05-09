@@ -1,5 +1,6 @@
 ﻿using BRIX.Lexis;
 using BRIX.Library.Aspects;
+using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Mathematics;
 
 namespace BRIX.Lexica
@@ -21,8 +22,6 @@ namespace BRIX.Lexica
                         return ForActionPoints(apa, language);
                     case TargetSelectionAspect tsa:
                         return ForTargetSelection(tsa, language);
-                    case TargetChainAspect tca:
-                        return ForTargetChain(tca, language);
                     default:
                         return string.Empty;
                 }
@@ -33,7 +32,7 @@ namespace BRIX.Lexica
             }
         }
 
-        private static string ForTargetChain(TargetChainAspect aspect, ELexisLanguage language)
+        private static string ForTargetChain(TargetChainSettings aspect, ELexisLanguage language)
         {
             switch (language)
             {
@@ -95,10 +94,16 @@ namespace BRIX.Lexica
 
         private static string ForTargetSelectionRUS(TargetSelectionAspect aspect)
         {
-            if(aspect.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
+            string result = string.Empty;
+
+            if(aspect.Strategy == ETargetSelectionStrategy.Area)
+            {
+                result = "Эффект применяется к самому персонажу.";
+            }
+            else if (aspect.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
             {
                 string located = aspect.NTAD.TargetsCount > 1 ? "расположенных" : "расположенную";
-                string result = $"Вы можете выбрать " +
+                result = $"Вы можете выбрать " +
                     $"{Numbers.RUSDeclension(aspect.NTAD.TargetsCount, "цель")}, " +
                     $"{located} не далее, чем {Numbers.RUSDeclension(aspect.NTAD.DistanceInMeters, "метр")} " +
                     $"от персонажа.";
@@ -107,12 +112,10 @@ namespace BRIX.Lexica
                 {
                     result += " Цель должна выбираться случайным образом.";
                 }
-
-                return result;
             }
-            else
+            else if (aspect.Strategy == ETargetSelectionStrategy.Area)
             {
-                string result = $"Эффект будет применён ко всем целям в области. Область — это " +
+                result = $"Эффект будет применён ко всем целям в области. Область — это " +
                     $"{ShapeLexis.GetLexis(aspect.Area.Shape, ELexisLanguage.Russian)}. " +
                     $"Область может быть размещена под любым углом. " +
                     $"Максимальное расстояние между персонажем и ближайшей к нему точкой области: " +
@@ -123,30 +126,41 @@ namespace BRIX.Lexica
                     result += $" При использовании способности персонаж по желанию может исключить из области " +
                         $"{Numbers.RUSDeclension(aspect.Area.ExcludedTargetsCount, "цель")}.";
                 }
-
-                return result;
             }
+
+            if(aspect.TargetChain.IsChainEnabled)
+            {
+                result += $" Цели поражаются по цепи (" +
+                    $"{Numbers.RUSDeclension(aspect.TargetChain.MaxTargetsCount, "цель")}, " +
+                    $"звено: {Numbers.RUSDeclension(aspect.TargetChain.MaxDistanceBetweenTargets, "метр")}).";
+            }
+
+            return result;
         }
 
         private static string ForTargetSelectionENG(TargetSelectionAspect aspect)
         {
-            if (aspect.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
+            string result = string.Empty;
+
+            if (aspect.Strategy == ETargetSelectionStrategy.Area)
             {
-                string result = $"You can select up to " +
+                result = "The effect is applied to the character himself.";
+            }
+            else if (aspect.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
+            {
+                result = $"You can select up to " +
                     $"{Numbers.ENGDeclension(aspect.NTAD.TargetsCount, "target")} " +
-                    $"located within {Numbers.RUSDeclension(aspect.NTAD.DistanceInMeters, "метр")} " +
+                    $"located within {Numbers.RUSDeclension(aspect.NTAD.DistanceInMeters, "meter")} " +
                     $"of the character.";
 
                 if (aspect.NTAD.IsTargetSelectionIsRandom)
                 {
                     result += " The target must be chosen randomly.";
                 }
-
-                return result;
             }
-            else
+            else if (aspect.Strategy == ETargetSelectionStrategy.Area)
             {
-                string result = $"The effect will be applied to all targets in the area. " +
+                result = $"The effect will be applied to all targets in the area. " +
                     $"The area is a {ShapeLexis.GetLexis(aspect.Area.Shape, ELexisLanguage.English)}. " +
                     $"The area can be placed at any angle. " +
                     $"The maximum distance between the character and the closest point of the area to him: " +
@@ -157,9 +171,16 @@ namespace BRIX.Lexica
                     result += $" When using the ability, the character can optionally exclude " +
                         $"{Numbers.RUSDeclension(aspect.Area.ExcludedTargetsCount, "target")} from the area.";
                 }
-
-                return result;
             }
+
+            if (aspect.TargetChain.IsChainEnabled)
+            {
+                result += $"Targets are hit in a chain (" +
+                    $"{Numbers.ENGDeclension(aspect.TargetChain.MaxTargetsCount, "target")}, " +
+                    $"link distance: {Numbers.ENGDeclension(aspect.TargetChain.MaxDistanceBetweenTargets, "meter")}).";
+            }
+
+            return result;
         }
     }
 }

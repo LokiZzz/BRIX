@@ -75,6 +75,17 @@
                             <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyArea}}" Style="{StaticResource StrategyLabel}"  InputTransparent="True"/>
                             <CheckBox IsChecked="{Binding IsAREA}" Style="{StaticResource StrategyCheckBox}" InputTransparent="True"/>
                         </Grid>
+                        <Grid>
+                            <Button Style="{StaticResource StrategyButton}" Command="{Binding SetCharacterCommand}">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding IsCharacter}" Value="True">
+                                        <Setter Property="BackgroundColor" Value="{StaticResource BRIXOrange}" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                            <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyCharacter}}" Style="{StaticResource StrategyLabel}"  InputTransparent="True"/>
+                            <CheckBox IsChecked="{Binding IsCharacter}" Style="{StaticResource StrategyCheckBox}" InputTransparent="True"/>
+                        </Grid>
                     </VerticalStackLayout>
                 </Border>
                 <!--NTAD-->
@@ -242,6 +253,55 @@
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionExcludeTargets}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionEcludeTargetsHint}}"/>
                         <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionEcludeTargetsField}}" Text="{Binding Aspect.ExcludedTargetsCount}"/>
+                    </VerticalStackLayout>
+                </Border>
+                <!--Chracter himself-->
+                <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding IsCharacter}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyCharacter}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyCharacterHint}}"/>
+                    </VerticalStackLayout>
+                </Border>
+                <!--Target chain-->
+                <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding ShowChainSettings}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectTargetChain}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetChainHint}}"/>
+                        <HorizontalStackLayout>
+                            <CheckBox IsChecked="{Binding Aspect.IsChainEnabled}"/>
+                            <Label 
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center"
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetChainEnable}}"/>
+                        </HorizontalStackLayout>
+                        <controls:FramedEntry 
+                            Text="{Binding Aspect.MaxDistanceBetweenTargetsInChain}" 
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetChainMaxDistance}}"
+                            IsVisible="{Binding Aspect.IsChainEnabled}"/>
+                        <controls:FramedEntry 
+                            Text="{Binding Aspect.MaxTargetsCountInChain}" 
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetChainMaxCount}}"
+                            IsVisible="{Binding Aspect.IsChainEnabled}"/>
+                        <Label 
+                            Style="{StaticResource TitleLabel}" 
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleBetweenTargetsInChain}}"
+                            IsVisible="{Binding Aspect.IsChainEnabled}"/>
+                        <Label 
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetChainObstacleHint}}"
+                            IsVisible="{Binding Aspect.IsChainEnabled}"/>
+                        <controls:PickerButton
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleEquivalent}}"
+                            Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleEquivalent}}"
+                            ItemSource="{Binding Aspect.Obstacles}"
+                            SelectedItem="{Binding Aspect.ObstacleBetweenTargetsInChain}"
+                            DisplayMember="LocalizedName"
+                            IsVisible="{Binding Aspect.IsChainEnabled}">
+                            <controls:PickerButton.ItemTemplate>
+                                <DataTemplate x:DataType="vm:ObstacleOptionVM">
+                                    <controls:PickerItem Text="{Binding LocalizedName}"/>
+                                </DataTemplate>
+                            </controls:PickerButton.ItemTemplate>
+                        </controls:PickerButton>
                     </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>

@@ -1,8 +1,29 @@
-﻿namespace BRIX.Library.Aspects
+﻿using BRIX.Library.Mathematics;
+
+namespace BRIX.Library.Aspects.TargetSelection
 {
-    public class TargetSelectionRestrictionsApsect : MultiConditionalAspect<ETargetSelectionRestrictions>
+    public class TargetSelectionRestrictionsSettings
     {
-        public override Dictionary<ETargetSelectionRestrictions, int> ConditionToCoeficientMap => new Dictionary<ETargetSelectionRestrictions, int>
+        public List<ETargetSelectionRestrictions> Conditions { get; set; } = new List<ETargetSelectionRestrictions>();
+
+        public double GetCoefficient()
+        {
+            if (!Conditions.Any())
+            {
+                return 1;
+            }
+
+            double coeficient = ((int)(object)Conditions.First()).ToCoeficient();
+
+            foreach (ETargetSelectionRestrictions condition in Conditions.Skip(1))
+            {
+                coeficient *= ConditionToCoeficientMap[condition].ToCoeficient();
+            }
+
+            return coeficient;
+        }
+
+        public Dictionary<ETargetSelectionRestrictions, int> ConditionToCoeficientMap => new Dictionary<ETargetSelectionRestrictions, int>
         {
             { ETargetSelectionRestrictions.SeeTarget, -10 },
             { ETargetSelectionRestrictions.TargetSeesCharacter, -5 },

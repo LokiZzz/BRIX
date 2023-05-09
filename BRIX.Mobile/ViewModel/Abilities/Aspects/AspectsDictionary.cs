@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Aspects;
+using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Services;
@@ -24,12 +25,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 Icon = AwesomeRPG.ArcheryTarget,
                 EditPage = typeof(TargetSelectionAspectPage),
                 LibraryAspectType = typeof(TargetSelectionAspect),
-            }},
-            { typeof(TargetChainAspectModel), new AspectUtilityModel() {
-                Name = _localization[Resources.Localizations.LocalizationKeys.AspectTargetChain].ToString(),
-                Icon = AwesomeRPG.PlayerThunderStruck,
-                EditPage = typeof(TargetChainAspectPage),
-                LibraryAspectType = typeof(TargetChainAspect),
             }},
         };
 

@@ -190,13 +190,13 @@
                     SelectedIndicatorColor="{StaticResource BRIXWhite}"
                     HorizontalOptions="Center"/>
 
-                <Border Style="{StaticResource SideMarginBlockBorder}" HeightRequest="500">
+                <Border Style="{StaticResource SideMarginBlockBorder}">
                     <Grid RowDefinitions="auto,auto,auto,auto" ColumnDefinitions="*,auto,auto">
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Tags}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
                     </Grid>
                 </Border>
 
-                <Border Style="{StaticResource SideMarginBlockBorder}" HeightRequest="400">
+                <Border Style="{StaticResource SideMarginBlockBorder}">
                     <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Abilities}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
                     </Grid>

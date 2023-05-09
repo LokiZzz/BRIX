@@ -70,7 +70,6 @@ public static class MauiProgram
         builder.RegisterView<HealDamageEffectPage, HealDamageEffectPageVM>();
         builder.RegisterView<ActionPointAspectPage, ActionPointAspectPageVM>();
         builder.RegisterView<TargetSelectionAspectPage, TargetSelectionAspectPageVM>();
-        builder.RegisterView<TargetChainAspectPage, TargetChainAspectPageVM>();
 
         builder.RegisterView<SettingsPage, SettingsPageVM>(false);
 

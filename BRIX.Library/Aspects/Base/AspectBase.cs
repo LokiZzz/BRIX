@@ -2,8 +2,6 @@
 {
     public abstract class AspectBase
     {
-        //public virtual bool IsEnabled { get; set; } = true;
-
         /// <summary>
         /// Показывает, синхронизируется ли аспект с другими аспектами того же типа в других эффектах способности.
         /// </summary>

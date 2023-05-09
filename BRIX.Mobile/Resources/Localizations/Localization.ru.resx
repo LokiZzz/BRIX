@@ -474,6 +474,12 @@
   <data name="TargetSelectionStratedyAreaHint" xml:space="preserve">
     <value>С этой стратегией эффект применяется на располагающиеся в заданной области цели. Все параметры области указываются в метрах. Область может быть размещена под любым углом относительно персонажа, а расстояние до области — это расстояние от персонажа до ближайшей точки этой области.</value>
   </data>
+  <data name="TargetSelectionStratedyCharacter" xml:space="preserve">
+    <value>Цель — это сам персонаж</value>
+  </data>
+  <data name="TargetSelectionStratedyCharacterHint" xml:space="preserve">
+    <value>Целью является сам персонаж, использующий способность.</value>
+  </data>
   <data name="TargetSelectionStratedyNTAD" xml:space="preserve">
     <value>Несколько целей на расстоянии</value>
   </data>
