@@ -66,11 +66,6 @@
                                     <Border Style="{StaticResource BlockBorder}" HeightRequest="75">
                                         <Grid ColumnDefinitions="*,auto">
                                             <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
-                                            <Button 
-                                                Style="{StaticResource UpgradeSquareButton}"
-                                                Grid.Column="1"
-                                                Command="{Binding Source={x:Reference listView}, Path= BindingContext.UpgradeCommand}"
-                                                CommandParameter="{Binding}"/>
                                         </Grid>
                                     </Border>
 

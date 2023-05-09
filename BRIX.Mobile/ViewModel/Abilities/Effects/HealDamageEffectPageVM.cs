@@ -14,17 +14,33 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 {
     public partial class HealDamageEffectPageVM : ViewModelBase, IQueryAttributable
     {
-        [ObservableProperty]
         private EEditingMode _mode;
+        public EEditingMode Mode
+        {
+            get => _mode;
+            set => SetProperty(ref _mode, value);
+        }
 
-        [ObservableProperty]
         private DamageEffectModel _damage = new();
+        public DamageEffectModel Damage
+        {
+            get => _damage;
+            set => SetProperty(ref _damage, value);
+        }
 
-        [ObservableProperty]
         private AspectPanelViewModel _aspects;
+        public AspectPanelViewModel Aspects
+        {
+            get => _aspects;
+            set => SetProperty(ref _aspects, value);
+        }
 
-        [ObservableProperty]
         private AbilityCostMonitorPanelVM _costMonitor;
+        public AbilityCostMonitorPanelVM CostMonitor
+        {
+            get => _costMonitor;
+            set => SetProperty(ref _costMonitor, value);
+        }
 
         [RelayCommand]
         private async Task EditFormula()
@@ -56,7 +72,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                     );
                     break;
                 case EEditingMode.Edit:
-                case EEditingMode.Upgrade:
                     await Navigation.Back(stepsBack: 1,
                         (NavigationParameters.Effect, Damage),
                         (NavigationParameters.EditMode, Mode)
@@ -110,7 +125,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                     CostMonitor.Ability.AddEffect(Damage);
                     break;
                 case EEditingMode.Edit:
-                case EEditingMode.Upgrade:
                     CostMonitor.Ability.UpdateEffect(Damage);
                     break;
             }

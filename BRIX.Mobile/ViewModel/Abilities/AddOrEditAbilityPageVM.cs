@@ -28,17 +28,34 @@ namespace BRIX.Mobile.ViewModel.Abilities
             _characterService = characterService;
         }
 
-        [ObservableProperty]
         private AbilityModel _ability;
+        public AbilityModel Ability
+        {
+            get => _ability;
+            set => SetProperty(ref _ability, value);
+        }
 
-        [ObservableProperty]
+
         private AbilityCostMonitorPanelVM _costMonitor;
+        public AbilityCostMonitorPanelVM CostMonitor
+        {
+            get => _costMonitor;
+            set => SetProperty(ref _costMonitor, value);
+        }
 
-        [ObservableProperty]
         private EEditingMode _mode;
+        public EEditingMode Mode
+        {
+            get => _mode;
+            set => SetProperty(ref _mode, value);
+        }
 
-        [ObservableProperty]
         private string _title;
+        public string Title
+        {
+            get => _title;
+            set => SetProperty(ref _title, value);
+        }
 
         [RelayCommand]
         public async Task Save()
@@ -100,9 +117,6 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 case EEditingMode.Edit:
                     Title = _localization[LocalizationKeys.AddOrEditAbilityPageTitle_Edit].ToString();
                     break;
-                case EEditingMode.Upgrade:
-                    Title = _localization[LocalizationKeys.AddOrEditAbilityPageTitle_Upgrade].ToString();
-                    break;
             }
 
             return Task.CompletedTask;
@@ -141,7 +155,6 @@ namespace BRIX.Mobile.ViewModel.Abilities
                         Ability.AddEffect(editedEffect);
                         break;
                     case EEditingMode.Edit:
-                    case EEditingMode.Upgrade:
                         Ability.UpdateEffect(editedEffect);
                         break;
                 }

@@ -31,11 +31,20 @@ namespace BRIX.Mobile.ViewModel.Characters
             );
         }
 
-        [ObservableProperty]
         private CharacterModel _character;
+        public CharacterModel Character
+        {
+            get => _character;
+            set => SetProperty(ref _character, value);
+        }
 
-        [ObservableProperty]
+
         private bool _showHelp;
+        public bool ShowHelp
+        {
+            get => _showHelp;
+            set => SetProperty(ref _showHelp, value);
+        }
 
         [RelayCommand]
         private void HideHelp()
@@ -58,15 +67,6 @@ namespace BRIX.Mobile.ViewModel.Characters
             await Navigation.NavigateAsync<AddOrEditAbilityPage>(
                 (NavigationParameters.Ability, ability.Copy()),
                 (NavigationParameters.EditMode, EEditingMode.Edit)
-            );
-        }
-
-        [RelayCommand]
-        private async void Upgrade(AbilityModel ability)
-        {
-            await Navigation.NavigateAsync<AddOrEditAbilityPage>(
-                (NavigationParameters.Ability, ability.Copy()),
-                (NavigationParameters.EditMode, EEditingMode.Upgrade)
             );
         }
 
@@ -130,7 +130,6 @@ namespace BRIX.Mobile.ViewModel.Characters
                         Character.AddAbility(editedAbility);
                         break;
                     case EEditingMode.Edit:
-                    case EEditingMode.Upgrade:
                         Character.UpdateAbility(editedAbility);
                         break;
                 }
