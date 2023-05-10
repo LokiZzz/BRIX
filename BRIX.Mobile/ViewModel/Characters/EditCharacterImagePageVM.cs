@@ -81,14 +81,8 @@ namespace BRIX.Mobile.ViewModel.Characters
                 ContentX = 0;
                 ContentY = 0;
                 ContentScale = 1;
-
-                if (result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase)
-                    || result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase)
-                    || result.FileName.EndsWith("gif", StringComparison.OrdinalIgnoreCase))
-                {
-                    _imagePath = result.FullPath;
-                    Image = ImageSource.FromFile(result.FullPath);
-                }
+                _imagePath = result.FullPath;
+                Image = ImageSource.FromFile(result.FullPath);
             }
         }
 

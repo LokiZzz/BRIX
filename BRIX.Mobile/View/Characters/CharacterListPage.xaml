@@ -24,7 +24,7 @@
                 <Button Style="{StaticResource HideHintButton}" Command="{Binding HideHelpCommand}"/>
             </VerticalStackLayout>
         </Border>
-        
+
         <Grid Grid.Row="2">
             <CollectionView
                 x:Name="listView"
@@ -61,22 +61,25 @@
                             <Grid Margin="10,0" >
                                 <Border 
                                     Style="{StaticResource BlockBorder}"
-                                    HeightRequest="150"
+                                    Padding="0"
+                                    HeightRequest="250" 
                                     StrokeShape="RoundRectangle 10,50,50,10">
-                                    <Grid Margin="-20">
-                                        <Image 
-                                            Grid.RowSpan="2"
-                                            Source="fox_character_moq.jpeg"
-                                            Aspect="AspectFill"/>
-                                        <Grid Margin="10" RowDefinitions="*,*">
-                                            <Grid Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
-                                                <Border Style="{StaticResource TransparentBorder}" Margin="-10,-5"/>
+                                    <Grid>
+                                        <controls:ZoomContainer 
+                                            BackgroundColor="{StaticResource BRIXMedium}" 
+                                            InputTransparent="True"
+                                            ContentX="{Binding PortraitX}"
+                                            ContentY="{Binding PortraitY}"
+                                            ContentScale="{Binding PortraitS}">
+                                            <Image Source="{Binding PortraitImage}" IsAnimationPlaying="True"/>
+                                        </controls:ZoomContainer>
+                                        <Grid Margin="10">
+                                            <Border Style="{StaticResource TransparentBorder}" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
                                                 <Label Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
-                                            </Grid>
-                                            <Grid Grid.Row="1" VerticalOptions="End" HorizontalOptions="End" Padding="10,5" >
-                                                <Border Style="{StaticResource TransparentBorder}" Margin="-10,-5"/>
+                                            </Border>
+                                            <Border Style="{StaticResource TransparentBorder}" VerticalOptions="End" HorizontalOptions="End" Padding="10,5">
                                                 <Label Style="{StaticResource TitleLabel}" Text="{lcz:Format ValuePath=Level, FormatPath={x:Static lcz:LocalizationKeys.LevelFormat}}"/>
-                                            </Grid>
+                                            </Border>
                                         </Grid>
                                     </Grid>
                                 </Border>

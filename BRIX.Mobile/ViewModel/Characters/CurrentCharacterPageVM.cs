@@ -38,17 +38,6 @@ namespace BRIX.Mobile.ViewModel.Characters
         [ObservableProperty]
         private ObservableCollection<ExperienceInfoVM> _expCards;
 
-        private ImageSource _portrait;
-        public ImageSource Portrait
-        {
-            get => _portrait;
-            set
-            {
-                SetProperty(ref _portrait, value);
-                ShowImagePlaceholder = value == null;
-            }
-        }
-
         private bool _showImagePlaceholder = true;
         public bool ShowImagePlaceholder
         {
@@ -168,7 +157,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             if (PlayerHaveCharacter)
             {
                 UpdateExpCards();
-                SetPortrait();
+                ShowImagePlaceholder = Character.PortraitImage == null;
             }
 
             // Возможно такие вызовы уползут в CharacterService, но пока что достаточно этого.
@@ -211,15 +200,6 @@ namespace BRIX.Mobile.ViewModel.Characters
             ExpCards.Last().Current = Character.FreeExperience;
             ExpCards.Last().Target = Character.Experience;
             ExpCards.Last().Title = _localization[LocalizationKeys.FreeExperience] as string;
-        }
-        
-        private void SetPortrait()
-        {
-            if (!string.IsNullOrEmpty(Character.InternalModel.Portrait?.Path))
-            {
-                FileResult file = new(Character.InternalModel.Portrait.Path);
-                Portrait = ImageSource.FromFile(file.FullPath);
-            }
         }
 
         private async Task SaveChanges()

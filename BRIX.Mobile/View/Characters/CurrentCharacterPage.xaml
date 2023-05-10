@@ -65,7 +65,7 @@
                     Style="{StaticResource SideMarginBlockBorder}"
                     Padding="0"
                     HeightRequest="250" 
-                    StrokeShape="RoundRectangle 10,50,30,10">
+                    StrokeShape="RoundRectangle 10,50,50,10">
                     <Grid>
                         <controls:ZoomContainer 
                             BackgroundColor="{StaticResource BRIXMedium}" 
@@ -73,7 +73,7 @@
                             ContentX="{Binding Character.PortraitX}"
                             ContentY="{Binding Character.PortraitY}"
                             ContentScale="{Binding Character.PortraitS}">
-                            <Image Source="{Binding Portrait}" IsAnimationPlaying="True"/>
+                            <Image Source="{Binding Character.PortraitImage}" IsAnimationPlaying="True"/>
                         </controls:ZoomContainer>
                         <Grid Margin="10">
                             <Label 

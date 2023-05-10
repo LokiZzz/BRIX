@@ -67,6 +67,21 @@ namespace BRIX.Mobile.Models.Characters
             set => SetProperty(InternalModel.Portrait.S, value, InternalModel, (character, s) => character.Portrait.S = s);
         }
 
+        public ImageSource PortraitImage
+        {
+            get
+            {
+                if(!string.IsNullOrEmpty(InternalModel.Portrait.Path))
+                {
+                    return ImageSource.FromFile(InternalModel.Portrait.Path);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         public int MaxHealth => InternalModel.MaxHealth;
 
         public int CurrentHealth
