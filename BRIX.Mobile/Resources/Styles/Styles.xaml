@@ -4,7 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
-    xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts">
+    xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+    xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations">
 
     <Style TargetType="ScrollView">
         <Setter Property="VerticalScrollBarVisibility" Value="Never"/>
@@ -44,6 +45,16 @@
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="BorderWidth" Value="1" />
         <Setter Property="BorderColor" Value="{StaticResource BRIXLight}" />
+        <Setter Property="TextColor" Value="{StaticResource BRIXWhite}" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="HideHintButton" BasedOn="{StaticResource LightButton}">
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="Margin" Value="0,20,0,0" />
+        <Setter Property="Text" Value="{lcz:Translate Name={x:Static lcz:LocalizationKeys.HideTooltip}}" />
+        <Setter Property="TextColor" Value="{StaticResource BRIXLight}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Padding" Value="10,5" />
         <Setter Property="TextColor" Value="{StaticResource BRIXWhite}" />
     </Style>
 

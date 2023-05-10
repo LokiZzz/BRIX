@@ -21,12 +21,7 @@
                 <VerticalStackLayout>
                     <Label Style="{StaticResource ParagraphTitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Help}}"/>
                     <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AbilitiesListHelpText}}"/>
-                    <Button 
-                        Style="{StaticResource LightButton}" 
-                        HorizontalOptions="End" 
-                        Margin="0,20,0,0"
-                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.HideTooltip}}"
-                        Command="{Binding HideHelpCommand}"/>
+                    <Button Style="{StaticResource HideHintButton}" Command="{Binding HideHelpCommand}"/>
                 </VerticalStackLayout>
             </Border>
 

@@ -121,7 +121,7 @@
     <value>Abilities</value>
   </data>
   <data name="AbilitiesListHelpText" xml:space="preserve">
-    <value>Tap arrow up to upgrade, swipe right to edit and swipe left to delete.</value>
+    <value>Swipe right to edit and swipe left to delete.</value>
   </data>
   <data name="AbilityCost" xml:space="preserve">
     <value>Ability cost:</value>

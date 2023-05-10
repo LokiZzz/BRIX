@@ -70,7 +70,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tap arrow up to upgrade, swipe right to edit and swipe left to delete..
+        ///   Looks up a localized string similar to Swipe right to edit and swipe left to delete..
         /// </summary>
         public static string AbilitiesListHelpText {
             get {
