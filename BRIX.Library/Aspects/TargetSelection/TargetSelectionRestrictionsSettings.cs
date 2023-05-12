@@ -4,7 +4,7 @@ namespace BRIX.Library.Aspects.TargetSelection
 {
     public class TargetSelectionRestrictionsSettings
     {
-        public List<ETargetSelectionRestrictions> Conditions { get; set; } = new List<ETargetSelectionRestrictions>();
+        public List<ETargetSelectionRestrictions, > Conditions { get; set; } = new List<ETargetSelectionRestrictions>();
 
         public double GetCoefficient()
         {
@@ -29,13 +29,10 @@ namespace BRIX.Library.Aspects.TargetSelection
             { ETargetSelectionRestrictions.TargetSeesCharacter, -5 },
             { ETargetSelectionRestrictions.HearTarget, -15 },
             { ETargetSelectionRestrictions.TargetHearsCharacter, -10 },
-            { ETargetSelectionRestrictions.DetermineTargetSomehow, -20 },
-            { ETargetSelectionRestrictions.TargetDeterminesCharacterSomehow, -25 },
 
-            { ETargetSelectionRestrictions.BeOrganic, -20 },
-            { ETargetSelectionRestrictions.BeNotOrganic, -20 },
-            { ETargetSelectionRestrictions.HaveSoul, -20 },
-            { ETargetSelectionRestrictions.HaveNoSoul, -20 },
+            { ETargetSelectionRestrictions.BeAlive, -20 },
+            { ETargetSelectionRestrictions.BeAnObject, -20 },
+            { ETargetSelectionRestrictions.BeViable, -20 },
 
             { ETargetSelectionRestrictions.LowRarityProperty, -10 },
             { ETargetSelectionRestrictions.MediumRarityProperty, -20 },
@@ -49,13 +46,10 @@ namespace BRIX.Library.Aspects.TargetSelection
         TargetSeesCharacter,
         HearTarget,
         TargetHearsCharacter,
-        DetermineTargetSomehow,
-        TargetDeterminesCharacterSomehow,
 
-        BeOrganic,
-        BeNotOrganic,
-        HaveSoul,
-        HaveNoSoul,
+        BeAlive,
+        BeAnObject,
+        BeViable,
 
         LowRarityProperty,
         MediumRarityProperty,

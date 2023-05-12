@@ -150,6 +150,9 @@
   <data name="AddOrEditCharacterPageTitle_Edit" xml:space="preserve">
     <value>Персонаж</value>
   </data>
+  <data name="AddRestriction" xml:space="preserve">
+    <value>Добавить ограничение</value>
+  </data>
   <data name="Appearance" xml:space="preserve">
     <value>Внешность</value>
   </data>
@@ -179,6 +182,15 @@
   </data>
   <data name="Backstory" xml:space="preserve">
     <value>Предыстория</value>
+  </data>
+  <data name="BeAlive" xml:space="preserve">
+    <value>Must be alve</value>
+  </data>
+  <data name="BeAnObject" xml:space="preserve">
+    <value>Must be an object</value>
+  </data>
+  <data name="BeViable" xml:space="preserve">
+    <value>Must be viable</value>
   </data>
   <data name="BrickWall" xml:space="preserve">
     <value>Кирпичная стена</value>
@@ -252,6 +264,9 @@
   <data name="Description" xml:space="preserve">
     <value>Описание</value>
   </data>
+  <data name="DetermineTargetSomehow" xml:space="preserve">
+    <value>Must be determined</value>
+  </data>
   <data name="DiceValuePopupHint" xml:space="preserve">
     <value>Введите значение в формате, обычно используемом для формул с игральными костями. Например, 3d6 + 2d4 + 5. В таких формулах число перед «d» означает количество костей, а число после «d» — количество граней на костях. Вы можете использовать нестандартные кости, такие как d11 или d19, если хотите.</value>
   </data>
@@ -291,11 +306,17 @@
   <data name="Health" xml:space="preserve">
     <value>Здоровье</value>
   </data>
+  <data name="HearTarget" xml:space="preserve">
+    <value>Must be heard</value>
+  </data>
   <data name="Help" xml:space="preserve">
     <value>Помощь</value>
   </data>
   <data name="HideTooltip" xml:space="preserve">
     <value>Скрыть подсказку</value>
+  </data>
+  <data name="HighRarityProperty" xml:space="preserve">
+    <value>Must have an high rarity property</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Язык</value>
@@ -308,6 +329,12 @@
   </data>
   <data name="Login" xml:space="preserve">
     <value>Логин</value>
+  </data>
+  <data name="LowRarityProperty" xml:space="preserve">
+    <value>Must have an low rarity property</value>
+  </data>
+  <data name="MediumRarityProperty" xml:space="preserve">
+    <value>Must have an medium rarity property</value>
   </data>
   <data name="MetalArmor" xml:space="preserve">
     <value>Металлический доспех</value>
@@ -366,6 +393,9 @@
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>
   </data>
+  <data name="SeeTarget" xml:space="preserve">
+    <value>Must be seen</value>
+  </data>
   <data name="SelectCharacterPortrait" xml:space="preserve">
     <value>Выберите портрет персонажа</value>
   </data>
@@ -406,7 +436,7 @@
     <value>Включить цепи целей</value>
   </data>
   <data name="TargetChainHint" xml:space="preserve">
-    <value>Цели могут составлять цепи. Это значит, что после того, как к цели применяется эффект, он также может быть применён к следующей цели, на заданном расстоянии от предыдущей и так далее. К каждой цели в рамках цепи эффект может быть применён только один раз. Расстояние указывается в метрах. Максимальное количество целей в цепи и расстояние между целями ограничено. Персонаж сам выбирает порядок целей в цепи.</value>
+    <value>Цели могут составлять цепи. Это значит, что после того, как к цели применяется эффект, он также может быть применён к следующей цели на заданном расстоянии от предыдущей и так далее. К каждой цели в рамках цепи эффект может быть применён только один раз. Расстояние указывается в метрах. Максимальное количество целей в цепи и расстояние между целями ограничено. Персонаж сам выбирает порядок целей в цепи.</value>
   </data>
   <data name="TargetChainMaxCount" xml:space="preserve">
     <value>Максимальное количество целей</value>
@@ -416,6 +446,12 @@
   </data>
   <data name="TargetChainObstacleHint" xml:space="preserve">
     <value>Эффект не может быть применён к следующей цели в цепи, если между ней и предыдущей целью находится препятствие с указанным эквивалентом прочности или прочнее.</value>
+  </data>
+  <data name="TargetHearsCharacter" xml:space="preserve">
+    <value>Must hear the character</value>
+  </data>
+  <data name="TargetSeesCharacter" xml:space="preserve">
+    <value>Must see the character</value>
   </data>
   <data name="TargetSelectionAreaA" xml:space="preserve">
     <value>Длина (А)</value>
@@ -465,6 +501,12 @@
   <data name="TargetSelectionNTADObstacleHint" xml:space="preserve">
     <value>Эффект не может быть применён к цели, если между ней и персонажем находится препятствие равное эквиваленту прочности или прочнее него.</value>
   </data>
+  <data name="TargetSelectionRestriction" xml:space="preserve">
+    <value>Ограничение выбора целей</value>
+  </data>
+  <data name="TargetSelectionRestrictionHint" xml:space="preserve">
+    <value>Способность будет работать только на целях, которые соответсвуют указанным свойствам. Цель...</value>
+  </data>
   <data name="TargetSelectionStratedyArea" xml:space="preserve">
     <value>Все цели в области</value>
   </data>
@@ -497,6 +539,12 @@
   </data>
   <data name="TargetSelectionVoxelHint" xml:space="preserve">
     <value>Воксель — это куб 1х1 метр. Из таких вокселей можно составлять массив — фигуру области, в которой к целям будет применяться эффект. На рисунке в качестве примера составлена область из пяти вокселей.</value>
+  </data>
+  <data name="TheTarget" xml:space="preserve">
+    <value>The target...</value>
+  </data>
+  <data name="TheTargetCanBeAnything" xml:space="preserve">
+    <value>Может быть кем угодно и чем угодно.</value>
   </data>
   <data name="ThickSteelPlate" xml:space="preserve">
     <value>Толстая стальная плита</value>

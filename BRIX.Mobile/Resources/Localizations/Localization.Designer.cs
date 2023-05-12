@@ -160,6 +160,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add restriction.
+        /// </summary>
+        public static string AddRestriction {
+            get {
+                return ResourceManager.GetString("AddRestriction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Appearance.
         /// </summary>
         public static string Appearance {
@@ -246,6 +255,33 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Backstory {
             get {
                 return ResourceManager.GetString("Backstory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Должна быть живой.
+        /// </summary>
+        public static string BeAlive {
+            get {
+                return ResourceManager.GetString("BeAlive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Должна быть предметом.
+        /// </summary>
+        public static string BeAnObject {
+            get {
+                return ResourceManager.GetString("BeAnObject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Должна быть дееспособной.
+        /// </summary>
+        public static string BeViable {
+            get {
+                return ResourceManager.GetString("BeViable", resourceCulture);
             }
         }
         
@@ -583,6 +619,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Нужно слышать.
+        /// </summary>
+        public static string HearTarget {
+            get {
+                return ResourceManager.GetString("HearTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help.
         /// </summary>
         public static string Help {
@@ -597,6 +642,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string HideTooltip {
             get {
                 return ResourceManager.GetString("HideTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Должна иметь признак высокой редкости.
+        /// </summary>
+        public static string HighRarityProperty {
+            get {
+                return ResourceManager.GetString("HighRarityProperty", resourceCulture);
             }
         }
         
@@ -633,6 +687,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Должна иметь признак малой редкости.
+        /// </summary>
+        public static string LowRarityProperty {
+            get {
+                return ResourceManager.GetString("LowRarityProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Должна иметь признак средней редкости.
+        /// </summary>
+        public static string MediumRarityProperty {
+            get {
+                return ResourceManager.GetString("MediumRarityProperty", resourceCulture);
             }
         }
         
@@ -808,6 +880,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Нужно видеть.
+        /// </summary>
+        public static string SeeTarget {
+            get {
+                return ResourceManager.GetString("SeeTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select character image.
         /// </summary>
         public static string SelectCharacterPortrait {
@@ -970,6 +1051,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Должна слышать персонажа.
+        /// </summary>
+        public static string TargetHearsCharacter {
+            get {
+                return ResourceManager.GetString("TargetHearsCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Должна видеть персонажа.
+        /// </summary>
+        public static string TargetSeesCharacter {
+            get {
+                return ResourceManager.GetString("TargetSeesCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Length (A).
         /// </summary>
         public static string TargetSelectionAreaA {
@@ -1114,6 +1213,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Target selection restriction.
+        /// </summary>
+        public static string TargetSelectionRestriction {
+            get {
+                return ResourceManager.GetString("TargetSelectionRestriction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The ability will only work on targets that match the specified properties. The target....
+        /// </summary>
+        public static string TargetSelectionRestrictionHint {
+            get {
+                return ResourceManager.GetString("TargetSelectionRestrictionHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All targets in area.
         /// </summary>
         public static string TargetSelectionStratedyArea {
@@ -1209,6 +1326,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string TargetSelectionVoxelHint {
             get {
                 return ResourceManager.GetString("TargetSelectionVoxelHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Цель....
+        /// </summary>
+        public static string TheTarget {
+            get {
+                return ResourceManager.GetString("TheTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can be anybody or anything..
+        /// </summary>
+        public static string TheTargetCanBeAnything {
+            get {
+                return ResourceManager.GetString("TheTargetCanBeAnything", resourceCulture);
             }
         }
         

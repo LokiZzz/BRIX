@@ -4,6 +4,7 @@
              xmlns:v="clr-namespace:BRIX.Mobile.View.Abilities"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities.Aspects"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              x:Class="BRIX.Mobile.View.Abilities.Aspects.TargetSelectionAspectPage"
              x:DataType="vm:TargetSelectionAspectPageVM"
@@ -302,6 +303,30 @@
                                 </DataTemplate>
                             </controls:PickerButton.ItemTemplate>
                         </controls:PickerButton>
+                    </VerticalStackLayout>
+                </Border>
+                <!--Target selection restriction-->
+                <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding ShowChainSettings}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionRestriction}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionRestrictionHint}}"/>
+                        <CollectionView ItemsSource="">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="vm:TargetSelectionRestrictionPropertyVM">
+                                    <Border 
+                                        BackgroundColor="Transparent" 
+                                        StrokeThickness="1" 
+                                        StrokeShape="Rectangle 5,5,5,5"
+                                        Stroke="{StaticResource BRIXDim}">
+                                        <Grid ColumnDefinitions="*, auto">
+                                            <Label Grid.Row="0" Text="{Binding Restriction}"/>
+                                            <Button Grid.Row="1" Text="{x:Static icons:Awesome.Cross}"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TheTargetCanBeAnything}}"/>
                     </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>

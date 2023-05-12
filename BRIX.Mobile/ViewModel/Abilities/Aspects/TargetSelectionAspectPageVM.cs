@@ -3,11 +3,19 @@ using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Mobile.Models.Abilities.Aspects;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 {
     public partial class TargetSelectionAspectPageVM : AspectPageVMBase<TargetSelectionAspectModel>
     {
+        private ObservableCollection<TargetSelectionRestrictionPropertyVM> _restrictions;
+        public ObservableCollection<TargetSelectionRestrictionPropertyVM> Restrictions
+        {
+            get => _restrictions;
+            set => SetProperty(ref _restrictions, value);
+        }
+
         [RelayCommand]
         public void SetNTAD()
         {
@@ -55,6 +63,13 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             }
 
             SetShape(Aspect.AreaType.ToString("G"));
+
+            Restrictions = new (Aspect.Internal.TargetSelectionRestrictions.Conditions.Select(ToRestrictionsVM));
+        }
+
+        private object ToRestrictionsVM(object arg1, int arg2)
+        {
+            throw new NotImplementedException();
         }
 
         private bool _isNTAD = true;
@@ -113,5 +128,10 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         public bool IsCylinder => Shape == EAreaType.Cylinder;
         public bool IsSphere => Shape == EAreaType.Sphere;
         public bool IsArbitrary => Shape == EAreaType.Arbitrary;
+    }
+
+    public class TargetSelectionRestrictionPropertyVM
+    {
+        public string Restriction { get; set; }
     }
 }
