@@ -1,6 +1,8 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Mobile.Models.Abilities.Aspects;
+using BRIX.Mobile.Resources.Localizations;
+using BRIX.Mobile.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -9,6 +11,13 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 {
     public partial class TargetSelectionAspectPageVM : AspectPageVMBase<TargetSelectionAspectModel>
     {
+        public TargetSelectionAspectPageVM(ILocalizationResourceManager localization)
+        {
+            Localization = localization;
+        }
+
+        public ILocalizationResourceManager Localization { get; }
+
         private ObservableCollection<TargetSelectionRestrictionPropertyVM> _restrictions;
         public ObservableCollection<TargetSelectionRestrictionPropertyVM> Restrictions
         {
@@ -51,6 +60,18 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             Aspect.AreaType = parsedShape;
         }
 
+        [RelayCommand]
+        public async Task AddRestriction()
+        {
+
+        }
+
+        [RelayCommand]
+        public void DeleteRestriction(TargetSelectionRestrictionPropertyVM property)
+        {
+
+        }
+
         public override void Initialize()
         {
             if (Aspect.Internal.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
@@ -64,12 +85,31 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
             SetShape(Aspect.AreaType.ToString("G"));
 
+            //Test
+            Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((ETargetSelectionRestrictions.SeeTarget, string.Empty));
+            Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((ETargetSelectionRestrictions.HearTarget, string.Empty));
+            Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((ETargetSelectionRestrictions.LowRarityProperty, "Должна быть эльфом"));
+
             Restrictions = new (Aspect.Internal.TargetSelectionRestrictions.Conditions.Select(ToRestrictionsVM));
         }
 
-        private object ToRestrictionsVM(object arg1, int arg2)
+        private TargetSelectionRestrictionPropertyVM ToRestrictionsVM((ETargetSelectionRestrictions Type, string Comment) restriction)
         {
-            throw new NotImplementedException();
+            TargetSelectionRestrictionPropertyVM restrictionVM = new();
+
+            switch(restriction.Type)
+            {
+                case ETargetSelectionRestrictions.LowRarityProperty:
+                case ETargetSelectionRestrictions.MediumRarityProperty:
+                case ETargetSelectionRestrictions.HighRarityProperty:
+                    restrictionVM.Restriction = restriction.Comment; 
+                    break;
+                default:
+                    restrictionVM.Restriction = Localization[restriction.Type.ToString("G")].ToString();
+                    break;
+            }
+
+            return restrictionVM;
         }
 
         private bool _isNTAD = true;

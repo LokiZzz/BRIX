@@ -184,13 +184,13 @@
     <value>Предыстория</value>
   </data>
   <data name="BeAlive" xml:space="preserve">
-    <value>Must be alve</value>
+    <value>Должна быть живой</value>
   </data>
   <data name="BeAnObject" xml:space="preserve">
-    <value>Must be an object</value>
+    <value>Должна быть предметом</value>
   </data>
   <data name="BeViable" xml:space="preserve">
-    <value>Must be viable</value>
+    <value>Должна быть дееспособной</value>
   </data>
   <data name="BrickWall" xml:space="preserve">
     <value>Кирпичная стена</value>
@@ -264,9 +264,6 @@
   <data name="Description" xml:space="preserve">
     <value>Описание</value>
   </data>
-  <data name="DetermineTargetSomehow" xml:space="preserve">
-    <value>Must be determined</value>
-  </data>
   <data name="DiceValuePopupHint" xml:space="preserve">
     <value>Введите значение в формате, обычно используемом для формул с игральными костями. Например, 3d6 + 2d4 + 5. В таких формулах число перед «d» означает количество костей, а число после «d» — количество граней на костях. Вы можете использовать нестандартные кости, такие как d11 или d19, если хотите.</value>
   </data>
@@ -307,7 +304,7 @@
     <value>Здоровье</value>
   </data>
   <data name="HearTarget" xml:space="preserve">
-    <value>Must be heard</value>
+    <value>Нужно слышать</value>
   </data>
   <data name="Help" xml:space="preserve">
     <value>Помощь</value>
@@ -316,7 +313,7 @@
     <value>Скрыть подсказку</value>
   </data>
   <data name="HighRarityProperty" xml:space="preserve">
-    <value>Must have an high rarity property</value>
+    <value>Должна иметь признак высокой редкости</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Язык</value>
@@ -331,10 +328,10 @@
     <value>Логин</value>
   </data>
   <data name="LowRarityProperty" xml:space="preserve">
-    <value>Must have an low rarity property</value>
+    <value>Должна иметь признак малой редкости</value>
   </data>
   <data name="MediumRarityProperty" xml:space="preserve">
-    <value>Must have an medium rarity property</value>
+    <value>Должна иметь признак средней редкости</value>
   </data>
   <data name="MetalArmor" xml:space="preserve">
     <value>Металлический доспех</value>
@@ -394,7 +391,7 @@
     <value>Сохранить</value>
   </data>
   <data name="SeeTarget" xml:space="preserve">
-    <value>Must be seen</value>
+    <value>Нужно видеть</value>
   </data>
   <data name="SelectCharacterPortrait" xml:space="preserve">
     <value>Выберите портрет персонажа</value>
@@ -448,10 +445,10 @@
     <value>Эффект не может быть применён к следующей цели в цепи, если между ней и предыдущей целью находится препятствие с указанным эквивалентом прочности или прочнее.</value>
   </data>
   <data name="TargetHearsCharacter" xml:space="preserve">
-    <value>Must hear the character</value>
+    <value>Должна слышать персонажа</value>
   </data>
   <data name="TargetSeesCharacter" xml:space="preserve">
-    <value>Must see the character</value>
+    <value>Должна видеть персонажа</value>
   </data>
   <data name="TargetSelectionAreaA" xml:space="preserve">
     <value>Длина (А)</value>
@@ -541,7 +538,7 @@
     <value>Воксель — это куб 1х1 метр. Из таких вокселей можно составлять массив — фигуру области, в которой к целям будет применяться эффект. На рисунке в качестве примера составлена область из пяти вокселей.</value>
   </data>
   <data name="TheTarget" xml:space="preserve">
-    <value>The target...</value>
+    <value>Цель...</value>
   </data>
   <data name="TheTargetCanBeAnything" xml:space="preserve">
     <value>Может быть кем угодно и чем угодно.</value>

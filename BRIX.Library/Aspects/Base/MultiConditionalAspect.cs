@@ -1,10 +1,11 @@
-﻿using BRIX.Library.Mathematics;
+﻿using BRIX.Library.Aspects.TargetSelection;
+using BRIX.Library.Mathematics;
 
 namespace BRIX.Library.Aspects
 {
     public abstract class MultiConditionalAspect<T> : AspectBase where T : Enum
     {
-        public List<(T, string)> Conditions { get; set; } = new List<(T, string)>();
+        public List<(T Type, string Comment)> Conditions { get; set; } = new ();
 
         public override double GetCoefficient()
         {
@@ -13,7 +14,8 @@ namespace BRIX.Library.Aspects
                 return 1;
             }
 
-            double coeficient = ((int)(object)Conditions.First()).ToCoeficient();
+            T restriction = (T)(object)Conditions.First().Type;
+            double coeficient = ConditionToCoeficientMap[restriction].ToCoeficient();
 
             foreach ((T Type, string Comment) condition in Conditions.Skip(1))
             {

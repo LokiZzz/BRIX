@@ -184,13 +184,13 @@
     <value>Backstory</value>
   </data>
   <data name="BeAlive" xml:space="preserve">
-    <value>Должна быть живой</value>
+    <value>Must be alive</value>
   </data>
   <data name="BeAnObject" xml:space="preserve">
-    <value>Должна быть предметом</value>
+    <value>Must be an object</value>
   </data>
   <data name="BeViable" xml:space="preserve">
-    <value>Должна быть дееспособной</value>
+    <value>Must be viable</value>
   </data>
   <data name="BrickWall" xml:space="preserve">
     <value>Brick wall</value>
@@ -304,7 +304,7 @@
     <value>Health</value>
   </data>
   <data name="HearTarget" xml:space="preserve">
-    <value>Нужно слышать</value>
+    <value>Must be heard</value>
   </data>
   <data name="Help" xml:space="preserve">
     <value>Help</value>
@@ -313,7 +313,7 @@
     <value>Ok, hide message</value>
   </data>
   <data name="HighRarityProperty" xml:space="preserve">
-    <value>Должна иметь признак высокой редкости</value>
+    <value>Must have an high rarity property</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
@@ -328,10 +328,10 @@
     <value>Login</value>
   </data>
   <data name="LowRarityProperty" xml:space="preserve">
-    <value>Должна иметь признак малой редкости</value>
+    <value>Must have an low rarity property</value>
   </data>
   <data name="MediumRarityProperty" xml:space="preserve">
-    <value>Должна иметь признак средней редкости</value>
+    <value>Must have an medium rarity property</value>
   </data>
   <data name="MetalArmor" xml:space="preserve">
     <value>Metal armor</value>
@@ -391,7 +391,7 @@
     <value>Save</value>
   </data>
   <data name="SeeTarget" xml:space="preserve">
-    <value>Нужно видеть</value>
+    <value>Must be seen</value>
   </data>
   <data name="SelectCharacterPortrait" xml:space="preserve">
     <value>Select character image</value>
@@ -448,10 +448,10 @@
     <value>The effect cannot be applied to the next target in the chain if there is an obstacle with the indicated durability equivalent or stronger between it and the previous target.</value>
   </data>
   <data name="TargetHearsCharacter" xml:space="preserve">
-    <value>Должна слышать персонажа</value>
+    <value>Must hear the character</value>
   </data>
   <data name="TargetSeesCharacter" xml:space="preserve">
-    <value>Должна видеть персонажа</value>
+    <value>Must see the character</value>
   </data>
   <data name="TargetSelectionAreaA" xml:space="preserve">
     <value>Length (A)</value>
@@ -541,7 +541,7 @@
     <value>A voxel is a 1x1 meter cube. From such voxels, you can make an array — the figure of the area in which the effect will be applied to the targets. In the picture an area of ​​five voxels is composed as an example.</value>
   </data>
   <data name="TheTarget" xml:space="preserve">
-    <value>Цель...</value>
+    <value>The target...</value>
   </data>
   <data name="TheTargetCanBeAnything" xml:space="preserve">
     <value>Can be anybody or anything.</value>

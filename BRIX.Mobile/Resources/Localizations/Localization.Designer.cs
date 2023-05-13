@@ -259,7 +259,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Должна быть живой.
+        ///   Looks up a localized string similar to Must be alive.
         /// </summary>
         public static string BeAlive {
             get {
@@ -268,7 +268,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Должна быть предметом.
+        ///   Looks up a localized string similar to Must be an object.
         /// </summary>
         public static string BeAnObject {
             get {
@@ -277,7 +277,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Должна быть дееспособной.
+        ///   Looks up a localized string similar to Must be viable.
         /// </summary>
         public static string BeViable {
             get {
@@ -619,7 +619,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Нужно слышать.
+        ///   Looks up a localized string similar to Must be heard.
         /// </summary>
         public static string HearTarget {
             get {
@@ -646,7 +646,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Должна иметь признак высокой редкости.
+        ///   Looks up a localized string similar to Must have an high rarity property.
         /// </summary>
         public static string HighRarityProperty {
             get {
@@ -691,7 +691,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Должна иметь признак малой редкости.
+        ///   Looks up a localized string similar to Must have an low rarity property.
         /// </summary>
         public static string LowRarityProperty {
             get {
@@ -700,7 +700,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Должна иметь признак средней редкости.
+        ///   Looks up a localized string similar to Must have an medium rarity property.
         /// </summary>
         public static string MediumRarityProperty {
             get {
@@ -880,7 +880,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Нужно видеть.
+        ///   Looks up a localized string similar to Must be seen.
         /// </summary>
         public static string SeeTarget {
             get {
@@ -1051,7 +1051,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Должна слышать персонажа.
+        ///   Looks up a localized string similar to Must hear the character.
         /// </summary>
         public static string TargetHearsCharacter {
             get {
@@ -1060,7 +1060,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Должна видеть персонажа.
+        ///   Looks up a localized string similar to Must see the character.
         /// </summary>
         public static string TargetSeesCharacter {
             get {
@@ -1330,7 +1330,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Цель....
+        ///   Looks up a localized string similar to The target....
         /// </summary>
         public static string TheTarget {
             get {

@@ -21,6 +21,11 @@ namespace BRIX.Lexis
         /// </summary>
         public static string RUSDeclension(int number, string nominative, bool addNumber = true)
         {
+            if(!NumberDeclensions.TryGetValue(nominative, out _))
+            {
+                return string.Empty;
+            }
+
             string[] titles = new[]
             {
                 NumberDeclensions[nominative][0], // Именительный (день)

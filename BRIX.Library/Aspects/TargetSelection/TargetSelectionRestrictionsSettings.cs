@@ -4,7 +4,7 @@ namespace BRIX.Library.Aspects.TargetSelection
 {
     public class TargetSelectionRestrictionsSettings
     {
-        public List<ETargetSelectionRestrictions, > Conditions { get; set; } = new List<ETargetSelectionRestrictions>();
+        public List<(ETargetSelectionRestrictions Type, string Comment)> Conditions { get; set; } = new ();
 
         public double GetCoefficient()
         {
@@ -13,17 +13,18 @@ namespace BRIX.Library.Aspects.TargetSelection
                 return 1;
             }
 
-            double coeficient = ((int)(object)Conditions.First()).ToCoeficient();
+            ETargetSelectionRestrictions restriction = (ETargetSelectionRestrictions)(object)Conditions.First().Type;
+            double coeficient = ConditionToCoeficientMap[restriction].ToCoeficient();
 
-            foreach (ETargetSelectionRestrictions condition in Conditions.Skip(1))
+            foreach ((ETargetSelectionRestrictions Restriction, string Comment) condition in Conditions.Skip(1))
             {
-                coeficient *= ConditionToCoeficientMap[condition].ToCoeficient();
+                coeficient *= ConditionToCoeficientMap[condition.Restriction].ToCoeficient();
             }
 
             return coeficient;
         }
 
-        public Dictionary<ETargetSelectionRestrictions, int> ConditionToCoeficientMap => new Dictionary<ETargetSelectionRestrictions, int>
+        public Dictionary<ETargetSelectionRestrictions, int> ConditionToCoeficientMap => new ()
         {
             { ETargetSelectionRestrictions.SeeTarget, -10 },
             { ETargetSelectionRestrictions.TargetSeesCharacter, -5 },

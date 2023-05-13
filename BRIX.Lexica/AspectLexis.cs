@@ -118,7 +118,7 @@ namespace BRIX.Lexica
             {
                 result = $"You can select up to " +
                     $"{Numbers.ENGDeclension(aspect.NTAD.TargetsCount, "target")} " +
-                    $"located within {Numbers.RUSDeclension(aspect.NTAD.DistanceInMeters, "meter")} " +
+                    $"located within {Numbers.ENGDeclension(aspect.NTAD.DistanceInMeters, "meter")} " +
                     $"of the character.";
 
                 if (aspect.NTAD.IsTargetSelectionIsRandom)
@@ -137,7 +137,7 @@ namespace BRIX.Lexica
                 if (aspect.Area.ExcludedTargetsCount > 0)
                 {
                     result += $" When using the ability, the character can optionally exclude " +
-                        $"{Numbers.RUSDeclension(aspect.Area.ExcludedTargetsCount, "target")} from the area.";
+                        $"{Numbers.ENGDeclension(aspect.Area.ExcludedTargetsCount, "target")} from the area.";
                 }
             }
 
