@@ -69,7 +69,10 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         public void DeleteRestriction(TargetSelectionRestrictionPropertyVM property)
         {
-
+            Restrictions.Remove(property);
+            var conditionToDelete = Aspect.Internal.TargetSelectionRestrictions.Conditions
+                .Single(x => x.Type == property.Restriction || x.Comment == property.Text);
+            Aspect.Internal.TargetSelectionRestrictions.Conditions.Remove(conditionToDelete);
         }
 
         public override void Initialize()
@@ -95,17 +98,17 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
         private TargetSelectionRestrictionPropertyVM ToRestrictionsVM((ETargetSelectionRestrictions Type, string Comment) restriction)
         {
-            TargetSelectionRestrictionPropertyVM restrictionVM = new();
+            TargetSelectionRestrictionPropertyVM restrictionVM = new() { Restriction = restriction.Type };
 
             switch(restriction.Type)
             {
                 case ETargetSelectionRestrictions.LowRarityProperty:
                 case ETargetSelectionRestrictions.MediumRarityProperty:
                 case ETargetSelectionRestrictions.HighRarityProperty:
-                    restrictionVM.Restriction = restriction.Comment; 
+                    restrictionVM.Text = restriction.Comment; 
                     break;
                 default:
-                    restrictionVM.Restriction = Localization[restriction.Type.ToString("G")].ToString();
+                    restrictionVM.Text = Localization[restriction.Type.ToString("G")].ToString();
                     break;
             }
 
@@ -172,6 +175,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
     public class TargetSelectionRestrictionPropertyVM
     {
-        public string Restriction { get; set; }
+        public ETargetSelectionRestrictions Restriction { get; set; }
+        public string Text { get; set; }
     }
 }

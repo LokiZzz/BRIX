@@ -307,10 +307,13 @@
                 </Border>
                 <!--Target selection restriction-->
                 <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding ShowChainSettings}">
-                    <VerticalStackLayout Spacing="10">
-                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionRestriction}}"/>
-                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionRestrictionHint}}"/>
-                        <CollectionView x:Name="collectionView" ItemsSource="{Binding Restrictions}">
+                    <Grid RowDefinitions="auto,*,auto" RowSpacing="10">
+                        <VerticalStackLayout Grid.Row="0" Spacing="10">
+                            <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionRestriction}}"/>
+                            <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionRestrictionHint}}"/>
+                        </VerticalStackLayout>
+                        
+                        <CollectionView Grid.Row="1" x:Name="collectionView" ItemsSource="{Binding Restrictions}" BackgroundColor="Red">
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
                             </CollectionView.ItemsLayout>
@@ -325,7 +328,7 @@
                                         <Grid ColumnDefinitions="*, auto">
                                             <Label 
                                                 Grid.Column="0" 
-                                                Text="{Binding Restriction}"
+                                                Text="{Binding Text}"
                                                 VerticalOptions="Center"
                                                 VerticalTextAlignment="Center"
                                                 Margin="10,0"/>
@@ -345,12 +348,17 @@
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
-                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TheTargetCanBeAnything}}"/>
-                        <Button 
-                            Style="{StaticResource LightButton}"
-                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AddRestriction}}"
-                            Command="{Binding AddRestrictionCommand}"/>
-                    </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Row="2" Spacing="10">
+                            <Label 
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TheTargetCanBeAnything}}"
+                                Margin="0,0,0,5"/>
+                            <Button 
+                                Style="{StaticResource LightButton}"
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AddRestriction}}"
+                                Command="{Binding AddRestrictionCommand}"/>
+                        </VerticalStackLayout>
+                    </Grid>
                 </Border>
             </VerticalStackLayout>
         </ScrollView>
