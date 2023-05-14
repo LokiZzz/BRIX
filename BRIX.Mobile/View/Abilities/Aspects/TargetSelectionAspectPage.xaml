@@ -264,7 +264,7 @@
                     </VerticalStackLayout>
                 </Border>
                 <!--Target chain-->
-                <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding ShowChainSettings}">
+                <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding ShowNTADAndAREASettings}">
                     <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectTargetChain}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetChainHint}}"/>
@@ -306,14 +306,14 @@
                     </VerticalStackLayout>
                 </Border>
                 <!--Target selection restriction-->
-                <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding ShowChainSettings}">
+                <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding ShowNTADAndAREASettings}">
                     <Grid RowDefinitions="auto,*,auto" RowSpacing="10">
                         <VerticalStackLayout Grid.Row="0" Spacing="10">
                             <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionRestriction}}"/>
                             <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionRestrictionHint}}"/>
                         </VerticalStackLayout>
                         
-                        <CollectionView Grid.Row="1" x:Name="collectionView" ItemsSource="{Binding Restrictions}" BackgroundColor="Red">
+                        <CollectionView Grid.Row="1" x:Name="collectionView" ItemsSource="{Binding Restrictions}">
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
                             </CollectionView.ItemsLayout>
@@ -352,11 +352,13 @@
                         <VerticalStackLayout Grid.Row="2" Spacing="10">
                             <Label 
                                 Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TheTargetCanBeAnything}}"
-                                Margin="0,0,0,5"/>
+                                Margin="0,0,0,5"
+                                IsVisible="{Binding ShowNoRestrictionsText}"/>
                             <Button 
                                 Style="{StaticResource LightButton}"
                                 Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AddRestriction}}"
-                                Command="{Binding AddRestrictionCommand}"/>
+                                Command="{Binding AddRestrictionCommand}"
+                                Margin="0,0,0,1"/>
                         </VerticalStackLayout>
                     </Grid>
                 </Border>

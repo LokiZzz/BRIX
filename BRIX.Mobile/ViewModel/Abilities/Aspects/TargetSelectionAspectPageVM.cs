@@ -25,6 +25,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             set => SetProperty(ref _restrictions, value);
         }
 
+        public bool ShowNoRestrictionsText => !Restrictions.Any();
+
         [RelayCommand]
         public void SetNTAD()
         {
@@ -63,7 +65,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         public async Task AddRestriction()
         {
-
+            OnPropertyChanged(nameof(ShowNoRestrictionsText));
         }
 
         [RelayCommand]
@@ -73,6 +75,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             var conditionToDelete = Aspect.Internal.TargetSelectionRestrictions.Conditions
                 .Single(x => x.Type == property.Restriction || x.Comment == property.Text);
             Aspect.Internal.TargetSelectionRestrictions.Conditions.Remove(conditionToDelete);
+            CostMonitor.UpdateCost();
+            OnPropertyChanged(nameof(ShowNoRestrictionsText));
         }
 
         public override void Initialize()
@@ -94,6 +98,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((ETargetSelectionRestrictions.LowRarityProperty, "Должна быть эльфом"));
 
             Restrictions = new (Aspect.Internal.TargetSelectionRestrictions.Conditions.Select(ToRestrictionsVM));
+            OnPropertyChanged(nameof(ShowNoRestrictionsText));
         }
 
         private TargetSelectionRestrictionPropertyVM ToRestrictionsVM((ETargetSelectionRestrictions Type, string Comment) restriction)
@@ -122,7 +127,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             set
             {
                 SetProperty(ref _isNTAD, value);
-                OnPropertyChanged(nameof(ShowChainSettings));
+                OnPropertyChanged(nameof(ShowNTADAndAREASettings));
             }
         }
 
@@ -134,7 +139,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             set
             {
                 SetProperty(ref _isAREA, value);
-                OnPropertyChanged(nameof(ShowChainSettings));
+                OnPropertyChanged(nameof(ShowNTADAndAREASettings));
             }
         }
 
@@ -145,11 +150,11 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             set
             {
                 SetProperty(ref _isCharacter, value);
-                OnPropertyChanged(nameof(ShowChainSettings));
+                OnPropertyChanged(nameof(ShowNTADAndAREASettings));
             }
         }
 
-        public bool ShowChainSettings => IsNTAD || IsAREA;
+        public bool ShowNTADAndAREASettings => IsNTAD || IsAREA;
 
         private EAreaType _shape;
         public EAreaType Shape

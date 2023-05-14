@@ -134,10 +134,10 @@ public partial class PickerButton : Grid
     public event EventHandler<EventArgs> OpenPickerEvent;
 
     public static readonly BindableProperty OpenPickerCommandProperty = BindableProperty.Create(
-       propertyName: nameof(OpenPickerCommand),
-       returnType: typeof(ICommand),
-       declaringType: typeof(PickerButton),
-       defaultBindingMode: BindingMode.TwoWay);
+        propertyName: nameof(OpenPickerCommand),
+        returnType: typeof(ICommand),
+        declaringType: typeof(PickerButton),
+        defaultBindingMode: BindingMode.TwoWay);
 
     public ICommand OpenPickerCommand
     {
@@ -146,11 +146,11 @@ public partial class PickerButton : Grid
     }
 
     public static readonly BindableProperty IsOpenProperty = BindableProperty.Create(
-      propertyName: nameof(IsOpen),
-      returnType: typeof(bool),
-      declaringType: typeof(PickerButton),
-      propertyChanged: IsOpenPropertyChanged,
-      defaultBindingMode: BindingMode.TwoWay);
+        propertyName: nameof(IsOpen),
+        returnType: typeof(bool),
+        declaringType: typeof(PickerButton),
+        propertyChanged: IsOpenPropertyChanged,
+        defaultBindingMode: BindingMode.TwoWay);
 
     private async static void IsOpenPropertyChanged(BindableObject bindable, object oldValue, object newValue)
     {
