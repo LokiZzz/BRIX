@@ -56,8 +56,6 @@ namespace BRIX.Mobile.ViewModel.Popups
 
         protected override void HandleParameters()
         {
-            bool alright = Parameters.Items.Contains(Parameters.SelectedItems.First());
-
             Items = new(
                 Parameters.Items.Select(x => new PickerItemVM { Item = x, Text = x.ToString() })
             );

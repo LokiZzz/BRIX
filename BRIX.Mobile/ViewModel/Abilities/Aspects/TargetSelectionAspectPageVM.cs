@@ -1,6 +1,8 @@
 ﻿using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Services;
+using BRIX.Mobile.View.Popups;
+using BRIX.Mobile.ViewModel.Popups;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 
@@ -62,16 +64,57 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         public async Task AddRestriction()
         {
-            OnPropertyChanged(nameof(ShowNoRestrictionsText));
+            List<ETargetSelectionRestrictions> customRestrictions = new()
+            {
+                ETargetSelectionRestrictions.LowRarityProperty,
+                ETargetSelectionRestrictions.MediumRarityProperty,
+                ETargetSelectionRestrictions.HighRarityProperty,
+            };
+
+            List<object> allRestrictions = Enum.GetValues<ETargetSelectionRestrictions>()
+                .Select(x => new TargetSelectionRestrictionPropertyVM { 
+                    Restriction = x, 
+                    Text = Localization[x.ToString("G")].ToString() 
+                })
+                .Where(x => !Restrictions.Any(y => y.Restriction == x.Restriction) 
+                    || customRestrictions.Any(y => y == x.Restriction))
+                .Select(x => x as object)
+                .ToList();
+
+            PickerPopupParameters parameters = new()
+            {
+                Title = Resources.Localizations.Localization.TargetSelectionRestriction,
+                Items = allRestrictions,
+            };
+            PickerPopupResult result = await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(parameters);
+
+            if (result != null)
+            {
+                TargetSelectionRestrictionPropertyVM concreteResult = result.SelectedItem
+                    as TargetSelectionRestrictionPropertyVM;
+                
+                if(Restrictions.Any(x => x.Restriction == concreteResult.Restriction && x.Text == concreteResult.Text))
+                {
+                    /// Show popup and exit
+                    return;
+                }
+
+                Restrictions.Add(concreteResult);
+                Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((concreteResult.Restriction, string.Empty));
+                OnPropertyChanged(nameof(ShowNoRestrictionsText));
+            }
         }
 
         [RelayCommand]
         public void DeleteRestriction(TargetSelectionRestrictionPropertyVM property)
         {
             Restrictions.Remove(property);
-            var conditionToDelete = Aspect.Internal.TargetSelectionRestrictions.Conditions
-                .Single(x => x.Type == property.Restriction || x.Comment == property.Text);
+
+            (ETargetSelectionRestrictions Type, string Comment) conditionToDelete = 
+                Aspect.Internal.TargetSelectionRestrictions.Conditions.Single(x => 
+                    x.Type == property.Restriction || x.Comment == property.Text);
             Aspect.Internal.TargetSelectionRestrictions.Conditions.Remove(conditionToDelete);
+
             CostMonitor.UpdateCost();
             OnPropertyChanged(nameof(ShowNoRestrictionsText));
         }
@@ -88,14 +131,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             }
 
             SetShape(Aspect.AreaType.ToString("G"));
-
-            //Test
-            if (!Aspect.Internal.TargetSelectionRestrictions.Conditions.Any())
-            {
-                Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((ETargetSelectionRestrictions.SeeTarget, string.Empty));
-                Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((ETargetSelectionRestrictions.HearTarget, string.Empty));
-                Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((ETargetSelectionRestrictions.LowRarityProperty, "Должна быть эльфом"));
-            }
 
             Restrictions = new (Aspect.Internal.TargetSelectionRestrictions.Conditions.Select(ToRestrictionsVM));
             OnPropertyChanged(nameof(ShowNoRestrictionsText));
@@ -182,5 +217,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
     {
         public ETargetSelectionRestrictions Restriction { get; set; }
         public string Text { get; set; }
+
+        public override string ToString() => Text;
     }
 }
