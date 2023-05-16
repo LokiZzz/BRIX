@@ -1,4 +1,7 @@
+using BRIX.Mobile.Services;
 using BRIX.Mobile.View.Popups;
+using BRIX.Mobile.ViewModel.Base;
+using BRIX.Mobile.ViewModel.Popups;
 using CommunityToolkit.Maui.Views;
 using System.Collections;
 using System.Windows.Input;
@@ -19,7 +22,7 @@ public partial class PickerButton : Grid
         }
     }
 
-    public DataTemplate ItemTemplate { get; set; }
+    //public DataTemplate ItemTemplate { get; set; }
 
     public string DisplayMember { get; set; }
 
@@ -131,20 +134,6 @@ public partial class PickerButton : Grid
         }
     }
 
-    public event EventHandler<EventArgs> OpenPickerEvent;
-
-    public static readonly BindableProperty OpenPickerCommandProperty = BindableProperty.Create(
-        propertyName: nameof(OpenPickerCommand),
-        returnType: typeof(ICommand),
-        declaringType: typeof(PickerButton),
-        defaultBindingMode: BindingMode.TwoWay);
-
-    public ICommand OpenPickerCommand
-    {
-        get => (ICommand)GetValue(OpenPickerCommandProperty);
-        set => SetValue(OpenPickerCommandProperty, value);
-    }
-
     public static readonly BindableProperty IsOpenProperty = BindableProperty.Create(
         propertyName: nameof(IsOpen),
         returnType: typeof(bool),
@@ -160,13 +149,21 @@ public partial class PickerButton : Grid
         {
             if ((bool)newValue)
             {
-                object response = await Application.Current.MainPage.ShowPopupAsync(
-                    new PickerPopup(control.ItemSource, control.ItemTemplate, control.Title, control.SelectedItem)
-                );
-
-                if (response != null)
+                PickerPopup popupToShow = ServicePool.GetService<PickerPopup>();
+                ParametrizedPopupVMBase<PickerPopupParameters> viewModel =
+                    popupToShow.BindingContext as ParametrizedPopupVMBase<PickerPopupParameters>;
+                viewModel.Parameters = new PickerPopupParameters
                 {
-                    control.SelectedItem = response;
+                    Items = control.ItemSource.Cast<object>().ToList(),
+                    SelectedItems = new() { control.SelectedItem },
+                    Title = control.Title,
+                };
+                PickerPopupResult result = await Application.Current.MainPage.ShowPopupAsync(popupToShow) 
+                    as PickerPopupResult;
+
+                if (result != null)
+                {
+                    control.SelectedItem = result.SelectedItem;
                 }
 
                 control.IsOpen = false;
@@ -196,7 +193,5 @@ public partial class PickerButton : Grid
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
         IsOpen = true;
-        OpenPickerCommand?.Execute(null);
-        OpenPickerEvent?.Invoke(sender, e);
     }
 }

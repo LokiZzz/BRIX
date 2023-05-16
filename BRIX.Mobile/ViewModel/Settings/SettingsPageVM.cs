@@ -53,5 +53,7 @@ namespace BRIX.Mobile.ViewModel.Settings
         public CultureInfo CultureInfo { get; set; }
 
         public string LanguageNativeName => CultureInfo == null ? null : CultureInfo.NativeName.Capitalize();
+
+        public override string ToString() => LanguageNativeName;
     }
 }

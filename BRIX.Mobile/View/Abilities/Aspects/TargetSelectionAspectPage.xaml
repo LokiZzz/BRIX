@@ -107,13 +107,8 @@
                             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleEquivalent}}"
                             ItemSource="{Binding Aspect.Obstacles}"
                             SelectedItem="{Binding Aspect.ObstacleBetweenCharacterAndTarget}"
-                            DisplayMember="LocalizedName">
-                            <controls:PickerButton.ItemTemplate>
-                                <DataTemplate x:DataType="vm:ObstacleOptionVM">
-                                    <controls:PickerItem Text="{Binding LocalizedName}"/>
-                                </DataTemplate>
-                            </controls:PickerButton.ItemTemplate>
-                        </controls:PickerButton>
+                            DisplayMember="LocalizedName"/>
+
                     </VerticalStackLayout>
                 </Border>
                 <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding IsNTAD}">
@@ -228,25 +223,13 @@
                             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleEquivalent}}"
                             ItemSource="{Binding Aspect.Obstacles}"
                             SelectedItem="{Binding Aspect.ObstacleBetweenCharacterAndArea}"
-                            DisplayMember="LocalizedName">
-                            <controls:PickerButton.ItemTemplate>
-                                <DataTemplate x:DataType="vm:ObstacleOptionVM">
-                                    <controls:PickerItem Text="{Binding LocalizedName}"/>
-                                </DataTemplate>
-                            </controls:PickerButton.ItemTemplate>
-                        </controls:PickerButton>
+                            DisplayMember="LocalizedName"/>
                         <controls:PickerButton
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaObstacleTargetAndEpicenter}}"
                             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleEquivalent}}"
                             ItemSource="{Binding Aspect.Obstacles}"
                             SelectedItem="{Binding Aspect.ObstacleBetweenEpicenterAndTarget}"
-                            DisplayMember="LocalizedName">
-                            <controls:PickerButton.ItemTemplate>
-                                <DataTemplate x:DataType="vm:ObstacleOptionVM">
-                                    <controls:PickerItem Text="{Binding LocalizedName}"/>
-                                </DataTemplate>
-                            </controls:PickerButton.ItemTemplate>
-                        </controls:PickerButton>
+                            DisplayMember="LocalizedName"/>
                     </VerticalStackLayout>
                 </Border>
                 <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding IsAREA}">
@@ -296,13 +279,7 @@
                             ItemSource="{Binding Aspect.Obstacles}"
                             SelectedItem="{Binding Aspect.ObstacleBetweenTargetsInChain}"
                             DisplayMember="LocalizedName"
-                            IsVisible="{Binding Aspect.IsChainEnabled}">
-                            <controls:PickerButton.ItemTemplate>
-                                <DataTemplate x:DataType="vm:ObstacleOptionVM">
-                                    <controls:PickerItem Text="{Binding LocalizedName}"/>
-                                </DataTemplate>
-                            </controls:PickerButton.ItemTemplate>
-                        </controls:PickerButton>
+                            IsVisible="{Binding Aspect.IsChainEnabled}"/>
                     </VerticalStackLayout>
                 </Border>
                 <!--Target selection restriction-->

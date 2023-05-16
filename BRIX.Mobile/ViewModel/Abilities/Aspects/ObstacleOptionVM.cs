@@ -24,5 +24,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         public string LocalizedName { get; set; }
 
         public EObstacleEquivalent Equivalent { get; set; }
+
+        public override string ToString() => LocalizedName;
     }
 }

@@ -30,13 +30,7 @@
                     Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ChooseLanguage}}"
                     DisplayMember="LanguageNativeName"
                     ItemSource="{Binding Cultures}"
-                    SelectedItem="{Binding SelectedCulture, Mode=TwoWay}">
-                    <controls:PickerButton.ItemTemplate>
-                        <DataTemplate x:DataType="vm:CultureInfoVM">
-                            <controls:PickerItem Text="{Binding LanguageNativeName}"/>
-                        </DataTemplate>
-                    </controls:PickerButton.ItemTemplate>
-                </controls:PickerButton>
+                    SelectedItem="{Binding SelectedCulture, Mode=TwoWay}"/>
             </VerticalStackLayout>
             
         </Border>

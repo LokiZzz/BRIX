@@ -1,9 +1,6 @@
-﻿using BRIX.Library.Aspects;
-using BRIX.Library.Aspects.TargetSelection;
+﻿using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Mobile.Models.Abilities.Aspects;
-using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 
@@ -25,7 +22,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             set => SetProperty(ref _restrictions, value);
         }
 
-        public bool ShowNoRestrictionsText => !Restrictions.Any();
+        public bool ShowNoRestrictionsText => Restrictions?.Any() == false;
 
         [RelayCommand]
         public void SetNTAD()
@@ -93,9 +90,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             SetShape(Aspect.AreaType.ToString("G"));
 
             //Test
-            Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((ETargetSelectionRestrictions.SeeTarget, string.Empty));
-            Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((ETargetSelectionRestrictions.HearTarget, string.Empty));
-            Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((ETargetSelectionRestrictions.LowRarityProperty, "Должна быть эльфом"));
+            if (!Aspect.Internal.TargetSelectionRestrictions.Conditions.Any())
+            {
+                Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((ETargetSelectionRestrictions.SeeTarget, string.Empty));
+                Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((ETargetSelectionRestrictions.HearTarget, string.Empty));
+                Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((ETargetSelectionRestrictions.LowRarityProperty, "Должна быть эльфом"));
+            }
 
             Restrictions = new (Aspect.Internal.TargetSelectionRestrictions.Conditions.Select(ToRestrictionsVM));
             OnPropertyChanged(nameof(ShowNoRestrictionsText));
