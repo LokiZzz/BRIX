@@ -285,6 +285,15 @@
   <data name="Effects" xml:space="preserve">
     <value>Effects</value>
   </data>
+  <data name="EnterHighRarityRestriction" xml:space="preserve">
+    <value>Enter a sign of high rarity, continuing the sentence: "Target...". For example: "Must have a tattoo", "Must be a dragon", "Must be born in June".</value>
+  </data>
+  <data name="EnterLowRarityRestriction" xml:space="preserve">
+    <value>Enter a low rarity property, continuing the sentence: "Target...". For example: "Must be female", "Must be an elf", "Must have a soul", "Must be made of wood".</value>
+  </data>
+  <data name="EnterMediumRarityRestriction" xml:space="preserve">
+    <value>Enter a sign of medium rarity, continuing the sentence: Target...". For example: “Must be in armor”, “Must be in water”, “Must breathe”.</value>
+  </data>
   <data name="EXP" xml:space="preserve">
     <value>EXP</value>
   </data>
@@ -426,9 +435,6 @@
   <data name="Strategy" xml:space="preserve">
     <value>Strategy</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value>Ability cost:</value>
-  </data>
   <data name="Switch" xml:space="preserve">
     <value>Switch</value>
   </data>
@@ -452,6 +458,9 @@
   </data>
   <data name="TargetHearsCharacter" xml:space="preserve">
     <value>Must hear the character</value>
+  </data>
+  <data name="TargetProperty" xml:space="preserve">
+    <value>Target property</value>
   </data>
   <data name="TargetSeesCharacter" xml:space="preserve">
     <value>Must see the character</value>
@@ -545,6 +554,9 @@
   </data>
   <data name="TargetSelectionVoxelHint" xml:space="preserve">
     <value>A voxel is a 1x1 meter cube. From such voxels, you can make an array — the figure of the area in which the effect will be applied to the targets. In the picture an area of ​​five voxels is composed as an example.</value>
+  </data>
+  <data name="TargetThreeDot" xml:space="preserve">
+    <value>Target...</value>
   </data>
   <data name="TheTarget" xml:space="preserve">
     <value>The target...</value>

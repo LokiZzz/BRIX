@@ -565,6 +565,33 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter a sign of high rarity, continuing the sentence: &quot;Target...&quot;. For example: &quot;Must have a tattoo&quot;, &quot;Must be a dragon&quot;, &quot;Must be born in June&quot;..
+        /// </summary>
+        public static string EnterHighRarityRestriction {
+            get {
+                return ResourceManager.GetString("EnterHighRarityRestriction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a low rarity property, continuing the sentence: &quot;Target...&quot;. For example: &quot;Must be female&quot;, &quot;Must be an elf&quot;, &quot;Must have a soul&quot;, &quot;Must be made of wood&quot;..
+        /// </summary>
+        public static string EnterLowRarityRestriction {
+            get {
+                return ResourceManager.GetString("EnterLowRarityRestriction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a sign of medium rarity, continuing the sentence: Target...&quot;. For example: “Must be in armor”, “Must be in water”, “Must breathe”..
+        /// </summary>
+        public static string EnterMediumRarityRestriction {
+            get {
+                return ResourceManager.GetString("EnterMediumRarityRestriction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to EXP.
         /// </summary>
         public static string EXP {
@@ -988,15 +1015,6 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ability cost:.
-        /// </summary>
-        public static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Switch.
         /// </summary>
         public static string Switch {
@@ -1065,6 +1083,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string TargetHearsCharacter {
             get {
                 return ResourceManager.GetString("TargetHearsCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target property.
+        /// </summary>
+        public static string TargetProperty {
+            get {
+                return ResourceManager.GetString("TargetProperty", resourceCulture);
             }
         }
         
@@ -1344,6 +1371,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string TargetSelectionVoxelHint {
             get {
                 return ResourceManager.GetString("TargetSelectionVoxelHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target....
+        /// </summary>
+        public static string TargetThreeDot {
+            get {
+                return ResourceManager.GetString("TargetThreeDot", resourceCulture);
             }
         }
         

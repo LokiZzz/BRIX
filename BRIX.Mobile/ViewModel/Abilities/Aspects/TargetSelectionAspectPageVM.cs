@@ -83,7 +83,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
             PickerPopupParameters parameters = new()
             {
-                Title = Resources.Localizations.Localization.TargetSelectionRestriction,
+                Title = Resources.Localizations.Localization.TargetThreeDot,
                 Items = allRestrictions,
             };
             PickerPopupResult result = await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(parameters);
@@ -95,11 +95,14 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
                 if(customRestrictions.Any(x => x ==  concreteResult.Restriction))
                 {
+                    string message = GetCustomRestrictionHint(concreteResult.Restriction);
+
                     EntryPopupResult entryResult = await ShowPopupAsync<EntryPopup, EntryPopupResult, EntryPopupParameters>(
                         new EntryPopupParameters
                         {
-                            Title = Resources.Localizations.Localization.Warning,
-                            Message = Resources.Localizations.Localization.TargetSelectionRestrictionWarning,
+                            Title = Resources.Localizations.Localization.TargetSelectionRestriction,
+                            Message = message,
+                            Placeholder = Resources.Localizations.Localization.TargetProperty,
                             ButtonText = Resources.Localizations.Localization.Ok,
                         }
                     );
@@ -126,8 +129,23 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 }
 
                 Restrictions.Add(concreteResult);
-                Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((concreteResult.Restriction, string.Empty));
+                Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((concreteResult.Restriction, concreteResult.Text));
                 OnPropertyChanged(nameof(ShowNoRestrictionsText));
+            }
+        }
+
+        private string GetCustomRestrictionHint(ETargetSelectionRestrictions restriction)
+        {
+            switch(restriction)
+            {
+                case ETargetSelectionRestrictions.LowRarityProperty:
+                    return Resources.Localizations.Localization.EnterLowRarityRestriction;
+                case ETargetSelectionRestrictions.MediumRarityProperty:
+                    return Resources.Localizations.Localization.EnterMediumRarityRestriction;
+                case ETargetSelectionRestrictions.HighRarityProperty:
+                    return Resources.Localizations.Localization.EnterHighRarityRestriction;
+                default: 
+                    return null;
             }
         }
 
@@ -137,7 +155,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             Restrictions.Remove(property);
 
             (ETargetSelectionRestrictions Type, string Comment) conditionToDelete = 
-                Aspect.Internal.TargetSelectionRestrictions.Conditions.Single(x => 
+                Aspect.Internal.TargetSelectionRestrictions.Conditions.FirstOrDefault(x => 
                     x.Type == property.Restriction || x.Comment == property.Text);
             Aspect.Internal.TargetSelectionRestrictions.Conditions.Remove(conditionToDelete);
 

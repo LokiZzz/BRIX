@@ -285,6 +285,15 @@
   <data name="Effects" xml:space="preserve">
     <value>Эффекты</value>
   </data>
+  <data name="EnterHighRarityRestriction" xml:space="preserve">
+    <value>Введите признак высокой редкости, продолжая предложение: «Цель...». Например: «Должна иметь татуировку», «Должна быть драконом», «Должна быть рождена в июне».</value>
+  </data>
+  <data name="EnterLowRarityRestriction" xml:space="preserve">
+    <value>Введите признак низкой редкости, продолжая предложение: «Цель...». Например: «Должна быть женского пола», «Должна быть эльфом», «Должна иметь душу», «Должна быть предметом из дерева».</value>
+  </data>
+  <data name="EnterMediumRarityRestriction" xml:space="preserve">
+    <value>Введите признак средней редкости, продолжая предложение: «Цель...». Например: «Должна быть в доспехах», «Должна находится в воде», «Должна дышать».</value>
+  </data>
   <data name="EXP" xml:space="preserve">
     <value>EXP</value>
   </data>
@@ -450,6 +459,9 @@
   <data name="TargetHearsCharacter" xml:space="preserve">
     <value>Должна слышать персонажа</value>
   </data>
+  <data name="TargetProperty" xml:space="preserve">
+    <value>Признак цели</value>
+  </data>
   <data name="TargetSeesCharacter" xml:space="preserve">
     <value>Должна видеть персонажа</value>
   </data>
@@ -542,6 +554,9 @@
   </data>
   <data name="TargetSelectionVoxelHint" xml:space="preserve">
     <value>Воксель — это куб 1х1 метр. Из таких вокселей можно составлять массив — фигуру области, в которой к целям будет применяться эффект. На рисунке в качестве примера составлена область из пяти вокселей.</value>
+  </data>
+  <data name="TargetThreeDot" xml:space="preserve">
+    <value>Цель...</value>
   </data>
   <data name="TheTarget" xml:space="preserve">
     <value>Цель...</value>
