@@ -45,10 +45,20 @@ namespace BRIX.Mobile.ViewModel.Popups
             set => SetProperty(ref _buttonText, value);
         }
 
+
+        public event EventHandler OnEmptyValueEntered;
+
         [RelayCommand]
         public void FireOk()
         {
-            View.Close(new EntryPopupResult { Text = string.IsNullOrEmpty(Text) ? null : Text });
+            if (string.IsNullOrEmpty(Text))
+            {
+                OnEmptyValueEntered(this, null);
+            }
+            else
+            {
+                View.Close(new EntryPopupResult { Text = string.IsNullOrEmpty(Text) ? null : Text });
+            }
         }
 
         protected override void HandleParameters()

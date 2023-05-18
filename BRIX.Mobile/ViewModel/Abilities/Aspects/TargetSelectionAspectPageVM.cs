@@ -92,8 +92,27 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             {
                 TargetSelectionRestrictionPropertyVM concreteResult = result.SelectedItem
                     as TargetSelectionRestrictionPropertyVM;
-                
-                if(Restrictions.Any(x => x.Restriction == concreteResult.Restriction && x.Text == concreteResult.Text))
+
+                if(customRestrictions.Any(x => x ==  concreteResult.Restriction))
+                {
+                    EntryPopupResult entryResult = await ShowPopupAsync<EntryPopup, EntryPopupResult, EntryPopupParameters>(
+                        new EntryPopupParameters
+                        {
+                            Title = Resources.Localizations.Localization.Warning,
+                            Message = Resources.Localizations.Localization.TargetSelectionRestrictionWarning,
+                            ButtonText = Resources.Localizations.Localization.Ok,
+                        }
+                    );
+
+                    if(entryResult == null)
+                    {
+                        return;
+                    }
+
+                    concreteResult.Text = entryResult.Text;
+                }
+
+                if (Restrictions.Any(x => x.Restriction == concreteResult.Restriction && x.Text == concreteResult.Text))
                 {
                     await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(new AlertPopupParameters
                     {
