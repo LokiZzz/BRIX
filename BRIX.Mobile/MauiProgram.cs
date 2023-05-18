@@ -77,6 +77,7 @@ public static class MauiProgram
         builder.RegisterPopup<AlertPopup, AlertPopupVM>();
         builder.RegisterPopup<DiceValuePopup, DiceValuePopupVM>();
         builder.RegisterPopup<PickerPopup, PickerPopupVM>();
+        builder.RegisterPopup<EntryPopup, EntryPopupVM>();
     }
 
     /// <param name="registerRoute"> Set false if view already registered in AppShell.xaml </param>

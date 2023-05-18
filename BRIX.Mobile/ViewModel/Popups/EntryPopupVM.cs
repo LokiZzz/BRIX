@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Popups
 {
-    public class EntryPopupVM : ParametrizedPopupVMBase<EntryPopupParameters>
+    public partial class EntryPopupVM : ParametrizedPopupVMBase<EntryPopupParameters>
     {
         private string _title;
         public string Title
