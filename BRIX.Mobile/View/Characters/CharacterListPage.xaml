@@ -74,6 +74,14 @@
                                             <Image Source="{Binding PortraitImage}" IsAnimationPlaying="True"/>
                                         </controls:ZoomContainer>
                                         <Grid Margin="10">
+                                            <Label 
+                                                FontFamily="Awesome" 
+                                                Text="{x:Static icons:Awesome.ImagePortrait}" 
+                                                FontSize="120" 
+                                                IsVisible="{Binding ShowImagePlaceholder}"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Center"
+                                                Opacity="0.5"/>
                                             <Border Style="{StaticResource TransparentBorder}" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
                                                 <Label Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
                                             </Border>

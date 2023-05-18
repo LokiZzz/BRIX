@@ -90,8 +90,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
         [RelayCommand]
         public async Task DeleteEffect(EffectModelBase effectToRemove)
         {
-            QuestionPopupResult result = await ShowPopupAsync<QuestionPopup, QuestionPopupResult, QuestionPopupParameters>(
-                new QuestionPopupParameters
+            AlertPopupResult result = await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
+                new AlertPopupParameters
                 {
                     Title = _localization[LocalizationKeys.Warning].ToString(),
                     Message = _localization[LocalizationKeys.DeleteEffectQuestion].ToString(),
@@ -100,7 +100,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 }
             );
 
-            if (result?.Answer == EQuestionPopupResult.Yes)
+            if (result?.Answer == EAlertPopupResult.Yes)
             {
                 Ability.RemoveEffect(effectToRemove);
             }

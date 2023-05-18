@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace BRIX.Mobile.ViewModel.Popups
 {
-    public partial class QuestionPopupVM : ParametrizedPopupVMBase<QuestionPopupParameters>
+    public partial class AlertPopupVM : ParametrizedPopupVMBase<AlertPopupParameters>
     {
         [ObservableProperty]
         private string _title;
@@ -21,13 +21,13 @@ namespace BRIX.Mobile.ViewModel.Popups
         [RelayCommand]
         private void FireYes()
         {
-            View.Close(new QuestionPopupResult { Answer = EQuestionPopupResult.Yes });
+            View.Close(new AlertPopupResult { Answer = EAlertPopupResult.Yes });
         }
 
         [RelayCommand]
         private void FireNo()
         {
-            View.Close(new QuestionPopupResult { Answer = EQuestionPopupResult.No });
+            View.Close(new AlertPopupResult { Answer = EAlertPopupResult.No });
         }
 
         protected override void HandleParameters()
@@ -39,23 +39,30 @@ namespace BRIX.Mobile.ViewModel.Popups
         }
     }
 
-    public class QuestionPopupParameters
+    public class AlertPopupParameters
     {
         public string Title { get; init; }
         public string Message { get; init; }
         public string YesText { get; init; }
         public string NoText { get; init; }
+        public EAlertMode Mode { get; init; }
     }
 
-    public enum EQuestionPopupResult
+    public enum EAlertMode
+    {
+        AskYesOrNo = 0,
+        ShowMessage = 1
+    }
+
+    public enum EAlertPopupResult
     {
         None = 0,
         Yes = 1,
         No = 2
     }
 
-    public class QuestionPopupResult
+    public class AlertPopupResult
     {
-        public EQuestionPopupResult Answer { get; set; }
+        public EAlertPopupResult Answer { get; set; }
     }
 }

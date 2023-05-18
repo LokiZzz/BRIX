@@ -3,9 +3,9 @@ using CommunityToolkit.Maui.Views;
 
 namespace BRIX.Mobile.View.Popups;
 
-public partial class QuestionPopup : Popup
+public partial class AlertPopup : Popup
 {
-	public QuestionPopup(QuestionPopupVM context)
+	public AlertPopup(AlertPopupVM context)
 	{
         InitializeComponent();
         context.View = this;

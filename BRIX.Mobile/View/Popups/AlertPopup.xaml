@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Popups"
-    x:DataType="vm:QuestionPopupVM"
-    x:Class="BRIX.Mobile.View.Popups.QuestionPopup"
+    x:DataType="vm:AlertPopupVM"
+    x:Class="BRIX.Mobile.View.Popups.AlertPopup"
     Color="Transparent">
     
     <Border Style="{StaticResource BlockBorder}" WidthRequest="350">

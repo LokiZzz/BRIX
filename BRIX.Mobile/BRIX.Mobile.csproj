@@ -199,7 +199,7 @@
 	  <MauiXaml Update="View\Popups\PickerPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Popups\QuestionPopup.xaml">
+	  <MauiXaml Update="View\Popups\AlertPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Account\SignInPage.xaml">
@@ -245,6 +245,9 @@
 	  </Compile>
 	  <Compile Update="View\Popups\DiceValuePopup.xaml.cs">
 	    <DependentUpon>DiceValuePopup.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Popups\AlertPopup.xaml.cs">
+	    <DependentUpon>AlertPopup.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 

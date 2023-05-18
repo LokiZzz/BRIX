@@ -74,7 +74,7 @@ public static class MauiProgram
         builder.RegisterView<SettingsPage, SettingsPageVM>(false);
 
         builder.RegisterPopup<NumericEditorPopup, NumericEditorPopupVM>();
-        builder.RegisterPopup<QuestionPopup, QuestionPopupVM>();
+        builder.RegisterPopup<AlertPopup, AlertPopupVM>();
         builder.RegisterPopup<DiceValuePopup, DiceValuePopupVM>();
         builder.RegisterPopup<PickerPopup, PickerPopupVM>();
     }
