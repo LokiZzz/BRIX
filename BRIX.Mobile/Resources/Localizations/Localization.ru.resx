@@ -357,6 +357,9 @@
   <data name="Obstacles" xml:space="preserve">
     <value>Препятствия</value>
   </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
   <data name="PaperSheet" xml:space="preserve">
     <value>Лист бумаги</value>
   </data>
@@ -503,6 +506,9 @@
   </data>
   <data name="TargetSelectionRestrictionHint" xml:space="preserve">
     <value>Способность будет работать только на целях, которые соответсвуют указанным свойствам. Цель...</value>
+  </data>
+  <data name="TargetSelectionRestrictionWarning" xml:space="preserve">
+    <value>Ограничение такого типа уже добавлено.</value>
   </data>
   <data name="TargetSelectionStratedyArea" xml:space="preserve">
     <value>Все цели в области</value>

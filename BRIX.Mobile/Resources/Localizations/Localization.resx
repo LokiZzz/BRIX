@@ -357,6 +357,9 @@
   <data name="Obstacles" xml:space="preserve">
     <value>Obstacles</value>
   </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
   <data name="PaperSheet" xml:space="preserve">
     <value>Paper sheet</value>
   </data>
@@ -506,6 +509,9 @@
   </data>
   <data name="TargetSelectionRestrictionHint" xml:space="preserve">
     <value>The ability will only work on targets that match the specified properties. The target...</value>
+  </data>
+  <data name="TargetSelectionRestrictionWarning" xml:space="preserve">
+    <value>Such restriction type already added.</value>
   </data>
   <data name="TargetSelectionStratedyArea" xml:space="preserve">
     <value>All targets in area</value>

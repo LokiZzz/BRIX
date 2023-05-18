@@ -13,8 +13,9 @@
             <Label Style="{StaticResource ParagraphTitleLabel}" Text="{Binding Title}"/>
             <Label Text="{Binding Message}" LineBreakMode="WordWrap"/>
             <HorizontalStackLayout Margin="0,20,0,0" Spacing="10" HorizontalOptions="End">
-                <Button Text="{Binding Yes}" Command="{Binding FireYesCommand}" WidthRequest="100" Style="{StaticResource SmallerButton}"/>
-                <Button Text="{Binding No}" Command="{Binding FireNoCommand}" WidthRequest="100" Style="{StaticResource SmallerButton}"/>
+                <Button Text="{Binding Yes}" Command="{Binding FireYesCommand}" IsVisible="{Binding ShowYes}" WidthRequest="100" Style="{StaticResource SmallerButton}"/>
+                <Button Text="{Binding No}" Command="{Binding FireNoCommand}" IsVisible="{Binding ShowNo}" WidthRequest="100" Style="{StaticResource SmallerButton}"/>
+                <Button Text="{Binding Ok}" Command="{Binding FireOkCommand}" IsVisible="{Binding ShowOk}" WidthRequest="100" Style="{StaticResource SmallerButton}"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </Border>

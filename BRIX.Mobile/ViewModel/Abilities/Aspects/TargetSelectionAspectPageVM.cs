@@ -95,7 +95,14 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 
                 if(Restrictions.Any(x => x.Restriction == concreteResult.Restriction && x.Text == concreteResult.Text))
                 {
-                    // Show popup and exit
+                    await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(new AlertPopupParameters
+                    {
+                        Title = Resources.Localizations.Localization.Warning,
+                        Message = Resources.Localizations.Localization.TargetSelectionRestrictionWarning,
+                        OkText = Resources.Localizations.Localization.Ok,
+                        Mode = EAlertMode.ShowMessage
+                    });
+
                     return;
                 }
 

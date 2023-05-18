@@ -82,6 +82,8 @@ namespace BRIX.Mobile.Models.Characters
             }
         }
 
+        public bool ShowImagePlaceholder => PortraitImage == null;
+
         public int MaxHealth => InternalModel.MaxHealth;
 
         public int CurrentHealth

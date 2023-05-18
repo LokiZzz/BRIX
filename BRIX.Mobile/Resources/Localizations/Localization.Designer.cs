@@ -781,6 +781,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Paper sheet.
         /// </summary>
         public static string PaperSheet {
@@ -1227,6 +1236,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string TargetSelectionRestrictionHint {
             get {
                 return ResourceManager.GetString("TargetSelectionRestrictionHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Such restriction type already added..
+        /// </summary>
+        public static string TargetSelectionRestrictionWarning {
+            get {
+                return ResourceManager.GetString("TargetSelectionRestrictionWarning", resourceCulture);
             }
         }
         

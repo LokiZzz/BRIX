@@ -18,6 +18,18 @@ namespace BRIX.Mobile.ViewModel.Popups
         [ObservableProperty]
         private string _no;
 
+        [ObservableProperty]
+        private string _ok;
+
+        [ObservableProperty]
+        private bool _showYes;
+
+        [ObservableProperty]
+        private bool _showNo; 
+        
+        [ObservableProperty]
+        private bool _showOk;
+
         [RelayCommand]
         private void FireYes()
         {
@@ -30,12 +42,23 @@ namespace BRIX.Mobile.ViewModel.Popups
             View.Close(new AlertPopupResult { Answer = EAlertPopupResult.No });
         }
 
+        [RelayCommand]
+        private void FireOk()
+        {
+            View.Close(new AlertPopupResult { Answer = EAlertPopupResult.None });
+        }
+
         protected override void HandleParameters()
         {
             Title = Parameters.Title;
             Message = Parameters.Message;
             Yes = Parameters.YesText;
             No = Parameters.NoText;
+            Ok = Parameters.OkText;
+
+            ShowYes = Parameters.Mode == EAlertMode.AskYesOrNo;
+            ShowNo = Parameters.Mode == EAlertMode.AskYesOrNo;
+            ShowOk = Parameters.Mode == EAlertMode.ShowMessage;
         }
     }
 
@@ -45,7 +68,8 @@ namespace BRIX.Mobile.ViewModel.Popups
         public string Message { get; init; }
         public string YesText { get; init; }
         public string NoText { get; init; }
-        public EAlertMode Mode { get; init; }
+        public string OkText { get; init; }
+        public EAlertMode Mode { get; init; } = EAlertMode.AskYesOrNo;
     }
 
     public enum EAlertMode
