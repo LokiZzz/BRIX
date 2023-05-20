@@ -32,7 +32,7 @@ namespace BRIX.Library.Aspects.TargetSelection
 
         private Dictionary<int, int> SizeCategoriesCountToPercentMap => new Dictionary<int, int>()
         {
-            { 1, -20 }, { 2, -10 }, { 3, 0 }, { 4, 10 }, { 5, 20 }, { 6, 30 },
+            { 0, 0 }, { 1, -20 }, { 2, -10 }, { 3, 0 }, { 4, 10 }, { 5, 20 }, { 6, 30 },
             { 7, 40 }, { 8, 50 }, { 9, 60 }, { 10, 70 }, { 11, 80 }
         };
     }

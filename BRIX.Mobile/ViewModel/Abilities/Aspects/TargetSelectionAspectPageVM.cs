@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Aspects.TargetSelection;
+using BRIX.Library.Enums;
 using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.View.Popups;
@@ -17,14 +18,31 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
         public ILocalizationResourceManager Localization { get; }
 
-        private ObservableCollection<TargetSelectionRestrictionPropertyVM> _restrictions;
-        public ObservableCollection<TargetSelectionRestrictionPropertyVM> Restrictions
+        
+
+        public override void Initialize()
         {
-            get => _restrictions;
-            set => SetProperty(ref _restrictions, value);
+            if (Aspect.Internal.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
+            {
+                SetNTAD();
+            }
+            else
+            {
+                SetAREA();
+            }
+
+            SetShape(Aspect.AreaType.ToString("G"));
+
+            Restrictions = new(Aspect.Internal.TargetSelectionRestrictions.Conditions.Select(ToRestrictionsVM));
+            OnPropertyChanged(nameof(ShowNoRestrictionsText));
+            Sizes = new(Aspect.Internal.TargetsSizes.AllowedTargetSizes.Select(x => new TargetSizeVM
+            {
+                Size = x,
+                Text = Localization[x.ToString("G")].ToString()
+            }));
         }
 
-        public bool ShowNoRestrictionsText => Restrictions?.Any() == false;
+        #region Strategy
 
         [RelayCommand]
         public void SetNTAD()
@@ -53,13 +71,54 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             Aspect.Strategy = ETargetSelectionStrategy.CharacterHimself;
         }
 
-        [RelayCommand]
-        public void SetShape(string shape)
+        private bool _isNTAD = true;
+        public bool IsNTAD
         {
-            Enum.TryParse(shape, out EAreaType parsedShape);
-            Shape = parsedShape;
-            Aspect.AreaType = parsedShape;
+            get => _isNTAD;
+            set
+            {
+                SetProperty(ref _isNTAD, value);
+                OnPropertyChanged(nameof(ShowNTADAndAREASettings));
+            }
         }
+
+
+        private bool _isAREA = true;
+        public bool IsAREA
+        {
+            get => _isAREA;
+            set
+            {
+                SetProperty(ref _isAREA, value);
+                OnPropertyChanged(nameof(ShowNTADAndAREASettings));
+            }
+        }
+
+        private bool _isCharacter = true;
+        public bool IsCharacter
+        {
+            get => _isCharacter;
+            set
+            {
+                SetProperty(ref _isCharacter, value);
+                OnPropertyChanged(nameof(ShowNTADAndAREASettings));
+            }
+        }
+
+        public bool ShowNTADAndAREASettings => IsNTAD || IsAREA;
+
+        #endregion
+
+        #region Targets selection restrictions
+
+        private ObservableCollection<TargetSelectionRestrictionPropertyVM> _restrictions;
+        public ObservableCollection<TargetSelectionRestrictionPropertyVM> Restrictions
+        {
+            get => _restrictions;
+            set => SetProperty(ref _restrictions, value);
+        }
+
+        public bool ShowNoRestrictionsText => Restrictions?.Any() == false;
 
         [RelayCommand]
         public async Task AddRestriction()
@@ -132,22 +191,9 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((concreteResult.Restriction, concreteResult.Text));
                 OnPropertyChanged(nameof(ShowNoRestrictionsText));
             }
-        }
 
-        private string GetCustomRestrictionHint(ETargetSelectionRestrictions restriction)
-        {
-            switch(restriction)
-            {
-                case ETargetSelectionRestrictions.LowRarityProperty:
-                    return Resources.Localizations.Localization.EnterLowRarityRestriction;
-                case ETargetSelectionRestrictions.MediumRarityProperty:
-                    return Resources.Localizations.Localization.EnterMediumRarityRestriction;
-                case ETargetSelectionRestrictions.HighRarityProperty:
-                    return Resources.Localizations.Localization.EnterHighRarityRestriction;
-                default: 
-                    return null;
-            }
-        }
+            CostMonitor.UpdateCost();
+        } 
 
         [RelayCommand]
         public void DeleteRestriction(TargetSelectionRestrictionPropertyVM property)
@@ -160,23 +206,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             Aspect.Internal.TargetSelectionRestrictions.Conditions.Remove(conditionToDelete);
 
             CostMonitor.UpdateCost();
-            OnPropertyChanged(nameof(ShowNoRestrictionsText));
-        }
-
-        public override void Initialize()
-        {
-            if (Aspect.Internal.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
-            {
-                SetNTAD();
-            } 
-            else
-            {
-                SetAREA();
-            }
-
-            SetShape(Aspect.AreaType.ToString("G"));
-
-            Restrictions = new (Aspect.Internal.TargetSelectionRestrictions.Conditions.Select(ToRestrictionsVM));
             OnPropertyChanged(nameof(ShowNoRestrictionsText));
         }
 
@@ -199,41 +228,88 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             return restrictionVM;
         }
 
-        private bool _isNTAD = true;
-        public bool IsNTAD
+        private string GetCustomRestrictionHint(ETargetSelectionRestrictions restriction)
         {
-            get => _isNTAD;
-            set
+            switch (restriction)
             {
-                SetProperty(ref _isNTAD, value);
-                OnPropertyChanged(nameof(ShowNTADAndAREASettings));
+                case ETargetSelectionRestrictions.LowRarityProperty:
+                    return Resources.Localizations.Localization.EnterLowRarityRestriction;
+                case ETargetSelectionRestrictions.MediumRarityProperty:
+                    return Resources.Localizations.Localization.EnterMediumRarityRestriction;
+                case ETargetSelectionRestrictions.HighRarityProperty:
+                    return Resources.Localizations.Localization.EnterHighRarityRestriction;
+                default:
+                    return null;
             }
         }
 
+        #endregion
 
-        private bool _isAREA = true;
-        public bool IsAREA
+        #region Target size
+
+        private ObservableCollection<TargetSizeVM> _sizes;
+        public ObservableCollection<TargetSizeVM> Sizes
         {
-            get => _isAREA;
-            set
-            {
-                SetProperty(ref _isAREA, value);
-                OnPropertyChanged(nameof(ShowNTADAndAREASettings));
-            }
+            get => _sizes;
+            set => SetProperty(ref _sizes, value);
         }
 
-        private bool _isCharacter = true;
-        public bool IsCharacter
+        [RelayCommand]
+        public async Task AddSize()
         {
-            get => _isCharacter;
-            set
+            List<object> allSizes = Enum.GetValues<ETargetSize>()
+                .Select(x => new TargetSizeVM
+                {
+                    Size = x,
+                    Text = Localization[x.ToString("G")].ToString()
+                })
+                .Where(x => !Sizes.Any(y => y.Size == x.Size))
+                .Select(x => x as object)
+                .ToList();
+
+            PickerPopupParameters parameters = new()
             {
-                SetProperty(ref _isCharacter, value);
-                OnPropertyChanged(nameof(ShowNTADAndAREASettings));
+                Title = Resources.Localizations.Localization.TargetsSizes,
+                Items = allSizes,
+            };
+            PickerPopupResult result = await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(parameters);
+
+            if (result != null)
+            {
+                TargetSizeVM concreteResult = result.SelectedItem as TargetSizeVM;
+
+                if (Sizes.Any(x => x.Size == concreteResult.Size))
+                {
+                    return;
+                }
+
+                Sizes.Add(concreteResult);
+                Aspect.Internal.TargetsSizes.AddSize(concreteResult.Size);
             }
+
+            CostMonitor.UpdateCost();
         }
 
-        public bool ShowNTADAndAREASettings => IsNTAD || IsAREA;
+        [RelayCommand]
+        public void DeleteSize(TargetSizeVM property)
+        {
+            Sizes.Remove(property);
+            Aspect.Internal.TargetsSizes.RemoveSize(property.Size);
+
+            CostMonitor.UpdateCost();
+        }
+
+        #endregion
+
+        #region Area shape
+
+        [RelayCommand]
+        public void SetShape(string shape)
+        {
+            Enum.TryParse(shape, out EAreaType parsedShape);
+            Shape = parsedShape;
+            Aspect.AreaType = parsedShape;
+        }
 
         private EAreaType _shape;
         public EAreaType Shape
@@ -255,11 +331,21 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         public bool IsCylinder => Shape == EAreaType.Cylinder;
         public bool IsSphere => Shape == EAreaType.Sphere;
         public bool IsArbitrary => Shape == EAreaType.Arbitrary;
+
+        #endregion
     }
 
     public class TargetSelectionRestrictionPropertyVM
     {
         public ETargetSelectionRestrictions Restriction { get; set; }
+        public string Text { get; set; }
+
+        public override string ToString() => Text;
+    }
+
+    public class TargetSizeVM
+    {
+        public ETargetSize Size { get; set; }
         public string Text { get; set; }
 
         public override string ToString() => Text;

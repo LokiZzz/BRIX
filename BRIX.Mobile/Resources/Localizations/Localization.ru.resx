@@ -153,6 +153,9 @@
   <data name="AddRestriction" xml:space="preserve">
     <value>Добавить ограничение</value>
   </data>
+  <data name="AddSize" xml:space="preserve">
+    <value>Добавить размер</value>
+  </data>
   <data name="Appearance" xml:space="preserve">
     <value>Внешность</value>
   </data>
@@ -192,6 +195,9 @@
   <data name="BeViable" xml:space="preserve">
     <value>Должна быть дееспособной</value>
   </data>
+  <data name="Big" xml:space="preserve">
+    <value>Большой</value>
+  </data>
   <data name="BrickWall" xml:space="preserve">
     <value>Кирпичная стена</value>
   </data>
@@ -230,6 +236,9 @@
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Очистить</value>
+  </data>
+  <data name="Colossal" xml:space="preserve">
+    <value>Колоссальный</value>
   </data>
   <data name="CreateNewCharacter" xml:space="preserve">
     <value>Создать персонажа</value>
@@ -309,6 +318,9 @@
   <data name="FreeExperience" xml:space="preserve">
     <value>Свободный опыт</value>
   </data>
+  <data name="Gigantic" xml:space="preserve">
+    <value>Гигантский</value>
+  </data>
   <data name="Health" xml:space="preserve">
     <value>Здоровье</value>
   </data>
@@ -324,11 +336,17 @@
   <data name="HighRarityProperty" xml:space="preserve">
     <value>Должна иметь признак высокой редкости</value>
   </data>
+  <data name="Huge" xml:space="preserve">
+    <value>Огромный</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Язык</value>
   </data>
   <data name="LeatherArmor" xml:space="preserve">
     <value>Кожаная броня</value>
+  </data>
+  <data name="Legendary" xml:space="preserve">
+    <value>Легендарный</value>
   </data>
   <data name="LevelFormat" xml:space="preserve">
     <value>Уровень {0}</value>
@@ -339,11 +357,20 @@
   <data name="LowRarityProperty" xml:space="preserve">
     <value>Должна иметь признак малой редкости</value>
   </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Средний</value>
+  </data>
   <data name="MediumRarityProperty" xml:space="preserve">
     <value>Должна иметь признак средней редкости</value>
   </data>
   <data name="MetalArmor" xml:space="preserve">
     <value>Металлический доспех</value>
+  </data>
+  <data name="Miniature" xml:space="preserve">
+    <value>Миниатюрный</value>
+  </data>
+  <data name="Monstrous" xml:space="preserve">
+    <value>Монструозный</value>
   </data>
   <data name="MuchMorePowerfullObstacle" xml:space="preserve">
     <value>Какое-то очень мощное препятствие</value>
@@ -428,6 +455,9 @@
   </data>
   <data name="SignInPageTitle" xml:space="preserve">
     <value>Авторизация</value>
+  </data>
+  <data name="Small" xml:space="preserve">
+    <value>Маленький</value>
   </data>
   <data name="Spread" xml:space="preserve">
     <value>Разброс:</value>
@@ -555,6 +585,12 @@
   <data name="TargetSelectionVoxelHint" xml:space="preserve">
     <value>Воксель — это куб 1х1 метр. Из таких вокселей можно составлять массив — фигуру области, в которой к целям будет применяться эффект. На рисунке в качестве примера составлена область из пяти вокселей.</value>
   </data>
+  <data name="TargetsSizes" xml:space="preserve">
+    <value>Размеры целей</value>
+  </data>
+  <data name="TargetsSizesHint" xml:space="preserve">
+    <value>Выберете размеры целей, на которые будет действовать способность. Способность не сможет быть применена к целям любой другой категории размера.</value>
+  </data>
   <data name="TargetThreeDot" xml:space="preserve">
     <value>Цель...</value>
   </data>
@@ -566,6 +602,12 @@
   </data>
   <data name="ThickSteelPlate" xml:space="preserve">
     <value>Толстая стальная плита</value>
+  </data>
+  <data name="Tiny" xml:space="preserve">
+    <value>Крохотный</value>
+  </data>
+  <data name="Titanic" xml:space="preserve">
+    <value>Титанический</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Внимание</value>

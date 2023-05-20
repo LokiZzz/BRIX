@@ -7,7 +7,7 @@
         Small = 3,
         Medium = 4,
         Big = 5,
-        Large = 6,
+        Huge = 6,
         Gigantic = 7,
         Monstrous = 8,
         Colossal = 9,

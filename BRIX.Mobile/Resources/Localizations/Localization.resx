@@ -153,6 +153,9 @@
   <data name="AddRestriction" xml:space="preserve">
     <value>Add restriction</value>
   </data>
+  <data name="AddSize" xml:space="preserve">
+    <value>Add size</value>
+  </data>
   <data name="Appearance" xml:space="preserve">
     <value>Appearance</value>
   </data>
@@ -192,6 +195,9 @@
   <data name="BeViable" xml:space="preserve">
     <value>Must be viable</value>
   </data>
+  <data name="Big" xml:space="preserve">
+    <value>Big</value>
+  </data>
   <data name="BrickWall" xml:space="preserve">
     <value>Brick wall</value>
   </data>
@@ -230,6 +236,9 @@
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Clear</value>
+  </data>
+  <data name="Colossal" xml:space="preserve">
+    <value>Colossal</value>
   </data>
   <data name="CreateNewCharacter" xml:space="preserve">
     <value>Create new character</value>
@@ -309,6 +318,9 @@
   <data name="FreeExperience" xml:space="preserve">
     <value>Free EXP</value>
   </data>
+  <data name="Gigantic" xml:space="preserve">
+    <value>Gigantic</value>
+  </data>
   <data name="Health" xml:space="preserve">
     <value>Health</value>
   </data>
@@ -324,11 +336,17 @@
   <data name="HighRarityProperty" xml:space="preserve">
     <value>Must have an high rarity property</value>
   </data>
+  <data name="Huge" xml:space="preserve">
+    <value>Huge</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>
   <data name="LeatherArmor" xml:space="preserve">
     <value>Leather armor</value>
+  </data>
+  <data name="Legendary" xml:space="preserve">
+    <value>Legendary</value>
   </data>
   <data name="LevelFormat" xml:space="preserve">
     <value>Level {0}</value>
@@ -339,11 +357,20 @@
   <data name="LowRarityProperty" xml:space="preserve">
     <value>Must have an low rarity property</value>
   </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
   <data name="MediumRarityProperty" xml:space="preserve">
     <value>Must have an medium rarity property</value>
   </data>
   <data name="MetalArmor" xml:space="preserve">
     <value>Metal armor</value>
+  </data>
+  <data name="Miniature" xml:space="preserve">
+    <value>Miniature</value>
+  </data>
+  <data name="Monstrous" xml:space="preserve">
+    <value>Monstrous</value>
   </data>
   <data name="MuchMorePowerfullObstacle" xml:space="preserve">
     <value>Some very powerful obstacle</value>
@@ -428,6 +455,9 @@
   </data>
   <data name="SignInPageTitle" xml:space="preserve">
     <value>Sign In</value>
+  </data>
+  <data name="Small" xml:space="preserve">
+    <value>Small</value>
   </data>
   <data name="Spread" xml:space="preserve">
     <value>Spread:</value>
@@ -555,6 +585,12 @@
   <data name="TargetSelectionVoxelHint" xml:space="preserve">
     <value>A voxel is a 1x1 meter cube. From such voxels, you can make an array — the figure of the area in which the effect will be applied to the targets. In the picture an area of ​​five voxels is composed as an example.</value>
   </data>
+  <data name="TargetsSizes" xml:space="preserve">
+    <value>Targets sizes</value>
+  </data>
+  <data name="TargetsSizesHint" xml:space="preserve">
+    <value>Choose the size of the targets that the ability will affect. The ability cannot be cast on targets of any other size category.</value>
+  </data>
   <data name="TargetThreeDot" xml:space="preserve">
     <value>Target...</value>
   </data>
@@ -566,6 +602,12 @@
   </data>
   <data name="ThickSteelPlate" xml:space="preserve">
     <value>Thick steel plate</value>
+  </data>
+  <data name="Tiny" xml:space="preserve">
+    <value>Tiny</value>
+  </data>
+  <data name="Titanic" xml:space="preserve">
+    <value>Titanic</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>

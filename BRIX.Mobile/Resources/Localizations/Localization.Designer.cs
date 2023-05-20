@@ -169,6 +169,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add size.
+        /// </summary>
+        public static string AddSize {
+            get {
+                return ResourceManager.GetString("AddSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Appearance.
         /// </summary>
         public static string Appearance {
@@ -286,6 +295,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Big.
+        /// </summary>
+        public static string Big {
+            get {
+                return ResourceManager.GetString("Big", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brick wall.
         /// </summary>
         public static string BrickWall {
@@ -399,6 +417,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Clear {
             get {
                 return ResourceManager.GetString("Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Colossal.
+        /// </summary>
+        public static string Colossal {
+            get {
+                return ResourceManager.GetString("Colossal", resourceCulture);
             }
         }
         
@@ -637,6 +664,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gigantic.
+        /// </summary>
+        public static string Gigantic {
+            get {
+                return ResourceManager.GetString("Gigantic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Health.
         /// </summary>
         public static string Health {
@@ -682,6 +718,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Huge.
+        /// </summary>
+        public static string Huge {
+            get {
+                return ResourceManager.GetString("Huge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Language {
@@ -696,6 +741,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string LeatherArmor {
             get {
                 return ResourceManager.GetString("LeatherArmor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Legendary.
+        /// </summary>
+        public static string Legendary {
+            get {
+                return ResourceManager.GetString("Legendary", resourceCulture);
             }
         }
         
@@ -727,6 +781,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Medium.
+        /// </summary>
+        public static string Medium {
+            get {
+                return ResourceManager.GetString("Medium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Must have an medium rarity property.
         /// </summary>
         public static string MediumRarityProperty {
@@ -741,6 +804,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string MetalArmor {
             get {
                 return ResourceManager.GetString("MetalArmor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Miniature.
+        /// </summary>
+        public static string Miniature {
+            get {
+                return ResourceManager.GetString("Miniature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monstrous.
+        /// </summary>
+        public static string Monstrous {
+            get {
+                return ResourceManager.GetString("Monstrous", resourceCulture);
             }
         }
         
@@ -993,6 +1074,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string SignInPageTitle {
             get {
                 return ResourceManager.GetString("SignInPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Small.
+        /// </summary>
+        public static string Small {
+            get {
+                return ResourceManager.GetString("Small", resourceCulture);
             }
         }
         
@@ -1375,6 +1465,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Targets sizes.
+        /// </summary>
+        public static string TargetsSizes {
+            get {
+                return ResourceManager.GetString("TargetsSizes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose the size of the targets that the ability will affect. The ability cannot be cast on targets of any other size category..
+        /// </summary>
+        public static string TargetsSizesHint {
+            get {
+                return ResourceManager.GetString("TargetsSizesHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Target....
         /// </summary>
         public static string TargetThreeDot {
@@ -1407,6 +1515,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string ThickSteelPlate {
             get {
                 return ResourceManager.GetString("ThickSteelPlate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tiny.
+        /// </summary>
+        public static string Tiny {
+            get {
+                return ResourceManager.GetString("Tiny", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Titanic.
+        /// </summary>
+        public static string Titanic {
+            get {
+                return ResourceManager.GetString("Titanic", resourceCulture);
             }
         }
         
