@@ -296,32 +296,10 @@
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="vm:TargetSelectionRestrictionPropertyVM">
-                                    <Border 
-                                        BackgroundColor="Transparent" 
-                                        StrokeThickness="1" 
-                                        StrokeShape="RoundRectangle 10"
-                                        Stroke="{StaticResource BRIXDim}"
-                                        Padding="0">
-                                        <Grid ColumnDefinitions="*, auto">
-                                            <Label 
-                                                Grid.Column="0" 
-                                                Text="{Binding Text}"
-                                                VerticalOptions="Center"
-                                                VerticalTextAlignment="Center"
-                                                Margin="10,0"/>
-                                            <Button 
-                                                Grid.Column="1" 
-                                                Padding="0"
-                                                Margin="7"
-                                                CornerRadius="5"
-                                                HeightRequest="30"
-                                                WidthRequest="30"
-                                                BackgroundColor="{StaticResource BRIXDim}"
-                                                Text="{x:Static icons:Awesome.Xmark}"
-                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.DeleteRestrictionCommand}"
-                                                CommandParameter="{Binding}"/>
-                                        </Grid>
-                                    </Border>
+                                    <controls:AspectConditionItem
+                                        Text="{Binding Text}"
+                                        DeleteCommand="{Binding Source={x:Reference collectionView}, Path= BindingContext.DeleteRestrictionCommand}"
+                                        CommandParameter="{Binding}"/>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
