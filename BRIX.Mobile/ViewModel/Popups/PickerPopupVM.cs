@@ -14,6 +14,20 @@ namespace BRIX.Mobile.ViewModel.Popups
             set => SetProperty(ref _title, value);
         }
 
+        private SelectionMode _mode;
+        public SelectionMode Mode
+        {
+            get => _mode;
+            set => SetProperty(ref _mode, value);
+        }
+
+        private bool _showOk;
+        public bool ShowOk
+        {
+            get => _showOk;
+            set => SetProperty(ref _showOk, value);
+        }
+
         private ObservableCollection<PickerItemVM> _items;
         public ObservableCollection<PickerItemVM> Items
         {
@@ -43,13 +57,22 @@ namespace BRIX.Mobile.ViewModel.Popups
                 return;
             }
 
-            if (!Parameters.SelectMultiple)
+            if (Mode == SelectionMode.Single)
             {
                 View.Close(new PickerPopupResult 
                 { 
                     SelectedItems = new List<object>() { SelectedItem.Item } 
                 });
             }
+        }
+
+        [RelayCommand]
+        public void Ok()
+        {
+            View.Close(new PickerPopupResult
+            {
+                SelectedItems = SelectedItems.Select(x => x.Item).ToList()
+            });
         }
 
         private bool _parametersHandled;
@@ -64,6 +87,9 @@ namespace BRIX.Mobile.ViewModel.Popups
             SelectedItem = SelectedItems?.FirstOrDefault();
             
             Title = Parameters.Title;
+
+            Mode = Parameters.SelectMultiple ? SelectionMode.Multiple : SelectionMode.Single;
+            ShowOk = Mode == SelectionMode.Multiple;
 
             _parametersHandled = true;
         }
