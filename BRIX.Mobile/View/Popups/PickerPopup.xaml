@@ -16,10 +16,11 @@
                 Text="{Binding Title}" 
                 Style="{StaticResource TitleLabel}"/>
             <CollectionView 
+                x:Name="pickerCollection"
                 ItemsSource="{Binding Items}"
                 SelectionMode="{Binding Mode}"
                 SelectedItem="{Binding SelectedItem}"
-                SelectedItems="{Binding SelectedItems}">
+                SelectionChanged="pickerCollection_SelectionChanged">
                 <CollectionView.Behaviors>
                     <mct:EventToCommandBehavior
                         EventName="SelectionChanged"
@@ -38,7 +39,9 @@
                 WidthRequest="100" 
                 Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Ok}}"
                 Command="{Binding OkCommand}"
-                IsVisible="{Binding ShowOk}"/>
+                IsVisible="{Binding ShowOk}"
+                HorizontalOptions="End"
+                Style="{StaticResource SmallerButton}"/>
         </VerticalStackLayout>
     </Border>
 

@@ -271,20 +271,27 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             {
                 Title = Resources.Localizations.Localization.TargetsSizes,
                 Items = allSizes,
+                SelectedItems = new List<object> { allSizes.First() },
+                SelectMultiple = true
             };
             PickerPopupResult result = await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(parameters);
 
             if (result != null)
             {
-                TargetSizeVM concreteResult = result.SelectedItem as TargetSizeVM;
+                List<TargetSizeVM> concreteResult = result.SelectedItems.Select(x => x as TargetSizeVM).ToList();
 
-                if (Sizes.Any(x => x.Size == concreteResult.Size))
+                if (Sizes.Any(x => concreteResult.Any(y => y.Size == x.Size)))
                 {
                     return;
                 }
 
-                Sizes.Add(concreteResult);
-                Aspect.Internal.TargetsSizes.AddSize(concreteResult.Size);
+                foreach(TargetSizeVM sizeVM in concreteResult)
+                {
+                    Sizes.Add(sizeVM); 
+                    Aspect.Internal.TargetsSizes.AddSize(sizeVM.Size);
+                }
+
+                Sizes = new(Sizes.OrderBy(x => x.Size));
             }
 
             CostMonitor.UpdateCost();
