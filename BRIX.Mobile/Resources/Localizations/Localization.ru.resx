@@ -168,6 +168,9 @@
   <data name="AspectActionPoints" xml:space="preserve">
     <value>Очки действий</value>
   </data>
+  <data name="AspectCooldown" xml:space="preserve">
+    <value>Время перезарядки</value>
+  </data>
   <data name="AspectObstacle" xml:space="preserve">
     <value>Препятствия</value>
   </data>
@@ -203,6 +206,9 @@
   </data>
   <data name="Browse" xml:space="preserve">
     <value>Обзор...</value>
+  </data>
+  <data name="CannotReset" xml:space="preserve">
+    <value>Не перезаряжается (одноразовая)</value>
   </data>
   <data name="ChangeLanguage" xml:space="preserve">
     <value>Изменить язык</value>
@@ -257,6 +263,9 @@
   </data>
   <data name="DamageEffectPageHint" xml:space="preserve">
     <value>Каждый раз, когда вы используете свою способность, бросайте набор костей, указанный ниже, чтобы определить, сколько урона нанесла способность.</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>День</value>
   </data>
   <data name="DeleteAbilityQuestion" xml:space="preserve">
     <value>Вы уверены, что хотите удалить способность?</value>
@@ -336,8 +345,14 @@
   <data name="HighRarityProperty" xml:space="preserve">
     <value>Должна иметь признак высокой редкости</value>
   </data>
+  <data name="Hour" xml:space="preserve">
+    <value>Час</value>
+  </data>
   <data name="Huge" xml:space="preserve">
     <value>Огромный</value>
+  </data>
+  <data name="HundredYears" xml:space="preserve">
+    <value>100 лет</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Язык</value>
@@ -369,8 +384,14 @@
   <data name="Miniature" xml:space="preserve">
     <value>Миниатюрный</value>
   </data>
+  <data name="Minute" xml:space="preserve">
+    <value>Минута</value>
+  </data>
   <data name="Monstrous" xml:space="preserve">
     <value>Монструозный</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Месяц</value>
   </data>
   <data name="MuchMorePowerfullObstacle" xml:space="preserve">
     <value>Какое-то очень мощное препятствие</value>
@@ -383,6 +404,9 @@
   </data>
   <data name="None" xml:space="preserve">
     <value>n/a</value>
+  </data>
+  <data name="NoneCooldown" xml:space="preserve">
+    <value>Не требует перезарядки</value>
   </data>
   <data name="ObstacleBetweenTargetsInChain" xml:space="preserve">
     <value>Препятствия между целями</value>
@@ -594,6 +618,9 @@
   <data name="TargetThreeDot" xml:space="preserve">
     <value>Цель...</value>
   </data>
+  <data name="TenYears" xml:space="preserve">
+    <value>10 лет</value>
+  </data>
   <data name="TheTarget" xml:space="preserve">
     <value>Цель...</value>
   </data>
@@ -612,8 +639,14 @@
   <data name="Warning" xml:space="preserve">
     <value>Внимание</value>
   </data>
+  <data name="Week" xml:space="preserve">
+    <value>Неделя</value>
+  </data>
   <data name="WoodenPlank" xml:space="preserve">
     <value>Деревянная доска</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Год</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Да</value>

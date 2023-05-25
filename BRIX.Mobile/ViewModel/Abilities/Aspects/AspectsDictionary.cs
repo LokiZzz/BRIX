@@ -2,6 +2,7 @@
 using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities.Aspects;
+using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.View.Abilities.Aspects;
 using BRIX.Mobile.View.IconFonts;
@@ -10,21 +11,25 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 {
     public static class AspectsDictionary
     {
-        private static ILocalizationResourceManager _localization => ServicePool.GetService<ILocalizationResourceManager>();
-
         public static Dictionary<Type, AspectUtilityModel> Collection => new()
         {
             { typeof(ActionPointsAspectModel), new AspectUtilityModel() {
-                Name = _localization[Resources.Localizations.LocalizationKeys.AspectActionPoints].ToString(),
+                Name = Localization.AspectActionPoints.ToString(),
                 Icon = AwesomeRPG.BottledBolt,
                 EditPage = typeof(ActionPointAspectPage),
                 LibraryAspectType = typeof(ActionPointAspect),
             }},
             { typeof(TargetSelectionAspectModel), new AspectUtilityModel() {
-                Name = _localization[Resources.Localizations.LocalizationKeys.AspectTargetSelection].ToString(),
+                Name = Localization.AspectTargetSelection.ToString(),
                 Icon = AwesomeRPG.ArcheryTarget,
                 EditPage = typeof(TargetSelectionAspectPage),
                 LibraryAspectType = typeof(TargetSelectionAspect),
+            }},
+            { typeof(CooldownAspectModel), new AspectUtilityModel() {
+                Name = Localization.AspectCooldown.ToString(),
+                Icon = AwesomeRPG.Hourglass,
+                EditPage = typeof(CooldownAspectPage),
+                LibraryAspectType = typeof(CooldownAspect),
             }},
         };
 

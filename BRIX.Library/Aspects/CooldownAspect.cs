@@ -4,7 +4,7 @@
     {
         public override Dictionary<ECooldownOption, int> ConditionToCoeficientMap => new Dictionary<ECooldownOption, int>
         {
-            { ECooldownOption.None, 0 },
+            { ECooldownOption.NoneCooldown, 0 },
             { ECooldownOption.Minute, -20 },
             { ECooldownOption.Hour, -30 },
             { ECooldownOption.Day, -40 },
@@ -16,14 +16,18 @@
             { ECooldownOption.CannotReset, -95 }
         };
 
-        public int UsesCount { get; set; } = 1;
+        /// <summary>
+        /// Количество раз, которое можно использовать способность до того, как ей понадобится перезарядка.
+        /// 0 означает, что способность можно использовать любое количество раз без ограничений.
+        /// </summary>
+        public int UsesCount { get; set; } = 0;
 
         public override double GetCoefficient() => base.GetCoefficient() / UsesCount;
     }
 
     public enum ECooldownOption
     {
-        None = 0,
+        NoneCooldown = 0,
         Minute = 10,
         Hour = 15,
         Day = 20,

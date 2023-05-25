@@ -18,8 +18,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
         public ILocalizationResourceManager Localization { get; }
 
-        
-
         public override void Initialize()
         {
             if (Aspect.Internal.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)

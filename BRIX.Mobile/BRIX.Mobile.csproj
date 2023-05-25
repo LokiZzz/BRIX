@@ -172,6 +172,9 @@
 	  <MauiXaml Update="View\Abilities\Aspects\AspectsPanelView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Aspects\CooldownAspectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Aspects\TargetSelectionAspectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
