@@ -246,6 +246,12 @@
   <data name="Colossal" xml:space="preserve">
     <value>Colossal</value>
   </data>
+  <data name="Cooldown" xml:space="preserve">
+    <value>Cooldown</value>
+  </data>
+  <data name="CooldownAspectHint" xml:space="preserve">
+    <value>Specify how long it takes for the ability to recharge and be able to use it again. You can also choose the number of times you can use the ability before it needs a cooldown.</value>
+  </data>
   <data name="CreateNewCharacter" xml:space="preserve">
     <value>Create new character</value>
   </data>
@@ -635,6 +641,9 @@
   </data>
   <data name="Titanic" xml:space="preserve">
     <value>Titanic</value>
+  </data>
+  <data name="UsesCount" xml:space="preserve">
+    <value>Uses count</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>

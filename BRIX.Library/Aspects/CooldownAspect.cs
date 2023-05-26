@@ -1,4 +1,6 @@
-﻿namespace BRIX.Library.Aspects
+﻿using BRIX.Library.Mathematics;
+
+namespace BRIX.Library.Aspects
 {
     public class CooldownAspect : SingleConditionAspect<ECooldownOption>
     {
@@ -22,7 +24,9 @@
         /// </summary>
         public int UsesCount { get; set; } = 0;
 
-        public override double GetCoefficient() => base.GetCoefficient() / UsesCount;
+        public override double GetCoefficient() => UsesCount > 0
+            ? (ConditionToCoeficientMap[Condition] / UsesCount).ToCoeficient()
+            : base.GetCoefficient();
     }
 
     public enum ECooldownOption

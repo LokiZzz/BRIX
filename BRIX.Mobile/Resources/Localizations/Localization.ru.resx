@@ -246,6 +246,12 @@
   <data name="Colossal" xml:space="preserve">
     <value>Колоссальный</value>
   </data>
+  <data name="Cooldown" xml:space="preserve">
+    <value>Время перезарядки</value>
+  </data>
+  <data name="CooldownAspectHint" xml:space="preserve">
+    <value>Укажите какое время требуется способности, чтобы она перезарядилась и могла использоваться вновь. Вы также можете выбрать количество раз, которое вы можете использовать способность, прежде чем ей понадобится перезарядка.</value>
+  </data>
   <data name="CreateNewCharacter" xml:space="preserve">
     <value>Создать персонажа</value>
   </data>
@@ -635,6 +641,9 @@
   </data>
   <data name="Titanic" xml:space="preserve">
     <value>Титанический</value>
+  </data>
+  <data name="UsesCount" xml:space="preserve">
+    <value>Количество использований</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Внимание</value>

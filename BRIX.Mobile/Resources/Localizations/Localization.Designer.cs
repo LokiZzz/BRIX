@@ -448,6 +448,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cooldown.
+        /// </summary>
+        public static string Cooldown {
+            get {
+                return ResourceManager.GetString("Cooldown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify how long it takes for the ability to recharge and be able to use it again. You can also choose the number of times you can use the ability before it needs a cooldown..
+        /// </summary>
+        public static string CooldownAspectHint {
+            get {
+                return ResourceManager.GetString("CooldownAspectHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create new character.
         /// </summary>
         public static string CreateNewCharacter {
@@ -1614,6 +1632,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Titanic {
             get {
                 return ResourceManager.GetString("Titanic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uses count.
+        /// </summary>
+        public static string UsesCount {
+            get {
+                return ResourceManager.GetString("UsesCount", resourceCulture);
             }
         }
         

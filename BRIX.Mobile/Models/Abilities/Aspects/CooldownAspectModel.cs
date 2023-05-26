@@ -20,7 +20,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public CooldownAspect Internal => GetSpecificAspect<CooldownAspect>();
 
-        public CooldownOptionVM ObstacleBetweenTargetsInChain
+        public CooldownOptionVM SelectedOption
         {
             get
             {
@@ -37,9 +37,17 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 if(cooldown == ECooldownOption.NoneCooldown || cooldown == ECooldownOption.CannotReset)
                 {
                     UsesCount = 0;
+                } 
+                else
+                {
+                    if(UsesCount <= 0)
+                    {
+                        UsesCount = 1;
+                    }
                 }
 
                 UpdateCost();
+                OnPropertyChanged(nameof(NeedToSetUsesCount));
             }
         }
 
@@ -60,6 +68,9 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 UpdateCost();
             }
         }
+
+        public bool NeedToSetUsesCount => SelectedOption?.Cooldown != ECooldownOption.NoneCooldown
+            && SelectedOption?.Cooldown != ECooldownOption.CannotReset;
     }
 
     public class CooldownOptionVM
