@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BRIX.Mobile.View.Abilities.Aspects.ActivationConditionsAspectPage"
+             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+             xmlns:v="clr-namespace:BRIX.Mobile.View.Abilities"
+             xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities.Aspects"
+             xmlns:m="clr-namespace:BRIX.Mobile.Models.Abilities.Aspects"
+             x:DataType="vm:ActivationConditionsAspectPageVM"
+             Shell.TabBarIsVisible="False"
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectActivationConditions}}">
+    
+    <Shell.TitleView>
+        <controls:TitleView/>
+    </Shell.TitleView>
+
+    <Grid RowDefinitions="*,auto">
+        <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never" >
+            <VerticalStackLayout Spacing="10">
+                <Border Style="{StaticResource BlockBorder}">
+                    <Grid RowDefinitions="auto,*,auto" RowSpacing="10">
+                        <VerticalStackLayout Grid.Row="0" Spacing="10">
+                            <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectActivationConditions}}"/>
+                            <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ActivationConditionsHint}}"/>
+                        </VerticalStackLayout>
+
+                        <CollectionView Grid.Row="1" x:Name="conditionsCollectionView" ItemsSource="{Binding Conditions}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="m:ActivationConditionOptionVM">
+                                    <controls:AspectConditionItem
+                                        Text="{Binding Text}"
+                                        DeleteCommand="{Binding Source={x:Reference restrictionsCollectionView}, Path= BindingContext.DeleteConditionCommand}"
+                                        CommandParameter="{Binding}"/>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <VerticalStackLayout Grid.Row="2" Spacing="10">
+                            <Label 
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NoSpecialActivationConditions}}"
+                                Margin="0,0,0,5"
+                                IsVisible="{Binding ShowNoConditionsText}"/>
+                            <Button 
+                                Style="{StaticResource LightButton}"
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AddCondition}}"
+                                Command="{Binding AddConditionCommand}"
+                                Margin="0,0,0,1"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+        <v:AbilityCostMonitorPanel
+            Grid.Row="1"
+            BindingContext="{Binding CostMonitor}"/>
+    </Grid>
+</ContentPage>

@@ -132,8 +132,20 @@
   <data name="ActionPointAspectHint" xml:space="preserve">
     <value>Almost any ability is used by spending action points. The more action points an ability spends, the cheaper it will be in experience points.</value>
   </data>
+  <data name="ActivationCondition" xml:space="preserve">
+    <value>Activation condition</value>
+  </data>
+  <data name="ActivationConditionsHint" xml:space="preserve">
+    <value>The effect will be applied only if all the specified conditions are met by the time the ability is activated.</value>
+  </data>
+  <data name="ActivationConditionWarning" xml:space="preserve">
+    <value>Such activation condition already exists.</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>New</value>
+  </data>
+  <data name="AddCondition" xml:space="preserve">
+    <value>Add condition</value>
   </data>
   <data name="AddOrEditAbilityPageTitle_Add" xml:space="preserve">
     <value>Add ability</value>
@@ -167,6 +179,9 @@
   </data>
   <data name="AspectActionPoints" xml:space="preserve">
     <value>Action points</value>
+  </data>
+  <data name="AspectActivationConditions" xml:space="preserve">
+    <value>Activation conditions</value>
   </data>
   <data name="AspectCooldown" xml:space="preserve">
     <value>Cooldown</value>
@@ -297,6 +312,9 @@
   <data name="DiceValuePopupTitle" xml:space="preserve">
     <value>Dice value</value>
   </data>
+  <data name="EasyActivationCondition" xml:space="preserve">
+    <value>Low difficulty condition</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
@@ -309,11 +327,20 @@
   <data name="Effects" xml:space="preserve">
     <value>Effects</value>
   </data>
+  <data name="EnterHardActiovationCondition" xml:space="preserve">
+    <value>Specify a condition that is difficult to reproduce or a condition of high rarity. For example, a shooting star in the field of view, a specific day of the year, a volcanic eruption nearby, etc.</value>
+  </data>
   <data name="EnterHighRarityRestriction" xml:space="preserve">
     <value>Enter a sign of high rarity, continuing the sentence: "Target...". For example: "Must have a tattoo", "Must be a dragon", "Must be born in June".</value>
   </data>
+  <data name="EnterLowActivationCondition" xml:space="preserve">
+    <value>Specify an easily reproducible condition or a condition of low rarity. For example, a specific time of day, the presence of a visible sky, the proximity of vessels with liquids, the presence of smooth vertical surfaces, the obligatory sound of music, activation only in the dark, etc.</value>
+  </data>
   <data name="EnterLowRarityRestriction" xml:space="preserve">
     <value>Enter a low rarity property, continuing the sentence: "Target...". For example: "Must be female", "Must be an elf", "Must have a soul", "Must be made of wood".</value>
+  </data>
+  <data name="EnterMediumActiovationCondition" xml:space="preserve">
+    <value>Indicate a condition that is difficult to reproduce or a condition of medium rarity. For example, rain, full moon, activation only under water, etc.</value>
   </data>
   <data name="EnterMediumRarityRestriction" xml:space="preserve">
     <value>Enter a sign of medium rarity, continuing the sentence: Target...". For example: “Must be in armor”, “Must be in water”, “Must breathe”.</value>
@@ -335,6 +362,9 @@
   </data>
   <data name="Gigantic" xml:space="preserve">
     <value>Gigantic</value>
+  </data>
+  <data name="HardActivationCondition" xml:space="preserve">
+    <value>Hard difficulty condition</value>
   </data>
   <data name="Health" xml:space="preserve">
     <value>Health</value>
@@ -381,6 +411,9 @@
   <data name="Medium" xml:space="preserve">
     <value>Medium</value>
   </data>
+  <data name="MediumActivationCondition" xml:space="preserve">
+    <value>Medium difficulty condition</value>
+  </data>
   <data name="MediumRarityProperty" xml:space="preserve">
     <value>Must have an medium rarity property</value>
   </data>
@@ -405,6 +438,18 @@
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="NeedToAbleToTalk" xml:space="preserve">
+    <value>Character can talk</value>
+  </data>
+  <data name="NeedToMove" xml:space="preserve">
+    <value>Character can move freely</value>
+  </data>
+  <data name="NeedToMoveArm" xml:space="preserve">
+    <value>Сharacter can move with one hand</value>
+  </data>
+  <data name="NeedToMoveBothArms" xml:space="preserve">
+    <value>Сharacter can move with both hands</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
@@ -413,6 +458,9 @@
   </data>
   <data name="NoneCooldown" xml:space="preserve">
     <value>No cooldown</value>
+  </data>
+  <data name="NoSpecialActivationConditions" xml:space="preserve">
+    <value>There is no special activation conditions.</value>
   </data>
   <data name="ObstacleBetweenTargetsInChain" xml:space="preserve">
     <value>Obstacles between targets</value>

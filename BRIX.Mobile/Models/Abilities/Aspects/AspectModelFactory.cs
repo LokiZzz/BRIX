@@ -15,6 +15,8 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                     return new TargetSelectionAspectModel(targetSelectionAspect);
                 case CooldownAspect cooldownAspect:
                     return new CooldownAspectModel(cooldownAspect);
+                case ActivationConditionsAspect activationConditionsAspect:
+                    return new ActivationConditionsAspectModel(activationConditionsAspect);
                 default: 
                     return null;
             }

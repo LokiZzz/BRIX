@@ -71,6 +71,7 @@ public static class MauiProgram
         builder.RegisterView<ActionPointAspectPage, ActionPointAspectPageVM>();
         builder.RegisterView<TargetSelectionAspectPage, TargetSelectionAspectPageVM>();
         builder.RegisterView<CooldownAspectPage, CooldownAspectPageVM>();
+        builder.RegisterView<ActivationConditionsAspectPage, ActivationConditionsAspectPageVM>();
 
         builder.RegisterView<SettingsPage, SettingsPageVM>(false);
 

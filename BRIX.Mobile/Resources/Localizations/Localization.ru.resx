@@ -132,8 +132,20 @@
   <data name="ActionPointAspectHint" xml:space="preserve">
     <value>Практически любые способности ипользуются посредством траты очков действий. Чем больше очков действий тратит способность, тем дешевле она будет в очках опыта.</value>
   </data>
+  <data name="ActivationCondition" xml:space="preserve">
+    <value>Условие активации</value>
+  </data>
+  <data name="ActivationConditionsHint" xml:space="preserve">
+    <value>Эффект будет применён, только если к моменту активации способности все указанные условия будут соблюдены.</value>
+  </data>
+  <data name="ActivationConditionWarning" xml:space="preserve">
+    <value>Такое условие активации уже есть.</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>Добавить</value>
+  </data>
+  <data name="AddCondition" xml:space="preserve">
+    <value>Добавить условие</value>
   </data>
   <data name="AddOrEditAbilityPageTitle_Add" xml:space="preserve">
     <value>Новая способность</value>
@@ -167,6 +179,9 @@
   </data>
   <data name="AspectActionPoints" xml:space="preserve">
     <value>Очки действий</value>
+  </data>
+  <data name="AspectActivationConditions" xml:space="preserve">
+    <value>Условия активации</value>
   </data>
   <data name="AspectCooldown" xml:space="preserve">
     <value>Время перезарядки</value>
@@ -297,6 +312,9 @@
   <data name="DiceValuePopupTitle" xml:space="preserve">
     <value>Кости</value>
   </data>
+  <data name="EasyActivationCondition" xml:space="preserve">
+    <value>Условие малой сложности</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Изменить</value>
   </data>
@@ -309,11 +327,20 @@
   <data name="Effects" xml:space="preserve">
     <value>Эффекты</value>
   </data>
+  <data name="EnterHardActiovationCondition" xml:space="preserve">
+    <value>Укажите сложно воспроизводимое условие или условие высокой редкости. Например падающая звезда в области видимости, конкретный день в году, извержение вулкана поблизости и т.п.</value>
+  </data>
   <data name="EnterHighRarityRestriction" xml:space="preserve">
     <value>Введите признак высокой редкости, продолжая предложение: «Цель...». Например: «Должна иметь татуировку», «Должна быть драконом», «Должна быть рождена в июне».</value>
   </data>
+  <data name="EnterLowActivationCondition" xml:space="preserve">
+    <value>Укажите легко воспроизводимое условие или условие малой редкости. Например конкретное время суток, наличие видимого неба, близость сосудов с жидкостями, наличие гладких вертикальных поверхностей, обязательное звучание музыки, активация только в темноте и т.п.</value>
+  </data>
   <data name="EnterLowRarityRestriction" xml:space="preserve">
     <value>Введите признак низкой редкости, продолжая предложение: «Цель...». Например: «Должна быть женского пола», «Должна быть эльфом», «Должна иметь душу», «Должна быть предметом из дерева».</value>
+  </data>
+  <data name="EnterMediumActiovationCondition" xml:space="preserve">
+    <value>Укажите с трудом воспроизводимое условие или условие средней редкости. Например дождь, полнолуние, активация только под водой и т.п.</value>
   </data>
   <data name="EnterMediumRarityRestriction" xml:space="preserve">
     <value>Введите признак средней редкости, продолжая предложение: «Цель...». Например: «Должна быть в доспехах», «Должна находится в воде», «Должна дышать».</value>
@@ -335,6 +362,9 @@
   </data>
   <data name="Gigantic" xml:space="preserve">
     <value>Гигантский</value>
+  </data>
+  <data name="HardActivationCondition" xml:space="preserve">
+    <value>Условие высокой сложности</value>
   </data>
   <data name="Health" xml:space="preserve">
     <value>Здоровье</value>
@@ -381,6 +411,9 @@
   <data name="Medium" xml:space="preserve">
     <value>Средний</value>
   </data>
+  <data name="MediumActivationCondition" xml:space="preserve">
+    <value>Условие средней сложности</value>
+  </data>
   <data name="MediumRarityProperty" xml:space="preserve">
     <value>Должна иметь признак средней редкости</value>
   </data>
@@ -405,6 +438,18 @@
   <data name="Name" xml:space="preserve">
     <value>Имя</value>
   </data>
+  <data name="NeedToAbleToTalk" xml:space="preserve">
+    <value>Персонаж может говорить</value>
+  </data>
+  <data name="NeedToMove" xml:space="preserve">
+    <value>Персонаж может свободно двигаться</value>
+  </data>
+  <data name="NeedToMoveArm" xml:space="preserve">
+    <value>Персонаж может двигать одной рукой</value>
+  </data>
+  <data name="NeedToMoveBothArms" xml:space="preserve">
+    <value>Персонаж может двигать обеими руками</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>Нет</value>
   </data>
@@ -413,6 +458,9 @@
   </data>
   <data name="NoneCooldown" xml:space="preserve">
     <value>Не требует перезарядки</value>
+  </data>
+  <data name="NoSpecialActivationConditions" xml:space="preserve">
+    <value>Для этого эффекта не указаны никакие особые условия активации.</value>
   </data>
   <data name="ObstacleBetweenTargetsInChain" xml:space="preserve">
     <value>Препятствия между целями</value>

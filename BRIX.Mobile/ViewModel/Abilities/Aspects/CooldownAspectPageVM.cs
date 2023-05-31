@@ -9,8 +9,5 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 {
-    public partial class CooldownAspectPageVM : AspectPageVMBase<CooldownAspectModel> 
-    {
-        
-    }
+    public partial class CooldownAspectPageVM : AspectPageVMBase<CooldownAspectModel> { }
 }

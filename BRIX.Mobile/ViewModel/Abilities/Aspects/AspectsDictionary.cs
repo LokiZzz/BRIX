@@ -31,6 +31,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 EditPage = typeof(CooldownAspectPage),
                 LibraryAspectType = typeof(CooldownAspect),
             }},
+            { typeof(ActivationConditionsAspectModel), new AspectUtilityModel() {
+                Name = Localization.AspectActivationConditions.ToString(),
+                Icon = AwesomeRPG.KeyBasic,
+                EditPage = typeof(ActivationConditionsAspectPage),
+                LibraryAspectType = typeof(ActivationConditionsAspect),
+            }},
         };
 
         public static string GetEditPageRoute(EffectBase effect)

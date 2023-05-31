@@ -106,11 +106,47 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activation condition.
+        /// </summary>
+        public static string ActivationCondition {
+            get {
+                return ResourceManager.GetString("ActivationCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The effect will be applied only if all the specified conditions are met by the time the ability is activated..
+        /// </summary>
+        public static string ActivationConditionsHint {
+            get {
+                return ResourceManager.GetString("ActivationConditionsHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Such activation condition already exists..
+        /// </summary>
+        public static string ActivationConditionWarning {
+            get {
+                return ResourceManager.GetString("ActivationConditionWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
         public static string Add {
             get {
                 return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add condition.
+        /// </summary>
+        public static string AddCondition {
+            get {
+                return ResourceManager.GetString("AddCondition", resourceCulture);
             }
         }
         
@@ -210,6 +246,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string AspectActionPoints {
             get {
                 return ResourceManager.GetString("AspectActionPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activation conditions.
+        /// </summary>
+        public static string AspectActivationConditions {
+            get {
+                return ResourceManager.GetString("AspectActivationConditions", resourceCulture);
             }
         }
         
@@ -601,6 +646,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Low difficulty condition.
+        /// </summary>
+        public static string EasyActivationCondition {
+            get {
+                return ResourceManager.GetString("EasyActivationCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string Edit {
@@ -637,6 +691,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Specify a condition that is difficult to reproduce or a condition of high rarity. For example, a shooting star in the field of view, a specific day of the year, a volcanic eruption nearby, etc..
+        /// </summary>
+        public static string EnterHardActiovationCondition {
+            get {
+                return ResourceManager.GetString("EnterHardActiovationCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter a sign of high rarity, continuing the sentence: &quot;Target...&quot;. For example: &quot;Must have a tattoo&quot;, &quot;Must be a dragon&quot;, &quot;Must be born in June&quot;..
         /// </summary>
         public static string EnterHighRarityRestriction {
@@ -646,11 +709,29 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Specify an easily reproducible condition or a condition of low rarity. For example, a specific time of day, the presence of a visible sky, the proximity of vessels with liquids, the presence of smooth vertical surfaces, the obligatory sound of music, activation only in the dark, etc..
+        /// </summary>
+        public static string EnterLowActivationCondition {
+            get {
+                return ResourceManager.GetString("EnterLowActivationCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter a low rarity property, continuing the sentence: &quot;Target...&quot;. For example: &quot;Must be female&quot;, &quot;Must be an elf&quot;, &quot;Must have a soul&quot;, &quot;Must be made of wood&quot;..
         /// </summary>
         public static string EnterLowRarityRestriction {
             get {
                 return ResourceManager.GetString("EnterLowRarityRestriction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Indicate a condition that is difficult to reproduce or a condition of medium rarity. For example, rain, full moon, activation only under water, etc..
+        /// </summary>
+        public static string EnterMediumActiovationCondition {
+            get {
+                return ResourceManager.GetString("EnterMediumActiovationCondition", resourceCulture);
             }
         }
         
@@ -714,6 +795,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Gigantic {
             get {
                 return ResourceManager.GetString("Gigantic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hard difficulty condition.
+        /// </summary>
+        public static string HardActivationCondition {
+            get {
+                return ResourceManager.GetString("HardActivationCondition", resourceCulture);
             }
         }
         
@@ -853,6 +943,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Medium difficulty condition.
+        /// </summary>
+        public static string MediumActivationCondition {
+            get {
+                return ResourceManager.GetString("MediumActivationCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Must have an medium rarity property.
         /// </summary>
         public static string MediumRarityProperty {
@@ -925,6 +1024,42 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Character can talk.
+        /// </summary>
+        public static string NeedToAbleToTalk {
+            get {
+                return ResourceManager.GetString("NeedToAbleToTalk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Character can move freely.
+        /// </summary>
+        public static string NeedToMove {
+            get {
+                return ResourceManager.GetString("NeedToMove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сharacter can move with one hand.
+        /// </summary>
+        public static string NeedToMoveArm {
+            get {
+                return ResourceManager.GetString("NeedToMoveArm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сharacter can move with both hands.
+        /// </summary>
+        public static string NeedToMoveBothArms {
+            get {
+                return ResourceManager.GetString("NeedToMoveBothArms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string No {
@@ -948,6 +1083,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string NoneCooldown {
             get {
                 return ResourceManager.GetString("NoneCooldown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no special activation conditions..
+        /// </summary>
+        public static string NoSpecialActivationConditions {
+            get {
+                return ResourceManager.GetString("NoSpecialActivationConditions", resourceCulture);
             }
         }
         

@@ -4,14 +4,14 @@
     {
         public override Dictionary<EActivationCondition, int> ConditionToCoeficientMap => new Dictionary<EActivationCondition, int>
         {
-            { EActivationCondition.NeedToMove, -5 },
             { EActivationCondition.NeedToMoveArm, -10 },
             { EActivationCondition.NeedToMoveBothArms, -15 },
-            { EActivationCondition.NeedToAbleToTalk, -10 },
+            { EActivationCondition.NeedToAbleToTalk, -15 },
+            { EActivationCondition.NeedToMove, -20 },
 
-            { EActivationCondition.EasyCondition, -20 },
-            { EActivationCondition.MediumCondition, -40 },
-            { EActivationCondition.HardCondition, -60 }
+            { EActivationCondition.EasyActivationCondition, -20 },
+            { EActivationCondition.MediumActivationCondition, -40 },
+            { EActivationCondition.HardActivationCondition, -60 }
         };
     }
 
@@ -22,8 +22,8 @@
         NeedToMoveBothArms = 3,
         NeedToAbleToTalk = 4,
 
-        EasyCondition = 5,
-        MediumCondition = 6,
-        HardCondition = 7
+        EasyActivationCondition = 5,
+        MediumActivationCondition = 6,
+        HardActivationCondition = 7
     }
 }
