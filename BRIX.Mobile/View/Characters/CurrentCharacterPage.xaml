@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Characters"
+             xmlns:m="clr-namespace:BRIX.Mobile.Models.Characters"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
@@ -29,7 +30,6 @@
                 <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.FileImage}" Command="{Binding PictureCommand}"/>
                 <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.PeopleArrows}" Command="{Binding SwitchCommand}"/>
             </HorizontalStackLayout>
-            
         </Grid>
     </Shell.TitleView>
 
@@ -61,6 +61,7 @@
         
             <!--In case of player have at leatst one character-->
             <VerticalStackLayout IsVisible="{Binding PlayerHaveCharacter}" Spacing="10">
+                <!--Portrait-->
                 <Border 
                     Style="{StaticResource SideMarginBlockBorder}"
                     Padding="0"
@@ -103,6 +104,7 @@
                             Opacity=".75"/>
                     </Grid>
                 </Border>
+                <!--Health-->
                 <Border Style="{StaticResource SideMarginBlockBorder}">
                     <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Health}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
@@ -144,7 +146,7 @@
                         </ProgressBar>
                     </Grid>
                 </Border>
-
+                <!--EXP-->
                 <CarouselView ItemsSource="{Binding ExpCards}" Loop="False" IndicatorView="experienceCarouselIndicator">
                     <CarouselView.ItemsLayout>
                         <LinearItemsLayout 
@@ -183,25 +185,60 @@
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>
-
                 <IndicatorView 
                     x:Name="experienceCarouselIndicator"
                     IndicatorColor="{StaticResource BRIXDim}"
                     SelectedIndicatorColor="{StaticResource BRIXWhite}"
                     HorizontalOptions="Center"/>
-
+                <!--Tags-->
                 <Border Style="{StaticResource SideMarginBlockBorder}">
-                    <Grid RowDefinitions="auto,auto,auto,auto" ColumnDefinitions="*,auto,auto">
-                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Tags}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
-                    </Grid>
+                    <VerticalStackLayout>
+                        <Grid ColumnDefinitions="*,auto">
+                            <Label 
+                                Grid.Column="0"
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.MarksOfFate}}" 
+                                Style="{StaticResource TitleLabel}" Grid.Row="0"/>
+                            <Button
+                                Grid.Column="1"
+                                Style="{StaticResource SquareIconButton}"
+                                Command="{Binding AddTagCommand}"
+                                Text="{x:Static icons:Awesome.SquarePlus}"/>
+                        </Grid>
+                        <FlexLayout 
+                            BindableLayout.ItemsSource="{Binding Character.Tags}" 
+                            x:Name="tagsLayout"
+                            Wrap="Wrap"
+                            Margin="-1,9,-1,-1"
+                            IsVisible="{Binding ShowTags}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="m:CharacterTagVM">
+                                    <Border
+                                        StrokeShape="RoundRectangle 5"
+                                        BackgroundColor="{StaticResource BRIXViolet}"
+                                        HeightRequest="40"
+                                        Margin="1">
+                                        <HorizontalStackLayout Margin="10,8" Spacing="10">
+                                            <Label 
+                                                Text="{Binding Text}"
+                                                FontFamily="Garamond"
+                                                FontSize="15"
+                                                VerticalOptions="Center"
+                                                VerticalTextAlignment="Center"/>
+                                            <Button 
+                                                Padding="0"
+                                                BackgroundColor="Transparent"
+                                                FontFamily="Awesome"
+                                                Text="{x:Static icons:Awesome.SquareXmark}"
+                                                TextColor="{StaticResource BRIXWhite}"
+                                                Command="{Binding Source={x:Reference tagsLayout}, Path=BindingContext.RemoveTagCommand}"
+                                                CommandParameter="{Binding}"/>
+                                        </HorizontalStackLayout>
+                                    </Border>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </FlexLayout>
+                    </VerticalStackLayout>
                 </Border>
-
-                <Border Style="{StaticResource SideMarginBlockBorder}">
-                    <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
-                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Abilities}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
-                    </Grid>
-                </Border>
-
             </VerticalStackLayout>
         </Grid>
     </ScrollView>

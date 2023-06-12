@@ -142,7 +142,7 @@
     <value>Such activation condition already exists.</value>
   </data>
   <data name="Add" xml:space="preserve">
-    <value>New</value>
+    <value>Add</value>
   </data>
   <data name="AddCondition" xml:space="preserve">
     <value>Add condition</value>
@@ -408,6 +408,15 @@
   <data name="LowRarityProperty" xml:space="preserve">
     <value>Must have an low rarity property</value>
   </data>
+  <data name="MarkOfFate" xml:space="preserve">
+    <value>Mark of fate</value>
+  </data>
+  <data name="MarkOfFateHint" xml:space="preserve">
+    <value>Enter the mark of fate assigned to you by the game master.</value>
+  </data>
+  <data name="MarksOfFate" xml:space="preserve">
+    <value>Marks of fate</value>
+  </data>
   <data name="Medium" xml:space="preserve">
     <value>Medium</value>
   </data>
@@ -545,9 +554,6 @@
   </data>
   <data name="Switch" xml:space="preserve">
     <value>Switch</value>
-  </data>
-  <data name="Tags" xml:space="preserve">
-    <value>Tags</value>
   </data>
   <data name="TargetChainEnable" xml:space="preserve">
     <value>Enable target chain</value>

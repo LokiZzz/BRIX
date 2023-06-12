@@ -2,6 +2,7 @@
 using BRIX.Library.Characters;
 using System.Collections.ObjectModel;
 using BRIX.Mobile.Models.Abilities;
+using System.Collections.Specialized;
 
 namespace BRIX.Mobile.Models.Characters
 {
@@ -12,7 +13,8 @@ namespace BRIX.Mobile.Models.Characters
         public CharacterModel(Character character)
         {
             InternalModel = character;
-            Abilities = new ObservableCollection<AbilityModel>(character.Abilities.Select(x => new AbilityModel(x)));
+            Abilities = new (character.Abilities.Select(x => new AbilityModel(x)));
+            Tags = new (character.Tags.Select(x => new CharacterTagVM { Text = x }));
         }
 
         public Character InternalModel { get; }
@@ -182,6 +184,25 @@ namespace BRIX.Mobile.Models.Characters
             );
             InternalModel.Abilities[indexOfOldAbility] = ability.InternalModel;
         }
+
+        public ObservableCollection<CharacterTagVM> Tags { get; set; }
+
+        public void AddTag(CharacterTagVM tag)
+        {
+            Tags.Add(tag);
+            InternalModel.Tags.Add(tag.Text);
+        }
+
+        public void RemoveTag(CharacterTagVM tag)
+        {
+            Tags.Remove(tag);
+            InternalModel.Tags.Remove(InternalModel.Tags.Single(x => x == tag.Text));
+        }
+    }
+
+    public class CharacterTagVM
+    {
+        public string Text { get; set; }
     }
 
     public enum EHealthState

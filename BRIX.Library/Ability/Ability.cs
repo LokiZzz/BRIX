@@ -29,12 +29,12 @@ namespace BRIX.Library
         /// <summary>
         /// Постоянное материальное обеспечение.
         /// </summary>
-        public AbilityMaterialSupport MaterialSupport { get; set; } = new();
+        public Equipment MaterialSupport { get; set; } = new();
 
         /// <summary>
         /// Расходуемое материальное обеспечение.
         /// </summary>
-        public AbilityConsumables Consumables { get; set; } = new();
+        public Consumables Consumables { get; set; } = new();
 
         public bool CanActivate() => MaterialSupport.IsProvided && Consumables.IsProvided;
 

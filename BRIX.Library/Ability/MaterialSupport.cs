@@ -13,7 +13,7 @@
         public bool IsProvided => CoinsPrice == default || IsAvailable;
     }
 
-    public class AbilityMaterialSupport : MaterialSupport
+    public class Equipment : MaterialSupport
     {
         private bool _isAvailable;
 
@@ -28,22 +28,22 @@
         public void SetIsAvailable(bool isAvailable) => _isAvailable = isAvailable;
     }
 
-    public class AbilityConsumables : MaterialSupport
+    public class Consumables : MaterialSupport
     {
         /// <summary>
         /// Запас расходуемого материального обеспечения выраженный в монетах
         /// </summary>
-        public int ConsumablesStock { get; set; }
+        public int Stock { get; set; }
 
         /// <summary>
         /// Достаточен ли запас расходуемого материального обеспечения персонажу.
         /// Если нет — способность не может быть использована.
         /// </summary>
-        public override bool IsAvailable => ConsumablesStock >= CoinsPrice;
+        public override bool IsAvailable => Stock >= CoinsPrice;
 
         public override double ToExpModifier => 10;
 
-        public void Spend() => ConsumablesStock -= CoinsPrice;
+        public void Spend() => Stock -= CoinsPrice;
     }
 
     public static class MatirealSupportExtensions

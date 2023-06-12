@@ -133,7 +133,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New.
+        ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string Add {
             get {
@@ -934,6 +934,33 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mark of fate.
+        /// </summary>
+        public static string MarkOfFate {
+            get {
+                return ResourceManager.GetString("MarkOfFate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the mark of fate assigned to you by the game master..
+        /// </summary>
+        public static string MarkOfFateHint {
+            get {
+                return ResourceManager.GetString("MarkOfFateHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Marks of fate.
+        /// </summary>
+        public static string MarksOfFate {
+            get {
+                return ResourceManager.GetString("MarksOfFate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Medium.
         /// </summary>
         public static string Medium {
@@ -1344,15 +1371,6 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Switch {
             get {
                 return ResourceManager.GetString("Switch", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tags.
-        /// </summary>
-        public static string Tags {
-            get {
-                return ResourceManager.GetString("Tags", resourceCulture);
             }
         }
         

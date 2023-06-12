@@ -1,4 +1,6 @@
-﻿namespace BRIX.Library.Characters
+﻿using System.Reflection.Metadata.Ecma335;
+
+namespace BRIX.Library.Characters
 {
     public class Character
     {
@@ -14,6 +16,7 @@
         public int Experience { get; set; }
         public string Backstory { get; set; }
         public string Appearance { get; set; }
+        public List<string> Tags { get; set; } = new();
 
         public int Level => ExperienceCalculator.GetLevelFromExp(Experience);
         public int ExpToLevelUp => ExperienceCalculator.GetExpToLevelUp(Experience);

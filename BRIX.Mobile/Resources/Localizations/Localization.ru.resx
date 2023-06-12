@@ -408,6 +408,15 @@
   <data name="LowRarityProperty" xml:space="preserve">
     <value>Должна иметь признак малой редкости</value>
   </data>
+  <data name="MarkOfFate" xml:space="preserve">
+    <value>Метка судьбы</value>
+  </data>
+  <data name="MarkOfFateHint" xml:space="preserve">
+    <value>Введите метку судьбы, которую вам назначил мастер игры.</value>
+  </data>
+  <data name="MarksOfFate" xml:space="preserve">
+    <value>Метки судьбы</value>
+  </data>
   <data name="Medium" xml:space="preserve">
     <value>Средний</value>
   </data>
@@ -545,9 +554,6 @@
   </data>
   <data name="Switch" xml:space="preserve">
     <value>Сменить</value>
-  </data>
-  <data name="Tags" xml:space="preserve">
-    <value>Тэги</value>
   </data>
   <data name="TargetChainEnable" xml:space="preserve">
     <value>Включить цепи целей</value>
