@@ -1,5 +1,6 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Aspects.TargetSelection;
+using BRIX.Library.Characters;
 using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
 
@@ -29,20 +30,21 @@ namespace BRIX.Library
         /// <summary>
         /// Постоянное материальное обеспечение.
         /// </summary>
-        public Equipment MaterialSupport { get; set; } = new();
+        public List<Equipment> Equipment { get; set; } = new();
 
         /// <summary>
         /// Расходуемое материальное обеспечение.
         /// </summary>
-        public Consumables Consumables { get; set; } = new();
+        public List<Consumable> Consumables { get; set; } = new();
 
-        public bool CanActivate() => MaterialSupport.IsProvided && Consumables.IsProvided;
+        public bool CanActivate() => Equipment.All(x => x.IsAvailable) 
+            && Consumables.All(x => x.IsAvailable);
 
         public void Activate()
         {
             if(CanActivate())
             {
-                Consumables.Spend();
+                Consumables.ForEach(x => x.Spend());
             }
         }
 
@@ -58,8 +60,8 @@ namespace BRIX.Library
 
             int sumOfEffectsExpCost = _effects.Sum(effect => effect.GetExpCost());
             int expCost = (sumOfEffectsExpCost * effectsCountPenaltyCoef).Round();
-            expCost -= MaterialSupport.ToExpEquivalent().Round();
-            expCost -= Consumables.ToExpEquivalent().Round();
+            expCost -= Equipment.Sum(x => x.ToExpEquivalent().Round());
+            expCost -= Consumables.Sum(x => x.ToExpEquivalent().Round());
 
             return expCost <= 1 ? 1 : expCost;
         }

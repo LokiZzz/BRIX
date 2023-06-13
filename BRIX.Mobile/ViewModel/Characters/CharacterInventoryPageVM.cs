@@ -4,6 +4,7 @@ using BRIX.Mobile.Services;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.Maui.Graphics;
 using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.ViewModel.Characters
@@ -21,7 +22,17 @@ namespace BRIX.Mobile.ViewModel.Characters
             _characterService = characterService;
         }
 
-        public ObservableCollection<InventoryItemVM> InventoryItems { get; set; }
+        private ObservableCollection<InventoryItemVM> _inventoryItems;
+        public ObservableCollection<InventoryItemVM> InventoryItems
+        {
+            get => _inventoryItems;
+            set => SetProperty(ref _inventoryItems, value);
+        }
+
+        public override async Task OnNavigatedAsync()
+        {
+            await Initialize(false);
+        }
 
         private async Task Initialize(bool force = false) 
         {
@@ -106,11 +117,16 @@ namespace BRIX.Mobile.ViewModel.Characters
 
     public partial class InventoryItemVM : ObservableObject
     {
+        private Random _random = new Random();
+        public Color Color => Color.FromRgb(_random.Next(256), _random.Next(256), _random.Next(256));
+
         public string Name { get; set; }
 
         public string Type { get; set; }
 
         public List<InventoryItemVM> Payload { get; set; } = new();
+
+        public bool ShowPayload => Type == Localization.InventoryItemContainer;
 
         private int _count;
         public int Count

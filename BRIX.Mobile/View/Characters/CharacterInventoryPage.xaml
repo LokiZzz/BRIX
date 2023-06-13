@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Characters"
              x:Class="BRIX.Mobile.View.Characters.CharacterInventoryPage"
+             x:DataType="vm:CharacterInventoryPageVM"
              Title="CharacterInventoryPage">
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="inventoryItemTemplate" x:DataType="vm:InventoryItemVM">
+            <Border BackgroundColor="{Binding Color}" Padding="5">
+                <VerticalStackLayout>
+                    <Label Text="{Binding Name}"/>
+                    <CollectionView 
+                        ItemTemplate="{StaticResource inventoryItemTemplate}"
+                        ItemsSource="{Binding Payload}" 
+                        IsVisible="{Binding ShowPayload}"
+                        Margin="20,0,0,0"/>
+                </VerticalStackLayout>
+            </Border>
+        </DataTemplate>
+    </ContentPage.Resources>
+    
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to inventory!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Label Style="{StaticResource TitleLabel}" Text="ИНВЕНТАРЬ"/>
+        <CollectionView 
+            ItemsSource="{Binding InventoryItems}"
+            ItemTemplate="{StaticResource inventoryItemTemplate}"
+            BackgroundColor="{StaticResource BRIXLight}"/>
     </VerticalStackLayout>
 </ContentPage>
