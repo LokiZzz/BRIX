@@ -17,6 +17,7 @@ namespace BRIX.Library.Characters
         public string Backstory { get; set; }
         public string Appearance { get; set; }
         public List<string> Tags { get; set; } = new();
+        public Inventory Inventory { get; set; } = new();
 
         public int Level => ExperienceCalculator.GetLevelFromExp(Experience);
         public int ExpToLevelUp => ExperienceCalculator.GetExpToLevelUp(Experience);

@@ -390,6 +390,15 @@
   <data name="HundredYears" xml:space="preserve">
     <value>100 лет</value>
   </data>
+  <data name="InventoryItem" xml:space="preserve">
+    <value />
+  </data>
+  <data name="InventoryItemConsumable" xml:space="preserve">
+    <value />
+  </data>
+  <data name="InventoryItemEquipment" xml:space="preserve">
+    <value />
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Язык</value>
   </data>

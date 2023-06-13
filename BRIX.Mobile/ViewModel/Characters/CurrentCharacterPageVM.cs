@@ -194,6 +194,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             // Возможно такие вызовы уползут в CharacterService, но пока что достаточно этого.
             WeakReferenceMessenger.Default.Send(new ShowCharacterTabsChanged(PlayerHaveCharacter));
+            OnPropertyChanged(nameof(ShowTags));
 
             IsBusy = false;
         }

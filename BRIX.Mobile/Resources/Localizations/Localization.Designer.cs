@@ -880,6 +880,42 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thing.
+        /// </summary>
+        public static string InventoryItem {
+            get {
+                return ResourceManager.GetString("InventoryItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Consumable.
+        /// </summary>
+        public static string InventoryItemConsumable {
+            get {
+                return ResourceManager.GetString("InventoryItemConsumable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Container.
+        /// </summary>
+        public static string InventoryItemContainer {
+            get {
+                return ResourceManager.GetString("InventoryItemContainer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Equipment.
+        /// </summary>
+        public static string InventoryItemEquipment {
+            get {
+                return ResourceManager.GetString("InventoryItemEquipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Language {
