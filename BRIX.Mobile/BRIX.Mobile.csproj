@@ -79,6 +79,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\Inventory\arrow.svg" />
+	  <None Remove="Resources\Images\Inventory\blade.svg" />
+	  <None Remove="Resources\Images\Inventory\chest.svg" />
+	  <None Remove="Resources\Images\Inventory\gem.svg" />
 	  <None Remove="Resources\Images\Shapes\brick.svg" />
 	  <None Remove="Resources\Images\Shapes\brick_icon.svg" />
 	  <None Remove="Resources\Images\Shapes\brick_scheme.svg" />
@@ -104,6 +108,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Include="Resources\Images\Inventory\arrow.svg" />
+	  <MauiImage Include="Resources\Images\Inventory\blade.svg" />
+	  <MauiImage Include="Resources\Images\Inventory\chest.svg" />
+	  <MauiImage Include="Resources\Images\Inventory\gem.svg" />
 	  <MauiImage Include="Resources\Images\Shapes\brick_icon.svg" />
 	  <MauiImage Include="Resources\Images\Shapes\brick_scheme.svg" />
 	  <MauiImage Include="Resources\Images\Shapes\cone_icon.svg" />

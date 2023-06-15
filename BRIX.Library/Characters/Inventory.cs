@@ -20,6 +20,8 @@ namespace BRIX.Library.Characters
     {
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public int Count { get; set; } = 1;
 
         public int WeightKg { get; set; }

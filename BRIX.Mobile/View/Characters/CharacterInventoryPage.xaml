@@ -2,30 +2,90 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Characters"
+             xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+             xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="BRIX.Mobile.View.Characters.CharacterInventoryPage"
              x:DataType="vm:CharacterInventoryPageVM"
-             Title="CharacterInventoryPage">
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Inventory}}">
 
+    <Shell.TitleView>
+        <controls:TitleView/>
+    </Shell.TitleView>
+    
     <ContentPage.Resources>
         <DataTemplate x:Key="inventoryItemTemplate" x:DataType="vm:InventoryItemVM">
-            <Border BackgroundColor="{Binding Color}" Padding="5">
+            <Border 
+                StrokeShape="RoundRectangle 5" 
+                BackgroundColor="{Binding BackgroundColor}" 
+                Padding="5">
                 <VerticalStackLayout>
-                    <Label Text="{Binding Name}"/>
+                    <Grid ColumnDefinitions="auto,*">
+                        <HorizontalStackLayout Grid.Column="0" Margin="3,0,0,0" Spacing="5">
+                            <Image Source="{Binding Icon}" HeightRequest="16"/>
+                            <Label Text="{Binding Name}"/>
+                            <Label Text="{Binding Count}" IsVisible="{Binding ShowCount}"/>
+                            <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CountPostfix}}" IsVisible="{Binding ShowCount}"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Grid.Column="1" Spacing="10" HorizontalOptions="End" Margin="0,0,3,0">
+                            <Label TextColor="{StaticResource BRIXOrange}" Text="{Binding Price}" IsVisible="{Binding ShowPrice}"/>
+                            <Label 
+                                TextColor="{StaticResource BRIXOrange}" 
+                                FontFamily="Awesome" 
+                                Text="{x:Static icons:Awesome.Coins}" 
+                                IsVisible="{Binding ShowPrice}"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center"
+                                Margin="0,0,0,1"/>
+                        </HorizontalStackLayout>
+                    </Grid>
                     <CollectionView 
                         ItemTemplate="{StaticResource inventoryItemTemplate}"
                         ItemsSource="{Binding Payload}" 
                         IsVisible="{Binding ShowPayload}"
-                        Margin="20,0,0,0"/>
+                        Margin="10,10,0,0">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+                        </CollectionView.ItemsLayout>
+                    </CollectionView>
                 </VerticalStackLayout>
+                <Border.GestureRecognizers>
+                    <SwipeGestureRecognizer 
+                        Direction="Right"
+                        Threshold="20"
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterInventoryPageVM}}, Path=ShowDescriptionCommand}"
+                        CommandParameter="{Binding}"/>
+                    <TapGestureRecognizer 
+                        NumberOfTapsRequired="2" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterInventoryPageVM}}, Path=DeleteCommand}"
+                        CommandParameter="{Binding}"/>
+                </Border.GestureRecognizers>
             </Border>
         </DataTemplate>
     </ContentPage.Resources>
     
-    <VerticalStackLayout>
-        <Label Style="{StaticResource TitleLabel}" Text="ИНВЕНТАРЬ"/>
+    <Grid RowDefinitions="*,auto">
+
         <CollectionView 
+            x:Name="inventoryListView"
             ItemsSource="{Binding InventoryItems}"
-            ItemTemplate="{StaticResource inventoryItemTemplate}"
-            BackgroundColor="{StaticResource BRIXLight}"/>
-    </VerticalStackLayout>
+            ItemTemplate="{StaticResource inventoryItemTemplate}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+            </CollectionView.ItemsLayout>
+        </CollectionView>
+        
+        <Border Grid.Row="1" Style="{StaticResource LowBlockWithShadowBorder}">
+            <Grid>
+                <Button 
+                    Style="{StaticResource LightPlusButton}" 
+                    HeightRequest="50"
+                    Padding="0"
+                    FontSize="20"
+                    Margin="0,0,0,10"/>
+            </Grid>
+        </Border>
+        
+    </Grid>
 </ContentPage>

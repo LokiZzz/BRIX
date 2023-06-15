@@ -1,15 +1,19 @@
 ﻿using BRIX.Library.Characters;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
+using BRIX.Mobile.View.IconFonts;
+using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
+using BRIX.Mobile.ViewModel.Popups;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Maui.Graphics;
 using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
-    public class CharacterInventoryPageVM : ViewModelBase
+    public partial class CharacterInventoryPageVM : ViewModelBase
     {
         private readonly ICharacterService _characterService;
 
@@ -45,7 +49,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                     Coins = 250,
                     Items = new List<InventoryItem>
                     {
-                        new InventoryItem { Name = "Ремень с медной бляшкой" },
+                        new InventoryItem { Name = "Ремень с медной пряжкой", Description = "Пояс украшен металлической фурнитурой различного размера. При желании пряжка отстегивается." },
                         new InventoryItem { Name = "Стильные сапоги" },
                         new Container 
                         {
@@ -76,7 +80,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                                 new InventoryItem { Name = "Расчёска" },
                             }
                         },
-                        new Equipment { Name = "Фамильный меч", CoinsPrice = 100 },
+                        new Equipment { Name = "Фамильный меч", Description = "Азот (Azoth) — магический меч великого лекаря (по легендам). Азот — это имя демона, заключённого в кристалл, использованный в эфесе этого оружия.", CoinsPrice = 100 },
                     }
                 };
 
@@ -84,49 +88,120 @@ namespace BRIX.Mobile.ViewModel.Characters
             }
         }
 
+        private bool isDarkBackgroundNow = true;
+
         private InventoryItemVM ToVM(InventoryItem item)
         {
+            string resourceKey = isDarkBackgroundNow ? "BRIXMedium" : "BRIXDim";
+            Application.Current.Resources.TryGetValue(resourceKey, out object colorObject);
+
             InventoryItemVM viewModel = new() 
             { 
                 Name = item.Name,
                 Count = item.Count,
+                BackgroundColor = colorObject as Color,
+                Description = item.Description,
             };
 
             switch (item)
             {
                 case Container container:
-                    viewModel.Type = Localization.InventoryItemContainer;
-                    viewModel.Payload = container.Payload.Select(ToVM).ToList();
+                    viewModel.Type = InventoryItemType.Container;
+                    isDarkBackgroundNow = !isDarkBackgroundNow;
+                    viewModel.Payload = new (container.Payload.Select(ToVM));
+                    isDarkBackgroundNow = !isDarkBackgroundNow;
                     break;
                 case Equipment equipment:
-                    viewModel.Type = Localization.InventoryItemEquipment;
+                    viewModel.Type = InventoryItemType.Equipment;
                     viewModel.Price = equipment.CoinsPrice;
                     break;
                 case Consumable consumable:
-                    viewModel.Type = Localization.InventoryItemConsumable;
+                    viewModel.Type = InventoryItemType.Consumable;
                     viewModel.Price = consumable.CoinsPrice;
                     break;
                 case InventoryItem:
-                    viewModel.Type = Localization.InventoryItem;
+                    viewModel.Type = InventoryItemType.Thing;
                     break;
             }
 
+            viewModel.Icon = GetItemTypeIcon(viewModel.Type);
+
             return viewModel;
+        }
+
+        private string GetItemTypeIcon(InventoryItemType type)
+        {
+            switch (type)
+            {
+                case InventoryItemType.Thing:
+                    return "Inventory/gem.svg";
+                case InventoryItemType.Container:
+                    return "Inventory/chest.svg";
+                case InventoryItemType.Equipment:
+                    return "Inventory/blade.svg";
+                case InventoryItemType.Consumable:
+                    return "Inventory/arrow.svg";
+            }
+
+            return string.Empty;
+        }
+
+        [RelayCommand]
+        public async Task ShowDescription(InventoryItemVM item)
+        {
+            await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
+                new AlertPopupParameters 
+                {
+                    Mode = EAlertMode.ShowMessage,
+                    OkText = Localization.Ok,
+                    Title = item.Name,
+                    Message = string.IsNullOrEmpty(item.Description) ? $"{item.Name}..." : item.Description,
+                }
+            );
+        }
+
+        [RelayCommand]
+        public async Task Delete(InventoryItemVM item)
+        {
+            AlertPopupResult result = await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
+                new AlertPopupParameters
+                {
+                    Mode = EAlertMode.AskYesOrNo,
+                    YesText = Localization.Yes,
+                    NoText = Localization.No,
+                    Title = Localization.Warning,
+                    Message = string.Format(Localization.AskToDeleteInventoryItem, item.Name),
+                }
+            );
         }
     }
 
     public partial class InventoryItemVM : ObservableObject
     {
-        private Random _random = new Random();
-        public Color Color => Color.FromRgb(_random.Next(256), _random.Next(256), _random.Next(256));
+        public Color BackgroundColor { get; set; }
 
         public string Name { get; set; }
 
-        public string Type { get; set; }
+        public string Description { get; set; }
 
-        public List<InventoryItemVM> Payload { get; set; } = new();
+        public string Icon { get; set; }
 
-        public bool ShowPayload => Type == Localization.InventoryItemContainer;
+        private InventoryItemType _type;
+        public InventoryItemType Type
+        {
+            get => _type;
+            set
+            {
+                SetProperty(ref _type, value);
+                OnPropertyChanged(nameof(ShowCount));
+                OnPropertyChanged(nameof(ShowPrice));
+                OnPropertyChanged(nameof(ShowPayload));
+            }
+        }
+
+        public ObservableCollection<InventoryItemVM> Payload { get; set; } = new();
+
+        public bool ShowPayload => Type == InventoryItemType.Container;
 
         private int _count;
         public int Count
@@ -135,13 +210,12 @@ namespace BRIX.Mobile.ViewModel.Characters
             set
             {
                 SetProperty(ref _count, value);
-                OnPropertyChanged(nameof(ShowPrice));
+                OnPropertyChanged(nameof(ShowCount));
             }
         }
 
-        public bool ShowPrice => Type == Localization.InventoryItemEquipment 
-            || Type == Localization.InventoryItemConsumable;
-
+        public bool ShowCount => Count != 1 || Type == InventoryItemType.Consumable;
+        
 
         private int _price;
         public int Price
@@ -150,11 +224,25 @@ namespace BRIX.Mobile.ViewModel.Characters
             set
             {
                 SetProperty(ref _price, value);
-                OnPropertyChanged(nameof(ShowCount));
+                OnPropertyChanged(nameof(ShowPrice));
             }
         }
 
-        public bool ShowCount => Count != 1 
-            || Type == Localization.InventoryItemConsumable;
+        public bool ShowPrice => Type == InventoryItemType.Equipment || Type == InventoryItemType.Consumable;
+
+        private RelayCommand _descriptionCommand;
+        public RelayCommand DescriptionCommand
+        {
+            get => _descriptionCommand;
+            set => SetProperty(ref _descriptionCommand, value);
+        }
+    }
+
+    public enum InventoryItemType
+    {
+        Thing,
+        Container,
+        Equipment,
+        Consumable
     }
 }

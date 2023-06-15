@@ -177,6 +177,9 @@
   <data name="Area" xml:space="preserve">
     <value>Область</value>
   </data>
+  <data name="AskToDeleteInventoryItem" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить «{0}»?</value>
+  </data>
   <data name="AspectActionPoints" xml:space="preserve">
     <value>Очки действий</value>
   </data>
@@ -266,6 +269,9 @@
   </data>
   <data name="CooldownAspectHint" xml:space="preserve">
     <value>Укажите какое время требуется способности, чтобы она перезарядилась и могла использоваться вновь. Вы также можете выбрать количество раз, которое вы можете использовать способность, прежде чем ей понадобится перезарядка.</value>
+  </data>
+  <data name="CountPostfix" xml:space="preserve">
+    <value>шт.</value>
   </data>
   <data name="CreateNewCharacter" xml:space="preserve">
     <value>Создать персонажа</value>
@@ -390,14 +396,20 @@
   <data name="HundredYears" xml:space="preserve">
     <value>100 лет</value>
   </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>Инвентарь</value>
+  </data>
   <data name="InventoryItem" xml:space="preserve">
-    <value />
+    <value>Вещь</value>
   </data>
   <data name="InventoryItemConsumable" xml:space="preserve">
-    <value />
+    <value>Расходник</value>
+  </data>
+  <data name="InventoryItemContainer" xml:space="preserve">
+    <value>Контейнер</value>
   </data>
   <data name="InventoryItemEquipment" xml:space="preserve">
-    <value />
+    <value>Снаряжение</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Язык</value>

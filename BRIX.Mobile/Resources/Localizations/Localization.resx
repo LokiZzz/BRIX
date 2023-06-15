@@ -177,6 +177,9 @@
   <data name="Area" xml:space="preserve">
     <value>Area</value>
   </data>
+  <data name="AskToDeleteInventoryItem" xml:space="preserve">
+    <value>Are you sure you want to delete «{0}»?</value>
+  </data>
   <data name="AspectActionPoints" xml:space="preserve">
     <value>Action points</value>
   </data>
@@ -266,6 +269,9 @@
   </data>
   <data name="CooldownAspectHint" xml:space="preserve">
     <value>Specify how long it takes for the ability to recharge and be able to use it again. You can also choose the number of times you can use the ability before it needs a cooldown.</value>
+  </data>
+  <data name="CountPostfix" xml:space="preserve">
+    <value>pcs.</value>
   </data>
   <data name="CreateNewCharacter" xml:space="preserve">
     <value>Create new character</value>
@@ -389,6 +395,9 @@
   </data>
   <data name="HundredYears" xml:space="preserve">
     <value>100 years</value>
+  </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>Inventory</value>
   </data>
   <data name="InventoryItem" xml:space="preserve">
     <value>Thing</value>

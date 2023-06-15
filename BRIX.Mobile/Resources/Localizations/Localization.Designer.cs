@@ -241,6 +241,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete «{0}»?.
+        /// </summary>
+        public static string AskToDeleteInventoryItem {
+            get {
+                return ResourceManager.GetString("AskToDeleteInventoryItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Action points.
         /// </summary>
         public static string AspectActionPoints {
@@ -507,6 +516,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string CooldownAspectHint {
             get {
                 return ResourceManager.GetString("CooldownAspectHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pcs..
+        /// </summary>
+        public static string CountPostfix {
+            get {
+                return ResourceManager.GetString("CountPostfix", resourceCulture);
             }
         }
         
@@ -876,6 +894,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string HundredYears {
             get {
                 return ResourceManager.GetString("HundredYears", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inventory.
+        /// </summary>
+        public static string Inventory {
+            get {
+                return ResourceManager.GetString("Inventory", resourceCulture);
             }
         }
         
