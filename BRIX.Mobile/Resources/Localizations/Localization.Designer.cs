@@ -151,6 +151,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add item.
+        /// </summary>
+        public static string AddInventoryItem {
+            get {
+                return ResourceManager.GetString("AddInventoryItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add ability.
         /// </summary>
         public static string AddOrEditAbilityPageTitle_Add {
@@ -687,6 +696,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit item.
+        /// </summary>
+        public static string EditInventoryItem {
+            get {
+                return ResourceManager.GetString("EditInventoryItem", resourceCulture);
             }
         }
         

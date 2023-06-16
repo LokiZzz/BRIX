@@ -1,19 +1,19 @@
 ﻿using BRIX.Library.Characters;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
-using BRIX.Mobile.View.IconFonts;
+using BRIX.Mobile.Services.Navigation;
+using BRIX.Mobile.View.Inventory;
 using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
+using BRIX.Mobile.ViewModel.Inventory;
 using BRIX.Mobile.ViewModel.Popups;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using Microsoft.Maui.Graphics;
 using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
-    public partial class CharacterInventoryPageVM : ViewModelBase
+    public partial class CharacterInventoryPageVM : ViewModelBase, IQueryAttributable
     {
         private readonly ICharacterService _characterService;
         private Character _currentCharacter;
@@ -41,13 +41,24 @@ namespace BRIX.Mobile.ViewModel.Characters
             await Initialize(false);
         }
 
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            Library.Characters.Inventory updatedInventory =
+                query.GetParameterOrDefault<Library.Characters.Inventory>(NavigationParameters.Inventory);
+
+            if(updatedInventory != null)
+            {
+                // Handle back from editing
+            }
+        }
+
         private async Task Initialize(bool force = false) 
         {
             if(InventoryItems == null || force)
             {
                 _currentCharacter = await _characterService.GetCurrentCharacter();
 
-                Inventory testInventory = new()
+                Library.Characters.Inventory testInventory = new()
                 {
                     Coins = 250,
                     Content = new List<InventoryItem>
@@ -194,10 +205,29 @@ namespace BRIX.Mobile.ViewModel.Characters
             await Initialize(force: true);
         }
 
-        public ImageSource _gemIS;
-        public ImageSource _containerIS;
-        public ImageSource _equipmentIS;
-        public ImageSource _consumableIS;
+        [RelayCommand]
+        public async Task Edit(InventoryItemVM item)
+        {
+            await Navigation.NavigateAsync<AddOrEditInventoryItemPage>(
+                (NavigationParameters.EditMode, EEditingMode.Edit),
+                (NavigationParameters.Inventory, _currentCharacter.Inventory),
+                (NavigationParameters.InventoryItem, item.OriginalModelReference)
+            );
+        }
+
+        [RelayCommand]
+        public async Task New()
+        {
+            await Navigation.NavigateAsync<AddOrEditInventoryItemPage>(
+                (NavigationParameters.EditMode, EEditingMode.Add),
+                (NavigationParameters.Inventory, _currentCharacter.Inventory)
+            );
+        }
+
+        private ImageSource _gemIS;
+        private ImageSource _containerIS;
+        private ImageSource _equipmentIS;
+        private ImageSource _consumableIS;
 
         private void InitializeVisual()
         {
@@ -210,77 +240,5 @@ namespace BRIX.Mobile.ViewModel.Characters
             _equipmentIS = ImageSource.FromFile("Inventory/blade.svg");
             _consumableIS = ImageSource.FromFile("Inventory/arrow.svg");
         }
-    }
-
-    public partial class InventoryItemVM : ObservableObject
-    {
-        public Color BackgroundColor { get; set; }
-
-        public string Name { get; set; }
-
-        public string Description { get; set; }
-
-        public ImageSource Icon { get; set; }
-
-        private EInventoryItemType _type;
-        public EInventoryItemType Type
-        {
-            get => _type;
-            set
-            {
-                SetProperty(ref _type, value);
-                OnPropertyChanged(nameof(ShowCount));
-                OnPropertyChanged(nameof(ShowPrice));
-                OnPropertyChanged(nameof(ShowPayload));
-            }
-        }
-
-        public ObservableCollection<InventoryItemVM> Payload { get; set; } = new();
-
-        public bool ShowPayload => Type == EInventoryItemType.Container;
-
-        private int _count;
-        public int Count
-        {
-            get => _count;
-            set
-            {
-                SetProperty(ref _count, value);
-                OnPropertyChanged(nameof(ShowCount));
-            }
-        }
-
-        public bool ShowCount => Count != 1 || Type == EInventoryItemType.Consumable;
-        
-
-        private int _price;
-        public int Price
-        {
-            get => _price;
-            set
-            {
-                SetProperty(ref _price, value);
-                OnPropertyChanged(nameof(ShowPrice));
-            }
-        }
-
-        public bool ShowPrice => Type == EInventoryItemType.Equipment || Type == EInventoryItemType.Consumable;
-
-        private RelayCommand _descriptionCommand;
-        public RelayCommand DescriptionCommand
-        {
-            get => _descriptionCommand;
-            set => SetProperty(ref _descriptionCommand, value);
-        }
-
-        public InventoryItem OriginalModelReference { get; set; }
-    }
-
-    public enum EInventoryItemType
-    {
-        Thing,
-        Container,
-        Equipment,
-        Consumable
     }
 }

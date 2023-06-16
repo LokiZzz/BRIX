@@ -147,6 +147,9 @@
   <data name="AddCondition" xml:space="preserve">
     <value>Add condition</value>
   </data>
+  <data name="AddInventoryItem" xml:space="preserve">
+    <value>Add item</value>
+  </data>
   <data name="AddOrEditAbilityPageTitle_Add" xml:space="preserve">
     <value>Add ability</value>
   </data>
@@ -326,6 +329,9 @@
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="EditInventoryItem" xml:space="preserve">
+    <value>Edit item</value>
   </data>
   <data name="EffectDamage" xml:space="preserve">
     <value>Damage</value>

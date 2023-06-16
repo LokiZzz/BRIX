@@ -147,6 +147,9 @@
   <data name="AddCondition" xml:space="preserve">
     <value>Добавить условие</value>
   </data>
+  <data name="AddInventoryItem" xml:space="preserve">
+    <value>Добавить предмет</value>
+  </data>
   <data name="AddOrEditAbilityPageTitle_Add" xml:space="preserve">
     <value>Новая способность</value>
   </data>
@@ -326,6 +329,9 @@
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Изменить</value>
+  </data>
+  <data name="EditInventoryItem" xml:space="preserve">
+    <value>Изменить предмет</value>
   </data>
   <data name="EffectDamage" xml:space="preserve">
     <value>Урон</value>

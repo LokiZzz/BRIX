@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Characters"
+             xmlns:inv="clr-namespace:BRIX.Mobile.ViewModel.Inventory"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
@@ -15,7 +16,7 @@
     </Shell.TitleView>
     
     <ContentPage.Resources>
-        <DataTemplate x:Key="inventoryItemTemplate" x:DataType="vm:InventoryItemVM">
+        <DataTemplate x:Key="inventoryItemTemplate" x:DataType="inv:InventoryItemVM">
             <Border 
                 StrokeShape="RoundRectangle 5" 
                 BackgroundColor="{Binding BackgroundColor}" 
@@ -57,6 +58,10 @@
                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterInventoryPageVM}}, Path=ShowDescriptionCommand}"
                         CommandParameter="{Binding}"/>
                     <TapGestureRecognizer 
+                        NumberOfTapsRequired="1" 
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterInventoryPageVM}}, Path=EditCommand}"
+                        CommandParameter="{Binding}"/>
+                    <TapGestureRecognizer 
                         NumberOfTapsRequired="2" 
                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterInventoryPageVM}}, Path=DeleteCommand}"
                         CommandParameter="{Binding}"/>
@@ -91,7 +96,8 @@
                     HeightRequest="50"
                     Padding="0"
                     FontSize="20"
-                    Margin="0,0,0,10"/>
+                    Margin="0,0,0,10"
+                    Command="{Binding NewCommand}"/>
             </Grid>
         </Border>
     </Grid>
