@@ -12,7 +12,6 @@ Inventory inventory = new()
             Name = "Рюкзак",
             Payload = new List<InventoryItem>
             {
-                new InventoryItem { Name = "Расчёска" },
                 new InventoryItem { Name = "Бутерброд", Count = 5 },
                 new InventoryItem { Name = "Кремень и кресало" },
                 new InventoryItem { Name = "Мини-палатка" },

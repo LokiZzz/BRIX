@@ -16,6 +16,7 @@ namespace BRIX.Mobile.ViewModel.Characters
     public partial class CharacterInventoryPageVM : ViewModelBase
     {
         private readonly ICharacterService _characterService;
+        private Character _currentCharacter;
 
         public CharacterInventoryPageVM(ICharacterService characterService)
         {
@@ -44,7 +45,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             if(InventoryItems == null || force)
             {
-                Character currentCharacter = await _characterService.GetCurrentCharacter();
+                _currentCharacter = await _characterService.GetCurrentCharacter();
 
                 Inventory testInventory = new()
                 {
@@ -58,7 +59,6 @@ namespace BRIX.Mobile.ViewModel.Characters
                             Name = "Рюкзак",
                             Payload = new List<InventoryItem>
                             {
-                                new InventoryItem { Name = "Расчёска" },
                                 new InventoryItem { Name = "Бутерброд", Count = 5 },
                                 new InventoryItem { Name = "Кремень и кресало" },
                                 new InventoryItem { Name = "Мини-палатка" },
@@ -85,13 +85,13 @@ namespace BRIX.Mobile.ViewModel.Characters
                         new Equipment { Name = "Фамильный меч", Description = "Азот (Azoth) — магический меч великого лекаря (по легендам). Азот — это имя демона, заключённого в кристалл, использованный в эфесе этого оружия.", CoinsPrice = 100 },
                     }
                 };
-                if(!currentCharacter.Inventory.Content.Any())
+                if(!_currentCharacter.Inventory.Content.Any())
                 {
-                    currentCharacter.Inventory = testInventory;
-                    await _characterService.UpdateAsync(currentCharacter);
+                    _currentCharacter.Inventory = testInventory;
+                    await _characterService.UpdateAsync(_currentCharacter);
                 }
 
-                InventoryItems = new(currentCharacter.Inventory.Content.Select(ToVM).ToList());
+                InventoryItems = new(_currentCharacter.Inventory.Content.Select(ToVM).ToList());
             }
         }
 
@@ -171,6 +171,8 @@ namespace BRIX.Mobile.ViewModel.Characters
                 return;
             }
 
+            bool saveContent = false;
+
             if(item.Type == EInventoryItemType.Container && item.Payload.Any())
             {
                 AlertPopupResult resultDeleteContent = 
@@ -184,27 +186,12 @@ namespace BRIX.Mobile.ViewModel.Characters
                     }
                 );
 
-                if(resultDeleteContent.Answer == EAlertPopupResult.No)
-                {
-                    foreach(InventoryItemVM payloadItem in item.Payload)
-                    {
-                        InventoryItems.Add(payloadItem);
-                    }
-                }
+                saveContent = resultDeleteContent.Answer == EAlertPopupResult.No;
             }
 
-            foreach (InventoryItemVM inventoryItem in InventoryItems)
-            {
-                SearchAndDelete(inventoryItem);
-            }
-        }
-
-        private void SearchAndDelete(InventoryItemVM item)
-        {
-            foreach(InventoryItemVM searchingItem in item.Payload)
-            {
-
-            }
+            _currentCharacter.Inventory.Remove(item.OriginalModelReference, saveContent);
+            await _characterService.UpdateAsync(_currentCharacter);
+            await Initialize(force: true);
         }
 
         public ImageSource _gemIS;
