@@ -15,21 +15,24 @@ namespace BRIX.Library.Characters
 
         public List<InventoryItem> Content = new();
 
-        public IEnumerable<InventoryItem> Items()
+        public IEnumerable<InventoryItem> Items
         {
-            foreach (InventoryItem item in Content)
-            {
-                yield return item;
-
-                if (item is Container container)
+            get
+            { 
+                foreach (InventoryItem item in Content)
                 {
-                    foreach (InventoryItem containerItem in GoThrough(container))
+                    yield return item;
+
+                    if (item is Container container)
                     {
-                        yield return containerItem;
+                        foreach (InventoryItem containerItem in GoThrough(container))
+                        {
+                            yield return containerItem;
+                        }
                     }
                 }
             }
-        }
+        } 
 
         private IEnumerable<InventoryItem> GoThrough(Container item)
         {
@@ -57,6 +60,8 @@ namespace BRIX.Library.Characters
         public int Count { get; set; } = 1;
 
         public int WeightKg { get; set; }
+
+        public override string ToString() =>  Name;
     }
 
     public class Container : InventoryItem
@@ -108,9 +113,52 @@ namespace BRIX.Library.Characters
             return matSupport.CoinsPrice * matSupport.ToExpModifier;
         }
 
-        //public static void Remove(this Inventory inventory, )
-        //{
-        //    return matSupport.CoinsPrice * matSupport.ToExpModifier;
-        //}
+        /// <summary>
+        /// Удаление элемента из инвентаря, поиск элемента происходит по ссылке.
+        /// Если вызвано удаление контейнера с сохранением его содержимого, 
+        /// то содержимое сначала «вываливается» в контейнер на уровень выше, 
+        /// самым последним уровнем является «корень» инвентаря.
+        /// </summary>
+        public static void Remove(this Inventory inventory, InventoryItem itemToDelete, bool saveContent = false)
+        {
+            if(saveContent && itemToDelete is Container containerToDelete)
+            {
+                MoveContentUpper(inventory, containerToDelete);
+            }
+
+            foreach(InventoryItem item in inventory.Items)
+            {
+                if(item == itemToDelete)
+                {
+                    inventory.Content.Remove(itemToDelete);
+
+                    break;
+                }
+                else if(item is Container container && container.Payload.Contains(itemToDelete))
+                {
+                    container.Payload.Remove(itemToDelete);
+
+                    break;
+                }
+            }
+        }
+
+        private static void MoveContentUpper(Inventory inventory, Container containerToDelete)
+        {
+            if (inventory.Content.Contains(containerToDelete))
+            {
+                inventory.Content.AddRange(containerToDelete.Payload);
+            }
+            else
+            {
+                foreach (InventoryItem item in inventory.Items)
+                {
+                    if (item is Container container && container.Payload.Contains(containerToDelete))
+                    {
+                        container.Payload.AddRange(containerToDelete.Payload);
+                    }
+                }
+            }
+        }
     }
 }

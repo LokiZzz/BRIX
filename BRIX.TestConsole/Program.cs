@@ -1,6 +1,6 @@
 ﻿using BRIX.Library.Characters;
 
-Inventory testInventory = new()
+Inventory inventory = new()
 {
     Coins = 250,
     Content = new List<InventoryItem>
@@ -40,6 +40,11 @@ Inventory testInventory = new()
     }
 };
 
-var contentList = testInventory.Items().Select(x => x.Name).ToList();
+List<string> contentList = inventory.Items.Select(x => x.Name).ToList();
+
+inventory.Remove(inventory.Items.Single(x => x.Name == "Стильные сапоги"));
+inventory.Remove(inventory.Items.Single(x => x.Name == "Шкатулка"), saveContent: true);
+inventory.Remove(inventory.Items.Single(x => x.Name == "Поясные сумки"));
+inventory.Remove(inventory.Items.Single(x => x.Name == "Расчёска"));
 
 Console.ReadLine();

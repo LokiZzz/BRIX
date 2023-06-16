@@ -107,6 +107,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                 Count = item.Count,
                 BackgroundColor = isDarkBackgroundNow ? _darkItemColor : _lightItemColor,
                 Description = item.Description,
+                OriginalModelReference = item
             };
 
             switch (item)
@@ -284,6 +285,8 @@ namespace BRIX.Mobile.ViewModel.Characters
             get => _descriptionCommand;
             set => SetProperty(ref _descriptionCommand, value);
         }
+
+        public InventoryItem OriginalModelReference { get; set; }
     }
 
     public enum EInventoryItemType
