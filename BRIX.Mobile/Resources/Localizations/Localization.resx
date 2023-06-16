@@ -177,6 +177,9 @@
   <data name="Area" xml:space="preserve">
     <value>Area</value>
   </data>
+  <data name="AskDeleteContainerWithContent" xml:space="preserve">
+    <value>Delete contents of a container?</value>
+  </data>
   <data name="AskToDeleteInventoryItem" xml:space="preserve">
     <value>Are you sure you want to delete «{0}»?</value>
   </data>
@@ -398,6 +401,9 @@
   </data>
   <data name="Inventory" xml:space="preserve">
     <value>Inventory</value>
+  </data>
+  <data name="InventoryHelp" xml:space="preserve">
+    <value>Tap an item in your inventory to edit it, double tap to delete it, or swipe on the item name from left to right to open the description.</value>
   </data>
   <data name="InventoryItem" xml:space="preserve">
     <value>Thing</value>

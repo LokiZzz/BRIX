@@ -177,6 +177,9 @@
   <data name="Area" xml:space="preserve">
     <value>Область</value>
   </data>
+  <data name="AskDeleteContainerWithContent" xml:space="preserve">
+    <value>Удалить содержимое контейнера?</value>
+  </data>
   <data name="AskToDeleteInventoryItem" xml:space="preserve">
     <value>Вы уверены, что хотите удалить «{0}»?</value>
   </data>
@@ -398,6 +401,9 @@
   </data>
   <data name="Inventory" xml:space="preserve">
     <value>Инвентарь</value>
+  </data>
+  <data name="InventoryHelp" xml:space="preserve">
+    <value>Коснитесь элемента в инвентаре, чтобы редактировать его, коснитесь дважды, чтобы удалить или проведите по названию элемента слева направо, чтобы открыть описание.</value>
   </data>
   <data name="InventoryItem" xml:space="preserve">
     <value>Вещь</value>

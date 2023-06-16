@@ -65,18 +65,26 @@
         </DataTemplate>
     </ContentPage.Resources>
     
-    <Grid RowDefinitions="*,auto">
-
-        <CollectionView 
-            x:Name="inventoryListView"
-            ItemsSource="{Binding InventoryItems}"
-            ItemTemplate="{StaticResource inventoryItemTemplate}">
+    <Grid RowDefinitions="auto,*,auto">
+        <Border Grid.Row="0" Style="{StaticResource BlockBorder}" >
+            <VerticalStackLayout>
+                <Label Style="{StaticResource ParagraphTitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Help}}"/>
+                <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.InventoryHelp}}"/>
+                <Button Style="{StaticResource HideHintButton}"/>
+            </VerticalStackLayout>
+        </Border>
+        <ScrollView Grid.Row="1">
+            <CollectionView 
+                x:Name="inventoryListView"
+                ItemsSource="{Binding InventoryItems}"
+                ItemTemplate="{StaticResource inventoryItemTemplate}"
+                Margin="0,5">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
             </CollectionView.ItemsLayout>
         </CollectionView>
-        
-        <Border Grid.Row="1" Style="{StaticResource LowBlockWithShadowBorder}">
+        </ScrollView>
+        <Border Grid.Row="2" Style="{StaticResource LowBlockWithShadowBorder}">
             <Grid>
                 <Button 
                     Style="{StaticResource LightPlusButton}" 
@@ -86,6 +94,5 @@
                     Margin="0,0,0,10"/>
             </Grid>
         </Border>
-        
     </Grid>
 </ContentPage>

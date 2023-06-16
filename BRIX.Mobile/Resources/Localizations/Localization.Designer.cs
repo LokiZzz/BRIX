@@ -241,6 +241,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete contents of a container?.
+        /// </summary>
+        public static string AskDeleteContainerWithContent {
+            get {
+                return ResourceManager.GetString("AskDeleteContainerWithContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete «{0}»?.
         /// </summary>
         public static string AskToDeleteInventoryItem {
@@ -903,6 +912,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Inventory {
             get {
                 return ResourceManager.GetString("Inventory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tap an item in your inventory to edit it, double tap to delete it, or swipe on the item name from left to right to open the description..
+        /// </summary>
+        public static string InventoryHelp {
+            get {
+                return ResourceManager.GetString("InventoryHelp", resourceCulture);
             }
         }
         

@@ -13,7 +13,39 @@ namespace BRIX.Library.Characters
     {
         public int Coins { get; set; }
 
-        public List<InventoryItem> Items = new();
+        public List<InventoryItem> Content = new();
+
+        public IEnumerable<InventoryItem> Items()
+        {
+            foreach (InventoryItem item in Content)
+            {
+                yield return item;
+
+                if (item is Container container)
+                {
+                    foreach (InventoryItem containerItem in GoThrough(container))
+                    {
+                        yield return containerItem;
+                    }
+                }
+            }
+        }
+
+        private IEnumerable<InventoryItem> GoThrough(Container item)
+        {
+            foreach (InventoryItem containerItem in item.Payload)
+            {
+                yield return containerItem;
+
+                if (containerItem is Container container)
+                {
+                    foreach (InventoryItem internalContainerItem in GoThrough(container))
+                    {
+                        yield return internalContainerItem;
+                    }
+                }
+            }
+        }
     }
 
     public class InventoryItem
@@ -69,11 +101,16 @@ namespace BRIX.Library.Characters
         public void Spend() => Count--;
     }
 
-    public static class MatirealSupportExtensions
+    public static class InventoryExtensions
     {
         public static double ToExpEquivalent(this MaterialSupport matSupport)
         {
             return matSupport.CoinsPrice * matSupport.ToExpModifier;
         }
+
+        //public static void Remove(this Inventory inventory, )
+        //{
+        //    return matSupport.CoinsPrice * matSupport.ToExpModifier;
+        //}
     }
 }
