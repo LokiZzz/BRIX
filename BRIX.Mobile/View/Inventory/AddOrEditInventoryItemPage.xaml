@@ -17,7 +17,7 @@
 
     <ScrollView>
         <VerticalStackLayout>
-            <Label Text="{Binding Name}" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Label Text="Lolz" VerticalOptions="Center" HorizontalOptions="Center" />
             <Button Text="Save" Command="{Binding SaveCommand}"/>
         </VerticalStackLayout>
     </ScrollView>

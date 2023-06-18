@@ -14,9 +14,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
     public partial class AddOrEditInventoryItemPageVM : ViewModelBase, IQueryAttributable
     {
         private EEditingMode _mode;
-
         private Library.Characters.Inventory _inventory;
-
         private InventoryItem _editingItem;
 
         private string _title;
@@ -26,11 +24,11 @@ namespace BRIX.Mobile.ViewModel.Inventory
             set => _title = value;
         }
 
-        private string _name;
-        public string Name
+        private InventoryItemVM _item;
+        public InventoryItemVM Item
         {
-            get => _name;
-            set => _name = value;
+            get => _item;
+            set => _item = value;
         }
 
         [RelayCommand]
@@ -46,13 +44,13 @@ namespace BRIX.Mobile.ViewModel.Inventory
             _mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
             _inventory = query.GetParameterOrDefault<Library.Characters.Inventory>(NavigationParameters.Inventory);
             _editingItem = query.GetParameterOrDefault<InventoryItem>(NavigationParameters.InventoryItem);
+            InventoryItemConverter converter = new ();
+
+            Item = _editingItem != null 
+                ? converter.ToVM(_editingItem)
+                : converter.ToVM(new InventoryItem());
 
             InitializeTitle();
-
-            if (_editingItem != null)
-            {
-                Name = _editingItem.Name;
-            }
 
             query.Clear();
         }
