@@ -126,9 +126,6 @@
   <data name="AbilityCost" xml:space="preserve">
     <value>Стоимость:</value>
   </data>
-  <data name="AbilityName" xml:space="preserve">
-    <value>Название</value>
-  </data>
   <data name="ActionPointAspectHint" xml:space="preserve">
     <value>Практически любые способности ипользуются посредством траты очков действий. Чем больше очков действий тратит способность, тем дешевле она будет в очках опыта.</value>
   </data>
@@ -270,6 +267,12 @@
   <data name="Colossal" xml:space="preserve">
     <value>Колоссальный</value>
   </data>
+  <data name="Consumable" xml:space="preserve">
+    <value>Расходник</value>
+  </data>
+  <data name="Container" xml:space="preserve">
+    <value>Контейнер</value>
+  </data>
   <data name="Cooldown" xml:space="preserve">
     <value>Время перезарядки</value>
   </data>
@@ -360,6 +363,9 @@
   <data name="EnterMediumRarityRestriction" xml:space="preserve">
     <value>Введите признак средней редкости, продолжая предложение: «Цель...». Например: «Должна быть в доспехах», «Должна находится в воде», «Должна дышать».</value>
   </data>
+  <data name="Equipment" xml:space="preserve">
+    <value>Снаряжение</value>
+  </data>
   <data name="EXP" xml:space="preserve">
     <value>EXP</value>
   </data>
@@ -411,17 +417,14 @@
   <data name="InventoryHelp" xml:space="preserve">
     <value>Коснитесь элемента в инвентаре, чтобы редактировать его, коснитесь дважды, чтобы удалить или проведите по названию элемента слева направо, чтобы открыть описание.</value>
   </data>
-  <data name="InventoryItem" xml:space="preserve">
-    <value>Вещь</value>
+  <data name="InventoryItemProperties" xml:space="preserve">
+    <value>Параметры предмета</value>
   </data>
-  <data name="InventoryItemConsumable" xml:space="preserve">
-    <value>Расходник</value>
+  <data name="InventoryItemType" xml:space="preserve">
+    <value>Вид предмета</value>
   </data>
-  <data name="InventoryItemContainer" xml:space="preserve">
-    <value>Контейнер</value>
-  </data>
-  <data name="InventoryItemEquipment" xml:space="preserve">
-    <value>Снаряжение</value>
+  <data name="ItemName" xml:space="preserve">
+    <value>Название</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Язык</value>
@@ -722,6 +725,9 @@
   </data>
   <data name="ThickSteelPlate" xml:space="preserve">
     <value>Толстая стальная плита</value>
+  </data>
+  <data name="Thing" xml:space="preserve">
+    <value>Вещь</value>
   </data>
   <data name="Tiny" xml:space="preserve">
     <value>Крохотный</value>

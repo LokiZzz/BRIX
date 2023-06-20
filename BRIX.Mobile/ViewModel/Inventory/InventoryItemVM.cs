@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using static Android.Util.EventLogTags;
 
 namespace BRIX.Mobile.ViewModel.Inventory
 {
@@ -9,9 +10,19 @@ namespace BRIX.Mobile.ViewModel.Inventory
     {
         public Color BackgroundColor { get; set; }
 
-        public string Name { get; set; }
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set => SetProperty(ref _name, value);
+        }
 
-        public string Description { get; set; }
+        private string _description;
+        public string Description
+        {
+            get => _description;
+            set => SetProperty(ref _description, value);
+        }
 
         public ImageSource Icon { get; set; }
 

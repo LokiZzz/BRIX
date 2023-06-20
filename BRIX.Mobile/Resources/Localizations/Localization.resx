@@ -126,9 +126,6 @@
   <data name="AbilityCost" xml:space="preserve">
     <value>Ability cost:</value>
   </data>
-  <data name="AbilityName" xml:space="preserve">
-    <value>Name</value>
-  </data>
   <data name="ActionPointAspectHint" xml:space="preserve">
     <value>Almost any ability is used by spending action points. The more action points an ability spends, the cheaper it will be in experience points.</value>
   </data>
@@ -270,6 +267,12 @@
   <data name="Colossal" xml:space="preserve">
     <value>Colossal</value>
   </data>
+  <data name="Consumable" xml:space="preserve">
+    <value>Consumable</value>
+  </data>
+  <data name="Container" xml:space="preserve">
+    <value>Container</value>
+  </data>
   <data name="Cooldown" xml:space="preserve">
     <value>Cooldown</value>
   </data>
@@ -360,6 +363,9 @@
   <data name="EnterMediumRarityRestriction" xml:space="preserve">
     <value>Enter a sign of medium rarity, continuing the sentence: Target...". For example: “Must be in armor”, “Must be in water”, “Must breathe”.</value>
   </data>
+  <data name="Equipment" xml:space="preserve">
+    <value>Equipment</value>
+  </data>
   <data name="EXP" xml:space="preserve">
     <value>EXP</value>
   </data>
@@ -411,17 +417,14 @@
   <data name="InventoryHelp" xml:space="preserve">
     <value>Tap an item in your inventory to edit it, double tap to delete it, or swipe on the item name from left to right to open the description.</value>
   </data>
-  <data name="InventoryItem" xml:space="preserve">
-    <value>Thing</value>
+  <data name="InventoryItemProperties" xml:space="preserve">
+    <value>Object properties</value>
   </data>
-  <data name="InventoryItemConsumable" xml:space="preserve">
-    <value>Consumable</value>
+  <data name="InventoryItemType" xml:space="preserve">
+    <value>Object type</value>
   </data>
-  <data name="InventoryItemContainer" xml:space="preserve">
-    <value>Container</value>
-  </data>
-  <data name="InventoryItemEquipment" xml:space="preserve">
-    <value>Equipment</value>
+  <data name="ItemName" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
@@ -722,6 +725,9 @@
   </data>
   <data name="ThickSteelPlate" xml:space="preserve">
     <value>Thick steel plate</value>
+  </data>
+  <data name="Thing" xml:space="preserve">
+    <value>Thing</value>
   </data>
   <data name="Tiny" xml:space="preserve">
     <value>Tiny</value>

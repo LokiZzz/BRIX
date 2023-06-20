@@ -15,11 +15,40 @@
         <controls:TitleView/>
     </Shell.TitleView>
 
-    <ScrollView>
-        <VerticalStackLayout>
-            <Label Text="Lolz" VerticalOptions="Center" HorizontalOptions="Center" />
-            <Button Text="Save" Command="{Binding SaveCommand}"/>
-        </VerticalStackLayout>
-    </ScrollView>
-    
+    <Grid RowDefinitions="*,auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="10">
+                <Border Style="{StaticResource BlockBorder}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label 
+                            Style="{StaticResource TitleLabel}" 
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.InventoryItemProperties}}"/>
+                        <controls:PickerButton
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.InventoryItemType}}"
+                            Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.InventoryItemType}}"
+                            ItemSource="{Binding Types}"
+                            SelectedItem="{Binding Type}"
+                            DisplayMember="Text"/>
+                        <controls:FramedEntry
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ItemName}}"
+                            Text="{Binding Item.Name}"/>
+                        <controls:FramedEditor
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Description}}"
+                            Text="{Binding Item.Description}"
+                            MaxLength="400"/>
+                    </VerticalStackLayout>
+                    
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Border 
+            Grid.Row="1"
+            Style="{StaticResource LowBlockWithShadowBorder}">
+            <Button 
+                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" 
+                Command="{Binding SaveCommand}"
+                Margin="0,0,0,10"/>
+        </Border>
+    </Grid>
 </ContentPage>

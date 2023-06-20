@@ -23,7 +23,7 @@
                 <Border Style="{StaticResource BlockBorder}" VerticalOptions="Start" Margin="10,0">
                     <VerticalStackLayout Spacing="10">
                         <controls:FramedEntry
-                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Name}}"
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ItemName}}"
                             Text="{Binding Ability.Name}"/>
                         <controls:FramedEditor
                             MaxLength="400"

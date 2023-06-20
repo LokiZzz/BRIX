@@ -88,15 +88,6 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
-        /// </summary>
-        public static string AbilityName {
-            get {
-                return ResourceManager.GetString("AbilityName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Almost any ability is used by spending action points. The more action points an ability spends, the cheaper it will be in experience points..
         /// </summary>
         public static string ActionPointAspectHint {
@@ -520,6 +511,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Consumable.
+        /// </summary>
+        public static string Consumable {
+            get {
+                return ResourceManager.GetString("Consumable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Container.
+        /// </summary>
+        public static string Container {
+            get {
+                return ResourceManager.GetString("Container", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cooldown.
         /// </summary>
         public static string Cooldown {
@@ -790,6 +799,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Equipment.
+        /// </summary>
+        public static string Equipment {
+            get {
+                return ResourceManager.GetString("Equipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to EXP.
         /// </summary>
         public static string EXP {
@@ -943,38 +961,29 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thing.
+        ///   Looks up a localized string similar to Object properties.
         /// </summary>
-        public static string InventoryItem {
+        public static string InventoryItemProperties {
             get {
-                return ResourceManager.GetString("InventoryItem", resourceCulture);
+                return ResourceManager.GetString("InventoryItemProperties", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Consumable.
+        ///   Looks up a localized string similar to Object type.
         /// </summary>
-        public static string InventoryItemConsumable {
+        public static string InventoryItemType {
             get {
-                return ResourceManager.GetString("InventoryItemConsumable", resourceCulture);
+                return ResourceManager.GetString("InventoryItemType", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Container.
+        ///   Looks up a localized string similar to Name.
         /// </summary>
-        public static string InventoryItemContainer {
+        public static string ItemName {
             get {
-                return ResourceManager.GetString("InventoryItemContainer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Equipment.
-        /// </summary>
-        public static string InventoryItemEquipment {
-            get {
-                return ResourceManager.GetString("InventoryItemEquipment", resourceCulture);
+                return ResourceManager.GetString("ItemName", resourceCulture);
             }
         }
         
@@ -1875,6 +1884,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string ThickSteelPlate {
             get {
                 return ResourceManager.GetString("ThickSteelPlate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thing.
+        /// </summary>
+        public static string Thing {
+            get {
+                return ResourceManager.GetString("Thing", resourceCulture);
             }
         }
         
