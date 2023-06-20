@@ -30,21 +30,25 @@ namespace BRIX.Mobile.ViewModel.Inventory
         public string Title
         {
             get => _title;
-            set => _title = value;
+            set => SetProperty(ref _title, value);
         }
 
         private InventoryItemVM _item;
         public InventoryItemVM Item
         {
             get => _item;
-            set => _item = value;
+            set => SetProperty(ref _item, value);
         }
 
-        private InventoryItemTypeVM _type;
-        public InventoryItemTypeVM Type
+        private InventoryItemTypeVM _selectedType;
+        public InventoryItemTypeVM SelectedType
         {
-            get => _type;
-            set => SetProperty(ref _type, value);
+            get => _selectedType;
+            set
+            {
+                SetProperty(ref _selectedType, value);
+                UpdateItemType(value);
+            }
         }
 
         private ObservableCollection<InventoryItemTypeVM> _types;
@@ -79,7 +83,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
                     Type  = x
                 })
             );
-            Type = Types.First(x => x.Type == Item.Type);
+            SelectedType = Types.First(x => x.Type == Item.Type);
             InitializeTitle();
 
             query.Clear();
@@ -94,6 +98,11 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 case EEditingMode.Edit:
                     Title = Localization.EditInventoryItem; break;
             }
+        }
+
+        private void UpdateItemType(InventoryItemTypeVM value)
+        {
+            Item.Type = value.Type;
         }
     }
 

@@ -27,7 +27,7 @@
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.InventoryItemType}}"
                             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.InventoryItemType}}"
                             ItemSource="{Binding Types}"
-                            SelectedItem="{Binding Type}"
+                            SelectedItem="{Binding SelectedType}"
                             DisplayMember="Text"/>
                         <controls:FramedEntry
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ItemName}}"
@@ -36,6 +36,16 @@
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Description}}"
                             Text="{Binding Item.Description}"
                             MaxLength="400"/>
+                        <controls:FramedEntry
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.InventoryItemCost}}"
+                            Text="{Binding Item.Price}"
+                            IsVisible="{Binding Item.ShowPrice}"
+                            Keyboard="Numeric"/>
+                        <controls:FramedEntry
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.InventoryItemCost}}"
+                            Text="{Binding Item.Count}"
+                            IsVisible="{Binding Item.ShowCount}"
+                            Keyboard="Numeric"/>
                     </VerticalStackLayout>
                     
                 </Border>

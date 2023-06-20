@@ -18,7 +18,8 @@
         <Label 
             x:Name="lblSelectedItemText"
             VerticalOptions="Center"
-            VerticalTextAlignment="Center"/>
+            VerticalTextAlignment="Center"
+            FontSize="15"/>
     </Border>
 
     <Label 

@@ -34,7 +34,7 @@
             BackgroundColor="{StaticResource BRIXMedium}"
             FontSize="15"
             TextColor="{Binding Source={x:Reference this}, Path=EntryColor}"
-            
+            Keyboard="{Binding Source={x:Reference this}, Path=Keyboard}"
             Focused="Entry_Focused"
             Unfocused="Entry_Unfocused"
             TextChanged="Entry_TextChanged"/>

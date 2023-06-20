@@ -547,6 +547,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Count.
+        /// </summary>
+        public static string COunt {
+            get {
+                return ResourceManager.GetString("COunt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to pcs..
         /// </summary>
         public static string CountPostfix {
@@ -957,6 +966,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string InventoryHelp {
             get {
                 return ResourceManager.GetString("InventoryHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cost in coins.
+        /// </summary>
+        public static string InventoryItemCost {
+            get {
+                return ResourceManager.GetString("InventoryItemCost", resourceCulture);
             }
         }
         

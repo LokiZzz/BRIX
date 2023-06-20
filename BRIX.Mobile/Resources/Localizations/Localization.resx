@@ -279,6 +279,9 @@
   <data name="CooldownAspectHint" xml:space="preserve">
     <value>Specify how long it takes for the ability to recharge and be able to use it again. You can also choose the number of times you can use the ability before it needs a cooldown.</value>
   </data>
+  <data name="COunt" xml:space="preserve">
+    <value>Count</value>
+  </data>
   <data name="CountPostfix" xml:space="preserve">
     <value>pcs.</value>
   </data>
@@ -416,6 +419,9 @@
   </data>
   <data name="InventoryHelp" xml:space="preserve">
     <value>Tap an item in your inventory to edit it, double tap to delete it, or swipe on the item name from left to right to open the description.</value>
+  </data>
+  <data name="InventoryItemCost" xml:space="preserve">
+    <value>Cost in coins</value>
   </data>
   <data name="InventoryItemProperties" xml:space="preserve">
     <value>Object properties</value>

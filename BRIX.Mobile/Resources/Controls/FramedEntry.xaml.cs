@@ -1,3 +1,6 @@
+using Microsoft.Maui.Converters;
+using System.ComponentModel;
+
 namespace BRIX.Mobile.Resources.Controls;
 
 public partial class FramedEntry : Grid
@@ -12,6 +15,21 @@ public partial class FramedEntry : Grid
         {
             EntryColor = entryColor;
         }
+    }
+
+    public static readonly BindableProperty KeyboardProperty = BindableProperty.Create(
+        propertyName: nameof(Keyboard),
+        returnType: typeof(Keyboard),
+        declaringType: typeof(FramedEntry),
+        defaultValue: Keyboard.Text,
+        defaultBindingMode: BindingMode.TwoWay
+    );
+
+    [TypeConverter(typeof(KeyboardTypeConverter))]
+    public Keyboard Keyboard
+    {
+        get => (Keyboard)GetValue(KeyboardProperty);
+        set => SetValue(KeyboardProperty, value);
     }
 
     public static readonly BindableProperty EntryColorProperty = BindableProperty.Create(

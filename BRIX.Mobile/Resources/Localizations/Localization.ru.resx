@@ -279,6 +279,9 @@
   <data name="CooldownAspectHint" xml:space="preserve">
     <value>Укажите какое время требуется способности, чтобы она перезарядилась и могла использоваться вновь. Вы также можете выбрать количество раз, которое вы можете использовать способность, прежде чем ей понадобится перезарядка.</value>
   </data>
+  <data name="Count" xml:space="preserve">
+    <value>Количество</value>
+  </data>
   <data name="CountPostfix" xml:space="preserve">
     <value>шт.</value>
   </data>
@@ -416,6 +419,9 @@
   </data>
   <data name="InventoryHelp" xml:space="preserve">
     <value>Коснитесь элемента в инвентаре, чтобы редактировать его, коснитесь дважды, чтобы удалить или проведите по названию элемента слева направо, чтобы открыть описание.</value>
+  </data>
+  <data name="InventoryItemCost" xml:space="preserve">
+    <value>Стоимость в монетах</value>
   </data>
   <data name="InventoryItemProperties" xml:space="preserve">
     <value>Параметры предмета</value>
