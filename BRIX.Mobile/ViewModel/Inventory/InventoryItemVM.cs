@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using static Android.Util.EventLogTags;
 
 namespace BRIX.Mobile.ViewModel.Inventory
 {

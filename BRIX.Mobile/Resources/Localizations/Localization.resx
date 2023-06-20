@@ -279,7 +279,7 @@
   <data name="CooldownAspectHint" xml:space="preserve">
     <value>Specify how long it takes for the ability to recharge and be able to use it again. You can also choose the number of times you can use the ability before it needs a cooldown.</value>
   </data>
-  <data name="COunt" xml:space="preserve">
+  <data name="Count" xml:space="preserve">
     <value>Count</value>
   </data>
   <data name="CountPostfix" xml:space="preserve">

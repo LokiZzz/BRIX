@@ -42,10 +42,15 @@
                             IsVisible="{Binding Item.ShowPrice}"
                             Keyboard="Numeric"/>
                         <controls:FramedEntry
-                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.InventoryItemCost}}"
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Count}}"
                             Text="{Binding Item.Count}"
-                            IsVisible="{Binding Item.ShowCount}"
                             Keyboard="Numeric"/>
+                        <controls:PickerButton
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Container}}"
+                            Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Container}}"
+                            ItemSource="{Binding Containers}"
+                            SelectedItem="{Binding SelectedContainer}"
+                            DisplayMember="Name"/>
                     </VerticalStackLayout>
                     
                 </Border>

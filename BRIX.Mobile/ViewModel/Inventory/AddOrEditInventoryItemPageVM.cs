@@ -58,6 +58,24 @@ namespace BRIX.Mobile.ViewModel.Inventory
             set => SetProperty(ref _types, value);
         }
 
+        private InventoryContainerVM _selectedContainer;
+        public InventoryContainerVM SelectedContainer
+        {
+            get => _selectedContainer;
+            set
+            {
+                SetProperty(ref _selectedContainer, value);
+                MoveItem(value);
+            }
+        }
+
+        private ObservableCollection<InventoryContainerVM> _containers;
+        public ObservableCollection<InventoryContainerVM> Containers
+        {
+            get => _containers;
+            set => SetProperty(ref _containers, value);
+        }
+
         [RelayCommand]
         public async Task Save()
         {
@@ -71,22 +89,45 @@ namespace BRIX.Mobile.ViewModel.Inventory
             _mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
             _inventory = query.GetParameterOrDefault<Library.Characters.Inventory>(NavigationParameters.Inventory);
             _editingItem = query.GetParameterOrDefault<InventoryItem>(NavigationParameters.InventoryItem);
-            InventoryItemConverter converter = new ();
 
-            Item = _editingItem != null 
+            InventoryItemConverter converter = new();
+            Item = _editingItem != null
                 ? converter.ToVM(_editingItem)
                 : converter.ToVM(new InventoryItem());
 
-            Types = new ObservableCollection<InventoryItemTypeVM>(
-                Enum.GetValues<EInventoryItemType>().Select(x => new InventoryItemTypeVM { 
-                    Text = _localization[x.ToString("G")].ToString(),
-                    Type  = x
-                })
-            );
-            SelectedType = Types.First(x => x.Type == Item.Type);
+            InitializeItemTypes();
+            InitializeContainers();
             InitializeTitle();
 
             query.Clear();
+        }
+
+        private void InitializeContainers()
+        {
+            List<InventoryContainerVM> containers = _inventory.Items
+                .Where(x => x is Container)
+                .Select(x => new InventoryContainerVM { Name = x.Name, OriginalModelRefernece = x as Container })
+                .ToList();
+            containers.Add(new InventoryContainerVM { Name = Localization.Inventory });
+            Containers = new(containers);
+            InventoryContainerVM selectedContainer = containers.FirstOrDefault(x =>
+                x.OriginalModelRefernece != null
+                && x.OriginalModelRefernece?.Payload?.Contains(Item.OriginalModelReference) == true
+            );
+
+            SelectedContainer = selectedContainer ?? Containers.First(x => x.OriginalModelRefernece == null);
+        }
+
+        private void InitializeItemTypes()
+        {
+            Types = new ObservableCollection<InventoryItemTypeVM>(
+                Enum.GetValues<EInventoryItemType>().Select(x => new InventoryItemTypeVM {
+                    Text = _localization[x.ToString("G")].ToString(),
+                    Type = x
+                })
+            );
+
+            SelectedType = Types.FirstOrDefault(x => x.Type == Item.Type);
         }
 
         private void InitializeTitle()
@@ -104,6 +145,44 @@ namespace BRIX.Mobile.ViewModel.Inventory
         {
             Item.Type = value.Type;
         }
+
+        private void MoveItem(InventoryContainerVM value)
+        {
+            if(value == null)
+            {
+                return;
+            }
+
+            Container oldContainer = _inventory.Items.FirstOrDefault(x =>
+                x is Container container && container.Payload.Contains(Item.OriginalModelReference)
+            ) as Container;
+            Container newContainer = value.OriginalModelRefernece;
+
+            if(oldContainer == newContainer)
+            {
+                return;
+            }
+            else
+            {
+                if(oldContainer == null)
+                {
+                    _inventory.Content.Remove(Item.OriginalModelReference);
+                }
+                else
+                {
+                    oldContainer.Payload.Remove(Item.OriginalModelReference);
+                }
+
+                if (newContainer == null)
+                {
+                    _inventory.Content.Add(Item.OriginalModelReference);
+                }
+                else
+                {
+                    oldContainer.Payload.Add(Item.OriginalModelReference);
+                }
+            }
+        }
     }
 
     public class InventoryItemTypeVM
@@ -112,5 +191,13 @@ namespace BRIX.Mobile.ViewModel.Inventory
         public string Text { get; set; }
 
         public override string ToString() => Text;
+    }
+
+    public class InventoryContainerVM
+    {
+        public Container OriginalModelRefernece { get; set; }
+        public string Name { get; set; }
+
+        public override string ToString() => Name;
     }
 }

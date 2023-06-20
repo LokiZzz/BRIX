@@ -549,9 +549,9 @@ namespace BRIX.Mobile.Resources.Localizations {
         /// <summary>
         ///   Looks up a localized string similar to Count.
         /// </summary>
-        public static string COunt {
+        public static string Count {
             get {
-                return ResourceManager.GetString("COunt", resourceCulture);
+                return ResourceManager.GetString("Count", resourceCulture);
             }
         }
         

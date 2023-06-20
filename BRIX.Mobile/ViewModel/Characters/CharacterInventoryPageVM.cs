@@ -7,6 +7,7 @@ using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
 using BRIX.Mobile.ViewModel.Inventory;
 using BRIX.Mobile.ViewModel.Popups;
+using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
@@ -169,7 +170,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             await Navigation.NavigateAsync<AddOrEditInventoryItemPage>(
                 (NavigationParameters.EditMode, EEditingMode.Edit),
-                (NavigationParameters.Inventory, _currentCharacter.Inventory),
+                (NavigationParameters.Inventory, _currentCharacter.Inventory.Copy()),
                 (NavigationParameters.InventoryItem, item.OriginalModelReference)
             );
         }
@@ -179,7 +180,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             await Navigation.NavigateAsync<AddOrEditInventoryItemPage>(
                 (NavigationParameters.EditMode, EEditingMode.Add),
-                (NavigationParameters.Inventory, _currentCharacter.Inventory)
+                (NavigationParameters.Inventory, _currentCharacter.Inventory.Copy())
             );
         }
     }
