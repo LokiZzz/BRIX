@@ -429,6 +429,9 @@
   <data name="InventoryItemType" xml:space="preserve">
     <value>Вид предмета</value>
   </data>
+  <data name="InventorySameNameAlert" xml:space="preserve">
+    <value>В инвентаре уже есть предмет с таким названием.</value>
+  </data>
   <data name="ItemName" xml:space="preserve">
     <value>Название</value>
   </data>

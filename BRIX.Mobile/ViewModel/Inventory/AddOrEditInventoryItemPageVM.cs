@@ -2,7 +2,9 @@
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
+using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
+using BRIX.Mobile.ViewModel.Popups;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -79,6 +81,19 @@ namespace BRIX.Mobile.ViewModel.Inventory
         [RelayCommand]
         public async Task Save()
         {
+            if(_inventory.Items.Where(x => x.Name == Item.Name).Count() > 1)
+            {
+                await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
+                    new AlertPopupParameters
+                    {
+                        Mode = EAlertMode.ShowMessage,
+                        OkText = Localization.Ok,
+                        Title = Localization.Warning,
+                        Message = Localization.InventorySameNameAlert
+                    }
+                );
+            }
+
             await Navigation.Back(stepsBack: 1, 
                 (NavigationParameters.Inventory, _inventory)
             );
@@ -88,7 +103,10 @@ namespace BRIX.Mobile.ViewModel.Inventory
         {
             _mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
             _inventory = query.GetParameterOrDefault<Library.Characters.Inventory>(NavigationParameters.Inventory);
-            _editingItem = query.GetParameterOrDefault<InventoryItem>(NavigationParameters.InventoryItem);
+            InventoryItem originalItem = query.GetParameterOrDefault<InventoryItem>(
+                NavigationParameters.InventoryItem
+            );
+            _editingItem = _inventory.Items.FirstOrDefault(x => x.Name == originalItem.Name);
 
             InventoryItemConverter converter = new();
             Item = _editingItem != null
@@ -112,7 +130,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             Containers = new(containers);
             InventoryContainerVM selectedContainer = containers.FirstOrDefault(x =>
                 x.OriginalModelRefernece != null
-                && x.OriginalModelRefernece?.Payload?.Contains(Item.OriginalModelReference) == true
+                && x.OriginalModelRefernece?.Payload?.Contains(Item.InternalModel) == true
             );
 
             SelectedContainer = selectedContainer ?? Containers.First(x => x.OriginalModelRefernece == null);
@@ -154,7 +172,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
 
             Container oldContainer = _inventory.Items.FirstOrDefault(x =>
-                x is Container container && container.Payload.Contains(Item.OriginalModelReference)
+                x is Container container && container.Payload.Contains(Item.InternalModel)
             ) as Container;
             Container newContainer = value.OriginalModelRefernece;
 
@@ -166,20 +184,20 @@ namespace BRIX.Mobile.ViewModel.Inventory
             {
                 if(oldContainer == null)
                 {
-                    _inventory.Content.Remove(Item.OriginalModelReference);
+                    _inventory.Content.Remove(Item.InternalModel);
                 }
                 else
                 {
-                    oldContainer.Payload.Remove(Item.OriginalModelReference);
+                    oldContainer.Payload.Remove(Item.InternalModel);
                 }
 
                 if (newContainer == null)
                 {
-                    _inventory.Content.Add(Item.OriginalModelReference);
+                    _inventory.Content.Add(Item.InternalModel);
                 }
                 else
                 {
-                    oldContainer.Payload.Add(Item.OriginalModelReference);
+                    oldContainer.Payload.Add(Item.InternalModel);
                 }
             }
         }

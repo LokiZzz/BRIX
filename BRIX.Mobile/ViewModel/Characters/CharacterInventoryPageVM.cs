@@ -42,14 +42,16 @@ namespace BRIX.Mobile.ViewModel.Characters
             await Initialize(false);
         }
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             Library.Characters.Inventory updatedInventory =
                 query.GetParameterOrDefault<Library.Characters.Inventory>(NavigationParameters.Inventory);
 
             if(updatedInventory != null)
             {
-                // Handle back from editing
+                _currentCharacter.Inventory = updatedInventory;
+                await _characterService.UpdateAsync(_currentCharacter);
+                await Initialize(force: true);
             }
         }
 
@@ -97,11 +99,8 @@ namespace BRIX.Mobile.ViewModel.Characters
                         new Equipment { Name = "Фамильный меч", Description = "Азот (Azoth) — магический меч великого лекаря (по легендам). Азот — это имя демона, заключённого в кристалл, использованный в эфесе этого оружия.", CoinsPrice = 100 },
                     }
                 };
-                if(!_currentCharacter.Inventory.Content.Any())
-                {
-                    _currentCharacter.Inventory = testInventory;
-                    await _characterService.UpdateAsync(_currentCharacter);
-                }
+                _currentCharacter.Inventory = testInventory;
+                await _characterService.UpdateAsync(_currentCharacter);
 
                 InventoryItems = new(
                     _currentCharacter.Inventory.Content.Select(_vmConverter.ToVM).ToList()
@@ -160,7 +159,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                 saveContent = resultDeleteContent.Answer == EAlertPopupResult.No;
             }
 
-            _currentCharacter.Inventory.Remove(item.OriginalModelReference, saveContent);
+            _currentCharacter.Inventory.Remove(item.InternalModel, saveContent);
             await _characterService.UpdateAsync(_currentCharacter);
             await Initialize(force: true);
         }
@@ -171,7 +170,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             await Navigation.NavigateAsync<AddOrEditInventoryItemPage>(
                 (NavigationParameters.EditMode, EEditingMode.Edit),
                 (NavigationParameters.Inventory, _currentCharacter.Inventory.Copy()),
-                (NavigationParameters.InventoryItem, item.OriginalModelReference)
+                (NavigationParameters.InventoryItem, item.InternalModel)
             );
         }
 

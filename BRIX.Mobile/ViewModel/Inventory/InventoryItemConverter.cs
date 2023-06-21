@@ -1,9 +1,4 @@
 ﻿using BRIX.Library.Characters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Inventory
 {
@@ -16,13 +11,12 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
         public InventoryItemVM ToVM(InventoryItem item)
         {
-            InventoryItemVM viewModel = new()
+            InventoryItemVM viewModel = new(item)
             {
                 Name = item.Name,
                 Count = item.Count,
                 BackgroundColor = isDarkBackgroundNow ? _darkItemColor : _lightItemColor,
                 Description = item.Description,
-                OriginalModelReference = item
             };
 
             switch (item)
@@ -51,6 +45,22 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
 
             return viewModel;
+        }
+
+        public static InventoryItem CreateItemByType(EInventoryItemType type)
+        {
+            switch (type)
+            {
+                case EInventoryItemType.Thing:
+                    return new InventoryItem();
+                case EInventoryItemType.Container:
+                    return new Container();
+                case EInventoryItemType.Equipment:
+                    return new Equipment();
+                case EInventoryItemType.Consumable:
+                    return new Consumable();
+                default: return null;
+            }
         }
 
         private ImageSource _gemIS;

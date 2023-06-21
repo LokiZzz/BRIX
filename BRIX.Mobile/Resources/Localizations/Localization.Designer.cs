@@ -997,6 +997,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is already an item with the same name in the inventory..
+        /// </summary>
+        public static string InventorySameNameAlert {
+            get {
+                return ResourceManager.GetString("InventorySameNameAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string ItemName {
