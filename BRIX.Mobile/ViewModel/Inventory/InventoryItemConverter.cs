@@ -11,35 +11,24 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
         public InventoryItemVM ToVM(InventoryItem item)
         {
-            InventoryItemVM viewModel = new(item)
-            {
-                Name = item.Name,
-                Count = item.Count,
-                BackgroundColor = isDarkBackgroundNow ? _darkItemColor : _lightItemColor,
-                Description = item.Description,
-            };
+            InventoryItemVM viewModel = new(item);
+            viewModel.BackgroundColor = isDarkBackgroundNow ? _darkItemColor : _lightItemColor;
 
             switch (item)
             {
                 case Container container:
-                    viewModel.Type = EInventoryItemType.Container;
                     isDarkBackgroundNow = !isDarkBackgroundNow;
                     viewModel.Payload = new(container.Payload.Select(ToVM));
                     isDarkBackgroundNow = !isDarkBackgroundNow;
                     viewModel.Icon = _containerIS;
                     break;
                 case Equipment equipment:
-                    viewModel.Type = EInventoryItemType.Equipment;
-                    viewModel.Price = equipment.CoinsPrice;
                     viewModel.Icon = _equipmentIS;
                     break;
                 case Consumable consumable:
-                    viewModel.Type = EInventoryItemType.Consumable;
-                    viewModel.Price = consumable.CoinsPrice;
                     viewModel.Icon = _consumableIS;
                     break;
                 case InventoryItem:
-                    viewModel.Type = EInventoryItemType.Thing;
                     viewModel.Icon = _gemIS;
                     break;
             }

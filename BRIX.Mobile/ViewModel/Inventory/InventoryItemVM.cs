@@ -12,7 +12,31 @@ namespace BRIX.Mobile.ViewModel.Inventory
             InternalModel = model;
         }
 
-        public InventoryItem InternalModel { get; set; }
+        private InventoryItem _internalModel;
+        public InventoryItem InternalModel
+        {
+            get => _internalModel;
+            set
+            {
+                _internalModel = value;
+
+                switch(value)
+                {
+                    case Container:
+                        Type = EInventoryItemType.Container;
+                        break;
+                    case Equipment:
+                        Type = EInventoryItemType.Equipment;
+                        break;
+                    case Consumable:
+                        Type = EInventoryItemType.Consumable;
+                        break;
+                    case InventoryItem:
+                        Type = EInventoryItemType.Thing;
+                        break;
+                }
+            }
+        }
 
         public Color BackgroundColor { get; set; }
 
@@ -20,7 +44,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
         {
             get => InternalModel.Name;
             set => SetProperty(
-                InternalModel.Name, value, InternalModel, (character, prop) => character.Name = prop
+                InternalModel.Name, value, InternalModel, (model, prop) => model.Name = prop
             );
         }
 
@@ -28,7 +52,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
         {
             get => InternalModel.Description;
             set => SetProperty(
-                InternalModel.Description, value, InternalModel, (character, prop) => character.Description = prop
+                InternalModel.Description, value, InternalModel, (model, prop) => model.Description = prop
             );
         }
 
@@ -38,7 +62,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             set
             {
                 SetProperty(
-                    InternalModel.Count, value, InternalModel, (character, prop) => character.Count = prop
+                    InternalModel.Count, value, InternalModel, (model, prop) => model.Count = prop
                 );
                 OnPropertyChanged(nameof(ShowCount));
             }
@@ -61,7 +85,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 {
                     MaterialSupport internalModel = InternalModel as MaterialSupport;
                     SetProperty(
-                        internalModel.Count, value, internalModel, (character, prop) => character.Count = prop
+                        internalModel.Count, value, internalModel, (model, prop) => model.Count = prop
                     );
                 }
 
@@ -77,18 +101,19 @@ namespace BRIX.Mobile.ViewModel.Inventory
             get => _type;
             set
             {
-                if(SetProperty(ref _type, value))
-                {
-                    InternalModel = InventoryItemConverter.CreateItemByType(value);
-                }
-
+                SetProperty(ref _type, value);
                 OnPropertyChanged(nameof(ShowCount));
                 OnPropertyChanged(nameof(ShowPrice));
                 OnPropertyChanged(nameof(ShowPayload));
             }
         }
 
-        public ObservableCollection<InventoryItemVM> Payload { get; set; } = new();
+        private ObservableCollection<InventoryItemVM> _payload = new();
+        public ObservableCollection<InventoryItemVM> Payload
+        {
+            get => _payload;
+            set => SetProperty(ref _payload, value);
+        }
 
         public bool ShowPayload => Type == EInventoryItemType.Container;     
         public bool ShowCount => Count != 1 || Type == EInventoryItemType.Consumable;
