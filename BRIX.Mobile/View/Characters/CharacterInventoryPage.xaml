@@ -16,7 +16,7 @@
     </Shell.TitleView>
     
     <ContentPage.Resources>
-        <DataTemplate x:Key="inventoryItemTemplate" x:DataType="inv:InventoryItemVM">
+        <DataTemplate x:Key="inventoryItemTemplate" x:DataType="inv:InventoryItemNodeVM">
             <Border 
                 StrokeShape="RoundRectangle 5" 
                 BackgroundColor="{Binding BackgroundColor}" 

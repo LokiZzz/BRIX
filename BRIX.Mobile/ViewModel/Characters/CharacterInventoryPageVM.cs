@@ -30,8 +30,8 @@ namespace BRIX.Mobile.ViewModel.Characters
             _vmConverter = new InventoryItemConverter();
         }
 
-        private ObservableCollection<InventoryItemVM> _inventoryItems;
-        public ObservableCollection<InventoryItemVM> InventoryItems
+        private ObservableCollection<InventoryItemNodeVM> _inventoryItems;
+        public ObservableCollection<InventoryItemNodeVM> InventoryItems
         {
             get => _inventoryItems;
             set => SetProperty(ref _inventoryItems, value);
@@ -109,7 +109,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         [RelayCommand]
-        public async Task ShowDescription(InventoryItemVM item)
+        public async Task ShowDescription(InventoryItemNodeVM item)
         {
             await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
                 new AlertPopupParameters 
@@ -123,7 +123,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         [RelayCommand]
-        public async Task Delete(InventoryItemVM item)
+        public async Task Delete(InventoryItemNodeVM item)
         {
             AlertPopupResult result = await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
                 new AlertPopupParameters
@@ -165,7 +165,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         [RelayCommand]
-        public async Task Edit(InventoryItemVM item)
+        public async Task Edit(InventoryItemNodeVM item)
         {
             await Navigation.NavigateAsync<AddOrEditInventoryItemPage>(
                 (NavigationParameters.EditMode, EEditingMode.Edit),

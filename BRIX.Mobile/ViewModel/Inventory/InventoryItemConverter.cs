@@ -9,9 +9,9 @@ namespace BRIX.Mobile.ViewModel.Inventory
             InitializeVisual();
         }
 
-        public InventoryItemVM ToVM(InventoryItem item)
+        public InventoryItemNodeVM ToVM(InventoryItem item)
         {
-            InventoryItemVM viewModel = new(item);
+            InventoryItemNodeVM viewModel = new(item);
             viewModel.BackgroundColor = isDarkBackgroundNow ? _darkItemColor : _lightItemColor;
 
             switch (item)

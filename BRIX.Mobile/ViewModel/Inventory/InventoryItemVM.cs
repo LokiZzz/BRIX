@@ -38,8 +38,6 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
-        public Color BackgroundColor { get; set; }
-
         public string Name
         {
             get => InternalModel.Name;
@@ -93,7 +91,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
-        public ImageSource Icon { get; set; }
+        
 
         private EInventoryItemType _type;
         public EInventoryItemType Type
@@ -125,7 +123,14 @@ namespace BRIX.Mobile.ViewModel.Inventory
             get => _descriptionCommand;
             set => SetProperty(ref _descriptionCommand, value);
         }
+    }
 
+    public class InventoryItemNodeVM : InventoryItemVM
+    {
+        public InventoryItemNodeVM(InventoryItem model) : base(model) { }
+
+        public ImageSource Icon { get; set; }
+        public Color BackgroundColor { get; set; }
     }
 
     public enum EInventoryItemType

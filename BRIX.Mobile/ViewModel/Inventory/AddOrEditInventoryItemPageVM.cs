@@ -108,10 +108,9 @@ namespace BRIX.Mobile.ViewModel.Inventory
             );
             _editingItem = _inventory.Items.FirstOrDefault(x => x.Name == originalItem.Name);
 
-            InventoryItemConverter converter = new();
             Item = _editingItem != null
-                ? converter.ToVM(_editingItem)
-                : converter.ToVM(new InventoryItem());
+                ? new InventoryItemVM(_editingItem)
+                : new InventoryItemVM(new InventoryItem());
 
             InitializeItemTypes();
             InitializeContainers();
