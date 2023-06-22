@@ -99,8 +99,12 @@ namespace BRIX.Mobile.ViewModel.Characters
                         new Equipment { Name = "Фамильный меч", Description = "Азот (Azoth) — магический меч великого лекаря (по легендам). Азот — это имя демона, заключённого в кристалл, использованный в эфесе этого оружия.", CoinsPrice = 100 },
                     }
                 };
-                _currentCharacter.Inventory = testInventory;
-                await _characterService.UpdateAsync(_currentCharacter);
+
+                if (_currentCharacter.Inventory?.Content.Any() == false)
+                {
+                    _currentCharacter.Inventory = testInventory;
+                    await _characterService.UpdateAsync(_currentCharacter);
+                }
 
                 InventoryItems = new(
                     _currentCharacter.Inventory.Content.Select(_vmConverter.ToVM).ToList()

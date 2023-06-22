@@ -196,7 +196,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 }
                 else
                 {
-                    oldContainer.Payload.Add(Item.InternalModel);
+                    newContainer.Payload.Add(Item.InternalModel);
                 }
             }
         }

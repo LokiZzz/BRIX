@@ -83,7 +83,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 {
                     MaterialSupport internalModel = InternalModel as MaterialSupport;
                     SetProperty(
-                        internalModel.Count, value, internalModel, (model, prop) => model.Count = prop
+                        internalModel.CoinsPrice, value, internalModel, (model, prop) => model.CoinsPrice = prop
                     );
                 }
 
