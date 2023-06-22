@@ -420,6 +420,9 @@
   <data name="InventoryHelp" xml:space="preserve">
     <value>Коснитесь элемента в инвентаре, чтобы редактировать его, коснитесь дважды, чтобы удалить или проведите по названию элемента слева направо, чтобы открыть описание.</value>
   </data>
+  <data name="InventoryItemAskChangeTypeAlert" xml:space="preserve">
+    <value>Вы уверены, что хотите сменить тип предмета? При смене типа все свойства, кроме имени, описания и количества будут обнулены.</value>
+  </data>
   <data name="InventoryItemCost" xml:space="preserve">
     <value>Стоимость в монетах</value>
   </data>
@@ -428,6 +431,9 @@
   </data>
   <data name="InventoryItemType" xml:space="preserve">
     <value>Вид предмета</value>
+  </data>
+  <data name="InventoryItemWasConatinerAlert" xml:space="preserve">
+    <value>Изменяемый предмет был контейнером и содержал в себе другие предметы. У него поменялся тип и теперь он не может хранить своё содержимое, удалить это содержимое?</value>
   </data>
   <data name="InventorySameNameAlert" xml:space="preserve">
     <value>В инвентаре уже есть предмет с таким названием.</value>

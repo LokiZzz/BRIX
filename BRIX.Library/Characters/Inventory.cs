@@ -123,7 +123,7 @@ namespace BRIX.Library.Characters
         {
             if(saveContent && itemToDelete is Container containerToDelete)
             {
-                MoveContentUpper(inventory, containerToDelete);
+                inventory.MoveContentUpper(containerToDelete);
             }
 
             foreach(InventoryItem item in inventory.Items)
@@ -143,7 +143,7 @@ namespace BRIX.Library.Characters
             }
         }
 
-        private static void MoveContentUpper(Inventory inventory, Container containerToDelete)
+        public static void MoveContentUpper(this Inventory inventory, Container containerToDelete)
         {
             if (inventory.Content.Contains(containerToDelete))
             {

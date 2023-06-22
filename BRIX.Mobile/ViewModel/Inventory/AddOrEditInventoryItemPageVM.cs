@@ -46,11 +46,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
         public InventoryItemTypeVM SelectedType
         {
             get => _selectedType;
-            set
-            {
-                SetProperty(ref _selectedType, value);
-                UpdateItemType(value);
-            }
+            set => UpdateItemType(value);
         }
 
         private ObservableCollection<InventoryItemTypeVM> _types;
@@ -158,8 +154,54 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
-        private void UpdateItemType(InventoryItemTypeVM value)
+        private async void UpdateItemType(InventoryItemTypeVM value)
         {
+            if (SelectedType.Type == value.Type)
+            {
+                return;
+            }
+
+            AlertPopupResult result = await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
+                new AlertPopupParameters
+                {
+                    Mode = EAlertMode.AskYesOrNo,
+                    Title = Localization.Warning,
+                    Message = Localization.InventoryItemAskChangeTypeAlert,
+                    YesText = Localization.Yes,
+                    NoText = Localization.No,
+                }
+            );
+
+            if(result.Answer == EAlertPopupResult.No)
+            {
+                return;
+            }
+
+            bool wasContainerAndNowIsNot = SelectedType.Type == EInventoryItemType.Container
+                && value.Type != EInventoryItemType.Container
+                && Item.Payload?.Any() == true;
+
+            if (wasContainerAndNowIsNot)
+            {
+                result = await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
+                    new AlertPopupParameters
+                    {
+                        Mode = EAlertMode.AskYesOrNo,
+                        Title = Localization.Warning,
+                        Message = Localization.InventoryItemWasConatinerAlert,
+                        YesText = Localization.Yes,
+                        NoText = Localization.No,
+                    }
+                );
+
+                if(result.Answer == EAlertPopupResult.No)
+                {
+                    _inventory.MoveContentUpper(Item.InternalModel as Container);
+                }
+            }
+
+
+            SetProperty(ref _selectedType, value);
             Item.Type = value.Type;
         }
 
