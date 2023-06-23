@@ -46,7 +46,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
         public InventoryItemTypeVM SelectedType
         {
             get => _selectedType;
-            set => UpdateItemType(value);
+            set => UpdateItemType(value).GetAwaiter().GetResult();
         }
 
         private ObservableCollection<InventoryItemTypeVM> _types;
@@ -118,7 +118,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
         private void InitializeContainers()
         {
             List<InventoryContainerVM> containers = _inventory.Items
-                .Where(x => x is Container)
+                .Where(x => x is Container && x != Item.InternalModel)
                 .Select(x => new InventoryContainerVM { Name = x.Name, OriginalModelRefernece = x as Container })
                 .ToList();
             containers.Add(new InventoryContainerVM { Name = Localization.Inventory });
@@ -154,9 +154,14 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
-        private async void UpdateItemType(InventoryItemTypeVM value)
+        private async Task UpdateItemType(InventoryItemTypeVM value)
         {
-            if (SelectedType.Type == value.Type)
+            if(SelectedType == null)
+            {
+                SetProperty(ref _selectedType, value, nameof(SelectedType));
+            }
+
+            if (SelectedType?.Type == value?.Type)
             {
                 return;
             }
@@ -200,8 +205,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 }
             }
 
-
-            SetProperty(ref _selectedType, value);
+            SetProperty(ref _selectedType, value, nameof(SelectedType));
             Item.Type = value.Type;
         }
 
