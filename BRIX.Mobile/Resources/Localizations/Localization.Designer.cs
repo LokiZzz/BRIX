@@ -970,15 +970,6 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to change the item type? When changing the type, all properties except for the name, description, and quantity will be reset..
-        /// </summary>
-        public static string InventoryItemAskChangeTypeAlert {
-            get {
-                return ResourceManager.GetString("InventoryItemAskChangeTypeAlert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cost in coins.
         /// </summary>
         public static string InventoryItemCost {

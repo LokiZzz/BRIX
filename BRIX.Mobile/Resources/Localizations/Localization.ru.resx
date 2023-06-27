@@ -420,9 +420,6 @@
   <data name="InventoryHelp" xml:space="preserve">
     <value>Коснитесь элемента в инвентаре, чтобы редактировать его, коснитесь дважды, чтобы удалить или проведите по названию элемента слева направо, чтобы открыть описание.</value>
   </data>
-  <data name="InventoryItemAskChangeTypeAlert" xml:space="preserve">
-    <value>Вы уверены, что хотите сменить тип предмета? При смене типа все свойства, кроме имени, описания и количества будут обнулены.</value>
-  </data>
   <data name="InventoryItemCost" xml:space="preserve">
     <value>Стоимость в монетах</value>
   </data>

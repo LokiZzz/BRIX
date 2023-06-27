@@ -91,18 +91,18 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
-        
-
-        private EInventoryItemType _type;
-        public EInventoryItemType Type
+        private EInventoryItemType? _type;
+        public EInventoryItemType? Type
         {
             get => _type;
             set
             {
-                SetProperty(ref _type, value);
-                OnPropertyChanged(nameof(ShowCount));
-                OnPropertyChanged(nameof(ShowPrice));
-                OnPropertyChanged(nameof(ShowPayload));
+                bool initialize = _type == null;
+
+                if (SetProperty(ref _type, value) && !initialize)
+                {
+                    UpdateInternalByType(value);
+                }
             }
         }
 
@@ -122,6 +122,23 @@ namespace BRIX.Mobile.ViewModel.Inventory
         {
             get => _descriptionCommand;
             set => SetProperty(ref _descriptionCommand, value);
+        }
+
+        private void UpdateInternalByType(EInventoryItemType? type)
+        {
+            if (type == null)
+            {
+                return;
+            }
+
+            InventoryItem newItem = InventoryItemConverter.CreateItemByType(type.Value, InternalModel);
+            InternalModel = newItem;
+
+            OnPropertyChanged(nameof(Count));
+            OnPropertyChanged(nameof(Price));
+            OnPropertyChanged(nameof(ShowCount));
+            OnPropertyChanged(nameof(ShowPrice));
+            OnPropertyChanged(nameof(ShowPayload));
         }
     }
 

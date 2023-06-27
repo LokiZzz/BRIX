@@ -59,13 +59,12 @@ namespace BRIX.Library.Characters
 
         public int Count { get; set; } = 1;
 
-        public int WeightKg { get; set; }
-
         public override string ToString() =>  Name;
     }
 
     public class Container : InventoryItem
     {
+
         public List<InventoryItem> Payload = new();
     }
 

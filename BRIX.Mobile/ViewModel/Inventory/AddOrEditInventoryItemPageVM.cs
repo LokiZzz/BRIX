@@ -46,7 +46,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
         public InventoryItemTypeVM SelectedType
         {
             get => _selectedType;
-            set => UpdateItemType(value).GetAwaiter().GetResult();
+            set => UpdateItemType(value);
         }
 
         private ObservableCollection<InventoryItemTypeVM> _types;
@@ -154,9 +154,9 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
-        private async Task UpdateItemType(InventoryItemTypeVM value)
+        private async void UpdateItemType(InventoryItemTypeVM value)
         {
-            if(SelectedType == null)
+            if (SelectedType == null)
             {
                 SetProperty(ref _selectedType, value, nameof(SelectedType));
             }
@@ -166,29 +166,13 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 return;
             }
 
-            AlertPopupResult result = await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
-                new AlertPopupParameters
-                {
-                    Mode = EAlertMode.AskYesOrNo,
-                    Title = Localization.Warning,
-                    Message = Localization.InventoryItemAskChangeTypeAlert,
-                    YesText = Localization.Yes,
-                    NoText = Localization.No,
-                }
-            );
-
-            if(result.Answer == EAlertPopupResult.No)
-            {
-                return;
-            }
-
             bool wasContainerAndNowIsNot = SelectedType.Type == EInventoryItemType.Container
                 && value.Type != EInventoryItemType.Container
-                && Item.Payload?.Any() == true;
+                && (Item.InternalModel as Container)?.Payload?.Any() == true;
 
             if (wasContainerAndNowIsNot)
             {
-                result = await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
+                AlertPopupResult result = await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
                     new AlertPopupParameters
                     {
                         Mode = EAlertMode.AskYesOrNo,
@@ -199,14 +183,36 @@ namespace BRIX.Mobile.ViewModel.Inventory
                     }
                 );
 
-                if(result.Answer == EAlertPopupResult.No)
+                if (result.Answer == EAlertPopupResult.No)
                 {
                     _inventory.MoveContentUpper(Item.InternalModel as Container);
                 }
             }
 
-            SetProperty(ref _selectedType, value, nameof(SelectedType));
+            ReplaceItemWithNewType(value);
+        }
+
+        private void ReplaceItemWithNewType(InventoryItemTypeVM value)
+        {
+            Container container = _inventory.Items.Where(x =>
+                            x is Container container && container.Payload.Contains(Item.InternalModel)
+                        ).FirstOrDefault() as Container;
+            int index = container != null
+                ? container.Payload.IndexOf(Item.InternalModel)
+                : _inventory.Content.IndexOf(Item.InternalModel);
+
+            _inventory.Remove(Item.InternalModel);
             Item.Type = value.Type;
+            SetProperty(ref _selectedType, value, nameof(SelectedType));
+
+            if (container == null)
+            {
+                _inventory.Content.Insert(index, Item.InternalModel);
+            }
+            else
+            {
+                container.Payload.Insert(index, Item.InternalModel);
+            }
         }
 
         private void MoveItem(InventoryContainerVM value)

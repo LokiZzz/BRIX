@@ -420,9 +420,6 @@
   <data name="InventoryHelp" xml:space="preserve">
     <value>Tap an item in your inventory to edit it, double tap to delete it, or swipe on the item name from left to right to open the description.</value>
   </data>
-  <data name="InventoryItemAskChangeTypeAlert" xml:space="preserve">
-    <value>Are you sure you want to change the item type? When changing the type, all properties except for the name, description, and quantity will be reset.</value>
-  </data>
   <data name="InventoryItemCost" xml:space="preserve">
     <value>Cost in coins</value>
   </data>

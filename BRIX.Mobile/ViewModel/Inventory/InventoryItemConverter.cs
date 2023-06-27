@@ -36,20 +36,42 @@ namespace BRIX.Mobile.ViewModel.Inventory
             return viewModel;
         }
 
-        public static InventoryItem CreateItemByType(EInventoryItemType type)
+        public static InventoryItem CreateItemByType(EInventoryItemType type, InventoryItem prototype = null)
         {
+            InventoryItem item;
+
             switch (type)
             {
                 case EInventoryItemType.Thing:
-                    return new InventoryItem();
+                    item = new InventoryItem();
+                    break;
                 case EInventoryItemType.Container:
-                    return new Container();
+                    item = new Container();
+                    break;
                 case EInventoryItemType.Equipment:
-                    return new Equipment();
+                    item = new Equipment();
+                    break;
                 case EInventoryItemType.Consumable:
-                    return new Consumable();
-                default: return null;
+                    item = new Consumable();
+                    break;
+                default: 
+                    item = null;
+                    break;
             }
+
+            if(prototype != null)
+            {
+                item.Name = prototype.Name;
+                item.Description = prototype.Description;
+                item.Count = prototype.Count;
+
+                if(item is MaterialSupport matirealSupport && prototype is MaterialSupport matirealSupportPrototype)
+                {
+                    matirealSupport.CoinsPrice = matirealSupportPrototype.Count;
+                }
+            }
+
+            return item;
         }
 
         private ImageSource _gemIS;
