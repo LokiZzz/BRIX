@@ -74,6 +74,35 @@ namespace BRIX.Mobile.ViewModel.Inventory
             set => SetProperty(ref _containers, value);
         }
 
+        private int _oldItemPrice;
+
+        private int _coinsNow;
+        public int CoinsNow
+        {
+            get => _coinsNow;
+            set => SetProperty(ref _coinsNow, value);
+        }
+
+        public bool ShowCoins => CoinsNow != CoinsWillBe
+            && (SelectedType?.Type == EInventoryItemType.Equipment 
+                || SelectedType?.Type == EInventoryItemType.Consumable);
+
+        private int _coinsWillBe;
+        public int CoinsWillBe
+        {
+            get => _coinsWillBe;
+            set
+            {
+                if (_inventory != null)
+                {
+                    _inventory.Coins = value;
+                }
+
+                SetProperty(ref _coinsWillBe, value);
+                OnPropertyChanged(nameof(ShowCoins));
+            }
+        }
+
         [RelayCommand]
         public async Task Save()
         {
@@ -102,17 +131,28 @@ namespace BRIX.Mobile.ViewModel.Inventory
             InventoryItem originalItem = query.GetParameterOrDefault<InventoryItem>(
                 NavigationParameters.InventoryItem
             );
-            _editingItem = _inventory.Items.FirstOrDefault(x => x.Name == originalItem.Name);
 
+            _editingItem = _inventory.Items.FirstOrDefault(x => x.Name == originalItem.Name);
             Item = _editingItem != null
                 ? new InventoryItemVM(_editingItem)
                 : new InventoryItemVM(new InventoryItem());
+
+            CoinsNow = _inventory.Coins; ;
+            CoinsWillBe = _inventory.Coins;
+            _oldItemPrice = Item.Price;
+            Item.OnPriceChanged += OnPriceChanged;
 
             InitializeItemTypes();
             InitializeContainers();
             InitializeTitle();
 
             query.Clear();
+        }
+
+        private void OnPriceChanged(object sender, int e)
+        {
+            int difference = _oldItemPrice - e;
+            CoinsWillBe = CoinsNow + difference;
         }
 
         private void InitializeContainers()
@@ -190,6 +230,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
 
             ReplaceItemWithNewType(value);
+            OnPropertyChanged(nameof(ShowCoins));
         }
 
         private void ReplaceItemWithNewType(InventoryItemTypeVM value)

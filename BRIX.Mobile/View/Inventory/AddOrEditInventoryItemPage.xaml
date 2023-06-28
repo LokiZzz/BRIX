@@ -17,7 +17,7 @@
 
     <Grid RowDefinitions="*,auto">
         <ScrollView Grid.Row="0">
-            <VerticalStackLayout Spacing="10">
+            <VerticalStackLayout Spacing="10" Margin="0,0,0,10">
                 <Border Style="{StaticResource BlockBorder}">
                     <VerticalStackLayout Spacing="10">
                         <Label 
@@ -57,13 +57,54 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <Border 
-            Grid.Row="1"
-            Style="{StaticResource LowBlockWithShadowBorder}">
-            <Button 
-                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" 
-                Command="{Binding SaveCommand}"
-                Margin="0,0,0,10"/>
+        <Border Grid.Row="1" Style="{StaticResource LowBlockWithShadowBorder}">
+            <Grid RowDefinitions="auto,auto,auto,auto" RowSpacing="0">
+                <Grid Grid.Row="0" ColumnDefinitions="*,auto" IsVisible="{Binding ShowCoins}" Margin="0,0,0,10">
+                    <Label 
+                        Style="{StaticResource TitleLabel}" 
+                        Grid.Column="0" 
+                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Coins}}"/>
+                    <HorizontalStackLayout Grid.Column="1" Spacing="10">
+                        <Label Style="{StaticResource TitleLabel}" Text="{Binding CoinsNow}"/>
+                        <Label 
+                            Style="{StaticResource TitleLabel}" Margin="-3,0,0,1" 
+                            FontFamily="Awesome" Text="{x:Static icons:Awesome.Coins}" 
+                            TextColor="{StaticResource BRIXOrange}" FontSize="18"/>
+                        <Label 
+                            Style="{StaticResource TitleLabel}" FontFamily="Awesome" 
+                            Text="{x:Static icons:Awesome.RightLong}" TextColor="{StaticResource BRIXLight}" 
+                            Margin="5,0" FontSize="18"/>
+                        <Label Style="{StaticResource TitleLabel}" Text="{Binding CoinsWillBe}"/>
+                        <Label 
+                            Style="{StaticResource TitleLabel}" Margin="-3,0,0,1" 
+                            FontFamily="Awesome" Text="{x:Static icons:Awesome.Coins}" 
+                            TextColor="{StaticResource BRIXOrange}" FontSize="18"/>
+                    </HorizontalStackLayout>
+                </Grid>
+
+                <Label 
+                    Grid.Row="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.InventoryAdjustCoinsHint}}"
+                    IsVisible="{Binding ShowCoins}"
+                     Margin="0,0,0,10"/>
+
+                <HorizontalStackLayout 
+                    Grid.Row="2" Spacing="10" 
+                    HorizontalOptions="End"
+                    IsVisible="{Binding ShowCoins}"
+                    Margin="0,0,5,10">
+                    <Label 
+                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AskAdjust}}" 
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"/>
+                    <Switch VerticalOptions="Center" />
+                </HorizontalStackLayout>
+                
+                <Button 
+                    Grid.Row="3"
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" 
+                    Command="{Binding SaveCommand}"
+                    Margin="0,0,0,10"/>
+            </Grid>
         </Border>
     </Grid>
 </ContentPage>

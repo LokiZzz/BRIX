@@ -177,6 +177,9 @@
   <data name="Area" xml:space="preserve">
     <value>Область</value>
   </data>
+  <data name="AskAdjust" xml:space="preserve">
+    <value>Скорректировать?</value>
+  </data>
   <data name="AskDeleteContainerWithContent" xml:space="preserve">
     <value>Удалить содержимое контейнера?</value>
   </data>
@@ -263,6 +266,9 @@
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Очистить</value>
+  </data>
+  <data name="Coins" xml:space="preserve">
+    <value>Монеты</value>
   </data>
   <data name="Colossal" xml:space="preserve">
     <value>Колоссальный</value>
@@ -416,6 +422,9 @@
   </data>
   <data name="Inventory" xml:space="preserve">
     <value>Инвентарь</value>
+  </data>
+  <data name="InventoryAdjustCoinsHint" xml:space="preserve">
+    <value>Вы изменили стоимость предмета и можете скорректировать количество монет, доступных персонажу, в соответствии с новым значением.</value>
   </data>
   <data name="InventoryHelp" xml:space="preserve">
     <value>Коснитесь элемента в инвентаре, чтобы редактировать его, коснитесь дважды, чтобы удалить или проведите по названию элемента слева направо, чтобы открыть описание.</value>

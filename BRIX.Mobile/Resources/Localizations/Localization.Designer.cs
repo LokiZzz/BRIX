@@ -241,6 +241,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adjust?.
+        /// </summary>
+        public static string AskAdjust {
+            get {
+                return ResourceManager.GetString("AskAdjust", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete contents of a container?.
         /// </summary>
         public static string AskDeleteContainerWithContent {
@@ -498,6 +507,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Clear {
             get {
                 return ResourceManager.GetString("Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Coins.
+        /// </summary>
+        public static string Coins {
+            get {
+                return ResourceManager.GetString("Coins", resourceCulture);
             }
         }
         
@@ -957,6 +975,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Inventory {
             get {
                 return ResourceManager.GetString("Inventory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have changed the cost of the item and can adjust the amount of coins available to the character according to the new value..
+        /// </summary>
+        public static string InventoryAdjustCoinsHint {
+            get {
+                return ResourceManager.GetString("InventoryAdjustCoinsHint", resourceCulture);
             }
         }
         

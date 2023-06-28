@@ -177,6 +177,9 @@
   <data name="Area" xml:space="preserve">
     <value>Area</value>
   </data>
+  <data name="AskAdjust" xml:space="preserve">
+    <value>Adjust?</value>
+  </data>
   <data name="AskDeleteContainerWithContent" xml:space="preserve">
     <value>Delete contents of a container?</value>
   </data>
@@ -263,6 +266,9 @@
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Clear</value>
+  </data>
+  <data name="Coins" xml:space="preserve">
+    <value>Coins</value>
   </data>
   <data name="Colossal" xml:space="preserve">
     <value>Colossal</value>
@@ -416,6 +422,9 @@
   </data>
   <data name="Inventory" xml:space="preserve">
     <value>Inventory</value>
+  </data>
+  <data name="InventoryAdjustCoinsHint" xml:space="preserve">
+    <value>You have changed the cost of the item and can adjust the amount of coins available to the character according to the new value.</value>
   </data>
   <data name="InventoryHelp" xml:space="preserve">
     <value>Tap an item in your inventory to edit it, double tap to delete it, or swipe on the item name from left to right to open the description.</value>

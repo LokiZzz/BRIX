@@ -66,6 +66,8 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
+        public event EventHandler<int> OnPriceChanged;
+
         public int Price
         {
             get
@@ -88,6 +90,11 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 }
 
                 OnPropertyChanged(nameof(ShowPrice));
+
+                if (OnPriceChanged != null)
+                {
+                    OnPriceChanged(this, value);
+                }
             }
         }
 
