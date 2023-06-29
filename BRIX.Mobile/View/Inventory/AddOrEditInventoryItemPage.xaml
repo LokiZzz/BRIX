@@ -96,7 +96,7 @@
                         Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AskAdjust}}" 
                         HorizontalOptions="End"
                         VerticalOptions="Center"/>
-                    <Switch VerticalOptions="Center" />
+                    <Switch VerticalOptions="Center" IsToggled="{Binding EditCoinsAfterSave}" />
                 </HorizontalStackLayout>
                 
                 <Button 

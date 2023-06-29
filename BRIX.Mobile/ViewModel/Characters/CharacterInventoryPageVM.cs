@@ -37,6 +37,13 @@ namespace BRIX.Mobile.ViewModel.Characters
             set => SetProperty(ref _inventoryItems, value);
         }
 
+        private int _coins;
+        public int Coins
+        {
+            get => _coins;
+            set => SetProperty(ref _coins, value);
+        }
+
         public override async Task OnNavigatedAsync()
         {
             await Initialize(false);
@@ -109,6 +116,8 @@ namespace BRIX.Mobile.ViewModel.Characters
                 InventoryItems = new(
                     _currentCharacter.Inventory.Content.Select(_vmConverter.ToVM).ToList()
                 );
+
+                Coins = _currentCharacter.Inventory.Coins;
             }
         }
 
@@ -185,6 +194,26 @@ namespace BRIX.Mobile.ViewModel.Characters
                 (NavigationParameters.EditMode, EEditingMode.Add),
                 (NavigationParameters.Inventory, _currentCharacter.Inventory.Copy())
             );
+        }
+
+        [RelayCommand]
+        public async Task EditCoins()
+        {
+            NumericEditorResult result = 
+                await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(
+                    new NumericEditorParameters { Title = Localization.Coins }
+            );
+
+            if(result != null)
+            {
+                int newValue = result.ToValue(_currentCharacter.Inventory.Coins);
+                newValue = newValue < 0 ? 0 : newValue;
+                
+                _currentCharacter.Inventory.Coins = newValue;
+                Coins = newValue;
+
+                await _characterService.UpdateAsync(_currentCharacter);
+            }
         }
     }
 }

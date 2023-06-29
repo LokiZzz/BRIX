@@ -1033,6 +1033,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You don&apos;t have enough coins in your inventory to store this item. Change the cost of the item or turn off the «Adjust» flag so that the cost of the item does not affect the number of coins in the inventory..
+        /// </summary>
+        public static string InventoryNotEnoughCoinsAlert {
+            get {
+                return ResourceManager.GetString("InventoryNotEnoughCoinsAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is already an item with the same name in the inventory..
         /// </summary>
         public static string InventorySameNameAlert {

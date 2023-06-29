@@ -103,9 +103,34 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
+        private bool _editCoinsAfterSave = true;
+        public bool EditCoinsAfterSave
+        {
+            get => _editCoinsAfterSave;
+            set => SetProperty(ref _editCoinsAfterSave, value);
+        }
+
         [RelayCommand]
         public async Task Save()
         {
+            if(EditCoinsAfterSave)
+            {
+                if(CoinsWillBe < 0)
+                {
+                    await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
+                        new AlertPopupParameters
+                        {
+                            Mode = EAlertMode.ShowMessage,
+                            OkText = Localization.Ok,
+                            Title = Localization.Warning,
+                            Message = Localization.InventoryNotEnoughCoinsAlert
+                        }
+                    );
+
+                    return;
+                }
+            }
+
             if(_inventory.Items.Where(x => x.Name == Item.Name).Count() > 1)
             {
                 await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
@@ -117,6 +142,13 @@ namespace BRIX.Mobile.ViewModel.Inventory
                         Message = Localization.InventorySameNameAlert
                     }
                 );
+
+                return;
+            }
+
+            if (EditCoinsAfterSave)
+            {
+                _inventory.Coins = CoinsWillBe;
             }
 
             await Navigation.Back(stepsBack: 1, 
@@ -132,10 +164,17 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 NavigationParameters.InventoryItem
             );
 
-            _editingItem = _inventory.Items.FirstOrDefault(x => x.Name == originalItem.Name);
-            Item = _editingItem != null
-                ? new InventoryItemVM(_editingItem)
-                : new InventoryItemVM(new InventoryItem());
+            _editingItem = _inventory.Items.FirstOrDefault(x => x.Name == originalItem?.Name);
+
+            if(_editingItem == null)
+            {
+                Item = new InventoryItemVM(new InventoryItem());
+                _inventory.Content.Add(Item.InternalModel);
+            }
+            else
+            {
+                Item = new InventoryItemVM(_editingItem);
+            }
 
             CoinsNow = _inventory.Coins; ;
             CoinsWillBe = _inventory.Coins;
