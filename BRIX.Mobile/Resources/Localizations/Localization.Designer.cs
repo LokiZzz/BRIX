@@ -88,6 +88,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot save such parameters to the ability, as you do not have enough experience points for this. Weaken the ability or exit editing without saving using the back button in the top left corner..
+        /// </summary>
+        public static string AbilityEXPOverflowMessage {
+            get {
+                return ResourceManager.GetString("AbilityEXPOverflowMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Almost any ability is used by spending action points. The more action points an ability spends, the cheaper it will be in experience points..
         /// </summary>
         public static string ActionPointAspectHint {
@@ -1308,6 +1317,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string NoSpecialActivationConditions {
             get {
                 return ResourceManager.GetString("NoSpecialActivationConditions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not enough experience points!.
+        /// </summary>
+        public static string NotEnoughEXP {
+            get {
+                return ResourceManager.GetString("NotEnoughEXP", resourceCulture);
             }
         }
         

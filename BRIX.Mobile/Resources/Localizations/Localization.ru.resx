@@ -126,6 +126,9 @@
   <data name="AbilityCost" xml:space="preserve">
     <value>Стоимость:</value>
   </data>
+  <data name="AbilityEXPOverflowMessage" xml:space="preserve">
+    <value>Вы не можете сохранить такие параметры у способности, так как у вас не хватает для этого очков опыта. Ослабьте способность или выйдите из редактирования без сохранения, используя кнопку «Назад» в верхнем левом углу.</value>
+  </data>
   <data name="ActionPointAspectHint" xml:space="preserve">
     <value>Практически любые способности ипользуются посредством траты очков действий. Чем больше очков действий тратит способность, тем дешевле она будет в очках опыта.</value>
   </data>
@@ -533,6 +536,9 @@
   </data>
   <data name="NoSpecialActivationConditions" xml:space="preserve">
     <value>Для этого эффекта не указаны никакие особые условия активации.</value>
+  </data>
+  <data name="NotEnoughEXP" xml:space="preserve">
+    <value>Не хватает очков опыта!</value>
   </data>
   <data name="ObstacleBetweenTargetsInChain" xml:space="preserve">
     <value>Препятствия между целями</value>

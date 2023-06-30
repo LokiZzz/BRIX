@@ -126,6 +126,9 @@
   <data name="AbilityCost" xml:space="preserve">
     <value>Ability cost:</value>
   </data>
+  <data name="AbilityEXPOverflowMessage" xml:space="preserve">
+    <value>You cannot save such parameters to the ability, as you do not have enough experience points for this. Weaken the ability or exit editing without saving using the back button in the top left corner.</value>
+  </data>
   <data name="ActionPointAspectHint" xml:space="preserve">
     <value>Almost any ability is used by spending action points. The more action points an ability spends, the cheaper it will be in experience points.</value>
   </data>
@@ -533,6 +536,9 @@
   </data>
   <data name="NoSpecialActivationConditions" xml:space="preserve">
     <value>There is no special activation conditions.</value>
+  </data>
+  <data name="NotEnoughEXP" xml:space="preserve">
+    <value>Not enough experience points!</value>
   </data>
   <data name="ObstacleBetweenTargetsInChain" xml:space="preserve">
     <value>Obstacles between targets</value>

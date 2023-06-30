@@ -60,6 +60,18 @@ namespace BRIX.Mobile.ViewModel.Abilities
         [RelayCommand]
         public async Task Save()
         {
+            if(CostMonitor.EXPOverflow)
+            {
+                await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(new AlertPopupParameters { 
+                    Mode = EAlertMode.ShowMessage,
+                    Title = Localization.NotEnoughEXP,
+                    OkText = Localization.Ok,
+                    Message = Localization.AbilityEXPOverflowMessage
+                });
+
+                return;
+            }
+
             await Navigation.Back(
                 stepsBack: 1,
                 (NavigationParameters.EditMode, Mode), 
