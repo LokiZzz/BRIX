@@ -160,6 +160,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 }
             }
 
+            CostMonitor.UpdateCost();
+
             return Task.CompletedTask;
         }
 

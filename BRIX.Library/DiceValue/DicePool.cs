@@ -109,7 +109,7 @@ namespace BRIX.Library.DiceValue
         {
             try
             {
-                return TryParseImpl(input, out parsedDicePool);
+                return TryParseInternal(input, out parsedDicePool);
             }
             catch
             {
@@ -119,8 +119,9 @@ namespace BRIX.Library.DiceValue
             }
         }
 
-        public static bool TryParseImpl(string input, out DicePool? parsedDicePool)
+        public static bool TryParseInternal(string input, out DicePool? parsedDicePool)
         {
+            input = input.Replace('к', 'd');
             parsedDicePool = null;
 
             if (!input.IsValidDicePool())

@@ -55,7 +55,16 @@
             <Grid Grid.Row="2">
                 <ProgressBar 
                     Progress="{Binding PercentWithEditingAbility}" 
-                    ProgressColor="{StaticResource BRIXOrange}"/>
+                    ProgressColor="{StaticResource BRIXOrange}">
+                    <ProgressBar.Triggers>
+                        <DataTrigger TargetType="ProgressBar" Binding="{Binding EXPOverflow}" Value="False">
+                            <Setter Property="ProgressColor" Value="{StaticResource BRIXOrange}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="ProgressBar" Binding="{Binding EXPOverflow}" Value="True">
+                            <Setter Property="ProgressColor" Value="{StaticResource BRIXRed}" />
+                        </DataTrigger>
+                    </ProgressBar.Triggers>
+                </ProgressBar>
                 <ProgressBar 
                     Progress="{Binding PercentWithoutEditingAbility}" 
                     BackgroundColor="Transparent" 

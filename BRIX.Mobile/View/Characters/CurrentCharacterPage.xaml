@@ -220,7 +220,6 @@
                                         <HorizontalStackLayout Margin="10,8" Spacing="10">
                                             <Label 
                                                 Text="{Binding Text}"
-                                                FontFamily="Garamond"
                                                 FontSize="15"
                                                 VerticalOptions="Center"
                                                 VerticalTextAlignment="Center"/>

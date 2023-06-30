@@ -60,6 +60,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             set => SetProperty(ref _percentWithEditingAbility, value);
         }
 
+        public bool EXPOverflow => AvailiableExp < 0;
 
         private IAsyncRelayCommand _saveCommand;
         public IAsyncRelayCommand SaveCommand 
@@ -84,6 +85,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
             PercentWithoutEditingAbility = (double)ExpSumWithoutEditingAbility / _character.Experience;
             PercentWithEditingAbility = (double)expSumWithEditingAbility / _character.Experience;
             AvailiableExp = Exp - expSumWithEditingAbility;
+
+            OnPropertyChanged(nameof(EXPOverflow));
         }
     }
 }
