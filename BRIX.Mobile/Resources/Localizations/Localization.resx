@@ -426,8 +426,11 @@
   <data name="InventoryAdjustCoinsHint" xml:space="preserve">
     <value>You have changed the cost of the item and can adjust the amount of coins available to the character according to the new value.</value>
   </data>
+  <data name="InventoryAskAdjustCoinsAlert" xml:space="preserve">
+    <value>You have changed the number of consumables and can automatically adjust the number of coins available to the character according to the new value. Adjust?</value>
+  </data>
   <data name="InventoryHelp" xml:space="preserve">
-    <value>Tap an item in your inventory to edit it, double tap to delete it, or swipe on the item name from left to right to open the description.</value>
+    <value>Tap an item in your inventory to edit it, double tap to delete it, or swipe on the item name from left to right to open the description. By swiping an element from right to left, you can change its quantity.</value>
   </data>
   <data name="InventoryItemCost" xml:space="preserve">
     <value>Cost in coins</value>

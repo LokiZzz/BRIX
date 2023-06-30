@@ -83,9 +83,9 @@ namespace BRIX.Mobile.ViewModel.Inventory
             set => SetProperty(ref _coinsNow, value);
         }
 
-        public bool ShowCoins => CoinsNow != CoinsWillBe
-            && (SelectedType?.Type == EInventoryItemType.Equipment 
-                || SelectedType?.Type == EInventoryItemType.Consumable);
+        public bool ShowCoins => CoinsNow != CoinsWillBe;
+            //&& (SelectedType?.Type == EInventoryItemType.Equipment 
+            //    || SelectedType?.Type == EInventoryItemType.Consumable);
 
         private int _coinsWillBe;
         public int CoinsWillBe

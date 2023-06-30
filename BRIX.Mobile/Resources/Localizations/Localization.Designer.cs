@@ -988,7 +988,16 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tap an item in your inventory to edit it, double tap to delete it, or swipe on the item name from left to right to open the description..
+        ///   Looks up a localized string similar to You have changed the number of consumables and can automatically adjust the number of coins available to the character according to the new value. Adjust?.
+        /// </summary>
+        public static string InventoryAskAdjustCoinsAlert {
+            get {
+                return ResourceManager.GetString("InventoryAskAdjustCoinsAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tap an item in your inventory to edit it, double tap to delete it, or swipe on the item name from left to right to open the description. By swiping an element from right to left, you can change its quantity..
         /// </summary>
         public static string InventoryHelp {
             get {

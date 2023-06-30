@@ -11,6 +11,7 @@ using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
+using static Android.Content.ClipData;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
@@ -211,6 +212,49 @@ namespace BRIX.Mobile.ViewModel.Characters
                 
                 _currentCharacter.Inventory.Coins = newValue;
                 Coins = newValue;
+
+                await _characterService.UpdateAsync(_currentCharacter);
+            }
+        }
+
+        [RelayCommand]
+        public async Task AdjustCount(InventoryItemVM itemToEdit)
+        {
+            NumericEditorResult result =
+                await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(
+                    new NumericEditorParameters { Title = itemToEdit.Name }
+            );
+
+            if (result != null)
+            {
+                int newValue = result.ToValue(itemToEdit.Count);
+                newValue = newValue < 0 ? 0 : newValue;
+                int oldValue = itemToEdit.Count;
+
+                itemToEdit.Count = newValue;
+
+                if(itemToEdit.Type == EInventoryItemType.Consumable)
+                {
+                    AlertPopupResult askAdjustCoinsReuslt =
+                        await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
+                        new AlertPopupParameters
+                        {
+                            Mode = EAlertMode.AskYesOrNo,
+                            YesText = Localization.Yes,
+                            NoText = Localization.No,
+                            Title = Localization.Warning,
+                            Message = Localization.InventoryAskAdjustCoinsAlert,
+                        }
+                    );
+
+                    if(askAdjustCoinsReuslt.Answer == EAlertPopupResult.Yes)
+                    {
+                        int coinsDiff = (newValue - oldValue) * itemToEdit.Price;
+                        int newCoinsValue = _currentCharacter.Inventory.Coins - coinsDiff;
+                        _currentCharacter.Inventory.Coins = newCoinsValue >= 0 ? newCoinsValue : 0;
+                        Coins = _currentCharacter.Inventory.Coins;
+                    }
+                }
 
                 await _characterService.UpdateAsync(_currentCharacter);
             }

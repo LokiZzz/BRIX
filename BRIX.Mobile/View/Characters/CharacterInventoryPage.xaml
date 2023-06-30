@@ -53,6 +53,11 @@
                 </VerticalStackLayout>
                 <Border.GestureRecognizers>
                     <SwipeGestureRecognizer 
+                        Direction="Left"
+                        Threshold="20"
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterInventoryPageVM}}, Path=AdjustCountCommand}"
+                        CommandParameter="{Binding}"/>
+                    <SwipeGestureRecognizer 
                         Direction="Right"
                         Threshold="20"
                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterInventoryPageVM}}, Path=ShowDescriptionCommand}"
