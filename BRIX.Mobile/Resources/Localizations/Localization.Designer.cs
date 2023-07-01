@@ -72,9 +72,9 @@ namespace BRIX.Mobile.Resources.Localizations {
         /// <summary>
         ///   Looks up a localized string similar to Swipe right to edit and swipe left to delete..
         /// </summary>
-        public static string AbilitiesListHelpText {
+        public static string AbilitiesList_Help {
             get {
-                return ResourceManager.GetString("AbilitiesListHelpText", resourceCulture);
+                return ResourceManager.GetString("AbilitiesList_Help", resourceCulture);
             }
         }
         
@@ -448,6 +448,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tap to select, swipe right to edit and swipe left to delete..
+        /// </summary>
+        public static string CharacterList_Help {
+            get {
+                return ResourceManager.GetString("CharacterList_Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Character list.
         /// </summary>
         public static string CharacterListPageTitle {
@@ -489,15 +498,6 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string CharacterTabInventory {
             get {
                 return ResourceManager.GetString("CharacterTabInventory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tap to select, swipe right to edit and swipe left to delete..
-        /// </summary>
-        public static string CharListHelpText {
-            get {
-                return ResourceManager.GetString("CharListHelpText", resourceCulture);
             }
         }
         
@@ -988,6 +988,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tap an item in your inventory to edit it, double tap to delete it, or swipe on the item name from left to right to open the description. By swiping an element from right to left, you can change its quantity..
+        /// </summary>
+        public static string Inventory_Help {
+            get {
+                return ResourceManager.GetString("Inventory_Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have changed the cost of the item and can adjust the amount of coins available to the character according to the new value..
         /// </summary>
         public static string InventoryAdjustCoinsHint {
@@ -1002,15 +1011,6 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string InventoryAskAdjustCoinsAlert {
             get {
                 return ResourceManager.GetString("InventoryAskAdjustCoinsAlert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tap an item in your inventory to edit it, double tap to delete it, or swipe on the item name from left to right to open the description. By swiping an element from right to left, you can change its quantity..
-        /// </summary>
-        public static string InventoryHelp {
-            get {
-                return ResourceManager.GetString("InventoryHelp", resourceCulture);
             }
         }
         
@@ -1452,6 +1452,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Reset {
             get {
                 return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round.
+        /// </summary>
+        public static string Round {
+            get {
+                return ResourceManager.GetString("Round", resourceCulture);
             }
         }
         

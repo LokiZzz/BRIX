@@ -76,13 +76,7 @@
     </ContentPage.Resources>
     
     <Grid RowDefinitions="auto,*,auto">
-        <Border Grid.Row="0" Style="{StaticResource BlockBorder}" >
-            <VerticalStackLayout>
-                <Label Style="{StaticResource ParagraphTitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Help}}"/>
-                <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.InventoryHelp}}"/>
-                <Button Style="{StaticResource HideHintButton}"/>
-            </VerticalStackLayout>
-        </Border>
+        <controls:HelpCard Grid.Row="0" Help="{x:Static lcz:LocalizationKeys.Inventory_Help}"/>
         <ScrollView Grid.Row="1">
             <CollectionView 
                 x:Name="inventoryListView"

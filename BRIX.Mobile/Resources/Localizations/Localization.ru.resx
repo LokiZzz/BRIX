@@ -120,7 +120,7 @@
   <data name="Abilities" xml:space="preserve">
     <value>Способности</value>
   </data>
-  <data name="AbilitiesListHelpText" xml:space="preserve">
+  <data name="AbilitiesList_Help" xml:space="preserve">
     <value>Сдвиньте карточку способности вправо, чтобы редактировать способность или сдвиньте карточку влево, чтобы её удалить.</value>
   </data>
   <data name="AbilityCost" xml:space="preserve">
@@ -249,6 +249,9 @@
   <data name="CharacterListPageTitle" xml:space="preserve">
     <value>Список персонажей</value>
   </data>
+  <data name="CharacterList_Help" xml:space="preserve">
+    <value>Коснитесь карточки персонажа, чтобы выбрать его, сдвиньте карточку вправо, чтобы редактировать персонажа или сдвиньте карточку влево, чтобы его удалить.</value>
+  </data>
   <data name="CharacterTab" xml:space="preserve">
     <value>Персонаж</value>
   </data>
@@ -260,9 +263,6 @@
   </data>
   <data name="CharacterTabInventory" xml:space="preserve">
     <value>Инвентарь</value>
-  </data>
-  <data name="CharListHelpText" xml:space="preserve">
-    <value>Коснитесь карточки персонажа, чтобы выбрать его, сдвиньте карточку вправо, чтобы редактировать персонажа или сдвиньте карточку влево, чтобы его удалить.</value>
   </data>
   <data name="ChooseLanguage" xml:space="preserve">
     <value>Выберите язык</value>
@@ -432,9 +432,6 @@
   <data name="InventoryAskAdjustCoinsAlert" xml:space="preserve">
     <value>Вы изменили количество расходников и можете автоматически скорректировать количество монет, доступных персонажу, в соответствии с новым значением. Скорректировать?</value>
   </data>
-  <data name="InventoryHelp" xml:space="preserve">
-    <value>Коснитесь элемента в инвентаре, чтобы редактировать его, коснитесь дважды, чтобы удалить или проведите по названию элемента слева направо, чтобы открыть описание. Проведя по элементу справа налево, можно изменить его количество.</value>
-  </data>
   <data name="InventoryItemCost" xml:space="preserve">
     <value>Стоимость в монетах</value>
   </data>
@@ -452,6 +449,9 @@
   </data>
   <data name="InventorySameNameAlert" xml:space="preserve">
     <value>В инвентаре уже есть предмет с таким названием.</value>
+  </data>
+  <data name="Inventory_Help" xml:space="preserve">
+    <value>Коснитесь элемента в инвентаре, чтобы редактировать его, коснитесь дважды, чтобы удалить или проведите по названию элемента слева направо, чтобы открыть описание. Проведя по элементу справа налево, можно изменить его количество.</value>
   </data>
   <data name="ItemName" xml:space="preserve">
     <value>Название</value>
@@ -581,6 +581,9 @@
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Сбросить</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>Раунд</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>

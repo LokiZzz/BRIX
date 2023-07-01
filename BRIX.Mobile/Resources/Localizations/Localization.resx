@@ -120,7 +120,7 @@
   <data name="Abilities" xml:space="preserve">
     <value>Abilities</value>
   </data>
-  <data name="AbilitiesListHelpText" xml:space="preserve">
+  <data name="AbilitiesList_Help" xml:space="preserve">
     <value>Swipe right to edit and swipe left to delete.</value>
   </data>
   <data name="AbilityCost" xml:space="preserve">
@@ -249,6 +249,9 @@
   <data name="CharacterListPageTitle" xml:space="preserve">
     <value>Character list</value>
   </data>
+  <data name="CharacterList_Help" xml:space="preserve">
+    <value>Tap to select, swipe right to edit and swipe left to delete.</value>
+  </data>
   <data name="CharacterTab" xml:space="preserve">
     <value>Character</value>
   </data>
@@ -260,9 +263,6 @@
   </data>
   <data name="CharacterTabInventory" xml:space="preserve">
     <value>Inventory</value>
-  </data>
-  <data name="CharListHelpText" xml:space="preserve">
-    <value>Tap to select, swipe right to edit and swipe left to delete.</value>
   </data>
   <data name="ChooseLanguage" xml:space="preserve">
     <value>Choose the language</value>
@@ -432,9 +432,6 @@
   <data name="InventoryAskAdjustCoinsAlert" xml:space="preserve">
     <value>You have changed the number of consumables and can automatically adjust the number of coins available to the character according to the new value. Adjust?</value>
   </data>
-  <data name="InventoryHelp" xml:space="preserve">
-    <value>Tap an item in your inventory to edit it, double tap to delete it, or swipe on the item name from left to right to open the description. By swiping an element from right to left, you can change its quantity.</value>
-  </data>
   <data name="InventoryItemCost" xml:space="preserve">
     <value>Cost in coins</value>
   </data>
@@ -452,6 +449,9 @@
   </data>
   <data name="InventorySameNameAlert" xml:space="preserve">
     <value>There is already an item with the same name in the inventory.</value>
+  </data>
+  <data name="Inventory_Help" xml:space="preserve">
+    <value>Tap an item in your inventory to edit it, double tap to delete it, or swipe on the item name from left to right to open the description. By swiping an element from right to left, you can change its quantity.</value>
   </data>
   <data name="ItemName" xml:space="preserve">
     <value>Name</value>
@@ -581,6 +581,9 @@
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>Round</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>

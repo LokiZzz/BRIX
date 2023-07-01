@@ -153,6 +153,9 @@
 	  <MauiXaml Update="Resources\Controls\FramedEntry.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Resources\Controls\HelpCard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Resources\Controls\PickerButton.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

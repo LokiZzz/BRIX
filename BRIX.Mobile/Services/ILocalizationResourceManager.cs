@@ -1,5 +1,6 @@
 ﻿using BRIX.Lexica;
 using BRIX.Mobile.Resources.Localizations;
+using System.Collections;
 using System.Globalization;
 
 namespace BRIX.Mobile.Services
@@ -11,6 +12,7 @@ namespace BRIX.Mobile.Services
         ELexisLanguage LexisLanguage { get; }
         List<CultureInfo> Cultures { get; }
         void SetCulture(CultureInfo culture);
+        List<string> GetKeys();
     }
 
     public class LocalizationResourceManager : BindableObject, ILocalizationResourceManager
@@ -23,6 +25,19 @@ namespace BRIX.Mobile.Services
         }
 
         public object this[string resourceKey] => Localization.ResourceManager.GetObject(resourceKey, Localization.Culture) ?? Array.Empty<byte>();
+
+        public List<string> GetKeys()
+        {
+            List<string> keys = new();
+            System.Resources.ResourceSet resourceSet = Localization.ResourceManager
+                .GetResourceSet(CurrentCulture, false, false);
+
+            foreach (DictionaryEntry entry in resourceSet)
+            {
+                keys.Add(entry.Key.ToString());
+            }
+            return keys;
+        }
 
         public CultureInfo CurrentCulture => Localization.Culture;
 

@@ -1,9 +1,12 @@
-﻿using BRIX.Mobile.Services;
+﻿using BRIX.Mobile.Resources.Controls;
+using BRIX.Mobile.Resources.Localizations;
+using BRIX.Mobile.Services;
 using BRIX.Mobile.View.Settings;
 using BRIX.Mobile.ViewModel.Base;
 using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
 using System.Globalization;
 
@@ -37,6 +40,21 @@ namespace BRIX.Mobile.ViewModel.Settings
                     _localization.SetCulture(value.CultureInfo);
                 }
             }
+        }
+
+        [RelayCommand]
+        public void ResetHelpCards()
+        {
+            List<string> helps = _localization.GetKeys()
+                .Where(x => x.EndsWith("_Help"))
+                .ToList();
+
+            foreach(string help in helps)
+            {
+                Preferences.Set(help, true);
+            }
+
+            WeakReferenceMessenger.Default.Send<ShowHelpCardsChanged>();
         }
 
         public override Task OnNavigatedAsync()

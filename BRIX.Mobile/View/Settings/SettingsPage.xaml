@@ -39,6 +39,7 @@
                 <Label 
                     Style="{StaticResource TitleLabel}"
                     Text="Other settings"/>
+                <Button Text="Reset help cards" Command="{Binding ResetHelpCardsCommand}"/>
             </VerticalStackLayout>
         </Border>
     </VerticalStackLayout>

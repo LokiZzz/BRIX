@@ -17,13 +17,7 @@
     </Shell.TitleView>
 
     <Grid RowDefinitions="auto,auto,*" RowSpacing="10">
-        <Border Grid.Row="0" Style="{StaticResource BlockBorder}" Margin="10,0" IsVisible="{Binding ShowHelp}">
-            <VerticalStackLayout>
-                <Label Style="{StaticResource ParagraphTitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Help}}"/>
-                <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CharListHelpText}}"/>
-                <Button Style="{StaticResource HideHintButton}" Command="{Binding HideHelpCommand}"/>
-            </VerticalStackLayout>
-        </Border>
+        <controls:HelpCard Grid.Row="0" Margin="10,0" Help="{x:Static lcz:LocalizationKeys.CharacterList_Help}"/>
 
         <Grid Grid.Row="2">
             <CollectionView
