@@ -14,6 +14,8 @@ using BRIX.Mobile.ViewModel.Popups;
 using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Abilities.Effects;
 using BRIX.Mobile.Models.Characters;
+using System.Collections.ObjectModel;
+using BRIX.Mobile.ViewModel.Inventory;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {
@@ -21,11 +23,12 @@ namespace BRIX.Mobile.ViewModel.Abilities
     {
         private readonly ILocalizationResourceManager _localization;
         private readonly ICharacterService _characterService;
-
+        private readonly InventoryItemConverter _inventoryConverter;
         public AddOrEditAbilityPageVM(ILocalizationResourceManager localization, ICharacterService characterService)
         {
             _localization = localization;
             _characterService = characterService;
+            _inventoryConverter = new InventoryItemConverter();
         }
 
         private AbilityModel _ability;
@@ -55,6 +58,20 @@ namespace BRIX.Mobile.ViewModel.Abilities
         {
             get => _title;
             set => SetProperty(ref _title, value);
+        }
+
+        private ObservableCollection<InventoryItemNodeVM> _availiableMaterialSupport;
+        public ObservableCollection<InventoryItemNodeVM> AvailiableMaterialSupport
+        {
+            get => _availiableMaterialSupport;
+            set => SetProperty(ref _availiableMaterialSupport, value);
+        }
+
+        private ObservableCollection<InventoryItemNodeVM> _materialSupport;
+        public ObservableCollection<InventoryItemNodeVM> MaterialSupport
+        {
+            get => _materialSupport;
+            set => SetProperty(ref _materialSupport, value);
         }
 
         [RelayCommand]
@@ -119,6 +136,18 @@ namespace BRIX.Mobile.ViewModel.Abilities
             
         }
 
+        [RelayCommand]
+        public async Task AddMaterial()
+        {
+
+        }
+
+        [RelayCommand]
+        public async Task DeleteMaterial(InventoryItemNodeVM itemToRemovove)
+        {
+            
+        }
+
         public override Task OnNavigatedAsync()
         {
             switch (Mode)
@@ -142,6 +171,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 Ability = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability)
                     ?? new AbilityModel(new Ability());
                 await IntitializeCostMonitor();
+                IntitializeMaterialSupport();
+                await InitializeAvailiableMaterialSupport();
             }
             else
             {
@@ -175,6 +206,29 @@ namespace BRIX.Mobile.ViewModel.Abilities
             CostMonitor.UpdateCost();
 
             return Task.CompletedTask;
+        }
+
+        private void IntitializeMaterialSupport()
+        {
+            List<InventoryItemNodeVM> equipment = Ability.InternalModel.Equipment
+                .Select(_inventoryConverter.ToVM)
+                .ToList();
+            List<InventoryItemNodeVM> consumables = Ability.InternalModel.Consumables
+                .Select(_inventoryConverter.ToVM)
+                .ToList();
+
+            MaterialSupport = new(equipment.Union(consumables));
+        }
+
+        private async Task InitializeAvailiableMaterialSupport()
+        {
+            Character currentCharacter = await _characterService.GetCurrentCharacter();
+            IEnumerable<InventoryItem> availiableItems = currentCharacter.Inventory.Items.Where(x =>
+                !MaterialSupport.Any(y => y.Name == x.Name) && (x is Equipment || x is Consumable)
+            );
+            IEnumerable<InventoryItemNodeVM> availiableItemsNodes = availiableItems.Select(_inventoryConverter.ToVM);
+
+            AvailiableMaterialSupport = new(availiableItemsNodes);
         }
 
         private async Task IntitializeCostMonitor()

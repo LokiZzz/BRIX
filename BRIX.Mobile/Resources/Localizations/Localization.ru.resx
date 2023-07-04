@@ -345,6 +345,9 @@
   <data name="Edit" xml:space="preserve">
     <value>Изменить</value>
   </data>
+  <data name="EditAbility_Help" xml:space="preserve">
+    <value>Чтобы добавить эффект, нажмите большую кнопку с плюсом в списке эффектов. Чтобы удалить эффект, сдвиньте его карточку влево, чтобы его редактировать — вправо. Если у способности есть материальное обеспечение, вы можете удалить его элемент при помощи двойного касания.</value>
+  </data>
   <data name="EditInventoryItem" xml:space="preserve">
     <value>Изменить предмет</value>
   </data>
@@ -482,6 +485,9 @@
   </data>
   <data name="MarksOfFate" xml:space="preserve">
     <value>Метки судьбы</value>
+  </data>
+  <data name="MaterialSupport" xml:space="preserve">
+    <value>Материальное обеспечение</value>
   </data>
   <data name="Medium" xml:space="preserve">
     <value>Средний</value>

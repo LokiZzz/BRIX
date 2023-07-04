@@ -5,6 +5,7 @@
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:v="clr-namespace:BRIX.Mobile.View.Abilities"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities"
+             xmlns:inv="clr-namespace:BRIX.Mobile.ViewModel.Inventory"
              xmlns:models="clr-namespace:BRIX.Mobile.Models.Abilities.Effects"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              x:Class="BRIX.Mobile.View.Abilities.AddOrEditAbilityPage"
@@ -20,6 +21,9 @@
     <Grid RowDefinitions="*,auto" RowSpacing="0">
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Margin="0,10">
+
+                <controls:HelpCard Help="{x:Static lcz:LocalizationKeys.EditAbility_Help}" Margin="10,0,10,10"/>
+
                 <Border Style="{StaticResource BlockBorder}" VerticalOptions="Start" Margin="10,0">
                     <VerticalStackLayout Spacing="10">
                         <controls:FramedEntry
@@ -29,6 +33,47 @@
                             MaxLength="400"
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Description}}"
                             Text="{Binding Ability.Description}"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource BlockBorder}" Margin="10">
+                    <VerticalStackLayout Spacing="10">
+                        <Label 
+                            Style="{StaticResource TitleLabel}"
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.MaterialSupport}}"/>
+                        <CollectionView ItemsSource="{Binding MaterialSupport}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="inv:InventoryItemNodeVM">
+                                    <Border StrokeShape="RoundRectangle 5" BackgroundColor="{Binding BackgroundColor}" Padding="5">
+                                        <VerticalStackLayout>
+                                            <Grid ColumnDefinitions="auto,*">
+                                                <HorizontalStackLayout Grid.Column="0" Margin="3,0,0,0" Spacing="5">
+                                                    <Image Source="{Binding Icon}" HeightRequest="16"/>
+                                                    <Label Text="{Binding Name}"/>
+                                                    <Label Text="{Binding Count}" IsVisible="{Binding ShowCount}"/>
+                                                    <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CountPostfix}}" IsVisible="{Binding ShowCount}"/>
+                                                </HorizontalStackLayout>
+                                                <HorizontalStackLayout Grid.Column="1" Spacing="10" HorizontalOptions="End" Margin="0,0,3,0">
+                                                    <Label Text="{Binding EXPBonus}"/>
+                                                    <Label TextColor="{StaticResource BRIXOrange}" Text="{Binding Price}" IsVisible="{Binding ShowPrice}"/>
+                                                    <Label TextColor="{StaticResource BRIXOrange}" FontFamily="Awesome" Text="{x:Static icons:Awesome.Coins}" IsVisible="{Binding ShowPrice}" VerticalOptions="Center" VerticalTextAlignment="Center" Margin="0,0,0,1"/>
+                                                </HorizontalStackLayout>
+                                            </Grid>
+                                        </VerticalStackLayout>
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                                NumberOfTapsRequired="2" 
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AddOrEditAbilityPageVM}}, Path=DeleteMaterialCommand}"
+                                                CommandParameter="{Binding}"/>
+                                        </Border.GestureRecognizers>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <Button 
+                            Style="{StaticResource LightButton}" 
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Add}}"
+                            Command="{Binding AddMaterialCommand}"/>
                     </VerticalStackLayout>
                 </Border>
 

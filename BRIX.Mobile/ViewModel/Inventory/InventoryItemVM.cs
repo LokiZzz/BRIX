@@ -90,10 +90,26 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 }
 
                 OnPropertyChanged(nameof(ShowPrice));
+                OnPropertyChanged(nameof(EXPBonus));
 
                 if (OnPriceChanged != null)
                 {
                     OnPriceChanged(this, value);
+                }
+            }
+        }
+
+        public string EXPBonus
+        {
+            get
+            {
+                if(InternalModel is MaterialSupport materialSupport)
+                {
+                    return $"– {materialSupport.ToExpEquivalent()} EXP";
+                }
+                else
+                {
+                    return string.Empty;
                 }
             }
         }

@@ -345,6 +345,9 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="EditAbility_Help" xml:space="preserve">
+    <value>To add an effect, click the big plus button in the effects list. To remove an effect, slide its card to the left, to edit it, move it to the right. If the ability has material support, you can remove its element with a double tap.</value>
+  </data>
   <data name="EditInventoryItem" xml:space="preserve">
     <value>Edit item</value>
   </data>
@@ -482,6 +485,9 @@
   </data>
   <data name="MarksOfFate" xml:space="preserve">
     <value>Marks of fate</value>
+  </data>
+  <data name="MaterialSupport" xml:space="preserve">
+    <value>Material support</value>
   </data>
   <data name="Medium" xml:space="preserve">
     <value>Medium</value>

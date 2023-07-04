@@ -74,7 +74,7 @@ namespace BRIX.Library.Characters
 
         public abstract bool IsAvailable { get; }
 
-        public abstract double ToExpModifier { get; }
+        public abstract double ExpModifier { get; }
     }
 
     public class Equipment : MaterialSupport
@@ -87,7 +87,7 @@ namespace BRIX.Library.Characters
         /// </summary>
         public override bool IsAvailable => _isAvailable;
 
-        public override double ToExpModifier => 0.1;
+        public override double ExpModifier => 0.1;
 
         public void SetIsAvailable(bool isAvailable) => _isAvailable = isAvailable;
     }
@@ -100,7 +100,7 @@ namespace BRIX.Library.Characters
         /// </summary>
         public override bool IsAvailable => Count > 0;
 
-        public override double ToExpModifier => 10;
+        public override double ExpModifier => 10;
 
         public void Spend() => Count--;
     }
@@ -109,7 +109,7 @@ namespace BRIX.Library.Characters
     {
         public static double ToExpEquivalent(this MaterialSupport matSupport)
         {
-            return matSupport.CoinsPrice * matSupport.ToExpModifier;
+            return matSupport.CoinsPrice * matSupport.ExpModifier;
         }
 
         /// <summary>

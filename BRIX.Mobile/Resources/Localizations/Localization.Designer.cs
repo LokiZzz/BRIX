@@ -745,6 +745,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To add an effect, click the big plus button in the effects list. To remove an effect, slide its card to the left, to edit it, move it to the right. If the ability has material support, you can remove its element with a double tap..
+        /// </summary>
+        public static string EditAbility_Help {
+            get {
+                return ResourceManager.GetString("EditAbility_Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit item.
         /// </summary>
         public static string EditInventoryItem {
@@ -1155,6 +1164,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string MarksOfFate {
             get {
                 return ResourceManager.GetString("MarksOfFate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Material support.
+        /// </summary>
+        public static string MaterialSupport {
+            get {
+                return ResourceManager.GetString("MaterialSupport", resourceCulture);
             }
         }
         
