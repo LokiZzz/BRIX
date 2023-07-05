@@ -186,6 +186,9 @@
   <data name="AskDeleteContainerWithContent" xml:space="preserve">
     <value>Delete contents of a container?</value>
   </data>
+  <data name="AskDeleteMaterialSupport" xml:space="preserve">
+    <value>Are you sure you want to delete «{0}» ability material support?</value>
+  </data>
   <data name="AskToDeleteInventoryItem" xml:space="preserve">
     <value>Are you sure you want to delete «{0}»?</value>
   </data>

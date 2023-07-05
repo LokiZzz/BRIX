@@ -139,13 +139,76 @@ namespace BRIX.Mobile.ViewModel.Abilities
         [RelayCommand]
         public async Task AddMaterial()
         {
+            Character currentCharacter = await _characterService.GetCurrentCharacter();
+            IEnumerable<InventoryItem> availiableItems = currentCharacter.Inventory.Items.Where(x =>
+                !MaterialSupport.Any(y => y.Name == x.Name) && (x is Equipment || x is Consumable)
+            );
+            IEnumerable<InventoryItemNodeVM> availiableItemsNodes = availiableItems.Select(_inventoryConverter.ToVM);
 
+            PickerPopupResult result = 
+                await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
+                new PickerPopupParameters
+                {
+                    Title = Localization.MaterialSupport,
+                    SelectMultiple = true,
+                    Items = availiableItemsNodes.Cast<object>().ToList(),
+                }
+            );
+
+            if (result != null && result.SelectedItems.Any())
+            {
+                IEnumerable<InventoryItemNodeVM> itemNodes = result.SelectedItems.Cast<InventoryItemNodeVM>();
+
+                foreach (InventoryItemNodeVM item in itemNodes)
+                {
+                    MaterialSupport.Add(item);
+
+                    if(item.Type == EInventoryItemType.Equipment)
+                    {
+                        Ability.InternalModel.Equipment.Add(item.InternalModel as Equipment);
+                    }
+                    else if(item.Type == EInventoryItemType.Consumable)
+                    {
+                        Ability.InternalModel.Consumables.Add(item.InternalModel as Consumable);
+                    }
+                }
+
+                CostMonitor.UpdateCost();
+            }
         }
 
         [RelayCommand]
-        public async Task DeleteMaterial(InventoryItemNodeVM itemToRemovove)
+        public async Task DeleteMaterial(InventoryItemNodeVM itemToRemove)
         {
-            
+            AlertPopupResult result =
+                await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
+                new AlertPopupParameters
+                {
+                    Mode = EAlertMode.AskYesOrNo,
+                    Title = Localization.Warning,
+                    Message = string.Format(Localization.AskDeleteMaterialSupport, itemToRemove.Name),
+                    YesText = Localization.Yes,
+                    NoText = Localization.No,
+                }
+            );
+
+            if(result?.Answer != EAlertPopupResult.Yes)
+            {
+                return;
+            }
+
+            MaterialSupport.Remove(itemToRemove);
+
+            if (itemToRemove.Type == EInventoryItemType.Equipment)
+            {
+                Ability.InternalModel.Equipment.Remove(itemToRemove.InternalModel as Equipment);
+            }
+            else if (itemToRemove.Type == EInventoryItemType.Consumable)
+            {
+                Ability.InternalModel.Consumables.Add(itemToRemove.InternalModel as Consumable);
+            }
+
+            CostMonitor.UpdateCost();
         }
 
         public override Task OnNavigatedAsync()
@@ -172,7 +235,6 @@ namespace BRIX.Mobile.ViewModel.Abilities
                     ?? new AbilityModel(new Ability());
                 await IntitializeCostMonitor();
                 IntitializeMaterialSupport();
-                await InitializeAvailiableMaterialSupport();
             }
             else
             {
@@ -218,17 +280,6 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 .ToList();
 
             MaterialSupport = new(equipment.Union(consumables));
-        }
-
-        private async Task InitializeAvailiableMaterialSupport()
-        {
-            Character currentCharacter = await _characterService.GetCurrentCharacter();
-            IEnumerable<InventoryItem> availiableItems = currentCharacter.Inventory.Items.Where(x =>
-                !MaterialSupport.Any(y => y.Name == x.Name) && (x is Equipment || x is Consumable)
-            );
-            IEnumerable<InventoryItemNodeVM> availiableItemsNodes = availiableItems.Select(_inventoryConverter.ToVM);
-
-            AvailiableMaterialSupport = new(availiableItemsNodes);
         }
 
         private async Task IntitializeCostMonitor()

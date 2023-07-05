@@ -163,6 +163,8 @@ namespace BRIX.Mobile.ViewModel.Inventory
             OnPropertyChanged(nameof(ShowPrice));
             OnPropertyChanged(nameof(ShowPayload));
         }
+
+        public override string ToString() => Name;
     }
 
     public class InventoryItemNodeVM : InventoryItemVM

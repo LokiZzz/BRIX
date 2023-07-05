@@ -11,7 +11,6 @@ using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
-using static Android.Content.ClipData;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {

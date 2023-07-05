@@ -268,6 +268,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete «{0}» ability material support?.
+        /// </summary>
+        public static string AskDeleteMaterialSupport {
+            get {
+                return ResourceManager.GetString("AskDeleteMaterialSupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete «{0}»?.
         /// </summary>
         public static string AskToDeleteInventoryItem {

@@ -44,7 +44,7 @@
                         <CollectionView ItemsSource="{Binding MaterialSupport}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="inv:InventoryItemNodeVM">
-                                    <Border StrokeShape="RoundRectangle 5" BackgroundColor="{Binding BackgroundColor}" Padding="5">
+                                    <Border StrokeShape="RoundRectangle 5" BackgroundColor="{StaticResource BRIXDim}" Padding="5">
                                         <VerticalStackLayout>
                                             <Grid ColumnDefinitions="auto,*">
                                                 <HorizontalStackLayout Grid.Column="0" Margin="3,0,0,0" Spacing="5">
