@@ -146,9 +146,9 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 return;
             }
 
-            if (EditCoinsAfterSave)
+            if (!EditCoinsAfterSave)
             {
-                _inventory.Coins = CoinsWillBe;
+                _inventory.Coins = CoinsNow;
             }
 
             await Navigation.Back(stepsBack: 1, 
