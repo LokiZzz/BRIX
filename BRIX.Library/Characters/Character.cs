@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Aspects;
+using BRIX.Library.Extensions;
 using System.Reflection.Metadata.Ecma335;
 
 namespace BRIX.Library.Characters
@@ -101,12 +102,40 @@ namespace BRIX.Library.Characters
 
         public void UpdateInventoryItem(InventoryItem itemToUpdate)
         {
+            if(!Inventory.Items.Any(x => x.Equals(itemToUpdate)))
+            {
+                return;
+            }
+
+            //bool notEnoughEXP = 
+
+            Inventory.Items.Replace(
+                Inventory.Items.Single(x => x.Equals(itemToUpdate)), 
+                itemToUpdate
+            );
+
+            foreach (Ability ability in Abilities)
+            {
+                Consumable? consumable = ability.Consumables.FirstOrDefault(x => x.Equals(itemToUpdate));
+
+                if(consumable != null)
+                {
+                    ability.Consumables.Replace(consumable, itemToUpdate);
+                }
+
+                Equipment? equipment = ability.Equipment.FirstOrDefault(x => x.Equals(itemToUpdate));
+
+                if (equipment != null)
+                {
+                    ability.Equipment.Replace(equipment, itemToUpdate);
+                }
+            }
         }
 
         //public void RemoveInventoryItem(InventoryItem itemToRemove, bool saveContent = false)
         //{
         //    Inventory.Remove(itemToRemove, saveContent);
-            
+
         //    foreach(Ability ability in Abilities)
         //    {
         //        Consumable? consumable = ability.Consumables.FirstOrDefault(x => x.Equals(itemToRemove));
