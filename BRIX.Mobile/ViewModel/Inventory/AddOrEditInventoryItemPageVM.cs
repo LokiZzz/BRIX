@@ -178,8 +178,8 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
             CoinsNow = _inventory.Coins; ;
             CoinsWillBe = _inventory.Coins;
-            _oldItemPrice = Item.Price;
-            Item.OnPriceChanged += OnPriceChanged;
+            _oldItemPrice = Item.FullPrice;
+            Item.OnFullPriceChanged += OnPriceChanged;
 
             InitializeItemTypes();
             InitializeContainers();

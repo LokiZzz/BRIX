@@ -63,10 +63,20 @@ namespace BRIX.Mobile.ViewModel.Inventory
                     InternalModel.Count, value, InternalModel, (model, prop) => model.Count = prop
                 );
                 OnPropertyChanged(nameof(ShowCount));
+                OnPropertyChanged(nameof(PriceString));
+                OnPropertyChanged(nameof(FullPrice));
+
+                if (Type == EInventoryItemType.Equipment || Type == EInventoryItemType.Consumable)
+                {
+                    if (OnFullPriceChanged != null)
+                    {
+                        OnFullPriceChanged(this, FullPrice);
+                    }
+                }
             }
         }
 
-        public event EventHandler<int> OnPriceChanged;
+        public event EventHandler<int> OnFullPriceChanged;
 
         public int Price
         {
@@ -91,13 +101,19 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
                 OnPropertyChanged(nameof(ShowPrice));
                 OnPropertyChanged(nameof(EXPBonus));
+                OnPropertyChanged(nameof(PriceString));
+                OnPropertyChanged(nameof(FullPrice));
 
-                if (OnPriceChanged != null)
+                if (OnFullPriceChanged != null)
                 {
-                    OnPriceChanged(this, value);
+                    OnFullPriceChanged(this, FullPrice);
                 }
             }
         }
+
+        public int FullPrice => Price * Count;
+
+        public string PriceString => Count > 1 ? $"{Price * Count} ({Price}x{Count})" : Price.ToString();
 
         public string EXPBonus
         {

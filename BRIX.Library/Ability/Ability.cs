@@ -37,17 +37,6 @@ namespace BRIX.Library
         /// </summary>
         public List<Consumable> Consumables { get; set; } = new();
 
-        public bool CanActivate() => Equipment.All(x => x.IsAvailable) 
-            && Consumables.All(x => x.IsAvailable);
-
-        public void Activate()
-        {
-            if(CanActivate())
-            {
-                Consumables.ForEach(x => x.Spend());
-            }
-        }
-
         public int ExpCost()
         {
             double effectsCountPenaltyCoef = 1;
@@ -64,6 +53,13 @@ namespace BRIX.Library
             expCost -= Consumables.Sum(x => x.ToExpEquivalent().Round());
 
             return expCost <= 1 ? 1 : expCost;
+        }
+
+        public T? GetAspect<T>() where T : AspectBase
+        {
+            AspectBase aspect = SynchronizingAspects.FirstOrDefault(x => x.GetType().Equals(typeof(T)));
+
+            return aspect as T;
         }
 
         public void AddEffect(EffectBase effect)

@@ -1,4 +1,5 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using BRIX.Library.Aspects;
+using System.Reflection.Metadata.Ecma335;
 
 namespace BRIX.Library.Characters
 {
@@ -30,7 +31,92 @@ namespace BRIX.Library.Characters
         public int MaxHealth => Level * 10;
         public int CurrentHealth { get; set; }
 
+        /// <summary>
+        /// Здесь зависимость от способностей, но временно считается по простому.
+        /// </summary>
+        public int MaxActionPoints => 5;
+        public int CurrentActionPoints { get; set; } = 5;
+
         public CharacterPortrait Portrait { get; set; } = new();
+
+        /// <summary>
+        /// Возвращает доступность способности. Передаваемая способность должна 
+        /// содержаться в коллекции Abilities.
+        /// </summary>
+        public bool GetAbilityAvailability(Ability ability)
+        {
+            if(!Abilities.Contains(ability))
+            {
+                return false;
+            }
+
+            List<MaterialSupport> materialSupport = ability.Equipment.Cast<MaterialSupport>()
+                .Union(ability.Consumables.Cast<MaterialSupport>())
+                .ToList();
+
+            foreach (MaterialSupport abilityMaterial in materialSupport)
+            {
+                bool matirealExistsAndAvailiable = Inventory.Items.Any(x => 
+                    x is MaterialSupport existingMaterial
+                    && existingMaterial.Equals(abilityMaterial)
+                    && existingMaterial.IsAvailable
+                );
+
+                if(!matirealExistsAndAvailiable)
+                {
+                    return false;
+                }
+            }
+
+            ActionPointAspect apAspect = ability.GetAspect<ActionPointAspect>();
+
+            if (apAspect != null && apAspect.ActionPoints > CurrentActionPoints)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public void ActivateAbility(Ability ability)
+        {
+            if (!Abilities.Contains(ability) || !GetAbilityAvailability(ability))
+            {
+                return;
+            }
+
+            foreach(Consumable consumable in ability.Consumables)
+            {
+                consumable.Count--;
+                Inventory.Items.Single(x => x.Equals(consumable)).Count--;
+            }
+
+            ActionPointAspect apAspect = ability.GetAspect<ActionPointAspect>();
+
+            if (apAspect != null)
+            {
+                CurrentActionPoints -= apAspect.ActionPoints;
+            }
+        }
+
+        public void UpdateInventoryItem(InventoryItem itemToUpdate)
+        {
+        }
+
+        //public void RemoveInventoryItem(InventoryItem itemToRemove, bool saveContent = false)
+        //{
+        //    Inventory.Remove(itemToRemove, saveContent);
+            
+        //    foreach(Ability ability in Abilities)
+        //    {
+        //        Consumable? consumable = ability.Consumables.FirstOrDefault(x => x.Equals(itemToRemove));
+
+        //        if (consumable != null)
+        //        {
+
+        //        }
+        //    }
+        //}
     }
 
     public class CharacterPortrait

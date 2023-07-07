@@ -30,7 +30,7 @@
                             <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CountPostfix}}" IsVisible="{Binding ShowCount}"/>
                         </HorizontalStackLayout>
                         <HorizontalStackLayout Grid.Column="1" Spacing="10" HorizontalOptions="End" Margin="0,0,3,0">
-                            <Label TextColor="{StaticResource BRIXOrange}" Text="{Binding Price}" IsVisible="{Binding ShowPrice}"/>
+                            <Label TextColor="{StaticResource BRIXOrange}" Text="{Binding PriceString}" IsVisible="{Binding ShowPrice}"/>
                             <Label 
                                 TextColor="{StaticResource BRIXOrange}" 
                                 FontFamily="Awesome" 

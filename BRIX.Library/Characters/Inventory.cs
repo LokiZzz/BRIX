@@ -11,7 +11,7 @@ namespace BRIX.Library.Characters
     /// </summary>
     public class Inventory
     {
-        public int Coins { get; set; }
+        public int Coins { get; set; } = 100;
 
         public List<InventoryItem> Content = new();
 
@@ -75,6 +75,23 @@ namespace BRIX.Library.Characters
         public abstract bool IsAvailable { get; }
 
         public abstract double ExpModifier { get; }
+
+        public override bool Equals(object? otherObject)
+        {
+            MaterialSupport other = otherObject as MaterialSupport;
+
+            if(other == null)
+            {
+                return false;
+            }
+
+            return other.Name == this.Name && other.CoinsPrice == this.CoinsPrice;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 
     public class Equipment : MaterialSupport
