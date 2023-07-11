@@ -126,6 +126,15 @@ namespace BRIX.Mobile.ViewModel.Characters
                         break;
                 }
 
+                List<AbilityMaterialSupport> materials = query.GetParameterOrDefault<List<AbilityMaterialSupport>>(
+                    NavigationParameters.MaterialSupport
+                );
+
+                if (materials != null)
+                {
+                    Character.InternalModel.MaterialSupport = materials;
+                }
+
                 await _characterService.UpdateAsync(Character.InternalModel);
             }
         }

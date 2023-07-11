@@ -32,6 +32,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
             SaveCommand = new AsyncRelayCommand(Save);
         }
 
+        private Character _characterCopy;
+
         private CharacterAbilityModel _ability;
         public CharacterAbilityModel Ability
         {
@@ -94,7 +96,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
             await Navigation.Back(
                 stepsBack: 1,
                 (NavigationParameters.EditMode, Mode), 
-                (NavigationParameters.Ability, Ability)
+                (NavigationParameters.Ability, Ability),
+                (NavigationParameters.MaterialSupport, _characterCopy.MaterialSupport)
             );
         }
 
@@ -133,8 +136,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
         [RelayCommand]
         public async Task AddMaterial()
         {
-            Character currentCharacter = await _characterService.GetCurrentCharacter();
-            IEnumerable<InventoryItem> availiableItems = currentCharacter.Inventory.Items.Where(x =>
+            IEnumerable<InventoryItem> availiableItems = _characterCopy.Inventory.Items.Where(x =>
                 !MaterialSupport.Any(y => y.Name == x.Name) && (x is Equipment || x is Consumable)
             );
             IEnumerable<InventoryItemNodeVM> availiableItemsNodes = availiableItems.Select(_inventoryConverter.ToVM);
@@ -156,7 +158,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 foreach (InventoryItemNodeVM item in itemNodes)
                 {
                     MaterialSupport.Add(item);
-                    currentCharacter.MaterialSupport.Add(new AbilityMaterialSupport { 
+                    _characterCopy.MaterialSupport.Add(new AbilityMaterialSupport { 
                         AbilityId = Ability.InternalModel.Id,
                         MaterialSupportId = item.InternalModel.Id
                     });
@@ -179,8 +181,10 @@ namespace BRIX.Mobile.ViewModel.Abilities
             }
 
             MaterialSupport.Remove(itemToRemove);
-            Character currentCharacter = await _characterService.GetCurrentCharacter();
-            currentCharacter.RemoveMaterialSupport(itemToRemove.InternalModel as MaterialSupport);
+            _characterCopy.MaterialSupport.RemoveAll(x => 
+                x.AbilityId == Ability.InternalModel.Id
+                && x.MaterialSupportId == itemToRemove.InternalModel.Id
+            );
 
             CostMonitor.UpdateCost();
         }
@@ -202,12 +206,15 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
+            _characterCopy = (await _characterService.GetCurrentCharacter()).Copy();
+
             if (Mode == EEditingMode.None)
             {
                 Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
                 Ability = query.GetParameterOrDefault<CharacterAbilityModel>(NavigationParameters.Ability)
                     ?? new CharacterAbilityModel(new CharacterAbility());
-                await IntitializeCostMonitor();
+                Ability.Character = _characterCopy;
+                IntitializeCostMonitor();
                 IntitializeMaterialSupport();
             }
             else
@@ -246,24 +253,16 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         private void IntitializeMaterialSupport()
         {
-            List<InventoryItemNodeVM> equipment = Ability.InternalModel.Equipment
-                .Select(_inventoryConverter.ToVM)
-                .ToList();
-            List<InventoryItemNodeVM> consumables = Ability.InternalModel.Consumables
+            List<InventoryItemNodeVM> materials = _characterCopy.GetMaterialSupportForAbility(Ability.InternalModel)
                 .Select(_inventoryConverter.ToVM)
                 .ToList();
 
-            MaterialSupport = new(equipment.Union(consumables));
+            MaterialSupport = new(materials);
         }
 
-        private async Task IntitializeCostMonitor()
+        private void IntitializeCostMonitor()
         {
-            Character currentCharacter = await _characterService.GetCurrentCharacter();
-            CostMonitor = new AbilityCostMonitorPanelVM(
-                Ability, 
-                SaveCommand, 
-                new CharacterModel(currentCharacter)
-            );
+            CostMonitor = new AbilityCostMonitorPanelVM(Ability, SaveCommand);
         }
     }
 }

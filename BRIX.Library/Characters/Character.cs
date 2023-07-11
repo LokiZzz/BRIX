@@ -22,7 +22,7 @@ namespace BRIX.Library.Characters
         public string Appearance { get; set; }
         public List<string> Tags { get; set; } = new();
         public List<CharacterAbility> Abilities { get; set; } = new();
-        public List<AbilityMaterialSupport> MaterialSupport { get; set; }
+        public List<AbilityMaterialSupport> MaterialSupport { get; set; } = new();
         public Inventory Inventory { get; set; } = new();
 
         public int Level => ExperienceCalculator.GetLevelFromExp(Experience);

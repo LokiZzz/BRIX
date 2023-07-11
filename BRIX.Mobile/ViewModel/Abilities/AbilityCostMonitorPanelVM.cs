@@ -1,4 +1,5 @@
-﻿using BRIX.Mobile.Models.Abilities;
+﻿using BRIX.Library.Characters;
+using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -8,15 +9,15 @@ namespace BRIX.Mobile.ViewModel.Abilities
 {
     public partial class AbilityCostMonitorPanelVM : ViewModelBase
     {
-        private CharacterModel _character;
-
-        public AbilityCostMonitorPanelVM(CharacterAbilityModel ability, IAsyncRelayCommand saveCommand, CharacterModel character)
+        public AbilityCostMonitorPanelVM(CharacterAbilityModel ability, IAsyncRelayCommand saveCommand)
         {
             Ability = ability;
             SaveCommand = saveCommand;
-            _character = character;
+            Character = new(ability.Character);
             UpdatePercents();
         }
+        
+        private CharacterModel Character;
 
         private CharacterAbilityModel _ability;
         public CharacterAbilityModel Ability
@@ -77,13 +78,13 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         private void UpdatePercents()
         {
-            Exp = _character.Experience;
-            ExpSumWithoutEditingAbility = _character.Abilities
+            Exp = Character.Experience;
+            ExpSumWithoutEditingAbility = Character.Abilities
                 .Where(x => x.InternalModel.Id != Ability.InternalModel.Id)
                 .Sum(x => x.Cost);
             int expSumWithEditingAbility = ExpSumWithoutEditingAbility + Ability.Cost;
-            PercentWithoutEditingAbility = (double)ExpSumWithoutEditingAbility / _character.Experience;
-            PercentWithEditingAbility = (double)expSumWithEditingAbility / _character.Experience;
+            PercentWithoutEditingAbility = (double)ExpSumWithoutEditingAbility / Character.Experience;
+            PercentWithEditingAbility = (double)expSumWithEditingAbility / Character.Experience;
             AvailiableExp = Exp - expSumWithEditingAbility;
 
             OnPropertyChanged(nameof(EXPOverflow));

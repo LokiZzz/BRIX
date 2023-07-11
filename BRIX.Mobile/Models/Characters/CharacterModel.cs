@@ -13,7 +13,9 @@ namespace BRIX.Mobile.Models.Characters
         public CharacterModel(Character character)
         {
             InternalModel = character;
-            Abilities = new (character.Abilities.Select(x => new CharacterAbilityModel(x, character)));
+            Abilities = new (character.Abilities.Select(x => 
+                new CharacterAbilityModel(x) { Character = character })
+            );
             Tags = new (character.Tags.Select(x => new CharacterTagVM { Text = x }));
         }
 

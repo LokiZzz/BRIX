@@ -8,18 +8,17 @@ namespace BRIX.Mobile.Models.Abilities
 {
     public class CharacterAbilityModel : ObservableObject
     {
-        private Character _character;
+        public CharacterAbilityModel() : this(new CharacterAbility()) { }
 
-        public CharacterAbilityModel(Character character) : this(new CharacterAbility(), character) { }
-
-        public CharacterAbilityModel(CharacterAbility ability, Character character)
+        public CharacterAbilityModel(CharacterAbility ability)
         {
-            _character = character;
             InternalModel = ability;
             Effects = new ObservableCollection<EffectModelBase>(
                 ability.Effects.Select(EffectModelFactory.GetModel)
             );
         }
+
+        public Character Character;
 
         public CharacterAbility InternalModel { get; }
 
@@ -37,7 +36,7 @@ namespace BRIX.Mobile.Models.Abilities
             set => SetProperty(InternalModel.Description, value, InternalModel, (ability, desc) => ability.Description = desc);
         }
 
-        public int Cost => InternalModel.ExpCost(_character);
+        public int Cost => InternalModel.ExpCost(Character);
 
         public void AddEffect(EffectModelBase effect)
         {
