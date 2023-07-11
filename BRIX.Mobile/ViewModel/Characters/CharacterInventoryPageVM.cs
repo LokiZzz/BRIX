@@ -51,13 +51,10 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            Library.Characters.Inventory updatedInventory =
-                query.GetParameterOrDefault<Library.Characters.Inventory>(NavigationParameters.Inventory);
+            bool update = query.GetParameterOrDefault<bool>(NavigationParameters.ForceUpdate);
 
-            if(updatedInventory != null)
+            if(update)
             {
-                _currentCharacter.Inventory = updatedInventory;
-                await _characterService.UpdateAsync(_currentCharacter);
                 await Initialize(force: true);
             }
         }
@@ -117,7 +114,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             }
 
             bool changesAffectsAbilities = item.InternalModel is MaterialSupport materialToRemove
-                && _currentCharacter.HaveAbilitiesWithMaterialSupport(materialToRemove);
+                && _currentCharacter.HaveMaterialDependedAbilities(materialToRemove);
 
             if (changesAffectsAbilities)
             {

@@ -7,9 +7,9 @@ namespace BRIX.Mobile.Models.Abilities
 {
     public class AbilityModel : ObservableObject
     {
-        public AbilityModel() : this(new Ability()) { }
+        public AbilityModel() : this(new CharacterAbility()) { }
 
-        public AbilityModel(Ability ability)
+        public AbilityModel(CharacterAbility ability)
         {
             InternalModel = ability;
             Effects = new ObservableCollection<EffectModelBase>(
@@ -17,7 +17,7 @@ namespace BRIX.Mobile.Models.Abilities
             );
         }
 
-        public Ability InternalModel { get; }
+        public CharacterAbility InternalModel { get; }
 
         public ObservableCollection<EffectModelBase> Effects { get; set; } = new ObservableCollection<EffectModelBase>();
 

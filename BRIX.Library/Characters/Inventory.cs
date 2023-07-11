@@ -53,6 +53,8 @@ namespace BRIX.Library.Characters
 
     public class InventoryItem
     {
+        public Guid Id { get; set; } = Guid.NewGuid();
+
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -85,7 +87,7 @@ namespace BRIX.Library.Characters
                 return false;
             }
 
-            return other.Name == this.Name && other.CoinsPrice == this.CoinsPrice;
+            return other.Id == this.Id;
         }
 
         public override int GetHashCode()

@@ -15,7 +15,7 @@ namespace BRIX.Library.Characters
 
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<Ability> Abilities { get; set; } = new();
+        public List<CharacterAbility> Abilities { get; set; } = new();
         public int Experience { get; set; }
         public string Backstory { get; set; }
         public string Appearance { get; set; }
@@ -45,7 +45,7 @@ namespace BRIX.Library.Characters
         /// Возвращает доступность способности. 
         /// Передаваемая способность должна содержаться в коллекции Abilities.
         /// </summary>
-        public bool GetAbilityAvailability(Ability ability)
+        public bool GetAbilityAvailability(CharacterAbility ability)
         {
             if(!Abilities.Contains(ability))
             {
@@ -84,7 +84,7 @@ namespace BRIX.Library.Characters
         /// Активация способности персонажем — трата расходников и очков действий.
         /// </summary>
         /// <param name="ability"></param>
-        public void ActivateAbility(Ability ability)
+        public void ActivateAbility(CharacterAbility ability)
         {
             if (!Abilities.Contains(ability) || !GetAbilityAvailability(ability))
             {
@@ -134,7 +134,7 @@ namespace BRIX.Library.Characters
                 itemToUpdate
             );
 
-            foreach (Ability ability in Abilities)
+            foreach (CharacterAbility ability in Abilities)
             {
                 Consumable? consumable = ability.Consumables.FirstOrDefault(x => x.Equals(itemToUpdate));
 
@@ -174,7 +174,7 @@ namespace BRIX.Library.Characters
 
             Inventory.Remove(itemToRemove, saveContent);
 
-            foreach (Ability ability in Abilities)
+            foreach (CharacterAbility ability in Abilities)
             {
                 Consumable? consumable = ability.Consumables.FirstOrDefault(x => x.Equals(itemToRemove));
 
@@ -194,7 +194,7 @@ namespace BRIX.Library.Characters
 
         public bool CanRemoveMaterialSupport(MaterialSupport itemToRemove)
         {
-            if(!HaveAbilitiesWithMaterialSupport(itemToRemove))
+            if(!HaveMaterialDependedAbilities(itemToRemove))
             {
                 return true;
             }
@@ -205,7 +205,7 @@ namespace BRIX.Library.Characters
             return AvailableExp > expDiff;
         }
 
-        public bool HaveAbilitiesWithMaterialSupport(MaterialSupport item)
+        public bool HaveMaterialDependedAbilities(MaterialSupport item)
         {
             return Abilities.Any(x => 
                 x.Equipment.Any(x => x.Equals(item)) 

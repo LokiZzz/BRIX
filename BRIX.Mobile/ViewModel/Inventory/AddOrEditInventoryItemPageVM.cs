@@ -18,14 +18,18 @@ namespace BRIX.Mobile.ViewModel.Inventory
     public partial class AddOrEditInventoryItemPageVM : ViewModelBase, IQueryAttributable
     {
         private readonly ILocalizationResourceManager _localization;
+        private readonly ICharacterService _characterService;
 
         private EEditingMode _mode;
         private Library.Characters.Inventory _inventory;
         private InventoryItem _editingItem;
 
-        public AddOrEditInventoryItemPageVM(ILocalizationResourceManager localization)
+        public AddOrEditInventoryItemPageVM(
+            ILocalizationResourceManager localization, 
+            ICharacterService characterService)
         {
             _localization = localization;
+            _characterService = characterService;
         }
 
         private string _title;
@@ -135,9 +139,28 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 _inventory.Coins = CoinsNow;
             }
 
-            await Navigation.Back(stepsBack: 1, 
-                (NavigationParameters.Inventory, _inventory)
-            );
+            Character currentCharacter = await _characterService.GetCurrentCharacter();
+            bool affectsAbility = _mode == EEditingMode.Edit 
+                && currentCharacter.HaveMaterialDependedAbilities(Item.InternalModel as MaterialSupport);
+
+            if (affectsAbility)
+            {
+                try
+                {
+                    currentCharacter.UpdateMaterialSupport(Item.InternalModel as MaterialSupport);
+                }
+                catch(NotEnoughEXPForChangesException)
+                {
+                    await Alert(Localization.InventoryNotEnoughEXPForChanges);
+
+                    return;
+                }
+            }
+
+            currentCharacter.Inventory = _inventory;
+            await _characterService.UpdateAsync(currentCharacter);
+
+            await Navigation.Back(stepsBack: 1, (NavigationParameters.ForceUpdate, true));
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)

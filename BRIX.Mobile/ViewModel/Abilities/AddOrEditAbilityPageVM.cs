@@ -218,7 +218,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             {
                 Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
                 Ability = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability)
-                    ?? new AbilityModel(new Ability());
+                    ?? new AbilityModel(new CharacterAbility());
                 await IntitializeCostMonitor();
                 IntitializeMaterialSupport();
             }

@@ -456,6 +456,9 @@
   <data name="InventoryNotEnoughCoinsAlert" xml:space="preserve">
     <value>You don't have enough coins in your inventory to store this item. Change the cost of the item or turn off the «Adjust» flag so that the cost of the item does not affect the number of coins in the inventory.</value>
   </data>
+  <data name="InventoryNotEnoughEXPForChanges" xml:space="preserve">
+    <value>Some abilities depend on this material support and the character does not have enough experience points to apply such changes.</value>
+  </data>
   <data name="InventoryNotEnoughEXPForDelete" xml:space="preserve">
     <value>You will run out of experience points for your current abilities if you remove this item. First, edit the abilities dependent on this item or remove them.</value>
   </data>

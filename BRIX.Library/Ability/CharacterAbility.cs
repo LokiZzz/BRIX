@@ -6,14 +6,14 @@ using BRIX.Library.Extensions;
 
 namespace BRIX.Library
 {
-    public class Ability
+    public class CharacterAbility
     {
-        public Ability()
+        public CharacterAbility()
         {
             Guid = Guid.NewGuid();
         }
 
-        public Ability(Guid guid)
+        public CharacterAbility(Guid guid)
         {
             Guid = guid;
         }

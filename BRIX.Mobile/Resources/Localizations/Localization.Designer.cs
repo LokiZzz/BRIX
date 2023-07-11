@@ -1087,6 +1087,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Some abilities depend on this material support and the character does not have enough experience points to apply such changes..
+        /// </summary>
+        public static string InventoryNotEnoughEXPForChanges {
+            get {
+                return ResourceManager.GetString("InventoryNotEnoughEXPForChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You will run out of experience points for your current abilities if you remove this item. First, edit the abilities dependent on this item or remove them..
         /// </summary>
         public static string InventoryNotEnoughEXPForDelete {
