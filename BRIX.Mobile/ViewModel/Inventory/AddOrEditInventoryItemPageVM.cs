@@ -1,4 +1,6 @@
-﻿using BRIX.Library.Characters;
+﻿using Android.Media;
+using BRIX.Library.Characters;
+using BRIX.Library.Extensions;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
@@ -240,20 +242,47 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
-        private async void UpdateItemType(InventoryItemTypeVM value)
+        private async void UpdateItemType(InventoryItemTypeVM itemType)
         {
             if (SelectedType == null)
             {
-                SetProperty(ref _selectedType, value, nameof(SelectedType));
+                SetProperty(ref _selectedType, itemType, nameof(SelectedType));
             }
 
-            if (SelectedType?.Type == value?.Type)
+            if (SelectedType?.Type == itemType?.Type || itemType == null)
             {
                 return;
             }
 
+            if(_mode == EEditingMode.Add)
+            {
+                Item.Type = itemType.Type;
+                SetProperty(ref _selectedType, itemType, nameof(SelectedType));
+
+                return;
+            }
+
+            bool wasMaterialAndNowNot = (SelectedType.Type == EInventoryItemType.Equipment
+                || SelectedType.Type == EInventoryItemType.Consumable)
+                && itemType.Type != EInventoryItemType.Equipment
+                && itemType.Type != EInventoryItemType.Consumable;
+
+            if (wasMaterialAndNowNot)
+            { 
+                Character character = await _characterService.GetCurrentCharacter();
+                bool canRemove = character.CanRemoveMaterialSupport(Item.InternalModel as MaterialSupport);
+
+                if (!canRemove)
+                {
+                    await Alert(Localization.InventoryNotEnoughEXPForChanges);
+                    OnPropertyChanged(nameof(SelectedType));
+
+                    return;
+                }
+            }
+
             bool wasContainerAndNowIsNot = SelectedType.Type == EInventoryItemType.Container
-                && value.Type != EInventoryItemType.Container
+                && itemType.Type != EInventoryItemType.Container
                 && (Item.InternalModel as Container)?.Payload?.Any() == true;
 
             if (wasContainerAndNowIsNot)
@@ -266,30 +295,35 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 }
             }
 
-            ReplaceItemWithNewType(value);
+            await ReplaceItemWithNewType(itemType);
             OnPropertyChanged(nameof(ShowCoins));
         }
 
-        private void ReplaceItemWithNewType(InventoryItemTypeVM value)
+        private async Task ReplaceItemWithNewType(InventoryItemTypeVM value)
         {
-            Container container = _inventory.Items.Where(x =>
-                            x is Container container && container.Payload.Contains(Item.InternalModel)
-                        ).FirstOrDefault() as Container;
-            int index = container != null
-                ? container.Payload.IndexOf(Item.InternalModel)
-                : _inventory.Content.IndexOf(Item.InternalModel);
+            bool isMaterial = SelectedType.Type == EInventoryItemType.Equipment
+                || SelectedType.Type == EInventoryItemType.Consumable;
 
-            _inventory.Remove(Item.InternalModel);
-            Item.Type = value.Type;
-            SetProperty(ref _selectedType, value, nameof(SelectedType));
-
-            if (container == null)
+            if (isMaterial)
             {
-                _inventory.Content.Insert(index, Item.InternalModel);
+                Character character = await _characterService.GetCurrentCharacter();
+
+                if(character.UpdateMaterialSupport(Item.InternalModel as MaterialSupport) == false)
+                {
+                    await Alert(Localization.InventoryNotEnoughEXPForChanges);
+
+                    return;
+                }
+
+                Item.Type = value.Type;
+                SetProperty(ref _selectedType, value, nameof(SelectedType));
             }
             else
             {
-                container.Payload.Insert(index, Item.InternalModel);
+                InventoryItem existingItem = _inventory.Items.FirstOrDefault(x => x.Equals(Item.InternalModel));
+                Item.Type = value.Type;
+                SetProperty(ref _selectedType, value, nameof(SelectedType));
+                _inventory.Items.Replace(existingItem, Item.InternalModel);
             }
         }
 
