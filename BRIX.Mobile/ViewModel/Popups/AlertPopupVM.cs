@@ -1,4 +1,5 @@
-﻿using BRIX.Mobile.ViewModel.Base;
+﻿using BRIX.Mobile.Resources.Localizations;
+using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -64,12 +65,12 @@ namespace BRIX.Mobile.ViewModel.Popups
 
     public class AlertPopupParameters
     {
-        public string Title { get; init; }
+        public string Title { get; init; } = Localization.Warning;
         public string Message { get; init; }
-        public string YesText { get; init; }
-        public string NoText { get; init; }
-        public string OkText { get; init; }
-        public EAlertMode Mode { get; init; } = EAlertMode.AskYesOrNo;
+        public string YesText { get; init; } = Localization.Yes;
+        public string NoText { get; init; } = Localization.No;
+        public string OkText { get; init; } = Localization.Ok;
+        public EAlertMode Mode { get; init; } = EAlertMode.ShowMessage;
     }
 
     public enum EAlertMode

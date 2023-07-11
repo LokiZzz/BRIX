@@ -76,10 +76,8 @@ namespace BRIX.Mobile.ViewModel.Characters
             AlertPopupResult result = await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
                 new AlertPopupParameters
                 { 
-                    Title = _localization[LocalizationKeys.Warning].ToString(),
-                    Message = _localization[LocalizationKeys.DeleteAbilityQuestion].ToString(),
-                    YesText = _localization[LocalizationKeys.Yes].ToString(),
-                    NoText = _localization[LocalizationKeys.No].ToString()
+                    Mode = EAlertMode.AskYesOrNo,
+                    Message = Localization.DeleteAbilityQuestion,
                 }
             );
 

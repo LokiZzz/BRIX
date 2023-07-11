@@ -80,9 +80,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             if(CostMonitor.EXPOverflow)
             {
                 await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(new AlertPopupParameters { 
-                    Mode = EAlertMode.ShowMessage,
                     Title = Localization.NotEnoughEXP,
-                    OkText = Localization.Ok,
                     Message = Localization.AbilityEXPOverflowMessage
                 });
 
@@ -122,10 +120,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
             AlertPopupResult result = await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
                 new AlertPopupParameters
                 {
-                    Title = _localization[LocalizationKeys.Warning].ToString(),
-                    Message = _localization[LocalizationKeys.DeleteEffectQuestion].ToString(),
-                    YesText = _localization[LocalizationKeys.Yes].ToString(),
-                    NoText = _localization[LocalizationKeys.No].ToString()
+                    Mode = EAlertMode.AskYesOrNo,
+                    Message = Localization.DeleteEffectQuestion,
                 }
             );
 
@@ -185,10 +181,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 new AlertPopupParameters
                 {
                     Mode = EAlertMode.AskYesOrNo,
-                    Title = Localization.Warning,
                     Message = string.Format(Localization.AskDeleteMaterialSupport, itemToRemove.Name),
-                    YesText = Localization.Yes,
-                    NoText = Localization.No,
                 }
             );
 
@@ -205,7 +198,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             }
             else if (itemToRemove.Type == EInventoryItemType.Consumable)
             {
-                Ability.InternalModel.Consumables.Add(itemToRemove.InternalModel as Consumable);
+                Ability.InternalModel.Consumables.Remove(itemToRemove.InternalModel as Consumable);
             }
 
             CostMonitor.UpdateCost();

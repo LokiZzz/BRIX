@@ -82,8 +82,6 @@ namespace BRIX.Mobile.ViewModel.Characters
             await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
                 new AlertPopupParameters 
                 {
-                    Mode = EAlertMode.ShowMessage,
-                    OkText = Localization.Ok,
                     Title = item.Name,
                     Message = string.IsNullOrEmpty(item.Description) ? $"{item.Name}..." : item.Description,
                 }
@@ -93,18 +91,19 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task Delete(InventoryItemNodeVM item)
         {
-            AlertPopupResult result = await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
-                new AlertPopupParameters
-                {
-                    Mode = EAlertMode.AskYesOrNo,
-                    YesText = Localization.Yes,
-                    NoText = Localization.No,
-                    Title = Localization.Warning,
-                    Message = string.Format(Localization.AskToDeleteInventoryItem, item.Name),
-                }
-            );
+            if (item.InternalModel is MaterialSupport material && !_currentCharacter.CanRemoveMaterialSupport(material))
+            {
+                await Alert(new AlertPopupParameters { Message = Localization.InventoryNotEnoughEXPForDelete });
 
-            if(result.Answer == EAlertPopupResult.No)
+                return;
+            }
+
+            AlertPopupResult result = await Alert( new AlertPopupParameters {
+                Mode = EAlertMode.AskYesOrNo,
+                Message = string.Format(Localization.AskToDeleteInventoryItem, item.Name),
+            });
+
+            if(result?.Answer == EAlertPopupResult.No)
             {
                 return;
             }
@@ -113,21 +112,36 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if(item.Type == EInventoryItemType.Container && item.Payload.Any())
             {
-                AlertPopupResult resultDeleteContent = 
-                    await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(new AlertPopupParameters
-                    {
-                        Mode = EAlertMode.AskYesOrNo,
-                        YesText = Localization.Yes,
-                        NoText = Localization.No,
-                        Title = Localization.Warning,
-                        Message = string.Format(Localization.AskDeleteContainerWithContent, item.Name),
-                    }
-                );
+                AlertPopupResult resultDeleteContent = await Alert(new AlertPopupParameters {
+                    Mode = EAlertMode.AskYesOrNo,
+                    Message = string.Format(Localization.AskDeleteContainerWithContent, item.Name),
+                });
 
-                saveContent = resultDeleteContent.Answer == EAlertPopupResult.No;
+                saveContent = resultDeleteContent?.Answer == EAlertPopupResult.No;
             }
 
-            _currentCharacter.Inventory.Remove(item.InternalModel, saveContent);
+            bool changesAffectsAbilities = item.InternalModel is MaterialSupport materialToRemove
+                && _currentCharacter.HaveAbilitiesWithMaterialSupport(materialToRemove);
+
+            if (changesAffectsAbilities)
+            {
+                AlertPopupResult willRisePriceResult = await Alert(new AlertPopupParameters {
+                    Mode = EAlertMode.AskYesOrNo,
+                    Message = Localization.InventoryAbilitiesWillRisePrice,
+                });
+
+                if(willRisePriceResult?.Answer == EAlertPopupResult.No)
+                {
+                    return;
+                }
+
+                _currentCharacter.RemoveMaterialSupport(item.InternalModel as MaterialSupport, saveContent);
+            }
+            else
+            {
+                _currentCharacter.Inventory.Remove(item.InternalModel, saveContent);
+            }
+
             await _characterService.UpdateAsync(_currentCharacter);
             await Initialize(force: true);
         }
@@ -194,14 +208,11 @@ namespace BRIX.Mobile.ViewModel.Characters
                         new AlertPopupParameters
                         {
                             Mode = EAlertMode.AskYesOrNo,
-                            YesText = Localization.Yes,
-                            NoText = Localization.No,
-                            Title = Localization.Warning,
                             Message = Localization.InventoryAskAdjustCoinsAlert,
                         }
                     );
 
-                    if(askAdjustCoinsReuslt.Answer == EAlertPopupResult.Yes)
+                    if(askAdjustCoinsReuslt?.Answer == EAlertPopupResult.Yes)
                     {
                         int coinsDiff = (newValue - oldValue) * itemToEdit.Price;
                         int newCoinsValue = _currentCharacter.Inventory.Coins - coinsDiff;

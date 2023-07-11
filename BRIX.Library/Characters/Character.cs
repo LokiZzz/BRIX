@@ -1,5 +1,6 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Extensions;
+using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 
 namespace BRIX.Library.Characters
@@ -41,8 +42,8 @@ namespace BRIX.Library.Characters
         public CharacterPortrait Portrait { get; set; } = new();
 
         /// <summary>
-        /// Возвращает доступность способности. Передаваемая способность должна 
-        /// содержаться в коллекции Abilities.
+        /// Возвращает доступность способности. 
+        /// Передаваемая способность должна содержаться в коллекции Abilities.
         /// </summary>
         public bool GetAbilityAvailability(Ability ability)
         {
@@ -79,6 +80,10 @@ namespace BRIX.Library.Characters
             return true;
         }
 
+        /// <summary>
+        /// Активация способности персонажем — трата расходников и очков действий.
+        /// </summary>
+        /// <param name="ability"></param>
         public void ActivateAbility(Ability ability)
         {
             if (!Abilities.Contains(ability) || !GetAbilityAvailability(ability))
@@ -100,14 +105,29 @@ namespace BRIX.Library.Characters
             }
         }
 
-        public void UpdateInventoryItem(InventoryItem itemToUpdate)
+        /// <summary>
+        /// Заменяет материальное обеспечение в инвентаре и способностях.
+        /// При изменении стоимости обеспечения произойдёт пересчёт опыта.
+        /// Если персонажу не хватает опыта на такое изменение, то изменение не произойдёт
+        /// и будет выброшено исключение.
+        /// </summary>
+        public void UpdateMaterialSupport(MaterialSupport itemToUpdate)
         {
             if(!Inventory.Items.Any(x => x.Equals(itemToUpdate)))
             {
-                return;
+                throw new AbilityLogicException("У персонажа не найдено соответствующее материальное обеспечение.");
             }
 
-            //bool notEnoughEXP = 
+            MaterialSupport existingItem = (MaterialSupport)Inventory.Items.Single(x => x.Equals(itemToUpdate));
+            int expDiff = (existingItem.ToExpEquivalent() - itemToUpdate.ToExpEquivalent()).Round();
+            bool notEnoughEXP = AvailableExp < -expDiff;
+
+            if(notEnoughEXP)
+            {
+                throw new NotEnoughEXPForChangesException(
+                    "У персонажа не хватает опыта, чтобы компенсировать удешевление материального обеспечение."
+                );
+            }
 
             Inventory.Items.Replace(
                 Inventory.Items.Single(x => x.Equals(itemToUpdate)), 
@@ -132,20 +152,66 @@ namespace BRIX.Library.Characters
             }
         }
 
-        //public void RemoveInventoryItem(InventoryItem itemToRemove, bool saveContent = false)
-        //{
-        //    Inventory.Remove(itemToRemove, saveContent);
+        /// <summary>
+        /// Удаляет материальное обеспечение в инвентаре и способностях,
+        /// зависимые способности станут дороже.
+        /// Если персонажу не хватает опыта на такое изменение, то изменение не произойдёт
+        /// и будет выброшено исключение.
+        /// </summary>
+        public void RemoveMaterialSupport(MaterialSupport itemToRemove, bool saveContent = false)
+        {
+            if (!Inventory.Items.Any(x => x.Equals(itemToRemove)))
+            {
+                throw new AbilityLogicException("У персонажа не найдено соответствующее материальное обеспечение.");
+            }
 
-        //    foreach(Ability ability in Abilities)
-        //    {
-        //        Consumable? consumable = ability.Consumables.FirstOrDefault(x => x.Equals(itemToRemove));
+            if(!CanRemoveMaterialSupport(itemToRemove))
+            {
+                throw new NotEnoughEXPForChangesException(
+                    "У персонажа не хватает опыта, чтобы компенсировать удешевление материального обеспечение."
+                );
+            }
 
-        //        if (consumable != null)
-        //        {
+            Inventory.Remove(itemToRemove, saveContent);
 
-        //        }
-        //    }
-        //}
+            foreach (Ability ability in Abilities)
+            {
+                Consumable? consumable = ability.Consumables.FirstOrDefault(x => x.Equals(itemToRemove));
+
+                if (consumable != null)
+                {
+                    ability.Consumables.Remove(consumable);
+                }
+
+                Equipment? equipment = ability.Equipment.FirstOrDefault(x => x.Equals(itemToRemove));
+
+                if (equipment != null)
+                {
+                    ability.Equipment.Remove(equipment);
+                }
+            }
+        }
+
+        public bool CanRemoveMaterialSupport(MaterialSupport itemToRemove)
+        {
+            if(!HaveAbilitiesWithMaterialSupport(itemToRemove))
+            {
+                return true;
+            }
+
+            MaterialSupport existingItem = (MaterialSupport)Inventory.Items.Single(x => x.Equals(itemToRemove));
+            int expDiff = itemToRemove.ToExpEquivalent().Round();
+            
+            return AvailableExp > expDiff;
+        }
+
+        public bool HaveAbilitiesWithMaterialSupport(MaterialSupport item)
+        {
+            return Abilities.Any(x => 
+                x.Equipment.Any(x => x.Equals(item)) 
+                || x.Consumables.Any(x => x.Equals(item))
+            );
+        }
     }
 
     public class CharacterPortrait

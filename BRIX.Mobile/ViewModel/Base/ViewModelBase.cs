@@ -1,5 +1,7 @@
 ﻿using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
+using BRIX.Mobile.View.Popups;
+using BRIX.Mobile.ViewModel.Popups;
 using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -43,6 +45,13 @@ namespace BRIX.Mobile.ViewModel.Base
         {
             Popup popupToShow = ServicePool.GetService<TPopup>();
             await Application.Current.MainPage.ShowPopupAsync(popupToShow);
+        }
+
+        protected async Task<AlertPopupResult> Alert(AlertPopupParameters parameters)
+        {
+            return await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
+                parameters
+            );
         }
     }
 }

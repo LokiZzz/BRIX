@@ -1015,6 +1015,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Some abilities depend on this supply, if you remove it, they will take more experience points. Delete?.
+        /// </summary>
+        public static string InventoryAbilitiesWillRisePrice {
+            get {
+                return ResourceManager.GetString("InventoryAbilitiesWillRisePrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have changed the cost of the item and can adjust the amount of coins available to the character according to the new value..
         /// </summary>
         public static string InventoryAdjustCoinsHint {
@@ -1074,6 +1083,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string InventoryNotEnoughCoinsAlert {
             get {
                 return ResourceManager.GetString("InventoryNotEnoughCoinsAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You will run out of experience points for your current abilities if you remove this item. First, edit the abilities dependent on this item or remove them..
+        /// </summary>
+        public static string InventoryNotEnoughEXPForDelete {
+            get {
+                return ResourceManager.GetString("InventoryNotEnoughEXPForDelete", resourceCulture);
             }
         }
         

@@ -92,10 +92,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 {
                     await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(new AlertPopupParameters
                     {
-                        Title = Resources.Localizations.Localization.Warning,
                         Message = Resources.Localizations.Localization.ActivationConditionWarning,
-                        OkText = Resources.Localizations.Localization.Ok,
-                        Mode = EAlertMode.ShowMessage
                     });
 
                     return;
