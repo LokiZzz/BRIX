@@ -62,7 +62,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         [RelayCommand]
-        private async void Edit(AbilityModel ability)
+        private async void Edit(CharacterAbilityModel ability)
         {
             await Navigation.NavigateAsync<AddOrEditAbilityPage>(
                 (NavigationParameters.Ability, ability.Copy()),
@@ -71,13 +71,13 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         [RelayCommand]
-        private async Task Remove(AbilityModel ability)
+        private async Task Remove(CharacterAbilityModel ability)
         {
             AlertPopupResult result = await Ask(Localization.DeleteAbilityQuestion);
 
             if (result?.Answer == EAlertPopupResult.Yes)
             {
-                Character.RemoveAbility(ability.InternalModel.Guid);
+                Character.RemoveAbility(ability.InternalModel.Id);
                 await _characterService.UpdateAsync(Character.InternalModel);
             }
         }
@@ -110,7 +110,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         private async Task HandleBackFromEditing(IDictionary<string, object> query)
         {
-            AbilityModel editedAbility = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability);
+            CharacterAbilityModel editedAbility = query.GetParameterOrDefault<CharacterAbilityModel>(NavigationParameters.Ability);
 
             if (editedAbility != null)
             {

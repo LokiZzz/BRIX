@@ -13,14 +13,14 @@ namespace BRIX.Mobile.Models.Characters
         public CharacterModel(Character character)
         {
             InternalModel = character;
-            Abilities = new (character.Abilities.Select(x => new AbilityModel(x)));
+            Abilities = new (character.Abilities.Select(x => new CharacterAbilityModel(x, character)));
             Tags = new (character.Tags.Select(x => new CharacterTagVM { Text = x }));
         }
 
         public Character InternalModel { get; }
 
-        private ObservableCollection<AbilityModel> _abilities;
-        public ObservableCollection<AbilityModel> Abilities
+        private ObservableCollection<CharacterAbilityModel> _abilities;
+        public ObservableCollection<CharacterAbilityModel> Abilities
         {
             get => _abilities;
             set => SetProperty(ref _abilities, value);
@@ -157,7 +157,7 @@ namespace BRIX.Mobile.Models.Characters
 
         public int FreeExperience => Experience - InternalModel.SpentExp;
 
-        public void AddAbility(AbilityModel ability)
+        public void AddAbility(CharacterAbilityModel ability)
         {
             InternalModel.Abilities.Add(ability.InternalModel);
             Abilities.Add(ability);
@@ -165,22 +165,22 @@ namespace BRIX.Mobile.Models.Characters
 
         public void RemoveAbility(Guid abilityGuid)
         {
-            InternalModel.Abilities.RemoveAll(x => x.Guid == abilityGuid);
-            Abilities.Remove(Abilities.First(x => x.InternalModel.Guid == abilityGuid));
+            InternalModel.Abilities.RemoveAll(x => x.Id == abilityGuid);
+            Abilities.Remove(Abilities.First(x => x.InternalModel.Id == abilityGuid));
         }
 
         /// <summary>
         /// Заменяет переданной способностью другую, с таким же Guid-ом
         /// </summary>
-        public void UpdateAbility(AbilityModel ability)
+        public void UpdateAbility(CharacterAbilityModel ability)
         {
             int indexOfOldAbility = Abilities.IndexOf(
-                Abilities.First(x => x.InternalModel.Guid == ability.InternalModel.Guid)
+                Abilities.First(x => x.InternalModel.Id == ability.InternalModel.Id)
             );
             Abilities[indexOfOldAbility] = ability;
 
             indexOfOldAbility = InternalModel.Abilities.IndexOf(
-                InternalModel.Abilities.First(x => x.Guid == ability.InternalModel.Guid)
+                InternalModel.Abilities.First(x => x.Id == ability.InternalModel.Id)
             );
             InternalModel.Abilities[indexOfOldAbility] = ability.InternalModel;
         }

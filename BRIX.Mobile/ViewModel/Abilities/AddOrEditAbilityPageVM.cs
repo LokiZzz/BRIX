@@ -32,8 +32,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
             SaveCommand = new AsyncRelayCommand(Save);
         }
 
-        private AbilityModel _ability;
-        public AbilityModel Ability
+        private CharacterAbilityModel _ability;
+        public CharacterAbilityModel Ability
         {
             get => _ability;
             set => SetProperty(ref _ability, value);
@@ -156,15 +156,10 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 foreach (InventoryItemNodeVM item in itemNodes)
                 {
                     MaterialSupport.Add(item);
-
-                    if(item.Type == EInventoryItemType.Equipment)
-                    {
-                        Ability.InternalModel.Equipment.Add(item.InternalModel as Equipment);
-                    }
-                    else if(item.Type == EInventoryItemType.Consumable)
-                    {
-                        Ability.InternalModel.Consumables.Add(item.InternalModel as Consumable);
-                    }
+                    currentCharacter.MaterialSupport.Add(new AbilityMaterialSupport { 
+                        AbilityId = Ability.InternalModel.Id,
+                        MaterialSupportId = item.InternalModel.Id
+                    });
                 }
 
                 CostMonitor.UpdateCost();
@@ -184,15 +179,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
             }
 
             MaterialSupport.Remove(itemToRemove);
-
-            if (itemToRemove.Type == EInventoryItemType.Equipment)
-            {
-                Ability.InternalModel.Equipment.Remove(itemToRemove.InternalModel as Equipment);
-            }
-            else if (itemToRemove.Type == EInventoryItemType.Consumable)
-            {
-                Ability.InternalModel.Consumables.Remove(itemToRemove.InternalModel as Consumable);
-            }
+            Character currentCharacter = await _characterService.GetCurrentCharacter();
+            currentCharacter.RemoveMaterialSupport(itemToRemove.InternalModel as MaterialSupport);
 
             CostMonitor.UpdateCost();
         }
@@ -217,8 +205,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
             if (Mode == EEditingMode.None)
             {
                 Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
-                Ability = query.GetParameterOrDefault<AbilityModel>(NavigationParameters.Ability)
-                    ?? new AbilityModel(new Ability());
+                Ability = query.GetParameterOrDefault<CharacterAbilityModel>(NavigationParameters.Ability)
+                    ?? new CharacterAbilityModel(new CharacterAbility());
                 await IntitializeCostMonitor();
                 IntitializeMaterialSupport();
             }

@@ -1,23 +1,27 @@
 ﻿using BRIX.Library;
+using BRIX.Library.Characters;
 using BRIX.Mobile.Models.Abilities.Effects;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.Models.Abilities
 {
-    public class AbilityModel : ObservableObject
+    public class CharacterAbilityModel : ObservableObject
     {
-        public AbilityModel() : this(new Ability()) { }
+        private Character _character;
 
-        public AbilityModel(Ability ability)
+        public CharacterAbilityModel(Character character) : this(new CharacterAbility(), character) { }
+
+        public CharacterAbilityModel(CharacterAbility ability, Character character)
         {
+            _character = character;
             InternalModel = ability;
             Effects = new ObservableCollection<EffectModelBase>(
                 ability.Effects.Select(EffectModelFactory.GetModel)
             );
         }
 
-        public Ability InternalModel { get; }
+        public CharacterAbility InternalModel { get; }
 
         public ObservableCollection<EffectModelBase> Effects { get; set; } = new ObservableCollection<EffectModelBase>();
 
@@ -33,7 +37,7 @@ namespace BRIX.Mobile.Models.Abilities
             set => SetProperty(InternalModel.Description, value, InternalModel, (ability, desc) => ability.Description = desc);
         }
 
-        public int Cost => InternalModel.ExpCost();
+        public int Cost => InternalModel.ExpCost(_character);
 
         public void AddEffect(EffectModelBase effect)
         {

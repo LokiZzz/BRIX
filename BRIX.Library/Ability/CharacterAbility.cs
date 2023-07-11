@@ -6,16 +6,16 @@ using BRIX.Library.Extensions;
 
 namespace BRIX.Library
 {
-    public class Ability
+    public class CharacterAbility
     {
-        public Ability()
+        public CharacterAbility()
         {
-            Guid = Guid.NewGuid();
+            Id = Guid.NewGuid();
         }
 
-        public Ability(Guid guid)
+        public CharacterAbility(Guid guid)
         {
-            Guid = guid;
+            Id = guid;
         }
 
         private readonly List<EffectBase> _effects = new();
@@ -23,21 +23,17 @@ namespace BRIX.Library
 
         private HashSet<AspectBase> SynchronizingAspects = new();
 
-        public Guid Guid { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 
         /// <summary>
-        /// Постоянное материальное обеспечение.
+        /// Получить стоимость способности в очках опыта. 
+        /// Можно передать персонажа, для которого будет рассчитана индивидуальная стоимость.
+        /// Индивидуальная стоимость может происходить из того, что у персонажа будет материальное обеспечение для
+        /// данной способности.
         /// </summary>
-        public List<Equipment> Equipment { get; set; } = new();
-
-        /// <summary>
-        /// Расходуемое материальное обеспечение.
-        /// </summary>
-        public List<Consumable> Consumables { get; set; } = new();
-
-        public int ExpCost()
+        public int ExpCost(Character? character = null)
         {
             double effectsCountPenaltyCoef = 1;
             double deltaPerEffect = 0.2;
@@ -49,8 +45,23 @@ namespace BRIX.Library
 
             int sumOfEffectsExpCost = _effects.Sum(effect => effect.GetExpCost());
             int expCost = (sumOfEffectsExpCost * effectsCountPenaltyCoef).Round();
-            expCost -= Equipment.Sum(x => x.ToExpEquivalent().Round());
-            expCost -= Consumables.Sum(x => x.ToExpEquivalent().Round());
+
+            if (character != null)
+            {
+                IEnumerable<AbilityMaterialSupport> abilityMaterialSupport = character.MaterialSupport
+                    .Where(x => x.AbilityId == Id);
+
+                foreach (AbilityMaterialSupport item in abilityMaterialSupport)
+                {
+                    MaterialSupport concreteItem = character.Inventory.Items
+                        .Single(x => x.Id == item.MaterialSupportId) as MaterialSupport;
+
+                    if (concreteItem != null)
+                    {
+                        expCost -= concreteItem.ToExpEquivalent().Round();
+                    }
+                }
+            }
 
             return expCost <= 1 ? 1 : expCost;
         }

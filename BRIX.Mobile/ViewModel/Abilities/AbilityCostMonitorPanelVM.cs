@@ -10,7 +10,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
     {
         private CharacterModel _character;
 
-        public AbilityCostMonitorPanelVM(AbilityModel ability, IAsyncRelayCommand saveCommand, CharacterModel character)
+        public AbilityCostMonitorPanelVM(CharacterAbilityModel ability, IAsyncRelayCommand saveCommand, CharacterModel character)
         {
             Ability = ability;
             SaveCommand = saveCommand;
@@ -18,8 +18,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
             UpdatePercents();
         }
 
-        private AbilityModel _ability;
-        public AbilityModel Ability
+        private CharacterAbilityModel _ability;
+        public CharacterAbilityModel Ability
         {
             get => _ability;
             set => SetProperty(ref _ability, value);
@@ -79,7 +79,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
         {
             Exp = _character.Experience;
             ExpSumWithoutEditingAbility = _character.Abilities
-                .Where(x => x.InternalModel.Guid != Ability.InternalModel.Guid)
+                .Where(x => x.InternalModel.Id != Ability.InternalModel.Id)
                 .Sum(x => x.Cost);
             int expSumWithEditingAbility = ExpSumWithoutEditingAbility + Ability.Cost;
             PercentWithoutEditingAbility = (double)ExpSumWithoutEditingAbility / _character.Experience;

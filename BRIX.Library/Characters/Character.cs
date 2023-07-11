@@ -1,6 +1,8 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Extensions;
+using System.Dynamic;
 using System.Linq;
+using System.Net;
 using System.Reflection.Metadata.Ecma335;
 
 namespace BRIX.Library.Characters
@@ -15,16 +17,17 @@ namespace BRIX.Library.Characters
 
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<Ability> Abilities { get; set; } = new();
         public int Experience { get; set; }
         public string Backstory { get; set; }
         public string Appearance { get; set; }
         public List<string> Tags { get; set; } = new();
+        public List<CharacterAbility> Abilities { get; set; } = new();
+        public List<AbilityMaterialSupport> MaterialSupport { get; set; }
         public Inventory Inventory { get; set; } = new();
 
         public int Level => ExperienceCalculator.GetLevelFromExp(Experience);
         public int ExpToLevelUp => ExperienceCalculator.GetExpToLevelUp(Experience);
-        public int SpentExp => Abilities.Sum(x => x.ExpCost());
+        public int SpentExp => Abilities.Sum(x => x.ExpCost(this));
         public int AvailableExp => Experience - SpentExp;
 
         /// <summary>
@@ -41,20 +44,44 @@ namespace BRIX.Library.Characters
 
         public CharacterPortrait Portrait { get; set; } = new();
 
+        public List<MaterialSupport> GetMaterialSupportForAbility(CharacterAbility ability)
+        {
+            List<Guid> itemsGuids = MaterialSupport
+                .Where(x => x.AbilityId == ability.Id)
+                .Select(x => x.MaterialSupportId)
+                .ToList();
+
+            return Inventory.Items
+                .Where(x => itemsGuids.Any(y => y == x.Id))
+                .Cast<MaterialSupport>()
+                .ToList();
+        }
+
+        public List<Consumable> GetConsumablesForAbility(CharacterAbility ability)
+        {
+            List<Guid> itemsGuids = MaterialSupport
+                .Where(x => x.AbilityId == ability.Id)
+                .Select(x => x.MaterialSupportId)
+                .ToList();
+
+            return Inventory.Items
+                .Where(x => itemsGuids.Any(y => y == x.Id) && x is Consumable)
+                .Cast<Consumable>()
+                .ToList();
+        }
+
         /// <summary>
         /// Возвращает доступность способности. 
         /// Передаваемая способность должна содержаться в коллекции Abilities.
         /// </summary>
-        public bool GetAbilityAvailability(Ability ability)
+        public bool GetAbilityAvailability(CharacterAbility ability)
         {
             if(!Abilities.Contains(ability))
             {
                 return false;
             }
 
-            List<MaterialSupport> materialSupport = ability.Equipment.Cast<MaterialSupport>()
-                .Union(ability.Consumables.Cast<MaterialSupport>())
-                .ToList();
+            List<MaterialSupport> materialSupport = GetMaterialSupportForAbility(ability);
 
             foreach (MaterialSupport abilityMaterial in materialSupport)
             {
@@ -84,17 +111,16 @@ namespace BRIX.Library.Characters
         /// Активация способности персонажем — трата расходников и очков действий.
         /// </summary>
         /// <param name="ability"></param>
-        public void ActivateAbility(Ability ability)
+        public void ActivateAbility(CharacterAbility ability)
         {
             if (!Abilities.Contains(ability) || !GetAbilityAvailability(ability))
             {
                 return;
             }
 
-            foreach(Consumable consumable in ability.Consumables)
+            foreach(Consumable consumable in GetConsumablesForAbility(ability))
             {
                 consumable.Count--;
-                Inventory.Items.Single(x => x.Equals(consumable)).Count--;
             }
 
             ActionPointAspect apAspect = ability.GetAspect<ActionPointAspect>();
@@ -106,12 +132,11 @@ namespace BRIX.Library.Characters
         }
 
         /// <summary>
-        /// Заменяет материальное обеспечение в инвентаре и способностях.
+        /// Заменяет материальное обеспечение в инвентаре.
         /// При изменении стоимости обеспечения произойдёт пересчёт опыта.
-        /// Если персонажу не хватает опыта на такое изменение, то изменение не произойдёт
-        /// и будет выброшено исключение.
+        /// Если персонажу не хватает опыта на такое изменение, то изменение не произойдёт, а метод вернёт False.
         /// </summary>
-        public void UpdateMaterialSupport(MaterialSupport itemToUpdate)
+        public bool UpdateMaterialSupport(MaterialSupport itemToUpdate)
         {
             if(!Inventory.Items.Any(x => x.Equals(itemToUpdate)))
             {
@@ -124,9 +149,7 @@ namespace BRIX.Library.Characters
 
             if(notEnoughEXP)
             {
-                throw new NotEnoughEXPForChangesException(
-                    "У персонажа не хватает опыта, чтобы компенсировать удешевление материального обеспечение."
-                );
+                return false;
             }
 
             Inventory.Items.Replace(
@@ -134,31 +157,14 @@ namespace BRIX.Library.Characters
                 itemToUpdate
             );
 
-            foreach (Ability ability in Abilities)
-            {
-                Consumable? consumable = ability.Consumables.FirstOrDefault(x => x.Equals(itemToUpdate));
-
-                if(consumable != null)
-                {
-                    ability.Consumables.Replace(consumable, itemToUpdate);
-                }
-
-                Equipment? equipment = ability.Equipment.FirstOrDefault(x => x.Equals(itemToUpdate));
-
-                if (equipment != null)
-                {
-                    ability.Equipment.Replace(equipment, itemToUpdate);
-                }
-            }
+            return true;
         }
 
         /// <summary>
-        /// Удаляет материальное обеспечение в инвентаре и способностях,
-        /// зависимые способности станут дороже.
-        /// Если персонажу не хватает опыта на такое изменение, то изменение не произойдёт
-        /// и будет выброшено исключение.
+        /// Удаляет материальное обеспечение в инвентаре и способностях, зависимые способности станут дороже.
+        /// Если персонажу не хватает опыта на такое изменение, то изменение не произойдёт, а метод вернёт False.
         /// </summary>
-        public void RemoveMaterialSupport(MaterialSupport itemToRemove, bool saveContent = false)
+        public bool RemoveMaterialSupport(MaterialSupport itemToRemove, bool saveContent = false)
         {
             if (!Inventory.Items.Any(x => x.Equals(itemToRemove)))
             {
@@ -167,29 +173,13 @@ namespace BRIX.Library.Characters
 
             if(!CanRemoveMaterialSupport(itemToRemove))
             {
-                throw new NotEnoughEXPForChangesException(
-                    "У персонажа не хватает опыта, чтобы компенсировать удешевление материального обеспечение."
-                );
+                return false;
             }
 
             Inventory.Remove(itemToRemove, saveContent);
+            MaterialSupport.RemoveAll(x => x.MaterialSupportId == itemToRemove.Id);
 
-            foreach (Ability ability in Abilities)
-            {
-                Consumable? consumable = ability.Consumables.FirstOrDefault(x => x.Equals(itemToRemove));
-
-                if (consumable != null)
-                {
-                    ability.Consumables.Remove(consumable);
-                }
-
-                Equipment? equipment = ability.Equipment.FirstOrDefault(x => x.Equals(itemToRemove));
-
-                if (equipment != null)
-                {
-                    ability.Equipment.Remove(equipment);
-                }
-            }
+            return true;
         }
 
         public bool CanRemoveMaterialSupport(MaterialSupport itemToRemove)
@@ -207,10 +197,7 @@ namespace BRIX.Library.Characters
 
         public bool HaveMaterialDependedAbilities(MaterialSupport item)
         {
-            return Abilities.Any(x => 
-                x.Equipment.Any(x => x.Equals(item)) 
-                || x.Consumables.Any(x => x.Equals(item))
-            );
+            return MaterialSupport.Any(x => x.MaterialSupportId == item.Id);
         }
     }
 
