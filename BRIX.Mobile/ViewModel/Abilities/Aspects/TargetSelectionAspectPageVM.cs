@@ -138,12 +138,13 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 .Select(x => x as object)
                 .ToList();
 
-            PickerPopupParameters parameters = new()
-            {
-                Title = Resources.Localizations.Localization.TargetThreeDot,
-                Items = allRestrictions,
-            };
-            PickerPopupResult result = await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(parameters);
+            PickerPopupResult result = await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
+                new()
+                {
+                    Title = Resources.Localizations.Localization.TargetThreeDot,
+                    Items = allRestrictions,
+                }
+            );
 
             if (result != null)
             {
@@ -174,10 +175,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
                 if (Restrictions.Any(x => x.Restriction == concreteResult.Restriction && x.Text == concreteResult.Text))
                 {
-                    await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(new AlertPopupParameters
-                    {
-                        Message = Resources.Localizations.Localization.TargetSelectionRestrictionWarning,
-                    });
+                    await Alert(Resources.Localizations.Localization.TargetSelectionRestrictionWarning);
 
                     return;
                 }
@@ -262,14 +260,15 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 .Select(x => x as object)
                 .ToList();
 
-            PickerPopupParameters parameters = new()
-            {
-                Title = Resources.Localizations.Localization.TargetsSizes,
-                Items = allSizes,
-                SelectedItems = new List<object> { allSizes.First() },
-                SelectMultiple = true
-            };
-            PickerPopupResult result = await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(parameters);
+            PickerPopupResult result = await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
+                new()
+                {
+                    Title = Resources.Localizations.Localization.TargetsSizes,
+                    Items = allSizes,
+                    SelectedItems = new List<object> { allSizes.First() },
+                    SelectMultiple = true
+                }
+            );
 
             if (result != null)
             {

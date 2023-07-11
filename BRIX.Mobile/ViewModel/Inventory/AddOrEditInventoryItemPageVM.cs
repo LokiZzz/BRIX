@@ -117,12 +117,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             {
                 if(CoinsWillBe < 0)
                 {
-                    await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>( 
-                        new AlertPopupParameters 
-                        {
-                            Message = Localization.InventoryNotEnoughCoinsAlert
-                        }
-                    );
+                    await Alert(Localization.InventoryNotEnoughCoinsAlert);
 
                     return;
                 }
@@ -130,12 +125,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
             if(_inventory.Items.Where(x => x.Name == Item.Name).Count() > 1)
             {
-                await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
-                    new AlertPopupParameters
-                    {
-                        Message = Localization.InventorySameNameAlert
-                    }
-                );
+                await Alert(Localization.InventorySameNameAlert);
 
                 return;
             }
@@ -245,13 +235,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
             if (wasContainerAndNowIsNot)
             {
-                AlertPopupResult result = await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
-                    new AlertPopupParameters
-                    {
-                        Mode = EAlertMode.AskYesOrNo,
-                        Message = Localization.InventoryItemWasConatinerAlert,
-                    }
-                );
+                AlertPopupResult result = await Ask(Localization.InventoryItemWasConatinerAlert);
 
                 if (result?.Answer == EAlertPopupResult.No)
                 {

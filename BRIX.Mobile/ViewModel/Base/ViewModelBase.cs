@@ -53,5 +53,23 @@ namespace BRIX.Mobile.ViewModel.Base
                 parameters
             );
         }
+
+        protected async Task<AlertPopupResult> Alert(string message)
+        {
+            return await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
+                new AlertPopupParameters { Message = message }
+            );
+        }
+
+        protected async Task<AlertPopupResult> Ask(string message)
+        {
+            return await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
+                new AlertPopupParameters 
+                {
+                    Mode = EAlertMode.AskYesOrNo,
+                    Message = message 
+                }
+            );
+        }
     }
 }

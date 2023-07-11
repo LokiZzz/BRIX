@@ -29,6 +29,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             _localization = localization;
             _characterService = characterService;
             _inventoryConverter = new InventoryItemConverter();
+            SaveCommand = new AsyncRelayCommand(Save);
         }
 
         private AbilityModel _ability;
@@ -74,15 +75,18 @@ namespace BRIX.Mobile.ViewModel.Abilities
             set => SetProperty(ref _materialSupport, value);
         }
 
-        [RelayCommand]
+        private IAsyncRelayCommand _saveCommand;
+        public IAsyncRelayCommand SaveCommand
+        {
+            get => _saveCommand;
+            set => SetProperty(ref _saveCommand, value);
+        }
+
         public async Task Save()
         {
             if(CostMonitor.EXPOverflow)
             {
-                await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(new AlertPopupParameters { 
-                    Title = Localization.NotEnoughEXP,
-                    Message = Localization.AbilityEXPOverflowMessage
-                });
+                await Alert(Localization.AbilityEXPOverflowMessage);
 
                 return;
             }
@@ -117,13 +121,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
         [RelayCommand]
         public async Task DeleteEffect(EffectModelBase effectToRemove)
         {
-            AlertPopupResult result = await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
-                new AlertPopupParameters
-                {
-                    Mode = EAlertMode.AskYesOrNo,
-                    Message = Localization.DeleteEffectQuestion,
-                }
-            );
+            AlertPopupResult result = await Ask(Localization.DeleteEffectQuestion);
 
             if (result?.Answer == EAlertPopupResult.Yes)
             {
@@ -176,13 +174,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
         [RelayCommand]
         public async Task DeleteMaterial(InventoryItemNodeVM itemToRemove)
         {
-            AlertPopupResult result =
-                await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
-                new AlertPopupParameters
-                {
-                    Mode = EAlertMode.AskYesOrNo,
-                    Message = string.Format(Localization.AskDeleteMaterialSupport, itemToRemove.Name),
-                }
+            AlertPopupResult result = await Ask(
+                string.Format(Localization.AskDeleteMaterialSupport, itemToRemove.Name)
             );
 
             if(result?.Answer != EAlertPopupResult.Yes)

@@ -93,15 +93,12 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             if (item.InternalModel is MaterialSupport material && !_currentCharacter.CanRemoveMaterialSupport(material))
             {
-                await Alert(new AlertPopupParameters { Message = Localization.InventoryNotEnoughEXPForDelete });
+                await Alert(Localization.InventoryNotEnoughEXPForDelete);
 
                 return;
             }
 
-            AlertPopupResult result = await Alert( new AlertPopupParameters {
-                Mode = EAlertMode.AskYesOrNo,
-                Message = string.Format(Localization.AskToDeleteInventoryItem, item.Name),
-            });
+            AlertPopupResult result = await Ask(string.Format(Localization.AskToDeleteInventoryItem, item.Name));
 
             if(result?.Answer == EAlertPopupResult.No)
             {
@@ -112,10 +109,9 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if(item.Type == EInventoryItemType.Container && item.Payload.Any())
             {
-                AlertPopupResult resultDeleteContent = await Alert(new AlertPopupParameters {
-                    Mode = EAlertMode.AskYesOrNo,
-                    Message = string.Format(Localization.AskDeleteContainerWithContent, item.Name),
-                });
+                AlertPopupResult resultDeleteContent = await Ask(
+                    string.Format(Localization.AskDeleteContainerWithContent, item.Name)
+                );
 
                 saveContent = resultDeleteContent?.Answer == EAlertPopupResult.No;
             }
@@ -125,10 +121,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if (changesAffectsAbilities)
             {
-                AlertPopupResult willRisePriceResult = await Alert(new AlertPopupParameters {
-                    Mode = EAlertMode.AskYesOrNo,
-                    Message = Localization.InventoryAbilitiesWillRisePrice,
-                });
+                AlertPopupResult willRisePriceResult = await Ask(Localization.InventoryAbilitiesWillRisePrice);
 
                 if(willRisePriceResult?.Answer == EAlertPopupResult.No)
                 {
@@ -203,14 +196,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
                 if(itemToEdit.Type == EInventoryItemType.Consumable)
                 {
-                    AlertPopupResult askAdjustCoinsReuslt =
-                        await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
-                        new AlertPopupParameters
-                        {
-                            Mode = EAlertMode.AskYesOrNo,
-                            Message = Localization.InventoryAskAdjustCoinsAlert,
-                        }
-                    );
+                    AlertPopupResult askAdjustCoinsReuslt = await Ask(Localization.InventoryAskAdjustCoinsAlert);
 
                     if(askAdjustCoinsReuslt?.Answer == EAlertPopupResult.Yes)
                     {
