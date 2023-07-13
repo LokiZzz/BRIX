@@ -178,5 +178,27 @@ namespace BRIX.Library.Characters
                 }
             }
         }
+
+        public static void Swap(this Inventory inventory, InventoryItem oldItem, InventoryItem newItem)
+        {
+            foreach(InventoryItem item in inventory.Items.ToList())
+            {
+                if(item == oldItem)
+                {
+                    int index = inventory.Content.IndexOf(item);
+                    inventory.Content[index] = newItem;
+
+                    return;
+                }
+
+                if(item is Container container && container.Payload.Any(x => x == oldItem))
+                {
+                    int index = container.Payload.IndexOf(item);
+                    container.Payload[index] = newItem;
+
+                    return;
+                }
+            }
+        }
     }
 }

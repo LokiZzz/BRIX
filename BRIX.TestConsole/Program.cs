@@ -1,5 +1,6 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Characters;
+using BRIX.Library.Extensions;
 
 //while (true)
 //{
@@ -17,3 +18,11 @@ using BRIX.Library.Characters;
 
 //    Console.ReadLine();
 //}
+
+IEnumerable<TestModel> enumerable = new List<TestModel>() { new TestModel { Prop = 1 }, new TestModel { Prop = 2 } };
+
+enumerable.Replace(enumerable.First(), new TestModel { Prop = 3 });
+
+Console.ReadLine();
+
+public class TestModel { public int Prop { get; set; } }

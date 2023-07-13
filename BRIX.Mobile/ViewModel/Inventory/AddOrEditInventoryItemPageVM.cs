@@ -143,7 +143,8 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
             Character currentCharacter = await _characterService.GetCurrentCharacter();
             bool affectsAbility = _mode == EEditingMode.Edit 
-                && currentCharacter.HaveMaterialDependedAbilities(Item.InternalModel as MaterialSupport);
+                && Item.InternalModel is MaterialSupport material
+                && currentCharacter.HaveMaterialDependedAbilities(material);
 
             if (affectsAbility)
             {
@@ -323,7 +324,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 InventoryItem existingItem = _inventory.Items.FirstOrDefault(x => x.Equals(Item.InternalModel));
                 Item.Type = value.Type;
                 SetProperty(ref _selectedType, value, nameof(SelectedType));
-                _inventory.Items.Replace(existingItem, Item.InternalModel);
+                _inventory.Swap(existingItem, Item.InternalModel);
             }
         }
 

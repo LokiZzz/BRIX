@@ -152,10 +152,7 @@ namespace BRIX.Library.Characters
                 return false;
             }
 
-            Inventory.Items.Replace(
-                Inventory.Items.Single(x => x.Equals(itemToUpdate)), 
-                itemToUpdate
-            );
+            Inventory.Swap(Inventory.Items.Single(x => x.Equals(itemToUpdate)), itemToUpdate);
 
             return true;
         }
