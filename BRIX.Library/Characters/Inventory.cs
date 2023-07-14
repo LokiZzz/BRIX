@@ -62,6 +62,23 @@ namespace BRIX.Library.Characters
         public int Count { get; set; } = 1;
 
         public override string ToString() =>  Name;
+
+        public override bool Equals(object? otherObject)
+        {
+            InventoryItem other = otherObject as InventoryItem;
+
+            if (other == null)
+            {
+                return false;
+            }
+
+            return other.Id == this.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 
     public class Container : InventoryItem
@@ -77,23 +94,6 @@ namespace BRIX.Library.Characters
         public abstract bool IsAvailable { get; }
 
         public abstract double ExpModifier { get; }
-
-        public override bool Equals(object? otherObject)
-        {
-            MaterialSupport other = otherObject as MaterialSupport;
-
-            if(other == null)
-            {
-                return false;
-            }
-
-            return other.Id == this.Id;
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
     }
 
     public class Equipment : MaterialSupport

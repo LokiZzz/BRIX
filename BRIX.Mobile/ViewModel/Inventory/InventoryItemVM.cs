@@ -171,6 +171,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
 
             InventoryItem newItem = InventoryItemConverter.CreateItemByType(type.Value, InternalModel);
+            newItem.Id = InternalModel.Id;
             InternalModel = newItem;
 
             OnPropertyChanged(nameof(Count));
@@ -197,5 +198,11 @@ namespace BRIX.Mobile.ViewModel.Inventory
         Container,
         Equipment,
         Consumable
+    }
+
+    public static class InventoryItemVMExtensions
+    {
+        public static bool IsMaterial(this EInventoryItemType type) =>
+            type == EInventoryItemType.Equipment || type == EInventoryItemType.Consumable;
     }
 }

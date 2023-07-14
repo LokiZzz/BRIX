@@ -7,6 +7,7 @@ using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
 using BRIX.Mobile.ViewModel.Popups;
+using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -148,11 +149,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
             if (affectsAbility)
             {
-                try
-                {
-                    currentCharacter.UpdateMaterialSupport(Item.InternalModel as MaterialSupport);
-                }
-                catch(NotEnoughEXPForChangesException)
+                if(currentCharacter.UpdateMaterialSupport(Item.InternalModel as MaterialSupport) == false)
                 {
                     await Alert(Localization.InventoryNotEnoughEXPForChanges);
 
@@ -263,12 +260,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 return;
             }
 
-            bool wasMaterialAndNowNot = (SelectedType.Type == EInventoryItemType.Equipment
-                || SelectedType.Type == EInventoryItemType.Consumable)
-                && itemType.Type != EInventoryItemType.Equipment
-                && itemType.Type != EInventoryItemType.Consumable;
-
-            if (wasMaterialAndNowNot)
+            if (SelectedType.Type.IsMaterial() && !itemType.Type.IsMaterial())
             { 
                 Character character = await _characterService.GetCurrentCharacter();
                 bool canRemove = character.CanRemoveMaterialSupport(Item.InternalModel as MaterialSupport);
@@ -296,36 +288,16 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 }
             }
 
-            await ReplaceItemWithNewType(itemType);
+            ReplaceItemWithNewType(itemType);
             OnPropertyChanged(nameof(ShowCoins));
         }
 
-        private async Task ReplaceItemWithNewType(InventoryItemTypeVM value)
+        private void ReplaceItemWithNewType(InventoryItemTypeVM value)
         {
-            bool isMaterial = SelectedType.Type == EInventoryItemType.Equipment
-                || SelectedType.Type == EInventoryItemType.Consumable;
-
-            if (isMaterial)
-            {
-                Character character = await _characterService.GetCurrentCharacter();
-
-                if(character.UpdateMaterialSupport(Item.InternalModel as MaterialSupport) == false)
-                {
-                    await Alert(Localization.InventoryNotEnoughEXPForChanges);
-
-                    return;
-                }
-
-                Item.Type = value.Type;
-                SetProperty(ref _selectedType, value, nameof(SelectedType));
-            }
-            else
-            {
-                InventoryItem existingItem = _inventory.Items.FirstOrDefault(x => x.Equals(Item.InternalModel));
-                Item.Type = value.Type;
-                SetProperty(ref _selectedType, value, nameof(SelectedType));
-                _inventory.Swap(existingItem, Item.InternalModel);
-            }
+            Item.Type = value.Type;
+            SetProperty(ref _selectedType, value, nameof(SelectedType));
+            InventoryItem existingItem = _inventory.Items.FirstOrDefault(x => x.Equals(Item.InternalModel));
+            _inventory.Swap(existingItem, Item.InternalModel);
         }
 
         private void MoveItem(InventoryContainerVM value)
