@@ -145,6 +145,19 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
+        public bool IsAvailiable
+        {
+            get => (InternalModel as MaterialSupport)?.IsAvailable ?? true;
+            set
+            {
+                if(InternalModel is Equipment equipment)
+                {
+                    equipment.SetIsAvailable(value);
+                    OnPropertyChanged(nameof(IsAvailiable));
+                }
+            }
+        }
+
         private ObservableCollection<InventoryItemVM> _payload = new();
         public ObservableCollection<InventoryItemVM> Payload
         {
@@ -155,6 +168,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
         public bool ShowPayload => Type == EInventoryItemType.Container;     
         public bool ShowCount => Count != 1 || Type == EInventoryItemType.Consumable;
         public bool ShowPrice => Type == EInventoryItemType.Equipment || Type == EInventoryItemType.Consumable;
+        public bool ShowIsAvailiable => Type == EInventoryItemType.Equipment;
 
         private RelayCommand _descriptionCommand;
         public RelayCommand DescriptionCommand
@@ -185,6 +199,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             OnPropertyChanged(nameof(ShowCount));
             OnPropertyChanged(nameof(ShowPrice));
             OnPropertyChanged(nameof(ShowPayload));
+            OnPropertyChanged(nameof(ShowIsAvailiable));
         }
 
         public override string ToString() => Name;

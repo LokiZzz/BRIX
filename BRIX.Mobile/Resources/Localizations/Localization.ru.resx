@@ -444,6 +444,9 @@
   <data name="InventoryItemCost" xml:space="preserve">
     <value>Стоимость в монетах</value>
   </data>
+  <data name="InventoryItemIsAvailiable" xml:space="preserve">
+    <value>Снаряжение доступно персонажу?</value>
+  </data>
   <data name="InventoryItemProperties" xml:space="preserve">
     <value>Параметры предмета</value>
   </data>

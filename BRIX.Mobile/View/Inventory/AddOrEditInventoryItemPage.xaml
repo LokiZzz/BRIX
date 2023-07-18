@@ -51,6 +51,17 @@
                             ItemSource="{Binding Containers}"
                             SelectedItem="{Binding SelectedContainer}"
                             DisplayMember="Name"/>
+                        <Grid ColumnDefinitions="*, auto" Margin="5,0" IsVisible="{Binding Item.ShowIsAvailiable}">
+                            <Label 
+                                Grid.Column="0" 
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.InventoryItemIsAvailiable}}"
+                                VerticalOptions="Center"/>
+                            <HorizontalStackLayout Grid.Column="1" Spacing="5">
+                                <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.No}}" VerticalOptions="Center"/>
+                                <Switch IsToggled="{Binding Item.IsAvailiable}" VerticalOptions="Center"/>
+                                <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Yes}}" VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+                        </Grid>
                     </VerticalStackLayout>
                     
                 </Border>

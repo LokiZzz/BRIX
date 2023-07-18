@@ -1051,6 +1051,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is the equipment available to the character?.
+        /// </summary>
+        public static string InventoryItemIsAvailiable {
+            get {
+                return ResourceManager.GetString("InventoryItemIsAvailiable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Object properties.
         /// </summary>
         public static string InventoryItemProperties {

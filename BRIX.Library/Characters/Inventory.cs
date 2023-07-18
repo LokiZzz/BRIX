@@ -98,7 +98,7 @@ namespace BRIX.Library.Characters
 
     public class Equipment : MaterialSupport
     {
-        private bool _isAvailable;
+        private bool _isAvailable = true;
 
         /// <summary>
         /// Доступно ли постоянное материальное обеспечение персонажу.
