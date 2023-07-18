@@ -172,6 +172,12 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
             InventoryItem newItem = InventoryItemConverter.CreateItemByType(type.Value, InternalModel);
             newItem.Id = InternalModel.Id;
+
+            if(newItem is MaterialSupport newMaterial && InternalModel is MaterialSupport oldMaterial)
+            {
+                newMaterial.CoinsPrice = oldMaterial.CoinsPrice;
+            }
+
             InternalModel = newItem;
 
             OnPropertyChanged(nameof(Count));

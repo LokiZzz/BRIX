@@ -1,5 +1,6 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Extensions;
+using BRIX.Utility.Extensions;
 using System.Dynamic;
 using System.Linq;
 using System.Net;
@@ -143,11 +144,11 @@ namespace BRIX.Library.Characters
                 throw new AbilityLogicException("У персонажа не найдено соответствующее материальное обеспечение.");
             }
 
-            MaterialSupport existingItem = (MaterialSupport)Inventory.Items.Single(x => x.Equals(itemToUpdate));
-            int expDiff = (existingItem.ToExpEquivalent() - itemToUpdate.ToExpEquivalent()).Round();
-            bool notEnoughEXP = AvailableExp < -expDiff;
+            Character copyOfThis = this.Copy();
+            MaterialSupport existingItem = Inventory.Items.Single(x => x.Equals(itemToUpdate)) as MaterialSupport;
+            copyOfThis?.Inventory.Swap(existingItem, itemToUpdate);
 
-            if(notEnoughEXP)
+            if(copyOfThis?.AvailableExp < 0)
             {
                 return false;
             }

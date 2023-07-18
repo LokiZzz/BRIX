@@ -183,7 +183,7 @@ namespace BRIX.Library.Characters
         {
             foreach(InventoryItem item in inventory.Items.ToList())
             {
-                if(item == oldItem)
+                if(item.Equals(oldItem))
                 {
                     int index = inventory.Content.IndexOf(item);
                     inventory.Content[index] = newItem;
@@ -191,7 +191,7 @@ namespace BRIX.Library.Characters
                     return;
                 }
 
-                if(item is Container container && container.Payload.Any(x => x == oldItem))
+                if(item is Container container && container.Payload.Any(x => x.Equals(oldItem)))
                 {
                     int index = container.Payload.IndexOf(item);
                     container.Payload[index] = newItem;
