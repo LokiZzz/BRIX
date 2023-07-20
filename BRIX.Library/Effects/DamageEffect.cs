@@ -6,7 +6,7 @@ namespace BRIX.Library.Effects
 {
     public class DamageEffect : EffectBase
     {
-        public DicePool Impact { get; set; } = new DicePool(0);
+        public DicePool Impact { get; set; } = new DicePool();
 
         public override List<Type> RequiredAspects => new() 
         {

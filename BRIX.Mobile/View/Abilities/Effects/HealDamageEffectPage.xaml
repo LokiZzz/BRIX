@@ -8,7 +8,7 @@
              xmlns:abilitiesview="clr-namespace:BRIX.Mobile.View.Abilities"
              xmlns:aspectsview="clr-namespace:BRIX.Mobile.View.Abilities.Aspects"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
-             x:DataType="effectsvm:HealDamageEffectPageVM"
+             x:DataType="effectsvm:DamageEffectPageVM"
              x:Class="BRIX.Mobile.View.Abilities.Effects.HealDamageEffectPage"
              Shell.TabBarIsVisible="False"
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectDamage}}">
@@ -34,7 +34,7 @@
                         
                         <!--Здесь Margin у коллекции компенсирует лишний Margin у элемента, это workaround бага MAUI, 
                         который не позволяет нормально установить ItemsLayout через тег (если так сделать, то CollectionView сломается)-->
-                        <CollectionView Grid.Row="2" ItemsSource="{Binding Damage.DiceChunks}" ItemsLayout="VerticalGrid, 4" Margin="-5">
+                        <CollectionView Grid.Row="2" ItemsSource="{Binding Effect.DiceChunks}" ItemsLayout="VerticalGrid, 4" Margin="-5">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="abilitiesvm:DiceFormulaChunkVM">
                                     <Border 
@@ -56,9 +56,9 @@
                         </CollectionView>
                         <Grid Grid.Row="3" RowDefinitions="*,*" ColumnDefinitions="auto,*" ColumnSpacing="20">
                             <Label Grid.Row="0" Grid.Column="0" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Spread}}"/>
-                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Damage.SpreadText}"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Effect.SpreadText}"/>
                             <Label Grid.Row="1" Grid.Column="0" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Average}}"/>
-                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Damage.Average}"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Effect.Average}"/>
                         </Grid>
                         
                         <!--Быстрая настройка!-->

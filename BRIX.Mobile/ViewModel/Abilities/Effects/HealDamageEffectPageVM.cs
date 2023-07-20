@@ -1,51 +1,18 @@
 ﻿using BRIX.Library.DiceValue;
-using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Models.Abilities.Effects;
-using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Popups;
-using BRIX.Mobile.ViewModel.Abilities.Aspects;
-using BRIX.Mobile.ViewModel.Base;
 using BRIX.Mobile.ViewModel.Popups;
 using BRIX.Utility.Extensions;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Effects
 {
-    public partial class HealDamageEffectPageVM : ViewModelBase, IQueryAttributable
+    public partial class DamageEffectPageVM : EffectPageVMBase<DamageEffectModel>
     {
-        private EEditingMode _mode;
-        public EEditingMode Mode
-        {
-            get => _mode;
-            set => SetProperty(ref _mode, value);
-        }
-
-        private DamageEffectModel _damage = new();
-        public DamageEffectModel Damage
-        {
-            get => _damage;
-            set => SetProperty(ref _damage, value);
-        }
-
-        private AspectPanelViewModel _aspects;
-        public AspectPanelViewModel Aspects
-        {
-            get => _aspects;
-            set => SetProperty(ref _aspects, value);
-        }
-
-        private AbilityCostMonitorPanelVM _costMonitor;
-        public AbilityCostMonitorPanelVM CostMonitor
-        {
-            get => _costMonitor;
-            set => SetProperty(ref _costMonitor, value);
-        }
-
         [RelayCommand]
         private async Task EditFormula()
         {
-            string formula = Damage?.Internal?.Impact?.ToString() ?? string.Empty;
+            string formula = Effect?.Internal?.Impact?.ToString() ?? string.Empty;
             DiceValuePopupResult result = await ShowPopupAsync<DiceValuePopup, DiceValuePopupResult, DiceValuePopupParameters>(
                 new DiceValuePopupParameters { Formula = formula }
             );
@@ -53,88 +20,13 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             if (result != null)
             {
                 ResetAdjustment();
-                Damage.Impact = result.DicePool;
+                Effect.Impact = result.DicePool;
                 _dicePoolToReset = null;
             }
 
             CostMonitor.UpdateCost();
         }
 
-        [RelayCommand]
-        private async Task Save()
-        {
-            switch(Mode)
-            {
-                case EEditingMode.Add:
-                    await Navigation.Back(stepsBack: 2, 
-                        (NavigationParameters.Effect, Damage),
-                        (NavigationParameters.EditMode, Mode)
-                    );
-                    break;
-                case EEditingMode.Edit:
-                    await Navigation.Back(stepsBack: 1,
-                        (NavigationParameters.Effect, Damage),
-                        (NavigationParameters.EditMode, Mode)
-                    );
-                    break;
-            }
-        }
-
-        private bool _alreadyInitialized = false;
-
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
-        {
-            if (_alreadyInitialized)
-            {
-                HandleBackFromEditingAspect(query);
-            }
-            else
-            {
-                HandleInitial(query);
-            }
-
-            CostMonitor.SaveCommand = SaveCommand;
-            CostMonitor.UpdateCost();
-
-            query.Clear();
-        }
-
-        private void HandleBackFromEditingAspect(IDictionary<string, object> query)
-        {
-            AspectModelBase aspect = query.GetParameterOrDefault<AspectModelBase>(NavigationParameters.Aspect);
-
-            if (aspect != null)
-            {
-                Damage.UpdateAspect(aspect);
-                Aspects.UpdateAspect(aspect);
-            }
-
-            CostMonitor.UpdateCost();
-        }
-
-        private void HandleInitial(IDictionary<string, object> query)
-        {
-            Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
-            CostMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
-            Damage = query.GetParameterOrDefault<DamageEffectModel>(NavigationParameters.Effect) ?? new();
-
-            switch (Mode)
-            {
-                case EEditingMode.Add:
-                    Damage.Impact = new DicePool((1, 4));
-                    CostMonitor.Ability.AddEffect(Damage);
-                    break;
-                case EEditingMode.Edit:
-                    CostMonitor.Ability.UpdateEffect(Damage);
-                    break;
-            }
-
-            Aspects = new AspectPanelViewModel(CostMonitor, Damage);
-
-            _alreadyInitialized = true;
-        }
-
-        #region Fast adjustment
 
         private DicePool _dicePoolToReset = null;
 
@@ -148,7 +40,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 {
                     if (_dicePoolToReset != null)
                     {
-                        Damage.Impact = _dicePoolToReset;
+                        Effect.Impact = _dicePoolToReset;
                         _dicePoolToReset = null;
                         CostMonitor.UpdateCost();
                     }
@@ -170,8 +62,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
         private void Adjust(int percent)
         {
-            _dicePoolToReset = _dicePoolToReset == null ? Damage.Impact.Copy() : _dicePoolToReset;
-            Damage.Impact = DicePool.FromAdjusted(_dicePoolToReset, percent);
+            _dicePoolToReset = _dicePoolToReset == null ? Effect.Impact.Copy() : _dicePoolToReset;
+            Effect.Impact = DicePool.FromAdjusted(_dicePoolToReset, percent);
             CostMonitor.UpdateCost();
         }
 
@@ -188,7 +80,5 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             Adjustment = 0;
             CostMonitor.UpdateCost();
         }
-
-        #endregion
     }
 }
