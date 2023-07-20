@@ -9,6 +9,14 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 {
     public partial class DamageEffectPageVM : EffectPageVMBase<DamageEffectModel>
     {
+        public override void Initialize()
+        {
+            if(Effect.Impact.IsEmpty)
+            {
+                Effect.Impact = new DicePool((1, 4));
+            }
+        }
+
         [RelayCommand]
         private async Task EditFormula()
         {

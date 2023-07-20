@@ -195,7 +195,7 @@
 	  <MauiXaml Update="View\Abilities\ChooseEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Abilities\Effects\HealDamageEffectPage.xaml">
+	  <MauiXaml Update="View\Abilities\Effects\DamageEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Characters\CharacterAbilitiesPage.xaml">
@@ -263,8 +263,8 @@
 	  <Compile Update="View\Abilities\Aspects\TargetSelectionAspectPage.xaml.cs">
 	    <DependentUpon>TargetSelectionAspectPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\Abilities\Effects\HealDamageEffectPage.xaml.cs">
-	    <DependentUpon>HealDamageEffectPage.xaml</DependentUpon>
+	  <Compile Update="View\Abilities\Effects\DamageEffectPage.xaml.cs">
+	    <DependentUpon>DamageEffectPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="View\Characters\AddOrEditCharacterPage.xaml.cs">
 	    <DependentUpon>AddOrEditCharacterPage.xaml</DependentUpon>

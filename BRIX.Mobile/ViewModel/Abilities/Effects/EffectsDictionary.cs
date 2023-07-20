@@ -16,22 +16,22 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             { typeof(DamageEffectModel), new EffectUtilityModel() {
                 Name = _localization[LocalizationKeys.EffectDamage].ToString(),
                 Icon = AwesomeRPG.Sword,
-                EditPage = typeof(HealDamageEffectPage)
+                EditPage = typeof(DamageEffectPage)
             }},
             { typeof(HealEffect), new EffectUtilityModel() {
                 Name = _localization[LocalizationKeys.EffectHeal].ToString(),
                 Icon = AwesomeRPG.HealthIncrease,
-                EditPage = typeof(HealDamageEffectPage) //временно
+                EditPage = typeof(DamageEffectPage) //временно
             }},
             { typeof(WinTheGameEffect), new EffectUtilityModel() {
                 Name = "Just win",
                 Icon = AwesomeRPG.FireballSword,
-                EditPage = typeof(HealDamageEffectPage) //временно
+                EditPage = typeof(DamageEffectPage) //временно
             }},
             { typeof(DummyEffect), new EffectUtilityModel() {
                 Name = "Win another way",
                 Icon = AwesomeRPG.PoisonCloud,
-                EditPage = typeof(HealDamageEffectPage) //временно
+                EditPage = typeof(DamageEffectPage) //временно
             }},
         };
 

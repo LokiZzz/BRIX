@@ -9,7 +9,7 @@
              xmlns:aspectsview="clr-namespace:BRIX.Mobile.View.Abilities.Aspects"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              x:DataType="effectsvm:DamageEffectPageVM"
-             x:Class="BRIX.Mobile.View.Abilities.Effects.HealDamageEffectPage"
+             x:Class="BRIX.Mobile.View.Abilities.Effects.DamageEffectPage"
              Shell.TabBarIsVisible="False"
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectDamage}}">
 
