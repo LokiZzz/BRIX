@@ -300,6 +300,9 @@
   <data name="CreateNewCharacter" xml:space="preserve">
     <value>Создать персонажа</value>
   </data>
+  <data name="CurrentAdjustment" xml:space="preserve">
+    <value>Сейчас (+0%)</value>
+  </data>
   <data name="CurrentCharacterPageTitle" xml:space="preserve">
     <value>Персонаж</value>
   </data>
@@ -308,9 +311,6 @@
   </data>
   <data name="Damage" xml:space="preserve">
     <value>Урон</value>
-  </data>
-  <data name="DamageEffectCurrentAdjustment" xml:space="preserve">
-    <value>Сейчас (+0%)</value>
   </data>
   <data name="DamageEffectPageHint" xml:space="preserve">
     <value>Каждый раз, когда вы используете свою способность, бросайте набор костей, указанный ниже, чтобы определить, сколько урона нанесла способность.</value>
@@ -404,6 +404,12 @@
   </data>
   <data name="HardActivationCondition" xml:space="preserve">
     <value>Условие высокой сложности</value>
+  </data>
+  <data name="Heal" xml:space="preserve">
+    <value>Лечение</value>
+  </data>
+  <data name="HealDiceImpactHint" xml:space="preserve">
+    <value>Каждый раз, когда вы используете свою способность, бросайте набор костей, указанный ниже, чтобы определить, сколько очков здоровья восстановила способность.</value>
   </data>
   <data name="Health" xml:space="preserve">
     <value>Здоровье</value>

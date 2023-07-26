@@ -300,6 +300,9 @@
   <data name="CreateNewCharacter" xml:space="preserve">
     <value>Create new character</value>
   </data>
+  <data name="CurrentAdjustment" xml:space="preserve">
+    <value>Current (+0%)</value>
+  </data>
   <data name="CurrentCharacterPageTitle" xml:space="preserve">
     <value>Character</value>
   </data>
@@ -308,9 +311,6 @@
   </data>
   <data name="Damage" xml:space="preserve">
     <value>Damage</value>
-  </data>
-  <data name="DamageEffectCurrentAdjustment" xml:space="preserve">
-    <value>Current (+0%)</value>
   </data>
   <data name="DamageEffectPageHint" xml:space="preserve">
     <value>Here is the set of dice or value you should use to decide how much damage your ability dealt.</value>
@@ -404,6 +404,12 @@
   </data>
   <data name="HardActivationCondition" xml:space="preserve">
     <value>Hard difficulty condition</value>
+  </data>
+  <data name="Heal" xml:space="preserve">
+    <value>Heal</value>
+  </data>
+  <data name="HealDiceImpactHint" xml:space="preserve">
+    <value>Each time you use the ability, roll the set of dice listed below to determine how many health points the ability restored.</value>
   </data>
   <data name="Health" xml:space="preserve">
     <value>Health</value>

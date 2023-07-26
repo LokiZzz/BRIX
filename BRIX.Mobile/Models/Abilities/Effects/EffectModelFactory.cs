@@ -8,8 +8,10 @@ namespace BRIX.Mobile.Models.Abilities.Effects
         {
             switch(effect)
             {
-                case DamageEffect damage:
-                    return new DamageEffectModel(damage);
+                case HealEffect heal:
+                    return new HealEffectModel(heal);
+                case DamageEffect dmg:
+                    return new DamageEffectModel(dmg);
             }
 
             return null;

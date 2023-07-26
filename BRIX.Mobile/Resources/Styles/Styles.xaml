@@ -62,8 +62,8 @@
         <Setter Property="CornerRadius" Value="10" />
         <Setter Property="FontFamily" Value="Awesome" />
         <Setter Property="Text" Value="{x:Static icons:Awesome.CirclePlus}" />
-        <Setter Property="HeightRequest" Value="75" />
-        <Setter Property="FontSize" Value="36" />
+        <Setter Property="HeightRequest" Value="60" />
+        <Setter Property="FontSize" Value="32" />
         <Setter Property="BackgroundColor" Value="{StaticResource BRIXDark}" />
     </Style>
 

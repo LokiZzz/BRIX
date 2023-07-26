@@ -17,6 +17,8 @@ namespace BRIX.Lexis
         {
             switch (effectBase)
             {
+                case HealEffect he:
+                    return string.Empty;
                 case DamageEffect de:
                     return GetDamageEffectLexis(de, language);
                 default:

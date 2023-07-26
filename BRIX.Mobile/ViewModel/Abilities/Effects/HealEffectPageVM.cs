@@ -7,11 +7,11 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Effects
 {
-    public partial class DamageEffectPageVM : EffectPageVMBase<DamageEffectModel>
+    public partial class HealEffectPageVM : EffectPageVMBase<HealEffectModel>
     {
         public override void Initialize()
         {
-            if(Effect.Impact.IsEmpty)
+            if (Effect.Impact.IsEmpty)
             {
                 Effect.Impact = new DicePool((1, 4));
             }
@@ -21,8 +21,9 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         private async Task EditFormula()
         {
             string formula = Effect?.Internal?.Impact?.ToString() ?? string.Empty;
-            DiceValuePopupResult result = await ShowPopupAsync<DiceValuePopup, DiceValuePopupResult, DiceValuePopupParameters>(
-                new DiceValuePopupParameters { Formula = formula }
+            DiceValuePopupResult result = 
+                await ShowPopupAsync<DiceValuePopup, DiceValuePopupResult, DiceValuePopupParameters>(
+                    new DiceValuePopupParameters { Formula = formula }
             );
 
             if (result != null)

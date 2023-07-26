@@ -8,11 +8,11 @@
              xmlns:abilitiesview="clr-namespace:BRIX.Mobile.View.Abilities"
              xmlns:aspectsview="clr-namespace:BRIX.Mobile.View.Abilities.Aspects"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
-             x:DataType="effectsvm:DamageEffectPageVM"
-             x:Class="BRIX.Mobile.View.Abilities.Effects.DamageEffectPage"
+             x:DataType="effectsvm:HealEffectPageVM"
+             x:Class="BRIX.Mobile.View.Abilities.Effects.HealEffectPage"
              Shell.TabBarIsVisible="False"
-             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectDamage}}">
-
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectHeal}}">
+    
     <Shell.TitleView>
         <controls:TitleView/>
     </Shell.TitleView>
@@ -23,15 +23,15 @@
                 <Border Style="{StaticResource BlockBorder}">
                     <Grid RowDefinitions="auto,auto,*,auto,auto,auto,auto" ColumnDefinitions="*" RowSpacing="10">
                         <Grid Grid.Row="0" ColumnDefinitions="*, auto">
-                            <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Damage}}"/>
+                            <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Heal}}"/>
                             <Button 
                                 Grid.Column="1" 
                                 Style="{StaticResource SquareIconButton}" 
                                 Text="{x:Static icons:Awesome.PenToSquare}"
                                 Command="{Binding EditFormulaCommand}"/>
                         </Grid>
-                        <Label Grid.Row="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DamageEffectPageHint}}"/>
-                        
+                        <Label Grid.Row="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.HealDiceImpactHint}}"/>
+
                         <!--Здесь Margin у коллекции компенсирует лишний Margin у элемента, это workaround бага MAUI, 
                         который не позволяет нормально установить ItemsLayout через тег (если так сделать, то CollectionView сломается)-->
                         <CollectionView Grid.Row="2" ItemsSource="{Binding Effect.DiceChunks}" ItemsLayout="VerticalGrid, 4" Margin="-5">
@@ -60,7 +60,7 @@
                             <Label Grid.Row="1" Grid.Column="0" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Average}}"/>
                             <Label Grid.Row="1" Grid.Column="1" Text="{Binding Effect.Average}"/>
                         </Grid>
-                        
+
                         <!--Быстрая настройка!-->
                         <Label Grid.Row="4" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.FastAdjustment}}"/>
                         <Grid Grid.Row="5" RowDefinitions="auto,auto,auto" ColumnDefinitions="auto,*,auto" Margin="0,0,0,10">
@@ -90,7 +90,7 @@
                         </Grid>
                     </Grid>
                 </Border>
-                
+
                 <!--Aspects-->
                 <aspectsview:AspectsPanelView BindingContext="{Binding Aspects}"/>
             </VerticalStackLayout>

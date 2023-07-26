@@ -610,6 +610,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current (+0%).
+        /// </summary>
+        public static string CurrentAdjustment {
+            get {
+                return ResourceManager.GetString("CurrentAdjustment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Character.
         /// </summary>
         public static string CurrentCharacterPageTitle {
@@ -633,15 +642,6 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Damage {
             get {
                 return ResourceManager.GetString("Damage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Current (+0%).
-        /// </summary>
-        public static string DamageEffectCurrentAdjustment {
-            get {
-                return ResourceManager.GetString("DamageEffectCurrentAdjustment", resourceCulture);
             }
         }
         
@@ -921,6 +921,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string HardActivationCondition {
             get {
                 return ResourceManager.GetString("HardActivationCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heal.
+        /// </summary>
+        public static string Heal {
+            get {
+                return ResourceManager.GetString("Heal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Each time you use the ability, roll the set of dice listed below to determine how many health points the ability restored..
+        /// </summary>
+        public static string HealDiceImpactHint {
+            get {
+                return ResourceManager.GetString("HealDiceImpactHint", resourceCulture);
             }
         }
         

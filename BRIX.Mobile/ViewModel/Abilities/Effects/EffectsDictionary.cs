@@ -9,28 +9,21 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 {
     public static class EffectsDictionary
     {
-        private static ILocalizationResourceManager _localization => ServicePool.GetService<ILocalizationResourceManager>();
-
         public static Dictionary<Type, EffectUtilityModel> Collection => new()
         {
             { typeof(DamageEffectModel), new EffectUtilityModel() {
-                Name = _localization[LocalizationKeys.EffectDamage].ToString(),
+                Name = Localization.EffectDamage,
                 Icon = AwesomeRPG.Sword,
                 EditPage = typeof(DamageEffectPage)
             }},
-            { typeof(HealEffect), new EffectUtilityModel() {
-                Name = _localization[LocalizationKeys.EffectHeal].ToString(),
+            { typeof(HealEffectModel), new EffectUtilityModel() {
+                Name = Localization.EffectHeal,
                 Icon = AwesomeRPG.HealthIncrease,
-                EditPage = typeof(DamageEffectPage) //временно
+                EditPage = typeof(HealEffectPage)
             }},
             { typeof(WinTheGameEffect), new EffectUtilityModel() {
                 Name = "Just win",
                 Icon = AwesomeRPG.FireballSword,
-                EditPage = typeof(DamageEffectPage) //временно
-            }},
-            { typeof(DummyEffect), new EffectUtilityModel() {
-                Name = "Win another way",
-                Icon = AwesomeRPG.PoisonCloud,
                 EditPage = typeof(DamageEffectPage) //временно
             }},
         };

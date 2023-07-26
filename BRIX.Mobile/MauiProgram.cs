@@ -72,6 +72,7 @@ public static class MauiProgram
         builder.RegisterView<AddOrEditAbilityPage, AddOrEditAbilityPageVM>();
         builder.RegisterView<ChooseEffectPage, ChooseEffectPageVM>();
         builder.RegisterView<DamageEffectPage, DamageEffectPageVM>();
+        builder.RegisterView<HealEffectPage, HealEffectPageVM>();
         builder.RegisterView<ActionPointAspectPage, ActionPointAspectPageVM>();
         builder.RegisterView<TargetSelectionAspectPage, TargetSelectionAspectPageVM>();
         builder.RegisterView<CooldownAspectPage, CooldownAspectPageVM>();
