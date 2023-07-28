@@ -22,6 +22,7 @@ namespace BRIX.Library.Characters
         public string Backstory { get; set; }
         public string Appearance { get; set; }
         public List<string> Tags { get; set; } = new();
+        public List<CharacterProject> Projects { get; set; } = new();
         public List<CharacterAbility> Abilities { get; set; } = new();
         public List<AbilityMaterialSupport> MaterialSupport { get; set; } = new();
         public Inventory Inventory { get; set; } = new();
@@ -146,7 +147,11 @@ namespace BRIX.Library.Characters
 
             Character copyOfThis = this.Copy();
             MaterialSupport existingItem = Inventory.Items.Single(x => x.Equals(itemToUpdate)) as MaterialSupport;
-            copyOfThis?.Inventory.Swap(existingItem, itemToUpdate);
+
+            if (existingItem != null)
+            {
+                copyOfThis?.Inventory.Swap(existingItem, itemToUpdate);
+            }
 
             if(copyOfThis?.AvailableExp < 0)
             {

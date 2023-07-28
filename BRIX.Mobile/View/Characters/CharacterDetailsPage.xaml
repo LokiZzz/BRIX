@@ -1,12 +1,82 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="BRIX.Mobile.View.Characters.CharacterDetailsPage"
-             Title="CharacterDetailsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to details!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Characters"
+             xmlns:m="clr-namespace:BRIX.Mobile.Models.Characters"
+             xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+             xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             x:DataType="vm:CharacterDetailsPageVM"
+             x:Name="DetailsPage"
+             ControlTemplate="{StaticResource BusyPageTemplate}"
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CharacterDetails}}" 
+             Padding="0">
+    
+    <Shell.TitleView>
+        <controls:TitleView/>
+    </Shell.TitleView>
+
+    <ScrollView>
+        <Grid>
+            <VerticalStackLayout Spacing="10">
+                <Border Style="{StaticResource SideMarginBlockBorder}">
+                    <controls:ArrowExpander Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Backstory}}">
+                        <controls:ArrowExpander.ExpanderContent>
+                            <Label Text="{Binding Character.Backstory}"/>
+                        </controls:ArrowExpander.ExpanderContent>
+                    </controls:ArrowExpander>
+                </Border>
+                <!--Tags-->
+                <Border Style="{StaticResource SideMarginBlockBorder}">
+                    <VerticalStackLayout>
+                        <Grid ColumnDefinitions="*,auto">
+                            <Label 
+                                Grid.Column="0"
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.MarksOfFate}}" 
+                                Style="{StaticResource TitleLabel}" Grid.Row="0"/>
+                            <Button
+                                Grid.Column="1"
+                                Style="{StaticResource SquareIconButton}"
+                                Command="{Binding AddTagCommand}"
+                                Text="{x:Static icons:Awesome.SquarePlus}"/>
+                        </Grid>
+                        <FlexLayout 
+                            BindableLayout.ItemsSource="{Binding Character.Tags}" 
+                            x:Name="tagsLayout"
+                            Wrap="Wrap"
+                            Margin="-1,9,-1,-1"
+                            IsVisible="{Binding ShowTags}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="m:CharacterTagVM">
+                                    <Border
+                                        StrokeShape="RoundRectangle 5"
+                                        BackgroundColor="{StaticResource BRIXViolet}"
+                                        HeightRequest="40"
+                                        Margin="1">
+                                        <HorizontalStackLayout Margin="10,8" Spacing="10">
+                                            <Label 
+                                                Text="{Binding Text}"
+                                                FontSize="15"
+                                                VerticalOptions="Center"
+                                                VerticalTextAlignment="Center"/>
+                                            <Button 
+                                                Padding="0"
+                                                BackgroundColor="Transparent"
+                                                FontFamily="Awesome"
+                                                Text="{x:Static icons:Awesome.SquareXmark}"
+                                                TextColor="{StaticResource BRIXWhite}"
+                                                Command="{Binding Source={x:Reference tagsLayout}, Path=BindingContext.RemoveTagCommand}"
+                                                CommandParameter="{Binding}"/>
+                                        </HorizontalStackLayout>
+                                    </Border>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </FlexLayout>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

@@ -292,6 +292,10 @@
         <Setter Property="BackgroundColor" Value="{StaticResource BRIXMedium}"/>
     </Style>
 
+    <Style TargetType="Border" BasedOn="{StaticResource BlockBorder}" x:Key="SideMarginBlockBorder">
+        <Setter Property="Margin" Value="10,0"/>
+    </Style>
+
     <Style TargetType="Border" x:Key="TransparentBorder">
         <Setter Property="StrokeShape" Value="RoundRectangle 5"/>
         <Setter Property="StrokeThickness" Value="0"/>

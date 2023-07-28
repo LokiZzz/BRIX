@@ -16,7 +16,7 @@
     <Grid RowDefinitions="*,auto" RowSpacing="10">
         <ScrollView Grid.Row="0" >
             <VerticalStackLayout Spacing="10" Margin="0,0,0,10">
-                <Border Style="{StaticResource BlockBorder}" VerticalOptions="Start">
+                <Border Style="{StaticResource BlockBorder}">
                     <VerticalStackLayout Spacing="10">
                         <controls:FramedEntry
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Name}}"
@@ -24,11 +24,11 @@
                         <controls:FramedEditor
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Backstory}}"
                             Text="{Binding Character.Backstory}"
-                            MaxLength="1000" />
+                            MaxLength="500" />
                         <controls:FramedEditor
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Appearance}}"
                             Text="{Binding Character.Appearance}"
-                            MaxLength="1000"/>
+                            MaxLength="500"/>
                     </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>

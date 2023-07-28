@@ -249,6 +249,9 @@
   <data name="CharacterAbilitiesPageTitle" xml:space="preserve">
     <value>Abilities</value>
   </data>
+  <data name="CharacterDetails" xml:space="preserve">
+    <value>Details</value>
+  </data>
   <data name="CharacterListPageTitle" xml:space="preserve">
     <value>Character list</value>
   </data>

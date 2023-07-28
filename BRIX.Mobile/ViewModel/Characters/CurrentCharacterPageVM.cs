@@ -130,38 +130,6 @@ namespace BRIX.Mobile.ViewModel.Characters
             await Navigation.NavigateAsync<CharacterAbilitiesPage>(mode: ENavigationMode.Absolute);
         }
 
-        public bool ShowTags => Character?.Tags.Any() == true;
-
-        [RelayCommand]
-        public async Task AddTag()
-        {
-            EntryPopupResult result = await ShowPopupAsync<EntryPopup, EntryPopupResult, EntryPopupParameters>(
-                new EntryPopupParameters
-                {
-                    Title = Localization.MarkOfFate,
-                    Message = Localization.MarkOfFateHint,
-                    Placeholder = Localization.MarkOfFate,
-                    ButtonText = Localization.Add,
-                }
-            );
-
-            if(result != null && !Character.Tags.Any(x => x.Text == result.Text))
-            {
-                Character.AddTag(new CharacterTagVM { Text = result.Text });
-            }
-
-            await _characterService.UpdateAsync(Character.InternalModel);
-            OnPropertyChanged(nameof(ShowTags));
-        }
-
-        [RelayCommand]
-        public async Task RemoveTag(CharacterTagVM tag)
-        {
-            Character.RemoveTag(tag);
-            await _characterService.UpdateAsync(Character.InternalModel);
-            OnPropertyChanged(nameof(ShowTags));
-        }
-
         public override async Task OnNavigatedAsync()
         {
             IsBusy = true;
@@ -194,7 +162,6 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             // Возможно такие вызовы уползут в CharacterService, но пока что достаточно этого.
             WeakReferenceMessenger.Default.Send(new ShowCharacterTabsChanged(PlayerHaveCharacter));
-            OnPropertyChanged(nameof(ShowTags));
 
             IsBusy = false;
         }

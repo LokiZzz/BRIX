@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+             x:Class="BRIX.Mobile.Resources.Controls.ArrowExpander"
+             x:Name="this">
+    <toolkit:Expander x:Name="expander" Content="{Binding Source={x:Reference this}, Path=ExpanderContent}">
+        <toolkit:Expander.Header>
+            <Grid ColumnDefinitions="*,auto">
+                <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{Binding Source={x:Reference this}, Path=Title}"/>
+                <Button Grid.Column="1"  Style="{StaticResource SquareIconButton}" BackgroundColor="{StaticResource BRIXDim}" InputTransparent="True" FontFamily="Awesome">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference expander}, Path=IsExpanded}" Value="True">
+                            <Setter Property="Text" Value="{x:Static icons:Awesome.ChevronDown}"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference expander}, Path=IsExpanded}" Value="False">
+                            <Setter Property="Text" Value="{x:Static icons:Awesome.ChevronUp}"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid" Binding="{Binding Source={x:Reference expander}, Path=IsExpanded}" Value="True">
+                        <Setter Property="Margin" Value="0,0,0,10"/>
+                    </DataTrigger>
+                    <DataTrigger TargetType="Grid" Binding="{Binding Source={x:Reference expander}, Path=IsExpanded}" Value="False">
+                        <Setter Property="Margin" Value="0"/>
+                    </DataTrigger>
+                </Grid.Triggers>
+            </Grid>
+        </toolkit:Expander.Header>
+    </toolkit:Expander>
+</ContentView>

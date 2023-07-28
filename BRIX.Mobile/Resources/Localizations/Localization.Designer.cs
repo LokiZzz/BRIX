@@ -457,6 +457,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string CharacterDetails {
+            get {
+                return ResourceManager.GetString("CharacterDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tap to select, swipe right to edit and swipe left to delete..
         /// </summary>
         public static string CharacterList_Help {
