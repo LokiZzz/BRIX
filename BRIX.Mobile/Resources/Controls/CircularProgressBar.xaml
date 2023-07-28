@@ -4,9 +4,14 @@
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              x:Class="BRIX.Mobile.Resources.Controls.CircularProgressBar"
              x:Name="this">
-    <GraphicsView>
-        <GraphicsView.Drawable>
-            <controls:CircularProgressBarDrawable
+    <Grid>
+        <Label 
+            Text="{Binding InnerText, Source={x:Reference this}}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+        <GraphicsView>
+            <GraphicsView.Drawable>
+                <controls:CircularProgressBarDrawable
                 Progress="{Binding Progress, Source={x:Reference this}}"
                 InnerText="{Binding InnerText, Source={x:Reference this}}"
                 Size="{Binding Size, Source={x:Reference this}}"
@@ -14,6 +19,7 @@
                 Thickness="{Binding Thickness, Source={x:Reference this}}"
                 ProgressColor="{Binding ProgressColor, Source={x:Reference this}}"
                 ProgressLeftColor="{Binding ProgressLeftColor, Source={x:Reference this}}"/>
-        </GraphicsView.Drawable>
-    </GraphicsView>
+            </GraphicsView.Drawable>
+        </GraphicsView>
+    </Grid>
 </ContentView>

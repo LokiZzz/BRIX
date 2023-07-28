@@ -133,7 +133,7 @@
                                             LineBreakMode="TailTruncation"/>
                                         <controls:CircularProgressBar
                                             Grid.Column="1"
-                                            InnerText="ХУЙ"
+                                            InnerText="{Binding Text}"
                                             Progress="{Binding Progress}"
                                             Size="50"
                                             TextColor="{StaticResource BRIXLight}"

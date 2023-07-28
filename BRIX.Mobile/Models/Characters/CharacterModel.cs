@@ -225,25 +225,4 @@ namespace BRIX.Mobile.Models.Characters
             InternalModel.Projects.Remove(InternalModel.Projects.Single(x => x.Name == project.Name));
         }
     }
-
-    public class CharacterTagVM
-    {
-        public string Text { get; set; }
-    }
-
-    public class CharacterProjectVM
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int Steps { get; set; }
-        public int CurrentStep { get; set; }
-        public double Progress => (double)CurrentStep / Steps * 100;
-    }
-
-    public enum EHealthState
-    {
-        Fine = 0,
-        Bad = 1,
-        Critical
-    }
 }

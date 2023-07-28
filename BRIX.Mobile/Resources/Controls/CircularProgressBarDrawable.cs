@@ -114,9 +114,16 @@ namespace BRIX.Mobile.Resources.Controls
 
             // Vertical text align the text, and we need a correction factor of around 1.15 to have it aligned properly
             // Note: The VerticalAlignment.Center property of the DrawString method seems to have no effect
-            float verticalPosition = ((Size / 2) - (fontSize / 2)) * 1.15f;
-            string innerText = string.IsNullOrEmpty(InnerText) ? $"{Progress}%" : InnerText;
-            canvas.DrawString(innerText, x, verticalPosition, effectiveSize, effectiveSize / 4, HorizontalAlignment.Center, VerticalAlignment.Center);
+            //float verticalPosition = ((Size / 2) - (fontSize / 2)) * 1.15f;
+            //string innerText = string.IsNullOrEmpty(InnerText) ? $"{Progress}%" : InnerText;
+            //canvas.Font = new Microsoft.Maui.Graphics.Font("Garamond");
+            //canvas.DrawString(
+            //    innerText, 
+            //    x, verticalPosition, 
+            //    effectiveSize, effectiveSize / 4, 
+            //    HorizontalAlignment.Center, VerticalAlignment.Center,
+            //    TextFlow.OverflowBounds
+            //);
         }
 
         private static float GetAngle(int progress)
