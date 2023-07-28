@@ -603,6 +603,9 @@
   <data name="PortraitSettings" xml:space="preserve">
     <value>Portrait settings</value>
   </data>
+  <data name="Projects" xml:space="preserve">
+    <value>Projects</value>
+  </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me</value>
   </data>

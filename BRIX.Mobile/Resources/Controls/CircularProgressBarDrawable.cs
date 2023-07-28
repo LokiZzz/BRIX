@@ -6,28 +6,28 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.Resources.Controls
 {
-    public class CircularProgressBar : BindableObject, IDrawable
+    public class CircularProgressBarDrawable : BindableObject, IDrawable
     {
         public static readonly BindableProperty ProgressProperty = 
-            BindableProperty.Create(nameof(Progress), typeof(int), typeof(CircularProgressBar));
+            BindableProperty.Create(nameof(Progress), typeof(int), typeof(CircularProgressBarDrawable));
 
         public static readonly BindableProperty InnerTextProperty =
-            BindableProperty.Create(nameof(InnerText), typeof(string), typeof(CircularProgressBar));
+            BindableProperty.Create(nameof(InnerText), typeof(string), typeof(CircularProgressBarDrawable));
 
         public static readonly BindableProperty SizeProperty = 
-            BindableProperty.Create(nameof(Size), typeof(int), typeof(CircularProgressBar));
+            BindableProperty.Create(nameof(Size), typeof(int), typeof(CircularProgressBarDrawable));
 
         public static readonly BindableProperty ThicknessProperty = 
-            BindableProperty.Create(nameof(Thickness), typeof(int), typeof(CircularProgressBar));
+            BindableProperty.Create(nameof(Thickness), typeof(int), typeof(CircularProgressBarDrawable));
 
         public static readonly BindableProperty ProgressColorProperty = 
-            BindableProperty.Create(nameof(ProgressColor), typeof(Color), typeof(CircularProgressBar));
+            BindableProperty.Create(nameof(ProgressColor), typeof(Color), typeof(CircularProgressBarDrawable));
 
         public static readonly BindableProperty ProgressLeftColorProperty = 
-            BindableProperty.Create(nameof(ProgressLeftColor), typeof(Color), typeof(CircularProgressBar));
+            BindableProperty.Create(nameof(ProgressLeftColor), typeof(Color), typeof(CircularProgressBarDrawable));
 
         public static readonly BindableProperty TextColorProperty = 
-            BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(CircularProgressBar));
+            BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(CircularProgressBarDrawable));
 
         public int Progress
         {

@@ -60,6 +60,24 @@ namespace BRIX.Mobile.ViewModel.Characters
             OnPropertyChanged(nameof(ShowTags));
         }
 
+        [RelayCommand]
+        public async Task AddProject(CharacterProjectVM project)
+        {
+
+        }
+
+        [RelayCommand]
+        public async Task EditProject(CharacterProjectVM project)
+        {
+            
+        }
+
+        [RelayCommand]
+        public async Task RemoveProject(CharacterProjectVM project)
+        {
+
+        }
+
         public override async Task OnNavigatedAsync()
         {
             await Initialize();

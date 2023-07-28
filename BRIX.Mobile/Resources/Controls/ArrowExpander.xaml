@@ -7,7 +7,7 @@
              x:Name="this">
     <toolkit:Expander x:Name="expander" Content="{Binding Source={x:Reference this}, Path=ExpanderContent}">
         <toolkit:Expander.Header>
-            <Grid ColumnDefinitions="*,auto">
+            <Grid ColumnDefinitions="*,auto" ColumnSpacing="0">
                 <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{Binding Source={x:Reference this}, Path=Title}"/>
                 <Button Grid.Column="1"  Style="{StaticResource SquareIconButton}" BackgroundColor="{StaticResource BRIXDim}" InputTransparent="True" FontFamily="Awesome">
                     <Button.Triggers>

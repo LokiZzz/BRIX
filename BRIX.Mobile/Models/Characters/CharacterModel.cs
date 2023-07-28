@@ -17,6 +17,12 @@ namespace BRIX.Mobile.Models.Characters
                 new CharacterAbilityModel(x) { Character = character })
             );
             Tags = new (character.Tags.Select(x => new CharacterTagVM { Text = x }));
+            Projects = new(character.Projects.Select(x => new CharacterProjectVM {  
+                Name = x.Name, Description = x.Description, Steps = x.Steps, CurrentStep = x.CurrentStep
+            }));
+
+            Projects.Add(new CharacterProjectVM { Name = "Проект 1", Description = "Описание 1", CurrentStep = 5, Steps = 12 });
+            Projects.Add(new CharacterProjectVM { Name = "Проект 2", Description = "Описание 2", CurrentStep = 3, Steps = 4 });
         }
 
         public Character InternalModel { get; }
@@ -27,7 +33,6 @@ namespace BRIX.Mobile.Models.Characters
             get => _abilities;
             set => SetProperty(ref _abilities, value);
         }
-
 
         public Guid Id
         {
@@ -200,11 +205,39 @@ namespace BRIX.Mobile.Models.Characters
             Tags.Remove(tag);
             InternalModel.Tags.Remove(InternalModel.Tags.Single(x => x == tag.Text));
         }
+
+        public ObservableCollection<CharacterProjectVM> Projects { get; set; }
+
+        public void AddProject(CharacterProjectVM project)
+        {
+            Projects.Add(project);
+            InternalModel.Projects.Add(new CharacterProject { 
+                Name = project.Name,
+                Description = project.Description,
+                Steps = project.Steps,
+                CurrentStep = project.CurrentStep
+            });
+        }
+
+        public void RemoveProject(CharacterProjectVM project)
+        {
+            Projects.Remove(project);
+            InternalModel.Projects.Remove(InternalModel.Projects.Single(x => x.Name == project.Name));
+        }
     }
 
     public class CharacterTagVM
     {
         public string Text { get; set; }
+    }
+
+    public class CharacterProjectVM
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int Steps { get; set; }
+        public int CurrentStep { get; set; }
+        public double Progress => (double)CurrentStep / Steps * 100;
     }
 
     public enum EHealthState

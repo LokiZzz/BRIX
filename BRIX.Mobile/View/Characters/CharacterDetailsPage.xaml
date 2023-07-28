@@ -21,12 +21,23 @@
     <ScrollView>
         <Grid>
             <VerticalStackLayout Spacing="10">
+                <!--Backstory-->
                 <Border Style="{StaticResource SideMarginBlockBorder}">
-                    <controls:ArrowExpander Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Backstory}}">
-                        <controls:ArrowExpander.ExpanderContent>
-                            <Label Text="{Binding Character.Backstory}"/>
-                        </controls:ArrowExpander.ExpanderContent>
-                    </controls:ArrowExpander>
+                    <Grid Margin="-15">
+                        <Image 
+                            Source="{Binding Character.PortraitImage}" 
+                            Opacity="0.2" 
+                            MaximumHeightRequest="{Binding Source={x:Reference expander}, Path=Height}"
+                            Aspect="AspectFill"/>
+                        <controls:ArrowExpander 
+                            x:Name="expander"
+                            Margin="15"
+                            Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Backstory}}">
+                            <controls:ArrowExpander.ExpanderContent>
+                                <Label Text="{Binding Character.Backstory}"/>
+                            </controls:ArrowExpander.ExpanderContent>
+                        </controls:ArrowExpander>
+                    </Grid>
                 </Border>
                 <!--Tags-->
                 <Border Style="{StaticResource SideMarginBlockBorder}">
@@ -76,7 +87,68 @@
                         </FlexLayout>
                     </VerticalStackLayout>
                 </Border>
+                <!--Projects-->
+                <Label 
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Projects}}" 
+                    Style="{StaticResource TitleLabel}"
+                    Margin="10,0,0,0"/>
+                <Button 
+                    Style="{StaticResource LightPlusButton}"
+                    Margin="10,0"/>
+                <CollectionView x:Name="collectionView" ItemsSource="{Binding Character.Projects}" Margin="0,0,0,10">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="m:CharacterProjectVM">
+                            <SwipeView Threshold="100">
+                                <SwipeView.LeftItems>
+                                    <SwipeItems Mode="Execute">
+                                        <SwipeItemView
+                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.EditProjectCommand}"
+                                                CommandParameter="{Binding}">
+                                            <Border Style="{StaticResource MediumSwipeViewBorder}">
+                                                <Label Style="{StaticResource MediumSwipeViewEditLabel}" />
+                                            </Border>
+                                        </SwipeItemView>
+                                    </SwipeItems>
+                                </SwipeView.LeftItems>
+                                <SwipeView.RightItems>
+                                    <SwipeItems Mode="Execute">
+                                        <SwipeItemView
+                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.RemoveProjectCommand}"
+                                                CommandParameter="{Binding}">
+                                            <Border Style="{StaticResource MediumSwipeViewBorder}">
+                                                <Label Style="{StaticResource MediumSwipeViewDeleteLabel}"/>
+                                            </Border>
+                                        </SwipeItemView>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <Border Style="{StaticResource BlockBorder}" Margin="10,0">
+                                    <Grid ColumnDefinitions="*,auto" ColumnSpacing="10">
+                                        <Label
+                                            Grid.Column="0"
+                                            Style="{StaticResource TitleLabel}" 
+                                            Text="{Binding Name}" 
+                                            LineBreakMode="TailTruncation"/>
+                                        <controls:CircularProgressBar
+                                            Grid.Column="1"
+                                            InnerText="ХУЙ"
+                                            Progress="{Binding Progress}"
+                                            Size="50"
+                                            TextColor="{StaticResource BRIXLight}"
+                                            Thickness="3"
+                                            ProgressColor="{StaticResource BRIXLime}"
+                                            ProgressLeftColor="{StaticResource BRIXDim}"
+                                            Margin="1"/>
+                                    </Grid>
+                                </Border>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </VerticalStackLayout>
+            
         </Grid>
     </ScrollView>
 </ContentPage>

@@ -147,6 +147,9 @@
 	  <MauiXaml Update="Resources\Controls\AspectConditionItem.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Resources\Controls\CircularProgressBar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Resources\Controls\ControlTemplates.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
