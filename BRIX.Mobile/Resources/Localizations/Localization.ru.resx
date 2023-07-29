@@ -165,6 +165,9 @@
   <data name="AddOrEditCharacterPageTitle_Edit" xml:space="preserve">
     <value>Персонаж</value>
   </data>
+  <data name="AddProject" xml:space="preserve">
+    <value>Добавить проект</value>
+  </data>
   <data name="AddRestriction" xml:space="preserve">
     <value>Добавить ограничение</value>
   </data>
@@ -188,6 +191,9 @@
   </data>
   <data name="AskDeleteMaterialSupport" xml:space="preserve">
     <value>Вы уверены, что хотите удалить материальное обеспечение способности «{0}»?</value>
+  </data>
+  <data name="AskDeleteProject" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить проект «{0}»?</value>
   </data>
   <data name="AskToDeleteInventoryItem" xml:space="preserve">
     <value>Вы уверены, что хотите удалить «{0}»?</value>
@@ -282,6 +288,12 @@
   <data name="Colossal" xml:space="preserve">
     <value>Колоссальный</value>
   </data>
+  <data name="CommonDescription" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="CommonName" xml:space="preserve">
+    <value>Название</value>
+  </data>
   <data name="Consumable" xml:space="preserve">
     <value>Расходник</value>
   </data>
@@ -356,6 +368,9 @@
   </data>
   <data name="EditInventoryItem" xml:space="preserve">
     <value>Изменить предмет</value>
+  </data>
+  <data name="EditProject" xml:space="preserve">
+    <value>Изменить проект</value>
   </data>
   <data name="EffectDamage" xml:space="preserve">
     <value>Урон</value>
@@ -603,8 +618,17 @@
   <data name="PortraitSettings" xml:space="preserve">
     <value>Настройка портрета</value>
   </data>
+  <data name="Project" xml:space="preserve">
+    <value>Проект</value>
+  </data>
+  <data name="ProjectCurrentSteps" xml:space="preserve">
+    <value>Шагов выполнено</value>
+  </data>
   <data name="Projects" xml:space="preserve">
     <value>Проекты</value>
+  </data>
+  <data name="ProjectSteps" xml:space="preserve">
+    <value>Шагов всего</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Запомнить меня</value>
@@ -617,6 +641,9 @@
   </data>
   <data name="Round" xml:space="preserve">
     <value>Раунд</value>
+  </data>
+  <data name="SameProjectExistsWarning" xml:space="preserve">
+    <value>Проект с таким названием уже существует.</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>

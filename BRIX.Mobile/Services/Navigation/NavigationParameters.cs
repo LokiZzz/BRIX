@@ -12,5 +12,6 @@
         public const string InventoryItem = nameof(InventoryItem);
         public const string MaterialSupport = nameof(MaterialSupport);
         public const string ForceUpdate = nameof(ForceUpdate);
+        public const string Project = nameof(Project);
     }
 }

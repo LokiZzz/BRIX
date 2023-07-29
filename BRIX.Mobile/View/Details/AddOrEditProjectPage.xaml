@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BRIX.Mobile.View.Details.AddOrEditProjectPage"
+             xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Details"
+             xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+             x:DataType="vm:AddOrEditProjectPageVM"
+             Shell.TabBarIsVisible="False"
+             Title="{Binding Title}">
+
+    <Shell.TitleView>
+        <controls:TitleView/>
+    </Shell.TitleView>
+
+    <Grid RowDefinitions="*,auto">
+        <ScrollView Grid.Row="0">
+            <Border Style="{StaticResource BlockBorder}" VerticalOptions="Start">
+                <VerticalStackLayout Spacing="10">
+                    <Label 
+                        Style="{StaticResource TitleLabel}" 
+                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Project}}"/>
+                    <controls:FramedEntry 
+                        Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CommonName}}"
+                        Text="{Binding Project.Name}"/>
+                    <controls:FramedEditor 
+                        Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CommonDescription}}"
+                        Text="{Binding Project.Description}"
+                        MaxLength="500"/>
+                    <controls:FramedEntry 
+                        Keyboard="Numeric"
+                        Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ProjectCurrentSteps}}"
+                        Text="{Binding Project.CurrentStep}"/>
+                    <controls:FramedEntry 
+                        Keyboard="Numeric"
+                        Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ProjectSteps}}"
+                        Text="{Binding Project.Steps}"/>
+                </VerticalStackLayout>
+            </Border>
+        </ScrollView>
+        <Border Grid.Row="1" Style="{StaticResource LowBlockWithShadowBorder}">
+            <Button 
+                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" 
+                Command="{Binding SaveCommand}"
+                Margin="0,0,0,10"/>
+        </Border>
+    </Grid>
+</ContentPage>

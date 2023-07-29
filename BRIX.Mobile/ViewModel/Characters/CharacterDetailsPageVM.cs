@@ -2,6 +2,8 @@
 using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
+using BRIX.Mobile.Services.Navigation;
+using BRIX.Mobile.View.Details;
 using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
 using BRIX.Mobile.ViewModel.Popups;
@@ -61,21 +63,34 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         [RelayCommand]
-        public async Task AddProject(CharacterProjectVM project)
+        public async Task AddProject()
         {
-
+            await Navigation.NavigateAsync<AddOrEditProjectPage>(
+                (NavigationParameters.EditMode, EEditingMode.Add)
+            );
         }
 
         [RelayCommand]
         public async Task EditProject(CharacterProjectVM project)
         {
-            
+            await Navigation.NavigateAsync<AddOrEditProjectPage>(
+                (NavigationParameters.EditMode, EEditingMode.Edit),
+                (NavigationParameters.Project, project)
+            );
         }
 
         [RelayCommand]
         public async Task RemoveProject(CharacterProjectVM project)
         {
+            AlertPopupResult result = await Ask(string.Format(Localization.AskDeleteProject, project.Name));
 
+            if(result.Answer == EAlertPopupResult.No)
+            {
+                return;
+            }
+
+            Character.RemoveProject(project);
+            await _characterService.UpdateAsync(Character.InternalModel);
         }
 
         public override async Task OnNavigatedAsync()

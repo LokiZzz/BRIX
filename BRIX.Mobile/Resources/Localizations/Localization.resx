@@ -165,6 +165,9 @@
   <data name="AddOrEditCharacterPageTitle_Edit" xml:space="preserve">
     <value>Edit character</value>
   </data>
+  <data name="AddProject" xml:space="preserve">
+    <value>Add project</value>
+  </data>
   <data name="AddRestriction" xml:space="preserve">
     <value>Add restriction</value>
   </data>
@@ -188,6 +191,9 @@
   </data>
   <data name="AskDeleteMaterialSupport" xml:space="preserve">
     <value>Are you sure you want to delete «{0}» ability material support?</value>
+  </data>
+  <data name="AskDeleteProject" xml:space="preserve">
+    <value>Are you sure you want to delete project «{0}»?</value>
   </data>
   <data name="AskToDeleteInventoryItem" xml:space="preserve">
     <value>Are you sure you want to delete «{0}»?</value>
@@ -282,6 +288,12 @@
   <data name="Colossal" xml:space="preserve">
     <value>Colossal</value>
   </data>
+  <data name="CommonDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="CommonName" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="Consumable" xml:space="preserve">
     <value>Consumable</value>
   </data>
@@ -356,6 +368,9 @@
   </data>
   <data name="EditInventoryItem" xml:space="preserve">
     <value>Edit item</value>
+  </data>
+  <data name="EditProject" xml:space="preserve">
+    <value>Edit project</value>
   </data>
   <data name="EffectDamage" xml:space="preserve">
     <value>Damage</value>
@@ -603,8 +618,17 @@
   <data name="PortraitSettings" xml:space="preserve">
     <value>Portrait settings</value>
   </data>
+  <data name="Project" xml:space="preserve">
+    <value>Project</value>
+  </data>
+  <data name="ProjectCurrentSteps" xml:space="preserve">
+    <value>Steps completed</value>
+  </data>
   <data name="Projects" xml:space="preserve">
     <value>Projects</value>
+  </data>
+  <data name="ProjectSteps" xml:space="preserve">
+    <value>Steps count</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me</value>
@@ -617,6 +641,9 @@
   </data>
   <data name="Round" xml:space="preserve">
     <value>Round</value>
+  </data>
+  <data name="SameProjectExistsWarning" xml:space="preserve">
+    <value>A project with the same name already exists.</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>

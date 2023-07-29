@@ -205,6 +205,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add project.
+        /// </summary>
+        public static string AddProject {
+            get {
+                return ResourceManager.GetString("AddProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add restriction.
         /// </summary>
         public static string AddRestriction {
@@ -273,6 +282,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string AskDeleteMaterialSupport {
             get {
                 return ResourceManager.GetString("AskDeleteMaterialSupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete project «{0}»?.
+        /// </summary>
+        public static string AskDeleteProject {
+            get {
+                return ResourceManager.GetString("AskDeleteProject", resourceCulture);
             }
         }
         
@@ -556,6 +574,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string CommonDescription {
+            get {
+                return ResourceManager.GetString("CommonDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string CommonName {
+            get {
+                return ResourceManager.GetString("CommonName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Consumable.
         /// </summary>
         public static string Consumable {
@@ -777,6 +813,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string EditInventoryItem {
             get {
                 return ResourceManager.GetString("EditInventoryItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit project.
+        /// </summary>
+        public static string EditProject {
+            get {
+                return ResourceManager.GetString("EditProject", resourceCulture);
             }
         }
         
@@ -1519,11 +1564,38 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Project.
+        /// </summary>
+        public static string Project {
+            get {
+                return ResourceManager.GetString("Project", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Steps completed.
+        /// </summary>
+        public static string ProjectCurrentSteps {
+            get {
+                return ResourceManager.GetString("ProjectCurrentSteps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Projects.
         /// </summary>
         public static string Projects {
             get {
                 return ResourceManager.GetString("Projects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Steps count.
+        /// </summary>
+        public static string ProjectSteps {
+            get {
+                return ResourceManager.GetString("ProjectSteps", resourceCulture);
             }
         }
         
@@ -1560,6 +1632,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Round {
             get {
                 return ResourceManager.GetString("Round", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A project with the same name already exists..
+        /// </summary>
+        public static string SameProjectExistsWarning {
+            get {
+                return ResourceManager.GetString("SameProjectExistsWarning", resourceCulture);
             }
         }
         

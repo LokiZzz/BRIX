@@ -17,12 +17,7 @@ namespace BRIX.Mobile.Models.Characters
                 new CharacterAbilityModel(x) { Character = character })
             );
             Tags = new (character.Tags.Select(x => new CharacterTagVM { Text = x }));
-            Projects = new(character.Projects.Select(x => new CharacterProjectVM {  
-                Name = x.Name, Description = x.Description, Steps = x.Steps, CurrentStep = x.CurrentStep
-            }));
-
-            Projects.Add(new CharacterProjectVM { Name = "Проект 1", Description = "Описание 1", CurrentStep = 5, Steps = 12 });
-            Projects.Add(new CharacterProjectVM { Name = "Проект 2", Description = "Описание 2", CurrentStep = 3, Steps = 4 });
+            Projects = new(character.Projects.Select(x => new CharacterProjectVM(x)));
         }
 
         public Character InternalModel { get; }
