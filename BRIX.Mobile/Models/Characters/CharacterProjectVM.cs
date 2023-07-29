@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Characters;
+using BRIX.Library.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BRIX.Mobile.Models.Characters
@@ -36,8 +37,7 @@ namespace BRIX.Mobile.Models.Characters
             set
             {
                 SetProperty(ref _steps, value);
-                OnPropertyChanged(nameof(Progress));
-                OnPropertyChanged(nameof(ProgressText));
+                UpdateProgress();
             }
         }
 
@@ -48,14 +48,23 @@ namespace BRIX.Mobile.Models.Characters
             set
             {
                 SetProperty(ref _currentStep, value);
-                OnPropertyChanged(nameof(Progress));
-                OnPropertyChanged(nameof(ProgressText));
+                UpdateProgress();
             }
         }
 
-        public double Progress => (double)CurrentStep / Steps * 100;
+        private int _progress;
+        public int Progress
+        {
+            get => _progress;
+            set => SetProperty(ref _progress, value);
+        }
 
-        public string ProgressText => $"{CurrentStep}/{Steps}";
+        private string _progressText;
+        public string ProgressText
+        {
+            get => _progressText;
+            set => SetProperty(ref _progressText, value);
+        }
 
         public CharacterProject ToModel()
         {
@@ -66,6 +75,12 @@ namespace BRIX.Mobile.Models.Characters
                 Steps = this.Steps,
                 CurrentStep = this.CurrentStep
             };
+        }
+
+        private void UpdateProgress()
+        {
+            Progress = ((double)CurrentStep / Steps * 100).Round();
+            ProgressText = $"{CurrentStep}/{Steps}";
         }
     }
 }

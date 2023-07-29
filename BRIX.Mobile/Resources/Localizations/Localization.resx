@@ -627,6 +627,9 @@
   <data name="Projects" xml:space="preserve">
     <value>Projects</value>
   </data>
+  <data name="ProjectsHelp" xml:space="preserve">
+    <value>Character projects are affairs for which progress needs to be tracked. To add a project, tap the plus sign button below. To edit a project, swipe the project card to the right; to delete it, swipe it to the left. To open the project description tap on its name. To increase the progress by one step tap the round progress bar or double tap to decrease it.</value>
+  </data>
   <data name="ProjectSteps" xml:space="preserve">
     <value>Steps count</value>
   </data>

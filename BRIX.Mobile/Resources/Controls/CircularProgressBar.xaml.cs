@@ -8,7 +8,14 @@ public partial class CircularProgressBar : ContentView
 	}
 
     public static readonly BindableProperty ProgressProperty = 
-        BindableProperty.Create(nameof(Progress), typeof(int), typeof(CircularProgressBar));
+        BindableProperty.Create(nameof(Progress), typeof(int), typeof(CircularProgressBar), 
+            propertyChanged:OnProgressChanged);
+
+    private static void OnProgressChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        CircularProgressBar progressBar = bindable as CircularProgressBar;
+        progressBar.graphicsView.Invalidate();
+    }
 
     public static readonly BindableProperty InnerTextProperty =
             BindableProperty.Create(nameof(InnerText), typeof(string), typeof(CircularProgressBarDrawable));
@@ -31,7 +38,7 @@ public partial class CircularProgressBar : ContentView
     public int Progress
     {
         get { return (int)GetValue(ProgressProperty); }
-        set { SetValue(ProgressProperty, value); }
+        set => SetValue(ProgressProperty, value);
     }
 
     public string InnerText

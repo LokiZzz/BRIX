@@ -92,6 +92,7 @@
                     Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Projects}}" 
                     Style="{StaticResource TitleLabel}"
                     Margin="10,0,0,0"/>
+                <controls:HelpCard Help="{x:Static lcz:LocalizationKeys.ProjectsHelp}" Margin="10,0"/>
                 <Button 
                     Style="{StaticResource LightPlusButton}"
                     Margin="10,0"
@@ -131,7 +132,14 @@
                                             Grid.Column="0"
                                             Style="{StaticResource TitleLabel}" 
                                             Text="{Binding Name}" 
-                                            LineBreakMode="TailTruncation"/>
+                                            LineBreakMode="TailTruncation">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer 
+                                                    NumberOfTapsRequired="1" 
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterDetailsPageVM}}, Path=OpenProjectDescriptionCommand}"
+                                                    CommandParameter="{Binding}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
                                         <controls:CircularProgressBar
                                             Grid.Column="1"
                                             InnerText="{Binding ProgressText}"
@@ -141,7 +149,20 @@
                                             Thickness="3"
                                             ProgressColor="{StaticResource BRIXLime}"
                                             ProgressLeftColor="{StaticResource BRIXDim}"
-                                            Margin="1"/>
+                                            Margin="1"
+                                            InputTransparent="True"/>
+                                        <Border Grid.Column="1" BackgroundColor="Transparent">
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer 
+                                                    NumberOfTapsRequired="1" 
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterDetailsPageVM}}, Path=AddProjectStepCommand}"
+                                                    CommandParameter="{Binding}"/>
+                                                <TapGestureRecognizer 
+                                                    NumberOfTapsRequired="2" 
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterDetailsPageVM}}, Path=ReduceProjectStepCommand}"
+                                                    CommandParameter="{Binding}"/>
+                                            </Border.GestureRecognizers>
+                                        </Border>
                                     </Grid>
                                 </Border>
                             </SwipeView>

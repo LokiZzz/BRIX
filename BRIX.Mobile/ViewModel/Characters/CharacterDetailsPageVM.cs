@@ -93,6 +93,41 @@ namespace BRIX.Mobile.ViewModel.Characters
             await _characterService.UpdateAsync(Character.InternalModel);
         }
 
+        [RelayCommand]
+        public async Task OpenProjectDescription(CharacterProjectVM project)
+        {
+            await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
+                new AlertPopupParameters
+                {
+                    Mode = EAlertMode.ShowMessage,
+                    Title = project.Name,
+                    Message = string.IsNullOrEmpty(project.Description) ? $"{project.Name}..." : project.Description
+                }
+            );
+        }
+
+        [RelayCommand]
+        public async Task AddProjectStep(CharacterProjectVM project)
+        {
+            if (project.CurrentStep < project.Steps)
+            {
+                project.CurrentStep++;
+                Character.InternalModel.Projects.Single(x => x.Name == project.Name).CurrentStep++;
+                await _characterService.UpdateAsync(Character.InternalModel);
+            }
+        }
+
+        [RelayCommand]
+        public async Task ReduceProjectStep(CharacterProjectVM project)
+        {
+            if (project.CurrentStep > 0)
+            {
+                project.CurrentStep--;
+                Character.InternalModel.Projects.Single(x => x.Name == project.Name).CurrentStep--;
+                await _characterService.UpdateAsync(Character.InternalModel);
+            }
+        }
+
         public override async Task OnNavigatedAsync()
         {
             await Initialize();

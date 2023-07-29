@@ -1591,6 +1591,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Character projects are affairs for which progress needs to be tracked. To add a project, tap the plus sign button below. To edit a project, swipe the project card to the right; to delete it, swipe it to the left. To open the project description tap on its name. To increase the progress by one step tap the round progress bar or double tap to decrease it..
+        /// </summary>
+        public static string ProjectsHelp {
+            get {
+                return ResourceManager.GetString("ProjectsHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Steps count.
         /// </summary>
         public static string ProjectSteps {
