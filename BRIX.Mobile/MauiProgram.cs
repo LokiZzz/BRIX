@@ -69,6 +69,7 @@ public static class MauiProgram
         builder.RegisterView<AddOrEditCharacterPage, AddOrEditCharacterPageVM>();
         builder.RegisterView<EditCharacterImagePage, EditCharacterImagePageVM>();
         builder.RegisterView<AddOrEditProjectPage, AddOrEditProjectPageVM>();
+        builder.RegisterView<AddHealthPage, AddHealthPageVM>();
 
         builder.RegisterView<AddOrEditInventoryItemPage, AddOrEditInventoryItemPageVM>();
 

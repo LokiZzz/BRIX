@@ -151,6 +151,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add health.
+        /// </summary>
+        public static string AddHealth {
+            get {
+                return ResourceManager.GetString("AddHealth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can increase the amount of health points your character has by pouring experience points into it. Be careful, the cost scale is progressive and the more experience you pour into health, the more expensive each health point will be..
+        /// </summary>
+        public static string AddHealthHint {
+            get {
+                return ResourceManager.GetString("AddHealthHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add item.
         /// </summary>
         public static string AddInventoryItem {
@@ -480,6 +498,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string CharacterDetails {
             get {
                 return ResourceManager.GetString("CharacterDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Character health.
+        /// </summary>
+        public static string CharacterHealth {
+            get {
+                return ResourceManager.GetString("CharacterHealth", resourceCulture);
             }
         }
         

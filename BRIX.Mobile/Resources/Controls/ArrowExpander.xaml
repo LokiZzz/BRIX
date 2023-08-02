@@ -9,7 +9,7 @@
         <toolkit:Expander.Header>
             <Grid ColumnDefinitions="*,auto" ColumnSpacing="0">
                 <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{Binding Source={x:Reference this}, Path=Title}"/>
-                <Button Grid.Column="1"  Style="{StaticResource SquareIconButton}" BackgroundColor="{StaticResource BRIXDim}" InputTransparent="True" FontFamily="Awesome">
+                <Button Grid.Column="1"  Style="{StaticResource SquareIconButton}" InputTransparent="True" FontFamily="Awesome">
                     <Button.Triggers>
                         <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference expander}, Path=IsExpanded}" Value="True">
                             <Setter Property="Text" Value="{x:Static icons:Awesome.ChevronDown}"/>

@@ -147,6 +147,12 @@
   <data name="AddCondition" xml:space="preserve">
     <value>Добавить условие</value>
   </data>
+  <data name="AddHealth" xml:space="preserve">
+    <value>Увеличить здоровье</value>
+  </data>
+  <data name="AddHealthHint" xml:space="preserve">
+    <value>Вы можете увеличить количество очков здоровья у своего персонажа, вливая в него очки опыта. Будьте внимательны, шкала стоимости является прогрессивной и чем больше вы будете вливать опыта в здоровье, тем дороже будет каждое очко здоровья.</value>
+  </data>
   <data name="AddInventoryItem" xml:space="preserve">
     <value>Добавить предмет</value>
   </data>
@@ -257,6 +263,9 @@
   </data>
   <data name="CharacterDetails" xml:space="preserve">
     <value>Детали</value>
+  </data>
+  <data name="CharacterHealth" xml:space="preserve">
+    <value>Здоровье персонажа</value>
   </data>
   <data name="CharacterListPageTitle" xml:space="preserve">
     <value>Список персонажей</value>

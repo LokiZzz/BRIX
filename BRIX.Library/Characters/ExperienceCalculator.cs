@@ -9,7 +9,9 @@
     /// </summary>
     public static class ExperienceCalculator
     {
-        private static int _experienceModifier = 50;
+        private static int _expPerLevel = 100;
+        private static int _experienceModifier = _expPerLevel / 2;
+        private static int _healthPerLevel = 10;
 
         public static int GetExpForLevel(int level) => _experienceModifier * level * (level + 1);
 
@@ -40,6 +42,30 @@
             int expForNextLevel = GetExpForLevel(currentLevel + 1);
 
             return expForNextLevel - currentExp;
+        }
+
+        public static int HealthToExp(int health)
+        {
+            int levelEquivalent = health / _healthPerLevel;
+            int requiredExp = GetExpForLevel(levelEquivalent);
+
+            int healthRemainder = health % _healthPerLevel;
+            int levelsExpDiff = _expPerLevel * (levelEquivalent + 1);
+            int expPerHealthPointOnThisLevel = levelsExpDiff / _healthPerLevel;
+            requiredExp += healthRemainder * expPerHealthPointOnThisLevel;
+
+            return requiredExp;
+        }
+
+        public static int ExpToHealth(int exp)
+        {
+            int levelEquivalent = GetLevelFromExp(exp);
+            int health = levelEquivalent * _healthPerLevel;
+            int levelsExpDiff = _expPerLevel * (levelEquivalent + 1);
+            int expPerHealthPointOnThisLevel = levelsExpDiff / _healthPerLevel;
+            health += (exp - GetExpForLevel(exp)) / expPerHealthPointOnThisLevel;
+
+            return health;
         }
     }
 }

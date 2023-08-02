@@ -18,7 +18,6 @@ namespace BRIX.Library.Characters
 
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public int Experience { get; set; }
         public string Backstory { get; set; }
         public string Appearance { get; set; }
         public List<string> Tags { get; set; } = new();
@@ -27,15 +26,20 @@ namespace BRIX.Library.Characters
         public List<AbilityMaterialSupport> MaterialSupport { get; set; } = new();
         public Inventory Inventory { get; set; } = new();
 
+        public int Experience { get; set; }
+        /// <summary>
+        /// Очки опыта, влитые в здоровье
+        /// </summary>
+        public int ExpInHealth { get; set; }
         public int Level => ExperienceCalculator.GetLevelFromExp(Experience);
         public int ExpToLevelUp => ExperienceCalculator.GetExpToLevelUp(Experience);
-        public int SpentExp => Abilities.Sum(x => x.ExpCost(this));
+        public int SpentExp => Abilities.Sum(x => x.ExpCost(this)) + ExpInHealth;
         public int AvailableExp => Experience - SpentExp;
 
         /// <summary>
         /// Здесь зависимость от способностей, но временно считается по простому.
         /// </summary>
-        public int MaxHealth => Level * 10;
+        public int MaxHealth => Level * 10 + ExperienceCalculator.HealthToExp(ExpInHealth);
         public int CurrentHealth { get; set; }
 
         /// <summary>
