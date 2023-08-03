@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Characters;
+using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.Input;
@@ -66,6 +67,13 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task Save()
         {
+            if(ExperienceLeft < 0)
+            {
+                await Alert(Localization.AddHealthNotEnoughExpAlert);
+
+                return;
+            }
+
             Character currentCharacter = await CharacterService.GetCurrentCharacter();
             currentCharacter.ExpInHealth = ExpSpent;
             await CharacterService.UpdateAsync(currentCharacter);

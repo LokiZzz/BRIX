@@ -153,6 +153,9 @@
   <data name="AddHealthHint" xml:space="preserve">
     <value>You can increase the amount of health points your character has by pouring experience points into it. Be careful, the cost scale is progressive and the more experience you pour into health, the more expensive each health point will be.</value>
   </data>
+  <data name="AddHealthNotEnoughExpAlert" xml:space="preserve">
+    <value>You have no enough experience points to add that health points count to your character.</value>
+  </data>
   <data name="AddInventoryItem" xml:space="preserve">
     <value>Add item</value>
   </data>

@@ -169,6 +169,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have no enough experience points to add that health points count to your character..
+        /// </summary>
+        public static string AddHealthNotEnoughExpAlert {
+            get {
+                return ResourceManager.GetString("AddHealthNotEnoughExpAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add item.
         /// </summary>
         public static string AddInventoryItem {

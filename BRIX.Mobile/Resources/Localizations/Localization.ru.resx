@@ -153,6 +153,9 @@
   <data name="AddHealthHint" xml:space="preserve">
     <value>Вы можете увеличить количество очков здоровья у своего персонажа, вливая в него очки опыта. Будьте внимательны, шкала стоимости является прогрессивной и чем больше вы будете вливать опыта в здоровье, тем дороже будет каждое очко здоровья.</value>
   </data>
+  <data name="AddHealthNotEnoughExpAlert" xml:space="preserve">
+    <value>У вас не хватает очков опыта, чтобы добвить персонажу такое количество здоровья.</value>
+  </data>
   <data name="AddInventoryItem" xml:space="preserve">
     <value>Добавить предмет</value>
   </data>
