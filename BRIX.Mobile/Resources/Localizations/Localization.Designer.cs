@@ -178,6 +178,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Additional health.
+        /// </summary>
+        public static string AdditionalHealth {
+            get {
+                return ResourceManager.GetString("AdditionalHealth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add ability.
         /// </summary>
         public static string AddOrEditAbilityPageTitle_Add {
@@ -961,6 +970,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Experience left: {0}.
+        /// </summary>
+        public static string ExperienceLeft {
+            get {
+                return ResourceManager.GetString("ExperienceLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Experience overall: {0}.
+        /// </summary>
+        public static string ExperienceOverall {
+            get {
+                return ResourceManager.GetString("ExperienceOverall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to EXP to level up.
         /// </summary>
         public static string ExperienceToLevelup {
@@ -1029,6 +1056,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Health {
             get {
                 return ResourceManager.GetString("Health", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spend all EXP.
+        /// </summary>
+        public static string HealthSpentAllExp {
+            get {
+                return ResourceManager.GetString("HealthSpentAllExp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spent exp.
+        /// </summary>
+        public static string HealthSpentExp {
+            get {
+                return ResourceManager.GetString("HealthSpentExp", resourceCulture);
             }
         }
         
@@ -1443,6 +1488,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string NeedToMoveBothArms {
             get {
                 return ResourceManager.GetString("NeedToMoveBothArms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Character health:.
+        /// </summary>
+        public static string NewCharacterHealth {
+            get {
+                return ResourceManager.GetString("NewCharacterHealth", resourceCulture);
             }
         }
         

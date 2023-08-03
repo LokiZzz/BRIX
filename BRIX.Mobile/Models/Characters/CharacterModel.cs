@@ -132,6 +132,7 @@ namespace BRIX.Mobile.Models.Characters
             set
             {
                 SetProperty(InternalModel.Experience, value, InternalModel, (character, exp) => character.Experience = exp);
+                OnPropertyChanged(nameof(CurrentHealth));
                 OnPropertyChanged(nameof(MaxHealth));
                 OnPropertyChanged(nameof(HealthPercent));
                 OnPropertyChanged(nameof(HealthState));
@@ -143,13 +144,13 @@ namespace BRIX.Mobile.Models.Characters
             }
         }
 
-        public int ExperienceForNextLevel => ExperienceCalculator.GetExpForLevel(Level + 1);
+        public int ExperienceForNextLevel => CharacterCalculator.GetExpForLevel(Level + 1);
 
         public double LevelUpProgress
         {
             get
             {
-                int absProgress = Experience - ExperienceCalculator.GetExpForLevel(Level);
+                int absProgress = Experience - CharacterCalculator.GetExpForLevel(Level);
 
                 return absProgress / (double)ExperienceForNextLevel;
             }

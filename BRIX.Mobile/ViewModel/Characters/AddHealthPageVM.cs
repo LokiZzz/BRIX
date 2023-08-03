@@ -19,35 +19,87 @@ namespace BRIX.Mobile.ViewModel.Characters
             CharacterService = characterService;
         }
 
-        private int _health;
-        public int Health
+        private bool _invokeHPCalc = true;
+        private bool _invokeEXPCalc = true;
+
+        private int _additionalHealth;
+        public int AdditionalHealth
         {
-            get => _health;
+            get => _additionalHealth;
             set
             {
-                SetProperty(ref _health, value);
-                Exp = ExperienceCalculator.HealthToExp(value);
+                if (SetProperty(ref _additionalHealth, value) && _invokeEXPCalc)
+                {
+                    _invokeHPCalc = false;
+                    ExpSpent = CharacterCalculator.HealthToExp(_additionalHealth);
+                    _invokeHPCalc = true;
+                }
+
+                OnPropertyChanged(nameof(NewHealth));
             }
         }
 
-        private int _exp;
-        public int Exp
+        private int _expSpent;
+        public int ExpSpent
         {
-            get => _exp;
+            get => _expSpent;
             set
             {
-                SetProperty(ref _exp, value);
-                Health = ExperienceCalculator.ExpToHealth(value);
+                if(SetProperty(ref _expSpent, value) && _invokeHPCalc)
+                {
+                    _invokeEXPCalc = false;
+                    AdditionalHealth = CharacterCalculator.ExpToHealth(_expSpent);
+                    _invokeEXPCalc = true;
+                }
+
+                OnPropertyChanged(nameof(ExperienceLeft));
             }
         }
+
+        private int _rawHealth;
+        public int NewHealth => _rawHealth + AdditionalHealth;
+
+        public int ExperienceOverall { get; set; }
+
+        public int ExperienceLeft => ExperienceOverall - ExpSpent;
 
         [RelayCommand]
         public async Task Save()
         {
             Character currentCharacter = await CharacterService.GetCurrentCharacter();
-            currentCharacter.ExpInHealth = Exp;
+            currentCharacter.ExpInHealth = ExpSpent;
             await CharacterService.UpdateAsync(currentCharacter);
             await Navigation.Back();
+        }
+
+        [RelayCommand]
+        public void AddHealth(string add)
+        {
+            AdditionalHealth = _additionalHealth + int.Parse(add);
+        }
+
+        [RelayCommand]
+        public async Task SpendAllExp()
+        {
+            Character currentCharacter = await CharacterService.GetCurrentCharacter();
+            ExpSpent = currentCharacter.ExpInHealth + currentCharacter.AvailableExp;
+        }
+
+        [RelayCommand]
+        public void Reset()
+        {
+            ExpSpent = 0;
+        }
+
+        public override async Task OnNavigatedAsync()
+        {
+            Character currentCharacter = await CharacterService.GetCurrentCharacter();
+            ExpSpent = currentCharacter.ExpInHealth;
+            _rawHealth = currentCharacter.RawHealth;
+            OnPropertyChanged(nameof(NewHealth));
+            ExperienceOverall = currentCharacter.Experience;
+            OnPropertyChanged(nameof(ExperienceOverall));
+            OnPropertyChanged(nameof(ExperienceLeft));
         }
     }
 }

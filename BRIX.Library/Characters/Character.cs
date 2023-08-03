@@ -26,20 +26,47 @@ namespace BRIX.Library.Characters
         public List<AbilityMaterialSupport> MaterialSupport { get; set; } = new();
         public Inventory Inventory { get; set; } = new();
 
-        public int Experience { get; set; }
+        private int _experience;
+        public int Experience
+        {
+            get => _experience;
+            set
+            {
+                int oldLevel = Level;
+                _experience = value;
+
+                if(Level != oldLevel)
+                {
+                    CurrentHealth = MaxHealth;
+                }
+            }
+        }
+
+        private int _expInHealth;
         /// <summary>
         /// Очки опыта, влитые в здоровье
         /// </summary>
-        public int ExpInHealth { get; set; }
-        public int Level => ExperienceCalculator.GetLevelFromExp(Experience);
-        public int ExpToLevelUp => ExperienceCalculator.GetExpToLevelUp(Experience);
+        public int ExpInHealth
+        {
+            get => _expInHealth;
+            set
+            {
+                int oldMaxHP = MaxHealth;
+                _expInHealth = value;
+
+                if(MaxHealth != oldMaxHP)
+                {
+                    CurrentHealth = MaxHealth;
+                }
+            }
+        }
+
+        public int Level => CharacterCalculator.GetLevelFromExp(Experience);
+        public int ExpToLevelUp => CharacterCalculator.GetExpToLevelUp(Experience);
         public int SpentExp => Abilities.Sum(x => x.ExpCost(this)) + ExpInHealth;
         public int AvailableExp => Experience - SpentExp;
-
-        /// <summary>
-        /// Здесь зависимость от способностей, но временно считается по простому.
-        /// </summary>
-        public int MaxHealth => Level * 10 + ExperienceCalculator.HealthToExp(ExpInHealth);
+        public int RawHealth => Level * CharacterCalculator.HealthPerLevel;
+        public int MaxHealth => RawHealth + CharacterCalculator.ExpToHealth(ExpInHealth);
         public int CurrentHealth { get; set; }
 
         /// <summary>

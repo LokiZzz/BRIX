@@ -156,6 +156,9 @@
   <data name="AddInventoryItem" xml:space="preserve">
     <value>Добавить предмет</value>
   </data>
+  <data name="AdditionalHealth" xml:space="preserve">
+    <value>Дополнительное здоровье</value>
+  </data>
   <data name="AddOrEditAbilityPageTitle_Add" xml:space="preserve">
     <value>Новая способность</value>
   </data>
@@ -417,6 +420,12 @@
   <data name="Experience" xml:space="preserve">
     <value>Опыт</value>
   </data>
+  <data name="ExperienceLeft" xml:space="preserve">
+    <value>Опыта осталось:</value>
+  </data>
+  <data name="ExperienceOverall" xml:space="preserve">
+    <value>Опыта всего:</value>
+  </data>
   <data name="ExperienceToLevelup" xml:space="preserve">
     <value>Опыт до уровня</value>
   </data>
@@ -440,6 +449,12 @@
   </data>
   <data name="Health" xml:space="preserve">
     <value>Здоровье</value>
+  </data>
+  <data name="HealthSpentAllExp" xml:space="preserve">
+    <value>Влить весь опыт</value>
+  </data>
+  <data name="HealthSpentExp" xml:space="preserve">
+    <value>Влитые очки опыта</value>
   </data>
   <data name="HearTarget" xml:space="preserve">
     <value>Нужно слышать</value>
@@ -578,6 +593,9 @@
   </data>
   <data name="NeedToMoveBothArms" xml:space="preserve">
     <value>Персонаж может двигать обеими руками</value>
+  </data>
+  <data name="NewCharacterHealth" xml:space="preserve">
+    <value>Здоровье персонажа:</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>Нет</value>

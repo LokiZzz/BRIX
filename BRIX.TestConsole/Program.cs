@@ -2,6 +2,6 @@
 using BRIX.Library.Characters;
 using BRIX.Library.Extensions;
 
-int exp = ExperienceCalculator.HealthToExp(56);
+int exp = CharacterCalculator.HealthToExp(56);
 
 Console.ReadLine();

@@ -7,11 +7,12 @@
     /// 1       2       3       4       5       ...     N
     /// 100     300     600     1000    1500    ...     50 * N * (N + 1)     
     /// </summary>
-    public static class ExperienceCalculator
+    public static class CharacterCalculator
     {
         private static int _expPerLevel = 100;
         private static int _experienceModifier = _expPerLevel / 2;
-        private static int _healthPerLevel = 10;
+
+        public static int HealthPerLevel = 10;
 
         public static int GetExpForLevel(int level) => _experienceModifier * level * (level + 1);
 
@@ -46,12 +47,17 @@
 
         public static int HealthToExp(int health)
         {
-            int levelEquivalent = health / _healthPerLevel;
+            if(health == 0)
+            {
+                return 0;
+            }
+
+            int levelEquivalent = health / HealthPerLevel;
             int requiredExp = GetExpForLevel(levelEquivalent);
 
-            int healthRemainder = health % _healthPerLevel;
+            int healthRemainder = health % HealthPerLevel;
             int levelsExpDiff = _expPerLevel * (levelEquivalent + 1);
-            int expPerHealthPointOnThisLevel = levelsExpDiff / _healthPerLevel;
+            int expPerHealthPointOnThisLevel = levelsExpDiff / HealthPerLevel;
             requiredExp += healthRemainder * expPerHealthPointOnThisLevel;
 
             return requiredExp;
@@ -59,11 +65,16 @@
 
         public static int ExpToHealth(int exp)
         {
+            if (exp == 0)
+            {
+                return 0;
+            }
+
             int levelEquivalent = GetLevelFromExp(exp);
-            int health = levelEquivalent * _healthPerLevel;
+            int health = levelEquivalent * HealthPerLevel;
             int levelsExpDiff = _expPerLevel * (levelEquivalent + 1);
-            int expPerHealthPointOnThisLevel = levelsExpDiff / _healthPerLevel;
-            health += (exp - GetExpForLevel(exp)) / expPerHealthPointOnThisLevel;
+            int expPerHealthPointOnThisLevel = levelsExpDiff / HealthPerLevel;
+            health += (exp - GetExpForLevel(levelEquivalent)) / expPerHealthPointOnThisLevel;
 
             return health;
         }

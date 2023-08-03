@@ -105,6 +105,12 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         [RelayCommand]
+        public async Task AddHealth()
+        {
+            await Navigation.NavigateAsync<AddHealthPage>();
+        }
+
+        [RelayCommand]
         public async Task EditExperience()
         {
             NumericEditorResult result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(

@@ -156,6 +156,9 @@
   <data name="AddInventoryItem" xml:space="preserve">
     <value>Add item</value>
   </data>
+  <data name="AdditionalHealth" xml:space="preserve">
+    <value>Additional health</value>
+  </data>
   <data name="AddOrEditAbilityPageTitle_Add" xml:space="preserve">
     <value>Add ability</value>
   </data>
@@ -417,6 +420,12 @@
   <data name="Experience" xml:space="preserve">
     <value>Experience</value>
   </data>
+  <data name="ExperienceLeft" xml:space="preserve">
+    <value>Experience left: {0}</value>
+  </data>
+  <data name="ExperienceOverall" xml:space="preserve">
+    <value>Experience overall: {0}</value>
+  </data>
   <data name="ExperienceToLevelup" xml:space="preserve">
     <value>EXP to level up</value>
   </data>
@@ -440,6 +449,12 @@
   </data>
   <data name="Health" xml:space="preserve">
     <value>Health</value>
+  </data>
+  <data name="HealthSpentAllExp" xml:space="preserve">
+    <value>Spend all EXP</value>
+  </data>
+  <data name="HealthSpentExp" xml:space="preserve">
+    <value>Spent exp</value>
   </data>
   <data name="HearTarget" xml:space="preserve">
     <value>Must be heard</value>
@@ -578,6 +593,9 @@
   </data>
   <data name="NeedToMoveBothArms" xml:space="preserve">
     <value>Сharacter can move with both hands</value>
+  </data>
+  <data name="NewCharacterHealth" xml:space="preserve">
+    <value>Character health:</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>

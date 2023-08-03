@@ -22,16 +22,80 @@
                             Style="{StaticResource TitleLabel}" 
                             Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AddHealth}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AddHealthHint}}"/>
+                        <controls:FramedEntry
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AdditionalHealth}}"
+                            Text="{Binding AdditionalHealth}"/>
+                        <controls:FramedEntry
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.HealthSpentExp}}"
+                            Text="{Binding ExpSpent}"/>
+                        <Grid RowDefinitions="*,*,*" ColumnDefinitions="*,*,*,*" RowSpacing="10" ColumnSpacing="10" Margin="1">
+                            <Button 
+                                Grid.Row="0" Grid.Column="0"
+                                Style="{StaticResource LightButton}" 
+                                Text="–5" Command="{Binding AddHealthCommand}" CommandParameter="-5"/>
+                            <Button 
+                                Grid.Row="0" Grid.Column="1"
+                                Style="{StaticResource LightButton}" 
+                                Text="+5" Command="{Binding AddHealthCommand}" CommandParameter="5"/>
+                            <Button 
+                                Grid.Row="0" Grid.Column="2"
+                                Style="{StaticResource LightButton}" 
+                                Text="+10" Command="{Binding AddHealthCommand}" CommandParameter="10"/>
+                            <Button 
+                                Grid.Row="0" Grid.Column="3"
+                                Style="{StaticResource LightButton}" 
+                                Text="+25" Command="{Binding AddHealthCommand}" CommandParameter="25"/>
+                            <Button 
+                                Grid.Row="1" Grid.ColumnSpan="4"
+                                Style="{StaticResource LightButton}" 
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.HealthSpentAllExp}}" 
+                                Command="{Binding SpendAllExpCommand}"/>
+                            <Button 
+                                Grid.Row="2" Grid.ColumnSpan="4"
+                                Style="{StaticResource LightButton}" 
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Reset}}" 
+                                Command="{Binding ResetCommand}"/>
+                        </Grid>
                     </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>
         </ScrollView>
 
-        <Button 
-            Grid.Row="1"
-            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" 
-            Command="{Binding SaveCommand}"
-            Margin="0,0,0,10"/>
+        <Border Grid.Row="1" Style="{StaticResource LowBlockWithShadowBorder}">
+            <Grid RowDefinitions="auto,auto" RowSpacing="10">
+                <Grid RowDefinitions="auto,*,*" ColumnDefinitions="auto,*" Grid.Row="0" RowSpacing="5">
+                    <Label 
+                        Grid.Row="0" Grid.Column="0"
+                        Style="{StaticResource TitleLabel}"
+                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NewCharacterHealth}}"/>
+                    <Label 
+                        Grid.Row="0" Grid.Column="1"
+                        Style="{StaticResource TitleLabel}"
+                        Text="{Binding NewHealth}"
+                        HorizontalOptions="End"/>
+                    <Label
+                        Grid.Row="1" Grid.Column="0"
+                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ExperienceLeft}}"/>
+                    <Label
+                        Grid.Row="1" Grid.Column="1"
+                        Text="{Binding ExperienceLeft}"
+                        HorizontalOptions="End"/>
+                    <Label
+                        Grid.Row="2" Grid.Column="0"
+                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ExperienceOverall}}"/>
+                    <Label
+                        Grid.Row="2" Grid.Column="1"
+                        Text="{Binding ExperienceOverall}"
+                        HorizontalOptions="End"/>
+                </Grid>
+                
+                <Button 
+                    Grid.Row="1"
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" 
+                    Command="{Binding SaveCommand}"
+                    Margin="0,0,0,10"/>
+            </Grid>
+        </Border>
     </Grid>
 
 </ContentPage>

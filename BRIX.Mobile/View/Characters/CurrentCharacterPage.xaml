@@ -114,8 +114,12 @@
                         <HorizontalStackLayout Grid.Row="0" Grid.Column="2" Spacing="10">
                             <Button
                                 Style="{StaticResource SquareIconButton}"
-                                Text="{x:Static icons:Awesome.HeartCirclePlus}"
+                                Text="{x:Static icons:Awesome.Heart}"
                                 Command="{Binding RestoreHealthCommand}"/>
+                            <Button
+                                Style="{StaticResource SquareIconButton}"
+                                Text="{x:Static icons:Awesome.HeartCirclePlus}"
+                                Command="{Binding AddHealthCommand}"/>
                             <Button
                                 Style="{StaticResource SquareIconButton}"
                                 Command="{Binding EditHealthCommand}"/>
