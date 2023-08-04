@@ -11,84 +11,23 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
     {
         public override void Initialize()
         {
-            if (Effect.Impact.IsEmpty)
-            {
-                Effect.Impact = new DicePool((1, 4));
-            }
+            DicePoolEditor.Dices = Effect.Internal.Impact.IsEmpty
+                ? new DicePool((1, 4))
+                : Effect.Internal.Impact;
+            DicePoolEditor.DicePoolUpdated += OnImpactUpdated;
         }
 
-        [RelayCommand]
-        private async Task EditFormula()
+        private void OnImpactUpdated(object sender, EventArgs e)
         {
-            string formula = Effect?.Internal?.Impact?.ToString() ?? string.Empty;
-            DiceValuePopupResult result = 
-                await ShowPopupAsync<DiceValuePopup, DiceValuePopupResult, DiceValuePopupParameters>(
-                    new DiceValuePopupParameters { Formula = formula }
-            );
-
-            if (result != null)
-            {
-                ResetAdjustment();
-                Effect.Impact = result.DicePool;
-                _dicePoolToReset = null;
-            }
-
+            Effect.Internal.Impact = DicePoolEditor.Dices;
             CostMonitor.UpdateCost();
         }
 
-
-        private DicePool _dicePoolToReset = null;
-
-        private double _adjustment = 0;
-
-        public double Adjustment
+        private DicePoolEditorVM _dicePoolEditor = new();
+        public DicePoolEditorVM DicePoolEditor
         {
-            get => _adjustment;
-            set
-            {
-                if (value < 1 && value > -1)
-                {
-                    if (_dicePoolToReset != null)
-                    {
-                        Effect.Impact = _dicePoolToReset;
-                        _dicePoolToReset = null;
-                        CostMonitor.UpdateCost();
-                    }
-                }
-                else
-                {
-                    bool crossInteger = Math.Abs(Math.Floor(_adjustment) - Math.Floor(value)) >= 1;
-
-                    if (crossInteger || value == -5 || value == 5)
-                    {
-                        int adjustmentPercent = (int)(value > 0 ? Math.Floor(value) : Math.Ceiling(value));
-                        Adjust(adjustmentPercent * 10);
-                    }
-                }
-
-                SetProperty(ref _adjustment, value);
-            }
-        }
-
-        private void Adjust(int percent)
-        {
-            _dicePoolToReset = _dicePoolToReset == null ? Effect.Impact.Copy() : _dicePoolToReset;
-            Effect.Impact = DicePool.FromAdjusted(_dicePoolToReset, percent);
-            CostMonitor.UpdateCost();
-        }
-
-        [RelayCommand]
-        public void ApplyAdjustment()
-        {
-            _dicePoolToReset = null;
-            Adjustment = 0;
-        }
-
-        [RelayCommand]
-        public void ResetAdjustment()
-        {
-            Adjustment = 0;
-            CostMonitor.UpdateCost();
+            get => _dicePoolEditor;
+            set => SetProperty(ref _dicePoolEditor, value);
         }
     }
 }

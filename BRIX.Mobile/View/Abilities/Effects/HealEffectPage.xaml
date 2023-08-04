@@ -18,85 +18,20 @@
     </Shell.TitleView>
 
     <Grid RowDefinitions="*,auto">
-        <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never" >
+        <ScrollView Grid.Row="0">
             <VerticalStackLayout Spacing="10" Margin="0,0,0,10">
                 <Border Style="{StaticResource BlockBorder}">
-                    <Grid RowDefinitions="auto,auto,*,auto,auto,auto,auto" ColumnDefinitions="*" RowSpacing="10">
-                        <Grid Grid.Row="0" ColumnDefinitions="*, auto">
-                            <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Heal}}"/>
-                            <Button 
-                                Grid.Column="1" 
-                                Style="{StaticResource SquareIconButton}" 
-                                Text="{x:Static icons:Awesome.PenToSquare}"
-                                Command="{Binding EditFormulaCommand}"/>
-                        </Grid>
-                        <Label Grid.Row="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.HealDiceImpactHint}}"/>
-
-                        <!--Здесь Margin у коллекции компенсирует лишний Margin у элемента, это workaround бага MAUI, 
-                        который не позволяет нормально установить ItemsLayout через тег (если так сделать, то CollectionView сломается)-->
-                        <CollectionView Grid.Row="2" ItemsSource="{Binding Effect.DiceChunks}" ItemsLayout="VerticalGrid, 4" Margin="-5">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="abilitiesvm:DiceFormulaChunkVM">
-                                    <Border 
-                                        Style="{StaticResource BlockBorder}" 
-                                        BackgroundColor="{StaticResource BRIXDim}"
-                                        StrokeShape="RoundRectangle 5"
-                                        Padding="7"
-                                        Margin="5">
-                                        <Label 
-                                            Style="{StaticResource TitleLabel}" 
-                                            Text="{Binding ChunkText}" 
-                                            HorizontalOptions="Center" 
-                                            HorizontalTextAlignment="Center"
-                                            Margin="-3,0,0,0"/>
-                                        <!--Margin здесь — это визуальная компенсация якорности текста-->
-                                    </Border>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                        <Grid Grid.Row="3" RowDefinitions="*,*" ColumnDefinitions="auto,*" ColumnSpacing="20">
-                            <Label Grid.Row="0" Grid.Column="0" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Spread}}"/>
-                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Effect.SpreadText}"/>
-                            <Label Grid.Row="1" Grid.Column="0" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Average}}"/>
-                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Effect.Average}"/>
-                        </Grid>
-
-                        <!--Быстрая настройка!-->
-                        <Label Grid.Row="4" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.FastAdjustment}}"/>
-                        <Grid Grid.Row="5" RowDefinitions="auto,auto,auto" ColumnDefinitions="auto,*,auto" Margin="0,0,0,10">
-                            <Label Grid.Row="0" Grid.Column="0" Text="-50%" HorizontalOptions="Start"/>
-                            <Label Grid.Row="0" Grid.Column="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CurrentAdjustment}}" HorizontalOptions="Center"/>
-                            <!--<Label Grid.Row="0" Grid.Column="1" Text="{Binding Adjustment}" HorizontalOptions="Center"/>-->
-                            <Label Grid.Row="0" Grid.Column="2" Text="+50%" HorizontalOptions="End"/>
-                            <Slider Grid.Row="1" Grid.ColumnSpan="3" Minimum="-5" Maximum="5" Value="{Binding Adjustment, Mode=TwoWay}"/>
-                            <Grid Grid.Row="2" Grid.ColumnSpan="3" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*">
-                                <Rectangle Grid.Column="0" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="7"/>
-                                <Rectangle Grid.Column="1" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
-                                <Rectangle Grid.Column="2" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
-                                <Rectangle Grid.Column="3" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
-                                <Rectangle Grid.Column="4" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
-                                <Rectangle Grid.Column="5" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="7"/>
-                                <Rectangle Grid.Column="6" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
-                                <Rectangle Grid.Column="7" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
-                                <Rectangle Grid.Column="8" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
-                                <Rectangle Grid.Column="9" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
-                                <Rectangle Grid.Column="10" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="3"/>
-                                <Rectangle Grid.Column="11" BackgroundColor="{StaticResource BRIXLight}" WidthRequest="1" HeightRequest="7"/>
-                            </Grid>
-                        </Grid>
-                        <Grid Grid.Row="6" ColumnDefinitions="*,*" ColumnSpacing="10" Margin="1">
-                            <Button Grid.Column="0" Style="{StaticResource LightButton}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Reset}}" Command="{Binding ResetAdjustmentCommand}"/>
-                            <Button Grid.Column="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Apply}}" Command="{Binding ApplyAdjustmentCommand}"/>
-                        </Grid>
-                    </Grid>
+                    <VerticalStackLayout Spacing="10">
+                        <Label 
+                            Style="{StaticResource TitleLabel}" 
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Heal}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.HealDiceImpactHint}}"/>
+                        <abilitiesview:DicePoolEditor BindingContext="{Binding DicePoolEditor}"/>
+                    </VerticalStackLayout>
                 </Border>
-
-                <!--Aspects-->
                 <aspectsview:AspectsPanelView BindingContext="{Binding Aspects}"/>
             </VerticalStackLayout>
         </ScrollView>
-        <abilitiesview:AbilityCostMonitorPanel
-            Grid.Row="1"
-            BindingContext="{Binding CostMonitor}"/>
+        <abilitiesview:AbilityCostMonitorPanel Grid.Row="1" BindingContext="{Binding CostMonitor}"/>
     </Grid>
 </ContentPage>
