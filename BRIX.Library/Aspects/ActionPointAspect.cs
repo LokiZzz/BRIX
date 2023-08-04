@@ -24,7 +24,7 @@ namespace BRIX.Library.Aspects
 
         public override double GetCoefficient()
         {
-            int percent = new ThrasholdCoefConverter((1, 0), (2, 20), (3, 10), (6, 1))
+            int percent = new ThrasholdCostConverter((1, 0), (2, 20), (3, 10), (6, 1))
                 .Convert(ActionPoints);
             double coef = (-percent).ToCoeficient();
 

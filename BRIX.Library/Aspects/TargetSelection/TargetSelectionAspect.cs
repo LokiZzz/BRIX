@@ -35,7 +35,7 @@ namespace BRIX.Library.Aspects.TargetSelection
         private double GetNTADCoeficient()
         {
             double distanceCoef = GetDistanceCoeficient(NTAD.DistanceInMeters);
-            double countCoef = new ThrasholdCoefConverter((1, 0), (2, 100), (6, 50), (11, 10), (101, 1))
+            double countCoef = new ThrasholdCostConverter((1, 0), (2, 100), (6, 50), (11, 10), (101, 1))
                 .Convert(NTAD.TargetsCount)
                 .ToCoeficient();
             double randomSelectionCoef = NTAD?.IsTargetSelectionIsRandom == true ? 0.8 : 1;
@@ -52,7 +52,7 @@ namespace BRIX.Library.Aspects.TargetSelection
         {
             double distanceCoef = GetDistanceCoeficient(Area.DistanceToAreaInMeters);
             double volumeCoef = (Area?.Shape?.GetVolume() ?? 0 * 5).ToCoeficient();
-            double excludedTargetsCoef = new ThrasholdCoefConverter((0, 0), (1, 30), (6, 5))
+            double excludedTargetsCoef = new ThrasholdCostConverter((0, 0), (1, 30), (6, 5))
                 .Convert(Area?.ExcludedTargetsCount ?? 0)
                 .ToCoeficient();
 
@@ -66,7 +66,7 @@ namespace BRIX.Library.Aspects.TargetSelection
 
         private double GetDistanceCoeficient(int distance)
         {
-            return new ThrasholdCoefConverter((1, 0), (2, 20), (3, 10), (21, 5), (101, 2), (1001, 1))
+            return new ThrasholdCostConverter((1, 0), (2, 20), (3, 10), (21, 5), (101, 2), (1001, 1))
                 .Convert(distance)
                 .ToCoeficient();
         }
