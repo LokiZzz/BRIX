@@ -26,7 +26,7 @@
                             Style="{StaticResource TitleLabel}" 
                             Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Heal}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.HealDiceImpactHint}}"/>
-                        <abilitiesview:DicePoolEditor BindingContext="{Binding DicePoolEditor}" ShowFastAdjustment="False"/>
+                        <abilitiesview:DicePoolEditor BindingContext="{Binding DicePoolEditor}"/>
                     </VerticalStackLayout>
                 </Border>
                 <aspectsview:AspectsPanelView BindingContext="{Binding Aspects}"/>
