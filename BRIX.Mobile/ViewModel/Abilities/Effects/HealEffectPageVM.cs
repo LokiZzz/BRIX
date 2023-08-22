@@ -1,13 +1,10 @@
 ﻿using BRIX.Library.DiceValue;
+using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities.Effects;
-using BRIX.Mobile.View.Popups;
-using BRIX.Mobile.ViewModel.Popups;
-using BRIX.Utility.Extensions;
-using CommunityToolkit.Mvvm.Input;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Effects
 {
-    public partial class HealEffectPageVM : EffectPageVMBase<HealEffectModel>
+    public partial class HealEffectPageVM : EffectPageVMBase<EffectGenericModelBase<HealEffect>>
     {
         public override void Initialize()
         {

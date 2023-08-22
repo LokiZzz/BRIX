@@ -16,7 +16,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 Icon = AwesomeRPG.Sword,
                 EditPage = typeof(DamageEffectPage)
             }},
-            { typeof(HealEffectModel), new EffectUtilityModel() {
+            { typeof(EffectGenericModelBase<HealEffect>), new EffectUtilityModel() {
                 Name = Localization.EffectHeal,
                 Icon = AwesomeRPG.HealthIncrease,
                 EditPage = typeof(HealEffectPage)

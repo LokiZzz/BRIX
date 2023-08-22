@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.Models.Abilities.Effects
 {
-    public abstract class EffectGenericModelBase<T> : EffectModelBase where T : EffectBase, new()
+    public class EffectGenericModelBase<T> : EffectModelBase where T : EffectBase, new()
     {
         public EffectGenericModelBase() : this(new T()) { }
 

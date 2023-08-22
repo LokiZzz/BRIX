@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Effects;
+using System.Reflection;
 
 namespace BRIX.Mobile.Models.Abilities.Effects
 {
@@ -8,13 +9,26 @@ namespace BRIX.Mobile.Models.Abilities.Effects
         {
             switch(effect)
             {
-                case HealEffect heal:
-                    return new HealEffectModel(heal);
+                // Здесь нужно добавлять варианты только для тех эффектов, у которых реализована своя модель,
+                // то есть для тех, которые не используют EffectGenericModelBase<T> напрямую, а наследуются от него.
                 case DamageEffect dmg:
                     return new DamageEffectModel(dmg);
+                default:
+                {
+                    MethodInfo method = typeof(EffectModelFactory).GetMethod(
+                        nameof(GetDefaultModel),
+                        BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                    );
+                    MethodInfo genericMethod = method.MakeGenericMethod(effect.GetType());
+                    
+                    return genericMethod.Invoke(null, new object[] { effect }) as EffectModelBase;
+                }
             }
+        }
 
-            return null;
+        private static EffectGenericModelBase<T> GetDefaultModel<T>(T effect) where T : EffectBase, new()
+        {
+            return new EffectGenericModelBase<T>(effect);
         }
     }
 }

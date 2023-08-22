@@ -24,7 +24,7 @@ namespace BRIX.Library.Effects
         {
             int experienceEquivalent = CharacterCalculator.HealthToExp(HealthIncrease.Average());
 
-            return (experienceEquivalent * 0.8).Round();
+            return (experienceEquivalent * 0.75).Round();
         }
     }
 }

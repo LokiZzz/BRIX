@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BRIX.Lexica\BRIX.Lexis.csproj" />
     <ProjectReference Include="..\BRIX.Library\BRIX.Library.csproj" />
+    <ProjectReference Include="..\BRIX.Mobile\BRIX.Mobile.csproj" />
     <ProjectReference Include="..\BRIX.Utility\BRIX.Utility.csproj" />
   </ItemGroup>
 
