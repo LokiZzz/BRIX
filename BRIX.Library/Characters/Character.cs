@@ -62,9 +62,12 @@ namespace BRIX.Library.Characters
         }
 
         public int Level => CharacterCalculator.GetLevelFromExp(Experience);
+
         public int ExpToLevelUp => CharacterCalculator.GetExpToLevelUp(Experience);
-        public int SpentExp => Abilities.Sum(x => x.ExpCost(this)) + ExpInHealth;
         public int AvailableExp => Experience - SpentExp;
+        public int SpentExp => ExpSpentOnAbilities + ExpInHealth;
+        public int ExpSpentOnAbilities => Abilities.Sum(x => x.ExpCost(this));
+
         public int RawHealth => Level * CharacterCalculator.HealthPerLevel;
         public int MaxHealth => RawHealth + CharacterCalculator.ExpToHealth(ExpInHealth);
         public int CurrentHealth { get; set; }

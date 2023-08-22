@@ -11,10 +11,10 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
     {
         public override void Initialize()
         {
+            DicePoolEditor.DicePoolUpdated += OnImpactUpdated;
             DicePoolEditor.Dices = Effect.Internal.Impact.IsEmpty 
                 ? new DicePool((1, 4))
                 : Effect.Internal.Impact;
-            DicePoolEditor.DicePoolUpdated += OnImpactUpdated;
         }
 
         private void OnImpactUpdated(object sender, EventArgs e)

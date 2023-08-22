@@ -6,6 +6,9 @@ using BRIX.Library.Extensions;
 
 namespace BRIX.Library.Effects
 {
+    /// <summary>
+    /// Временное уменьшение максимального здоровья
+    /// </summary>
     public class ExhaustionEffect : EffectBase
     {
         public DicePool HealthDecrease { get; set; }

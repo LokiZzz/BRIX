@@ -29,6 +29,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 OnPropertyChanged(nameof(SpreadText));
                 OnPropertyChanged(nameof(Average));
                 OnPropertyChanged(nameof(DiceChunks));
+                DicePoolUpdated(this, null);
             }
         }
 

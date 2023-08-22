@@ -2,13 +2,7 @@
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Base;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 {
@@ -47,13 +41,13 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         {
             CostMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
             CostMonitor.SaveCommand = SaveCommand;
-            Effect = query.GetParameterOrDefault<DamageEffectModel>(NavigationParameters.Effect);
+            Effect = query.GetParameterOrDefault<EffectModelBase>(NavigationParameters.Effect);
             T temp = query.GetParameterOrDefault<T>(NavigationParameters.Aspect);
             Aspect = temp;
             Aspect.CostMonitor = CostMonitor;
 
             Initialize();
-
+             
             Effect.UpdateAspect(Aspect);
             CostMonitor.Ability.UpdateEffect(Effect);
 

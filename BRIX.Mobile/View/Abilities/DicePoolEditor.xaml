@@ -4,7 +4,8 @@
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:abilitiesvm="clr-namespace:BRIX.Mobile.ViewModel.Abilities"
              x:DataType="abilitiesvm:DicePoolEditorVM"
-             x:Class="BRIX.Mobile.View.Abilities.DicePoolEditor">
+             x:Class="BRIX.Mobile.View.Abilities.DicePoolEditor"
+             x:Name="this">
 
     <ContentView.Resources>
         <Style TargetType="Rectangle" x:Key="AdjustmentMark">
@@ -57,35 +58,38 @@
             Command="{Binding EditFormulaCommand}"/>
             
         <!--Быстрая настройка!-->
-        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.FastAdjustment}}"/>
-        
-        <Grid RowDefinitions="auto,auto,auto" ColumnDefinitions="auto,*,auto" Margin="0,0,0,10">
-            <Label Grid.Row="0" Grid.Column="0" Text="-50%" HorizontalOptions="Start"/>
+        <VerticalStackLayout IsVisible="{Binding Source={x:Reference this}, Path=ShowFastAdjustment}" Spacing="10">
             <Label 
-                Grid.Row="0" Grid.Column="1" 
-                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CurrentAdjustment}}" HorizontalOptions="Center"/>
-            <Label Grid.Row="0" Grid.Column="2" Text="+50%" HorizontalOptions="End"/>
-            <Slider Grid.Row="1" Grid.ColumnSpan="3" Minimum="-5" Maximum="5" Value="{Binding Adjustment, Mode=TwoWay}"/>
-            <Grid Grid.Row="2" Grid.ColumnSpan="3" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*">
-                <Rectangle Grid.Column="0" Style="{StaticResource BigAdjustmentMark}"/>
-                <Rectangle Grid.Column="1" Style="{StaticResource AdjustmentMark}"/>
-                <Rectangle Grid.Column="2" Style="{StaticResource AdjustmentMark}"/>
-                <Rectangle Grid.Column="3" Style="{StaticResource AdjustmentMark}"/>
-                <Rectangle Grid.Column="4" Style="{StaticResource AdjustmentMark}"/>
-                <Rectangle Grid.Column="5" Style="{StaticResource BigAdjustmentMark}"/>
-                <Rectangle Grid.Column="6" Style="{StaticResource AdjustmentMark}"/>
-                <Rectangle Grid.Column="7" Style="{StaticResource AdjustmentMark}"/>
-                <Rectangle Grid.Column="8" Style="{StaticResource AdjustmentMark}"/>
-                <Rectangle Grid.Column="9" Style="{StaticResource AdjustmentMark}"/>
-                <Rectangle Grid.Column="10" Style="{StaticResource AdjustmentMark}"/>
-                <Rectangle Grid.Column="11" Style="{StaticResource BigAdjustmentMark}"/>
-            </Grid>
-        </Grid>
-
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="1">
-            <Button Grid.Column="0" Style="{StaticResource LightButton}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Reset}}" Command="{Binding ResetAdjustmentCommand}"/>
-            <Button Grid.Column="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Apply}}" Command="{Binding ApplyAdjustmentCommand}"/>
-        </Grid>
+                Style="{StaticResource TitleLabel}" 
+                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.FastAdjustment}}"/>
         
+            <Grid RowDefinitions="auto,auto,auto" ColumnDefinitions="auto,*,auto" Margin="0,0,0,10">
+                <Label Grid.Row="0" Grid.Column="0" Text="-50%" HorizontalOptions="Start"/>
+                <Label 
+                    Grid.Row="0" Grid.Column="1" 
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CurrentAdjustment}}" HorizontalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="2" Text="+50%" HorizontalOptions="End"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="3" Minimum="-5" Maximum="5" Value="{Binding Adjustment, Mode=TwoWay}"/>
+                <Grid Grid.Row="2" Grid.ColumnSpan="3" ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*">
+                    <Rectangle Grid.Column="0" Style="{StaticResource BigAdjustmentMark}"/>
+                    <Rectangle Grid.Column="1" Style="{StaticResource AdjustmentMark}"/>
+                    <Rectangle Grid.Column="2" Style="{StaticResource AdjustmentMark}"/>
+                    <Rectangle Grid.Column="3" Style="{StaticResource AdjustmentMark}"/>
+                    <Rectangle Grid.Column="4" Style="{StaticResource AdjustmentMark}"/>
+                    <Rectangle Grid.Column="5" Style="{StaticResource BigAdjustmentMark}"/>
+                    <Rectangle Grid.Column="6" Style="{StaticResource AdjustmentMark}"/>
+                    <Rectangle Grid.Column="7" Style="{StaticResource AdjustmentMark}"/>
+                    <Rectangle Grid.Column="8" Style="{StaticResource AdjustmentMark}"/>
+                    <Rectangle Grid.Column="9" Style="{StaticResource AdjustmentMark}"/>
+                    <Rectangle Grid.Column="10" Style="{StaticResource AdjustmentMark}"/>
+                    <Rectangle Grid.Column="11" Style="{StaticResource BigAdjustmentMark}"/>
+                </Grid>
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="1">
+                <Button Grid.Column="0" Style="{StaticResource LightButton}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Reset}}" Command="{Binding ResetAdjustmentCommand}"/>
+                <Button Grid.Column="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Apply}}" Command="{Binding ApplyAdjustmentCommand}"/>
+            </Grid>
+        </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentView>

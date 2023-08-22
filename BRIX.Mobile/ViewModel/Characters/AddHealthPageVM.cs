@@ -60,9 +60,15 @@ namespace BRIX.Mobile.ViewModel.Characters
         private int _rawHealth;
         public int NewHealth => _rawHealth + AdditionalHealth;
 
-        public int ExperienceOverall { get; set; }
+        private int _experienceOverall;
+        public int ExperienceOverall
+        {
+            get => _experienceOverall;
+            set => SetProperty(ref _experienceOverall, value);
+        }
 
-        public int ExperienceLeft => ExperienceOverall - ExpSpent;
+        private int _expSpentOnAbilities;
+        public int ExperienceLeft => ExperienceOverall - ExpSpent - _expSpentOnAbilities;
 
         [RelayCommand]
         public async Task Save()
@@ -104,9 +110,9 @@ namespace BRIX.Mobile.ViewModel.Characters
             Character currentCharacter = await CharacterService.GetCurrentCharacter();
             ExpSpent = currentCharacter.ExpInHealth;
             _rawHealth = currentCharacter.RawHealth;
+            _expSpentOnAbilities = currentCharacter.ExpSpentOnAbilities;
             OnPropertyChanged(nameof(NewHealth));
             ExperienceOverall = currentCharacter.Experience;
-            OnPropertyChanged(nameof(ExperienceOverall));
             OnPropertyChanged(nameof(ExperienceLeft));
         }
     }
