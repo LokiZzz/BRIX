@@ -11,17 +11,9 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.Models.Abilities.Effects
 {
-    public partial class HealEffectModel : EffectModelBase
+    public partial class HealEffectModel : EffectGenericModelBase<HealEffect>
     {
-        public HealEffectModel() : this(new HealEffect()) { }
-
-        public HealEffectModel(HealEffect model)
-        {
-            InternalModel = model;
-            model.ForceAspectInitialize();
-            UpdateAspects();
-        }
-
-        public HealEffect Internal => GetSpecificEffect<HealEffect>();
+        public HealEffectModel() { }
+        public HealEffectModel(HealEffect effect) : base(effect) { }
     }
 }

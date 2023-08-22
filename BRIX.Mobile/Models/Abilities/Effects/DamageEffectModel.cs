@@ -3,9 +3,6 @@ using BRIX.Library.Effects;
 
 namespace BRIX.Mobile.Models.Abilities.Effects
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public partial class DamageEffectModel : EffectGenericModelBase<DamageEffect> 
     {
         public DamageEffectModel() { }

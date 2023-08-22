@@ -29,7 +29,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 OnPropertyChanged(nameof(SpreadText));
                 OnPropertyChanged(nameof(Average));
                 OnPropertyChanged(nameof(DiceChunks));
-                DicePoolUpdated(this, null);
+                FireDicePoolUpdated();
             }
         }
 
@@ -65,7 +65,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 _dicePoolToReset = null;
             }
 
-            DicePoolUpdated(this, null);
+            FireDicePoolUpdated();
         }
 
 
@@ -84,7 +84,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                     {
                         Dices = _dicePoolToReset;
                         _dicePoolToReset = null;
-                        DicePoolUpdated(this, null);
+                        FireDicePoolUpdated();
                     }
                 }
                 else
@@ -106,7 +106,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
         {
             _dicePoolToReset = _dicePoolToReset == null ? Dices.Copy() : _dicePoolToReset;
             Dices = DicePool.FromAdjusted(_dicePoolToReset, percent);
-            DicePoolUpdated(this, null);
+            FireDicePoolUpdated();
         }
 
         [RelayCommand]
@@ -120,7 +120,15 @@ namespace BRIX.Mobile.ViewModel.Abilities
         public void ResetAdjustment()
         {
             Adjustment = 0;
-            DicePoolUpdated(this, null);
+            FireDicePoolUpdated();
+        }
+
+        private void FireDicePoolUpdated()
+        {
+            if (DicePoolUpdated != null)
+            {
+                DicePoolUpdated(this, null);
+            }
         }
     }
 }
