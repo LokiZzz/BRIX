@@ -21,10 +21,20 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 Icon = AwesomeRPG.HealthIncrease,
                 EditPage = typeof(HealEffectPage)
             }},
-            { typeof(WinTheGameEffect), new EffectUtilityModel() {
-                Name = "Just win",
-                Icon = AwesomeRPG.FireballSword,
-                EditPage = typeof(DamageEffectPage) //временно
+            { typeof(EffectGenericModelBase<FortifyEffect>), new EffectUtilityModel() {
+                Name = Localization.EffectFortify,
+                Icon = AwesomeRPG.HeartTower,
+                EditPage = typeof(FortifyEffectPage)
+            }},
+            { typeof(EffectGenericModelBase<ExhaustionEffect>), new EffectUtilityModel() {
+                Name = Localization.EffectExhaustion,
+                Icon = AwesomeRPG.BleedingHearts,
+                EditPage = typeof(ExhaustionEffectPage)
+            }},
+            { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectUtilityModel() {
+                Name = Localization.EffectWin,
+                Icon = AwesomeRPG.PerspectiveDiceRandom,
+                EditPage = typeof(WinEffectPage)
             }},
         };
 

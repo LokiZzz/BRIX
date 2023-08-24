@@ -4,10 +4,8 @@ using BRIX.Library.DiceValue;
 
 namespace BRIX.Library.Effects
 {
-    public class DamageEffect : EffectBase
+    public class DamageEffect : SinglePropEffectBase
     {
-        public DicePool Impact { get; set; } = new DicePool();
-
         public override List<Type> RequiredAspects => new() 
         {
             typeof(ActionPointAspect), typeof(TargetSelectionAspect), 

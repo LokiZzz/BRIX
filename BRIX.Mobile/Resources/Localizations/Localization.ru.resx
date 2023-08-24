@@ -393,11 +393,20 @@
   <data name="EffectDamage" xml:space="preserve">
     <value>Урон</value>
   </data>
+  <data name="EffectExhaustion" xml:space="preserve">
+    <value>Истощение</value>
+  </data>
+  <data name="EffectFortify" xml:space="preserve">
+    <value>Укрепление</value>
+  </data>
   <data name="EffectHeal" xml:space="preserve">
     <value>Лечение</value>
   </data>
   <data name="Effects" xml:space="preserve">
     <value>Эффекты</value>
+  </data>
+  <data name="EffectWin" xml:space="preserve">
+    <value>Победа</value>
   </data>
   <data name="EnterHardActiovationCondition" xml:space="preserve">
     <value>Укажите сложно воспроизводимое условие или условие высокой редкости. Например падающая звезда в области видимости, конкретный день в году, извержение вулкана поблизости и т.п.</value>
@@ -420,6 +429,9 @@
   <data name="Equipment" xml:space="preserve">
     <value>Снаряжение</value>
   </data>
+  <data name="ExhaustionEffectPageHint" xml:space="preserve">
+    <value>Временно уменьшает количество максимальных очков здоровья цели. Шкала стоимости прогрессивная и зависит от количества, на которое увеличивается здоровье. Количество, на которое уменьшится здоровье может определяться броском костей.</value>
+  </data>
   <data name="EXP" xml:space="preserve">
     <value>EXP</value>
   </data>
@@ -437,6 +449,9 @@
   </data>
   <data name="FastAdjustment" xml:space="preserve">
     <value>Быстрая настройка</value>
+  </data>
+  <data name="FortifyEffectPageHint" xml:space="preserve">
+    <value>Временно увеличивает количество максимальных очков здоровья цели. Шкала стоимости прогрессивная и зависит от количества, на которое увеличивается здоровье. Количество бонусных очков здоровья может определяться броском костей.</value>
   </data>
   <data name="FreeExperience" xml:space="preserve">
     <value>Свободный опыт</value>
@@ -875,6 +890,9 @@
   </data>
   <data name="Week" xml:space="preserve">
     <value>Неделя</value>
+  </data>
+  <data name="WinEffectPageHint" xml:space="preserve">
+    <value>Этот эффект позволяет победить в игре BRIX. Мгновенно и бесповоротно. Дополнительное действие этого эффекта может быть обсуждено внутри каждой конкретной партии игроков отдельно.</value>
   </data>
   <data name="WoodenPlank" xml:space="preserve">
     <value>Деревянная доска</value>

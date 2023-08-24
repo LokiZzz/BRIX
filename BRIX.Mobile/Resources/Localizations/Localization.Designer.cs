@@ -889,6 +889,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exhaustion.
+        /// </summary>
+        public static string EffectExhaustion {
+            get {
+                return ResourceManager.GetString("EffectExhaustion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fortify.
+        /// </summary>
+        public static string EffectFortify {
+            get {
+                return ResourceManager.GetString("EffectFortify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Heal.
         /// </summary>
         public static string EffectHeal {
@@ -903,6 +921,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Effects {
             get {
                 return ResourceManager.GetString("Effects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win.
+        /// </summary>
+        public static string EffectWin {
+            get {
+                return ResourceManager.GetString("EffectWin", resourceCulture);
             }
         }
         
@@ -970,6 +997,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Temporarily decreases the target&apos;s maximum health. The cost scale is progressive and depends on the amount by which health is increased. The amount by which health is reduced can be determined by rolling the dice..
+        /// </summary>
+        public static string ExhaustionEffectPageHint {
+            get {
+                return ResourceManager.GetString("ExhaustionEffectPageHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to EXP.
         /// </summary>
         public static string EXP {
@@ -1020,6 +1056,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string FastAdjustment {
             get {
                 return ResourceManager.GetString("FastAdjustment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temporarily increases the target&apos;s maximum health. The cost scale is progressive and depends on the amount by which health is increased. The number of bonus health points can be determined by rolling the dice..
+        /// </summary>
+        public static string FortifyEffectPageHint {
+            get {
+                return ResourceManager.GetString("FortifyEffectPageHint", resourceCulture);
             }
         }
         
@@ -2334,6 +2379,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Week {
             get {
                 return ResourceManager.GetString("Week", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This effect allows you to win the BRIX game. Instantly and irrevocably. The additional effect of this effect can be discussed within each specific party of players separately..
+        /// </summary>
+        public static string WinEffectPageHint {
+            get {
+                return ResourceManager.GetString("WinEffectPageHint", resourceCulture);
             }
         }
         

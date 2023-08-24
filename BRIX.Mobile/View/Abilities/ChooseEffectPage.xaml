@@ -27,14 +27,14 @@
                                 CommandParameter="{Binding}"/>
                             <Label 
                                 FontFamily="AwesomeRPG" 
-                                FontSize="110"
+                                FontSize="60"
                                 Opacity="0.2"
                                 Text="{Binding Icon}" 
                                 TextColor="{StaticResource BRIXDim}" 
                                 VerticalOptions="Center" 
                                 VerticalTextAlignment="Center"
                                 HorizontalOptions="End"
-                                Margin="-10"/>
+                                Margin="5"/>
                             <Label 
                                 Style="{StaticResource ParagraphTitleLabel}" 
                                 Text="{Binding Name}" 

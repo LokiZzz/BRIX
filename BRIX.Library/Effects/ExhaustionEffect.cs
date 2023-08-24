@@ -9,10 +9,8 @@ namespace BRIX.Library.Effects
     /// <summary>
     /// Временное уменьшение максимального здоровья
     /// </summary>
-    public class ExhaustionEffect : EffectBase
+    public class ExhaustionEffect : SinglePropEffectBase
     {
-        public DicePool HealthDecrease { get; set; }
-
         public override List<Type> RequiredAspects => new List<Type>()
         {
             typeof(ActionPointAspect), typeof(TargetSelectionAspect),
@@ -22,7 +20,7 @@ namespace BRIX.Library.Effects
 
         public override int BaseExpCost()
         {
-            int experienceEquivalent = CharacterCalculator.HealthToExp(HealthDecrease.Average());
+            int experienceEquivalent = CharacterCalculator.HealthToExp(Impact.Average());
 
             return (experienceEquivalent * 0.5).Round();
         }

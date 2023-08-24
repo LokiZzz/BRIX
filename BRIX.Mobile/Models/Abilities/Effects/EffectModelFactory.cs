@@ -9,8 +9,8 @@ namespace BRIX.Mobile.Models.Abilities.Effects
         {
             switch(effect)
             {
-                // Здесь нужно добавлять варианты только для тех эффектов, у которых реализована своя модель,
-                // то есть для тех, которые не используют EffectGenericModelBase<T> напрямую, а наследуются от него.
+                // Здесь добавляются варианты только для тех эффектов, у которых реализована своя модель,
+                // то есть для те, которые не используют EffectGenericModelBase<T> напрямую, а наследуются от него.
                 case DamageEffect dmg:
                     return new DamageEffectModel(dmg);
                 default:

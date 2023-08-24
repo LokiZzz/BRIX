@@ -5,10 +5,8 @@ using BRIX.Library.Extensions;
 
 namespace BRIX.Library.Effects
 {
-    public class HealEffect : EffectBase
+    public class HealEffect : SinglePropEffectBase
     {
-        public DicePool Impact { get; set; } = new DicePool();
-
         public override List<Type> RequiredAspects => new()
         {
             typeof(ActionPointAspect), typeof(TargetSelectionAspect),

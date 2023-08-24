@@ -1,4 +1,6 @@
-﻿using BRIX.Mobile.Services;
+﻿using BRIX.Library.Effects;
+using BRIX.Mobile.Models.Abilities.Effects;
+using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Abilities;
 using BRIX.Mobile.View.Abilities.Aspects;
@@ -56,7 +58,7 @@ public static class MauiProgram
     }
 
     public static void RegisterViews(this MauiAppBuilder builder)
-	{
+    {
         builder.RegisterView<AppShell, AppShellVM>();
 
         builder.RegisterView<SignInPage, SignInPageVM>(false);
@@ -70,25 +72,38 @@ public static class MauiProgram
         builder.RegisterView<EditCharacterImagePage, EditCharacterImagePageVM>();
         builder.RegisterView<AddOrEditProjectPage, AddOrEditProjectPageVM>();
         builder.RegisterView<AddHealthPage, AddHealthPageVM>();
-
         builder.RegisterView<AddOrEditInventoryItemPage, AddOrEditInventoryItemPageVM>();
-
         builder.RegisterView<AddOrEditAbilityPage, AddOrEditAbilityPageVM>();
-        builder.RegisterView<ChooseEffectPage, ChooseEffectPageVM>();
-        builder.RegisterView<DamageEffectPage, DamageEffectPageVM>();
-        builder.RegisterView<HealEffectPage, HealEffectPageVM>();
-        builder.RegisterView<ActionPointAspectPage, ActionPointAspectPageVM>();
-        builder.RegisterView<TargetSelectionAspectPage, TargetSelectionAspectPageVM>();
-        builder.RegisterView<CooldownAspectPage, CooldownAspectPageVM>();
-        builder.RegisterView<ActivationConditionsAspectPage, ActivationConditionsAspectPageVM>();
+
+        AddEffectsAndAspects(builder);
 
         builder.RegisterView<SettingsPage, SettingsPageVM>(false);
 
+        AddPopups(builder);
+    }
+
+    private static void AddPopups(MauiAppBuilder builder)
+    {
         builder.RegisterPopup<NumericEditorPopup, NumericEditorPopupVM>();
         builder.RegisterPopup<AlertPopup, AlertPopupVM>();
         builder.RegisterPopup<DiceValuePopup, DiceValuePopupVM>();
         builder.RegisterPopup<PickerPopup, PickerPopupVM>();
         builder.RegisterPopup<EntryPopup, EntryPopupVM>();
+    }
+
+    private static void AddEffectsAndAspects(MauiAppBuilder builder)
+    {
+        builder.RegisterView<ChooseEffectPage, ChooseEffectPageVM>();
+        builder.RegisterView<DamageEffectPage, SinglePropEffectPageVMBase<DamageEffect>>();
+        builder.RegisterView<HealEffectPage, SinglePropEffectPageVMBase<HealEffect>>();
+        builder.RegisterView<FortifyEffectPage, SinglePropEffectPageVMBase<FortifyEffect>>();
+        builder.RegisterView<ExhaustionEffectPage, SinglePropEffectPageVMBase<ExhaustionEffect>>();
+        builder.RegisterView<WinEffectPage, EffectPageVMBase<EffectGenericModelBase<WinTheGameEffect>>>();
+
+        builder.RegisterView<ActionPointAspectPage, ActionPointAspectPageVM>();
+        builder.RegisterView<TargetSelectionAspectPage, TargetSelectionAspectPageVM>();
+        builder.RegisterView<CooldownAspectPage, CooldownAspectPageVM>();
+        builder.RegisterView<ActivationConditionsAspectPage, ActivationConditionsAspectPageVM>();
     }
 
     /// <param name="registerRoute"> Set false if view already registered in AppShell.xaml </param>

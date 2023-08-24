@@ -9,10 +9,8 @@ namespace BRIX.Library.Effects
     /// <summary>
     /// Временное увеличение максимального здоровья.
     /// </summary>
-    public class FortifyEffect : EffectBase
+    public class FortifyEffect : SinglePropEffectBase
     {
-        public DicePool HealthIncrease { get; set; }
-
         public override List<Type> RequiredAspects => new List<Type>()
         {
             typeof(ActionPointAspect), typeof(TargetSelectionAspect),
@@ -22,7 +20,7 @@ namespace BRIX.Library.Effects
 
         public override int BaseExpCost()
         {
-            int experienceEquivalent = CharacterCalculator.HealthToExp(HealthIncrease.Average());
+            int experienceEquivalent = CharacterCalculator.HealthToExp(Impact.Average());
 
             return (experienceEquivalent * 0.75).Round();
         }

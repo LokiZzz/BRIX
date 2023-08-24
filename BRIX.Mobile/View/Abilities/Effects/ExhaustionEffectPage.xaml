@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BRIX.Mobile.View.Abilities.Effects.ExhaustionEffectPage"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:abilitiesvm="clr-namespace:BRIX.Mobile.ViewModel.Abilities"
@@ -8,9 +9,8 @@
              xmlns:abilitiesview="clr-namespace:BRIX.Mobile.View.Abilities"
              xmlns:aspectsview="clr-namespace:BRIX.Mobile.View.Abilities.Aspects"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
-             x:Class="BRIX.Mobile.View.Abilities.Effects.DamageEffectPage"
              Shell.TabBarIsVisible="False"
-             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectDamage}}">
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectExhaustion}}">
 
     <Shell.TitleView>
         <controls:TitleView/>
@@ -23,9 +23,9 @@
                     <VerticalStackLayout Spacing="10">
                         <Label 
                             Style="{StaticResource TitleLabel}" 
-                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Damage}}"/>
-                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DamageEffectPageHint}}"/>
-                        <abilitiesview:DicePoolEditor BindingContext="{Binding DicePoolEditor}"/>
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectExhaustion}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ExhaustionEffectPageHint}}"/>
+                        <abilitiesview:DicePoolEditor BindingContext="{Binding DicePoolEditor}" ShowFastAdjustment="False"/>
                     </VerticalStackLayout>
                 </Border>
                 <aspectsview:AspectsPanelView BindingContext="{Binding Aspects}"/>
@@ -33,5 +33,5 @@
         </ScrollView>
         <abilitiesview:AbilityCostMonitorPanel Grid.Row="1" BindingContext="{Binding CostMonitor}"/>
     </Grid>
-    
+
 </ContentPage>

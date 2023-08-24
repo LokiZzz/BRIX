@@ -3,9 +3,9 @@ using BRIX.Mobile.ViewModel.Abilities.Effects;
 
 namespace BRIX.Mobile.View.Abilities.Effects;
 
-public partial class DamageEffectPage : ContentPage
+public partial class FortifyEffectPage : ContentPage
 {
-	public DamageEffectPage(SinglePropEffectPageVMBase<DamageEffect> context)
+	public FortifyEffectPage(SinglePropEffectPageVMBase<FortifyEffect> context)
 	{
 		InitializeComponent();
 		BindingContext = context;

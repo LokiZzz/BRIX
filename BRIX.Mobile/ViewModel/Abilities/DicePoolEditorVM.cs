@@ -16,9 +16,14 @@ namespace BRIX.Mobile.ViewModel.Abilities
 {
     public partial class DicePoolEditorVM : ViewModelBase
     {
+        public DicePoolEditorVM()
+        {
+            Dices = new DicePool((1, 4));
+        }
+
         public event EventHandler DicePoolUpdated;
 
-        private DicePool _dices = new((1, 4));
+        private DicePool _dices;
         public DicePool Dices
         {
             get => _dices;
@@ -29,6 +34,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 OnPropertyChanged(nameof(SpreadText));
                 OnPropertyChanged(nameof(Average));
                 OnPropertyChanged(nameof(DiceChunks));
+                OnPropertyChanged(nameof(ShowNoDicesMessage));
                 FireDicePoolUpdated();
             }
         }
@@ -48,7 +54,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         public int Average => Dices.Average();
 
-        public bool ShowNoDicesMessage => DiceChunks.Any();
+        public bool ShowNoDicesMessage => !DiceChunks.Any();
 
         [RelayCommand]
         private async Task EditFormula()

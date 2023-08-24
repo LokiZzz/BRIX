@@ -1,18 +1,16 @@
 ﻿using BRIX.Library.DiceValue;
+using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities.Effects;
-using BRIX.Mobile.View.Popups;
-using BRIX.Mobile.ViewModel.Popups;
-using BRIX.Utility.Extensions;
-using CommunityToolkit.Mvvm.Input;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Effects
 {
-    public partial class DamageEffectPageVM : EffectPageVMBase<DamageEffectModel>
+    public partial class SinglePropEffectPageVMBase<T> : EffectPageVMBase<EffectGenericModelBase<T>> 
+        where T : SinglePropEffectBase, new()
     {
         public override void Initialize()
         {
             DicePoolEditor.DicePoolUpdated += OnImpactUpdated;
-            DicePoolEditor.Dices = Effect.Internal.Impact.IsEmpty 
+            DicePoolEditor.Dices = Effect.Internal.Impact.IsEmpty
                 ? new DicePool((1, 4))
                 : Effect.Internal.Impact;
         }

@@ -3,7 +3,6 @@ using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Base;
 using BRIX.Utility.Extensions;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 
@@ -28,7 +27,10 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
             AspectsCollection = GetAspects(effect);
 
-            SelectedAspect = AspectsCollection.First();
+            if (AspectsCollection.Any())
+            {
+                SelectedAspect = AspectsCollection.First();
+            }
         }
 
         private ObservableCollection<AspectUtilityModel> _aspectsCollection = new();

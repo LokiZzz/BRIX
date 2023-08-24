@@ -8,7 +8,6 @@
              xmlns:abilitiesview="clr-namespace:BRIX.Mobile.View.Abilities"
              xmlns:aspectsview="clr-namespace:BRIX.Mobile.View.Abilities.Aspects"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
-             x:DataType="effectsvm:HealEffectPageVM"
              x:Class="BRIX.Mobile.View.Abilities.Effects.HealEffectPage"
              Shell.TabBarIsVisible="False"
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectHeal}}">
