@@ -19,11 +19,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public AbilityCostMonitorPanelVM CostMonitor { get; set; }
 
-        public T GetSpecificAspect<T>() where T : AspectBase
-        {
-            return InternalBase as T;
-        }
-
         public string Name => AspectsDictionary.Collection[GetType()].Name;
 
         public string Description 

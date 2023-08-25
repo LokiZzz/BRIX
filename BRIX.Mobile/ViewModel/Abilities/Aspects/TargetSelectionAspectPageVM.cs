@@ -38,6 +38,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 Size = x,
                 Text = Localization[x.ToString("G")].ToString()
             }));
+            OnPropertyChanged(nameof(ShowSizesCollection));
         }
 
         #region Strategy
@@ -240,6 +241,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
         #region Target size
 
+        public bool ShowSizesCollection => Sizes?.Any() == true;
+
         private ObservableCollection<TargetSizeVM> _sizes;
         public ObservableCollection<TargetSizeVM> Sizes
         {
@@ -289,6 +292,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             }
 
             CostMonitor.UpdateCost();
+
+            OnPropertyChanged(nameof(ShowSizesCollection));
         }
 
         [RelayCommand]
@@ -298,6 +303,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             Aspect.Internal.TargetsSizes.RemoveSize(property.Size);
 
             CostMonitor.UpdateCost();
+
+            OnPropertyChanged(nameof(ShowSizesCollection));
         }
 
         #endregion

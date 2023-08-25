@@ -9,14 +9,16 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
         {
             switch(aspect)
             {
-                case ActionPointAspect actionPointAspect:
-                    return new ActionPointsAspectModel(actionPointAspect);
-                case TargetSelectionAspect targetSelectionAspect:
-                    return new TargetSelectionAspectModel(targetSelectionAspect);
-                case CooldownAspect cooldownAspect:
-                    return new CooldownAspectModel(cooldownAspect);
-                case ActivationConditionsAspect activationConditionsAspect:
-                    return new ActivationConditionsAspectModel(activationConditionsAspect);
+                case ActionPointAspect apa:
+                    return new ActionPointsAspectModel(apa);
+                case TargetSelectionAspect tsa:
+                    return new TargetSelectionAspectModel(tsa);
+                case CooldownAspect ca:
+                    return new CooldownAspectModel(ca);
+                case ActivationConditionsAspect aca:
+                    return new ActivationConditionsAspectModel(aca);
+                case RoundDurationAspect rda:
+                    return new RoundDurationAspectModel(rda);
                 default: 
                     return null;
             }

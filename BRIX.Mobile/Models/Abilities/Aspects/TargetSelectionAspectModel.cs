@@ -8,14 +8,12 @@ using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {
-    public partial class TargetSelectionAspectModel : AspectModelBase
+    public partial class TargetSelectionAspectModel : SpecificAspectModelBase<TargetSelectionAspect>
     {
-        public TargetSelectionAspectModel(AspectBase model) : base(model) 
+        public TargetSelectionAspectModel(TargetSelectionAspect model) : base(model) 
         {
             Obstacles = ObstacleOptionHelper.GetOptions(ServicePool.GetService<ILocalizationResourceManager>());
         }
-
-        public TargetSelectionAspect Internal => GetSpecificAspect<TargetSelectionAspect>();
 
         public ETargetSelectionStrategy Strategy
         {

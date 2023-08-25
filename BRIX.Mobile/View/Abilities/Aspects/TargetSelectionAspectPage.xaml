@@ -284,13 +284,17 @@
                 </Border>
                 <!--Target selection restriction-->
                 <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding ShowNTADAndAREASettings}">
-                    <Grid RowDefinitions="auto,*,auto" RowSpacing="10">
+                    <Grid RowDefinitions="auto,auto,auto" RowSpacing="10">
                         <VerticalStackLayout Grid.Row="0" Spacing="10">
                             <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionRestriction}}"/>
                             <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionRestrictionHint}}"/>
                         </VerticalStackLayout>
                         
-                        <CollectionView Grid.Row="1" x:Name="restrictionsCollectionView" ItemsSource="{Binding Restrictions}">
+                        <CollectionView 
+                            Grid.Row="1" 
+                            x:Name="restrictionsCollectionView" 
+                            ItemsSource="{Binding Restrictions}"
+                            IsVisible="{Binding ShowNoRestrictionsText, Converter={StaticResource NotConverter}}">
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
                             </CollectionView.ItemsLayout>
@@ -325,7 +329,11 @@
                             <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetsSizesHint}}"/>
                         </VerticalStackLayout>
 
-                        <CollectionView Grid.Row="1" x:Name="sizesCollectionView" ItemsSource="{Binding Sizes}">
+                        <CollectionView 
+                            Grid.Row="1" 
+                            x:Name="sizesCollectionView" 
+                            ItemsSource="{Binding Sizes}"
+                            IsVisible="{Binding ShowSizesCollection}">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Vertical" Span="2" VerticalItemSpacing="5" HorizontalItemSpacing="5"/>
                             </CollectionView.ItemsLayout>
@@ -343,7 +351,7 @@
                             Style="{StaticResource LightButton}"
                             Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AddSize}}"
                             Command="{Binding AddSizeCommand}"
-                            Margin="0,0,0,1"/>
+                            Margin="1"/>
                     </Grid>
                 </Border>
             </VerticalStackLayout>

@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {
-    public partial class ActivationConditionsAspectModel : AspectModelBase
+    public partial class ActivationConditionsAspectModel : SpecificAspectModelBase<ActivationConditionsAspect>
     {
-        public ActivationConditionsAspectModel(AspectBase model) : base(model)
+        public ActivationConditionsAspectModel(ActivationConditionsAspect model) : base(model)
         {
             ILocalizationResourceManager localization = ServicePool.GetService<ILocalizationResourceManager>();
 
@@ -26,8 +26,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             ));
         }
 
-        public ActivationConditionsAspect Internal => GetSpecificAspect<ActivationConditionsAspect>();
-
         private ObservableCollection<ActivationConditionOptionVM> _conditions = new();
         public ObservableCollection<ActivationConditionOptionVM> Conditions
         {
@@ -38,8 +36,8 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
         private ObservableCollection<ActivationConditionOptionVM> _selectedConditions = new();
         public ObservableCollection<ActivationConditionOptionVM> SelectedConditions
         {
-            get => _conditions;
-            set => SetProperty(ref _conditions, value);
+            get => _selectedConditions;
+            set => SetProperty(ref _selectedConditions, value);
         }
     }
 

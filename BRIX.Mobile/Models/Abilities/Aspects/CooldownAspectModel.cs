@@ -5,9 +5,9 @@ using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {
-    public partial class CooldownAspectModel : AspectModelBase
+    public partial class CooldownAspectModel : SpecificAspectModelBase<CooldownAspect>
     {
-        public CooldownAspectModel(AspectBase model) : base(model) 
+        public CooldownAspectModel(CooldownAspect model) : base(model) 
         { 
             ILocalizationResourceManager localization = ServicePool.GetService<ILocalizationResourceManager>();
 
@@ -17,8 +17,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 LocalizedName = localization[x.ToString("G")].ToString()
             }));
         }
-
-        public CooldownAspect Internal => GetSpecificAspect<CooldownAspect>();
 
         public CooldownOptionVM SelectedOption
         {

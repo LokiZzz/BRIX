@@ -3,11 +3,9 @@ using BRIX.Mobile.ViewModel.Abilities;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {
-    public partial class ActionPointsAspectModel : AspectModelBase
+    public partial class ActionPointsAspectModel : SpecificAspectModelBase<ActionPointAspect>
     {
-        public ActionPointsAspectModel(AspectBase model) : base(model) { }
-
-        public ActionPointAspect Internal => GetSpecificAspect<ActionPointAspect>();
+        public ActionPointsAspectModel(ActionPointAspect model) : base(model) { }
 
         public int ActionPoints
         {
