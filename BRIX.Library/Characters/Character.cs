@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Aspects;
+﻿using BRIX.Library.Ability;
+using BRIX.Library.Aspects;
 using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
 using BRIX.Utility.Extensions;
@@ -22,6 +23,7 @@ namespace BRIX.Library.Characters
         public List<CharacterAbility> Abilities { get; set; } = new();
         public List<AbilityMaterialSupport> MaterialSupport { get; set; } = new();
         public Inventory Inventory { get; set; } = new();
+        public List<Status> Statuses { get; set; } = new();
 
         private int _experience;
         public int Experience
