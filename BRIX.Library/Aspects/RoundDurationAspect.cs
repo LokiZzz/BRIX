@@ -13,8 +13,6 @@ namespace BRIX.Library.Aspects
 
         public int Rounds { get; set; } = 1;
 
-        public Status Status { get; set; } = new();
-
         public bool CanDisableStatus { get; set; } = false;
 
         public override double GetCoefficient()

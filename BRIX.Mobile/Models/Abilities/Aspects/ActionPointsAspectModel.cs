@@ -14,7 +14,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             {
                 SetProperty(Internal.ActionPoints, value, Internal, 
                     (model, prop) => model.ActionPoints = prop);
-                UpdateCost();
             }
         }
     }

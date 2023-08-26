@@ -104,6 +104,7 @@ public static class MauiProgram
         builder.RegisterView<TargetSelectionAspectPage, TargetSelectionAspectPageVM>();
         builder.RegisterView<CooldownAspectPage, CooldownAspectPageVM>();
         builder.RegisterView<ActivationConditionsAspectPage, ActivationConditionsAspectPageVM>();
+        builder.RegisterView<RoundDurationAspectPage, RoundDurationAspectPageVM>();
     }
 
     /// <param name="registerRoute"> Set false if view already registered in AppShell.xaml </param>

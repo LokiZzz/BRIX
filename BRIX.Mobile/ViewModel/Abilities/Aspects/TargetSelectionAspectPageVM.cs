@@ -9,6 +9,9 @@ using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 {
+    /// <summary>
+    /// Просит рефакторинга, но не срочно, нужно убрать из регионов в TargetSelectionAspectModel по максимуму.
+    /// </summary>
     public partial class TargetSelectionAspectPageVM : AspectPageVMBase<TargetSelectionAspectModel>
     {
         public TargetSelectionAspectPageVM(ILocalizationResourceManager localization)

@@ -376,6 +376,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Duration.
+        /// </summary>
+        public static string AspectRoundDuration {
+            get {
+                return ResourceManager.GetString("AspectRoundDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Aspects.
         /// </summary>
         public static string Aspects {
@@ -507,6 +516,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string CharacterAbilitiesPageTitle {
             get {
                 return ResourceManager.GetString("CharacterAbilitiesPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can the character cancel the effect?.
+        /// </summary>
+        public static string CharacterCanDisableEffect {
+            get {
+                return ResourceManager.GetString("CharacterCanDisableEffect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is an option when a character can cancel a long-term effect (status) that he himself created without spending resources, but this option increases the cost of the ability..
+        /// </summary>
+        public static string CharacterCanDisableEffectHint {
+            get {
+                return ResourceManager.GetString("CharacterCanDisableEffectHint", resourceCulture);
             }
         }
         
@@ -1785,6 +1812,33 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Round {
             get {
                 return ResourceManager.GetString("Round", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration in rounds.
+        /// </summary>
+        public static string RoundDuration {
+            get {
+                return ResourceManager.GetString("RoundDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can specify the number of rounds for which the effect will last. Each round of duration ends at the start of the turn of the character that activated the ability..
+        /// </summary>
+        public static string RoundDurationHint {
+            get {
+                return ResourceManager.GetString("RoundDurationHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rounds count.
+        /// </summary>
+        public static string RoundsCount {
+            get {
+                return ResourceManager.GetString("RoundsCount", resourceCulture);
             }
         }
         

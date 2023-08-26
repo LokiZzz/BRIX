@@ -222,6 +222,9 @@
   <data name="AspectObstacle" xml:space="preserve">
     <value>Obstacles</value>
   </data>
+  <data name="AspectRoundDuration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
   <data name="Aspects" xml:space="preserve">
     <value>Aspects</value>
   </data>
@@ -266,6 +269,12 @@
   </data>
   <data name="CharacterAbilitiesPageTitle" xml:space="preserve">
     <value>Abilities</value>
+  </data>
+  <data name="CharacterCanDisableEffect" xml:space="preserve">
+    <value>Can the character cancel the effect?</value>
+  </data>
+  <data name="CharacterCanDisableEffectHint" xml:space="preserve">
+    <value>There is an option when a character can cancel a long-term effect (status) that he himself created without spending resources, but this option increases the cost of the ability.</value>
   </data>
   <data name="CharacterDetails" xml:space="preserve">
     <value>Details</value>
@@ -692,6 +701,15 @@
   </data>
   <data name="Round" xml:space="preserve">
     <value>Round</value>
+  </data>
+  <data name="RoundDuration" xml:space="preserve">
+    <value>Duration in rounds</value>
+  </data>
+  <data name="RoundDurationHint" xml:space="preserve">
+    <value>You can specify the number of rounds for which the effect will last. Each round of duration ends at the start of the turn of the character that activated the ability.</value>
+  </data>
+  <data name="RoundsCount" xml:space="preserve">
+    <value>Rounds count</value>
   </data>
   <data name="SameProjectExistsWarning" xml:space="preserve">
     <value>A project with the same name already exists.</value>

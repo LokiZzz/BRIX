@@ -222,6 +222,9 @@
   <data name="AspectObstacle" xml:space="preserve">
     <value>Препятствия</value>
   </data>
+  <data name="AspectRoundDuration" xml:space="preserve">
+    <value>Длительность</value>
+  </data>
   <data name="Aspects" xml:space="preserve">
     <value>Аспекты</value>
   </data>
@@ -266,6 +269,12 @@
   </data>
   <data name="CharacterAbilitiesPageTitle" xml:space="preserve">
     <value>Способности</value>
+  </data>
+  <data name="CharacterCanDisableEffect" xml:space="preserve">
+    <value>Персонаж может отменить эффект?</value>
+  </data>
+  <data name="CharacterCanDisableEffectHint" xml:space="preserve">
+    <value>Возможна опция, когда персонаж может не тратя ресурсов отменить длительный эффект (статус), который сам создал, но такая опция удорожает способность.</value>
   </data>
   <data name="CharacterDetails" xml:space="preserve">
     <value>Детали</value>
@@ -692,6 +701,15 @@
   </data>
   <data name="Round" xml:space="preserve">
     <value>Раунд</value>
+  </data>
+  <data name="RoundDuration" xml:space="preserve">
+    <value>Длительность в раундах</value>
+  </data>
+  <data name="RoundDurationHint" xml:space="preserve">
+    <value>Вы можете указать количество раундов, в течение которых будет действовать эффект. Каждый раунд длительности заканчивается в начале хода персонажа, активировавшего способность.</value>
+  </data>
+  <data name="RoundsCount" xml:space="preserve">
+    <value>Количество раундов</value>
   </data>
   <data name="SameProjectExistsWarning" xml:space="preserve">
     <value>Проект с таким названием уже существует.</value>

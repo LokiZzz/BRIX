@@ -14,28 +14,34 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         public static Dictionary<Type, AspectUtilityModel> Collection => new()
         {
             { typeof(ActionPointsAspectModel), new AspectUtilityModel() {
-                Name = Localization.AspectActionPoints.ToString(),
-                Icon = AwesomeRPG.BottledBolt,
+                Name = Localization.AspectActionPoints,
+                Icon = AwesomeRPG.Battery75,
                 EditPage = typeof(ActionPointAspectPage),
                 LibraryAspectType = typeof(ActionPointAspect),
             }},
             { typeof(TargetSelectionAspectModel), new AspectUtilityModel() {
-                Name = Localization.AspectTargetSelection.ToString(),
+                Name = Localization.AspectTargetSelection,
                 Icon = AwesomeRPG.ArcheryTarget,
                 EditPage = typeof(TargetSelectionAspectPage),
                 LibraryAspectType = typeof(TargetSelectionAspect),
             }},
             { typeof(CooldownAspectModel), new AspectUtilityModel() {
-                Name = Localization.AspectCooldown.ToString(),
+                Name = Localization.AspectCooldown,
                 Icon = AwesomeRPG.Hourglass,
                 EditPage = typeof(CooldownAspectPage),
                 LibraryAspectType = typeof(CooldownAspect),
             }},
             { typeof(ActivationConditionsAspectModel), new AspectUtilityModel() {
-                Name = Localization.AspectActivationConditions.ToString(),
+                Name = Localization.AspectActivationConditions,
                 Icon = AwesomeRPG.KeyBasic,
                 EditPage = typeof(ActivationConditionsAspectPage),
                 LibraryAspectType = typeof(ActivationConditionsAspect),
+            }},
+            { typeof(RoundDurationAspectModel), new AspectUtilityModel() {
+                Name = Localization.AspectRoundDuration,
+                Icon = AwesomeRPG.Stopwatch,
+                EditPage = typeof(RoundDurationAspectPage),
+                LibraryAspectType = typeof(RoundDurationAspect),
             }},
         };
 

@@ -22,7 +22,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             { 
                 SetProperty(Internal.Strategy, value, Internal, 
                     (model, prop) => model.Strategy = prop);
-                UpdateCost();
             }
         }
 
@@ -49,7 +48,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             {
                 SetProperty(Internal.NTAD.TargetsCount, value, Internal, 
                     (model, prop) => model.NTAD.TargetsCount = prop); 
-                UpdateCost();
             }
         }
 
@@ -60,7 +58,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             { 
                 SetProperty(Internal.NTAD.DistanceInMeters, value, Internal, 
                     (model, prop) => model.NTAD.DistanceInMeters = prop); 
-                UpdateCost();
             }
         }
 
@@ -77,7 +74,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 EObstacleEquivalent equivalent = value.Equivalent;
                 SetProperty(Internal.NTAD.ObstacleBetweenCharacterAndTarget, equivalent, Internal,
                     (model, prop) => model.NTAD.ObstacleBetweenCharacterAndTarget = prop);
-                UpdateCost();
             }
         }
 
@@ -88,7 +84,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             {
                 SetProperty(Internal.NTAD.IsTargetSelectionIsRandom, value, Internal,
                     (model, prop) => model.NTAD.IsTargetSelectionIsRandom = prop);
-                UpdateCost();
             }
         }
 
@@ -104,7 +99,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 SetProperty(Internal.Area.AreaType, value, Internal, 
                     (model, prop) => model.Area.AreaType = prop);
                 OnShapeParametersChanged(value);
-                UpdateCost();
             }
         }
 
@@ -115,7 +109,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             {
                 SetProperty(Internal.Area.DistanceToAreaInMeters, value, Internal, 
                     (model, prop) => model.Area.DistanceToAreaInMeters = prop);
-                UpdateCost();
             }
         }
 
@@ -126,7 +119,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             {
                 SetProperty(Internal.Area.ExcludedTargetsCount, value, Internal,
                     (model, prop) => model.Area.ExcludedTargetsCount = prop);
-                UpdateCost();
             }
         }
 
@@ -163,8 +155,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                         SetProperty(cone.R, value, cone, (model, prop) => model.R = prop);
                         break;
                 }
-                
-                UpdateCost();
             }
         }
 
@@ -195,8 +185,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                         SetProperty(cone.H, value, cone, (model, prop) => model.H = prop);
                         break;
                 }
-
-                UpdateCost();
             }
         }
 
@@ -208,7 +196,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 if(Internal.Area.Shape is Brick brick)
                 {
                     brick.A = value;
-                    UpdateCost();
                 }
             }
         }
@@ -221,7 +208,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 if (Internal.Area.Shape is Brick brick)
                 {
                     brick.B = value;
-                    UpdateCost();
                 }
             }
         }
@@ -234,7 +220,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 if (Internal.Area.Shape is Brick brick)
                 {
                     brick.C = value;
-                    UpdateCost();
                 }
             }
         }
@@ -247,7 +232,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 if (Internal.Area.Shape is VoxelArray voxels)
                 {
                     voxels.N = value;
-                    UpdateCost();
                 }
             }
         }
@@ -288,7 +272,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 EObstacleEquivalent equivalent = value.Equivalent;
                 SetProperty(Internal.Area.ObstacleBetweenCharacterAndArea, equivalent, Internal,
                     (model, prop) => model.Area.ObstacleBetweenCharacterAndArea = prop);
-                UpdateCost();
             }
         }
 
@@ -305,7 +288,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 EObstacleEquivalent equivalent = value.Equivalent;
                 SetProperty(Internal.Area.ObstacleBetweenEpicenterAndTarget, equivalent, Internal,
                     (model, prop) => model.Area.ObstacleBetweenEpicenterAndTarget = prop);
-                UpdateCost();
             }
         }
 
@@ -320,7 +302,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             {
                 SetProperty(Internal.TargetChain.IsChainEnabled, value, Internal,
                     (model, prop) => model.TargetChain.IsChainEnabled = prop);
-                UpdateCost();
             }
         }
 
@@ -331,7 +312,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             {
                 SetProperty(Internal.TargetChain.MaxDistanceBetweenTargets, value, Internal,
                     (model, prop) => model.TargetChain.MaxDistanceBetweenTargets = prop);
-                UpdateCost();
             }
         }
 
@@ -342,7 +322,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             {
                 SetProperty(Internal.TargetChain.MaxTargetsCount, value, Internal,
                     (model, prop) => model.TargetChain.MaxTargetsCount = prop);
-                UpdateCost();
             }
         }
 
@@ -359,7 +338,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 EObstacleEquivalent equivalent = value.Equivalent;
                 SetProperty(Internal.TargetChain.ObstacleBetweenTargetsInChain, equivalent, Internal,
                     (model, prop) => model.TargetChain.ObstacleBetweenTargetsInChain = prop);
-                UpdateCost();
             }
         }
 

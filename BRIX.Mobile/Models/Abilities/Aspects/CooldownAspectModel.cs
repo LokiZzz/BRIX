@@ -44,7 +44,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                     }
                 }
 
-                UpdateCost();
                 OnPropertyChanged(nameof(NeedToSetUsesCount));
             }
         }
@@ -63,7 +62,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             {
                 SetProperty(Internal.UsesCount, value, Internal,
                     (model, prop) => model.UsesCount = prop);
-                UpdateCost();
             }
         }
 
