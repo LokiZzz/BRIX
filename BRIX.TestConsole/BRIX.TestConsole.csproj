@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -14,7 +14,6 @@
   <ItemGroup>
     <ProjectReference Include="..\BRIX.Lexica\BRIX.Lexis.csproj" />
     <ProjectReference Include="..\BRIX.Library\BRIX.Library.csproj" />
-    <ProjectReference Include="..\BRIX.Mobile\BRIX.Mobile.csproj" />
     <ProjectReference Include="..\BRIX.Utility\BRIX.Utility.csproj" />
   </ItemGroup>
 
