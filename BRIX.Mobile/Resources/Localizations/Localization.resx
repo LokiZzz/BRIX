@@ -471,6 +471,9 @@
   <data name="HardActivationCondition" xml:space="preserve">
     <value>Hard difficulty condition</value>
   </data>
+  <data name="HaveNoActiveStatuses" xml:space="preserve">
+    <value>Character have no active statuses.</value>
+  </data>
   <data name="Heal" xml:space="preserve">
     <value>Heal</value>
   </data>
@@ -706,7 +709,7 @@
     <value>Duration in rounds</value>
   </data>
   <data name="RoundDurationHint" xml:space="preserve">
-    <value>You can specify the number of rounds for which the effect will last. Each round of duration ends at the start of the turn of the character that activated the ability.</value>
+    <value>You can specify the number of rounds for which the effect will last.</value>
   </data>
   <data name="RoundsCount" xml:space="preserve">
     <value>Rounds count</value>

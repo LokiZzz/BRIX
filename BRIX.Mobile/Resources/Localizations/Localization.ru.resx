@@ -471,6 +471,9 @@
   <data name="HardActivationCondition" xml:space="preserve">
     <value>Условие высокой сложности</value>
   </data>
+  <data name="HaveNoActiveStatuses" xml:space="preserve">
+    <value>У персонажа нет активных статусов.</value>
+  </data>
   <data name="Heal" xml:space="preserve">
     <value>Лечение</value>
   </data>
@@ -706,7 +709,7 @@
     <value>Длительность в раундах</value>
   </data>
   <data name="RoundDurationHint" xml:space="preserve">
-    <value>Вы можете указать количество раундов, в течение которых будет действовать эффект. Каждый раунд длительности заканчивается в начале хода персонажа, активировавшего способность.</value>
+    <value>Вы можете указать количество раундов, в течение которых будет действовать эффект.</value>
   </data>
   <data name="RoundsCount" xml:space="preserve">
     <value>Количество раундов</value>

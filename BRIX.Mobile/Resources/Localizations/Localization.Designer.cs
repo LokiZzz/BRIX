@@ -1123,6 +1123,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Character have no active statuses..
+        /// </summary>
+        public static string HaveNoActiveStatuses {
+            get {
+                return ResourceManager.GetString("HaveNoActiveStatuses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Heal.
         /// </summary>
         public static string Heal {
@@ -1825,7 +1834,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can specify the number of rounds for which the effect will last. Each round of duration ends at the start of the turn of the character that activated the ability..
+        ///   Looks up a localized string similar to You can specify the number of rounds for which the effect will last..
         /// </summary>
         public static string RoundDurationHint {
             get {
