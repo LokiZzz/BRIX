@@ -18,6 +18,7 @@ namespace BRIX.Mobile.Models.Characters
             );
             Tags = new (character.Tags.Select(x => new CharacterTagVM { Text = x }));
             Projects = new(character.Projects.Select(x => new CharacterProjectVM(x)));
+            Statuses = new(character.Statuses.Select(x => new StatusItemVM(x)));
         }
 
         public Character InternalModel { get; }
@@ -219,6 +220,20 @@ namespace BRIX.Mobile.Models.Characters
         {
             Projects.Remove(project);
             InternalModel.Projects.Remove(InternalModel.Projects.Single(x => x.Name == project.Name));
+        }
+
+        public ObservableCollection<StatusItemVM> Statuses { get; set; }
+
+        public void AddStatus(StatusItemVM status)
+        {
+            Statuses.Add(status);
+            InternalModel.Statuses.Add(status.Internal);
+        }
+
+        public void RemoveStatus(StatusItemVM status)
+        {
+            Statuses.Remove(status);
+            InternalModel.Statuses.Remove(status.Internal);
         }
     }
 }

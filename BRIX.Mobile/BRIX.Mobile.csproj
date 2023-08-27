@@ -144,7 +144,7 @@
 	  <MauiXaml Update="Resources\Controls\ArrowExpander.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Resources\Controls\AspectConditionItem.xaml">
+	  <MauiXaml Update="Resources\Controls\BasicCollectionItem.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Controls\CircularProgressBar.xaml">
@@ -267,7 +267,7 @@
 	  <MauiXaml Update="View\Characters\CharacterListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Characters\CurrentCharacterPage.xaml">
+	  <MauiXaml Update="View\Characters\CharacterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Settings\SettingsPage.xaml">
@@ -276,6 +276,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Resources\Controls\BasicCollectionItem.xaml.cs">
+	    <DependentUpon>BasicCollectionItem.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Resources\Controls\FramedEditor.xaml.cs">
 	    <DependentUpon>FramedEditor.xaml</DependentUpon>
 	  </Compile>
@@ -298,6 +301,9 @@
 	  </Compile>
 	  <Compile Update="View\Characters\AddOrEditCharacterPage.xaml.cs">
 	    <DependentUpon>AddOrEditCharacterPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Characters\CharacterPage.xaml.cs">
+	    <DependentUpon>CharacterPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="View\Popups\DiceValuePopup.xaml.cs">
 	    <DependentUpon>DiceValuePopup.xaml</DependentUpon>

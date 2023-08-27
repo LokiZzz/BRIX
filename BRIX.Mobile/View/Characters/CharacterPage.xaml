@@ -6,12 +6,21 @@
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
-             x:Class="BRIX.Mobile.View.Characters.CurrentCharacterPage"
-             x:DataType="vm:CurrentCharacterPageVM"
+             x:Class="BRIX.Mobile.View.Characters.CharacterPage"
+             x:DataType="vm:CharacterPageVM"
              x:Name="CharacterContentPage"
              ControlTemplate="{StaticResource BusyPageTemplate}"
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Character}}" Padding="0">
 
+    <ContentPage.Resources>
+        <Style x:Key="StatusTimeButton" TargetType="Button" BasedOn="{StaticResource SquareIconButton}">
+            <Setter Property="WidthRequest" Value="-1"/>
+            <Setter Property="CornerRadius" Value="0"/>
+            <Setter Property="Padding" Value="7,0"/>
+
+        </Style>
+    </ContentPage.Resources>
+    
     <Shell.TitleView>
         <Grid ColumnDefinitions="*,auto" ColumnSpacing="10" Padding="0,10,15,10">
             <Label 
@@ -188,6 +197,61 @@
                     IndicatorColor="{StaticResource BRIXDim}"
                     SelectedIndicatorColor="{StaticResource BRIXWhite}"
                     HorizontalOptions="Center"/>
+                <!--Statuses-->
+                <Border Style="{StaticResource SideMarginBlockBorder}">
+                    <VerticalStackLayout Spacing="10">
+                        <Grid ColumnDefinitions="*,auto" >
+                            <Label 
+                                Grid.Column="0"
+                                Style="{StaticResource TitleLabel}" 
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Statuses}}"/>
+                            <HorizontalStackLayout Grid.Column="1" Padding="0">
+                                <Button 
+                                    Style="{StaticResource SquareIconButton}" 
+                                    Text="{x:Static icons:Awesome.SquarePen}"/>
+                                <Border 
+                                    StrokeShape="RoundRectangle 5"
+                                    Padding="0"
+                                    VerticalOptions="CenterAndExpand"
+                                    BackgroundColor="Transparent">
+                                    <HorizontalStackLayout Spacing="7" Margin="1">
+                                        <Button 
+                                            Style="{StaticResource StatusTimeButton}" 
+                                            Text="{x:Static icons:Awesome.CircleArrowLeft}"
+                                            Command="{Binding DecreaseRoundsPassedCommand}"/>
+                                        <Label 
+                                            FontFamily="AwesomeRPG" 
+                                            FontSize="25"
+                                            VerticalOptions="Center"
+                                            TextColor="{StaticResource BRIXWhite}"
+                                            Text="{x:Static icons:AwesomeRPG.Stopwatch}"/>
+                                        <Button 
+                                            Style="{StaticResource StatusTimeButton}" 
+                                            Text="{x:Static icons:Awesome.CircleArrowRight}"
+                                            Command="{Binding IncreaseRoundsPassedCommand}"/> 
+                                    </HorizontalStackLayout>
+                                </Border>
+                            </HorizontalStackLayout>
+                        </Grid>
+                        <CollectionView 
+                            Grid.Row="1" 
+                            x:Name="statusesCollectionView" 
+                            ItemsSource="{Binding Character.Statuses}">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="5"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="m:StatusItemVM">
+                                    <controls:BasicCollectionItem
+                                        Text="{Binding Name}"
+                                        SecondaryText="{Binding RoundsLeft}"
+                                        DeleteCommand="{Binding Source={x:Reference statusesCollectionView}, Path= BindingContext.RemoveStatusCommand}"
+                                        CommandParameter="{Binding}"/>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Border>
             </VerticalStackLayout>
         </Grid>
     </ScrollView>

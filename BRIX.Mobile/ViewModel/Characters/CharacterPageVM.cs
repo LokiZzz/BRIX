@@ -12,15 +12,19 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Messaging;
+using BRIX.Library.Ability;
+using System;
+using BRIX.Library.Effects;
+using BRIX.Library.Aspects;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
-    public partial class CurrentCharacterPageVM : ViewModelBase
+    public partial class CharacterPageVM : ViewModelBase
     {
         private readonly ICharacterService _characterService;
         private readonly ILocalizationResourceManager _localization;
 
-        public CurrentCharacterPageVM(ICharacterService characterService, ILocalizationResourceManager localization)
+        public CharacterPageVM(ICharacterService characterService, ILocalizationResourceManager localization)
         {
             _characterService = characterService;
             _localization = localization;
@@ -136,13 +140,43 @@ namespace BRIX.Mobile.ViewModel.Characters
             await Navigation.NavigateAsync<CharacterAbilitiesPage>(mode: ENavigationMode.Absolute);
         }
 
+        [RelayCommand]
+        public async Task RemoveStatus(StatusItemVM status)
+        {
+            Character.RemoveStatus(status);
+            await _characterService.UpdateAsync(Character.InternalModel);
+        }
+
+        [RelayCommand]
+        public async Task IncreaseRoundsPassed()
+        {
+            Character.Statuses.ToList().ForEach(x => x.IncreaseRoundsPassed());
+
+            foreach(StatusItemVM status in Character.Statuses.ToList())
+            {
+                if(status.Internal.RoundsLeft == 0)
+                {
+                    Character.RemoveStatus(status);
+                }
+            }
+
+            await _characterService.UpdateAsync(Character.InternalModel);
+        }
+
+        [RelayCommand]
+        public async Task DecreaseRoundsPassed()
+        {
+            Character.Statuses.ToList().ForEach(x => x.DecreaseRoundsPassed());
+            await _characterService.UpdateAsync(Character.InternalModel);
+        }
+
         public override async Task OnNavigatedAsync()
         {
             IsBusy = true;
 
             Character character = await _characterService.GetCurrentCharacter();
 
-            if(character != null)
+            if (character != null)
             {
                 Character = new CharacterModel(character);
             }
@@ -168,6 +202,26 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             // Возможно такие вызовы уползут в CharacterService, но пока что достаточно этого.
             WeakReferenceMessenger.Default.Send(new ShowCharacterTabsChanged(PlayerHaveCharacter));
+
+            //УБРАТЬ
+            if (!Character.Statuses.Any())
+            {
+                Status dragonFortitude = new Status() { Name = "Драконья крепкость" };
+                FortifyEffect fortify = new FortifyEffect() { Impact = new(5) };
+                fortify.GetAspect<RoundDurationAspect>().Rounds = 4;
+                FortifyEffect fortify2 = new FortifyEffect() { Impact = new(10) };
+                fortify.GetAspect<RoundDurationAspect>().Rounds = 8;
+                dragonFortitude.AddEffect(fortify);
+                dragonFortitude.AddEffect(fortify2);
+                dragonFortitude.RoundsPassed = 1;
+                Character.AddStatus(new StatusItemVM(dragonFortitude));
+                Status ill = new Status() { Name = "Ветрянка" };
+                ExhaustionEffect exhaustion = new ExhaustionEffect() { Impact = new(3) };
+                exhaustion.GetAspect<RoundDurationAspect>().Rounds = 4;
+                ill.AddEffect(fortify2);
+                Character.AddStatus(new StatusItemVM(ill));
+                await _characterService.UpdateAsync(Character.InternalModel);
+            }
 
             IsBusy = false;
         }

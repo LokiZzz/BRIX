@@ -2,9 +2,9 @@ using System.Windows.Input;
 
 namespace BRIX.Mobile.Resources.Controls;
 
-public partial class AspectConditionItem : ContentView
+public partial class BasicCollectionItem : ContentView
 {
-	public AspectConditionItem()
+	public BasicCollectionItem()
 	{
 		InitializeComponent();
 	}
@@ -12,7 +12,7 @@ public partial class AspectConditionItem : ContentView
     public static readonly BindableProperty TextProperty = BindableProperty.Create(
         nameof(Text),
         typeof(string),
-        typeof(AspectConditionItem)
+        typeof(BasicCollectionItem)
     );
 
     public string Text
@@ -21,10 +21,22 @@ public partial class AspectConditionItem : ContentView
         set { SetValue(TextProperty, value); }
     }
 
+    public static readonly BindableProperty SecondaryTextProperty = BindableProperty.Create(
+        nameof(SecondaryText),
+        typeof(string),
+        typeof(BasicCollectionItem)
+    );
+
+    public string SecondaryText
+    {
+        get { return (string)GetValue(SecondaryTextProperty); }
+        set { SetValue(SecondaryTextProperty, value); }
+    }
+
     public static readonly BindableProperty DeleteCommandProperty = BindableProperty.Create(
         nameof(DeleteCommand),
         typeof(ICommand),
-        typeof(AspectConditionItem)
+        typeof(BasicCollectionItem)
     );
 
     public ICommand DeleteCommand
@@ -36,7 +48,7 @@ public partial class AspectConditionItem : ContentView
     public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(
         nameof(CommandParameter),
         typeof(object),
-        typeof(AspectConditionItem)
+        typeof(BasicCollectionItem)
     );
 
     public object CommandParameter

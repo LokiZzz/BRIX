@@ -1843,6 +1843,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} rounds.
+        /// </summary>
+        public static string RoundsLeft {
+            get {
+                return ResourceManager.GetString("RoundsLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A project with the same name already exists..
         /// </summary>
         public static string SameProjectExistsWarning {
@@ -1956,6 +1965,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Spread {
             get {
                 return ResourceManager.GetString("Spread", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statuses.
+        /// </summary>
+        public static string Statuses {
+            get {
+                return ResourceManager.GetString("Statuses", resourceCulture);
             }
         }
         

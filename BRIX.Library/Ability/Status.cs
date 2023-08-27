@@ -1,10 +1,5 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Effects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Library.Ability
 {
@@ -12,8 +7,26 @@ namespace BRIX.Library.Ability
     {
         public string Name { get; set; }
 
-        private List<EffectBase> _effects = new();
-        public IReadOnlyList<EffectBase> Effects => _effects.AsReadOnly();
+        public int RoundsPassed { get; set; }
+
+        public int MaxDuration
+        {
+            get
+            {
+                if (Effects.Any())
+                {
+                    return Effects.Max(x => x.GetAspect<RoundDurationAspect>()?.Rounds ?? 0);
+                }
+                else
+                { 
+                    return 0; 
+                }
+            }
+        }
+        public int RoundsLeft => MaxDuration - RoundsPassed >= 0 ? MaxDuration - RoundsPassed : 0;
+
+        private readonly List<EffectBase> _effects = new();
+        public IReadOnlyList<EffectBase> Effects => _effects;
 
         public void AddEffect(EffectBase effect)
         {

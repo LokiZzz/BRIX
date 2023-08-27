@@ -711,6 +711,9 @@
   <data name="RoundsCount" xml:space="preserve">
     <value>Rounds count</value>
   </data>
+  <data name="RoundsLeft" xml:space="preserve">
+    <value>{0} rounds</value>
+  </data>
   <data name="SameProjectExistsWarning" xml:space="preserve">
     <value>A project with the same name already exists.</value>
   </data>
@@ -749,6 +752,9 @@
   </data>
   <data name="Spread" xml:space="preserve">
     <value>Spread:</value>
+  </data>
+  <data name="Statuses" xml:space="preserve">
+    <value>Statuses</value>
   </data>
   <data name="Strategy" xml:space="preserve">
     <value>Strategy</value>

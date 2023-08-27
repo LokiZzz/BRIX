@@ -72,8 +72,8 @@
             Icon="{FontImage FontFamily=AwesomeRPG, Glyph={x:Static icons:AwesomeRPG.CloakAndDagger}}"
             Title="{localization:Translate CharacterTab}">
             <ShellContent
-                ContentTemplate="{DataTemplate characters:CurrentCharacterPage}"
-                Route="CurrentCharacterPage" />
+                ContentTemplate="{DataTemplate characters:CharacterPage}"
+                Route="CharacterPage" />
         </Tab>
         <Tab
             Icon="{FontImage FontFamily=AwesomeRPG, Glyph={x:Static icons:AwesomeRPG.BurningEmbers}}"

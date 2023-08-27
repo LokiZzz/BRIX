@@ -34,7 +34,7 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="m:ActivationConditionOptionVM">
-                                <controls:AspectConditionItem
+                                <controls:BasicCollectionItem
                                     Text="{Binding Text}"
                                     DeleteCommand="{Binding Source={x:Reference conditionsCollectionView}, Path= BindingContext.DeleteConditionCommand}"
                                     CommandParameter="{Binding}"/>

@@ -300,7 +300,7 @@
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="vm:TargetSelectionRestrictionPropertyVM">
-                                    <controls:AspectConditionItem
+                                    <controls:BasicCollectionItem
                                         Text="{Binding Text}"
                                         DeleteCommand="{Binding Source={x:Reference restrictionsCollectionView}, Path= BindingContext.DeleteRestrictionCommand}"
                                         CommandParameter="{Binding}"/>
@@ -317,7 +317,7 @@
                                 Style="{StaticResource LightButton}"
                                 Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AddRestriction}}"
                                 Command="{Binding AddRestrictionCommand}"
-                                Margin="0,0,0,1"/>
+                                Margin="1"/>
                         </VerticalStackLayout>
                     </Grid>
                 </Border>
@@ -339,7 +339,7 @@
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="vm:TargetSizeVM">
-                                    <controls:AspectConditionItem
+                                    <controls:BasicCollectionItem
                                         Text="{Binding Text}"
                                         DeleteCommand="{Binding Source={x:Reference sizesCollectionView}, Path= BindingContext.DeleteSizeCommand}"
                                         CommandParameter="{Binding}"/>

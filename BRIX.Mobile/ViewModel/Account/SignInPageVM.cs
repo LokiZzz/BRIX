@@ -40,7 +40,7 @@ namespace BRIX.Mobile.ViewModel.Account
                     Preferences.Set(Mobile.Settings.Account.Password, Password);
                 }
 
-                await Navigation.NavigateAsync<CurrentCharacterPage>(ENavigationMode.Absolute);
+                await Navigation.NavigateAsync<CharacterPage>(ENavigationMode.Absolute);
             }
 
             IsBusy = false;
@@ -56,7 +56,7 @@ namespace BRIX.Mobile.ViewModel.Account
                 Login = Preferences.Get(Mobile.Settings.Account.Login, string.Empty);
                 Password = Preferences.Get(Mobile.Settings.Account.Password, string.Empty);
 
-                await Navigation.NavigateAsync<CurrentCharacterPage>(ENavigationMode.Absolute);
+                await Navigation.NavigateAsync<CharacterPage>(ENavigationMode.Absolute);
             }
         }
     }

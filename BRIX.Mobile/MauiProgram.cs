@@ -63,7 +63,7 @@ public static class MauiProgram
 
         builder.RegisterView<SignInPage, SignInPageVM>(false);
 
-        builder.RegisterView<CurrentCharacterPage, CurrentCharacterPageVM>(false);
+        builder.RegisterView<CharacterPage, CharacterPageVM>(false);
         builder.RegisterView<CharacterAbilitiesPage, CharacterAbilitiesPageVM>(false);
         builder.RegisterView<CharacterInventoryPage, CharacterInventoryPageVM>(false);
         builder.RegisterView<CharacterDetailsPage, CharacterDetailsPageVM>(false);
