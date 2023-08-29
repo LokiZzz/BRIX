@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BRIX.Mobile.View.Abilities.AddOrEditAbilityPage"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:v="clr-namespace:BRIX.Mobile.View.Abilities"
@@ -8,7 +9,6 @@
              xmlns:inv="clr-namespace:BRIX.Mobile.ViewModel.Inventory"
              xmlns:models="clr-namespace:BRIX.Mobile.Models.Abilities.Effects"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
-             x:Class="BRIX.Mobile.View.Abilities.AddOrEditAbilityPage"
              x:DataType="vm:AddOrEditAbilityPageVM"
              Shell.TabBarIsVisible="False"
              Title="{Binding Title}"

@@ -132,6 +132,9 @@
   <data name="ActionPointAspectHint" xml:space="preserve">
     <value>Практически любые способности ипользуются посредством траты очков действий. Чем больше очков действий тратит способность, тем дешевле она будет в очках опыта.</value>
   </data>
+  <data name="Activate" xml:space="preserve">
+    <value>Активировать</value>
+  </data>
   <data name="ActivationCondition" xml:space="preserve">
     <value>Условие активации</value>
   </data>
@@ -206,6 +209,9 @@
   </data>
   <data name="AskDeleteProject" xml:space="preserve">
     <value>Вы уверены, что хотите удалить проект «{0}»?</value>
+  </data>
+  <data name="AskDeleteStatus" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить статус «{0}»?</value>
   </data>
   <data name="AskToDeleteInventoryItem" xml:space="preserve">
     <value>Вы уверены, что хотите удалить «{0}»?</value>
@@ -287,6 +293,9 @@
   </data>
   <data name="CharacterList_Help" xml:space="preserve">
     <value>Коснитесь карточки персонажа, чтобы выбрать его, сдвиньте карточку вправо, чтобы редактировать персонажа или сдвиньте карточку влево, чтобы его удалить.</value>
+  </data>
+  <data name="CharacterStatusesPageHelp" xml:space="preserve">
+    <value>Чтобы редактировать статус, сдвиньте карточку статуса вправо, чтобы удалить, сдвиньте её влево.</value>
   </data>
   <data name="CharacterTab" xml:space="preserve">
     <value>Персонаж</value>

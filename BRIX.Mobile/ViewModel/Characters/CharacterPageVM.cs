@@ -141,6 +141,12 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         [RelayCommand]
+        public async Task GoToStatuses()
+        {
+            await Navigation.NavigateAsync<CharacterStatusesPage>();
+        }
+
+        [RelayCommand]
         public async Task RemoveStatus(StatusItemVM status)
         {
             Character.RemoveStatus(status);
@@ -202,26 +208,6 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             // Возможно такие вызовы уползут в CharacterService, но пока что достаточно этого.
             WeakReferenceMessenger.Default.Send(new ShowCharacterTabsChanged(PlayerHaveCharacter));
-
-            //УБРАТЬ
-            if (!Character.Statuses.Any())
-            {
-                Status dragonFortitude = new Status() { Name = "Драконья крепкость" };
-                FortifyEffect fortify = new FortifyEffect() { Impact = new(5) };
-                fortify.GetAspect<RoundDurationAspect>().Rounds = 4;
-                FortifyEffect fortify2 = new FortifyEffect() { Impact = new(10) };
-                fortify.GetAspect<RoundDurationAspect>().Rounds = 8;
-                dragonFortitude.AddEffect(fortify);
-                dragonFortitude.AddEffect(fortify2);
-                dragonFortitude.RoundsPassed = 1;
-                Character.AddStatus(new StatusItemVM(dragonFortitude));
-                Status ill = new Status() { Name = "Ветрянка" };
-                ExhaustionEffect exhaustion = new ExhaustionEffect() { Impact = new(3) };
-                exhaustion.GetAspect<RoundDurationAspect>().Rounds = 4;
-                ill.AddEffect(fortify2);
-                Character.AddStatus(new StatusItemVM(ill));
-                await _characterService.UpdateAsync(Character.InternalModel);
-            }
 
             IsBusy = false;
         }

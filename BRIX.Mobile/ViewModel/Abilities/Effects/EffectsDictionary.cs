@@ -38,6 +38,15 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             }},
         };
 
+        public static string GetName(EffectBase effect)
+        {
+            EffectModelBase model = EffectModelFactory.GetModel(effect);
+
+            return model != null 
+                ? Collection[model.GetType()].Name
+                : string.Empty;
+        }
+
         public static string GetEditPageRoute(EffectModelBase effect)
         {
             return Collection[effect.GetType()].EditPage.Name.ToString();

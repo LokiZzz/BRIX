@@ -132,6 +132,9 @@
   <data name="ActionPointAspectHint" xml:space="preserve">
     <value>Almost any ability is used by spending action points. The more action points an ability spends, the cheaper it will be in experience points.</value>
   </data>
+  <data name="Activate" xml:space="preserve">
+    <value>Activate</value>
+  </data>
   <data name="ActivationCondition" xml:space="preserve">
     <value>Activation condition</value>
   </data>
@@ -206,6 +209,9 @@
   </data>
   <data name="AskDeleteProject" xml:space="preserve">
     <value>Are you sure you want to delete project «{0}»?</value>
+  </data>
+  <data name="AskDeleteStatus" xml:space="preserve">
+    <value>Are you sure you want to delete status «{0}»?</value>
   </data>
   <data name="AskToDeleteInventoryItem" xml:space="preserve">
     <value>Are you sure you want to delete «{0}»?</value>
@@ -287,6 +293,9 @@
   </data>
   <data name="CharacterList_Help" xml:space="preserve">
     <value>Tap to select, swipe right to edit and swipe left to delete.</value>
+  </data>
+  <data name="CharacterStatusesPageHelp" xml:space="preserve">
+    <value>To edit a status, slide the status card to the right; to delete, slide it to the left.</value>
   </data>
   <data name="CharacterTab" xml:space="preserve">
     <value>Character</value>

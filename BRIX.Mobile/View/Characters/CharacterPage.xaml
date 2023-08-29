@@ -29,7 +29,7 @@
                 Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Character}}"/>
 
             <HorizontalStackLayout Grid.Column="1" Spacing="10" IsVisible="{Binding PlayerHaveCharacter}">
-                <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.SquarePen}" Command="{Binding EditCommand}"/>
+                <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.PenToSquare}" Command="{Binding EditCommand}"/>
                 <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.FileImage}" Command="{Binding PictureCommand}"/>
                 <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.PeopleArrows}" Command="{Binding SwitchCommand}"/>
             </HorizontalStackLayout>
@@ -208,7 +208,8 @@
                             <HorizontalStackLayout Grid.Column="1" Padding="0">
                                 <Button 
                                     Style="{StaticResource SquareIconButton}" 
-                                    Text="{x:Static icons:Awesome.SquarePen}"/>
+                                    Text="{x:Static icons:Awesome.PenToSquare}"
+                                    Command="{Binding GoToStatusesCommand}"/>
                                 <Border 
                                     StrokeShape="RoundRectangle 5"
                                     Padding="0"

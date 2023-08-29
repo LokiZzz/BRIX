@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BRIX.Mobile.View.Characters.CharacterStatusesPage"
+             xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             xmlns:v="clr-namespace:BRIX.Mobile.View.Characters"
+             xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Characters"
+             xmlns:models="clr-namespace:BRIX.Mobile.Models.Characters"
+             xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+             x:DataType="vm:CharacterStatusesPageVM"
+             Shell.TabBarIsVisible="False"
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Statuses}}"
+             Padding="0">
+
+    <Shell.TitleView>
+        <controls:TitleView/>
+    </Shell.TitleView>
+
+    <Grid RowDefinitions="*,auto" RowSpacing="0">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Margin="0,10">
+
+                <controls:HelpCard Help="{x:Static lcz:LocalizationKeys.CharacterStatusesPageHelp}" Margin="10,0,10,10"/>
+
+                <Grid RowDefinitions="auto,*" Margin="0,0,0,-10">
+                    <Button
+                        Grid.Row="0"
+                        Style="{StaticResource LightPlusButton}" 
+                        Command="{Binding AddStatusCommand}"
+                        Margin="10,0,10,10"/>
+                    <CollectionView Grid.Row="1" x:Name="collectionView" ItemsSource="{Binding Statuses}" Margin="0,0,0,10">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:StatusItemVM">
+                                <SwipeView Threshold="100">
+                                    <SwipeView.LeftItems>
+                                        <SwipeItems Mode="Execute">
+                                            <SwipeItemView
+                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.EditStatusCommand}"
+                                                CommandParameter="{Binding}">
+                                                <Border Style="{StaticResource MediumSwipeViewBorder}">
+                                                    <Label Style="{StaticResource MediumSwipeViewEditLabel}" />
+                                                </Border>
+                                            </SwipeItemView>
+                                        </SwipeItems>
+                                    </SwipeView.LeftItems>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems Mode="Execute">
+                                            <SwipeItemView
+                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.RemoveStatusCommand}"
+                                                CommandParameter="{Binding}">
+                                                <Border Style="{StaticResource MediumSwipeViewBorder}">
+                                                    <Label Style="{StaticResource MediumSwipeViewDeleteLabel}"/>
+                                                </Border>
+                                            </SwipeItemView>
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <Grid Margin="10,0">
+                                        <Border Style="{StaticResource BlockBorder}" >
+                                            <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto">
+                                                <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
+                                                <Label Grid.Row="1" Grid.Column="0" Text="{Binding EffectsString}" />
+                                                <HorizontalStackLayout Grid.Row="0" Grid.Column="1">
+                                                    <Label 
+                                                        Grid.Row="1" Grid.Column="0" 
+                                                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Activate}}" 
+                                                        VerticalOptions="Center"/>
+                                                    <CheckBox IsChecked="{Binding IsActive}"/>
+                                                </HorizontalStackLayout>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

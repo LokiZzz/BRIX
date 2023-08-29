@@ -106,6 +106,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activate.
+        /// </summary>
+        public static string Activate {
+            get {
+                return ResourceManager.GetString("Activate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Activation condition.
         /// </summary>
         public static string ActivationCondition {
@@ -327,6 +336,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string AskDeleteProject {
             get {
                 return ResourceManager.GetString("AskDeleteProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete status «{0}»?.
+        /// </summary>
+        public static string AskDeleteStatus {
+            get {
+                return ResourceManager.GetString("AskDeleteStatus", resourceCulture);
             }
         }
         
@@ -570,6 +588,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string CharacterListPageTitle {
             get {
                 return ResourceManager.GetString("CharacterListPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To edit a status, slide the status card to the right; to delete, slide it to the left..
+        /// </summary>
+        public static string CharacterStatusesPageHelp {
+            get {
+                return ResourceManager.GetString("CharacterStatusesPageHelp", resourceCulture);
             }
         }
         

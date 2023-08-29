@@ -234,6 +234,9 @@
 	  <MauiXaml Update="View\Characters\CharacterInventoryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Characters\CharacterStatusesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\Characters\EditCharacterImagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -304,6 +307,9 @@
 	  </Compile>
 	  <Compile Update="View\Characters\CharacterPage.xaml.cs">
 	    <DependentUpon>CharacterPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Characters\CharacterStatusesPage.xaml.cs">
+	    <DependentUpon>CharacterStatusesPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="View\Popups\DiceValuePopup.xaml.cs">
 	    <DependentUpon>DiceValuePopup.xaml</DependentUpon>

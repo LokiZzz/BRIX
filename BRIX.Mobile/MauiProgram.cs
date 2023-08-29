@@ -53,6 +53,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IAccountService, AccountServiceMoq>();
         builder.Services.AddSingleton<INavigationService, NavigationService>();
         builder.Services.AddSingleton<ICharacterService, JsonCharacterService>();
+        builder.Services.AddSingleton<IAssetsService, JsonAssetsService>();
         builder.Services.AddSingleton<ILocalStorage, LocalStorage>();
         builder.Services.AddSingleton<ILocalizationResourceManager, LocalizationResourceManager>();
     }
@@ -74,6 +75,7 @@ public static class MauiProgram
         builder.RegisterView<AddHealthPage, AddHealthPageVM>();
         builder.RegisterView<AddOrEditInventoryItemPage, AddOrEditInventoryItemPageVM>();
         builder.RegisterView<AddOrEditAbilityPage, AddOrEditAbilityPageVM>();
+        builder.RegisterView<CharacterStatusesPage, CharacterStatusesPageVM>();
 
         AddEffectsAndAspects(builder);
 
