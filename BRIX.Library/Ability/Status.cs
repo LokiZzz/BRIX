@@ -5,6 +5,8 @@ namespace BRIX.Library.Ability
 {
     public class Status
     {
+        public Guid Id { get; set; } = Guid.NewGuid();
+
         public string Name { get; set; }
 
         public int RoundsPassed { get; set; }
@@ -46,6 +48,18 @@ namespace BRIX.Library.Ability
             {
                 _effects.Remove(effect);
             }
+        }
+
+        public override bool Equals(object? other)
+        {
+            return other != null 
+                && other is Status otherStatus 
+                && Id == otherStatus.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

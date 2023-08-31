@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
-    public partial class CharacterStatusesPageVM : ViewModelBase, IQueryAttributable
+    public partial class CharacterStatusesPageVM : ViewModelBase
     {
         public CharacterStatusesPageVM(ICharacterService characterService, IAssetsService assetsService)
         {
@@ -59,9 +59,28 @@ namespace BRIX.Mobile.ViewModel.Characters
             }
         }
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        [RelayCommand]
+        public async Task ChangeStatusState(StatusItemVM status)
         {
-            
+            if(status == null)
+            {
+                return;
+            }
+
+            if(!_currentCharacter.Statuses.Any(x => x.Name == status.Name) && status.IsActive)
+            {
+                _currentCharacter.Statuses.Add(status.Internal);
+                await CharacterService.UpdateAsync(_currentCharacter);
+            }
+
+            if (_currentCharacter.Statuses.Any(x => x.Name == status.Name) && !status.IsActive)
+            {
+                _currentCharacter.Statuses.Remove(
+                    _currentCharacter.Statuses.FirstOrDefault(x => x.Equals(status.Internal))
+                );
+
+                await CharacterService.UpdateAsync(_currentCharacter);
+            }
         }
 
         public override async Task OnNavigatedAsync()

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BRIX.Mobile.View.Characters.CharacterStatusesPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:v="clr-namespace:BRIX.Mobile.View.Characters"
@@ -68,7 +69,14 @@
                                                         Grid.Row="1" Grid.Column="0" 
                                                         Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Activate}}" 
                                                         VerticalOptions="Center"/>
-                                                    <CheckBox IsChecked="{Binding IsActive}"/>
+                                                    <CheckBox IsChecked="{Binding IsActive}">
+                                                        <CheckBox.Behaviors>
+                                                            <toolkit:EventToCommandBehavior 
+                                                                EventName="CheckedChanged" 
+                                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.ChangeStatusStateCommand}"
+                                                                CommandParameter="{Binding}"/>
+                                                        </CheckBox.Behaviors>
+                                                    </CheckBox>
                                                 </HorizontalStackLayout>
                                             </Grid>
                                         </Border>

@@ -237,16 +237,16 @@
                                 </Border>
                             </HorizontalStackLayout>
                         </Grid>
+                        <Label 
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center"
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.HaveNoActiveStatuses}}"
+                            IsVisible="{Binding Character.ShowStatuses, Converter={StaticResource NotConverter}}"/>
                         <CollectionView 
                             Grid.Row="1" 
                             x:Name="statusesCollectionView" 
-                            ItemsSource="{Binding Character.Statuses}">
-                            <CollectionView.EmptyView>
-                                <Label 
-                                    VerticalOptions="Center"
-                                    VerticalTextAlignment="Center"
-                                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.HaveNoActiveStatuses}}"/>
-                            </CollectionView.EmptyView>
+                            ItemsSource="{Binding Character.Statuses}"
+                            IsVisible="{Binding Character.ShowStatuses}">
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="5"/>
                             </CollectionView.ItemsLayout>
