@@ -469,7 +469,7 @@
     <value>Опыта всего:</value>
   </data>
   <data name="ExperienceToLevelup" xml:space="preserve">
-    <value>Опыт до уровня</value>
+    <value>Опыт</value>
   </data>
   <data name="FastAdjustment" xml:space="preserve">
     <value>Быстрая настройка</value>
@@ -478,7 +478,7 @@
     <value>Временно увеличивает количество максимальных очков здоровья цели. Шкала стоимости прогрессивная и зависит от количества, на которое увеличивается здоровье. Количество бонусных очков здоровья может определяться броском костей.</value>
   </data>
   <data name="FreeExperience" xml:space="preserve">
-    <value>Свободный опыт</value>
+    <value>Свободно</value>
   </data>
   <data name="Gigantic" xml:space="preserve">
     <value>Гигантский</value>

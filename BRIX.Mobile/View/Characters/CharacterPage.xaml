@@ -113,7 +113,7 @@
                 <!--Health-->
                 <Border Style="{StaticResource SideMarginBlockBorder}">
                     <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
-                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Health}}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Health}}" LineBreakMode="TailTruncation" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
                         <Label Grid.Row="0" Grid.Column="1" Margin="0,0,15,0" VerticalTextAlignment="Center">
                             <Label.FormattedText>
                                 <FormattedString>

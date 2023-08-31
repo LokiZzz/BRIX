@@ -469,7 +469,7 @@
     <value>Experience overall: {0}</value>
   </data>
   <data name="ExperienceToLevelup" xml:space="preserve">
-    <value>EXP to level up</value>
+    <value>Experience</value>
   </data>
   <data name="FastAdjustment" xml:space="preserve">
     <value>Fast adjustment</value>

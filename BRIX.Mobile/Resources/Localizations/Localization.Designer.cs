@@ -1114,7 +1114,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EXP to level up.
+        ///   Looks up a localized string similar to Experience.
         /// </summary>
         public static string ExperienceToLevelup {
             get {
