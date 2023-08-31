@@ -33,7 +33,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task Save()
         {
-            
+            await Navigation.Back(
+                stepsBack: 1,
+                (NavigationParameters.EditMode, _mode),
+                (NavigationParameters.Status, Status)
+            );
         }
 
         [RelayCommand]
@@ -57,7 +61,8 @@ namespace BRIX.Mobile.ViewModel.Characters
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             _mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
-            Status = query.GetParameterOrDefault<StatusItemVM>(NavigationParameters.Status);
+            Status = query.GetParameterOrDefault<StatusItemVM>(NavigationParameters.Status)
+                ?? new StatusItemVM(new Library.Ability.Status());
 
             InitializeTitle();
         }

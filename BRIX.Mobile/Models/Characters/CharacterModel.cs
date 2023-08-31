@@ -3,6 +3,7 @@ using BRIX.Library.Characters;
 using System.Collections.ObjectModel;
 using BRIX.Mobile.Models.Abilities;
 using System.Collections.Specialized;
+using BRIX.Library.Ability;
 
 namespace BRIX.Mobile.Models.Characters
 {
@@ -232,6 +233,23 @@ namespace BRIX.Mobile.Models.Characters
             Statuses.Remove(status);
             InternalModel.Statuses.Remove(status.Internal);
             OnPropertyChanged(nameof(ShowStatuses));
+        }
+
+        public void AddStatus(StatusItemVM status)
+        {
+            Statuses.Add(status);
+            InternalModel.Statuses.Add(status.Internal);
+            OnPropertyChanged(nameof(ShowStatuses));
+        }
+
+        public void ReplaceStatus(StatusItemVM status)
+        {
+            if (Statuses.Any(x => x.Internal.Equals(status.Internal)))
+            {
+                StatusItemVM existingStatus = Statuses.FirstOrDefault(x => x.Internal.Equals(status.Internal));
+                Statuses[Statuses.IndexOf(existingStatus)] = status;
+                InternalModel.Statuses[InternalModel.Statuses.IndexOf(existingStatus.Internal)] = status.Internal;
+            }
         }
     }
 }

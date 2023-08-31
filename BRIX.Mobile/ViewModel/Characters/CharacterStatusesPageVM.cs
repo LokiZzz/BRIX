@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
-    public partial class CharacterStatusesPageVM : ViewModelBase
+    public partial class CharacterStatusesPageVM : ViewModelBase, IQueryAttributable
     {
         public CharacterStatusesPageVM(ICharacterService characterService, IAssetsService assetsService)
         {
@@ -28,7 +28,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             AssetsService = assetsService;
         }
 
-        private Character _currentCharacter;
+        private CharacterModel _currentCharacter;
 
         public ICharacterService CharacterService { get; }
         public IAssetsService AssetsService { get; }
@@ -59,8 +59,6 @@ namespace BRIX.Mobile.ViewModel.Characters
             if(result.Answer == Popups.EAlertPopupResult.Yes)
             {
                 Statuses.Remove(status);
-                _currentCharacter.Statuses.Remove(status.Internal);
-                await CharacterService.UpdateAsync(_currentCharacter);
                 await AssetsService.SaveStatuses(Statuses.Select(x => x.Internal).ToList());
             }
         }
@@ -75,23 +73,23 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if(!_currentCharacter.Statuses.Any(x => x.Name == status.Name) && status.IsActive)
             {
-                _currentCharacter.Statuses.Add(status.Internal);
-                await CharacterService.UpdateAsync(_currentCharacter);
+                _currentCharacter.AddStatus(status);
+                await CharacterService.UpdateAsync(_currentCharacter.InternalModel);
             }
 
             if (_currentCharacter.Statuses.Any(x => x.Name == status.Name) && !status.IsActive)
             {
-                _currentCharacter.Statuses.Remove(
-                    _currentCharacter.Statuses.FirstOrDefault(x => x.Equals(status.Internal))
+                _currentCharacter.InternalModel.Statuses.Remove(
+                    _currentCharacter.InternalModel.Statuses.FirstOrDefault(x => x.Equals(status.Internal))
                 );
 
-                await CharacterService.UpdateAsync(_currentCharacter);
+                await CharacterService.UpdateAsync(_currentCharacter.InternalModel);
             }
         }
 
         public override async Task OnNavigatedAsync()
         {
-            _currentCharacter = await CharacterService.GetCurrentCharacter();
+            _currentCharacter = new(await CharacterService.GetCurrentCharacter());
             List<Status> statuses = await AssetsService.GetStatuses();
 
             Statuses = new(statuses.Select(x => new StatusItemVM(x)));
@@ -102,6 +100,32 @@ namespace BRIX.Mobile.ViewModel.Characters
                 {
                     status.IsActive = true;
                 }
+            }
+        }
+
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            StatusItemVM status = query.GetParameterOrDefault<StatusItemVM>(NavigationParameters.Status);
+            EEditingMode mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
+
+            if (status != null)
+            {
+                List<Status> statuses = await AssetsService.GetStatuses();
+
+                switch (mode)
+                {
+                    case EEditingMode.Add:
+                        statuses.Add(status.Internal);
+                        break;
+                    case EEditingMode.Edit:
+                        Status existingStatus = statuses.FirstOrDefault(x => x.Equals(status.Internal));
+                        statuses[statuses.IndexOf(existingStatus)] = status.Internal;
+                        _currentCharacter.ReplaceStatus(status);
+                        break;
+                }
+
+                await AssetsService.SaveStatuses(statuses);
+                Statuses = new(statuses.Select(x => new StatusItemVM(x)));
             }
         }
     }
