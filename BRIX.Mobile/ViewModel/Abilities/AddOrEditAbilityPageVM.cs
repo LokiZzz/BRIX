@@ -19,12 +19,12 @@ using BRIX.Mobile.ViewModel.Inventory;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {
-    public partial class AddOrEditAbilityPageVM : ViewModelBase, IQueryAttributable
+    public partial class AOEAbilityPageVM : ViewModelBase, IQueryAttributable
     {
         private readonly ILocalizationResourceManager _localization;
         private readonly ICharacterService _characterService;
         private readonly InventoryItemConverter _inventoryConverter;
-        public AddOrEditAbilityPageVM(ILocalizationResourceManager localization, ICharacterService characterService)
+        public AOEAbilityPageVM(ILocalizationResourceManager localization, ICharacterService characterService)
         {
             _localization = localization;
             _characterService = characterService;

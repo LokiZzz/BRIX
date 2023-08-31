@@ -5,7 +5,10 @@ using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
+using BRIX.Mobile.Services.Navigation;
+using BRIX.Mobile.View.Characters;
 using BRIX.Mobile.ViewModel.Base;
+using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -36,13 +39,16 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task AddStatus()
         {
-            //Navigate to add status
+            await Navigation.NavigateAsync<AOEStatusPage>((NavigationParameters.EditMode, EEditingMode.Add));
         }
 
         [RelayCommand]
         public async Task EditStatus(StatusItemVM status)
         {
-            //Navigate to add status
+            await Navigation.NavigateAsync<AOEStatusPage>(
+                (NavigationParameters.EditMode, EEditingMode.Edit),
+                (NavigationParameters.Status, status.Copy())
+            );
         }
 
         [RelayCommand]
@@ -87,26 +93,6 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             _currentCharacter = await CharacterService.GetCurrentCharacter();
             List<Status> statuses = await AssetsService.GetStatuses();
-
-            //УБРАТЬ
-            if (!statuses.Any())
-            {
-                Status dragonFortitude = new Status() { Name = "Драконья крепкость" };
-                FortifyEffect fortify = new FortifyEffect() { Impact = new(5) };
-                fortify.GetAspect<RoundDurationAspect>().Rounds = 4;
-                FortifyEffect fortify2 = new FortifyEffect() { Impact = new(10) };
-                fortify.GetAspect<RoundDurationAspect>().Rounds = 8;
-                dragonFortitude.AddEffect(fortify);
-                dragonFortitude.AddEffect(fortify2);
-                dragonFortitude.RoundsPassed = 1;
-                statuses.Add(dragonFortitude);
-                Status ill = new Status() { Name = "Ветрянка" };
-                ExhaustionEffect exhaustion = new ExhaustionEffect() { Impact = new(3) };
-                exhaustion.GetAspect<RoundDurationAspect>().Rounds = 4;
-                ill.AddEffect(exhaustion);
-                statuses.Add(ill);
-                await AssetsService.SaveStatuses(statuses);
-            }
 
             Statuses = new(statuses.Select(x => new StatusItemVM(x)));
 

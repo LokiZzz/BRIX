@@ -4,6 +4,8 @@ using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.ViewModel.Abilities.Effects;
 using BRIX.Library.Effects;
 using Microsoft.Maui.Controls;
+using System.Collections.ObjectModel;
+using BRIX.Mobile.Models.Abilities.Effects;
 
 namespace BRIX.Mobile.Models.Characters
 {
@@ -12,9 +14,14 @@ namespace BRIX.Mobile.Models.Characters
         public StatusItemVM(Status status)
         {
             Internal = status;
+            Effects = new ObservableCollection<EffectModelBase>(
+                status.Effects.Select(EffectModelFactory.GetModel)
+            );
         }
 
         public Status Internal { get; set; }
+
+        public ObservableCollection<EffectModelBase> Effects { get; set; } = new ObservableCollection<EffectModelBase>();
 
         public string Name
         {

@@ -52,13 +52,13 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task Create()
         {
-            await Navigation.NavigateAsync<AddOrEditCharacterPage>();
+            await Navigation.NavigateAsync<AOECharacterPage>();
         }
 
         [RelayCommand]
         public async Task Edit()
         {
-            await Navigation.NavigateAsync<AddOrEditCharacterPage>((NavigationParameters.Character, Character));
+            await Navigation.NavigateAsync<AOECharacterPage>((NavigationParameters.Character, Character));
         }
 
         [RelayCommand]

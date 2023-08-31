@@ -277,6 +277,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add status.
+        /// </summary>
+        public static string AddStatus {
+            get {
+                return ResourceManager.GetString("AddStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Appearance.
         /// </summary>
         public static string Appearance {
@@ -930,6 +939,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string EditProject {
             get {
                 return ResourceManager.GetString("EditProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit status.
+        /// </summary>
+        public static string EditStatus {
+            get {
+                return ResourceManager.GetString("EditStatus", resourceCulture);
             }
         }
         

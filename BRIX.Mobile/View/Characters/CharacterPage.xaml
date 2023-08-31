@@ -92,7 +92,10 @@
                                 <Label Style="{StaticResource TitleLabel}" Text="{Binding Character.Name}" />
                             </Border>
                             <Border Style="{StaticResource TransparentBorder}" VerticalOptions="End" HorizontalOptions="End" Padding="10,5">
-                                <Label Style="{StaticResource TitleLabel}" Text="{lcz:Format ValuePath=Character.Level, FormatPath={x:Static lcz:LocalizationKeys.LevelFormat}}"/>
+                                <Label 
+                                    Style="{StaticResource TitleLabel}" 
+                                    Text="{lcz:Format ValuePath=Character.Level, FormatPath={x:Static lcz:LocalizationKeys.LevelFormat}}"
+                                    Margin="1"/>
                             </Border>
                         </Grid>
                         <Label 

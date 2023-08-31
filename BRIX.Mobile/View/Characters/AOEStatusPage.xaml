@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="BRIX.Mobile.View.Characters.AOEStatusPage"
+    xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+    xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+    xmlns:v="clr-namespace:BRIX.Mobile.View.Characters"
+    xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Characters"
+    xmlns:efmodels="clr-namespace:BRIX.Mobile.Models.Abilities.Effects"
+    xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+    x:DataType="vm:AOEStatusPageVM"
+    Shell.TabBarIsVisible="False"
+    Title="{Binding Title}"
+    Padding="0">
+
+    <Shell.TitleView>
+        <controls:TitleView/>
+    </Shell.TitleView>
+
+    <Grid RowDefinitions="*,auto" RowSpacing="0">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Margin="0,10">
+
+                <Border Style="{StaticResource BlockBorder}" VerticalOptions="Start" Margin="10,0">
+                    <VerticalStackLayout Spacing="10">
+                        <controls:FramedEntry
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CommonName}}"
+                            Text="{Binding Status.Name}"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Grid RowDefinitions="auto,auto,*" Margin="0,0,0,-10">
+                    <Label Grid.Row="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Effects}}" Margin="10,5,10,15"/>
+                    <Button
+                        Grid.Row="1"
+                        Style="{StaticResource LightPlusButton}" 
+                        Command="{Binding AddEffectCommand}"
+                        Margin="10,0,10,10"/>
+                    <CollectionView Grid.Row="2" x:Name="collectionView" ItemsSource="{Binding Status.Effects}" Margin="0,0,0,10">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="efmodels:EffectModelBase">
+                                <SwipeView Threshold="100">
+                                    <SwipeView.LeftItems>
+                                        <SwipeItems Mode="Execute">
+                                            <SwipeItemView
+                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.EditEffectCommand}"
+                                                CommandParameter="{Binding}">
+                                                <Border Style="{StaticResource MediumSwipeViewBorder}">
+                                                    <Label Style="{StaticResource MediumSwipeViewEditLabel}" />
+                                                </Border>
+                                            </SwipeItemView>
+                                        </SwipeItems>
+                                    </SwipeView.LeftItems>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems Mode="Execute">
+                                            <SwipeItemView
+                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.DeleteEffectCommand}"
+                                                CommandParameter="{Binding}">
+                                                <Border Style="{StaticResource MediumSwipeViewBorder}">
+                                                    <Label Style="{StaticResource MediumSwipeViewDeleteLabel}"/>
+                                                </Border>
+                                            </SwipeItemView>
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <Grid Margin="10,0">
+                                        <Border Style="{StaticResource BlockBorder}" >
+                                            <VerticalStackLayout Spacing="5">
+                                                <Label Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
+                                                <Label Text="{Binding Description}" />
+                                            </VerticalStackLayout>
+                                        </Border>
+                                    </Grid>
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Border Style="{StaticResource LowBlockWithShadowBorder}" Grid.Row="2">
+            <Button 
+                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save} }"
+                Command="{Binding SaveCommand}"
+                Margin="10,0,10,10"/>
+        </Border>
+        
+    </Grid>
+</ContentPage>

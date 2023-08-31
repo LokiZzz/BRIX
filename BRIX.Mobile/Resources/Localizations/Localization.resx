@@ -189,6 +189,9 @@
   <data name="AddSize" xml:space="preserve">
     <value>Add size</value>
   </data>
+  <data name="AddStatus" xml:space="preserve">
+    <value>Add status</value>
+  </data>
   <data name="Appearance" xml:space="preserve">
     <value>Appearance</value>
   </data>
@@ -407,6 +410,9 @@
   </data>
   <data name="EditProject" xml:space="preserve">
     <value>Edit project</value>
+  </data>
+  <data name="EditStatus" xml:space="preserve">
+    <value>Edit status</value>
   </data>
   <data name="EffectDamage" xml:space="preserve">
     <value>Damage</value>

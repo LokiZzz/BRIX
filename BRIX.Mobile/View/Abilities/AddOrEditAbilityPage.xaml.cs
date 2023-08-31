@@ -2,9 +2,9 @@ using BRIX.Mobile.ViewModel.Abilities;
 
 namespace BRIX.Mobile.View.Abilities;
 
-public partial class AddOrEditAbilityPage : ContentPage
+public partial class AOEAbilityPage : ContentPage
 {
-	public AddOrEditAbilityPage(AddOrEditAbilityPageVM context)
+	public AOEAbilityPage(AOEAbilityPageVM context)
 	{
 		InitializeComponent();
 		BindingContext = context;

@@ -189,6 +189,9 @@
   <data name="AddSize" xml:space="preserve">
     <value>Добавить размер</value>
   </data>
+  <data name="AddStatus" xml:space="preserve">
+    <value>Добавить статус</value>
+  </data>
   <data name="Appearance" xml:space="preserve">
     <value>Внешность</value>
   </data>
@@ -407,6 +410,9 @@
   </data>
   <data name="EditProject" xml:space="preserve">
     <value>Изменить проект</value>
+  </data>
+  <data name="EditStatus" xml:space="preserve">
+    <value>Изменить статус</value>
   </data>
   <data name="EffectDamage" xml:space="preserve">
     <value>Урон</value>
