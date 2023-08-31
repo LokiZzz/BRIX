@@ -121,6 +121,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                         Status existingStatus = statuses.FirstOrDefault(x => x.Equals(status.Internal));
                         statuses[statuses.IndexOf(existingStatus)] = status.Internal;
                         _currentCharacter.ReplaceStatus(status);
+                        await CharacterService.UpdateAsync(_currentCharacter.InternalModel);
                         break;
                 }
 
