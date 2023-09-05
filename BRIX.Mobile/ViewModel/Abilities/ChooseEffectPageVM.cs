@@ -12,18 +12,11 @@ namespace BRIX.Mobile.ViewModel.Abilities
 {
     public partial class ChooseEffectPageVM : ViewModelBase, IQueryAttributable
     {
-        private readonly ILocalizationResourceManager _localization;
-
-        public ChooseEffectPageVM(ILocalizationResourceManager localization)
-        {
-            _localization = localization;
-        }
-
         [ObservableProperty]
-        private ObservableCollection<EffectToChooseVM> _effects;
+        private ObservableCollection<EffectTypeVM> _effects;
 
         [RelayCommand]
-        public async Task Choose(EffectToChooseVM effectToChoose)
+        public async Task Choose(EffectTypeVM effectToChoose)
         {
             await Navigation.NavigateAsync(
                 effectToChoose.EditPage.Name,
@@ -37,21 +30,20 @@ namespace BRIX.Mobile.ViewModel.Abilities
         {
             if (Effects != null) return Task.CompletedTask;
 
-            Effects = new ObservableCollection<EffectToChooseVM>(
-                EffectsDictionary.Collection.Select(x => 
-                    new EffectToChooseVM() 
-                    { 
-                        Name = x.Value.Name, 
-                        EditPage = x.Value.EditPage, 
-                        Icon = x.Value.Icon 
-                    }
-                )
-            );
+            IEnumerable<EffectTypeVM> effects = EffectsDictionary.Collection.Select(x => x.Value);
+                
+            if(_forStatus)
+            {
+                effects = effects.Where(x => x.ForStatus);
+            }
+
+            Effects = new(effects);
 
             return Task.CompletedTask;
         }
 
         private AbilityCostMonitorPanelVM _costMonitor;
+        private bool _forStatus = false;
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
@@ -60,14 +52,9 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 _costMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
             }
 
+            _forStatus = query.GetParameterOrDefault<bool>(NavigationParameters.ForStatus);
+
             query.Clear();
         }
-    }
-
-    public class EffectToChooseVM
-    {
-        public string Name{ get; set; }
-        public string Icon { get; set; }
-        public Type EditPage { get; set; }
     }
 }

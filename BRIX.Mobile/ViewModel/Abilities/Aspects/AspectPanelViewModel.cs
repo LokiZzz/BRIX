@@ -15,7 +15,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
         public AspectPanelViewModel(AbilityCostMonitorPanelVM costMonitor, EffectModelBase effect)
         {
-            if(!costMonitor.Ability.Effects.Contains(effect))
+            if(costMonitor != null && !costMonitor.Ability.Effects.Contains(effect))
             {
                 throw new ArgumentException(
                     "Инициализируя модель аспекта, необходимо передавать способность и её (!!!) эффект."

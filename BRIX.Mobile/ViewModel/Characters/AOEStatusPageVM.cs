@@ -1,10 +1,16 @@
 ﻿using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.Resources.Localizations;
+using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
+using BRIX.Mobile.View.Abilities;
+using BRIX.Mobile.ViewModel.Abilities;
+using BRIX.Mobile.ViewModel.Abilities.Effects;
 using BRIX.Mobile.ViewModel.Base;
 using BRIX.Mobile.ViewModel.Popups;
+using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,13 +50,22 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task AddEffect()
         {
-
+            await Navigation.NavigateAsync<ChooseEffectPage>(
+                (NavigationParameters.CostMonitor, new AbilityCostMonitorPanelVM()),
+                (NavigationParameters.ForStatus, true)
+            );
         }
 
         [RelayCommand]
         public async Task EditEffect(EffectModelBase effect)
         {
-
+            await Navigation.NavigateAsync(
+                EffectsDictionary.GetEditPageRoute(effect),
+                ENavigationMode.Push,
+                (NavigationParameters.EditMode, EEditingMode.Edit),
+                (NavigationParameters.Effect, effect.Copy()),
+                (NavigationParameters.CostMonitor, new AbilityCostMonitorPanelVM())
+            );
         }
 
         [RelayCommand]
@@ -66,11 +81,39 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            _mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
-            Status = query.GetParameterOrDefault<StatusItemVM>(NavigationParameters.Status)
-                ?? new StatusItemVM(new Library.Ability.Status());
+            if (_mode == EEditingMode.None)
+            {
+                _mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
+                Status = query.GetParameterOrDefault<StatusItemVM>(NavigationParameters.Status)
+                    ?? new StatusItemVM(new Library.Ability.Status());
+                InitializeTitle();
+            }
+            else
+            {
+                HandleBackFromEditing(query);
+            }
+        }
 
-            InitializeTitle();
+        private Task HandleBackFromEditing(IDictionary<string, object> query)
+        {
+            EffectModelBase editedEffect = query.GetParameterOrDefault<EffectModelBase>(NavigationParameters.Effect);
+
+            if (editedEffect != null)
+            {
+                EEditingMode mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
+
+                switch (mode)
+                {
+                    case EEditingMode.Add:
+                        Status.AddEffect(editedEffect);
+                        break;
+                    case EEditingMode.Edit:
+                        Status.UpdateEffect(editedEffect);
+                        break;
+                }
+            }
+
+            return Task.CompletedTask;
         }
 
         private void InitializeTitle()

@@ -117,14 +117,14 @@ namespace BRIX.Library
         /// Удобно для обновления эффекта в способности после его редактирования или улучшения.
         /// Переданный эффект заменит совпавший по типу и полю Number.
         /// </summary>
-        public void UpdateEffect(EffectBase effectToAdd)
+        public void UpdateEffect(EffectBase effect)
         {
-            var effectToRemove = _effects.First(x =>
-                x.Number == effectToAdd.Number && x.GetType().Equals(effectToAdd.GetType())
+            EffectBase effectToRemove = _effects.First(x =>
+                x.Number == effect.Number && x.GetType().Equals(effect.GetType())
             );
 
             RemoveEffect(effectToRemove);
-            AddEffect(effectToAdd);
+            AddEffect(effect);
         }
 
         public void RemoveEffect(EffectBase item)

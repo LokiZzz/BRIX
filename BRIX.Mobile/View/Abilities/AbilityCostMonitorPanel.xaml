@@ -4,7 +4,8 @@
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities"
              x:DataType="vm:AbilityCostMonitorPanelVM"
-             x:Class="BRIX.Mobile.View.Abilities.AbilityCostMonitorPanel">
+             x:Class="BRIX.Mobile.View.Abilities.AbilityCostMonitorPanel"
+             IsVisible="{Binding IsMock, Converter={StaticResource NotConverter}}">
 
     <ContentView.Resources>
         <Style TargetType="Rectangle" x:Key="LegendMarker">

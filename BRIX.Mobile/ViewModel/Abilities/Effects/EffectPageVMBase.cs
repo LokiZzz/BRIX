@@ -1,4 +1,5 @@
-﻿using BRIX.Mobile.Models.Abilities.Aspects;
+﻿using BRIX.Mobile.Models.Abilities;
+using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Abilities.Aspects;
@@ -70,8 +71,11 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 HandleInitial(query);
             }
 
-            CostMonitor.SaveCommand = SaveCommand;
-            CostMonitor.UpdateCost();
+            if (CostMonitor != null)
+            {
+                CostMonitor.SaveCommand = SaveCommand;
+                CostMonitor.UpdateCost();
+            }
 
             query.Clear();
         }
@@ -86,23 +90,26 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 Aspects.UpdateAspect(aspect);
             }
 
-            CostMonitor.UpdateCost();
+            CostMonitor?.UpdateCost();
         }
 
         private void HandleInitial(IDictionary<string, object> query)
         {
             Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
-            CostMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
             Effect = query.GetParameterOrDefault<T>(NavigationParameters.Effect) ?? new T();
+            CostMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
 
-            switch (Mode)
-            {
-                case EEditingMode.Add:
-                    CostMonitor.Ability.AddEffect(Effect);
-                    break;
-                case EEditingMode.Edit:
-                    CostMonitor.Ability.UpdateEffect(Effect);
-                    break;
+            if (CostMonitor != null)
+            { 
+                switch (Mode)
+                {
+                    case EEditingMode.Add:
+                        CostMonitor.Ability.AddEffect(Effect);
+                        break;
+                    case EEditingMode.Edit:
+                        CostMonitor.Ability.UpdateEffect(Effect);
+                        break;
+                }
             }
 
             Aspects = new AspectPanelViewModel(CostMonitor, Effect);

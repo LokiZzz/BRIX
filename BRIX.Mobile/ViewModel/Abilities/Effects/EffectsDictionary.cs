@@ -9,29 +9,31 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 {
     public static class EffectsDictionary
     {
-        public static Dictionary<Type, EffectUtilityModel> Collection => new()
+        public static Dictionary<Type, EffectTypeVM> Collection => new()
         {
-            { typeof(DamageEffectModel), new EffectUtilityModel() {
+            { typeof(DamageEffectModel), new EffectTypeVM() {
                 Name = Localization.EffectDamage,
                 Icon = AwesomeRPG.Sword,
                 EditPage = typeof(DamageEffectPage)
             }},
-            { typeof(EffectGenericModelBase<HealEffect>), new EffectUtilityModel() {
+            { typeof(EffectGenericModelBase<HealEffect>), new EffectTypeVM() {
                 Name = Localization.EffectHeal,
                 Icon = AwesomeRPG.HealthIncrease,
                 EditPage = typeof(HealEffectPage)
             }},
-            { typeof(EffectGenericModelBase<FortifyEffect>), new EffectUtilityModel() {
+            { typeof(EffectGenericModelBase<FortifyEffect>), new EffectTypeVM() {
                 Name = Localization.EffectFortify,
                 Icon = AwesomeRPG.HeartTower,
-                EditPage = typeof(FortifyEffectPage)
+                EditPage = typeof(FortifyEffectPage),
+                ForStatus = true
             }},
-            { typeof(EffectGenericModelBase<ExhaustionEffect>), new EffectUtilityModel() {
+            { typeof(EffectGenericModelBase<ExhaustionEffect>), new EffectTypeVM() {
                 Name = Localization.EffectExhaustion,
                 Icon = AwesomeRPG.BleedingHearts,
-                EditPage = typeof(ExhaustionEffectPage)
+                EditPage = typeof(ExhaustionEffectPage),
+                ForStatus = true
             }},
-            { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectUtilityModel() {
+            { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectTypeVM() {
                 Name = Localization.EffectWin,
                 Icon = AwesomeRPG.PerspectiveDiceRandom,
                 EditPage = typeof(WinEffectPage)
@@ -51,12 +53,5 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         {
             return Collection[effect.GetType()].EditPage.Name.ToString();
         }
-    }
-
-    public class EffectUtilityModel
-    {
-        public string Name { get; set; }
-        public string Icon { get; set; }
-        public Type EditPage { get; set; }
     }
 }

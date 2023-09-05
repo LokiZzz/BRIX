@@ -20,7 +20,7 @@
                 <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="10" VerticalItemSpacing="10"/>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="vm:EffectToChooseVM">
+                <DataTemplate x:DataType="vm:EffectTypeVM">
                     <Border Style="{StaticResource BlockBorder}" Padding="0" HeightRequest="75">
                         <Grid>
                             <Button 
