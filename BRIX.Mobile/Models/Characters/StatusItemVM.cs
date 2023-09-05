@@ -68,5 +68,11 @@ namespace BRIX.Mobile.Models.Characters
             Internal.RoundsPassed--;
             OnPropertyChanged(nameof(RoundsLeft));
         }
+
+        public void RemoveEffect(EffectModelBase effect)
+        {
+            Internal.RemoveEffect(effect.InternalModel);
+            Effects.Remove(effect);
+        }
     }
 }

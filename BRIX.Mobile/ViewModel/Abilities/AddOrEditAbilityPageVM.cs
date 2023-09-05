@@ -130,7 +130,6 @@ namespace BRIX.Mobile.ViewModel.Abilities
             {
                 Ability.RemoveEffect(effectToRemove);
             }
-            
         }
 
         [RelayCommand]

@@ -3,6 +3,7 @@ using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Base;
+using BRIX.Mobile.ViewModel.Popups;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -55,7 +56,12 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task DeleteEffect(EffectModelBase effect)
         {
+            AlertPopupResult result = await Ask(Localization.DeleteEffectQuestion);
 
+            if (result?.Answer == EAlertPopupResult.Yes)
+            {
+                Status.RemoveEffect(effect);
+            }
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
