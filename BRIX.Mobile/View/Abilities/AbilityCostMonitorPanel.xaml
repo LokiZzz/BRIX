@@ -4,8 +4,7 @@
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities"
              x:DataType="vm:AbilityCostMonitorPanelVM"
-             x:Class="BRIX.Mobile.View.Abilities.AbilityCostMonitorPanel"
-             IsVisible="{Binding IsMock, Converter={StaticResource NotConverter}}">
+             x:Class="BRIX.Mobile.View.Abilities.AbilityCostMonitorPanel">
 
     <ContentView.Resources>
         <Style TargetType="Rectangle" x:Key="LegendMarker">
@@ -28,32 +27,17 @@
     </ContentView.Resources>
     
     <Border Style="{StaticResource LowBlockWithShadowBorder}">
-        <Grid RowDefinitions="auto,auto,auto,auto,auto,auto">
-            <Label Grid.Row="1" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AbilityCost}}" />
-            <HorizontalStackLayout Grid.Row="1" HorizontalOptions="End" Spacing="10">
+        <Grid RowDefinitions="auto,auto,auto,auto,auto">
+            <Label Grid.Row="0" IsVisible="{Binding IsMock, Converter={StaticResource NotConverter}}" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AbilityCost}}" />
+            <HorizontalStackLayout Grid.Row="1" IsVisible="{Binding IsMock, Converter={StaticResource NotConverter}}" HorizontalOptions="End" Spacing="10">
                 <Label 
                     Style="{StaticResource TitleLabel}" 
                     Text="{Binding Ability.Cost}"/>
                 <Label 
                     Style="{StaticResource TitleLabel}" 
                     Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EXP}}"/>
-                <!--<Rectangle Style="{StaticResource LegendMarker}" BackgroundColor="{StaticResource BRIXOrange}"/>-->
             </HorizontalStackLayout>
-            <Grid Grid.Row="3" ColumnDefinitions="auto,*">
-                <HorizontalStackLayout Grid.Column="0" Spacing="5">
-                    <Label Text="Уже занято:"/>
-                    <Label Text="{Binding ExpSumWithoutEditingAbility}" />
-                    <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EXP}}" />
-                    <!--<Rectangle Style="{StaticResource SmallLegendMarker}" BackgroundColor="{StaticResource BRIXLime}"/>-->
-                </HorizontalStackLayout>
-                <HorizontalStackLayout  Grid.Column="1" Spacing="5" HorizontalOptions="End">
-                    <Label Text="Осталось:"/>
-                    <Label Text="{Binding AvailiableExp}"/>
-                    <Label Text="/"/>
-                    <Label Text="{Binding Exp}" />
-                </HorizontalStackLayout>
-            </Grid>
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="2" IsVisible="{Binding IsMock, Converter={StaticResource NotConverter}}">
                 <ProgressBar 
                     Progress="{Binding PercentWithEditingAbility}" 
                     ProgressColor="{StaticResource BRIXOrange}">
@@ -71,12 +55,20 @@
                     BackgroundColor="Transparent" 
                     ProgressColor="{StaticResource BRIXLime}"/>
             </Grid>
-
-            <Grid Grid.Row="4">
-                
+            <Grid Grid.Row="3" IsVisible="{Binding IsMock, Converter={StaticResource NotConverter}}" ColumnDefinitions="auto,*">
+                <HorizontalStackLayout Grid.Column="0" Spacing="5">
+                    <Label Text="Уже занято:"/>
+                    <Label Text="{Binding ExpSumWithoutEditingAbility}" />
+                    <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EXP}}" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout  Grid.Column="1" Spacing="5" HorizontalOptions="End">
+                    <Label Text="Осталось:"/>
+                    <Label Text="{Binding AvailiableExp}"/>
+                    <Label Text="/"/>
+                    <Label Text="{Binding Exp}" />
+                </HorizontalStackLayout>
             </Grid>
-
-            <Button Grid.Row="5" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" Margin="0,10,0,10" Command="{Binding SaveCommand}"/>
+            <Button Grid.Row="4" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Save}}" Margin="0,10,0,10" Command="{Binding SaveCommand}"/>
         </Grid>
     </Border>
     

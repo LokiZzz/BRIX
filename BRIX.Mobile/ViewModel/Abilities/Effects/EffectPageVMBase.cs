@@ -95,28 +95,35 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
         private void HandleInitial(IDictionary<string, object> query)
         {
-            Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
-            Effect = query.GetParameterOrDefault<T>(NavigationParameters.Effect) ?? new T();
-            CostMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
+            try
+            {
+                Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
+                Effect = query.GetParameterOrDefault<T>(NavigationParameters.Effect) ?? new T();
+                CostMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
 
-            if (CostMonitor != null)
-            { 
-                switch (Mode)
+                if (CostMonitor?.IsMock == false)
                 {
-                    case EEditingMode.Add:
-                        CostMonitor.Ability.AddEffect(Effect);
-                        break;
-                    case EEditingMode.Edit:
-                        CostMonitor.Ability.UpdateEffect(Effect);
-                        break;
+                    switch (Mode)
+                    {
+                        case EEditingMode.Add:
+                            CostMonitor.Ability.AddEffect(Effect);
+                            break;
+                        case EEditingMode.Edit:
+                            CostMonitor.Ability.UpdateEffect(Effect);
+                            break;
+                    }
                 }
+
+                Aspects = new AspectPanelViewModel(CostMonitor, Effect);
+
+                Initialize();
+
+                _alreadyInitialized = true;
             }
-
-            Aspects = new AspectPanelViewModel(CostMonitor, Effect);
-
-            Initialize();
-
-            _alreadyInitialized = true;
+            catch(Exception ex)
+            {
+                string stop = "";
+            }
         }
 
         /// <summary>
