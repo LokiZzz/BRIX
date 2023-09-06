@@ -49,7 +49,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             Initialize();
              
             Effect.UpdateAspect(Aspect);
-            CostMonitor.Ability.UpdateEffect(Effect);
+            CostMonitor.Ability?.UpdateEffect(Effect);
 
             query.Clear();
         }
