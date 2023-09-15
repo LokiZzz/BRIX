@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Aspects;
+﻿using BRIX.Library.Ability;
+using BRIX.Library.Aspects;
 using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Characters;
 using BRIX.Library.Effects;
@@ -26,6 +27,7 @@ namespace BRIX.Library
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string StatusName { get; set; }
 
         /// <summary>
         /// Получить стоимость способности в очках опыта. 
@@ -178,5 +180,17 @@ namespace BRIX.Library
                 throw new AbilityLogicException("Нельзя рассинхронизировать аспект очков действий.");
             }
         }
+
+        public Status BuildStatus()
+        {
+            Status status = new Status();
+
+            status.Name = string.IsNullOrEmpty(StatusName) ? Name : StatusName;
+            status.AddEffects(_effects.Where(x => x.Aspects.Any(x => x is RoundDurationAspect)));
+
+            return status;
+        }
+
+        public override string ToString() => Name;
     }
 }

@@ -351,6 +351,9 @@
   <data name="CreateNewCharacter" xml:space="preserve">
     <value>Создать персонажа</value>
   </data>
+  <data name="CreateStatusFromAbility" xml:space="preserve">
+    <value>Из способности...</value>
+  </data>
   <data name="CurrentAdjustment" xml:space="preserve">
     <value>Сейчас (+0%)</value>
   </data>

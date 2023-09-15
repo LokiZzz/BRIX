@@ -27,6 +27,11 @@
                         <controls:FramedEntry
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CommonName}}"
                             Text="{Binding Status.Name}"/>
+                        <Button 
+                            Style="{StaticResource LightButton}"
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CreateStatusFromAbility}}"
+                            Command="{Binding FromAbilityCommand}"
+                            Margin="1"/>
                     </VerticalStackLayout>
                 </Border>
 

@@ -1,26 +1,32 @@
-﻿using BRIX.Mobile.Models.Abilities.Effects;
+﻿using BRIX.Library;
+using BRIX.Library.Characters;
+using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Abilities;
+using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Abilities;
 using BRIX.Mobile.ViewModel.Abilities.Effects;
 using BRIX.Mobile.ViewModel.Base;
 using BRIX.Mobile.ViewModel.Popups;
 using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
     public partial class AOEStatusPageVM : ViewModelBase, IQueryAttributable
     {
+        public AOEStatusPageVM(ICharacterService characterService)
+        {
+            CharacterService = characterService;
+        }
+
+        private Character _currentCharacrter;
+
+        public ICharacterService CharacterService { get; }
+
         EEditingMode _mode;
 
         private string _title;
@@ -79,7 +85,29 @@ namespace BRIX.Mobile.ViewModel.Characters
             }
         }
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        [RelayCommand]
+        public async Task FromAbility()
+        {
+            List<CharacterAbility> abilities = _currentCharacrter.Abilities;
+
+            PickerPopupResult result =
+                await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
+                new PickerPopupParameters
+                {
+                    Title = Localization.Abilities,
+                    SelectMultiple = false,
+                    Items = abilities.Cast<object>().ToList(),
+                }
+            );
+
+            if(result != null)
+            {
+                Library.Ability.Status status = (result.SelectedItem as CharacterAbility).BuildStatus();
+                Status = new StatusItemVM(status);
+            }
+        }
+
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (_mode == EEditingMode.None)
             {
@@ -87,10 +115,11 @@ namespace BRIX.Mobile.ViewModel.Characters
                 Status = query.GetParameterOrDefault<StatusItemVM>(NavigationParameters.Status)
                     ?? new StatusItemVM(new Library.Ability.Status());
                 InitializeTitle();
+                _currentCharacrter = await CharacterService.GetCurrentCharacter();
             }
             else
             {
-                HandleBackFromEditing(query);
+                await HandleBackFromEditing(query);
             }
         }
 

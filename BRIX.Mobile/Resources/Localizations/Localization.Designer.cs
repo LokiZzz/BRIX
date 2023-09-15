@@ -763,6 +763,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to From ability....
+        /// </summary>
+        public static string CreateStatusFromAbility {
+            get {
+                return ResourceManager.GetString("CreateStatusFromAbility", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current (+0%).
         /// </summary>
         public static string CurrentAdjustment {

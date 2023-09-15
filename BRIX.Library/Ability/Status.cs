@@ -42,6 +42,14 @@ namespace BRIX.Library.Ability
             _effects.Add(effect);
         }
 
+        public void AddEffects(IEnumerable<EffectBase> effectsToAdd)
+        {
+            foreach(EffectBase effectToAdd in effectsToAdd)
+            {
+                AddEffect(effectToAdd);
+            }
+        }
+
         public void UpdateEffect(EffectBase effect)
         {
             EffectBase effectToRemove = _effects.First(x =>

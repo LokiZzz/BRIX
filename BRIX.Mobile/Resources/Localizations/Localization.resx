@@ -351,6 +351,9 @@
   <data name="CreateNewCharacter" xml:space="preserve">
     <value>Create new character</value>
   </data>
+  <data name="CreateStatusFromAbility" xml:space="preserve">
+    <value>From ability...</value>
+  </data>
   <data name="CurrentAdjustment" xml:space="preserve">
     <value>Current (+0%)</value>
   </data>
