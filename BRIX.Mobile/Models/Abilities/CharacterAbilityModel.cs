@@ -16,6 +16,7 @@ namespace BRIX.Mobile.Models.Abilities
             Effects = new ObservableCollection<EffectModelBase>(
                 ability.Effects.Select(EffectModelFactory.GetModel)
             );
+            OnPropertyChanged(nameof(ShowStatusName));
         }
 
         public Character Character;
@@ -27,22 +28,37 @@ namespace BRIX.Mobile.Models.Abilities
         public string Name
         {
             get => InternalModel.Name;
-            set => SetProperty(InternalModel.Name, value, InternalModel, (character, name) => character.Name = name);
+            set => SetProperty(
+                InternalModel.Name, value, InternalModel, (character, name) => character.Name = name
+            );
         }
 
         public string Description
         {
             get => InternalModel.Description;
-            set => SetProperty(InternalModel.Description, value, InternalModel, (ability, desc) => ability.Description = desc);
+            set => SetProperty(
+                InternalModel.Description, value, InternalModel, (ability, desc) => ability.Description = desc
+            );
+        }
+
+        public string StatusName
+        {
+            get => InternalModel.StatusName;
+            set => SetProperty(
+                InternalModel.StatusName, value, InternalModel, (character, status) => character.StatusName = status
+            );
         }
 
         public int Cost => InternalModel.ExpCost(Character);
+
+        public bool ShowStatusName => InternalModel.HasStatus;
 
         public void AddEffect(EffectModelBase effect)
         {
             InternalModel.AddEffect(effect.InternalModel);
             Effects.Add(effect);
             OnPropertyChanged(nameof(Cost));
+            OnPropertyChanged(nameof(ShowStatusName));
         }
 
         public void UpdateEffect(EffectModelBase effect)
@@ -55,6 +71,7 @@ namespace BRIX.Mobile.Models.Abilities
             Effects.Remove(effectToRemove);
             Effects.Add(effect);
             OnPropertyChanged(nameof(Cost));
+            OnPropertyChanged(nameof(ShowStatusName));
         }
 
         public void RemoveEffect(EffectModelBase effect) 
@@ -62,6 +79,7 @@ namespace BRIX.Mobile.Models.Abilities
             InternalModel.RemoveEffect(effect.InternalModel);
             Effects.Remove(effect);
             OnPropertyChanged(nameof(Cost));
+            OnPropertyChanged(nameof(ShowStatusName));
         }
 
         public void UpdateCost()

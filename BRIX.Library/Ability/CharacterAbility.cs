@@ -29,6 +29,8 @@ namespace BRIX.Library
         public string Description { get; set; }
         public string StatusName { get; set; }
 
+        public bool HasStatus => Effects?.Any(x => x.Aspects.Any(x => x is RoundDurationAspect)) == true;
+
         /// <summary>
         /// Получить стоимость способности в очках опыта. 
         /// Можно передать персонажа, для которого будет рассчитана индивидуальная стоимость.

@@ -2041,6 +2041,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Status name.
+        /// </summary>
+        public static string StatusName {
+            get {
+                return ResourceManager.GetString("StatusName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Strategy.
         /// </summary>
         public static string Strategy {

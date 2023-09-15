@@ -37,7 +37,7 @@ namespace BRIX.Library.Characters
                     return new List<CharacterAbility>();
                 }
 
-                return Abilities.Where(x => x.Effects.Any(y => y.Aspects.Any(z => z is RoundDurationAspect))).ToList();
+                return Abilities.Where(x => x.HasStatus).ToList();
             }
         }
 
