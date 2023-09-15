@@ -58,9 +58,9 @@
                                         </Grid>
                                     </Border>
 
-                                    <Grid.GestureRecognizers>
+                                    <!--<Grid.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={x:Reference listView}, Path= BindingContext.SelectCommand}" CommandParameter="{Binding .}"/>
-                                    </Grid.GestureRecognizers>
+                                    </Grid.GestureRecognizers>-->
                                 </Grid>
                             </SwipeView>
                         </DataTemplate>

@@ -84,7 +84,11 @@
                         Style="{StaticResource LightPlusButton}" 
                         Command="{Binding AddEffectCommand}"
                         Margin="10,0,10,10"/>   
-                    <CollectionView Grid.Row="2" x:Name="collectionView" ItemsSource="{Binding Ability.Effects}" Margin="0,0,0,10">
+                    <CollectionView 
+                        Grid.Row="2" 
+                        x:Name="collectionView" 
+                        ItemsSource="{Binding Ability.Effects}" 
+                        Margin="0,0,0,10">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                         </CollectionView.ItemsLayout>

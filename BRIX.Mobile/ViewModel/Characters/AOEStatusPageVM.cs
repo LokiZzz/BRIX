@@ -1,4 +1,5 @@
 ﻿using BRIX.Library;
+using BRIX.Library.Aspects;
 using BRIX.Library.Characters;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Models.Characters;
@@ -88,15 +89,13 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task FromAbility()
         {
-            List<CharacterAbility> abilities = _currentCharacrter.Abilities;
-
             PickerPopupResult result =
                 await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
                 new PickerPopupParameters
                 {
                     Title = Localization.Abilities,
                     SelectMultiple = false,
-                    Items = abilities.Cast<object>().ToList(),
+                    Items = _currentCharacrter.StatusAbilities.Cast<object>().ToList(),
                 }
             );
 

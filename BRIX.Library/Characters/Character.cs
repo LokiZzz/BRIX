@@ -25,6 +25,22 @@ namespace BRIX.Library.Characters
         public Inventory Inventory { get; set; } = new();
         public List<Status> Statuses { get; set; } = new();
 
+        /// <summary>
+        /// Способности, создающие статус.
+        /// </summary>
+        public List<CharacterAbility> StatusAbilities
+        {
+            get
+            {
+                if(!Abilities.Any())
+                {
+                    return new List<CharacterAbility>();
+                }
+
+                return Abilities.Where(x => x.Effects.Any(y => y.Aspects.Any(z => z is RoundDurationAspect))).ToList();
+            }
+        }
+
         private int _experience;
         public int Experience
         {

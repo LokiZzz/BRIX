@@ -11,7 +11,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
     {
         public static Dictionary<Type, EffectTypeVM> Collection => new()
         {
-            { typeof(DamageEffectModel), new EffectTypeVM() {
+            { typeof(EffectGenericModelBase<DamageEffect>), new EffectTypeVM() {
                 Name = Localization.EffectDamage,
                 Icon = AwesomeRPG.Sword,
                 EditPage = typeof(DamageEffectPage)

@@ -205,10 +205,9 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            _characterCopy = (await _characterService.GetCurrentCharacter()).Copy();
-
             if (Mode == EEditingMode.None)
             {
+                _characterCopy = (await _characterService.GetCurrentCharacter()).Copy();
                 Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
                 Ability = query.GetParameterOrDefault<CharacterAbilityModel>(NavigationParameters.Ability)
                     ?? new CharacterAbilityModel(new CharacterAbility());
