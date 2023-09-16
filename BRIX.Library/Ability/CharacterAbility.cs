@@ -29,7 +29,7 @@ namespace BRIX.Library
         public string Description { get; set; }
         public string StatusName { get; set; }
 
-        public bool HasStatus => Effects?.Any(x => x.Aspects.Any(x => x is RoundDurationAspect)) == true;
+        public bool HasStatus => Effects?.Any(x => x.Aspects.Any(x => x is DurationAspect)) == true;
 
         /// <summary>
         /// Получить стоимость способности в очках опыта. 
@@ -188,7 +188,7 @@ namespace BRIX.Library
             Status status = new Status();
 
             status.Name = string.IsNullOrEmpty(StatusName) ? Name : StatusName;
-            status.AddEffects(_effects.Where(x => x.Aspects.Any(x => x is RoundDurationAspect)));
+            status.AddEffects(_effects.Where(x => x.Aspects.Any(x => x is DurationAspect)));
 
             return status;
         }

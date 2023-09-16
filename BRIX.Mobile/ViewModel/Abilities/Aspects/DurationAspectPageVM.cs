@@ -2,5 +2,5 @@
 
 namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 {
-    public partial class RoundDurationAspectPageVM : AspectPageVMBase<RoundDurationAspectModel> { }
+    public partial class DurationAspectPageVM : AspectPageVMBase<DurationAspectModel> { }
 }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {
-    public partial class RoundDurationAspectModel : SpecificAspectModelBase<RoundDurationAspect>
+    public partial class DurationAspectModel : SpecificAspectModelBase<DurationAspect>
     {
-        public RoundDurationAspectModel(RoundDurationAspect model) : base(model) { }
+        public DurationAspectModel(DurationAspect model) : base(model) { }
 
         public int Rounds
         {

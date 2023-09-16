@@ -17,8 +17,8 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                     return new CooldownAspectModel(ca);
                 case ActivationConditionsAspect aca:
                     return new ActivationConditionsAspectModel(aca);
-                case RoundDurationAspect rda:
-                    return new RoundDurationAspectModel(rda);
+                case DurationAspect rda:
+                    return new DurationAspectModel(rda);
                 default: 
                     return null;
             }

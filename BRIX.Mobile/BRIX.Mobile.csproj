@@ -195,7 +195,7 @@
 	  <MauiXaml Update="View\Abilities\Aspects\CooldownAspectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Abilities\Aspects\RoundDurationAspectPage.xaml">
+	  <MauiXaml Update="View\Abilities\Aspects\DurationAspectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Aspects\TargetSelectionAspectPage.xaml">
@@ -298,6 +298,9 @@
 	  </Compile>
 	  <Compile Update="View\Abilities\AddOrEditAbilityPage.xaml.cs">
 	    <DependentUpon>AddOrEditAbilityPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Abilities\Aspects\DurationAspectPage.xaml.cs">
+	    <DependentUpon>DurationAspectPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="View\Abilities\Aspects\TargetSelectionAspectPage.xaml.cs">
 	    <DependentUpon>TargetSelectionAspectPage.xaml</DependentUpon>

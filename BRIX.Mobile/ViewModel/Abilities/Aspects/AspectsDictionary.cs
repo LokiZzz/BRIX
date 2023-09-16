@@ -37,11 +37,11 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 EditPage = typeof(ActivationConditionsAspectPage),
                 LibraryAspectType = typeof(ActivationConditionsAspect),
             }},
-            { typeof(RoundDurationAspectModel), new AspectUtilityModel() {
+            { typeof(DurationAspectModel), new AspectUtilityModel() {
                 Name = Localization.AspectRoundDuration,
                 Icon = AwesomeRPG.Stopwatch,
-                EditPage = typeof(RoundDurationAspectPage),
-                LibraryAspectType = typeof(RoundDurationAspect),
+                EditPage = typeof(DurationAspectPage),
+                LibraryAspectType = typeof(DurationAspect),
             }},
         };
 

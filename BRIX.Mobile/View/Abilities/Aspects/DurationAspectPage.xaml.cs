@@ -2,9 +2,9 @@ using BRIX.Mobile.ViewModel.Abilities.Aspects;
 
 namespace BRIX.Mobile.View.Abilities.Aspects;
 
-public partial class RoundDurationAspectPage : ContentPage
+public partial class DurationAspectPage : ContentPage
 {
-	public RoundDurationAspectPage(RoundDurationAspectPageVM context)
+	public DurationAspectPage(DurationAspectPageVM context)
 	{
 		InitializeComponent();
 		BindingContext = context;

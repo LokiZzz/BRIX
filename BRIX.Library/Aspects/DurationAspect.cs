@@ -2,7 +2,7 @@
 
 namespace BRIX.Library.Aspects
 {
-    public class RoundDurationAspect : AspectBase
+    public class DurationAspect : AspectBase
     {
         private double _disableStatusCoef => CanDisableStatus ? 1.3 : 1;
 

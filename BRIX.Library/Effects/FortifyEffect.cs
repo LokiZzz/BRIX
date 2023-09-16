@@ -15,7 +15,7 @@ namespace BRIX.Library.Effects
         {
             typeof(ActionPointAspect), typeof(TargetSelectionAspect),
             typeof(CooldownAspect), typeof(ActivationConditionsAspect),
-            typeof(RoundDurationAspect),
+            typeof(DurationAspect),
         };
 
         public override int BaseExpCost()

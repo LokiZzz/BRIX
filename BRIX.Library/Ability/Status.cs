@@ -17,7 +17,7 @@ namespace BRIX.Library.Ability
             {
                 if (Effects.Any())
                 {
-                    return Effects.Max(x => x.GetAspect<RoundDurationAspect>()?.Rounds ?? 0);
+                    return Effects.Max(x => x.GetAspect<DurationAspect>()?.Rounds ?? 0);
                 }
                 else
                 { 
@@ -34,7 +34,7 @@ namespace BRIX.Library.Ability
         {
             effect.ForceAspectInitialize();
 
-            if(!effect.Aspects.Any(x => x is RoundDurationAspect))
+            if(!effect.Aspects.Any(x => x is DurationAspect))
             {
                 throw new Exception("Статус не может содержать эффектов без аспекта длительности действия.");
             }
