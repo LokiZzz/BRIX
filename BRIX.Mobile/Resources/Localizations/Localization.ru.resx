@@ -283,7 +283,7 @@
     <value>Персонаж может отменить эффект?</value>
   </data>
   <data name="CharacterCanDisableEffectHint" xml:space="preserve">
-    <value>Возможна опция, когда персонаж может не тратя ресурсов отменить длительный эффект (статус), который сам создал, но такая опция удорожает способность.</value>
+    <value>Возможна опция, когда персонаж может не тратя ресурсов отменить длительный эффект, который сам создал, но такая опция удорожает способность.</value>
   </data>
   <data name="CharacterDetails" xml:space="preserve">
     <value>Детали</value>
@@ -399,6 +399,9 @@
   <data name="DiceValuePopupTitle" xml:space="preserve">
     <value>Кости</value>
   </data>
+  <data name="DurationHint" xml:space="preserve">
+    <value>Вы можете указать время, в течение которого будет действовать эффект.</value>
+  </data>
   <data name="EasyActivationCondition" xml:space="preserve">
     <value>Условие малой сложности</value>
   </data>
@@ -419,6 +422,9 @@
   </data>
   <data name="EffectDamage" xml:space="preserve">
     <value>Урон</value>
+  </data>
+  <data name="EffectDuration" xml:space="preserve">
+    <value>Длительность эффекта</value>
   </data>
   <data name="EffectExhaustion" xml:space="preserve">
     <value>Истощение</value>
@@ -723,12 +729,6 @@
   <data name="Round" xml:space="preserve">
     <value>Раунд</value>
   </data>
-  <data name="RoundDuration" xml:space="preserve">
-    <value>Длительность в раундах</value>
-  </data>
-  <data name="RoundDurationHint" xml:space="preserve">
-    <value>Вы можете указать количество раундов, в течение которых будет действовать эффект.</value>
-  </data>
   <data name="RoundsCount" xml:space="preserve">
     <value>Количество раундов</value>
   </data>
@@ -923,6 +923,9 @@
   </data>
   <data name="Thing" xml:space="preserve">
     <value>Вещь</value>
+  </data>
+  <data name="TimeUnit" xml:space="preserve">
+    <value>Единица времени</value>
   </data>
   <data name="Tiny" xml:space="preserve">
     <value>Крохотный</value>

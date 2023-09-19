@@ -5,19 +5,11 @@ using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
 using BRIX.Library.Mathematics;
 
-Status status = new Status();
-status.AddEffect(new FortifyEffect());
-status.AddEffect(new ExhaustionEffect());
-
-try
+while (true)
 {
-    status.AddEffect(new HealEffect());
+    int duration = int.Parse(Console.ReadLine());
+    DurationAspect aspect = new DurationAspect();
+    
+    aspect.Duration = duration;
+    Console.WriteLine($"Coef: {aspect.GetCoefficient()}");
 }
-catch (Exception ex)
-{
-    string here = "!!!";
-}
-
-status.RemoveEffect(status.Effects.FirstOrDefault(x => x is ExhaustionEffect));
-
-Console.ReadLine();

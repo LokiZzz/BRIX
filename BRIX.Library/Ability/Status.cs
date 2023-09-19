@@ -17,7 +17,7 @@ namespace BRIX.Library.Ability
             {
                 if (Effects.Any())
                 {
-                    return Effects.Max(x => x.GetAspect<DurationAspect>()?.Rounds ?? 0);
+                    return Effects.Max(x => x.GetAspect<DurationAspect>()?.DurationInSeconds ?? 0);
                 }
                 else
                 { 

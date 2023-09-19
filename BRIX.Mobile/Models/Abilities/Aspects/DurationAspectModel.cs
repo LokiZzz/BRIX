@@ -1,23 +1,44 @@
 ﻿using BRIX.Library.Aspects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BRIX.Library.Enums;
+using BRIX.Mobile.Services;
+using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {
     public partial class DurationAspectModel : SpecificAspectModelBase<DurationAspect>
     {
-        public DurationAspectModel(DurationAspect model) : base(model) { }
-
-        public int Rounds
+        public DurationAspectModel(DurationAspect model) : base(model) 
         {
-            get => Internal.Rounds;
+            ILocalizationResourceManager localization = ServicePool.GetService<ILocalizationResourceManager>();
+
+            UnitOptions = new(Enum.GetValues<ETimeUnit>().Select(x => new TimeUnitOption
+            {
+                Name = localization[x.ToString("G")].ToString(),
+                Unit = x
+            }));
+
+            SelectedUnit = UnitOptions.FirstOrDefault(x => x.Unit == Internal.Unit);
+        }
+
+        public ObservableCollection<TimeUnitOption> UnitOptions { get; set; }
+
+        public TimeUnitOption SelectedUnit
+        {
+            get => UnitOptions.FirstOrDefault(x => x.Unit == Internal.Unit);
             set
             {
-                SetProperty(Internal.Rounds, value, Internal,
-                    (model, prop) => model.Rounds = prop);
+                SetProperty(Internal.Unit, value.Unit, Internal,
+                    (model, prop) => model.Unit = prop);
+            }
+        }
+
+        public int Duration
+        {
+            get => Internal.Duration;
+            set
+            {
+                SetProperty(Internal.Duration, value, Internal,
+                    (model, prop) => model.Duration = prop);
             }
         }
 
@@ -30,5 +51,14 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                     (model, prop) => model.CanDisableStatus = prop);
             }
         }
+    }
+
+    public class TimeUnitOption
+    {
+        public string Name { get; set; }
+
+        public ETimeUnit Unit { get; set; }
+
+        public override string ToString() => Name;
     }
 }

@@ -556,7 +556,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is an option when a character can cancel a long-term effect (status) that he himself created without spending resources, but this option increases the cost of the ability..
+        ///   Looks up a localized string similar to There is an option when a character can cancel a long-term effect that he himself created without spending resources, but this option increases the cost of the ability..
         /// </summary>
         public static string CharacterCanDisableEffectHint {
             get {
@@ -907,6 +907,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can specify the time for which the effect will last..
+        /// </summary>
+        public static string DurationHint {
+            get {
+                return ResourceManager.GetString("DurationHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Low difficulty condition.
         /// </summary>
         public static string EasyActivationCondition {
@@ -966,6 +975,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string EffectDamage {
             get {
                 return ResourceManager.GetString("EffectDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Effect duration.
+        /// </summary>
+        public static string EffectDuration {
+            get {
+                return ResourceManager.GetString("EffectDuration", resourceCulture);
             }
         }
         
@@ -1879,24 +1897,6 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Duration in rounds.
-        /// </summary>
-        public static string RoundDuration {
-            get {
-                return ResourceManager.GetString("RoundDuration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You can specify the number of rounds for which the effect will last..
-        /// </summary>
-        public static string RoundDurationHint {
-            get {
-                return ResourceManager.GetString("RoundDurationHint", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Rounds count.
         /// </summary>
         public static string RoundsCount {
@@ -2478,6 +2478,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Thing {
             get {
                 return ResourceManager.GetString("Thing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time unit.
+        /// </summary>
+        public static string TimeUnit {
+            get {
+                return ResourceManager.GetString("TimeUnit", resourceCulture);
             }
         }
         

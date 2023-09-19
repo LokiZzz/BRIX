@@ -12,6 +12,6 @@ namespace BRIX.Library.Enums
         Minute,
         Hour,
         Day,
-        Year
+        Year,
     }
 }

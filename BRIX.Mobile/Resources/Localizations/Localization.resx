@@ -283,7 +283,7 @@
     <value>Can the character cancel the effect?</value>
   </data>
   <data name="CharacterCanDisableEffectHint" xml:space="preserve">
-    <value>There is an option when a character can cancel a long-term effect (status) that he himself created without spending resources, but this option increases the cost of the ability.</value>
+    <value>There is an option when a character can cancel a long-term effect that he himself created without spending resources, but this option increases the cost of the ability.</value>
   </data>
   <data name="CharacterDetails" xml:space="preserve">
     <value>Details</value>
@@ -399,6 +399,9 @@
   <data name="DiceValuePopupTitle" xml:space="preserve">
     <value>Dice value</value>
   </data>
+  <data name="DurationHint" xml:space="preserve">
+    <value>You can specify the time for which the effect will last.</value>
+  </data>
   <data name="EasyActivationCondition" xml:space="preserve">
     <value>Low difficulty condition</value>
   </data>
@@ -419,6 +422,9 @@
   </data>
   <data name="EffectDamage" xml:space="preserve">
     <value>Damage</value>
+  </data>
+  <data name="EffectDuration" xml:space="preserve">
+    <value>Effect duration</value>
   </data>
   <data name="EffectExhaustion" xml:space="preserve">
     <value>Exhaustion</value>
@@ -723,12 +729,6 @@
   <data name="Round" xml:space="preserve">
     <value>Round</value>
   </data>
-  <data name="RoundDuration" xml:space="preserve">
-    <value>Duration in rounds</value>
-  </data>
-  <data name="RoundDurationHint" xml:space="preserve">
-    <value>You can specify the number of rounds for which the effect will last.</value>
-  </data>
   <data name="RoundsCount" xml:space="preserve">
     <value>Rounds count</value>
   </data>
@@ -923,6 +923,9 @@
   </data>
   <data name="Thing" xml:space="preserve">
     <value>Thing</value>
+  </data>
+  <data name="TimeUnit" xml:space="preserve">
+    <value>Time unit</value>
   </data>
   <data name="Tiny" xml:space="preserve">
     <value>Tiny</value>
