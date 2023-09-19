@@ -18,7 +18,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         private void OnImpactUpdated(object sender, EventArgs e)
         {
             Effect.Internal.Impact = DicePoolEditor.Dices;
-            CostMonitor.UpdateCost();
+            CostMonitor?.UpdateCost();
         }
 
         private DicePoolEditorVM _dicePoolEditor = new();
