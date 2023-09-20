@@ -1483,6 +1483,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The list is empty....
+        /// </summary>
+        public static string ListIsEmpty {
+            get {
+                return ResourceManager.GetString("ListIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Login {

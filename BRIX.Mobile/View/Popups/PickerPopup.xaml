@@ -15,12 +15,17 @@
             <Label 
                 Text="{Binding Title}" 
                 Style="{StaticResource TitleLabel}"/>
+            <Label 
+                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ListIsEmpty}}" 
+                Margin="0,0,0,10"
+                IsVisible="{Binding ShowListEmptyMessage}"/>
             <CollectionView 
                 x:Name="pickerCollection"
                 ItemsSource="{Binding Items}"
                 SelectionMode="{Binding Mode}"
                 SelectedItem="{Binding SelectedItem}"
-                SelectionChanged="pickerCollection_SelectionChanged">
+                SelectionChanged="pickerCollection_SelectionChanged"
+                IsVisible="{Binding ShowListEmptyMessage, Converter={StaticResource NotConverter}}">
                 <CollectionView.Behaviors>
                     <mct:EventToCommandBehavior
                         EventName="SelectionChanged"

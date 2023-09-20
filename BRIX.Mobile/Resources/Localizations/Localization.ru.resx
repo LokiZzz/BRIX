@@ -591,6 +591,9 @@
   <data name="LevelFormat" xml:space="preserve">
     <value>Уровень {0}</value>
   </data>
+  <data name="ListIsEmpty" xml:space="preserve">
+    <value>Список пуст...</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Логин</value>
   </data>

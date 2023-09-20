@@ -49,6 +49,13 @@ namespace BRIX.Mobile.ViewModel.Popups
             set => SetProperty(ref _selectedItem, value);
         }
 
+        private bool _showListEmptyMessage;
+        public bool ShowListEmptyMessage
+        {
+            get => _showListEmptyMessage;
+            set => SetProperty(ref _showListEmptyMessage, value);
+        }
+
         [RelayCommand]
         public void SelectItem()
         {
@@ -90,6 +97,7 @@ namespace BRIX.Mobile.ViewModel.Popups
 
             Mode = Parameters.SelectMultiple ? SelectionMode.Multiple : SelectionMode.Single;
             ShowOk = Mode == SelectionMode.Multiple;
+            ShowListEmptyMessage = !Items.Any();
 
             _parametersHandled = true;
         }
