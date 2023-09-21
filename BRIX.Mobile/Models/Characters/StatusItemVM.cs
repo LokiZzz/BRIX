@@ -36,7 +36,27 @@ namespace BRIX.Mobile.Models.Characters
             set => SetProperty(ref _isActive, value);
         }
 
-        public string RoundsLeft => string.Format(Localization.RoundsLeft, Internal.RoundsLeft);
+        public string RoundsLeft 
+        {
+            get
+            {
+                switch(Internal.GetHighestTimeUnit())
+                {
+                    case Library.Enums.ETimeUnit.Round:
+                        return string.Format(Localization.RoundsCountFormat, Internal.DurationLeft);
+                    case Library.Enums.ETimeUnit.Minute:
+                        return string.Format(Localization.MinutesCountFormat, Internal.DurationLeft);
+                    case Library.Enums.ETimeUnit.Hour:
+                        return string.Format(Localization.HoursCountFormat, Internal.DurationLeft);
+                    case Library.Enums.ETimeUnit.Day:
+                        return string.Format(Localization.DaysCountFormat, Internal.DurationLeft);
+                    case Library.Enums.ETimeUnit.Year:
+                        return string.Format(Localization.YearsCountFormat, Internal.DurationLeft);
+                    default:
+                        return Internal.DurationLeft.ToString();
+                }
+            }
+        }
 
         public string EffectsString
         {
@@ -59,13 +79,13 @@ namespace BRIX.Mobile.Models.Characters
 
         public void IncreaseRoundsPassed()
         {
-            Internal.RoundsPassed++;
+            Internal.DurationPassed++;
             OnPropertyChanged(nameof(RoundsLeft));
         }
 
         public void DecreaseRoundsPassed()
         {
-            Internal.RoundsPassed--;
+            Internal.DurationPassed--;
             OnPropertyChanged(nameof(RoundsLeft));
         }
 

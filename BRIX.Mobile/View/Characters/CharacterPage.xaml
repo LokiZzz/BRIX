@@ -222,7 +222,7 @@
                                         <Button 
                                             Style="{StaticResource StatusTimeButton}" 
                                             Text="{x:Static icons:Awesome.CircleArrowLeft}"
-                                            Command="{Binding DecreaseRoundsPassedCommand}"/>
+                                            Command="{Binding DecreaseStatusTimeCommand}"/>
                                         <Label 
                                             FontFamily="AwesomeRPG" 
                                             FontSize="25"
@@ -235,7 +235,7 @@
                                         <Button 
                                             Style="{StaticResource StatusTimeButton}" 
                                             Text="{x:Static icons:Awesome.CircleArrowRight}"
-                                            Command="{Binding IncreaseRoundsPassedCommand}"/> 
+                                            Command="{Binding IncreaseStatusTimeCommand}"/> 
                                     </HorizontalStackLayout>
                                 </Border>
                             </HorizontalStackLayout>

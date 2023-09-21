@@ -372,6 +372,12 @@
   <data name="Day" xml:space="preserve">
     <value>День</value>
   </data>
+  <data name="DaysCountFormat" xml:space="preserve">
+    <value>{0} дней</value>
+  </data>
+  <data name="DaysLeft" xml:space="preserve">
+    <value>Days left</value>
+  </data>
   <data name="DeleteAbilityQuestion" xml:space="preserve">
     <value>Вы уверены, что хотите удалить способность?</value>
   </data>
@@ -528,6 +534,12 @@
   <data name="Hour" xml:space="preserve">
     <value>Час</value>
   </data>
+  <data name="HoursCountFormat" xml:space="preserve">
+    <value>{0} часов</value>
+  </data>
+  <data name="HoursLeft" xml:space="preserve">
+    <value>Hours left</value>
+  </data>
   <data name="Huge" xml:space="preserve">
     <value>Огромный</value>
   </data>
@@ -629,6 +641,12 @@
   </data>
   <data name="Minute" xml:space="preserve">
     <value>Минута</value>
+  </data>
+  <data name="MinutesCountFormat" xml:space="preserve">
+    <value>{0} минут</value>
+  </data>
+  <data name="MinutesLeft" xml:space="preserve">
+    <value>Minutes left</value>
   </data>
   <data name="Monstrous" xml:space="preserve">
     <value>Монструозный</value>
@@ -735,7 +753,7 @@
   <data name="RoundsCount" xml:space="preserve">
     <value>Количество раундов</value>
   </data>
-  <data name="RoundsLeft" xml:space="preserve">
+  <data name="RoundsCountFormat" xml:space="preserve">
     <value>{0} раундов</value>
   </data>
   <data name="SameProjectExistsWarning" xml:space="preserve">
@@ -953,6 +971,12 @@
   </data>
   <data name="Year" xml:space="preserve">
     <value>Год</value>
+  </data>
+  <data name="YearsCountFormat" xml:space="preserve">
+    <value>{0} лет</value>
+  </data>
+  <data name="YearsLeft" xml:space="preserve">
+    <value>YearsLeft</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Да</value>

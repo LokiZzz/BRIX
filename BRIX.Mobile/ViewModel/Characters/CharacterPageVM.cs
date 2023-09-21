@@ -16,6 +16,7 @@ using BRIX.Library.Ability;
 using System;
 using BRIX.Library.Effects;
 using BRIX.Library.Aspects;
+using BRIX.Library.Enums;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
@@ -154,13 +155,15 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         [RelayCommand]
-        public async Task IncreaseRoundsPassed()
+        public async Task IncreaseStatusTime()
         {
-            Character.Statuses.ToList().ForEach(x => x.IncreaseRoundsPassed());
+            List<StatusItemVM> statuses = GetStatusesWithLowestUnit();
 
-            foreach(StatusItemVM status in Character.Statuses.ToList())
+            statuses.ForEach(x => x.IncreaseRoundsPassed());
+
+            foreach (StatusItemVM status in statuses.ToList())
             {
-                if(status.Internal.RoundsLeft == 0)
+                if (status.Internal.DurationLeft == 0)
                 {
                     Character.RemoveStatus(status);
                 }
@@ -170,10 +173,33 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         [RelayCommand]
-        public async Task DecreaseRoundsPassed()
+        public async Task DecreaseStatusTime()
         {
-            Character.Statuses.ToList().ForEach(x => x.DecreaseRoundsPassed());
+            List<StatusItemVM> statuses = GetStatusesWithLowestUnit();
+            statuses.ForEach(x => x.DecreaseRoundsPassed());
             await _characterService.UpdateAsync(Character.InternalModel);
+        }
+
+        /// <summary>
+        /// Добывает статусы с наименьшей единицей времени (Раунды, Минуты, Часы, Дни, Года).
+        /// </summary>
+        private List<StatusItemVM> GetStatusesWithLowestUnit()
+        {
+            List<StatusItemVM> statuses = new();
+
+            foreach (ETimeUnit timeUnit in Enum.GetValues<ETimeUnit>())
+            {
+                statuses = Character.Statuses
+                    .Where(x => x.Internal.GetHighestTimeUnit() == timeUnit)
+                    .ToList();
+
+                if (statuses.Any())
+                {
+                    break;
+                }
+            }
+
+            return statuses;
         }
 
         public override async Task OnNavigatedAsync()

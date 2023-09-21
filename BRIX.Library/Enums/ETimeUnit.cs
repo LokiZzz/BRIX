@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BRIX.Library.Enums
 {
+    /// <summary>
+    /// Игровые единицы измерения времени, должны распологаться по возрастанию.
+    /// </summary>
     public enum ETimeUnit
     {
         Round,

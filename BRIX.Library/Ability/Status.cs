@@ -1,5 +1,6 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Effects;
+using BRIX.Library.Enums;
 
 namespace BRIX.Library.Ability
 {
@@ -9,15 +10,19 @@ namespace BRIX.Library.Ability
 
         public string Name { get; set; }
 
-        public int RoundsPassed { get; set; }
-
         public int MaxDuration
         {
             get
             {
                 if (Effects.Any())
                 {
-                    return Effects.Max(x => x.GetAspect<DurationAspect>()?.DurationInSeconds ?? 0);
+                    EffectBase effect = Effects.Aggregate((x, y) => 
+                        x.GetAspect<DurationAspect>()?.DurationInSeconds > 
+                            y.GetAspect<DurationAspect>()?.DurationInSeconds
+                        ? x : y
+                    );
+
+                    return effect.GetAspect<DurationAspect>()?.Duration ?? 0;
                 }
                 else
                 { 
@@ -25,7 +30,10 @@ namespace BRIX.Library.Ability
                 }
             }
         }
-        public int RoundsLeft => MaxDuration - RoundsPassed >= 0 ? MaxDuration - RoundsPassed : 0;
+
+        public int DurationPassed { get; set; }
+
+        public int DurationLeft => MaxDuration - DurationPassed >= 0 ? MaxDuration - DurationPassed : 0;
 
         private readonly List<EffectBase> _effects = new();
         public IReadOnlyList<EffectBase> Effects => _effects;
@@ -78,6 +86,26 @@ namespace BRIX.Library.Ability
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        /// <summary>
+        /// Получает самую большую единицу измерения среди эффектов.
+        /// </summary>
+        public ETimeUnit GetHighestTimeUnit()
+        {
+            ETimeUnit highestTimeUnit = ETimeUnit.Round;
+
+            foreach(EffectBase effect in Effects)
+            {
+                ETimeUnit? eTimeUnit = effect.GetAspect<DurationAspect>()?.Unit;
+
+                if(eTimeUnit != null && (int)eTimeUnit > (int)highestTimeUnit)
+                {
+                    highestTimeUnit = eTimeUnit.Value;
+                }
+            }
+
+            return highestTimeUnit;
         }
     }
 }

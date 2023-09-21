@@ -372,6 +372,9 @@
   <data name="Day" xml:space="preserve">
     <value>Day</value>
   </data>
+  <data name="DaysCountFormat" xml:space="preserve">
+    <value>{0} days</value>
+  </data>
   <data name="DeleteAbilityQuestion" xml:space="preserve">
     <value>Are you sure you want to delete the ability?</value>
   </data>
@@ -528,6 +531,9 @@
   <data name="Hour" xml:space="preserve">
     <value>Hour</value>
   </data>
+  <data name="HoursCountFormat" xml:space="preserve">
+    <value>{0} hours</value>
+  </data>
   <data name="Huge" xml:space="preserve">
     <value>Huge</value>
   </data>
@@ -629,6 +635,9 @@
   </data>
   <data name="Minute" xml:space="preserve">
     <value>Minute</value>
+  </data>
+  <data name="MinutesCountFormat" xml:space="preserve">
+    <value>{0} minutes</value>
   </data>
   <data name="Monstrous" xml:space="preserve">
     <value>Monstrous</value>
@@ -735,7 +744,7 @@
   <data name="RoundsCount" xml:space="preserve">
     <value>Rounds count</value>
   </data>
-  <data name="RoundsLeft" xml:space="preserve">
+  <data name="RoundsCountFormat" xml:space="preserve">
     <value>{0} rounds</value>
   </data>
   <data name="SameProjectExistsWarning" xml:space="preserve">
@@ -953,6 +962,9 @@
   </data>
   <data name="Year" xml:space="preserve">
     <value>Year</value>
+  </data>
+  <data name="YearsCountFormat" xml:space="preserve">
+    <value>{0} years</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>

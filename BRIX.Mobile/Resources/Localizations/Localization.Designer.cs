@@ -826,6 +826,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} days.
+        /// </summary>
+        public static string DaysCountFormat {
+            get {
+                return ResourceManager.GetString("DaysCountFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the ability?.
         /// </summary>
         public static string DeleteAbilityQuestion {
@@ -1294,6 +1303,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} hours.
+        /// </summary>
+        public static string HoursCountFormat {
+            get {
+                return ResourceManager.GetString("HoursCountFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Huge.
         /// </summary>
         public static string Huge {
@@ -1596,6 +1614,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Minute {
             get {
                 return ResourceManager.GetString("Minute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} minutes.
+        /// </summary>
+        public static string MinutesCountFormat {
+            get {
+                return ResourceManager.GetString("MinutesCountFormat", resourceCulture);
             }
         }
         
@@ -1917,9 +1944,9 @@ namespace BRIX.Mobile.Resources.Localizations {
         /// <summary>
         ///   Looks up a localized string similar to {0} rounds.
         /// </summary>
-        public static string RoundsLeft {
+        public static string RoundsCountFormat {
             get {
-                return ResourceManager.GetString("RoundsLeft", resourceCulture);
+                return ResourceManager.GetString("RoundsCountFormat", resourceCulture);
             }
         }
         
@@ -2568,6 +2595,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Year {
             get {
                 return ResourceManager.GetString("Year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} years.
+        /// </summary>
+        public static string YearsCountFormat {
+            get {
+                return ResourceManager.GetString("YearsCountFormat", resourceCulture);
             }
         }
         
