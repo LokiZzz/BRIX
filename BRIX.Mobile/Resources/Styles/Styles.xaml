@@ -315,12 +315,25 @@
             <Shadow 
                 Brush="Black"
                 Offset="0,-50"
-                Radius="20"
-                Opacity="0.8" />
+                Radius="40"
+                Opacity="1" />
         </Setter>
         <Setter Property="BackgroundColor" Value="{StaticResource BRIXDark}"/>
         <Setter Property="Margin" Value="-20,-2"/>
         <Setter Property="Padding" Value="20,10,20,0"/>
+    </Style>
+
+    <Style TargetType="Border" x:Key="EmptyShadowBorder">
+        <Setter Property="Shadow" >
+            <Shadow 
+            Brush="Black"
+            Offset="0,-50"
+            Radius="40"
+            Opacity="1" />
+        </Setter>
+        <Setter Property="BackgroundColor" Value="{StaticResource BRIXDark}"/>
+        <Setter Property="Margin" Value="0,0,0,-30"/>
+        <Setter Property="HeightRequest" Value="30"/>
     </Style>
 
     <Style TargetType="Label" x:Key="SwipeViewLabel">

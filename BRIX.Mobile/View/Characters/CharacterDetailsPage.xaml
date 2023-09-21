@@ -18,158 +18,161 @@
         <controls:TitleView/>
     </Shell.TitleView>
 
-    <ScrollView>
-        <Grid>
-            <VerticalStackLayout Spacing="10">
-                <!--Backstory-->
-                <Border Style="{StaticResource SideMarginBlockBorder}">
-                    <Grid Margin="-15">
-                        <Image 
-                            Source="{Binding Character.PortraitImage}" 
-                            Opacity="0.2" 
-                            MaximumHeightRequest="{Binding Source={x:Reference expander}, Path=Height}"
-                            Aspect="AspectFill"/>
-                        <controls:ArrowExpander 
-                            x:Name="expander"
-                            Margin="15"
-                            Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Backstory}}">
-                            <controls:ArrowExpander.ExpanderContent>
-                                <Label Text="{Binding Character.Backstory}"/>
-                            </controls:ArrowExpander.ExpanderContent>
-                        </controls:ArrowExpander>
-                    </Grid>
-                </Border>
-                <!--Tags-->
-                <Border Style="{StaticResource SideMarginBlockBorder}">
-                    <VerticalStackLayout>
-                        <Grid ColumnDefinitions="*,auto">
-                            <Label 
-                                Grid.Column="0"
-                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.MarksOfFate}}" 
-                                Style="{StaticResource TitleLabel}" Grid.Row="0"/>
-                            <Button
-                                Grid.Column="1"
-                                Style="{StaticResource SquareIconButton}"
-                                Command="{Binding AddTagCommand}"
-                                Text="{x:Static icons:Awesome.SquarePlus}"/>
+    <Grid RowDefinitions="*,auto">
+        <ScrollView Grid.Row="0">
+            <Grid>
+                <VerticalStackLayout Spacing="10">
+                    <!--Backstory-->
+                    <Border Style="{StaticResource SideMarginBlockBorder}">
+                        <Grid Margin="-15">
+                            <Image 
+                                Source="{Binding Character.PortraitImage}" 
+                                Opacity="0.2" 
+                                MaximumHeightRequest="{Binding Source={x:Reference expander}, Path=Height}"
+                                Aspect="AspectFill"/>
+                            <controls:ArrowExpander 
+                                x:Name="expander"
+                                Margin="15"
+                                Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Backstory}}">
+                                <controls:ArrowExpander.ExpanderContent>
+                                    <Label Text="{Binding Character.Backstory}"/>
+                                </controls:ArrowExpander.ExpanderContent>
+                            </controls:ArrowExpander>
                         </Grid>
-                        <FlexLayout 
-                            BindableLayout.ItemsSource="{Binding Character.Tags}" 
-                            x:Name="tagsLayout"
-                            Wrap="Wrap"
-                            Margin="-1,9,-1,-1"
-                            IsVisible="{Binding ShowTags}">
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate x:DataType="m:CharacterTagVM">
-                                    <Border
-                                        StrokeShape="RoundRectangle 5"
-                                        BackgroundColor="{StaticResource BRIXViolet}"
-                                        HeightRequest="40"
-                                        Margin="1">
-                                        <HorizontalStackLayout Margin="10,8" Spacing="10">
-                                            <Label 
-                                                Text="{Binding Text}"
-                                                FontSize="15"
-                                                VerticalOptions="Center"
-                                                VerticalTextAlignment="Center"/>
-                                            <Button 
-                                                Padding="0"
-                                                BackgroundColor="Transparent"
-                                                FontFamily="Awesome"
-                                                Text="{x:Static icons:Awesome.SquareXmark}"
-                                                TextColor="{StaticResource BRIXWhite}"
-                                                Command="{Binding Source={x:Reference tagsLayout}, Path=BindingContext.RemoveTagCommand}"
-                                                CommandParameter="{Binding}"/>
-                                        </HorizontalStackLayout>
-                                    </Border>
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                        </FlexLayout>
-                    </VerticalStackLayout>
-                </Border>
-                <!--Projects-->
-                <Label 
-                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Projects}}" 
-                    Style="{StaticResource TitleLabel}"
-                    Margin="10,0,0,0"/>
-                <controls:HelpCard Help="{x:Static lcz:LocalizationKeys.ProjectsHelp}" Margin="10,0"/>
-                <Button 
-                    Style="{StaticResource LightPlusButton}"
-                    Margin="10,0"
-                    Command="{Binding AddProjectCommand}}"/>
-                <CollectionView x:Name="collectionView" ItemsSource="{Binding Character.Projects}" Margin="0,0,0,10">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="m:CharacterProjectVM">
-                            <SwipeView Threshold="100">
-                                <SwipeView.LeftItems>
-                                    <SwipeItems Mode="Execute">
-                                        <SwipeItemView
-                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.EditProjectCommand}"
-                                                CommandParameter="{Binding}">
-                                            <Border Style="{StaticResource MediumSwipeViewBorder}">
-                                                <Label Style="{StaticResource MediumSwipeViewEditLabel}" />
-                                            </Border>
-                                        </SwipeItemView>
-                                    </SwipeItems>
-                                </SwipeView.LeftItems>
-                                <SwipeView.RightItems>
-                                    <SwipeItems Mode="Execute">
-                                        <SwipeItemView
-                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.RemoveProjectCommand}"
-                                                CommandParameter="{Binding}">
-                                            <Border Style="{StaticResource MediumSwipeViewBorder}">
-                                                <Label Style="{StaticResource MediumSwipeViewDeleteLabel}"/>
-                                            </Border>
-                                        </SwipeItemView>
-                                    </SwipeItems>
-                                </SwipeView.RightItems>
-                                <Border Style="{StaticResource BlockBorder}" Margin="10,0">
-                                    <Grid ColumnDefinitions="*,auto" ColumnSpacing="10">
-                                        <Label
-                                            Grid.Column="0"
-                                            Style="{StaticResource TitleLabel}" 
-                                            Text="{Binding Name}" 
-                                            LineBreakMode="TailTruncation">
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer 
-                                                    NumberOfTapsRequired="1" 
-                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterDetailsPageVM}}, Path=OpenProjectDescriptionCommand}"
+                    </Border>
+                    <!--Tags-->
+                    <Border Style="{StaticResource SideMarginBlockBorder}">
+                        <VerticalStackLayout>
+                            <Grid ColumnDefinitions="*,auto">
+                                <Label 
+                                    Grid.Column="0"
+                                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.MarksOfFate}}" 
+                                    Style="{StaticResource TitleLabel}" Grid.Row="0"/>
+                                <Button
+                                    Grid.Column="1"
+                                    Style="{StaticResource SquareIconButton}"
+                                    Command="{Binding AddTagCommand}"
+                                    Text="{x:Static icons:Awesome.SquarePlus}"/>
+                            </Grid>
+                            <FlexLayout 
+                                BindableLayout.ItemsSource="{Binding Character.Tags}" 
+                                x:Name="tagsLayout"
+                                Wrap="Wrap"
+                                Margin="-1,9,-1,-1"
+                                IsVisible="{Binding ShowTags}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="m:CharacterTagVM">
+                                        <Border
+                                            StrokeShape="RoundRectangle 5"
+                                            BackgroundColor="{StaticResource BRIXViolet}"
+                                            HeightRequest="40"
+                                            Margin="1">
+                                            <HorizontalStackLayout Margin="10,8" Spacing="10">
+                                                <Label 
+                                                    Text="{Binding Text}"
+                                                    FontSize="15"
+                                                    VerticalOptions="Center"
+                                                    VerticalTextAlignment="Center"/>
+                                                <Button 
+                                                    Padding="0"
+                                                    BackgroundColor="Transparent"
+                                                    FontFamily="Awesome"
+                                                    Text="{x:Static icons:Awesome.SquareXmark}"
+                                                    TextColor="{StaticResource BRIXWhite}"
+                                                    Command="{Binding Source={x:Reference tagsLayout}, Path=BindingContext.RemoveTagCommand}"
                                                     CommandParameter="{Binding}"/>
-                                            </Label.GestureRecognizers>
-                                        </Label>
-                                        <controls:CircularProgressBar
-                                            Grid.Column="1"
-                                            InnerText="{Binding ProgressText}"
-                                            Progress="{Binding Progress}"
-                                            Size="50"
-                                            TextColor="{StaticResource BRIXLight}"
-                                            Thickness="3"
-                                            ProgressColor="{StaticResource BRIXLime}"
-                                            ProgressLeftColor="{StaticResource BRIXDim}"
-                                            Margin="1"
-                                            InputTransparent="True"/>
-                                        <Border Grid.Column="1" BackgroundColor="Transparent">
-                                            <Border.GestureRecognizers>
-                                                <TapGestureRecognizer 
-                                                    NumberOfTapsRequired="1" 
-                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterDetailsPageVM}}, Path=AddProjectStepCommand}"
-                                                    CommandParameter="{Binding}"/>
-                                                <TapGestureRecognizer 
-                                                    NumberOfTapsRequired="2" 
-                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterDetailsPageVM}}, Path=ReduceProjectStepCommand}"
-                                                    CommandParameter="{Binding}"/>
-                                            </Border.GestureRecognizers>
+                                            </HorizontalStackLayout>
                                         </Border>
-                                    </Grid>
-                                </Border>
-                            </SwipeView>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </VerticalStackLayout>
-        </Grid>
-    </ScrollView>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </FlexLayout>
+                        </VerticalStackLayout>
+                    </Border>
+                    <!--Projects-->
+                    <Label 
+                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Projects}}" 
+                        Style="{StaticResource TitleLabel}"
+                        Margin="10,0,0,0"/>
+                    <controls:HelpCard Help="{x:Static lcz:LocalizationKeys.ProjectsHelp}" Margin="10,0"/>
+                    <Button 
+                        Style="{StaticResource LightPlusButton}"
+                        Margin="10,0"
+                        Command="{Binding AddProjectCommand}"/>
+                    <CollectionView x:Name="collectionView" ItemsSource="{Binding Character.Projects}" Margin="0,0,0,10">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="m:CharacterProjectVM">
+                                <SwipeView Threshold="100">
+                                    <SwipeView.LeftItems>
+                                        <SwipeItems Mode="Execute">
+                                            <SwipeItemView
+                                                    Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.EditProjectCommand}"
+                                                    CommandParameter="{Binding}">
+                                                <Border Style="{StaticResource MediumSwipeViewBorder}">
+                                                    <Label Style="{StaticResource MediumSwipeViewEditLabel}" />
+                                                </Border>
+                                            </SwipeItemView>
+                                        </SwipeItems>
+                                    </SwipeView.LeftItems>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems Mode="Execute">
+                                            <SwipeItemView
+                                                    Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.RemoveProjectCommand}"
+                                                    CommandParameter="{Binding}">
+                                                <Border Style="{StaticResource MediumSwipeViewBorder}">
+                                                    <Label Style="{StaticResource MediumSwipeViewDeleteLabel}"/>
+                                                </Border>
+                                            </SwipeItemView>
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <Border Style="{StaticResource BlockBorder}" Margin="10,0">
+                                        <Grid ColumnDefinitions="*,auto" ColumnSpacing="10">
+                                            <Label
+                                                Grid.Column="0"
+                                                Style="{StaticResource TitleLabel}" 
+                                                Text="{Binding Name}" 
+                                                LineBreakMode="TailTruncation">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer 
+                                                        NumberOfTapsRequired="1" 
+                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterDetailsPageVM}}, Path=OpenProjectDescriptionCommand}"
+                                                        CommandParameter="{Binding}"/>
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                            <controls:CircularProgressBar
+                                                Grid.Column="1"
+                                                InnerText="{Binding ProgressText}"
+                                                Progress="{Binding Progress}"
+                                                Size="50"
+                                                TextColor="{StaticResource BRIXLight}"
+                                                Thickness="3"
+                                                ProgressColor="{StaticResource BRIXLime}"
+                                                ProgressLeftColor="{StaticResource BRIXDim}"
+                                                Margin="1"
+                                                InputTransparent="True"/>
+                                            <Border Grid.Column="1" BackgroundColor="Transparent">
+                                                <Border.GestureRecognizers>
+                                                    <TapGestureRecognizer 
+                                                        NumberOfTapsRequired="1" 
+                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterDetailsPageVM}}, Path=AddProjectStepCommand}"
+                                                        CommandParameter="{Binding}"/>
+                                                    <TapGestureRecognizer 
+                                                        NumberOfTapsRequired="2" 
+                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CharacterDetailsPageVM}}, Path=ReduceProjectStepCommand}"
+                                                        CommandParameter="{Binding}"/>
+                                                </Border.GestureRecognizers>
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+        <Border Grid.Row="1" Style="{StaticResource EmptyShadowBorder}"/>
+    </Grid>
 </ContentPage>
