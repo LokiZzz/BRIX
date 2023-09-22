@@ -55,10 +55,12 @@ namespace BRIX.Library.Aspects.TargetSelection
             double excludedTargetsCoef = new ThrasholdCostConverter((0, 0), (1, 30), (6, 5))
                 .Convert(Area?.ExcludedTargetsCount ?? 0)
                 .ToCoeficient();
+            double areaBoundedToCharacterCoef = Area?.IsAreaBoundedTo == true ? 1.7 : 1;
 
             return distanceCoef * volumeCoef * excludedTargetsCoef
                 * EquivalentToPercentMap[Area?.ObstacleBetweenCharacterAndArea ?? 0].ToCoeficient()
                 * EquivalentToPercentMap[Area?.ObstacleBetweenEpicenterAndTarget ?? 0].ToCoeficient()
+                * areaBoundedToCharacterCoef
                 * TargetChain.GetCoefficient()
                 * TargetsSizes.GetCoefficient()
                 * TargetSelectionRestrictions.GetCoefficient();

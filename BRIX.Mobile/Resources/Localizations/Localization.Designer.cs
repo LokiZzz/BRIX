@@ -313,6 +313,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Area binding.
+        /// </summary>
+        public static string AreaBinding {
+            get {
+                return ResourceManager.GetString("AreaBinding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An area that exists for some time remains in place and is tied to a certain point in space. But it can also be attached to a character or object and move along with the object of attachment..
+        /// </summary>
+        public static string AreaBindingHint {
+            get {
+                return ResourceManager.GetString("AreaBindingHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adjust?.
         /// </summary>
         public static string AskAdjust {
@@ -1452,6 +1470,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string InventorySameNameAlert {
             get {
                 return ResourceManager.GetString("InventorySameNameAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Аrea can be bound.
+        /// </summary>
+        public static string IsAreaCanBound {
+            get {
+                return ResourceManager.GetString("IsAreaCanBound", resourceCulture);
             }
         }
         

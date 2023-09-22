@@ -10,6 +10,7 @@ namespace BRIX.Library.Aspects.TargetSelection
         public EAreaType AreaType { get; set; } = EAreaType.Brick;
         public EObstacleEquivalent ObstacleBetweenCharacterAndArea { get; set; } = EObstacleEquivalent.WoodenPlank;
         public EObstacleEquivalent ObstacleBetweenEpicenterAndTarget { get; set; } = EObstacleEquivalent.WoodenPlank;
+        public bool IsAreaBoundedTo { get; set; } = false;
 
         public IShape? Shape
         {

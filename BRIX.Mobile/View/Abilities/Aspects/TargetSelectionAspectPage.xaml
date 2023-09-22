@@ -131,6 +131,15 @@
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyArea}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyAreaHint}}"/>
                         <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyAreaDistance}}" Text="{Binding Aspect.AreaDistance}"/>
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AreaBinding}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AreaBindingHint}}"/>
+                        <HorizontalStackLayout>
+                            <CheckBox IsChecked="{Binding Aspect.IsAreaBoundedTo}"/>
+                            <Label 
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center"
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.IsAreaCanBound}}"/>
+                        </HorizontalStackLayout>
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Area}}"/>
                         <FlexLayout JustifyContent="SpaceBetween">
                             <ImageButton 

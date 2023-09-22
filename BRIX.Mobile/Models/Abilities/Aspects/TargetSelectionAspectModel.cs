@@ -122,6 +122,16 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
         }
 
+        public bool IsAreaBoundedTo
+        {
+            get => Internal.Area.IsAreaBoundedTo;
+            set
+            {
+                SetProperty(Internal.Area.IsAreaBoundedTo, value, Internal,
+                    (model, prop) => model.Area.IsAreaBoundedTo = prop);
+            }
+        }
+
         public int R
         {
             get

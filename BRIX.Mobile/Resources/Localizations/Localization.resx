@@ -201,6 +201,12 @@
   <data name="Area" xml:space="preserve">
     <value>Area</value>
   </data>
+  <data name="AreaBinding" xml:space="preserve">
+    <value>Area binding</value>
+  </data>
+  <data name="AreaBindingHint" xml:space="preserve">
+    <value>An area that exists for some time remains in place and is tied to a certain point in space. But it can also be attached to a character or object and move along with the object of attachment.</value>
+  </data>
   <data name="AskAdjust" xml:space="preserve">
     <value>Adjust?</value>
   </data>
@@ -581,6 +587,9 @@
   </data>
   <data name="Inventory_Help" xml:space="preserve">
     <value>Tap an item in your inventory to edit it, double tap to delete it, or swipe on the item name from left to right to open the description. By swiping an element from right to left, you can change its quantity.</value>
+  </data>
+  <data name="IsAreaCanBound" xml:space="preserve">
+    <value>Аrea can be bound</value>
   </data>
   <data name="ItemName" xml:space="preserve">
     <value>Name</value>

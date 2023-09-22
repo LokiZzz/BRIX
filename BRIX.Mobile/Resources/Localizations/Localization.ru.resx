@@ -201,6 +201,12 @@
   <data name="Area" xml:space="preserve">
     <value>Область</value>
   </data>
+  <data name="AreaBinding" xml:space="preserve">
+    <value>Привязка области</value>
+  </data>
+  <data name="AreaBindingHint" xml:space="preserve">
+    <value>Область, которая существует некоторое время, остаётся на месте и привязывается к некоторой точке в пространстве. Но так же она может быть привзяана к персонажу или предмету и перемещаться вместе с объектом привязки.</value>
+  </data>
   <data name="AskAdjust" xml:space="preserve">
     <value>Скорректировать?</value>
   </data>
@@ -587,6 +593,9 @@
   </data>
   <data name="Inventory_Help" xml:space="preserve">
     <value>Коснитесь элемента в инвентаре, чтобы редактировать его, коснитесь дважды, чтобы удалить или проведите по названию элемента слева направо, чтобы открыть описание. Проведя по элементу справа налево, можно изменить его количество.</value>
+  </data>
+  <data name="IsAreaCanBound" xml:space="preserve">
+    <value>Область может быть привязана</value>
   </data>
   <data name="ItemName" xml:space="preserve">
     <value>Название</value>
