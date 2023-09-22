@@ -256,6 +256,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             {
                 Item.Type = itemType.Type;
                 SetProperty(ref _selectedType, itemType, nameof(SelectedType));
+                ReplaceItemWithNewType(itemType);
 
                 return;
             }
