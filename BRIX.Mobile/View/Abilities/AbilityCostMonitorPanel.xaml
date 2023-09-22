@@ -28,15 +28,17 @@
     
     <Border Style="{StaticResource LowBlockWithShadowBorder}">
         <Grid RowDefinitions="auto,auto,auto,auto,auto">
-            <Label Grid.Row="0" IsVisible="{Binding IsMock, Converter={StaticResource NotConverter}}" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AbilityCost}}" />
-            <HorizontalStackLayout Grid.Row="1" IsVisible="{Binding IsMock, Converter={StaticResource NotConverter}}" HorizontalOptions="End" Spacing="10">
-                <Label 
-                    Style="{StaticResource TitleLabel}" 
-                    Text="{Binding Ability.Cost}"/>
-                <Label 
-                    Style="{StaticResource TitleLabel}" 
-                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EXP}}"/>
-            </HorizontalStackLayout>
+            <Grid Grid.Row="0" ColumnDefinitions="auto,*">
+                <Label Grid.Column="0" IsVisible="{Binding IsMock, Converter={StaticResource NotConverter}}" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AbilityCost}}" />
+                <HorizontalStackLayout Grid.Column="1" IsVisible="{Binding IsMock, Converter={StaticResource NotConverter}}" HorizontalOptions="End" Spacing="10">
+                    <Label 
+                        Style="{StaticResource TitleLabel}" 
+                        Text="{Binding Ability.Cost}"/>
+                    <Label 
+                        Style="{StaticResource TitleLabel}" 
+                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EXP}}"/>
+                </HorizontalStackLayout>
+            </Grid>
             <Grid Grid.Row="2" IsVisible="{Binding IsMock, Converter={StaticResource NotConverter}}">
                 <ProgressBar 
                     Progress="{Binding PercentWithEditingAbility}" 
