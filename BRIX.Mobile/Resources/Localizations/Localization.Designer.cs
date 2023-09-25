@@ -1141,6 +1141,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Already spent:.
+        /// </summary>
+        public static string EXPAlreadySpent {
+            get {
+                return ResourceManager.GetString("EXPAlreadySpent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Experience.
         /// </summary>
         public static string Experience {
@@ -1173,6 +1182,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string ExperienceToLevelup {
             get {
                 return ResourceManager.GetString("ExperienceToLevelup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Availiable:.
+        /// </summary>
+        public static string EXPStillAvailiable {
+            get {
+                return ResourceManager.GetString("EXPStillAvailiable", resourceCulture);
             }
         }
         

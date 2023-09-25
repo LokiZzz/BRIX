@@ -477,6 +477,9 @@
   <data name="EXP" xml:space="preserve">
     <value>EXP</value>
   </data>
+  <data name="EXPAlreadySpent" xml:space="preserve">
+    <value>Already spent:</value>
+  </data>
   <data name="Experience" xml:space="preserve">
     <value>Experience</value>
   </data>
@@ -488,6 +491,9 @@
   </data>
   <data name="ExperienceToLevelup" xml:space="preserve">
     <value>Experience</value>
+  </data>
+  <data name="EXPStillAvailiable" xml:space="preserve">
+    <value>Availiable:</value>
   </data>
   <data name="FastAdjustment" xml:space="preserve">
     <value>Fast adjustment</value>

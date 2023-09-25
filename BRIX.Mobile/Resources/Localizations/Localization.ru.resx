@@ -480,6 +480,9 @@
   <data name="EXP" xml:space="preserve">
     <value>EXP</value>
   </data>
+  <data name="EXPAlreadySpent" xml:space="preserve">
+    <value>Уже занято:</value>
+  </data>
   <data name="Experience" xml:space="preserve">
     <value>Опыт</value>
   </data>
@@ -491,6 +494,9 @@
   </data>
   <data name="ExperienceToLevelup" xml:space="preserve">
     <value>Опыт</value>
+  </data>
+  <data name="EXPStillAvailiable" xml:space="preserve">
+    <value>Осталось:</value>
   </data>
   <data name="FastAdjustment" xml:space="preserve">
     <value>Быстрая настройка</value>

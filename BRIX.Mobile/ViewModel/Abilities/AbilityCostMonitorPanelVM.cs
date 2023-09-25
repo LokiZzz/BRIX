@@ -50,11 +50,15 @@ namespace BRIX.Mobile.ViewModel.Abilities
             set => SetProperty(ref _exp, value);
         }
 
-        private int _expSumWithoutEditingAbility;
-        public int ExpSumWithoutEditingAbility
+        private int _spentEXP;
+        /// <summary>
+        /// Опыт, уже занятый другими способнностями и увеличенным здоровьем,
+        /// но не включающий текущую редактируемую способность.
+        /// </summary>
+        public int SpentEXP
         {
-            get => _expSumWithoutEditingAbility;
-            set => SetProperty(ref _expSumWithoutEditingAbility, value);
+            get => _spentEXP;
+            set => SetProperty(ref _spentEXP, value);
         }
 
         private double _percentWithoutEditingAbility;
@@ -106,12 +110,16 @@ namespace BRIX.Mobile.ViewModel.Abilities
             }
 
             Exp = Character.Experience;
-            ExpSumWithoutEditingAbility = Character.Abilities
+
+            SpentEXP = Character.Abilities
                 .Where(x => x.InternalModel.Id != Ability.InternalModel.Id)
-                .Sum(x => x.Cost);
-            int expSumWithEditingAbility = ExpSumWithoutEditingAbility + Ability.Cost;
-            PercentWithoutEditingAbility = (double)ExpSumWithoutEditingAbility / Character.Experience;
+                .Sum(x => x.Cost) + Character.InternalModel.ExpInHealth;
+
+            int expSumWithEditingAbility = SpentEXP + Ability.Cost;
+
+            PercentWithoutEditingAbility = (double)SpentEXP / Character.Experience;
             PercentWithEditingAbility = (double)expSumWithEditingAbility / Character.Experience;
+
             AvailiableExp = Exp - expSumWithEditingAbility;
 
             OnPropertyChanged(nameof(EXPOverflow));

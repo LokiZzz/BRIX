@@ -54,18 +54,35 @@
                 </ProgressBar>
                 <ProgressBar 
                     Progress="{Binding PercentWithoutEditingAbility}" 
-                    BackgroundColor="Transparent" 
-                    ProgressColor="{StaticResource BRIXLime}"/>
+                    BackgroundColor="Transparent">
+                    <ProgressBar.Triggers>
+                        <DataTrigger TargetType="ProgressBar" Binding="{Binding EXPOverflow}" Value="False">
+                            <Setter Property="ProgressColor" Value="{StaticResource BRIXLime}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="ProgressBar" Binding="{Binding EXPOverflow}" Value="True">
+                            <Setter Property="ProgressColor" Value="{StaticResource BRIXRed}" />
+                        </DataTrigger>
+                    </ProgressBar.Triggers>
+                </ProgressBar>
             </Grid>
             <Grid Grid.Row="3" IsVisible="{Binding IsMock, Converter={StaticResource NotConverter}}" ColumnDefinitions="auto,*">
                 <HorizontalStackLayout Grid.Column="0" Spacing="5">
-                    <Label Text="Уже занято:"/>
-                    <Label Text="{Binding ExpSumWithoutEditingAbility}" />
+                    <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EXPAlreadySpent}}"/>
+                    <Label Text="{Binding SpentEXP}" />
                     <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EXP}}" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout  Grid.Column="1" Spacing="5" HorizontalOptions="End">
                     <Label Text="Осталось:"/>
-                    <Label Text="{Binding AvailiableExp}"/>
+                    <Label Text="{Binding AvailiableExp}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding EXPOverflow}" Value="False">
+                                <Setter Property="TextColor" Value="{StaticResource BRIXLight}" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding EXPOverflow}" Value="True">
+                                <Setter Property="TextColor" Value="{StaticResource BRIXRed}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
                     <Label Text="/"/>
                     <Label Text="{Binding Exp}" />
                 </HorizontalStackLayout>
