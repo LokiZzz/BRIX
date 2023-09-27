@@ -1573,7 +1573,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Luck: {0}.
+        ///   Looks up a localized string similar to Luck.
         /// </summary>
         public static string LuckPoints {
             get {

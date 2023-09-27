@@ -113,7 +113,7 @@
                     </Border>
                     <!--Health-->
                     <Border Style="{StaticResource SideMarginBlockBorder}">
-                        <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
+                        <Grid RowDefinitions="auto,auto,auto" ColumnDefinitions="*,auto,auto">
                             <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Health}}" LineBreakMode="TailTruncation" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0"/>
                             <Label Grid.Row="0" Grid.Column="1" Margin="0,0,15,0" VerticalTextAlignment="Center">
                                 <Label.FormattedText>
@@ -155,6 +155,19 @@
                                     </DataTrigger>
                                 </ProgressBar.Triggers>
                             </ProgressBar>
+                            <Label Grid.Row="2" Grid.ColumnSpan="3" HorizontalOptions="End" Margin="0,3,0,0">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Character.RawMaxHealth}"/>
+                                        <Span Text=" + "/>
+                                        <Span Text="{Binding Character.HealthFromExp}"/>
+                                        <Span Text=" + "/>
+                                        <Span Text="{Binding Character.MaxHealthBonuses}"/>
+                                        <Span Text=" – "/>
+                                        <Span Text="{Binding Character.MaxHealthPenalties}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
                         </Grid>
                     </Border>
                     <!--EXP-->

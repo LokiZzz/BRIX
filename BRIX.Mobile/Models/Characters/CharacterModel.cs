@@ -98,6 +98,10 @@ namespace BRIX.Mobile.Models.Characters
         public bool ShowImagePlaceholder => PortraitImage == null;
 
         public int MaxHealth => InternalModel.MaxHealth;
+        public int RawMaxHealth => InternalModel.RawMaxHealth;
+        public int HealthFromExp => InternalModel.HealthFromExp;
+        public int MaxHealthPenalties => -InternalModel.MaxHealthPenalties;
+        public int MaxHealthBonuses => InternalModel.MaxHealthBonuses;
 
         public int CurrentHealth
         {
@@ -157,6 +161,11 @@ namespace BRIX.Mobile.Models.Characters
             OnPropertyChanged(nameof(MaxHealth));
             OnPropertyChanged(nameof(HealthPercent));
             OnPropertyChanged(nameof(HealthState));
+            OnPropertyChanged(nameof(RawMaxHealth));
+            OnPropertyChanged(nameof(HealthFromExp));
+            OnPropertyChanged(nameof(MaxHealthBonuses));
+            OnPropertyChanged(nameof(MaxHealthPenalties));
+
         }
 
         public void UpdateExp()

@@ -81,8 +81,10 @@ namespace BRIX.Library.Characters
         public int ExpSpentOnAbilities => Abilities.Sum(x => x.ExpCost(this));
 
         public int RawMaxHealth => Level * CharacterCalculator.HealthPerLevel;
-        public int MaxHealthModifier => GetMaxHealthModifier();
-        public int MaxHealth => GetMaximumHealth();
+        public int MaxHealthBonuses => GetMaxHealthBonuses();
+        public int MaxHealthPenalties => GetMaxHealthPenalties(); 
+        public int HealthFromExp => CharacterCalculator.ExpToHealth(ExpInHealth);
+        public int MaxHealth => RawMaxHealth + HealthFromExp + MaxHealthBonuses + MaxHealthPenalties;
         public int CurrentHealth { get; set; }
 
         /// <summary>
@@ -95,7 +97,7 @@ namespace BRIX.Library.Characters
 
         public int LuckPoints { get; set; }
 
-        private int GetMaxHealthModifier()
+        private int GetMaxHealthBonuses()
         {
             IEnumerable<FortifyEffect> fortifyStatusEffects = Statuses
                 .Where(x => x.Effects.Any(x => x is FortifyEffect))
@@ -105,6 +107,11 @@ namespace BRIX.Library.Characters
                 .Where(x => x.Impact.Dice?.Any() == false)
                 .Sum(x => x.Impact.Modifier);
 
+            return fortifyBonus;
+        }
+
+        private int GetMaxHealthPenalties()
+        {
             IEnumerable<ExhaustionEffect> exhaustionStatusEffects = Statuses
                 .Where(x => x.Effects.Any(x => x is ExhaustionEffect))
                 .SelectMany(x => x.Effects.Where(x => x is ExhaustionEffect))
@@ -113,14 +120,7 @@ namespace BRIX.Library.Characters
                 .Where(x => x.Impact.Dice?.Any() == false)
                 .Sum(x => x.Impact.Modifier);
 
-            return fortifyBonus - exhaustionBonus;
-        }
-
-        private int GetMaximumHealth()
-        {
-            return RawMaxHealth 
-                + CharacterCalculator.ExpToHealth(ExpInHealth)
-                + MaxHealthModifier;
+            return -exhaustionBonus;
         }
     }
 }

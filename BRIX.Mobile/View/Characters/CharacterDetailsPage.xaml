@@ -89,10 +89,26 @@
                         </VerticalStackLayout>
                     </Border>
                     <!--Tags-->
-                    <Border Style="{StaticResource SideMarginBlockBorder}">
-                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="10">
-                            <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{lcz:Format ValuePath=Character.LuckPoints, FormatPath={x:Static lcz:LocalizationKeys.LuckPoints}}"/>
-                            <HorizontalStackLayout Grid.Column="2" HorizontalOptions="End" Spacing="10">
+                    <Border Style="{StaticResource SideMarginBlockBorder}" Padding="0">
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                            <Label 
+                                Grid.Column="0" Style="{StaticResource TitleLabel}" 
+                                Text="{lcz:Format ValuePath=Character.LuckPoints, FormatPath={x:Static lcz:LocalizationKeys.LuckPoints}}"
+                                Margin="15"/>
+                            <Grid Grid.Column="1" HorizontalOptions="Center" Margin="0,0,25,0">
+                                <Label 
+                                    FontFamily="Awesome" Text="{x:Static icons:Awesome.Clover}" 
+                                    TextColor="{StaticResource BRIXLime}"
+                                    VerticalOptions="Center" VerticalTextAlignment="Center"
+                                    FontSize="90"
+                                    Rotation="20"
+                                    Margin="-20"/>
+                                <Label 
+                                    Style="{StaticResource TitleLabel}" Text="{Binding Character.LuckPoints}"
+                                    HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                                    TextColor="{StaticResource BRIXDark}"/>
+                            </Grid>
+                            <HorizontalStackLayout Grid.Column="2" HorizontalOptions="End" Spacing="10" Margin="15">
                                 <Button 
                                     Style="{StaticResource SquareIconButton}" 
                                     Text="{x:Static icons:Awesome.SquareMinus}"
