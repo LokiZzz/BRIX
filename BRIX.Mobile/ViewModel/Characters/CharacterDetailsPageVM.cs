@@ -128,6 +128,20 @@ namespace BRIX.Mobile.ViewModel.Characters
             }
         }
 
+        [RelayCommand]
+        public async Task AddLuck()
+        {
+            Character.LuckPoints++;
+            await _characterService.UpdateAsync(Character.InternalModel);
+        }
+
+        [RelayCommand]
+        public async Task DecreaseLuck()
+        {
+            Character.LuckPoints--;
+            await _characterService.UpdateAsync(Character.InternalModel);
+        }
+
         public override async Task OnNavigatedAsync()
         {
             await Initialize();

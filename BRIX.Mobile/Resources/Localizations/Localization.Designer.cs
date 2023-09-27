@@ -1573,6 +1573,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Luck: {0}.
+        /// </summary>
+        public static string LuckPoints {
+            get {
+                return ResourceManager.GetString("LuckPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mark of fate.
         /// </summary>
         public static string MarkOfFate {

@@ -621,6 +621,9 @@
   <data name="LowRarityProperty" xml:space="preserve">
     <value>Must have an low rarity property</value>
   </data>
+  <data name="LuckPoints" xml:space="preserve">
+    <value>Luck: {0}</value>
+  </data>
   <data name="MarkOfFate" xml:space="preserve">
     <value>Mark of fate</value>
   </data>

@@ -627,6 +627,9 @@
   <data name="LowRarityProperty" xml:space="preserve">
     <value>Должна иметь признак малой редкости</value>
   </data>
+  <data name="LuckPoints" xml:space="preserve">
+    <value>Удача: {0}</value>
+  </data>
   <data name="MarkOfFate" xml:space="preserve">
     <value>Метка судьбы</value>
   </data>

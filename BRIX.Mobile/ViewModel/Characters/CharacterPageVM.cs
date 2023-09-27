@@ -152,6 +152,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             Character.RemoveStatus(status);
             await _characterService.UpdateAsync(Character.InternalModel);
+            Character.UpdateHealth();
         }
 
         [RelayCommand]
@@ -230,6 +231,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             {
                 UpdateExpCards();
                 ShowImagePlaceholder = Character.PortraitImage == null;
+                Character.UpdateHealth();
             }
 
             // Возможно такие вызовы уползут в CharacterService, но пока что достаточно этого.

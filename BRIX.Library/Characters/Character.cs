@@ -1,8 +1,5 @@
 ﻿using BRIX.Library.Ability;
-using BRIX.Library.Aspects;
 using BRIX.Library.Effects;
-using BRIX.Library.Extensions;
-using BRIX.Utility.Extensions;
 
 namespace BRIX.Library.Characters
 {
@@ -83,8 +80,9 @@ namespace BRIX.Library.Characters
         public int SpentExp => ExpSpentOnAbilities + ExpInHealth;
         public int ExpSpentOnAbilities => Abilities.Sum(x => x.ExpCost(this));
 
-        public int RawHealth => Level * CharacterCalculator.HealthPerLevel;
-        public int MaxHealth => RawHealth + CharacterCalculator.ExpToHealth(ExpInHealth);
+        public int RawMaxHealth => Level * CharacterCalculator.HealthPerLevel;
+        public int MaxHealthModifier => GetMaxHealthModifier();
+        public int MaxHealth => GetMaximumHealth();
         public int CurrentHealth { get; set; }
 
         /// <summary>
@@ -94,5 +92,35 @@ namespace BRIX.Library.Characters
         public int CurrentActionPoints { get; set; } = 5;
 
         public CharacterPortrait Portrait { get; set; } = new();
+
+        public int LuckPoints { get; set; }
+
+        private int GetMaxHealthModifier()
+        {
+            IEnumerable<FortifyEffect> fortifyStatusEffects = Statuses
+                .Where(x => x.Effects.Any(x => x is FortifyEffect))
+                .SelectMany(x => x.Effects.Where(x => x is FortifyEffect))
+                .Cast<FortifyEffect>();
+            int fortifyBonus = fortifyStatusEffects
+                .Where(x => x.Impact.Dice?.Any() == false)
+                .Sum(x => x.Impact.Modifier);
+
+            IEnumerable<ExhaustionEffect> exhaustionStatusEffects = Statuses
+                .Where(x => x.Effects.Any(x => x is ExhaustionEffect))
+                .SelectMany(x => x.Effects.Where(x => x is ExhaustionEffect))
+                .Cast<ExhaustionEffect>();
+            int exhaustionBonus = exhaustionStatusEffects
+                .Where(x => x.Impact.Dice?.Any() == false)
+                .Sum(x => x.Impact.Modifier);
+
+            return fortifyBonus - exhaustionBonus;
+        }
+
+        private int GetMaximumHealth()
+        {
+            return RawMaxHealth 
+                + CharacterCalculator.ExpToHealth(ExpInHealth)
+                + MaxHealthModifier;
+        }
     }
 }

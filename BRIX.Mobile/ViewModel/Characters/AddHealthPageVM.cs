@@ -109,7 +109,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             Character currentCharacter = await CharacterService.GetCurrentCharacter();
             ExpSpent = currentCharacter.ExpInHealth;
-            _rawHealth = currentCharacter.RawHealth;
+            _rawHealth = currentCharacter.RawMaxHealth;
             _expSpentOnAbilities = currentCharacter.ExpSpentOnAbilities;
             OnPropertyChanged(nameof(NewHealth));
             ExperienceOverall = currentCharacter.Experience;

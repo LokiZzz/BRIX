@@ -56,6 +56,12 @@ namespace BRIX.Mobile.Models.Characters
             set => SetProperty(InternalModel.Appearance, value, InternalModel, (character, appearance) => character.Appearance = appearance);
         }
 
+        public int LuckPoints
+        {
+            get => InternalModel.LuckPoints;
+            set => SetProperty(InternalModel.LuckPoints, value, InternalModel, (character, luck) => character.LuckPoints = luck);
+        }
+
         public double PortraitX
         {
             get => InternalModel.Portrait.X;
@@ -135,16 +141,31 @@ namespace BRIX.Mobile.Models.Characters
             set
             {
                 SetProperty(InternalModel.Experience, value, InternalModel, (character, exp) => character.Experience = exp);
-                OnPropertyChanged(nameof(CurrentHealth));
-                OnPropertyChanged(nameof(MaxHealth));
-                OnPropertyChanged(nameof(HealthPercent));
-                OnPropertyChanged(nameof(HealthState));
-                OnPropertyChanged(nameof(Level));
-                OnPropertyChanged(nameof(ExperienceForNextLevel));
-                OnPropertyChanged(nameof(LevelUpProgress));
-                OnPropertyChanged(nameof(SpentExperience));
-                OnPropertyChanged(nameof(FreeExperience));
+                UpdateHealth();
+                UpdateExp();
             }
+        }
+
+        public void UpdateHealth()
+        {
+            if(CurrentHealth > MaxHealth)
+            {
+                CurrentHealth = MaxHealth;
+            }
+
+            OnPropertyChanged(nameof(CurrentHealth));
+            OnPropertyChanged(nameof(MaxHealth));
+            OnPropertyChanged(nameof(HealthPercent));
+            OnPropertyChanged(nameof(HealthState));
+        }
+
+        public void UpdateExp()
+        {
+            OnPropertyChanged(nameof(Level));
+            OnPropertyChanged(nameof(ExperienceForNextLevel));
+            OnPropertyChanged(nameof(LevelUpProgress));
+            OnPropertyChanged(nameof(SpentExperience));
+            OnPropertyChanged(nameof(FreeExperience));
         }
 
         public int ExperienceForNextLevel => CharacterCalculator.GetExpForLevel(Level + 1);

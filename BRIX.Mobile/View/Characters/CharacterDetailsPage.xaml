@@ -88,6 +88,22 @@
                             </FlexLayout>
                         </VerticalStackLayout>
                     </Border>
+                    <!--Tags-->
+                    <Border Style="{StaticResource SideMarginBlockBorder}">
+                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="10">
+                            <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{lcz:Format ValuePath=Character.LuckPoints, FormatPath={x:Static lcz:LocalizationKeys.LuckPoints}}"/>
+                            <HorizontalStackLayout Grid.Column="2" HorizontalOptions="End" Spacing="10">
+                                <Button 
+                                    Style="{StaticResource SquareIconButton}" 
+                                    Text="{x:Static icons:Awesome.SquareMinus}"
+                                    Command="{Binding DecreaseLuckCommand}"/>
+                                <Button 
+                                    Style="{StaticResource SquareIconButton}" 
+                                    Text="{x:Static icons:Awesome.SquarePlus}"
+                                    Command="{Binding AddLuckCommand}"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Border>
                     <!--Projects-->
                     <Label 
                         Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Projects}}" 
