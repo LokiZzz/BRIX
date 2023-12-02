@@ -6,7 +6,7 @@ namespace BRIX.Mobile;
 
 public partial class App : Application
 {
-	public App()
+	public App(IServiceProvider serviceProvider)
 	{
 		InitializeComponent();
 
@@ -39,6 +39,6 @@ public partial class App : Application
         });
 
 
-        MainPage = ServicePool.GetService<AppShell>();
+        MainPage = serviceProvider.GetService<AppShell>();
 	}
 }

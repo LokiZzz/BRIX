@@ -4,7 +4,7 @@ namespace BRIX.Mobile.Services
 {
     public interface ICharacterService
     {
-        public Task<Character> GetCurrentCharacter();
+        public Task<Character?> GetCurrentCharacter();
         public Task SelectCurrentCharacter(Character character);
         public Task<Character> AddAsync(Character character);
         public Task<Character> GetAsync(Guid id);
@@ -49,7 +49,7 @@ namespace BRIX.Mobile.Services
             List<Character> characters = await _storage.ReadJson<List<Character>>(_fileName)
                 ?? new List<Character>();
 
-            return characters?.Single(charater => charater.Id == id);
+            return characters.Single(charater => charater.Id == id);
         }
 
         public async Task RemoveAsync(Guid id)
@@ -90,16 +90,16 @@ namespace BRIX.Mobile.Services
             return character;
         }
 
-        private Character _currentCharacter;
+        private Character? _currentCharacter = null;
 
-        public async Task SelectCurrentCharacter(Character character)
+        public async Task SelectCurrentCharacter(Character? character)
         {
             await Task.Run(() => {
                 _currentCharacter = character;
             });
         }
 
-        public async Task<Character> GetCurrentCharacter()
+        public async Task<Character?> GetCurrentCharacter()
         {
             return await Task.FromResult(_currentCharacter);
         }

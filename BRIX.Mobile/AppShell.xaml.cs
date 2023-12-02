@@ -13,9 +13,13 @@ public partial class AppShell : Shell
 		BindingContext = context;
 	}
 
-	private async void NavigatedHandler(object sender, ShellNavigatedEventArgs e)
+	private async void NavigatedHandler(object? sender, ShellNavigatedEventArgs e)
 	{
-		INavigationService navigation = ServicePool.GetService<INavigationService>();
-		await navigation.FireOnNavigatedAsync();
-    }
+		INavigationService? navigation = Handler?.MauiContext?.Services.GetService<INavigationService>();
+
+		if (navigation != null)
+		{
+			await navigation.FireOnNavigatedAsync();
+		}
+	}
 }
