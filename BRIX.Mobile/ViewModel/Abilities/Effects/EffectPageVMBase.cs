@@ -95,35 +95,28 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
         private void HandleInitial(IDictionary<string, object> query)
         {
-            try
-            {
-                Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
-                Effect = query.GetParameterOrDefault<T>(NavigationParameters.Effect) ?? new T();
-                CostMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
+            Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
+            Effect = query.GetParameterOrDefault<T>(NavigationParameters.Effect) ?? new T();
+            CostMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
 
-                if (CostMonitor?.IsMock == false)
+            if (CostMonitor?.IsMock == false)
+            {
+                switch (Mode)
                 {
-                    switch (Mode)
-                    {
-                        case EEditingMode.Add:
-                            CostMonitor.Ability.AddEffect(Effect);
-                            break;
-                        case EEditingMode.Edit:
-                            CostMonitor.Ability.UpdateEffect(Effect);
-                            break;
-                    }
+                    case EEditingMode.Add:
+                        CostMonitor.Ability.AddEffect(Effect);
+                        break;
+                    case EEditingMode.Edit:
+                        CostMonitor.Ability.UpdateEffect(Effect);
+                        break;
                 }
-
-                Aspects = new AspectPanelViewModel(CostMonitor, Effect);
-
-                Initialize();
-
-                _alreadyInitialized = true;
             }
-            catch(Exception ex)
-            {
-                string stop = "";
-            }
+
+            Aspects = new AspectPanelViewModel(CostMonitor, Effect);
+
+            Initialize();
+
+            _alreadyInitialized = true;
         }
 
         /// <summary>

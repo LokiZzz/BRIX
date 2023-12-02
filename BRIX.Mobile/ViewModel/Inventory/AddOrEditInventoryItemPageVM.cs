@@ -1,20 +1,11 @@
-﻿using Android.Media;
-using BRIX.Library.Characters;
-using BRIX.Library.Extensions;
+﻿using BRIX.Library.Characters;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
-using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
 using BRIX.Mobile.ViewModel.Popups;
-using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Inventory
 {
