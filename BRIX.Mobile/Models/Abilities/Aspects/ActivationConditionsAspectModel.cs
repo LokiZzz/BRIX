@@ -15,7 +15,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
     {
         public ActivationConditionsAspectModel(ActivationConditionsAspect model) : base(model)
         {
-            ILocalizationResourceManager localization = ServicePool.GetService<ILocalizationResourceManager>();
+            ILocalizationResourceManager localization = Resolver.Resolve<ILocalizationResourceManager>();
 
             Conditions = new(Enum.GetValues<EActivationCondition>().Select(x => 
                 new ActivationConditionOptionVM

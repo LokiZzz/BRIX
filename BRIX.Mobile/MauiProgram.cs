@@ -42,10 +42,14 @@ public static class MauiProgram
 				fonts.AddFont("Font Awesome 6 Brands-Regular-400.otf", "AwesomeBrands");
 				fonts.AddFont("rpgawesome-webfont.ttf", "AwesomeRPG");
             });
+
         builder.RegisterServices();
         builder.RegisterViews();
 
-        return builder.Build();
+        MauiApp app = builder.Build();
+        app.UseServicePool();
+
+        return app;
 	}
 
     public static void RegisterServices(this MauiAppBuilder builder)

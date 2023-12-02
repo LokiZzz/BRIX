@@ -21,7 +21,7 @@ namespace BRIX.Mobile.Resources.Localizations
                     {
                         Mode = BindingMode.OneWay,
                         Path = $"[{FormatPath}]",
-                        Source = ServicePool.GetService<ILocalizationResourceManager>()
+                        Source = Resolver.Resolve<ILocalizationResourceManager>()
                     },
                     new Binding
                     {

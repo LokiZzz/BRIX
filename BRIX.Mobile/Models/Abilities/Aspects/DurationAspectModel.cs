@@ -9,7 +9,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
     {
         public DurationAspectModel(DurationAspect model) : base(model) 
         {
-            ILocalizationResourceManager localization = ServicePool.GetService<ILocalizationResourceManager>();
+            ILocalizationResourceManager localization = Resolver.Resolve<ILocalizationResourceManager>();
 
             UnitOptions = new(Enum.GetValues<ETimeUnit>().Select(x => new TimeUnitOption
             {

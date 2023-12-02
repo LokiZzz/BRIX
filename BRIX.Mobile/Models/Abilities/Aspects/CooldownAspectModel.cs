@@ -9,7 +9,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
     {
         public CooldownAspectModel(CooldownAspect model) : base(model) 
         { 
-            ILocalizationResourceManager localization = ServicePool.GetService<ILocalizationResourceManager>();
+            ILocalizationResourceManager localization = Resolver.Resolve<ILocalizationResourceManager>();
 
             Options = new(Enum.GetValues<ECooldownOption>().Select(x => new CooldownOptionVM
             {

@@ -23,7 +23,7 @@ namespace BRIX.Mobile.Models.Abilities.Effects
         {
             get
             {
-                ILocalizationResourceManager localization = ServicePool.GetService<ILocalizationResourceManager>();
+                ILocalizationResourceManager localization = Resolver.Resolve<ILocalizationResourceManager>();
                 ELexisLanguage language = localization.LexisLanguage;
 
                 return EffectLexis.GetEffectDescription(InternalModel, language);

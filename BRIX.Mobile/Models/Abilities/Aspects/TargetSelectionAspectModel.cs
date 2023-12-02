@@ -12,7 +12,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
     {
         public TargetSelectionAspectModel(TargetSelectionAspect model) : base(model) 
         {
-            Obstacles = ObstacleOptionHelper.GetOptions(ServicePool.GetService<ILocalizationResourceManager>());
+            Obstacles = ObstacleOptionHelper.GetOptions((ILocalizationResourceManager)Resolver.Resolve<ILocalizationResourceManager>());
         }
 
         public ETargetSelectionStrategy Strategy

@@ -149,7 +149,7 @@ public partial class PickerButton : Grid
         {
             if ((bool)newValue)
             {
-                PickerPopup popupToShow = ServicePool.GetService<PickerPopup>();
+                PickerPopup popupToShow = Resolver.Resolve<PickerPopup>();
                 ParametrizedPopupVMBase<PickerPopupParameters> viewModel =
                     popupToShow.BindingContext as ParametrizedPopupVMBase<PickerPopupParameters>;
                 viewModel.Parameters = new PickerPopupParameters

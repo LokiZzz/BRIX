@@ -13,7 +13,7 @@ namespace BRIX.Mobile.ViewModel.Base
 
         public ViewModelBase()
         {
-            Navigation = ServicePool.GetService<INavigationService>();
+            Navigation = Resolver.Resolve<INavigationService>();
         }
 
         [ObservableProperty]
@@ -24,7 +24,7 @@ namespace BRIX.Mobile.ViewModel.Base
         protected async Task<TResult> ShowPopupAsync<TPopup, TResult, TParams>(TParams parameters) 
             where TPopup : Popup where TResult : class where TParams : class
         {
-            TPopup popupToShow = ServicePool.GetService<TPopup>();
+            TPopup popupToShow = Resolver.Resolve<TPopup>();
             ParametrizedPopupVMBase<TParams> viewModel = 
                 popupToShow.BindingContext as ParametrizedPopupVMBase<TParams>;
             viewModel.Parameters = parameters;
@@ -35,7 +35,7 @@ namespace BRIX.Mobile.ViewModel.Base
 
         protected async Task<TResult> ShowPopupAsync<TPopup, TResult>() where TPopup : Popup where TResult : class
         {
-            Popup popupToShow = ServicePool.GetService<TPopup>();
+            Popup popupToShow = Resolver.Resolve<TPopup>();
             object result = await Application.Current.MainPage.ShowPopupAsync(popupToShow);
 
             return (TResult)result;
@@ -43,7 +43,7 @@ namespace BRIX.Mobile.ViewModel.Base
 
         protected async Task ShowPopupAsync<TPopup>() where TPopup : Popup
         {
-            Popup popupToShow = ServicePool.GetService<TPopup>();
+            Popup popupToShow = Resolver.Resolve<TPopup>();
             await Application.Current.MainPage.ShowPopupAsync(popupToShow);
         }
 

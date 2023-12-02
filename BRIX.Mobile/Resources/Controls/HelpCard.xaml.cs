@@ -41,7 +41,7 @@ public partial class HelpCard : ContentView
 
     private static void HelpChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        ILocalizationResourceManager localization = ServicePool.GetService<ILocalizationResourceManager>();
+        ILocalizationResourceManager localization = Resolver.Resolve<ILocalizationResourceManager>();
         string helpText = localization[(string)newValue].ToString();
         HelpCard helpCard = (HelpCard)bindable;
         helpCard.SetText(helpText);
