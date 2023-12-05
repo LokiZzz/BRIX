@@ -17,7 +17,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public AspectBase InternalBase { get; set; }
 
-        public AbilityCostMonitorPanelVM CostMonitor { get; set; }
+        public AbilityCostMonitorPanelVM CostMonitor { get; set; } = new();
 
         public string Name => AspectsDictionary.Collection[GetType()].Name;
 

@@ -80,7 +80,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                 return;
             }
 
-            Character currentCharacter = await CharacterService.GetCurrentCharacter();
+            Character currentCharacter = await CharacterService.GetCurrentCharacterGuaranteed();
             currentCharacter.ExpInHealth = ExpSpent;
             await CharacterService.UpdateAsync(currentCharacter);
             await Navigation.Back();
@@ -95,7 +95,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task SpendAllExp()
         {
-            Character currentCharacter = await CharacterService.GetCurrentCharacter();
+            Character currentCharacter = await CharacterService.GetCurrentCharacterGuaranteed();
             ExpSpent = currentCharacter.ExpInHealth + currentCharacter.AvailableExp;
         }
 
@@ -107,7 +107,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         public override async Task OnNavigatedAsync()
         {
-            Character currentCharacter = await CharacterService.GetCurrentCharacter();
+            Character currentCharacter = await CharacterService.GetCurrentCharacterGuaranteed();
             ExpSpent = currentCharacter.ExpInHealth;
             _rawHealth = currentCharacter.RawMaxHealth;
             _expSpentOnAbilities = currentCharacter.ExpSpentOnAbilities;

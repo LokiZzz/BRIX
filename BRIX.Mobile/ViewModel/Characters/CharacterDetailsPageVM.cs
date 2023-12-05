@@ -35,7 +35,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task AddTag()
         {
-            EntryPopupResult result = await ShowPopupAsync<EntryPopup, EntryPopupResult, EntryPopupParameters>(
+            EntryPopupResult? result = await ShowPopupAsync<EntryPopup, EntryPopupResult, EntryPopupParameters>(
                 new EntryPopupParameters
                 {
                     Title = Localization.MarkOfFate,
@@ -150,7 +150,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         private async Task Initialize() 
         {
-            Character = new(await _characterService.GetCurrentCharacter());
+            Character = new(await _characterService.GetCurrentCharacterGuaranteed());
         }
     }
 }

@@ -12,10 +12,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Messaging;
-using BRIX.Library.Ability;
-using System;
-using BRIX.Library.Effects;
-using BRIX.Library.Aspects;
 using BRIX.Library.Enums;
 
 namespace BRIX.Mobile.ViewModel.Characters
@@ -32,7 +28,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         [ObservableProperty]
-        private CharacterModel _character;
+        private CharacterModel? _character;
 
         [ObservableProperty]
         private bool _playerHaveCharacter;
@@ -41,7 +37,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         private bool _showNoCharacterText;
 
         [ObservableProperty]
-        private ObservableCollection<ExperienceInfoVM> _expCards;
+        private ObservableCollection<ExperienceInfoVM> _expCards = new();
 
         private bool _showImagePlaceholder = true;
         public bool ShowImagePlaceholder
@@ -77,8 +73,13 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task EditHealth()
         {
-            NumericEditorResult result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(
-                new NumericEditorParameters { Title = _localization[LocalizationKeys.Health] as string }
+            if (Character == null)
+            {
+                return;
+            }
+
+            NumericEditorResult? result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(
+                new NumericEditorParameters { Title = _localization[LocalizationKeys.Health].ToString() ?? string.Empty }
             );
 
             if (result != null)
@@ -105,8 +106,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task RestoreHealth()
         {
-            Character.CurrentHealth = Character.MaxHealth;
-            await SaveChanges();
+            if (Character != null)
+            {
+                Character.CurrentHealth = Character.MaxHealth;
+                await SaveChanges();
+            }
         }
 
         [RelayCommand]
@@ -118,8 +122,16 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task EditExperience()
         {
-            NumericEditorResult result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(
-                new NumericEditorParameters { Title = _localization[LocalizationKeys.Experience] as string }
+            if (Character == null)
+            {
+                return;
+            }
+
+            NumericEditorResult? result = await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(
+                new NumericEditorParameters
+                {
+                    Title = _localization[LocalizationKeys.Experience].ToString() ?? string.Empty
+                }
             );
 
             if (result != null)
@@ -150,6 +162,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task RemoveStatus(StatusItemVM status)
         {
+            if (Character == null)
+            {
+                return;
+            }
+
             Character.RemoveStatus(status);
             await _characterService.UpdateAsync(Character.InternalModel);
             Character.UpdateHealth();
@@ -158,6 +175,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task IncreaseStatusTime()
         {
+            if (Character == null)
+            {
+                return;
+            }
+
             List<StatusItemVM> statuses = GetStatusesWithLowestUnit();
 
             statuses.ForEach(x => x.IncreaseRoundsPassed());
@@ -176,6 +198,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task DecreaseStatusTime()
         {
+            if (Character == null)
+            {
+                return;
+            }
+
             List<StatusItemVM> statuses = GetStatusesWithLowestUnit();
             statuses.ForEach(x => x.DecreaseRoundsPassed());
             await _characterService.UpdateAsync(Character.InternalModel);
@@ -187,19 +214,20 @@ namespace BRIX.Mobile.ViewModel.Characters
         private List<StatusItemVM> GetStatusesWithLowestUnit()
         {
             List<StatusItemVM> statuses = new();
-
-            foreach (ETimeUnit timeUnit in Enum.GetValues<ETimeUnit>())
+            if (Character != null)
             {
-                statuses = Character.Statuses
-                    .Where(x => x.Internal.GetHighestTimeUnit() == timeUnit)
-                    .ToList();
-
-                if (statuses.Any())
+                foreach (ETimeUnit timeUnit in Enum.GetValues<ETimeUnit>())
                 {
-                    break;
-                }
-            }
+                    statuses = Character.Statuses
+                        .Where(x => x.Internal.GetHighestTimeUnit() == timeUnit)
+                        .ToList();
 
+                    if (statuses.Any())
+                    {
+                        break;
+                    }
+            }
+}
             return statuses;
         }
 
@@ -247,6 +275,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         /// </summary>
         private void UpdateExpCards()
         {
+            if (Character == null)
+            {
+                return;
+            }
+
             if (ExpCards == null || !ExpCards.Any())
             {
                 ExpCards = new ObservableCollection<ExperienceInfoVM>
@@ -259,7 +292,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                     },
                     new ExperienceInfoVM
                     {
-                        Title = _localization[LocalizationKeys.FreeExperience] as string,
+                        Title = _localization[LocalizationKeys.FreeExperience].ToString() ?? string.Empty,
                         Icon = AwesomeRPG.BurningEmbers,
                         IconFont = "AwesomeRPG",
                         DoCardActionCommand = new RelayCommand(async () => await GoToAbilities())
@@ -269,15 +302,20 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             ExpCards.First().Current = Character.Experience;
             ExpCards.First().Target = Character.ExperienceForNextLevel;
-            ExpCards.First().Title = _localization[LocalizationKeys.ExperienceToLevelup] as string;
+            ExpCards.First().Title = _localization[LocalizationKeys.ExperienceToLevelup].ToString() ?? string.Empty;
 
             ExpCards.Last().Current = Character.FreeExperience;
             ExpCards.Last().Target = Character.Experience;
-            ExpCards.Last().Title = _localization[LocalizationKeys.FreeExperience] as string;
+            ExpCards.Last().Title = _localization[LocalizationKeys.FreeExperience].ToString() ?? string.Empty;
         }
 
         private async Task SaveChanges()
         {
+            if (Character == null)
+            {
+                return;
+            }
+
             await _characterService.UpdateAsync(Character.InternalModel);
         }
     }
@@ -285,13 +323,13 @@ namespace BRIX.Mobile.ViewModel.Characters
     public partial class ExperienceInfoVM : ObservableObject
     {
         [ObservableProperty]
-        private string _title;
+        private string _title = string.Empty;
 
         [ObservableProperty]
-        private string _icon;
+        private string _icon = string.Empty;
 
         [ObservableProperty]
-        private string _iconFont;
+        private string _iconFont = string.Empty;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(Percent))]
@@ -303,6 +341,6 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         public double Percent => Current / (double)Target;
 
-        public RelayCommand DoCardActionCommand { get; set; }
+        public RelayCommand? DoCardActionCommand { get; set; }
     }
 }

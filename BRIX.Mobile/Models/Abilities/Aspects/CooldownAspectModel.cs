@@ -14,7 +14,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             Options = new(Enum.GetValues<ECooldownOption>().Select(x => new CooldownOptionVM
             {
                 Cooldown = x,
-                LocalizedName = localization[x.ToString("G")].ToString()
+                LocalizedName = localization[x.ToString("G")].ToString() ?? string.Empty,
             }));
         }
 

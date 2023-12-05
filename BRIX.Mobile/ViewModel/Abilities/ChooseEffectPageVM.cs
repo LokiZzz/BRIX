@@ -13,7 +13,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
     public partial class ChooseEffectPageVM : ViewModelBase, IQueryAttributable
     {
         [ObservableProperty]
-        private ObservableCollection<EffectTypeVM> _effects;
+        private ObservableCollection<EffectTypeVM> _effects = new();
 
         [RelayCommand]
         public async Task Choose(EffectTypeVM effectToChoose)
@@ -42,7 +42,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             return Task.CompletedTask;
         }
 
-        private AbilityCostMonitorPanelVM _costMonitor;
+        private AbilityCostMonitorPanelVM? _costMonitor;
         private bool _forStatus = false;
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)

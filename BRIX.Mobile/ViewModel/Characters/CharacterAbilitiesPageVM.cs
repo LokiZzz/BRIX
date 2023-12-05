@@ -18,12 +18,10 @@ namespace BRIX.Mobile.ViewModel.Characters
     public partial class CharacterAbilitiesPageVM : ViewModelBase, IQueryAttributable
     {
         private readonly ICharacterService _characterService;
-        private readonly ILocalizationResourceManager _localization;
 
-        public CharacterAbilitiesPageVM(ICharacterService characterService, ILocalizationResourceManager localization)
+        public CharacterAbilitiesPageVM(ICharacterService characterService)
         {
             _characterService = characterService;
-            _localization = localization;
 
             WeakReferenceMessenger.Default.Register<CurrentCharacterChanged>(
                 this, 
@@ -31,8 +29,8 @@ namespace BRIX.Mobile.ViewModel.Characters
             );
         }
 
-        private CharacterModel _character;
-        public CharacterModel Character
+        private CharacterModel? _character;
+        public CharacterModel? Character
         {
             get => _character;
             set => SetProperty(ref _character, value);
@@ -77,8 +75,11 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if (result?.Answer == EAlertPopupResult.Yes)
             {
-                Character.RemoveAbility(ability.InternalModel.Id);
-                await _characterService.UpdateAsync(Character.InternalModel);
+                if (Character != null)
+                {
+                    Character.RemoveAbility(ability.InternalModel.Id);
+                    await _characterService.UpdateAsync(Character.InternalModel);
+                }
             }
         }
 
@@ -110,9 +111,10 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         private async Task HandleBackFromEditing(IDictionary<string, object> query)
         {
-            CharacterAbilityModel? editedAbility = query.GetParameterOrDefault<CharacterAbilityModel>(NavigationParameters.Ability);
+            CharacterAbilityModel? editedAbility = 
+                query.GetParameterOrDefault<CharacterAbilityModel>(NavigationParameters.Ability);
 
-            if (editedAbility != null)
+            if (editedAbility != null && Character != null)
             {
                 EEditingMode mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
 

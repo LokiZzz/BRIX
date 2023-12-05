@@ -21,20 +21,20 @@ namespace BRIX.Mobile.ViewModel.Settings
             _localization = localization;
         }
 
-        private ObservableCollection<CultureInfoVM> _cultures;
+        private ObservableCollection<CultureInfoVM> _cultures = new();
         public ObservableCollection<CultureInfoVM> Cultures
         {
             get => _cultures;
             set => SetProperty(ref _cultures, value);
         }
 
-        private CultureInfoVM _selectedCulture;
-        public CultureInfoVM SelectedCulture
+        private CultureInfoVM? _selectedCulture;
+        public CultureInfoVM? SelectedCulture
         {
             get => _selectedCulture;
             set
             {
-                if(SetProperty(ref _selectedCulture, value))
+                if(value?.CultureInfo != null && SetProperty(ref _selectedCulture, value))
                 {
                     Preferences.Set(Mobile.Settings.Account.Culture, value.CultureInfo.Name);
                     _localization.SetCulture(value.CultureInfo);
@@ -68,9 +68,9 @@ namespace BRIX.Mobile.ViewModel.Settings
 
     public class CultureInfoVM
     {
-        public CultureInfo CultureInfo { get; set; }
+        public CultureInfo? CultureInfo { get; set; }
 
-        public string LanguageNativeName => CultureInfo == null ? null : CultureInfo.NativeName.Capitalize();
+        public string LanguageNativeName => CultureInfo == null ? string.Empty : CultureInfo.NativeName.Capitalize();
 
         public override string ToString() => LanguageNativeName;
     }

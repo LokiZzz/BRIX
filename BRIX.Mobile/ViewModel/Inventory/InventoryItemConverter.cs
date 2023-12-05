@@ -71,10 +71,10 @@ namespace BRIX.Mobile.ViewModel.Inventory
             return item;
         }
 
-        private ImageSource _gemIS;
-        private ImageSource _containerIS;
-        private ImageSource _equipmentIS;
-        private ImageSource _consumableIS;
+        private ImageSource _gemIS = ImageSource.FromFile("Inventory/gem.svg");
+        private ImageSource _containerIS = ImageSource.FromFile("Inventory/chest.svg");
+        private ImageSource _equipmentIS = ImageSource.FromFile("Inventory/blade.svg");
+        private ImageSource _consumableIS = ImageSource.FromFile("Inventory/arrow.svg");
         private bool isDarkBackgroundNow = true;
         private Color? _darkItemColor;
         private Color? _lightItemColor;
@@ -88,11 +88,6 @@ namespace BRIX.Mobile.ViewModel.Inventory
             object? lightItemColor = null;
             Application.Current?.Resources.TryGetValue("BRIXDim", out lightItemColor);
             _lightItemColor = lightItemColor as Color;
-
-            _gemIS = ImageSource.FromFile("Inventory/gem.svg");
-            _containerIS = ImageSource.FromFile("Inventory/chest.svg");
-            _equipmentIS = ImageSource.FromFile("Inventory/blade.svg");
-            _consumableIS = ImageSource.FromFile("Inventory/arrow.svg");
         }
     }
 }

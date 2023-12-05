@@ -161,7 +161,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task EditCoins()
         {
-            NumericEditorResult result = 
+            NumericEditorResult? result = 
                 await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(
                     new NumericEditorParameters { Title = Localization.Coins }
             );
@@ -181,7 +181,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task AdjustCount(InventoryItemVM itemToEdit)
         {
-            NumericEditorResult result =
+            NumericEditorResult? result =
                 await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(
                     new NumericEditorParameters { Title = itemToEdit.Name }
             );
@@ -196,7 +196,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
                 if(itemToEdit.Type == EInventoryItemType.Consumable)
                 {
-                    AlertPopupResult askAdjustCoinsReuslt = await Ask(Localization.InventoryAskAdjustCoinsAlert);
+                    AlertPopupResult? askAdjustCoinsReuslt = await Ask(Localization.InventoryAskAdjustCoinsAlert);
 
                     if(askAdjustCoinsReuslt?.Answer == EAlertPopupResult.Yes)
                     {

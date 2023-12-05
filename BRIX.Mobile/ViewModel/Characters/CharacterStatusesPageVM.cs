@@ -118,7 +118,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                         statuses.Add(status.Internal);
                         break;
                     case EEditingMode.Edit:
-                        Status existingStatus = statuses.FirstOrDefault(x => x.Equals(status.Internal));
+                        Status existingStatus = statuses.Single(x => x.Equals(status.Internal));
                         statuses[statuses.IndexOf(existingStatus)] = status.Internal;
                         _currentCharacter.ReplaceStatus(status);
                         await CharacterService.UpdateAsync(_currentCharacter.InternalModel);

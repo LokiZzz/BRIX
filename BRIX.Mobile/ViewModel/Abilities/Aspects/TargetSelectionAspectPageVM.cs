@@ -266,7 +266,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 .Select(x => x as object)
                 .ToList();
 
-            PickerPopupResult result = await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
+            PickerPopupResult? result = await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
                 new()
                 {
                     Title = Resources.Localizations.Localization.TargetsSizes,

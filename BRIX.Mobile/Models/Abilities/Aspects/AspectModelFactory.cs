@@ -20,7 +20,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 case DurationAspect rda:
                     return new DurationAspectModel(rda);
                 default: 
-                    return null;
+                    throw new NotImplementedException($"Для аспекта {aspect.GetType()} не реализована модель.");
             }
         }
     }

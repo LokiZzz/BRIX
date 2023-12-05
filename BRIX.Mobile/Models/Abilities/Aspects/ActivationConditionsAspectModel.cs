@@ -21,7 +21,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 new ActivationConditionOptionVM
                 {
                     Condition = x,
-                    Text = localization[x.ToString("G")].ToString()
+                    Text = localization[x.ToString("G")].ToString() ?? string.Empty
                 }
             ));
         }

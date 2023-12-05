@@ -12,9 +12,9 @@ namespace BRIX.Library.Characters
         }
 
         public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Backstory { get; set; }
-        public string Appearance { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Backstory { get; set; } = string.Empty;
+        public string Appearance { get; set; } = string.Empty;
         public List<string> Tags { get; set; } = new();
         public List<CharacterProject> Projects { get; set; } = new();
         public List<CharacterAbility> Abilities { get; set; } = new();

@@ -25,9 +25,9 @@ namespace BRIX.Library
         private HashSet<AspectBase> SynchronizingAspects = new();
 
         public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string StatusName { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public string StatusName { get; set; } = string.Empty;
 
         public bool HasStatus => Effects?.Any(x => x.Aspects.Any(x => x is DurationAspect)) == true;
 
