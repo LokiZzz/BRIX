@@ -36,9 +36,9 @@ namespace BRIX.Mobile.ViewModel.Inventory
             return viewModel;
         }
 
-        public static InventoryItem CreateItemByType(EInventoryItemType type, InventoryItem prototype = null)
+        public static InventoryItem CreateItemByType(EInventoryItemType type, InventoryItem? prototype = null)
         {
-            InventoryItem item;
+            InventoryItem item = new InventoryItem();
 
             switch (type)
             {
@@ -53,9 +53,6 @@ namespace BRIX.Mobile.ViewModel.Inventory
                     break;
                 case EInventoryItemType.Consumable:
                     item = new Consumable();
-                    break;
-                default: 
-                    item = null;
                     break;
             }
 
@@ -79,15 +76,19 @@ namespace BRIX.Mobile.ViewModel.Inventory
         private ImageSource _equipmentIS;
         private ImageSource _consumableIS;
         private bool isDarkBackgroundNow = true;
-        private Color _darkItemColor;
-        private Color _lightItemColor;
+        private Color? _darkItemColor;
+        private Color? _lightItemColor;
 
         private void InitializeVisual()
         {
-            Application.Current.Resources.TryGetValue("BRIXMedium", out object darkItemColor);
+            object? darkItemColor = null;
+            Application.Current?.Resources.TryGetValue("BRIXMedium", out darkItemColor);
             _darkItemColor = darkItemColor as Color;
-            Application.Current.Resources.TryGetValue("BRIXDim", out object lightItemColor);
+
+            object? lightItemColor = null;
+            Application.Current?.Resources.TryGetValue("BRIXDim", out lightItemColor);
             _lightItemColor = lightItemColor as Color;
+
             _gemIS = ImageSource.FromFile("Inventory/gem.svg");
             _containerIS = ImageSource.FromFile("Inventory/chest.svg");
             _equipmentIS = ImageSource.FromFile("Inventory/blade.svg");

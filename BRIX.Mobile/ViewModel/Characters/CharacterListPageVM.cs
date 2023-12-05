@@ -64,7 +64,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         private async Task Remove(CharacterModel character)
         {
-            AlertPopupResult result = await Ask(Localization.DeleteCharacterQuestion);
+            AlertPopupResult? result = await Ask(Localization.DeleteCharacterQuestion);
 
             if (result?.Answer == EAlertPopupResult.Yes)
             {

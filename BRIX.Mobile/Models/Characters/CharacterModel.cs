@@ -276,7 +276,7 @@ namespace BRIX.Mobile.Models.Characters
         {
             if (Statuses.Any(x => x.Internal.Equals(status.Internal)))
             {
-                StatusItemVM existingStatus = Statuses.FirstOrDefault(x => x.Internal.Equals(status.Internal));
+                StatusItemVM existingStatus = Statuses.Single(x => x.Internal.Equals(status.Internal));
                 Statuses[Statuses.IndexOf(existingStatus)] = status;
                 InternalModel.Statuses[InternalModel.Statuses.IndexOf(existingStatus.Internal)] = status.Internal;
             }

@@ -59,7 +59,7 @@ namespace BRIX.Library.Characters
                 }
             }
 
-            ActionPointAspect apAspect = ability.GetAspect<ActionPointAspect>();
+            ActionPointAspect? apAspect = ability.GetAspect<ActionPointAspect>();
 
             if (apAspect != null && apAspect.ActionPoints > CurrentActionPoints)
             {
@@ -85,7 +85,7 @@ namespace BRIX.Library.Characters
                 consumable.Count--;
             }
 
-            ActionPointAspect apAspect = ability.GetAspect<ActionPointAspect>();
+            ActionPointAspect? apAspect = ability.GetAspect<ActionPointAspect>();
 
             if (apAspect != null)
             {
@@ -105,8 +105,9 @@ namespace BRIX.Library.Characters
                 throw new AbilityLogicException("У персонажа не найдено соответствующее материальное обеспечение.");
             }
 
-            Character copyOfThis = this.Copy();
-            MaterialSupport existingItem = Inventory.Items.Single(x => x.Equals(itemToUpdate)) as MaterialSupport;
+            Character? copyOfThis = this.Copy();
+            MaterialSupport? existingItem = Inventory.Items
+                .Single(x => x.Equals(itemToUpdate)) as MaterialSupport;
 
             if (existingItem != null)
             {

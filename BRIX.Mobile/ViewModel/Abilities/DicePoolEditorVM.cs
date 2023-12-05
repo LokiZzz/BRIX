@@ -21,9 +21,9 @@ namespace BRIX.Mobile.ViewModel.Abilities
             Dices = new DicePool((1, 4));
         }
 
-        public event EventHandler DicePoolUpdated;
+        public event EventHandler? DicePoolUpdated;
 
-        private DicePool _dices;
+        private DicePool _dices = new DicePool();
         public DicePool Dices
         {
             get => _dices;
@@ -60,7 +60,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
         private async Task EditFormula()
         {
             string formula = Dices.ToString() ?? string.Empty;
-            DiceValuePopupResult result = await ShowPopupAsync<DiceValuePopup, DiceValuePopupResult, DiceValuePopupParameters>(
+            DiceValuePopupResult? result = 
+                await ShowPopupAsync<DiceValuePopup, DiceValuePopupResult, DiceValuePopupParameters>(
                 new DiceValuePopupParameters { Formula = formula }
             );
 
@@ -75,7 +76,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
         }
 
 
-        private DicePool _dicePoolToReset = null;
+        private DicePool? _dicePoolToReset = null;
 
         private double _adjustment = 0;
 
@@ -111,8 +112,12 @@ namespace BRIX.Mobile.ViewModel.Abilities
         private void Adjust(int percent)
         {
             _dicePoolToReset = _dicePoolToReset == null ? Dices.Copy() : _dicePoolToReset;
-            Dices = DicePool.FromAdjusted(_dicePoolToReset, percent);
-            FireDicePoolUpdated();
+
+            if (_dicePoolToReset != null)
+            {
+                Dices = DicePool.FromAdjusted(_dicePoolToReset, percent);
+                FireDicePoolUpdated();
+            }
         }
 
         [RelayCommand]
@@ -133,7 +138,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
         {
             if (DicePoolUpdated != null)
             {
-                DicePoolUpdated(this, null);
+                DicePoolUpdated(this, EventArgs.Empty);
             }
         }
     }

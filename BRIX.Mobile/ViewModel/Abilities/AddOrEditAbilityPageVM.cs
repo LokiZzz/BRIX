@@ -124,7 +124,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
         [RelayCommand]
         public async Task DeleteEffect(EffectModelBase effectToRemove)
         {
-            AlertPopupResult result = await Ask(Localization.DeleteEffectQuestion);
+            AlertPopupResult? result = await Ask(Localization.DeleteEffectQuestion);
 
             if (result?.Answer == EAlertPopupResult.Yes)
             {
@@ -140,7 +140,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             );
             IEnumerable<InventoryItemNodeVM> availiableItemsNodes = availiableItems.Select(_inventoryConverter.ToVM);
 
-            PickerPopupResult result = 
+            PickerPopupResult? result = 
                 await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
                 new PickerPopupParameters
                 {
@@ -170,7 +170,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
         [RelayCommand]
         public async Task DeleteMaterial(InventoryItemNodeVM itemToRemove)
         {
-            AlertPopupResult result = await Ask(
+            AlertPopupResult? result = await Ask(
                 string.Format(Localization.AskDeleteMaterialSupport, itemToRemove.Name)
             );
 

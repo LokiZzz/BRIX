@@ -207,7 +207,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             IsBusy = true;
 
-            Character character = await _characterService.GetCurrentCharacter();
+            Character? character = await _characterService.GetCurrentCharacter();
 
             if (character != null)
             {
@@ -220,14 +220,14 @@ namespace BRIX.Mobile.ViewModel.Characters
                 if(characters.Any())
                 {
                     await _characterService.SelectCurrentCharacter(characters.First());
-                    Character = new CharacterModel(await _characterService.GetCurrentCharacter());
+                    Character = new CharacterModel(await _characterService.GetCurrentCharacterGuaranteed());
                 }
             }
 
             PlayerHaveCharacter = Character != null;
             ShowNoCharacterText = !PlayerHaveCharacter;
 
-            if (PlayerHaveCharacter)
+            if (Character != null)
             {
                 UpdateExpCards();
                 ShowImagePlaceholder = Character.PortraitImage == null;

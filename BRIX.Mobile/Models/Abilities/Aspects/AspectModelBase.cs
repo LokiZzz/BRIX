@@ -39,7 +39,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             T newValue, 
             TModel model, 
             Action<TModel, T> callback, 
-            [CallerMemberName] string propertyName = null) where TModel : class
+            [CallerMemberName] string? propertyName = null) where TModel : class
         {
             bool set = base.SetProperty(oldValue, newValue, model, callback, propertyName);
             UpdateCost();

@@ -13,8 +13,8 @@ public partial class CircularProgressBar : ContentView
 
     private static void OnProgressChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        CircularProgressBar progressBar = bindable as CircularProgressBar;
-        progressBar.graphicsView.Invalidate();
+        CircularProgressBar? progressBar = bindable as CircularProgressBar;
+        progressBar?.graphicsView.Invalidate();
     }
 
     public static readonly BindableProperty InnerTextProperty =
@@ -77,7 +77,7 @@ public partial class CircularProgressBar : ContentView
         set { SetValue(TextColorProperty, value); }
     }
 
-    protected override void OnPropertyChanged(string propertyName = null)
+    protected override void OnPropertyChanged(string? propertyName = null)
     {
         base.OnPropertyChanged(propertyName);
 

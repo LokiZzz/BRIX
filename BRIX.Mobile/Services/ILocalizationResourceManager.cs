@@ -20,7 +20,7 @@ namespace BRIX.Mobile.Services
         public LocalizationResourceManager()
         {
             string cultureName = Preferences.Get(Settings.Account.Culture, CultureInfo.CurrentCulture.Name);
-            CultureInfo fromSettings = Cultures.FirstOrDefault(culture => culture == CultureInfo.GetCultureInfo(cultureName));
+            CultureInfo? fromSettings = Cultures.FirstOrDefault(culture => culture == CultureInfo.GetCultureInfo(cultureName));
             Localization.Culture = fromSettings ?? Cultures.First();
         }
 
@@ -29,13 +29,22 @@ namespace BRIX.Mobile.Services
         public List<string> GetKeys()
         {
             List<string> keys = new();
-            System.Resources.ResourceSet resourceSet = Localization.ResourceManager
+            System.Resources.ResourceSet? resourceSet = Localization.ResourceManager
                 .GetResourceSet(CurrentCulture, false, false);
 
-            foreach (DictionaryEntry entry in resourceSet)
+            if (resourceSet != null)
             {
-                keys.Add(entry.Key.ToString());
+                foreach (DictionaryEntry entry in resourceSet)
+                {
+                    string key = entry.Key.ToString() ?? string.Empty;
+
+                    if (!string.IsNullOrEmpty(key))
+                    {
+                        keys.Add(key);
+                    }
+                }
             }
+
             return keys;
         }
 

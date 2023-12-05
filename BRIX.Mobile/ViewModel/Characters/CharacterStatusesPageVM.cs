@@ -54,9 +54,9 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task RemoveStatus(StatusItemVM status)
         {
-            Popups.AlertPopupResult result = await Ask(string.Format(Localization.AskDeleteStatus, status.Name));
+            Popups.AlertPopupResult? result = await Ask(string.Format(Localization.AskDeleteStatus, status.Name));
 
-            if(result.Answer == Popups.EAlertPopupResult.Yes)
+            if(result?.Answer == Popups.EAlertPopupResult.Yes)
             {
                 Statuses.Remove(status);
                 await AssetsService.SaveStatuses(Statuses.Select(x => x.Internal).ToList());

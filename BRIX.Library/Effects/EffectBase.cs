@@ -29,7 +29,7 @@ namespace BRIX.Library.Effects
                     throw new Exception("Невалидный тип экземпляра аспекта в эффекте.");
                 }
 
-                AspectBase aspect = GetAspect(aspectType);
+                AspectBase? aspect = GetAspect(aspectType);
 
                 if (aspect != null)
                 {
@@ -50,28 +50,24 @@ namespace BRIX.Library.Effects
         /// Получить аспект указанного типа. Если такого аспекта в эффекте нет, но его тип указан в списке 
         /// обязательных аспектов, то аспект будет инициализирован и возвращён в out-параметре.
         /// </summary>
-        public AspectBase? GetAspect(Type aspectType)
+        public AspectBase GetAspect(Type aspectType)
         {
-            AspectBase aspect = Aspects.FirstOrDefault(x => x.GetType() == aspectType);
+            AspectBase? aspect = Aspects.FirstOrDefault(x => x.GetType() == aspectType);
 
             if(aspect == null)
             {
                 if (RequiredAspects.Any(x => x.Equals(aspectType)))
                 {
-                    aspect = (AspectBase)Activator.CreateInstance(aspectType);
+                    aspect = (AspectBase?)Activator.CreateInstance(aspectType);
 
                     if (aspect != null)
                     {
                         Aspects.Add(aspect);
                     }
                 }
-                else
-                {
-                    throw new ArgumentException($"У эффекта {GetType()} нет аспекта {aspectType.Name}");
-                }
             }
 
-            return aspect;
+            return aspect ?? throw new ArgumentException($"У эффекта {GetType()} нет аспекта {aspectType.Name}");
         }
 
         /// <summary>

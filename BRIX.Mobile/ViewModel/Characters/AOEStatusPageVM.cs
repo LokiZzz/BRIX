@@ -78,7 +78,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task DeleteEffect(EffectModelBase effect)
         {
-            AlertPopupResult result = await Ask(Localization.DeleteEffectQuestion);
+            AlertPopupResult? result = await Ask(Localization.DeleteEffectQuestion);
 
             if (result?.Answer == EAlertPopupResult.Yes)
             {
@@ -89,7 +89,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task FromAbility()
         {
-            PickerPopupResult result =
+            PickerPopupResult? result =
                 await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
                 new PickerPopupParameters
                 {
@@ -101,7 +101,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if(result != null)
             {
-                Library.Ability.Status status = (result.SelectedItem as CharacterAbility).BuildStatus();
+                Library.Ability.Status status = ((CharacterAbility)result.SelectedItem).BuildStatus();
                 Status = new StatusItemVM(status);
             }
         }

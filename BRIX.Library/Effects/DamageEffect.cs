@@ -16,7 +16,7 @@ namespace BRIX.Library.Effects
         {
             int damageToHimselfCoef = 1;
 
-            TargetSelectionAspect targetSelection = GetAspect<TargetSelectionAspect>();
+            TargetSelectionAspect? targetSelection = GetAspect<TargetSelectionAspect>();
 
             if (targetSelection?.Strategy == ETargetSelectionStrategy.CharacterHimself)
             {

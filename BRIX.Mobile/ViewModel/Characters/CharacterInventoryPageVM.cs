@@ -63,7 +63,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             if(InventoryItems == null || force)
             {
-                _currentCharacter = await _characterService.GetCurrentCharacter();
+                _currentCharacter = await _characterService.GetCurrentCharacterGuaranteed();
 
                 InventoryItems = new(
                     _currentCharacter.Inventory.Content.Select(_vmConverter.ToVM).ToList()
@@ -95,7 +95,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                 return;
             }
 
-            AlertPopupResult result = await Ask(string.Format(Localization.AskToDeleteInventoryItem, item.Name));
+            AlertPopupResult? result = await Ask(string.Format(Localization.AskToDeleteInventoryItem, item.Name));
 
             if(result?.Answer == EAlertPopupResult.No)
             {
@@ -106,7 +106,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if(item.Type == EInventoryItemType.Container && item.Payload.Any())
             {
-                AlertPopupResult resultDeleteContent = await Ask(
+                AlertPopupResult? resultDeleteContent = await Ask(
                     string.Format(Localization.AskDeleteContainerWithContent, item.Name)
                 );
 
@@ -118,14 +118,17 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if (changesAffectsAbilities)
             {
-                AlertPopupResult willRisePriceResult = await Ask(Localization.InventoryAbilitiesWillRisePrice);
+                AlertPopupResult? willRisePriceResult = await Ask(Localization.InventoryAbilitiesWillRisePrice);
 
                 if(willRisePriceResult?.Answer == EAlertPopupResult.No)
                 {
                     return;
                 }
 
-                _currentCharacter.RemoveMaterialSupport(item.InternalModel as MaterialSupport, saveContent);
+                if(item.InternalModel is MaterialSupport materialSupport)
+                {
+                    _currentCharacter.RemoveMaterialSupport(materialSupport, saveContent);
+                }
             }
             else
             {

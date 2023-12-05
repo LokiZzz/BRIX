@@ -12,7 +12,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             InternalModel = model;
         }
 
-        private InventoryItem _internalModel;
+        private InventoryItem _internalModel = new InventoryItem();
         public InventoryItem InternalModel
         {
             get => _internalModel;
@@ -76,7 +76,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
-        public event EventHandler<int> OnFullPriceChanged;
+        public event EventHandler<int>? OnFullPriceChanged;
 
         public int Price
         {
@@ -84,7 +84,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             {
                 if(Type == EInventoryItemType.Equipment || Type == EInventoryItemType.Consumable)
                 {
-                    return (InternalModel as MaterialSupport).CoinsPrice;
+                    return (InternalModel as MaterialSupport)?.CoinsPrice ?? 0;
                 }
 
                 return 0;
@@ -93,10 +93,14 @@ namespace BRIX.Mobile.ViewModel.Inventory
             {
                 if (Type == EInventoryItemType.Equipment || Type == EInventoryItemType.Consumable)
                 {
-                    MaterialSupport internalModel = InternalModel as MaterialSupport;
-                    SetProperty(
-                        internalModel.CoinsPrice, value, internalModel, (model, prop) => model.CoinsPrice = prop
-                    );
+                    MaterialSupport? internalModel = InternalModel as MaterialSupport;
+
+                    if (internalModel != null)
+                    {
+                        SetProperty(
+                            internalModel.CoinsPrice, value, internalModel, (model, prop) => model.CoinsPrice = prop
+                        );
+                    }
                 }
 
                 OnPropertyChanged(nameof(ShowPrice));
@@ -209,8 +213,8 @@ namespace BRIX.Mobile.ViewModel.Inventory
     {
         public InventoryItemNodeVM(InventoryItem model) : base(model) { }
 
-        public ImageSource Icon { get; set; }
-        public Color BackgroundColor { get; set; }
+        public ImageSource? Icon { get; set; }
+        public Color? BackgroundColor { get; set; }
     }
 
     public enum EInventoryItemType

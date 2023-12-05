@@ -1,4 +1,5 @@
 ﻿using BRIX.Mobile.ViewModel.Base;
+using System.Linq;
 
 namespace BRIX.Mobile.Services.Navigation
 {
@@ -9,17 +10,17 @@ namespace BRIX.Mobile.Services.Navigation
             await NavigateAsync(GetStepBackPath(stepsBack), ENavigationMode.None);
         }
 
-        public async Task Back(int stepsBack = 1, params (string, object)[] parameters)
+        public async Task Back(int stepsBack = 1, params (string, object?)[] parameters)
         {
             await NavigateAsync(GetStepBackPath(stepsBack), ENavigationMode.None, parameters);
         }
 
-        public async Task NavigateAsync<T>(params (string, object)[] parameters) where T : Page
+        public async Task NavigateAsync<T>(params (string, object?)[] parameters) where T : Page
         {
             await NavigateAsync(typeof(T).Name, ENavigationMode.Push, parameters);
         }
 
-        public async Task NavigateAsync<T>(ENavigationMode mode, params (string, object)[] parameters) where T : Page
+        public async Task NavigateAsync<T>(ENavigationMode mode, params (string, object?)[] parameters) where T : Page
         {
             await NavigateAsync(typeof(T).Name, mode, parameters);
         }
@@ -27,7 +28,7 @@ namespace BRIX.Mobile.Services.Navigation
         public async Task NavigateAsync(
             string route, 
             ENavigationMode mode = ENavigationMode.Push, 
-            params (string, object)[] parameters)
+            params (string, object?)[] parameters)
         {
             switch(mode)
             {
@@ -53,7 +54,7 @@ namespace BRIX.Mobile.Services.Navigation
 
         public async Task FireOnNavigatedAsync()
         {
-            ViewModelBase currentPageVM = Shell.Current.CurrentPage?.BindingContext as ViewModelBase;
+            ViewModelBase? currentPageVM = Shell.Current.CurrentPage?.BindingContext as ViewModelBase;
 
             if (currentPageVM != null)
             {
@@ -76,13 +77,16 @@ namespace BRIX.Mobile.Services.Navigation
 
     public static class NavigationParametersExtension
     {
-        public static Dictionary<string, object> ToParametersDictionary(this (string, object)[] parameters)
+        public static Dictionary<string, object> ToParametersDictionary(this (string, object?)[] parameters)
         {
             Dictionary<string, object> parametersDictionary = new();
 
-            foreach ((string Key, object Value) parameter in parameters)
+            foreach ((string Key, object? Value) parameter in parameters)
             {
-                parametersDictionary.Add(parameter.Key, parameter.Value);
+                if (parameter.Value != null)
+                {
+                    parametersDictionary.Add(parameter.Key, parameter.Value);
+                }
             }
 
             return parametersDictionary;

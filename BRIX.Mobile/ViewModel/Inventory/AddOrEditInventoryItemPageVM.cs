@@ -15,8 +15,8 @@ namespace BRIX.Mobile.ViewModel.Inventory
         private readonly ICharacterService _characterService;
 
         private EEditingMode _mode;
-        private Library.Characters.Inventory _inventory;
-        private InventoryItem _editingItem;
+        private Library.Characters.Inventory _inventory = new();
+        private InventoryItem? _editingItem;
 
         public AddOrEditInventoryItemPageVM(
             ILocalizationResourceManager localization, 
@@ -26,46 +26,55 @@ namespace BRIX.Mobile.ViewModel.Inventory
             _characterService = characterService;
         }
 
-        private string _title;
+        private string _title = string.Empty;
         public string Title
         {
             get => _title;
             set => SetProperty(ref _title, value);
         }
 
-        private InventoryItemVM _item;
+        private InventoryItemVM _item = new InventoryItemVM(new InventoryItem());
         public InventoryItemVM Item
         {
             get => _item;
             set => SetProperty(ref _item, value);
         }
 
-        private InventoryItemTypeVM _selectedType;
-        public InventoryItemTypeVM SelectedType
+        private InventoryItemTypeVM? _selectedType;
+        public InventoryItemTypeVM? SelectedType
         {
             get => _selectedType;
-            set => UpdateItemType(value);
+            set
+            {
+                if (value != null)
+                {
+                    UpdateItemType(value);
+                }
+            }
         }
 
-        private ObservableCollection<InventoryItemTypeVM> _types;
+        private ObservableCollection<InventoryItemTypeVM> _types = new();
         public ObservableCollection<InventoryItemTypeVM> Types
         {
             get => _types;
             set => SetProperty(ref _types, value);
         }
 
-        private InventoryContainerVM _selectedContainer;
-        public InventoryContainerVM SelectedContainer
+        private InventoryContainerVM? _selectedContainer;
+        public InventoryContainerVM? SelectedContainer
         {
             get => _selectedContainer;
             set
             {
                 SetProperty(ref _selectedContainer, value);
-                MoveItem(value);
+                if (value != null)
+                {
+                    MoveItem(value);
+                }
             }
         }
 
-        private ObservableCollection<InventoryContainerVM> _containers;
+        private ObservableCollection<InventoryContainerVM> _containers = new();
         public ObservableCollection<InventoryContainerVM> Containers
         {
             get => _containers;
@@ -82,8 +91,6 @@ namespace BRIX.Mobile.ViewModel.Inventory
         }
 
         public bool ShowCoins => CoinsNow != CoinsWillBe;
-            //&& (SelectedType?.Type == EInventoryItemType.Equipment 
-            //    || SelectedType?.Type == EInventoryItemType.Consumable);
 
         private int _coinsWillBe;
         public int CoinsWillBe
@@ -133,18 +140,21 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 _inventory.Coins = CoinsNow;
             }
 
-            Character currentCharacter = await _characterService.GetCurrentCharacter();
+            Character currentCharacter = await _characterService.GetCurrentCharacterGuaranteed();
             bool affectsAbility = _mode == EEditingMode.Edit 
                 && Item.InternalModel is MaterialSupport material
-                && currentCharacter.HaveMaterialDependedAbilities(material);
+                && currentCharacter.HaveMaterialDependedAbilities(material) == true;
 
             if (affectsAbility)
             {
-                if(currentCharacter.UpdateMaterialSupport(Item.InternalModel as MaterialSupport) == false)
+                if (Item.InternalModel is MaterialSupport materialSupport)
                 {
-                    await Alert(Localization.InventoryNotEnoughEXPForChanges);
+                    if (currentCharacter.UpdateMaterialSupport(materialSupport) == false)
+                    {
+                        await Alert(Localization.InventoryNotEnoughEXPForChanges);
 
-                    return;
+                        return;
+                    }
                 }
             }
 
@@ -186,7 +196,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             query.Clear();
         }
 
-        private void OnPriceChanged(object sender, int e)
+        private void OnPriceChanged(object? sender, int e)
         {
             int difference = _oldItemPrice - e;
             CoinsWillBe = CoinsNow + difference;
@@ -196,11 +206,11 @@ namespace BRIX.Mobile.ViewModel.Inventory
         {
             List<InventoryContainerVM> containers = _inventory.Items
                 .Where(x => x is Container && x != Item.InternalModel)
-                .Select(x => new InventoryContainerVM { Name = x.Name, OriginalModelRefernece = x as Container })
+                .Select(x => new InventoryContainerVM { Name = x.Name, OriginalModelRefernece = (Container)x })
                 .ToList();
             containers.Add(new InventoryContainerVM { Name = Localization.Inventory });
             Containers = new(containers);
-            InventoryContainerVM selectedContainer = containers.FirstOrDefault(x =>
+            InventoryContainerVM? selectedContainer = containers.FirstOrDefault(x =>
                 x.OriginalModelRefernece != null
                 && x.OriginalModelRefernece?.Payload?.Contains(Item.InternalModel) == true
             );
@@ -212,12 +222,12 @@ namespace BRIX.Mobile.ViewModel.Inventory
         {
             Types = new ObservableCollection<InventoryItemTypeVM>(
                 Enum.GetValues<EInventoryItemType>().Select(x => new InventoryItemTypeVM {
-                    Text = _localization[x.ToString("G")].ToString(),
+                    Text = _localization[x.ToString("G")].ToString() ?? string.Empty,
                     Type = x
                 })
             );
 
-            SelectedType = Types.FirstOrDefault(x => x.Type == Item.Type);
+            SelectedType = Types.Single(x => x.Type == Item.Type);
         }
 
         private void InitializeTitle()
@@ -252,17 +262,26 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 return;
             }
 
+            if(SelectedType == null)
+            {
+                throw new Exception("Inconsistent item type was set.");
+            }
+
             if (SelectedType.Type.IsMaterial() && !itemType.Type.IsMaterial())
             { 
-                Character character = await _characterService.GetCurrentCharacter();
-                bool canRemove = character.CanRemoveMaterialSupport(Item.InternalModel as MaterialSupport);
+                Character character = await _characterService.GetCurrentCharacterGuaranteed();
 
-                if (!canRemove)
+                if (Item.InternalModel is MaterialSupport materialSupport)
                 {
-                    await Alert(Localization.InventoryNotEnoughEXPForChanges);
-                    OnPropertyChanged(nameof(SelectedType));
+                    bool canRemove = character.CanRemoveMaterialSupport(materialSupport);
 
-                    return;
+                    if (!canRemove)
+                    {
+                        await Alert(Localization.InventoryNotEnoughEXPForChanges);
+                        OnPropertyChanged(nameof(SelectedType));
+
+                        return;
+                    }
                 }
             }
 
@@ -272,11 +291,14 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
             if (wasContainerAndNowIsNot)
             {
-                AlertPopupResult result = await Ask(Localization.InventoryItemWasConatinerAlert);
+                AlertPopupResult? result = await Ask(Localization.InventoryItemWasConatinerAlert);
 
                 if (result?.Answer == EAlertPopupResult.No)
                 {
-                    _inventory.MoveContentUpper(Item.InternalModel as Container);
+                    if (Item.InternalModel is Container container)
+                    {
+                        _inventory.MoveContentUpper(container);
+                    }
                 }
             }
 
@@ -288,8 +310,12 @@ namespace BRIX.Mobile.ViewModel.Inventory
         {
             Item.Type = value.Type;
             SetProperty(ref _selectedType, value, nameof(SelectedType));
-            InventoryItem existingItem = _inventory.Items.FirstOrDefault(x => x.Equals(Item.InternalModel));
-            _inventory.Swap(existingItem, Item.InternalModel);
+            InventoryItem? existingItem = _inventory.Items.FirstOrDefault(x => x.Equals(Item.InternalModel));
+
+            if (existingItem != null)
+            {
+                _inventory.Swap(existingItem, Item.InternalModel);
+            }
         }
 
         private void MoveItem(InventoryContainerVM value)
@@ -299,10 +325,10 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 return;
             }
 
-            Container oldContainer = _inventory.Items.FirstOrDefault(x =>
+            Container? oldContainer = _inventory.Items.FirstOrDefault(x =>
                 x is Container container && container.Payload.Contains(Item.InternalModel)
             ) as Container;
-            Container newContainer = value.OriginalModelRefernece;
+            Container? newContainer = value.OriginalModelRefernece;
 
             if(oldContainer == newContainer)
             {
@@ -334,15 +360,15 @@ namespace BRIX.Mobile.ViewModel.Inventory
     public class InventoryItemTypeVM
     {
         public EInventoryItemType Type { get; set; }
-        public string Text { get; set; }
+        public string Text { get; set; } = string.Empty;
 
         public override string ToString() => Text;
     }
 
     public class InventoryContainerVM
     {
-        public Container OriginalModelRefernece { get; set; }
-        public string Name { get; set; }
+        public Container? OriginalModelRefernece { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         public override string ToString() => Name;
     }

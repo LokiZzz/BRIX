@@ -135,14 +135,14 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             List<object> allRestrictions = Enum.GetValues<ETargetSelectionRestrictions>()
                 .Select(x => new TargetSelectionRestrictionPropertyVM { 
                     Restriction = x, 
-                    Text = Localization[x.ToString("G")].ToString() 
+                    Text = Localization[x.ToString("G")].ToString() ?? string.Empty 
                 })
                 .Where(x => !Restrictions.Any(y => y.Restriction == x.Restriction) 
                     || customRestrictions.Any(y => y == x.Restriction))
                 .Select(x => x as object)
                 .ToList();
 
-            PickerPopupResult result = await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
+            PickerPopupResult? result = await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
                 new()
                 {
                     Title = Resources.Localizations.Localization.TargetThreeDot,
@@ -152,41 +152,41 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
             if (result != null)
             {
-                TargetSelectionRestrictionPropertyVM concreteResult = result.SelectedItem
-                    as TargetSelectionRestrictionPropertyVM;
-
-                if(customRestrictions.Any(x => x ==  concreteResult.Restriction))
+                if (result.SelectedItem is TargetSelectionRestrictionPropertyVM concreteResult)
                 {
-                    string message = GetCustomRestrictionHint(concreteResult.Restriction);
-
-                    EntryPopupResult entryResult = await ShowPopupAsync<EntryPopup, EntryPopupResult, EntryPopupParameters>(
-                        new EntryPopupParameters
-                        {
-                            Title = Resources.Localizations.Localization.TargetSelectionRestriction,
-                            Message = message,
-                            Placeholder = Resources.Localizations.Localization.TargetProperty,
-                            ButtonText = Resources.Localizations.Localization.Ok,
-                        }
-                    );
-
-                    if(entryResult == null)
+                    if (customRestrictions.Any(x => x == concreteResult.Restriction))
                     {
+                        string message = GetCustomRestrictionHint(concreteResult.Restriction);
+
+                        EntryPopupResult? entryResult = await ShowPopupAsync<EntryPopup, EntryPopupResult, EntryPopupParameters>(
+                            new EntryPopupParameters
+                            {
+                                Title = Resources.Localizations.Localization.TargetSelectionRestriction,
+                                Message = message,
+                                Placeholder = Resources.Localizations.Localization.TargetProperty,
+                                ButtonText = Resources.Localizations.Localization.Ok,
+                            }
+                        );
+
+                        if (entryResult == null)
+                        {
+                            return;
+                        }
+
+                        concreteResult.Text = entryResult.Text;
+                    }
+
+                    if (Restrictions.Any(x => x.Restriction == concreteResult.Restriction && x.Text == concreteResult.Text))
+                    {
+                        await Alert(Resources.Localizations.Localization.TargetSelectionRestrictionWarning);
+
                         return;
                     }
 
-                    concreteResult.Text = entryResult.Text;
+                    Restrictions.Add(concreteResult);
+                    Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((concreteResult.Restriction, concreteResult.Text));
+                    OnPropertyChanged(nameof(ShowNoRestrictionsText));
                 }
-
-                if (Restrictions.Any(x => x.Restriction == concreteResult.Restriction && x.Text == concreteResult.Text))
-                {
-                    await Alert(Resources.Localizations.Localization.TargetSelectionRestrictionWarning);
-
-                    return;
-                }
-
-                Restrictions.Add(concreteResult);
-                Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((concreteResult.Restriction, concreteResult.Text));
-                OnPropertyChanged(nameof(ShowNoRestrictionsText));
             }
 
             CostMonitor.UpdateCost();

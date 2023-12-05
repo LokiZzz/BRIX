@@ -15,13 +15,14 @@ namespace BRIX.Mobile.Models.Abilities.Effects
                 //    return new DamageEffectModel(dmg);
                 default:
                 {
-                    MethodInfo method = typeof(EffectModelFactory).GetMethod(
+                    MethodInfo? method = typeof(EffectModelFactory).GetMethod(
                         nameof(GetDefaultModel),
                         BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
                     );
-                    MethodInfo genericMethod = method.MakeGenericMethod(effect.GetType());
-                    
-                    return genericMethod.Invoke(null, new object[] { effect }) as EffectModelBase;
+                    MethodInfo? genericMethod = method?.MakeGenericMethod(effect.GetType());
+
+                        return genericMethod?.Invoke(null, new object[] { effect }) as EffectModelBase
+                            ?? throw new Exception($"Модель эффекта не найдена для {effect.GetType()}");
                 }
             }
         }

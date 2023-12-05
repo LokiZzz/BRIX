@@ -5,6 +5,12 @@ namespace BRIX.Library.Aspects.TargetSelection
 {
     public class AreaSettings
     {
+        private readonly Brick _brick = new();
+        private readonly Sphere _sphere = new();
+        private readonly Cylinder _cylinder = new();
+        private readonly Cone _cone = new();
+        private readonly VoxelArray _voxelArray = new();
+
         public int DistanceToAreaInMeters { get; set; } = 0;
         public int ExcludedTargetsCount { get; set; } = 0;
         public EAreaType AreaType { get; set; } = EAreaType.Brick;
@@ -34,10 +40,9 @@ namespace BRIX.Library.Aspects.TargetSelection
             }
         }
 
-        private readonly Brick _brick = new Brick();
-        private readonly Sphere _sphere = new Sphere();
-        private readonly Cylinder _cylinder = new Cylinder();
-        private readonly Cone _cone = new Cone();
-        private readonly VoxelArray _voxelArray = new VoxelArray();
+        public T GetConcreteShape<T>() where T : class, IShape
+        {
+            return Shape as T ?? throw new Exception("Фигура не инициализирована");
+        }
     }
 }

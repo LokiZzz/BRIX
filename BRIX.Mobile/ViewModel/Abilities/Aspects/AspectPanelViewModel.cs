@@ -64,7 +64,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         public void UpdateAspect(AspectModelBase aspect)
         {
             AspectUtilityModel aspectToUpdate = AspectsCollection
-                .FirstOrDefault(x => x.LibraryAspectType == aspect.InternalBase.GetType());
+                .Single(x => x.LibraryAspectType == aspect.InternalBase.GetType());
 
             if (aspectToUpdate != null)
             {
@@ -87,15 +87,19 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
         private AspectUtilityModel GetAspectModel(AspectModelBase aspect)
         {
-            AspectUtilityModel model = null;
+            AspectUtilityModel? model = null;
 
             if (aspect != null)
             {
                 AspectsDictionary.Collection.TryGetValue(aspect.GetType(), out model);
-                model.Description = aspect.Description;
+
+                if (model != null)
+                {
+                    model.Description = aspect.Description;
+                }
             }
 
-            return model;
+            return model ?? throw new Exception($"В AspectsDictionary не найдена модель для {aspect?.GetType()}");
         }
     }
 }

@@ -19,10 +19,12 @@ namespace BRIX.Mobile.View
 
             uint length = 60;
 
-            Color before = entry.EntryColor.Copy();
+            Color? before = entry.EntryColor.Copy();
             Color after = Colors.Red;
+            object? colorResource = null;
 
-            Application.Current.Resources.TryGetValue("BRIXRed", out object colorResource);
+            Application.Current?.Resources.TryGetValue("BRIXRed", out colorResource);
+
             if (colorResource != null && colorResource is Color afterColor)
             {
                 after = afterColor;

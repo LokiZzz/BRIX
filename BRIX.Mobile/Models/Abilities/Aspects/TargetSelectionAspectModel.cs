@@ -1,5 +1,4 @@
-﻿using BRIX.Library.Aspects;
-using BRIX.Library.Aspects.TargetSelection;
+﻿using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Enums;
 using BRIX.Library.Mathematics;
 using BRIX.Mobile.Services;
@@ -139,11 +138,11 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 switch (AreaType)
                 {
                     case EAreaType.Sphere:
-                        return ((Sphere)Internal.Area.Shape).R;
+                        return Internal.Area.GetConcreteShape<Sphere>().R;
                     case EAreaType.Cylinder:
-                        return ((Cylinder)Internal.Area.Shape).R;
+                        return Internal.Area.GetConcreteShape<Cylinder>().R;
                     case EAreaType.Cone:
-                        return ((Cone)Internal.Area.Shape).R;
+                        return Internal.Area.GetConcreteShape<Cone>().R;
                     default:
                         return 1;
                 }
@@ -153,15 +152,15 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 switch (AreaType)
                 {
                     case EAreaType.Sphere:
-                        Sphere sphere = (Sphere)Internal.Area.Shape;
+                        Sphere sphere = Internal.Area.GetConcreteShape<Sphere>();
                         SetProperty(sphere.R, value, sphere, (model, prop) => model.R = prop);
                         break;
                     case EAreaType.Cylinder:
-                        Cylinder cylinder = (Cylinder)Internal.Area.Shape;
+                        Cylinder cylinder = Internal.Area.GetConcreteShape<Cylinder>();
                         SetProperty(cylinder.R, value, cylinder, (model, prop) => model.R = prop);
                         break;
                     case EAreaType.Cone:
-                        Cone cone = (Cone)Internal.Area.Shape;
+                        Cone cone = Internal.Area.GetConcreteShape<Cone>();
                         SetProperty(cone.R, value, cone, (model, prop) => model.R = prop);
                         break;
                 }
@@ -175,9 +174,9 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 switch (AreaType)
                 {
                     case EAreaType.Cylinder:
-                        return ((Cylinder)Internal.Area.Shape).H;
+                        return Internal.Area.GetConcreteShape<Cylinder>().H;
                     case EAreaType.Cone:
-                        return ((Cone)Internal.Area.Shape).H;
+                        return Internal.Area.GetConcreteShape<Cone>().H;
                     default:
                         return 1;
                 }
@@ -187,11 +186,11 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 switch (AreaType)
                 {
                     case EAreaType.Cylinder:
-                        Cylinder cylinder = (Cylinder)Internal.Area.Shape;
+                        Cylinder cylinder = Internal.Area.GetConcreteShape<Cylinder>();
                         SetProperty(cylinder.H, value, cylinder, (model, prop) => model.H = prop);
                         break;
                     case EAreaType.Cone:
-                        Cone cone = (Cone)Internal.Area.Shape;
+                        Cone cone = Internal.Area.GetConcreteShape<Cone>();
                         SetProperty(cone.H, value, cone, (model, prop) => model.H = prop);
                         break;
                 }
@@ -269,7 +268,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
         }
 
-        public ObstacleOptionVM ObstacleBetweenCharacterAndArea
+        public ObstacleOptionVM? ObstacleBetweenCharacterAndArea
         {
             get
             {
@@ -279,13 +278,16 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
             set
             {
-                EObstacleEquivalent equivalent = value.Equivalent;
-                SetProperty(Internal.Area.ObstacleBetweenCharacterAndArea, equivalent, Internal,
-                    (model, prop) => model.Area.ObstacleBetweenCharacterAndArea = prop);
+                if (value != null)
+                {
+                    EObstacleEquivalent equivalent = value.Equivalent;
+                    SetProperty(Internal.Area.ObstacleBetweenCharacterAndArea, equivalent, Internal,
+                        (model, prop) => model.Area.ObstacleBetweenCharacterAndArea = prop);
+                }
             }
         }
 
-        public ObstacleOptionVM ObstacleBetweenEpicenterAndTarget
+        public ObstacleOptionVM? ObstacleBetweenEpicenterAndTarget
         {
             get
             {
@@ -295,9 +297,12 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
             set
             {
-                EObstacleEquivalent equivalent = value.Equivalent;
-                SetProperty(Internal.Area.ObstacleBetweenEpicenterAndTarget, equivalent, Internal,
-                    (model, prop) => model.Area.ObstacleBetweenEpicenterAndTarget = prop);
+                if (value != null)
+                {
+                    EObstacleEquivalent equivalent = value.Equivalent;
+                    SetProperty(Internal.Area.ObstacleBetweenEpicenterAndTarget, equivalent, Internal,
+                        (model, prop) => model.Area.ObstacleBetweenEpicenterAndTarget = prop);
+                }
             }
         }
 
@@ -335,7 +340,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
         }
 
-        public ObstacleOptionVM ObstacleBetweenTargetsInChain
+        public ObstacleOptionVM? ObstacleBetweenTargetsInChain
         {
             get
             {
@@ -345,9 +350,12 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
             set
             {
-                EObstacleEquivalent equivalent = value.Equivalent;
-                SetProperty(Internal.TargetChain.ObstacleBetweenTargetsInChain, equivalent, Internal,
-                    (model, prop) => model.TargetChain.ObstacleBetweenTargetsInChain = prop);
+                if (value != null)
+                {
+                    EObstacleEquivalent equivalent = value.Equivalent;
+                    SetProperty(Internal.TargetChain.ObstacleBetweenTargetsInChain, equivalent, Internal,
+                        (model, prop) => model.TargetChain.ObstacleBetweenTargetsInChain = prop);
+                }
             }
         }
 

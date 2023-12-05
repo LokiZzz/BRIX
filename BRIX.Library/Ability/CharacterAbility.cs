@@ -57,7 +57,7 @@ namespace BRIX.Library
 
                 foreach (AbilityMaterialSupport item in abilityMaterialSupport)
                 {
-                    MaterialSupport concreteItem = character.Inventory.Items
+                    MaterialSupport? concreteItem = character.Inventory.Items
                         .Single(x => x.Id == item.MaterialSupportId) as MaterialSupport;
 
                     if (concreteItem != null)
@@ -72,7 +72,7 @@ namespace BRIX.Library
 
         public T? GetAspect<T>() where T : AspectBase
         {
-            AspectBase aspect = SynchronizingAspects.FirstOrDefault(x => x.GetType().Equals(typeof(T)));
+            AspectBase? aspect = SynchronizingAspects.FirstOrDefault(x => x.GetType().Equals(typeof(T)));
 
             return aspect as T;
         }
@@ -89,7 +89,7 @@ namespace BRIX.Library
 
             foreach (AspectBase aspect in effect.Aspects.ToList())
             {
-                AspectBase existingAspect = SynchronizingAspects.FirstOrDefault(
+                AspectBase? existingAspect = SynchronizingAspects.FirstOrDefault(
                     x => x.GetType().Equals(SynchronizingAspects.GetType())
                 );
 

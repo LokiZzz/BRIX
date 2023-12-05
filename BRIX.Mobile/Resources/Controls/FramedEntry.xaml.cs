@@ -8,8 +8,8 @@ public partial class FramedEntry : Grid
 	public FramedEntry()
 	{
 		InitializeComponent();
-
-        Application.Current.Resources.TryGetValue("BRIXLight", out object colorResource);
+        object? colorResource = null;
+        Application.Current?.Resources.TryGetValue("BRIXLight", out colorResource);
 
         if(colorResource != null && colorResource is Color entryColor)
         {

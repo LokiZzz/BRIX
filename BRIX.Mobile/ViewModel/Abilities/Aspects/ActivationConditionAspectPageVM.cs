@@ -47,14 +47,14 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 .Select(x => new ActivationConditionOptionVM
                 {
                     Condition = x,
-                    Text = Localization[x.ToString("G")].ToString()
+                    Text = Localization[x.ToString("G")].ToString() ?? string.Empty
                 })
                 .Where(x => !Conditions.Any(y => y.Condition == x.Condition)
                     || customConditions.Any(y => y == x.Condition))
                 .Select(x => x as object)
                 .ToList();
 
-            PickerPopupResult result = await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
+            PickerPopupResult? result = await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
                 new()
                 {
                     Title = Resources.Localizations.Localization.ActivationCondition,
@@ -64,14 +64,13 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
             if (result != null)
             {
-                ActivationConditionOptionVM concreteResult = result.SelectedItem
-                    as ActivationConditionOptionVM;
+                ActivationConditionOptionVM concreteResult = (ActivationConditionOptionVM)result.SelectedItem;
 
                 if (customConditions.Any(x => x == concreteResult.Condition))
                 {
                     string message = GetCustomConditionHint(concreteResult.Condition);
 
-                    EntryPopupResult entryResult = await ShowPopupAsync<EntryPopup, EntryPopupResult, EntryPopupParameters>(
+                    EntryPopupResult? entryResult = await ShowPopupAsync<EntryPopup, EntryPopupResult, EntryPopupParameters>(
                         new EntryPopupParameters
                         {
                             Title = Resources.Localizations.Localization.ActivationCondition,
@@ -130,7 +129,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                     restrictionVM.Text = condition.Comment;
                     break;
                 default:
-                    restrictionVM.Text = Localization[condition.Type.ToString("G")].ToString();
+                    restrictionVM.Text = Localization[condition.Type.ToString("G")].ToString() ?? string.Empty;
                     break;
             }
 

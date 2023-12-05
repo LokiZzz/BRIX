@@ -27,7 +27,7 @@
             int converted = 0;
             int valueToProcess = value;
 
-            for (LinkedListNode<ThresholdStep> node = Steps.First; node != null; node = node.Next)
+            for (LinkedListNode<ThresholdStep>? node = Steps.First; node != null; node = node.Next)
             {
                 ThresholdStep current = node.Value;
                 ThresholdStep? next = node.Next?.Value;

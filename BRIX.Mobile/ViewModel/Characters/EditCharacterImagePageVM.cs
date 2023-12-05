@@ -28,8 +28,8 @@ namespace BRIX.Mobile.ViewModel.Characters
             set => SetProperty(ref _character, value);
         }
 
-        private ImageSource _image;
-        public ImageSource Image
+        private ImageSource? _image;
+        public ImageSource? Image
         {
             get => _image;
             set
@@ -74,7 +74,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                 FileTypes = FilePickerFileType.Images,
             };
 
-            FileResult result = await FilePicker.Default.PickAsync(options);
+            FileResult? result = await FilePicker.Default.PickAsync(options);
 
             if (result != null)
             {

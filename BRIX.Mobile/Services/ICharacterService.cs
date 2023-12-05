@@ -4,6 +4,7 @@ namespace BRIX.Mobile.Services
 {
     public interface ICharacterService
     {
+        public Task<Character> GetCurrentCharacterGuaranteed();
         public Task<Character?> GetCurrentCharacter();
         public Task SelectCurrentCharacter(Character character);
         public Task<Character> AddAsync(Character character);
@@ -102,6 +103,12 @@ namespace BRIX.Mobile.Services
         public async Task<Character?> GetCurrentCharacter()
         {
             return await Task.FromResult(_currentCharacter);
+        }
+
+        public async Task<Character> GetCurrentCharacterGuaranteed()
+        {
+            return await Task.FromResult(_currentCharacter)
+                ?? throw new Exception("Character not found");
         }
     }
 }

@@ -65,14 +65,14 @@ namespace BRIX.Library.Characters
 
         public override bool Equals(object? otherObject)
         {
-            InventoryItem other = otherObject as InventoryItem;
+            InventoryItem? other = otherObject as InventoryItem;
 
             if (other == null)
             {
                 return false;
             }
 
-            return other.Id == this.Id;
+            return other.Id == Id;
         }
 
         public override int GetHashCode()

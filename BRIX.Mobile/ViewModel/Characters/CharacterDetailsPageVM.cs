@@ -82,9 +82,9 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task RemoveProject(CharacterProjectVM project)
         {
-            AlertPopupResult result = await Ask(string.Format(Localization.AskDeleteProject, project.Name));
+            AlertPopupResult? result = await Ask(string.Format(Localization.AskDeleteProject, project.Name));
 
-            if(result.Answer == EAlertPopupResult.No)
+            if(result?.Answer == EAlertPopupResult.No)
             {
                 return;
             }

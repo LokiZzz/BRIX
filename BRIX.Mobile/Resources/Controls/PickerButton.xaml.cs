@@ -14,7 +14,8 @@ public partial class PickerButton : Grid
     {
         InitializeComponent();
 
-        Application.Current.Resources.TryGetValue("BRIXLight", out object colorResource);
+        object? colorResource = null;
+        Application.Current?.Resources.TryGetValue("BRIXLight", out colorResource);
 
         if (colorResource != null && colorResource is Color entryColor)
         {
@@ -22,9 +23,7 @@ public partial class PickerButton : Grid
         }
     }
 
-    //public DataTemplate ItemTemplate { get; set; }
-
-    public string DisplayMember { get; set; }
+    public string? DisplayMember { get; set; }
 
 
     public static readonly BindableProperty EntryColorProperty = BindableProperty.Create(
@@ -104,8 +103,8 @@ public partial class PickerButton : Grid
                 control.lblSelectedItemText.Text = newValue
                     .GetType()
                     .GetProperty(control.DisplayMember)
-                    .GetValue(newValue, null)
-                    .ToString();
+                    ?.GetValue(newValue, null)
+                    ?.ToString();
             }
 
             control.Up();
@@ -151,22 +150,27 @@ public partial class PickerButton : Grid
             {
                 PickerPopup popupToShow = Resolver.Resolve<PickerPopup>();
                 ParametrizedPopupVMBase<PickerPopupParameters> viewModel =
-                    popupToShow.BindingContext as ParametrizedPopupVMBase<PickerPopupParameters>;
+                    (ParametrizedPopupVMBase<PickerPopupParameters>)popupToShow.BindingContext;
                 viewModel.Parameters = new PickerPopupParameters
                 {
                     Items = control.ItemSource.Cast<object>().ToList(),
                     SelectedItems = new() { control.SelectedItem },
                     Title = control.Title,
                 };
-                PickerPopupResult result = await Application.Current.MainPage.ShowPopupAsync(popupToShow) 
-                    as PickerPopupResult;
 
-                if (result != null)
+                Page? mainPage = Application.Current?.MainPage;
+
+                if (mainPage != null)
                 {
-                    control.SelectedItem = result.SelectedItem;
-                }
+                    PickerPopupResult? result = await mainPage.ShowPopupAsync(popupToShow) as PickerPopupResult;
 
-                control.IsOpen = false;
+                    if (result != null)
+                    {
+                        control.SelectedItem = result.SelectedItem;
+                    }
+
+                    control.IsOpen = false;
+                }
             }
 
         }

@@ -31,14 +31,14 @@ namespace BRIX.Mobile.ViewModel.Popups
             set => SetProperty(ref _placeholder, value);
         }
 
-        private string _text;
+        private string _text = string.Empty;
         public string Text
         {
             get => _text;
             set => SetProperty(ref _text, value);
         }
 
-        private string _buttonText;
+        private string _buttonText = string.Empty;
         public string ButtonText
         {
             get => _buttonText;
@@ -46,18 +46,18 @@ namespace BRIX.Mobile.ViewModel.Popups
         }
 
 
-        public event EventHandler OnEmptyValueEntered;
+        public event EventHandler? OnEmptyValueEntered;
 
         [RelayCommand]
         public void FireOk()
         {
-            if (string.IsNullOrEmpty(Text))
+            if (string.IsNullOrEmpty(Text) && OnEmptyValueEntered != null)
             {
-                OnEmptyValueEntered(this, null);
+                OnEmptyValueEntered(this, EventArgs.Empty);
             }
             else
             {
-                View.Close(new EntryPopupResult { Text = string.IsNullOrEmpty(Text) ? null : Text });
+                View.Close(new EntryPopupResult { Text = string.IsNullOrEmpty(Text) ? string.Empty : Text });
             }
         }
 

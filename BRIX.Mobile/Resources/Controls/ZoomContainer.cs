@@ -146,19 +146,19 @@ public class ZoomContainer : ContentView
 
     private static void UpdateX(BindableObject bindable, object oldValue, object newValue)
     {
-        ZoomContainer thisControl = bindable as ZoomContainer;
+        ZoomContainer thisControl = (ZoomContainer)bindable;
         thisControl.Content.TranslationX = (double)newValue;
     }
 
     private static void UpdateY(BindableObject bindable, object oldValue, object newValue)
     {
-        ZoomContainer thisControl = bindable as ZoomContainer;
+        ZoomContainer thisControl = (ZoomContainer)bindable;
         thisControl.Content.TranslationY = (double)newValue;
     }
 
     private static void UpdateS(BindableObject bindable, object oldValue, object newValue)
     {
-        ZoomContainer thisControl = bindable as ZoomContainer;
+        ZoomContainer thisControl = (ZoomContainer)bindable;
         thisControl.Content.Scale = (double)newValue;
     }
 

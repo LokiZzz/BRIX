@@ -73,7 +73,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         private async Task Remove(CharacterAbilityModel ability)
         {
-            AlertPopupResult result = await Ask(Localization.DeleteAbilityQuestion);
+            AlertPopupResult? result = await Ask(Localization.DeleteAbilityQuestion);
 
             if (result?.Answer == EAlertPopupResult.Yes)
             {
@@ -93,7 +93,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             if (Character == null || force)
             {
-                Character currentCharacter = await _characterService.GetCurrentCharacter();
+                Character? currentCharacter = await _characterService.GetCurrentCharacter();
 
                 if (currentCharacter != null)
                 {
@@ -110,7 +110,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         private async Task HandleBackFromEditing(IDictionary<string, object> query)
         {
-            CharacterAbilityModel editedAbility = query.GetParameterOrDefault<CharacterAbilityModel>(NavigationParameters.Ability);
+            CharacterAbilityModel? editedAbility = query.GetParameterOrDefault<CharacterAbilityModel>(NavigationParameters.Ability);
 
             if (editedAbility != null)
             {
