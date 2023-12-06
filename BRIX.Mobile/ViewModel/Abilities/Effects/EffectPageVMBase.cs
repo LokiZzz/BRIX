@@ -17,22 +17,22 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             set => SetProperty(ref _mode, value);
         }
 
-        private T _effect;
-        public T Effect
+        private T? _effect;
+        public T? Effect
         {
             get => _effect;
             set => SetProperty(ref _effect, value);
         }
 
-        private AspectPanelViewModel _aspects;
-        public AspectPanelViewModel Aspects
+        private AspectPanelViewModel? _aspects;
+        public AspectPanelViewModel? Aspects
         {
             get => _aspects;
             set => SetProperty(ref _aspects, value);
         }
 
-        private AbilityCostMonitorPanelVM _costMonitor;
-        public AbilityCostMonitorPanelVM CostMonitor
+        private AbilityCostMonitorPanelVM? _costMonitor;
+        public AbilityCostMonitorPanelVM? CostMonitor
         {
             get => _costMonitor;
             set => SetProperty(ref _costMonitor, value);
@@ -82,12 +82,19 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
         private void HandleBackFromEditingAspect(IDictionary<string, object> query)
         {
-            AspectModelBase aspect = query.GetParameterOrDefault<AspectModelBase>(NavigationParameters.Aspect);
+            AspectModelBase? aspect = query.GetParameterOrDefault<AspectModelBase>(NavigationParameters.Aspect);
 
             if (aspect != null)
             {
-                Effect.UpdateAspect(aspect);
-                Aspects.UpdateAspect(aspect);
+                if (Effect != null && Aspects != null)
+                {
+                    Effect.UpdateAspect(aspect);
+                    Aspects.UpdateAspect(aspect);
+                }
+                else
+                {
+                    throw new Exception("Эффект или его аспекты не инициализированы.");
+                }
             }
 
             CostMonitor?.UpdateCost();

@@ -24,7 +24,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             Localization = localization;
         }
 
-        private ObservableCollection<ActivationConditionOptionVM> _conditions;
+        private ObservableCollection<ActivationConditionOptionVM> _conditions = [];
         public ObservableCollection<ActivationConditionOptionVM> Conditions
         {
             get => _conditions;
@@ -36,12 +36,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         public async Task AddCondition()
         {
-            List<EActivationCondition> customConditions = new()
-            {
+            List<EActivationCondition> customConditions =
+            [
                 EActivationCondition.EasyActivationCondition,
                 EActivationCondition.MediumActivationCondition,
                 EActivationCondition.HardActivationCondition
-            };
+            ];
 
             List<object> allConditions = Enum.GetValues<EActivationCondition>()
                 .Select(x => new ActivationConditionOptionVM
@@ -62,7 +62,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 }
             );
 
-            if (result != null)
+            if (result?.SelectedItem != null)
             {
                 ActivationConditionOptionVM concreteResult = (ActivationConditionOptionVM)result.SelectedItem;
 
@@ -96,16 +96,26 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 }
 
                 Conditions.Add(concreteResult);
-                Aspect.Internal.Conditions.Add((concreteResult.Condition, concreteResult.Text));
+
+                if (Aspect != null)
+                {
+                    Aspect.Internal.Conditions.Add((concreteResult.Condition, concreteResult.Text));
+                }
+
                 OnPropertyChanged(nameof(ShowNoConditionsText));
             }
 
-            CostMonitor.UpdateCost();
+            CostMonitor?.UpdateCost();
         }
 
         [RelayCommand]
         public void DeleteCondition(ActivationConditionOptionVM condition)
         {
+            if(Aspect == null)
+            {
+                return;
+            }
+
             Conditions.Remove(condition);
 
             (EActivationCondition Type, string Comment) conditionToDelete =
@@ -113,7 +123,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                     x.Type == condition.Condition || x.Comment == condition.Text);
             Aspect.Internal.Conditions.Remove(conditionToDelete);
 
-            CostMonitor.UpdateCost();
+            CostMonitor?.UpdateCost();
             OnPropertyChanged(nameof(ShowNoConditionsText));
         }
 
@@ -147,12 +157,17 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 case EActivationCondition.HardActivationCondition:
                     return Resources.Localizations.Localization.EnterHardActiovationCondition;
                 default:
-                    return null;
+                    return string.Empty;
             }
         }
 
         public override void Initialize()
         {
+            if (Aspect == null)
+            {
+                return;
+            }
+
             Conditions = new(Aspect.Internal.Conditions.Select(ToConditionVM));
             OnPropertyChanged(nameof(ShowNoConditionsText));
         }
