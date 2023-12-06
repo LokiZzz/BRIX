@@ -48,7 +48,7 @@ namespace BRIX.Mobile.ViewModel.Popups
         [RelayCommand]
         private void FireOk()
         {
-            View.Close(new AlertPopupResult { Answer = EAlertPopupResult.None });
+            View?.Close(new AlertPopupResult { Answer = EAlertPopupResult.None });
         }
 
         protected override void HandleParameters()

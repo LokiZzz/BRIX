@@ -8,7 +8,7 @@ namespace BRIX.Mobile.Services
         bool FileExists(string fileName);
         Task WriteAllTextAsync(string fileName, string text);
         Task<string> ReadAllTextAsync(string fileName);
-        Task<T> ReadJson<T>(string fileName) where T : class, new();
+        Task<T?> ReadJson<T>(string fileName) where T : class, new();
         Task WriteJsonAsync<T>(string fileName, T collection) where T : class, new();
     }
 
@@ -40,7 +40,7 @@ namespace BRIX.Mobile.Services
             return await File.ReadAllTextAsync(path);
         }
 
-        public async Task<T> ReadJson<T>(string fileName) where T : class, new()
+        public async Task<T?> ReadJson<T>(string fileName) where T : class, new()
         {
             string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
 

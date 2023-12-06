@@ -118,7 +118,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             Character = query.GetParameterOrDefault<CharacterModel>(NavigationParameters.Character);
 
-            if(!string.IsNullOrEmpty(Character.InternalModel.Portrait?.Path))
+            if(Character != null && !string.IsNullOrEmpty(Character.InternalModel.Portrait?.Path))
             {
                 _imagePath = Character.InternalModel.Portrait.Path;
                 FileResult file = new(_imagePath);

@@ -8,22 +8,22 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 {
     public abstract partial class AspectPageVMBase<T> : ViewModelBase, IQueryAttributable where T : AspectModelBase
     {
-        private AbilityCostMonitorPanelVM _costMonitor;
-        public AbilityCostMonitorPanelVM CostMonitor
+        private AbilityCostMonitorPanelVM? _costMonitor;
+        public AbilityCostMonitorPanelVM? CostMonitor
         {
             get => _costMonitor;
             set => SetProperty(ref _costMonitor, value);
         }
 
-        private EffectModelBase _effect;
-        public EffectModelBase Effect
+        private EffectModelBase? _effect;
+        public EffectModelBase? Effect
         {
             get => _effect;
             set => SetProperty(ref _effect, value);
         }
 
-        private T _aspect;
-        public T Aspect
+        private T? _aspect;
+        public T? Aspect
         {
             get => _aspect;
             set

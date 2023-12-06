@@ -32,9 +32,9 @@ namespace BRIX.Mobile.ViewModel.Abilities
             SaveCommand = new AsyncRelayCommand(Save);
         }
 
-        private Character _characterCopy;
+        private Character? _characterCopy;
 
-        private CharacterAbilityModel _ability;
+        private CharacterAbilityModel _ability = new();
         public CharacterAbilityModel Ability
         {
             get => _ability;
@@ -42,7 +42,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
         }
 
 
-        private AbilityCostMonitorPanelVM _costMonitor;
+        private AbilityCostMonitorPanelVM _costMonitor = new();
         public AbilityCostMonitorPanelVM CostMonitor
         {
             get => _costMonitor;
@@ -56,29 +56,29 @@ namespace BRIX.Mobile.ViewModel.Abilities
             set => SetProperty(ref _mode, value);
         }
 
-        private string _title;
+        private string _title = string.Empty;
         public string Title
         {
             get => _title;
             set => SetProperty(ref _title, value);
         }
 
-        private ObservableCollection<InventoryItemNodeVM> _availiableMaterialSupport;
+        private ObservableCollection<InventoryItemNodeVM> _availiableMaterialSupport = [];
         public ObservableCollection<InventoryItemNodeVM> AvailiableMaterialSupport
         {
             get => _availiableMaterialSupport;
             set => SetProperty(ref _availiableMaterialSupport, value);
         }
 
-        private ObservableCollection<InventoryItemNodeVM> _materialSupport;
+        private ObservableCollection<InventoryItemNodeVM> _materialSupport = [];
         public ObservableCollection<InventoryItemNodeVM> MaterialSupport
         {
             get => _materialSupport;
             set => SetProperty(ref _materialSupport, value);
         }
 
-        private IAsyncRelayCommand _saveCommand;
-        public IAsyncRelayCommand SaveCommand
+        private IAsyncRelayCommand? _saveCommand;
+        public IAsyncRelayCommand? SaveCommand
         {
             get => _saveCommand;
             set => SetProperty(ref _saveCommand, value);
@@ -86,6 +86,11 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         public async Task Save()
         {
+            if(_characterCopy == null)
+            {
+                return;
+            }
+
             if(CostMonitor.EXPOverflow)
             {
                 await Alert(Localization.AbilityEXPOverflowMessage);
@@ -135,6 +140,11 @@ namespace BRIX.Mobile.ViewModel.Abilities
         [RelayCommand]
         public async Task AddMaterial()
         {
+            if (_characterCopy == null)
+            {
+                return;
+            }
+
             IEnumerable<InventoryItem> availiableItems = _characterCopy.Inventory.Items.Where(x =>
                 !MaterialSupport.Any(y => y.Name == x.Name) && (x is Equipment || x is Consumable)
             );
@@ -170,6 +180,11 @@ namespace BRIX.Mobile.ViewModel.Abilities
         [RelayCommand]
         public async Task DeleteMaterial(InventoryItemNodeVM itemToRemove)
         {
+            if (_characterCopy == null)
+            {
+                return;
+            }
+
             AlertPopupResult? result = await Ask(
                 string.Format(Localization.AskDeleteMaterialSupport, itemToRemove.Name)
             );
@@ -193,10 +208,10 @@ namespace BRIX.Mobile.ViewModel.Abilities
             switch (Mode)
             {
                 case EEditingMode.Add:
-                    Title = _localization[LocalizationKeys.AddOrEditAbilityPageTitle_Add].ToString();
+                    Title = _localization[LocalizationKeys.AddOrEditAbilityPageTitle_Add].ToString() ?? string.Empty;
                     break;
                 case EEditingMode.Edit:
-                    Title = _localization[LocalizationKeys.AddOrEditAbilityPageTitle_Edit].ToString();
+                    Title = _localization[LocalizationKeys.AddOrEditAbilityPageTitle_Edit].ToString() ?? string.Empty;
                     break;
             }
 
@@ -220,7 +235,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 await HandleBackFromEditing(query);
             }
 
-            CostMonitor.SaveCommand = SaveCommand;
+            CostMonitor.SaveCommand = SaveCommand 
+                ?? throw new Exception("Команда сохранения для CostMonitor не инициализирована.");
 
             query.Clear();
         }
@@ -251,6 +267,11 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         private void IntitializeMaterialSupport()
         {
+            if (_characterCopy == null)
+            {
+                return;
+            }
+
             List<InventoryItemNodeVM> materials = _characterCopy.GetMaterialSupportForAbility(Ability.InternalModel)
                 .Select(_inventoryConverter.ToVM)
                 .ToList();
@@ -260,7 +281,10 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         private void IntitializeCostMonitor()
         {
-            CostMonitor = new AbilityCostMonitorPanelVM(Ability, SaveCommand);
+            CostMonitor = new AbilityCostMonitorPanelVM(
+                Ability, 
+                SaveCommand ?? throw new Exception("Команда сохранения для CostMonitor не инициализирована.")
+            );
         }
     }
 }

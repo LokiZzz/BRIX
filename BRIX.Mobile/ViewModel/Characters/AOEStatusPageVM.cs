@@ -129,7 +129,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         private Task HandleBackFromEditing(IDictionary<string, object> query)
         {
-            EffectModelBase editedEffect = query.GetParameterOrDefault<EffectModelBase>(NavigationParameters.Effect);
+            EffectModelBase? editedEffect = query.GetParameterOrDefault<EffectModelBase>(NavigationParameters.Effect);
 
             if (editedEffect != null)
             {

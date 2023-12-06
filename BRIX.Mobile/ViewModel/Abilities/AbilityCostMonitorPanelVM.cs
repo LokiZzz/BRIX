@@ -23,11 +23,16 @@ namespace BRIX.Mobile.ViewModel.Abilities
         {
             Ability = ability;
             SaveCommand = saveCommand;
-            Character = new(ability.Character);
+
+            if(ability?.Character != null)
+            {
+                Character = new(ability.Character);
+            }
+
             UpdatePercents();
         }
         
-        private CharacterModel Character;
+        private CharacterModel? Character;
 
         private CharacterAbilityModel _ability;
         public CharacterAbilityModel Ability
@@ -77,8 +82,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         public bool EXPOverflow => AvailiableExp < 0;
 
-        private IAsyncRelayCommand _saveCommand;
-        public IAsyncRelayCommand SaveCommand 
+        private IAsyncRelayCommand? _saveCommand;
+        public IAsyncRelayCommand? SaveCommand 
         {
             get => _saveCommand;
             set => SetProperty(ref _saveCommand, value);
@@ -104,7 +109,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         private void UpdatePercents()
         {
-            if (IsMock)
+            if (IsMock || Character == null)
             {
                 return;
             }

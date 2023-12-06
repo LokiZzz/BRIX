@@ -2,7 +2,7 @@
 {
     public static class NavigationExtensions
     {
-        public static T GetParameterOrDefault<T>(this IDictionary<string, object> query, string key)
+        public static T? GetParameterOrDefault<T>(this IDictionary<string, object> query, string key)
         {
             if (query.ContainsKey(key))
             {

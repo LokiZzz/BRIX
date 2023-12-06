@@ -19,7 +19,7 @@ namespace BRIX.Mobile.Models.Abilities
             OnPropertyChanged(nameof(ShowStatusName));
         }
 
-        public Character Character;
+        public Character? Character;
 
         public CharacterAbility InternalModel { get; }
 

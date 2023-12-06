@@ -16,14 +16,14 @@ namespace BRIX.Mobile.Models.Characters
             CurrentStep = project.CurrentStep;
         }
 
-        private string _name;
+        private string _name = string.Empty;
         public string Name
         {
             get => _name;
             set => SetProperty(ref _name, value);
         }
 
-        private string _description;
+        private string _description = string.Empty;
         public string Description
         {
             get => _description;
@@ -59,7 +59,7 @@ namespace BRIX.Mobile.Models.Characters
             set => SetProperty(ref _progress, value);
         }
 
-        private string _progressText;
+        private string _progressText = string.Empty;
         public string ProgressText
         {
             get => _progressText;

@@ -164,7 +164,7 @@ public partial class PickerButton : Grid
                 {
                     PickerPopupResult? result = await mainPage.ShowPopupAsync(popupToShow) as PickerPopupResult;
 
-                    if (result != null)
+                    if (result?.SelectedItem != null)
                     {
                         control.SelectedItem = result.SelectedItem;
                     }

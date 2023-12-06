@@ -16,10 +16,10 @@ namespace BRIX.Mobile.ViewModel.Account
         }
 
         [ObservableProperty]
-        private string _login;
+        private string _login = string.Empty;
 
         [ObservableProperty]
-        private string _password;
+        private string _password = string.Empty;
 
         [ObservableProperty]
         private bool _rememberMe;

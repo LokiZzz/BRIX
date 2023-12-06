@@ -7,8 +7,8 @@ namespace BRIX.Mobile.Resources.Localizations
     [ContentProperty(nameof(ValuePath))]
     public class FormatExtension : IMarkupExtension<BindingBase>
     {
-        public string ValuePath { get; set; }
-        public string FormatPath { get; set; }
+        public string ValuePath { get; set; } = string.Empty;
+        public string FormatPath { get; set; } = string.Empty;
 
         public BindingBase ProvideValue(IServiceProvider serviceProvider)
         {

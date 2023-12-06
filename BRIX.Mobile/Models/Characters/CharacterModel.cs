@@ -25,7 +25,7 @@ namespace BRIX.Mobile.Models.Characters
 
         public Character InternalModel { get; }
 
-        private ObservableCollection<CharacterAbilityModel> _abilities;
+        private ObservableCollection<CharacterAbilityModel> _abilities = [];
         public ObservableCollection<CharacterAbilityModel> Abilities
         {
             get => _abilities;
@@ -80,7 +80,7 @@ namespace BRIX.Mobile.Models.Characters
             set => SetProperty(InternalModel.Portrait.S, value, InternalModel, (character, s) => character.Portrait.S = s);
         }
 
-        public ImageSource PortraitImage
+        public ImageSource? PortraitImage
         {
             get
             {

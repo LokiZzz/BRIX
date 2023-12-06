@@ -76,7 +76,7 @@ public class ZoomContainer : ContentView
     double xOffset = 0;
     double yOffset = 0;
 
-    void OnPinchUpdated(object sender, PinchGestureUpdatedEventArgs e)
+    void OnPinchUpdated(object? sender, PinchGestureUpdatedEventArgs e)
     {
         if (e.Status == GestureStatus.Started)
         {
@@ -124,7 +124,7 @@ public class ZoomContainer : ContentView
         }
     }
 
-    void OnPanUpdated(object sender, PanUpdatedEventArgs e)
+    void OnPanUpdated(object? sender, PanUpdatedEventArgs e)
     {
         switch (e.StatusType)
         {
@@ -162,7 +162,7 @@ public class ZoomContainer : ContentView
         thisControl.Content.Scale = (double)newValue;
     }
 
-    void OnChildAdded(object sender, ElementEventArgs e)
+    void OnChildAdded(object? sender, ElementEventArgs e)
     {
         Content.AnchorX = 0;
         Content.AnchorY = 0;

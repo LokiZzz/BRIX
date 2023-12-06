@@ -75,7 +75,7 @@ namespace BRIX.Mobile.Models.Characters
             }
         }
 
-        public override string ToString() => Internal?.Name;
+        public override string ToString() => Internal?.Name ?? string.Empty;
 
         public void IncreaseRoundsPassed()
         {

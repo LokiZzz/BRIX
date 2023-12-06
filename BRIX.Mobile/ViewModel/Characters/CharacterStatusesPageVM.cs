@@ -105,7 +105,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            StatusItemVM status = query.GetParameterOrDefault<StatusItemVM>(NavigationParameters.Status);
+            StatusItemVM? status = query.GetParameterOrDefault<StatusItemVM>(NavigationParameters.Status);
             EEditingMode mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
 
             if (status != null)
