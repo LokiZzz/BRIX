@@ -28,7 +28,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         public override Task OnNavigatedAsync()
         {
-            if (Effects != null) return Task.CompletedTask;
+            if (Effects.Any()) return Task.CompletedTask;
 
             IEnumerable<EffectTypeVM> effects = EffectsDictionary.Collection.Select(x => x.Value);
                 

@@ -1,4 +1,6 @@
-﻿using BRIX.Mobile.ViewModel.Base;
+﻿using BRIX.Mobile.View.Popups;
+using BRIX.Mobile.ViewModel.Base;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -8,14 +10,14 @@ namespace BRIX.Mobile.ViewModel.Popups
     {
         protected override void HandleParameters()
         {
-            EditorTitle = Parameters?.Title;
+            EditorTitle = Parameters?.Title ?? string.Empty;
         }
 
         [ObservableProperty]
-        private string _editorTitle;
+        private string _editorTitle = string.Empty;
 
         [ObservableProperty]
-        private string _value;
+        private string _value = string.Empty;
 
         [RelayCommand]
         private void EnterNumber(string number)
@@ -43,7 +45,7 @@ namespace BRIX.Mobile.ViewModel.Popups
         {
             if (!string.IsNullOrEmpty(Value))
             {
-                View.Close(new NumericEditorResult(ENumericEditorResult.Add, int.Parse(Value)));
+                View?.Close(new NumericEditorResult(ENumericEditorResult.Add, int.Parse(Value)));
             }
         }
 
@@ -52,7 +54,7 @@ namespace BRIX.Mobile.ViewModel.Popups
         {
             if (!string.IsNullOrEmpty(Value))
             {
-                View.Close(new NumericEditorResult(ENumericEditorResult.Set, int.Parse(Value)));
+                View?.Close(new NumericEditorResult(ENumericEditorResult.Set, int.Parse(Value)));
             }
         }
 
@@ -61,7 +63,7 @@ namespace BRIX.Mobile.ViewModel.Popups
         {
             if (!string.IsNullOrEmpty(Value))
             {
-                View.Close(new NumericEditorResult(ENumericEditorResult.Substract, int.Parse(Value)));
+                View?.Close(new NumericEditorResult(ENumericEditorResult.Substract, int.Parse(Value)));
             }
         }
     }
@@ -106,6 +108,6 @@ namespace BRIX.Mobile.ViewModel.Popups
 
     public class NumericEditorParameters
     {
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
     }
 }

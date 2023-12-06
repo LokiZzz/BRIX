@@ -174,8 +174,8 @@ namespace BRIX.Mobile.ViewModel.Inventory
         public bool ShowPrice => Type == EInventoryItemType.Equipment || Type == EInventoryItemType.Consumable;
         public bool ShowIsAvailiable => Type == EInventoryItemType.Equipment;
 
-        private RelayCommand _descriptionCommand;
-        public RelayCommand DescriptionCommand
+        private RelayCommand? _descriptionCommand;
+        public RelayCommand? DescriptionCommand
         {
             get => _descriptionCommand;
             set => SetProperty(ref _descriptionCommand, value);

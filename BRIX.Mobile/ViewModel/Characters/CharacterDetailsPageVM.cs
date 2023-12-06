@@ -28,13 +28,18 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         [ObservableProperty]
-        private CharacterModel _character;
+        private CharacterModel? _character;
 
         public bool ShowTags => Character?.Tags.Any() == true;
 
         [RelayCommand]
         public async Task AddTag()
         {
+            if (Character == null)
+            {
+                return;
+            }
+
             EntryPopupResult? result = await ShowPopupAsync<EntryPopup, EntryPopupResult, EntryPopupParameters>(
                 new EntryPopupParameters
                 {
@@ -57,6 +62,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task RemoveTag(CharacterTagVM tag)
         {
+            if (Character == null)
+            {
+                return;
+            }
+
             Character.RemoveTag(tag);
             await _characterService.UpdateAsync(Character.InternalModel);
             OnPropertyChanged(nameof(ShowTags));
@@ -82,6 +92,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task RemoveProject(CharacterProjectVM project)
         {
+            if (Character == null)
+            {
+                return;
+            }
+
             AlertPopupResult? result = await Ask(string.Format(Localization.AskDeleteProject, project.Name));
 
             if(result?.Answer == EAlertPopupResult.No)
@@ -109,6 +124,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task AddProjectStep(CharacterProjectVM project)
         {
+            if (Character == null)
+            {
+                return;
+            }
+
             if (project.CurrentStep < project.Steps)
             {
                 project.CurrentStep++;
@@ -120,6 +140,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task ReduceProjectStep(CharacterProjectVM project)
         {
+            if (Character == null)
+            {
+                return;
+            }
+
             if (project.CurrentStep > 0)
             {
                 project.CurrentStep--;
@@ -131,6 +156,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task AddLuck()
         {
+            if (Character == null)
+            {
+                return;
+            }
+
             Character.LuckPoints++;
             await _characterService.UpdateAsync(Character.InternalModel);
         }
@@ -138,6 +168,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task DecreaseLuck()
         {
+            if (Character == null)
+            {
+                return;
+            }
+
             Character.LuckPoints--;
             await _characterService.UpdateAsync(Character.InternalModel);
         }

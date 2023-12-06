@@ -18,7 +18,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }));
         }
 
-        public CooldownOptionVM SelectedOption
+        public CooldownOptionVM? SelectedOption
         {
             get
             {
@@ -28,6 +28,11 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
             set
             {
+                if(value == null)
+                {
+                    return;
+                }
+
                 ECooldownOption cooldown = value.Cooldown;
                 SetProperty(Internal.Condition, cooldown, Internal,
                     (model, prop) => model.Condition = prop);
@@ -71,7 +76,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
     public class CooldownOptionVM
     {
-        public string LocalizedName { get; set; }
+        public string LocalizedName { get; set; } = string.Empty;
 
         public ECooldownOption Cooldown { get; set; }
 

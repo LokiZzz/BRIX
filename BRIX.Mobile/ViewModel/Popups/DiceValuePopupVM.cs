@@ -1,5 +1,6 @@
 ﻿using BRIX.Library.DiceValue;
 using BRIX.Mobile.ViewModel.Base;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -8,14 +9,14 @@ namespace BRIX.Mobile.ViewModel.Popups
     public partial class DiceValuePopupVM : ParametrizedPopupVMBase<DiceValuePopupParameters>
     {
         [ObservableProperty]
-        private string _formula;
+        private string _formula = string.Empty;
 
         [RelayCommand]
         private void Set()
         {
             if (DicePool.TryParse(Formula, out DicePool? parsed) && parsed != null)
             {
-                View.Close(new DiceValuePopupResult { DicePool = parsed });
+                View?.Close(new DiceValuePopupResult { DicePool = parsed });
             }
             else
             {
@@ -30,17 +31,22 @@ namespace BRIX.Mobile.ViewModel.Popups
 
         protected override void HandleParameters()
         {
+            if (Parameters == null)
+            {
+                return;
+            }
+
             Formula = Parameters.Formula;
         }
     }
 
     public class DiceValuePopupParameters
     {
-        public string Formula { get; init; }
+        public string Formula { get; init; } = string.Empty;
     }
     
     public class DiceValuePopupResult
     {
-        public DicePool DicePool { get; set; }
+        public DicePool DicePool { get; set; } = new DicePool();
     }
 }

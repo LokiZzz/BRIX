@@ -19,7 +19,7 @@ namespace BRIX.Mobile.View
 
             uint length = 60;
 
-            Color? before = entry.EntryColor.Copy();
+            Color before = entry.EntryColor.Copy() ?? Colors.White;
             Color after = Colors.Red;
             object? colorResource = null;
 

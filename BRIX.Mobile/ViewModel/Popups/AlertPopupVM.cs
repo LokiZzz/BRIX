@@ -1,5 +1,7 @@
 ﻿using BRIX.Mobile.Resources.Localizations;
+using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Base;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -8,19 +10,19 @@ namespace BRIX.Mobile.ViewModel.Popups
     public partial class AlertPopupVM : ParametrizedPopupVMBase<AlertPopupParameters>
     {
         [ObservableProperty]
-        private string _title;
+        private string _title = string.Empty;
 
         [ObservableProperty]
-        private string _message;
+        private string _message = string.Empty;
 
         [ObservableProperty]
-        private string _yes;
+        private string _yes = string.Empty;
 
         [ObservableProperty]
-        private string _no;
+        private string _no = string.Empty;
 
         [ObservableProperty]
-        private string _ok;
+        private string _ok = string.Empty;
 
         [ObservableProperty]
         private bool _showYes;
@@ -34,13 +36,13 @@ namespace BRIX.Mobile.ViewModel.Popups
         [RelayCommand]
         private void FireYes()
         {
-            View.Close(new AlertPopupResult { Answer = EAlertPopupResult.Yes });
+            View?.Close(new AlertPopupResult { Answer = EAlertPopupResult.Yes });
         }
 
         [RelayCommand]
         private void FireNo()
         {
-            View.Close(new AlertPopupResult { Answer = EAlertPopupResult.No });
+            View?.Close(new AlertPopupResult { Answer = EAlertPopupResult.No });
         }
 
         [RelayCommand]
@@ -51,6 +53,11 @@ namespace BRIX.Mobile.ViewModel.Popups
 
         protected override void HandleParameters()
         {
+            if (Parameters == null)
+            {
+                return;
+            }
+
             Title = Parameters.Title;
             Message = Parameters.Message;
             Yes = Parameters.YesText;
@@ -66,7 +73,7 @@ namespace BRIX.Mobile.ViewModel.Popups
     public class AlertPopupParameters
     {
         public string Title { get; init; } = Localization.Warning;
-        public string Message { get; init; }
+        public string Message { get; init; } = string.Empty;
         public string YesText { get; init; } = Localization.Yes;
         public string NoText { get; init; } = Localization.No;
         public string OkText { get; init; } = Localization.Ok;

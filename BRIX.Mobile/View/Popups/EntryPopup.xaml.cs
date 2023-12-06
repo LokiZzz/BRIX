@@ -13,7 +13,7 @@ public partial class EntryPopup : Popup
         BindingContext = context;
     }
 
-    private void PlayAnimation(object sender, EventArgs e)
+    private void PlayAnimation(object? sender, EventArgs e)
     {
         AnimationHelper.PlayInvalidEntryAnimation(entry);
     }

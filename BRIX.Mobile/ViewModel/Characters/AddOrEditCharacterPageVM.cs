@@ -21,10 +21,10 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         [ObservableProperty]
-        private CharacterModel _character;
+        private CharacterModel _character = new(new());
 
         [ObservableProperty]
-        private string _title;
+        private string _title = string.Empty;
 
         [RelayCommand]
         public async Task Save()
@@ -58,8 +58,8 @@ namespace BRIX.Mobile.ViewModel.Characters
         public override Task OnNavigatedAsync()
         {
             Title = Character.Id == default
-                ? _localization[LocalizationKeys.AddOrEditCharacterPageTitle_Add].ToString()
-                : _localization[LocalizationKeys.AddOrEditCharacterPageTitle_Edit].ToString();
+                ? _localization[LocalizationKeys.AddOrEditCharacterPageTitle_Add].ToString() ?? string.Empty
+                : _localization[LocalizationKeys.AddOrEditCharacterPageTitle_Edit].ToString() ?? string.Empty;
 
             return Task.CompletedTask;
         }

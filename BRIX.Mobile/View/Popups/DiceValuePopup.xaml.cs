@@ -14,7 +14,7 @@ public partial class DiceValuePopup : Popup
         BindingContext = context;
     }
 
-    private void PlayAnimation(object sender, EventArgs e)
+    private void PlayAnimation(object? sender, EventArgs e)
     {
         AnimationHelper.PlayInvalidEntryAnimation(formulaEntry);
     }

@@ -24,15 +24,14 @@ namespace BRIX.Mobile.ViewModel.Details
 
         EEditingMode _mode;
 
-        private string _title;
+        private string _title = string.Empty;
 		public string Title
 		{
 			get => _title;
 			set => SetProperty(ref _title, value);
 		}
 
-        private CharacterProjectVM _project;
-
+        private CharacterProjectVM _project = new();
         public CharacterProjectVM Project
         {
             get => _project;
@@ -42,7 +41,7 @@ namespace BRIX.Mobile.ViewModel.Details
         [RelayCommand]
         public async Task Save()
         {
-            Character character = await _characterService.GetCurrentCharacter();
+            Character character = await _characterService.GetCurrentCharacterGuaranteed();
 
             switch (_mode)
             {

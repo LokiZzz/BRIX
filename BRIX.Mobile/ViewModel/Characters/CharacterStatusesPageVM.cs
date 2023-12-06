@@ -28,13 +28,13 @@ namespace BRIX.Mobile.ViewModel.Characters
             AssetsService = assetsService;
         }
 
-        private CharacterModel _currentCharacter;
+        private CharacterModel? _currentCharacter;
 
         public ICharacterService CharacterService { get; }
         public IAssetsService AssetsService { get; }
 
         [ObservableProperty]
-        public ObservableCollection<StatusItemVM> _statuses;
+        public ObservableCollection<StatusItemVM> _statuses = [];
 
         [RelayCommand]
         public async Task AddStatus()
@@ -66,7 +66,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task ChangeStatusState(StatusItemVM status)
         {
-            if(status == null)
+            if(status == null || _currentCharacter == null)
             {
                 return;
             }
@@ -80,7 +80,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             if (_currentCharacter.Statuses.Any(x => x.Name == status.Name) && !status.IsActive)
             {
                 _currentCharacter.InternalModel.Statuses.Remove(
-                    _currentCharacter.InternalModel.Statuses.FirstOrDefault(x => x.Equals(status.Internal))
+                    _currentCharacter.InternalModel.Statuses.Single(x => x.Equals(status.Internal))
                 );
 
                 await CharacterService.UpdateAsync(_currentCharacter.InternalModel);
@@ -89,7 +89,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         public override async Task OnNavigatedAsync()
         {
-            _currentCharacter = new(await CharacterService.GetCurrentCharacter());
+            _currentCharacter = new(await CharacterService.GetCurrentCharacterGuaranteed());
             List<Status> statuses = await AssetsService.GetStatuses();
 
             Statuses = new(statuses.Select(x => new StatusItemVM(x)));
@@ -120,6 +120,12 @@ namespace BRIX.Mobile.ViewModel.Characters
                     case EEditingMode.Edit:
                         Status existingStatus = statuses.Single(x => x.Equals(status.Internal));
                         statuses[statuses.IndexOf(existingStatus)] = status.Internal;
+
+                        if(_currentCharacter == null)
+                        {
+                            throw new Exception("Текущий персонаж не инициализирован.");
+                        }
+
                         _currentCharacter.ReplaceStatus(status);
                         await CharacterService.UpdateAsync(_currentCharacter.InternalModel);
                         break;

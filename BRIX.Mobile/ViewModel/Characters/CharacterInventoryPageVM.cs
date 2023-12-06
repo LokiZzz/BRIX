@@ -17,8 +17,8 @@ namespace BRIX.Mobile.ViewModel.Characters
     public partial class CharacterInventoryPageVM : ViewModelBase, IQueryAttributable
     {
         private readonly ICharacterService _characterService;
-        private Character _currentCharacter;
-        private InventoryItemConverter _vmConverter;
+        private Character? _currentCharacter;
+        private readonly InventoryItemConverter _vmConverter;
 
         public CharacterInventoryPageVM(ICharacterService characterService)
         {
@@ -30,7 +30,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             _vmConverter = new InventoryItemConverter();
         }
 
-        private ObservableCollection<InventoryItemNodeVM> _inventoryItems;
+        private ObservableCollection<InventoryItemNodeVM> _inventoryItems = [];
         public ObservableCollection<InventoryItemNodeVM> InventoryItems
         {
             get => _inventoryItems;
@@ -88,6 +88,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task Delete(InventoryItemNodeVM item)
         {
+            if(_currentCharacter == null)
+            {
+                return;
+            }
+
             if (item.InternalModel is MaterialSupport material && !_currentCharacter.CanRemoveMaterialSupport(material))
             {
                 await Alert(Localization.InventoryNotEnoughEXPForDelete);
@@ -142,6 +147,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task Edit(InventoryItemNodeVM item)
         {
+            if (_currentCharacter == null)
+            {
+                return;
+            }
+
             await Navigation.NavigateAsync<AddOrEditInventoryItemPage>(
                 (NavigationParameters.EditMode, EEditingMode.Edit),
                 (NavigationParameters.Inventory, _currentCharacter.Inventory.Copy()),
@@ -152,6 +162,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task New()
         {
+            if (_currentCharacter == null)
+            {
+                return;
+            }
+
             await Navigation.NavigateAsync<AddOrEditInventoryItemPage>(
                 (NavigationParameters.EditMode, EEditingMode.Add),
                 (NavigationParameters.Inventory, _currentCharacter.Inventory.Copy())
@@ -161,6 +176,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task EditCoins()
         {
+            if (_currentCharacter == null)
+            {
+                return;
+            }
+
             NumericEditorResult? result = 
                 await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(
                     new NumericEditorParameters { Title = Localization.Coins }
@@ -181,6 +201,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task AdjustCount(InventoryItemVM itemToEdit)
         {
+            if (_currentCharacter == null)
+            {
+                return;
+            }
+
             NumericEditorResult? result =
                 await ShowPopupAsync<NumericEditorPopup, NumericEditorResult, NumericEditorParameters>(
                     new NumericEditorParameters { Title = itemToEdit.Name }

@@ -60,7 +60,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
         }
 
-        public ObstacleOptionVM ObstacleBetweenCharacterAndTarget
+        public ObstacleOptionVM? ObstacleBetweenCharacterAndTarget
         {
             get
             {
@@ -70,9 +70,12 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
             set
             {
-                EObstacleEquivalent equivalent = value.Equivalent;
-                SetProperty(Internal.NTAD.ObstacleBetweenCharacterAndTarget, equivalent, Internal,
-                    (model, prop) => model.NTAD.ObstacleBetweenCharacterAndTarget = prop);
+                if (value != null)
+                {
+                    EObstacleEquivalent equivalent = value.Equivalent;
+                    SetProperty(Internal.NTAD.ObstacleBetweenCharacterAndTarget, equivalent, Internal,
+                        (model, prop) => model.NTAD.ObstacleBetweenCharacterAndTarget = prop);
+                }
             }
         }
 

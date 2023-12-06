@@ -21,8 +21,8 @@ namespace BRIX.Mobile.ViewModel.Characters
             _characterService = characterService;
         }
 
-        private CharacterModel _character;
-        public CharacterModel Character
+        private CharacterModel? _character;
+        public CharacterModel? Character
         {
             get => _character;
             set => SetProperty(ref _character, value);
@@ -89,6 +89,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task Save()
         {
+            if(Character == null)
+            {
+                return;
+            }
+
             Character.InternalModel.Portrait.X = ContentX;
             Character.InternalModel.Portrait.Y = ContentY;
             Character.InternalModel.Portrait.S = ContentScale;

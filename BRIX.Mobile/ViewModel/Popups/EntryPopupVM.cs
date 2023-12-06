@@ -1,30 +1,25 @@
 ﻿using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Popups
 {
     public partial class EntryPopupVM : ParametrizedPopupVMBase<EntryPopupParameters>
     {
-        private string _title;
+        private string _title = string.Empty;
         public string Title
         {
             get => _title;
             set => SetProperty(ref _title, value);
         }
 
-        private string _message;
+        private string _message = string.Empty;
         public string Message
         {
             get => _message;
             set => SetProperty(ref _message, value);
         }
 
-        private string _placeholder;
+        private string _placeholder = string.Empty;
         public string Placeholder
         {
             get => _placeholder;
@@ -39,6 +34,7 @@ namespace BRIX.Mobile.ViewModel.Popups
         }
 
         private string _buttonText = string.Empty;
+
         public string ButtonText
         {
             get => _buttonText;
@@ -57,12 +53,17 @@ namespace BRIX.Mobile.ViewModel.Popups
             }
             else
             {
-                View.Close(new EntryPopupResult { Text = string.IsNullOrEmpty(Text) ? string.Empty : Text });
+                View?.Close(new EntryPopupResult { Text = string.IsNullOrEmpty(Text) ? string.Empty : Text });
             }
         }
 
         protected override void HandleParameters()
         {
+            if (Parameters == null)
+            {
+                return;
+            }
+
             Title = Parameters.Title;
             Placeholder = Parameters.Placeholder;
             Message = Parameters.Message;
@@ -72,14 +73,14 @@ namespace BRIX.Mobile.ViewModel.Popups
 
     public class EntryPopupParameters
     {
-        public string Title { get; set; }
-        public string Message { get; set; }
-        public string Placeholder { get; set; }
-        public string ButtonText { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public string Message { get; set; } = string.Empty;
+        public string Placeholder { get; set; } = string.Empty;
+        public string ButtonText { get; set; } = string.Empty;
     }
 
     public class EntryPopupResult
     {
-        public string Text { get; set; }
+        public string Text { get; set; } = string.Empty;
     }
 }

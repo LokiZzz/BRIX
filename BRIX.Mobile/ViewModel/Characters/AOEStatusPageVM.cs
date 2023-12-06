@@ -24,20 +24,20 @@ namespace BRIX.Mobile.ViewModel.Characters
             CharacterService = characterService;
         }
 
-        private Character _currentCharacrter;
+        private Character? _currentCharacrter;
 
         public ICharacterService CharacterService { get; }
 
         EEditingMode _mode;
 
-        private string _title;
+        private string _title = string.Empty;
 		public string Title
 		{
 			get { return _title; }
 			set { _title = value; }
 		}
 
-        private StatusItemVM _status;
+        private StatusItemVM _status = new(new());
         public StatusItemVM Status
         {
             get => _status;
@@ -89,6 +89,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task FromAbility()
         {
+            if(_currentCharacrter == null)
+            {
+                return;
+            }
+
             PickerPopupResult? result =
                 await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
                 new PickerPopupParameters
@@ -99,7 +104,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                 }
             );
 
-            if(result != null)
+            if(result != null && result?.SelectedItem != null)
             {
                 Library.Ability.Status status = ((CharacterAbility)result.SelectedItem).BuildStatus();
                 Status = new StatusItemVM(status);
@@ -114,7 +119,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                 Status = query.GetParameterOrDefault<StatusItemVM>(NavigationParameters.Status)
                     ?? new StatusItemVM(new Library.Ability.Status());
                 InitializeTitle();
-                _currentCharacrter = await CharacterService.GetCurrentCharacter();
+                _currentCharacrter = await CharacterService.GetCurrentCharacterGuaranteed();
             }
             else
             {

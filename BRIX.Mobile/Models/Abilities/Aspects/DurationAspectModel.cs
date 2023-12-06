@@ -13,22 +13,25 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
             UnitOptions = new(Enum.GetValues<ETimeUnit>().Select(x => new TimeUnitOption
             {
-                Name = localization[x.ToString("G")].ToString(),
+                Name = localization[x.ToString("G")].ToString() ?? string.Empty,
                 Unit = x
             }));
 
-            SelectedUnit = UnitOptions.FirstOrDefault(x => x.Unit == Internal.Unit);
+            SelectedUnit = UnitOptions.Single(x => x.Unit == Internal.Unit);
         }
 
         public ObservableCollection<TimeUnitOption> UnitOptions { get; set; }
 
-        public TimeUnitOption SelectedUnit
+        public TimeUnitOption? SelectedUnit
         {
             get => UnitOptions.FirstOrDefault(x => x.Unit == Internal.Unit);
             set
             {
-                SetProperty(Internal.Unit, value.Unit, Internal,
-                    (model, prop) => model.Unit = prop);
+                if (value != null)
+                {
+                    SetProperty(Internal.Unit, value.Unit, Internal,
+                        (model, prop) => model.Unit = prop);
+                }
             }
         }
 
@@ -55,7 +58,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
     public class TimeUnitOption
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         public ETimeUnit Unit { get; set; }
 
