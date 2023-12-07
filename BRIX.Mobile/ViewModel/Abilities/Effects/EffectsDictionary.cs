@@ -51,7 +51,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
         public static string GetEditPageRoute(EffectModelBase effect)
         {
-            return Collection[effect.GetType()].EditPage.Name.ToString();
+            return Collection[effect.GetType()].EditPage?.Name.ToString()
+                ?? throw new Exception("Страница редактирования эффекта не надена в EffectsDictionary.");
         }
     }
 }

@@ -106,7 +106,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             Effect = query.GetParameterOrDefault<T>(NavigationParameters.Effect) ?? new T();
             CostMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
 
-            if (CostMonitor?.IsMock == false)
+            if (CostMonitor?.Ability != null && CostMonitor?.IsMock == false)
             {
                 switch (Mode)
                 {
@@ -119,7 +119,10 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 }
             }
 
-            Aspects = new AspectPanelViewModel(CostMonitor, Effect);
+            if (CostMonitor != null)
+            {
+                Aspects = new AspectPanelViewModel(CostMonitor, Effect);
+            }
 
             Initialize();
 

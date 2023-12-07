@@ -18,6 +18,11 @@ namespace BRIX.Mobile.ViewModel.Abilities
         [RelayCommand]
         public async Task Choose(EffectTypeVM effectToChoose)
         {
+            if(effectToChoose.EditPage == null)
+            {
+                return;
+            }
+
             await Navigation.NavigateAsync(
                 effectToChoose.EditPage.Name,
                 ENavigationMode.Push,

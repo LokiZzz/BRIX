@@ -10,8 +10,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 {
     public partial class AspectPanelViewModel : ViewModelBase
     {
-        private EffectModelBase _aspectOwnerEffect;
-        private AbilityCostMonitorPanelVM _costMonitor;
+        private readonly EffectModelBase _aspectOwnerEffect;
+        private readonly AbilityCostMonitorPanelVM _costMonitor;
 
         public AspectPanelViewModel(AbilityCostMonitorPanelVM costMonitor, EffectModelBase effect)
         {
@@ -23,7 +23,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             }
 
             _aspectOwnerEffect = effect;
-            _costMonitor = costMonitor;
+            _costMonitor = costMonitor ?? throw new Exception("Передан не инициализированный CostMonitor.");
 
             AspectsCollection = GetAspects(effect);
 
@@ -33,7 +33,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             }
         }
 
-        private ObservableCollection<AspectUtilityModel> _aspectsCollection = new();
+        private ObservableCollection<AspectUtilityModel> _aspectsCollection = [];
         public ObservableCollection<AspectUtilityModel> AspectsCollection
         {
             get => _aspectsCollection;
@@ -50,7 +50,17 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         public async Task NavigateToAspect()
         {
+            if(SelectedAspect.LibraryAspectType == null)
+            {
+                throw new ArgumentNullException(nameof(SelectedAspect.LibraryAspectType));
+            }
+
             AspectModelBase aspectToEdit = _aspectOwnerEffect.GetAspect(SelectedAspect.LibraryAspectType);
+
+            if (SelectedAspect.EditPage == null)
+            {
+                throw new ArgumentNullException(nameof(SelectedAspect.EditPage));
+            }
 
             await Navigation.NavigateAsync(
                 SelectedAspect.EditPage.Name,

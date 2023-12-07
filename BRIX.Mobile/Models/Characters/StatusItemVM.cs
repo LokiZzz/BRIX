@@ -9,19 +9,13 @@ using BRIX.Mobile.Models.Abilities.Effects;
 
 namespace BRIX.Mobile.Models.Characters
 {
-    public partial class StatusItemVM : ObservableObject
+    public partial class StatusItemVM(Status status) : ObservableObject
     {
-        public StatusItemVM(Status status)
-        {
-            Internal = status;
-            Effects = new ObservableCollection<EffectModelBase>(
-                status.Effects.Select(EffectModelFactory.GetModel)
-            );
-        }
+        public Status Internal { get; set; } = status;
 
-        public Status Internal { get; set; }
-
-        public ObservableCollection<EffectModelBase> Effects { get; set; } = new ObservableCollection<EffectModelBase>();
+        public ObservableCollection<EffectModelBase> Effects { get; set; } = new (
+            status.Effects.Select(EffectModelFactory.GetModel)
+        );
 
         public string Name
         {
@@ -40,21 +34,20 @@ namespace BRIX.Mobile.Models.Characters
         {
             get
             {
-                switch(Internal.GetHighestTimeUnit())
+                return Internal.GetHighestTimeUnit() switch
                 {
-                    case Library.Enums.ETimeUnit.Round:
-                        return string.Format(Localization.RoundsCountFormat, Internal.DurationLeft);
-                    case Library.Enums.ETimeUnit.Minute:
-                        return string.Format(Localization.MinutesCountFormat, Internal.DurationLeft);
-                    case Library.Enums.ETimeUnit.Hour:
-                        return string.Format(Localization.HoursCountFormat, Internal.DurationLeft);
-                    case Library.Enums.ETimeUnit.Day:
-                        return string.Format(Localization.DaysCountFormat, Internal.DurationLeft);
-                    case Library.Enums.ETimeUnit.Year:
-                        return string.Format(Localization.YearsCountFormat, Internal.DurationLeft);
-                    default:
-                        return Internal.DurationLeft.ToString();
-                }
+                    Library.Enums.ETimeUnit.Round => 
+                        string.Format(Localization.RoundsCountFormat, Internal.DurationLeft),
+                    Library.Enums.ETimeUnit.Minute => 
+                        string.Format(Localization.MinutesCountFormat, Internal.DurationLeft),
+                    Library.Enums.ETimeUnit.Hour => 
+                        string.Format(Localization.HoursCountFormat, Internal.DurationLeft),
+                    Library.Enums.ETimeUnit.Day => 
+                        string.Format(Localization.DaysCountFormat, Internal.DurationLeft),
+                    Library.Enums.ETimeUnit.Year => 
+                        string.Format(Localization.YearsCountFormat, Internal.DurationLeft),
+                    _ => Internal.DurationLeft.ToString(),
+                };
             }
         }
 
@@ -91,15 +84,25 @@ namespace BRIX.Mobile.Models.Characters
 
         public void AddEffect(EffectModelBase effect)
         {
+            if(effect.InternalModel == null)
+            {
+                throw new Exception("Не инициализирована модель" + nameof(effect.InternalModel));
+            }
+
             Internal.AddEffect(effect.InternalModel);
             Effects.Add(effect);
         }
 
         public void UpdateEffect(EffectModelBase effect)
         {
+            if (effect.InternalModel == null)
+            {
+                throw new Exception("Не инициализирована модель" + nameof(effect.InternalModel));
+            }
+
             Internal.UpdateEffect(effect.InternalModel);
             EffectModelBase effectToRemove = Effects.First(x =>
-                x.InternalModel.Number == effect.InternalModel.Number
+                x.InternalModel?.Number == effect.InternalModel.Number
                 && x.InternalModel.GetType().Equals(effect.InternalModel.GetType())
             );
             Effects.Remove(effectToRemove);

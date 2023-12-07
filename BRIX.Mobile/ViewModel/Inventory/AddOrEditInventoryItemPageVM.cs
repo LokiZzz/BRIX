@@ -167,8 +167,9 @@ namespace BRIX.Mobile.ViewModel.Inventory
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             _mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
-            _inventory = query.GetParameterOrDefault<Library.Characters.Inventory>(NavigationParameters.Inventory);
-            InventoryItem originalItem = query.GetParameterOrDefault<InventoryItem>(
+            _inventory = query.GetParameterOrDefault<Library.Characters.Inventory>(NavigationParameters.Inventory)
+                ?? throw new Exception("В параметры страницы редактирования предмета не передан инвентарь персонажа.");
+            InventoryItem? originalItem = query.GetParameterOrDefault<InventoryItem>(
                 NavigationParameters.InventoryItem
             );
 

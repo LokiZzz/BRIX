@@ -12,8 +12,11 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         private void SetPoints(string points)
         {
-            int intPoints = int.Parse(points);
-            Aspect.ActionPoints = intPoints;
+            if (Aspect != null)
+            {
+                int intPoints = int.Parse(points);
+                Aspect.ActionPoints = intPoints;
+            }
         }
     }
 }

@@ -128,7 +128,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                         break;
                 }
 
-                List<AbilityMaterialSupport> materials = query.GetParameterOrDefault<List<AbilityMaterialSupport>>(
+                List<AbilityMaterialSupport>? materials = query.GetParameterOrDefault<List<AbilityMaterialSupport>>(
                     NavigationParameters.MaterialSupport
                 );
 

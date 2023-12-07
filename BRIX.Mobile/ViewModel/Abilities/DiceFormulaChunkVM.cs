@@ -8,7 +8,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
     /// </summary>
     public class DiceFormulaChunkVM
     {
-        public Dice Dice { get; set; }
+        public Dice Dice { get; set; } = new();
 
         public int Modifier { get; set; }
 

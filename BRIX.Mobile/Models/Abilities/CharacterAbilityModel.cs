@@ -23,7 +23,7 @@ namespace BRIX.Mobile.Models.Abilities
 
         public CharacterAbility InternalModel { get; }
 
-        public ObservableCollection<EffectModelBase> Effects { get; set; } = new ObservableCollection<EffectModelBase>();
+        public ObservableCollection<EffectModelBase> Effects { get; set; } = [];
 
         public string Name
         {
@@ -55,6 +55,11 @@ namespace BRIX.Mobile.Models.Abilities
 
         public void AddEffect(EffectModelBase effect)
         {
+            if(effect.InternalModel == null)
+            {
+                throw new Exception("Не инициализирована модель" + nameof(effect.InternalModel));
+            }
+
             InternalModel.AddEffect(effect.InternalModel);
             Effects.Add(effect);
             OnPropertyChanged(nameof(Cost));
@@ -63,9 +68,14 @@ namespace BRIX.Mobile.Models.Abilities
 
         public void UpdateEffect(EffectModelBase effect)
         {
+            if (effect.InternalModel == null)
+            {
+                throw new ArgumentNullException(nameof(effect));
+            }
+
             InternalModel.UpdateEffect(effect.InternalModel);
             EffectModelBase effectToRemove = Effects.First(x =>
-                x.InternalModel.Number == effect.InternalModel.Number
+                x.InternalModel?.Number == effect.InternalModel.Number
                 && x.InternalModel.GetType().Equals(effect.InternalModel.GetType())
             );
             Effects.Remove(effectToRemove);
@@ -76,6 +86,11 @@ namespace BRIX.Mobile.Models.Abilities
 
         public void RemoveEffect(EffectModelBase effect) 
         {
+            if(effect.InternalModel == null)
+            {
+                throw new ArgumentNullException(nameof(effect));
+            }
+
             InternalModel.RemoveEffect(effect.InternalModel);
             Effects.Remove(effect);
             OnPropertyChanged(nameof(Cost));

@@ -40,16 +40,25 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             CostMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
-            CostMonitor.SaveCommand = SaveCommand;
-            Effect = query.GetParameterOrDefault<EffectModelBase>(NavigationParameters.Effect);
-            T temp = query.GetParameterOrDefault<T>(NavigationParameters.Aspect);
-            Aspect = temp;
-            Aspect.CostMonitor = CostMonitor;
 
-            Initialize();
-             
-            Effect.UpdateAspect(Aspect);
-            CostMonitor.Ability?.UpdateEffect(Effect);
+            if (CostMonitor != null)
+            {
+                CostMonitor.SaveCommand = SaveCommand;
+            }
+
+            Effect = query.GetParameterOrDefault<EffectModelBase>(NavigationParameters.Effect);
+            T? temp = query.GetParameterOrDefault<T>(NavigationParameters.Aspect);
+            Aspect = temp;
+
+            if (Aspect != null && CostMonitor != null && Effect != null)
+            {
+                Aspect.CostMonitor = CostMonitor;
+
+                Initialize();
+
+                Effect.UpdateAspect(Aspect);
+                CostMonitor.Ability?.UpdateEffect(Effect);
+            }
 
             query.Clear();
         }

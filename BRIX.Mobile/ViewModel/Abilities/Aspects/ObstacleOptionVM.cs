@@ -11,7 +11,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             IEnumerable<ObstacleOptionVM> options = Enum.GetValues<EObstacleEquivalent>()
                 .Where(x => x != EObstacleEquivalent.None)
                 .Select(x => new ObstacleOptionVM { 
-                    LocalizedName = localization[x.ToString("G")].ToString(), 
+                    LocalizedName = localization[x.ToString("G")].ToString() ?? string.Empty, 
                     Equivalent = x 
                 });
 
@@ -21,7 +21,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
     public class ObstacleOptionVM
     {
-        public string LocalizedName { get; set; }
+        public string LocalizedName { get; set; } = string.Empty;
 
         public EObstacleEquivalent Equivalent { get; set; }
 

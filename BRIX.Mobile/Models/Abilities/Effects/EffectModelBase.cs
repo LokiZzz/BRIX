@@ -10,11 +10,13 @@ namespace BRIX.Mobile.Models.Abilities.Effects
 {
     public abstract partial class EffectModelBase : ObservableObject
     {
-        public EffectBase InternalModel { get; set; }
+        public EffectBase? InternalModel { get; set; }
 
         public T GetSpecificEffect<T>() where T : EffectBase
         {
-            return InternalModel as T;
+            return InternalModel != null
+                ? (T)InternalModel
+                : throw new Exception("InternalModel не инициализирован.");
         }
 
         public string Name => EffectsDictionary.Collection[GetType()].Name;
@@ -26,25 +28,32 @@ namespace BRIX.Mobile.Models.Abilities.Effects
                 ILocalizationResourceManager localization = Resolver.Resolve<ILocalizationResourceManager>();
                 ELexisLanguage language = localization.LexisLanguage;
 
-                return EffectLexis.GetEffectDescription(InternalModel, language);
+                return InternalModel != null
+                    ? EffectLexis.GetEffectDescription(InternalModel, language)
+                    : string.Empty;
             }
         }
 
-        public List<AspectModelBase> Aspects { get; protected set; }
+        public List<AspectModelBase> Aspects { get; protected set; } = [];
 
         public AspectModelBase GetAspect(Type aspectType)
         {
-            return Aspects.FirstOrDefault(x => x.InternalBase.GetType() == aspectType);
+            return Aspects.Single(x => x.InternalBase.GetType() == aspectType);
         }
 
         public void UpdateAspect(AspectModelBase aspect)
         {
-            InternalModel.SetAspect(aspect.InternalBase);
+            InternalModel?.SetAspect(aspect.InternalBase);
             UpdateAspects();
         }
 
         public void UpdateAspects()
         {
+            if(InternalModel == null)
+            {
+                return;
+            }
+
             Aspects = InternalModel.Aspects
                 .Select(AspectModelFactory.GetAspectModel)
                 .Where(x => x != null)

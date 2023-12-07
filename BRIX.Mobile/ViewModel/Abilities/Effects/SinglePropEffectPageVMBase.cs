@@ -9,14 +9,24 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
     {
         public override void Initialize()
         {
+            if(Effect == null)
+            {
+                throw new Exception("Эффект не инициализирован.");
+            }
+
             DicePoolEditor.DicePoolUpdated += OnImpactUpdated;
             DicePoolEditor.Dices = Effect.Internal.Impact.IsEmpty
                 ? new DicePool((1, 4))
                 : Effect.Internal.Impact;
         }
 
-        private void OnImpactUpdated(object sender, EventArgs e)
+        private void OnImpactUpdated(object? sender, EventArgs e)
         {
+            if (Effect == null)
+            {
+                throw new Exception("Эффект не инициализирован.");
+            }
+
             Effect.Internal.Impact = DicePoolEditor.Dices;
             CostMonitor?.UpdateCost();
         }

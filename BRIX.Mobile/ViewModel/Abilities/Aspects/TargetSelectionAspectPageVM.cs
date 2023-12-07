@@ -12,17 +12,18 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
     /// <summary>
     /// Просит рефакторинга, но не срочно, нужно убрать из регионов в TargetSelectionAspectModel по максимуму.
     /// </summary>
-    public partial class TargetSelectionAspectPageVM : AspectPageVMBase<TargetSelectionAspectModel>
+    public partial class TargetSelectionAspectPageVM(ILocalizationResourceManager localization) 
+        : AspectPageVMBase<TargetSelectionAspectModel>
     {
-        public TargetSelectionAspectPageVM(ILocalizationResourceManager localization)
-        {
-            Localization = localization;
-        }
-
-        public ILocalizationResourceManager Localization { get; }
+        public ILocalizationResourceManager Localization { get; } = localization;
 
         public override void Initialize()
         {
+            if(Aspect == null)
+            {
+                throw new ArgumentNullException(nameof(Aspect));
+            }
+
             if (Aspect.Internal.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
             {
                 SetNTAD();
@@ -39,7 +40,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             Sizes = new(Aspect.Internal.TargetsSizes.AllowedTargetSizes.Select(x => new TargetSizeVM
             {
                 Size = x,
-                Text = Localization[x.ToString("G")].ToString()
+                Text = Localization[x.ToString("G")].ToString() ?? string.Empty
             }));
             OnPropertyChanged(nameof(ShowSizesCollection));
         }
@@ -49,6 +50,11 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         public void SetNTAD()
         {
+            if (Aspect == null)
+            {
+                throw new ArgumentNullException(nameof(Aspect));
+            }
+
             IsAREA = false;
             IsNTAD = true;
             IsCharacter = false;
@@ -58,6 +64,11 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         public void SetAREA()
         {
+            if (Aspect == null)
+            {
+                throw new ArgumentNullException(nameof(Aspect));
+            }
+
             IsNTAD = false;
             IsAREA = true;
             IsCharacter = false;
@@ -67,6 +78,11 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         public void SetCharacter()
         {
+            if (Aspect == null)
+            {
+                throw new ArgumentNullException(nameof(Aspect));
+            }
+
             IsNTAD = false;
             IsAREA = false;
             IsCharacter = true;
@@ -113,7 +129,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
         #region Targets selection restrictions
 
-        private ObservableCollection<TargetSelectionRestrictionPropertyVM> _restrictions;
+        private ObservableCollection<TargetSelectionRestrictionPropertyVM> _restrictions = [];
         public ObservableCollection<TargetSelectionRestrictionPropertyVM> Restrictions
         {
             get => _restrictions;
@@ -125,12 +141,17 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         public async Task AddRestriction()
         {
-            List<ETargetSelectionRestrictions> customRestrictions = new()
+            if (Aspect == null)
             {
+                throw new ArgumentNullException(nameof(Aspect));
+            }
+
+            List<ETargetSelectionRestrictions> customRestrictions =
+            [
                 ETargetSelectionRestrictions.LowRarityProperty,
                 ETargetSelectionRestrictions.MediumRarityProperty,
                 ETargetSelectionRestrictions.HighRarityProperty,
-            };
+            ];
 
             List<object> allRestrictions = Enum.GetValues<ETargetSelectionRestrictions>()
                 .Select(x => new TargetSelectionRestrictionPropertyVM { 
@@ -156,7 +177,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 {
                     if (customRestrictions.Any(x => x == concreteResult.Restriction))
                     {
-                        string message = GetCustomRestrictionHint(concreteResult.Restriction);
+                        string message = TargetSelectionAspectPageVM.GetCustomRestrictionHint(concreteResult.Restriction);
 
                         EntryPopupResult? entryResult = await ShowPopupAsync<EntryPopup, EntryPopupResult, EntryPopupParameters>(
                             new EntryPopupParameters
@@ -189,12 +210,17 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 }
             }
 
-            CostMonitor.UpdateCost();
+            CostMonitor?.UpdateCost();
         } 
 
         [RelayCommand]
         public void DeleteRestriction(TargetSelectionRestrictionPropertyVM property)
         {
+            if (Aspect == null)
+            {
+                throw new Exception("Не инициализирована модель" + nameof(Aspect));
+            }
+
             Restrictions.Remove(property);
 
             (ETargetSelectionRestrictions Type, string Comment) conditionToDelete = 
@@ -202,42 +228,39 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                     x.Type == property.Restriction || x.Comment == property.Text);
             Aspect.Internal.TargetSelectionRestrictions.Conditions.Remove(conditionToDelete);
 
-            CostMonitor.UpdateCost();
+            CostMonitor?.UpdateCost();
             OnPropertyChanged(nameof(ShowNoRestrictionsText));
         }
 
         private TargetSelectionRestrictionPropertyVM ToRestrictionsVM((ETargetSelectionRestrictions Type, string Comment) restriction)
         {
-            TargetSelectionRestrictionPropertyVM restrictionVM = new() { Restriction = restriction.Type };
-
-            switch(restriction.Type)
+            TargetSelectionRestrictionPropertyVM restrictionVM = new()
             {
-                case ETargetSelectionRestrictions.LowRarityProperty:
-                case ETargetSelectionRestrictions.MediumRarityProperty:
-                case ETargetSelectionRestrictions.HighRarityProperty:
-                    restrictionVM.Text = restriction.Comment; 
-                    break;
-                default:
-                    restrictionVM.Text = Localization[restriction.Type.ToString("G")].ToString();
-                    break;
-            }
+                Restriction = restriction.Type,
+                Text = restriction.Type switch
+                {
+                    ETargetSelectionRestrictions.LowRarityProperty
+                    or ETargetSelectionRestrictions.MediumRarityProperty
+                    or ETargetSelectionRestrictions.HighRarityProperty => restriction.Comment,
+                    _ => Localization[restriction.Type.ToString("G")].ToString() ?? string.Empty,
+                }
+            };
 
             return restrictionVM;
         }
 
-        private string GetCustomRestrictionHint(ETargetSelectionRestrictions restriction)
+        private static string GetCustomRestrictionHint(ETargetSelectionRestrictions restriction)
         {
-            switch (restriction)
+            return restriction switch
             {
-                case ETargetSelectionRestrictions.LowRarityProperty:
-                    return Resources.Localizations.Localization.EnterLowRarityRestriction;
-                case ETargetSelectionRestrictions.MediumRarityProperty:
-                    return Resources.Localizations.Localization.EnterMediumRarityRestriction;
-                case ETargetSelectionRestrictions.HighRarityProperty:
-                    return Resources.Localizations.Localization.EnterHighRarityRestriction;
-                default:
-                    return null;
-            }
+                ETargetSelectionRestrictions.LowRarityProperty => 
+                    Resources.Localizations.Localization.EnterLowRarityRestriction,
+                ETargetSelectionRestrictions.MediumRarityProperty => 
+                    Resources.Localizations.Localization.EnterMediumRarityRestriction,
+                ETargetSelectionRestrictions.HighRarityProperty => 
+                    Resources.Localizations.Localization.EnterHighRarityRestriction,
+                _ => string.Empty,
+            };
         }
 
         #endregion
@@ -246,7 +269,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
         public bool ShowSizesCollection => Sizes?.Any() == true;
 
-        private ObservableCollection<TargetSizeVM> _sizes;
+        private ObservableCollection<TargetSizeVM> _sizes = [];
         public ObservableCollection<TargetSizeVM> Sizes
         {
             get => _sizes;
@@ -256,11 +279,16 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         public async Task AddSize()
         {
+            if (Aspect == null)
+            {
+                throw new ArgumentNullException(nameof(Aspect));
+            }
+
             List<object> allSizes = Enum.GetValues<ETargetSize>()
                 .Select(x => new TargetSizeVM
                 {
                     Size = x,
-                    Text = Localization[x.ToString("G")].ToString()
+                    Text = Localization[x.ToString("G")].ToString() ?? string.Empty
                 })
                 .Where(x => !Sizes.Any(y => y.Size == x.Size))
                 .Select(x => x as object)
@@ -271,14 +299,14 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 {
                     Title = Resources.Localizations.Localization.TargetsSizes,
                     Items = allSizes,
-                    SelectedItems = new List<object> { allSizes.First() },
+                    SelectedItems = [allSizes.First()],
                     SelectMultiple = true
                 }
             );
 
             if (result != null)
             {
-                List<TargetSizeVM> concreteResult = result.SelectedItems.Select(x => x as TargetSizeVM).ToList();
+                List<TargetSizeVM> concreteResult = result.SelectedItems.Select(x => (TargetSizeVM)x).ToList();
 
                 if (Sizes.Any(x => concreteResult.Any(y => y.Size == x.Size)))
                 {
@@ -294,7 +322,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 Sizes = new(Sizes.OrderBy(x => x.Size));
             }
 
-            CostMonitor.UpdateCost();
+            CostMonitor?.UpdateCost();
 
             OnPropertyChanged(nameof(ShowSizesCollection));
         }
@@ -302,10 +330,15 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         public void DeleteSize(TargetSizeVM property)
         {
+            if (Aspect == null)
+            {
+                throw new Exception("Не инициализирована модель" + nameof(Aspect));
+            }
+
             Sizes.Remove(property);
             Aspect.Internal.TargetsSizes.RemoveSize(property.Size);
 
-            CostMonitor.UpdateCost();
+            CostMonitor?.UpdateCost();
 
             OnPropertyChanged(nameof(ShowSizesCollection));
         }
@@ -317,9 +350,16 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         public void SetShape(string shape)
         {
-            Enum.TryParse(shape, out EAreaType parsedShape);
-            Shape = parsedShape;
-            Aspect.AreaType = parsedShape;
+            if(Aspect == null)
+            {
+                throw new Exception("Аспект не инициализирован.");
+            }
+
+            if (Enum.TryParse(shape, out EAreaType parsedShape))
+            {
+                Shape = parsedShape;
+                Aspect.AreaType = parsedShape;
+            }
         }
 
         private EAreaType _shape;
@@ -349,7 +389,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
     public class TargetSelectionRestrictionPropertyVM
     {
         public ETargetSelectionRestrictions Restriction { get; set; }
-        public string Text { get; set; }
+        public string Text { get; set; } = string.Empty;
 
         public override string ToString() => Text;
     }
@@ -357,7 +397,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
     public class TargetSizeVM
     {
         public ETargetSize Size { get; set; }
-        public string Text { get; set; }
+        public string Text { get; set; } = string.Empty;
 
         public override string ToString() => Text;
     }

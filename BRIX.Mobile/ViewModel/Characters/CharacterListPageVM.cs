@@ -93,7 +93,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         private void HandleBackFromEditing(IDictionary<string, object> query)
         {
-            CharacterModel character = query.GetParameterOrDefault<CharacterModel>(NavigationParameters.Character);
+            CharacterModel? character = query.GetParameterOrDefault<CharacterModel>(NavigationParameters.Character);
 
             if (character != null)
             {
