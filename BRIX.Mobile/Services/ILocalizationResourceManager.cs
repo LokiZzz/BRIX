@@ -36,7 +36,7 @@ namespace BRIX.Mobile.Services
 
         public List<string> GetKeys()
         {
-            List<string> keys = new();
+            List<string> keys = [];
             System.Resources.ResourceSet? resourceSet = Localization.ResourceManager
                 .GetResourceSet(CurrentCulture, false, false);
 
@@ -62,20 +62,20 @@ namespace BRIX.Mobile.Services
         {
             get
             {
-                switch(CurrentCulture.Name)
+                return CurrentCulture.Name switch
                 {
-                    case "en-US": return ELexisLanguage.English;
-                    case "ru-RU": return ELexisLanguage.Russian;
-                    default: return ELexisLanguage.English;
-                }
+                    "en-US" => ELexisLanguage.English,
+                    "ru-RU" => ELexisLanguage.Russian,
+                    _ => ELexisLanguage.English,
+                };
             }
         }
 
-        public List<CultureInfo> Cultures { get; } = new()
-        {
+        public List<CultureInfo> Cultures { get; } =
+        [
             CultureInfo.GetCultureInfo("en-US"),
             CultureInfo.GetCultureInfo("ru-RU"),
-        };
+        ];
 
         public void SetCulture(CultureInfo culture)
         {

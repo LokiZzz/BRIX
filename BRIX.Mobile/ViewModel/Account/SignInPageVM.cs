@@ -6,14 +6,9 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace BRIX.Mobile.ViewModel.Account
 {
-    public partial class SignInPageVM : ViewModelBase
+    public partial class SignInPageVM(IAccountService accountService) : ViewModelBase
     {
-        private readonly IAccountService _accountService;
-
-        public SignInPageVM(IAccountService accountService)
-        {
-            _accountService = accountService;
-        }
+        private readonly IAccountService _accountService = accountService;
 
         [ObservableProperty]
         private string _login = string.Empty;

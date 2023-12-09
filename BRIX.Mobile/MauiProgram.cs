@@ -1,5 +1,6 @@
 ﻿using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities.Effects;
+using BRIX.Mobile.Resources.Handlers;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Abilities;
@@ -31,10 +32,10 @@ public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
 	{
-		MauiAppBuilder builder = MauiApp.CreateBuilder();
+        MauiAppBuilder builder = MauiApp.CreateBuilder();
 		builder.UseMauiApp<App>()
             .UseMauiCommunityToolkit()
-			.ConfigureFonts(fonts =>
+            .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("EBGaramond-Regular.ttf", "Garamond");
 				fonts.AddFont("SourceSansPro-Regular.ttf", "SourceSansPro");
