@@ -226,8 +226,9 @@ namespace BRIX.Mobile.ViewModel.Characters
                     {
                         break;
                     }
+                }
             }
-}
+
             return statuses;
         }
 
@@ -249,6 +250,10 @@ namespace BRIX.Mobile.ViewModel.Characters
                 {
                     await _characterService.SelectCurrentCharacter(characters.First());
                     Character = new CharacterModel(await _characterService.GetCurrentCharacterGuaranteed());
+                }
+                else
+                {
+                    Character = null;
                 }
             }
 

@@ -17,7 +17,6 @@
             <Setter Property="WidthRequest" Value="-1"/>
             <Setter Property="CornerRadius" Value="0"/>
             <Setter Property="Padding" Value="7,0"/>
-
         </Style>
     </ContentPage.Resources>
     
@@ -29,9 +28,12 @@
                 Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Character}}"/>
 
             <HorizontalStackLayout Grid.Column="1" Spacing="10" IsVisible="{Binding PlayerHaveCharacter}">
-                <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.PenToSquare}" Command="{Binding EditCommand}"/>
-                <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.FileImage}" Command="{Binding PictureCommand}"/>
-                <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.PeopleArrows}" Command="{Binding SwitchCommand}"/>
+                <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.PenToSquare}" 
+                        Command="{Binding Source={x:Reference CharacterContentPage}, Path= BindingContext.EditCommand}"/>
+                <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.FileImage}" 
+                        Command="{Binding Source={x:Reference CharacterContentPage}, Path= BindingContext.PictureCommand}"/>
+                <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.PeopleArrows}" 
+                        Command="{Binding Source={x:Reference CharacterContentPage}, Path= BindingContext.SwitchCommand}"/>
             </HorizontalStackLayout>
         </Grid>
     </Shell.TitleView>
