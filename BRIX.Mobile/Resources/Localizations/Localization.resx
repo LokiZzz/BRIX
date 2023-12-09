@@ -492,6 +492,9 @@
   <data name="ExperienceToLevelup" xml:space="preserve">
     <value>Experience</value>
   </data>
+  <data name="EXPLeft" xml:space="preserve">
+    <value>Left: </value>
+  </data>
   <data name="EXPStillAvailiable" xml:space="preserve">
     <value>Availiable:</value>
   </data>

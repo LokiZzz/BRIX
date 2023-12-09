@@ -1186,6 +1186,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Left: .
+        /// </summary>
+        public static string EXPLeft {
+            get {
+                return ResourceManager.GetString("EXPLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Availiable:.
         /// </summary>
         public static string EXPStillAvailiable {

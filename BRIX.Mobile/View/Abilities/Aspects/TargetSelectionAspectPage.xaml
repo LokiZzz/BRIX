@@ -33,12 +33,9 @@
         </Style>
         <Style TargetType="ImageButton" x:Key="ShapeButton">
             <Setter Property="BackgroundColor" Value="{StaticResource BRIXDim}"/>
-            <Setter Property="HeightRequest" Value="70"/>
-            <Setter Property="WidthRequest" Value="70"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="Margin" Value="-3"/> <!--Когда в MAUI пофиксят баги с паддингом ImageButton-а, можно будет это убрать-->
-            <!--https://github.com/dotnet/maui/issues/7927-->
-            <!--https://github.com/dotnet/maui/issues/13101-->
+            <Setter Property="HeightRequest" Value="55"/>
+            <Setter Property="WidthRequest" Value="55"/>
+            <Setter Property="Padding" Value="20"/>
         </Style>
         <Style TargetType="Image" x:Key="ShapeScheme">
             <Setter Property="HeightRequest" Value="150"/>
