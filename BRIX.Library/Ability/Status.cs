@@ -35,7 +35,7 @@ namespace BRIX.Library.Ability
 
         public int DurationLeft => MaxDuration - DurationPassed >= 0 ? MaxDuration - DurationPassed : 0;
 
-        private readonly List<EffectBase> _effects = new();
+        private readonly List<EffectBase> _effects = [];
         public IReadOnlyList<EffectBase> Effects => _effects;
 
         public void AddEffect(EffectBase effect)

@@ -16,16 +16,11 @@ using BRIX.Library.Enums;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
-    public partial class CharacterPageVM : ViewModelBase
+    public partial class CharacterPageVM(ICharacterService characterService, ILocalizationResourceManager localization) 
+        : ViewModelBase
     {
-        private readonly ICharacterService _characterService;
-        private readonly ILocalizationResourceManager _localization;
-
-        public CharacterPageVM(ICharacterService characterService, ILocalizationResourceManager localization)
-        {
-            _characterService = characterService;
-            _localization = localization;
-        }
+        private readonly ICharacterService _characterService = characterService;
+        private readonly ILocalizationResourceManager _localization = localization;
 
         [ObservableProperty]
         private CharacterModel? _character;
@@ -37,7 +32,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         private bool _showNoCharacterText;
 
         [ObservableProperty]
-        private ObservableCollection<ExperienceInfoVM> _expCards = new();
+        private ObservableCollection<ExperienceInfoVM> _expCards = [];
 
         private bool _showImagePlaceholder = true;
         public bool ShowImagePlaceholder
@@ -213,7 +208,8 @@ namespace BRIX.Mobile.ViewModel.Characters
         /// </summary>
         private List<StatusItemVM> GetStatusesWithLowestUnit()
         {
-            List<StatusItemVM> statuses = new();
+            List<StatusItemVM> statuses = [];
+
             if (Character != null)
             {
                 foreach (ETimeUnit timeUnit in Enum.GetValues<ETimeUnit>())
@@ -222,7 +218,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                         .Where(x => x.Internal.GetHighestTimeUnit() == timeUnit)
                         .ToList();
 
-                    if (statuses.Any())
+                    if (statuses.Count > 0)
                     {
                         break;
                     }
@@ -246,7 +242,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             {
                 List<Character> characters = await _characterService.GetAllAsync();
 
-                if(characters.Any())
+                if(characters.Count > 0)
                 {
                     await _characterService.SelectCurrentCharacter(characters.First());
                     Character = new CharacterModel(await _characterService.GetCurrentCharacterGuaranteed());
@@ -287,8 +283,8 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if (ExpCards == null || !ExpCards.Any())
             {
-                ExpCards = new ObservableCollection<ExperienceInfoVM>
-                {
+                ExpCards =
+                [
                     new ExperienceInfoVM
                     {
                         Icon = Awesome.Calculator,
@@ -302,7 +298,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                         IconFont = "AwesomeRPG",
                         DoCardActionCommand = new RelayCommand(async () => await GoToAbilities())
                     },
-                };
+                ];
             }
 
             ExpCards.First().Current = Character.Experience;

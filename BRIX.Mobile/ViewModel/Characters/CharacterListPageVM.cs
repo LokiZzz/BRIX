@@ -15,21 +15,13 @@ using CommunityToolkit.Mvvm.Messaging.Messages;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
-    public partial class CharacterListPageVM : ViewModelBase, IQueryAttributable
+    public partial class CharacterListPageVM(ICharacterService characterService) : ViewModelBase, IQueryAttributable
     {
-        private readonly ICharacterService _characterService;
-        private readonly ILocalizationResourceManager _localization;
-
-        public CharacterListPageVM(ICharacterService characterService, ILocalizationResourceManager localization)
-        {
-            _characterService = characterService;
-            _localization = localization;
-        }
-
+        private readonly ICharacterService _characterService = characterService;
         private bool _initialized = false;
 
         [ObservableProperty]
-        private ObservableCollection<CharacterModel> _characters = new();
+        private ObservableCollection<CharacterModel> _characters = [];
 
         [ObservableProperty]
         private bool _showHelp;
@@ -107,8 +99,5 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
     }
 
-    public class CurrentCharacterChanged : ValueChangedMessage<CharacterModel>
-    {
-        public CurrentCharacterChanged(CharacterModel character) : base(character) { }
-    }
+    public class CurrentCharacterChanged(CharacterModel character) : ValueChangedMessage<CharacterModel>(character) { }
 }
