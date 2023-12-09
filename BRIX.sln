@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BRIX.Utility", "BRIX.Utilit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BRIX.Lexica", "BRIX.Lexica\BRIX.Lexica.csproj", "{93F54607-C88F-4C34-921A-A14D4DE50CB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BRIX.SourceGenerator", "BRIX.SourceGenerator\BRIX.SourceGenerator.csproj", "{C7DB9542-43FD-41FD-B296-400B4DBDCF54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BRIX.SourceGenerator", "BRIX.SourceGenerator\BRIX.SourceGenerator.csproj", "{C7DB9542-43FD-41FD-B296-400B4DBDCF54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

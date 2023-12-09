@@ -24,7 +24,15 @@ namespace BRIX.Mobile.Services
             Localization.Culture = fromSettings ?? Cultures.First();
         }
 
-        public object this[string resourceKey] => Localization.ResourceManager.GetObject(resourceKey, Localization.Culture) ?? Array.Empty<byte>();
+        public object this[string resourceKey]
+        {
+            get 
+            {
+                object? resource = Localization.ResourceManager.GetObject(resourceKey, Localization.Culture);
+
+                return resource  ?? Array.Empty<byte>();
+            }
+        }
 
         public List<string> GetKeys()
         {

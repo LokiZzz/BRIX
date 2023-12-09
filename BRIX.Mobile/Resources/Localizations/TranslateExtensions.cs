@@ -5,18 +5,24 @@ namespace BRIX.Mobile.Resources.Localizations
     [ContentProperty(nameof(Name))]
     public class TranslateExtension : IMarkupExtension<BindingBase>
     {
-        public string Name { get; set; } = string.Empty;
-        public string StringFormat { get; set; } = string.Empty;
+        public string? Name { get; set; }
+        public string? StringFormat { get; set; }
 
         public BindingBase ProvideValue(IServiceProvider serviceProvider)
         {
-            return new Binding
+            Binding binding = new ()
             {
                 Mode = BindingMode.OneWay,
                 Path = $"[{Name}]",
                 Source = Resolver.Resolve<ILocalizationResourceManager>(),
-                StringFormat = StringFormat
             };
+
+            if(!string.IsNullOrEmpty(StringFormat))
+            {
+                binding.StringFormat = StringFormat;
+            }
+
+            return binding;
         }
 
         object IMarkupExtension.ProvideValue(IServiceProvider serviceProvider)
