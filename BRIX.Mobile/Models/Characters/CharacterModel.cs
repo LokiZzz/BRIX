@@ -103,6 +103,8 @@ namespace BRIX.Mobile.Models.Characters
         public int MaxHealthPenalties => -InternalModel.MaxHealthPenalties;
         public int MaxHealthBonuses => InternalModel.MaxHealthBonuses;
 
+        public bool ShowHealthFormula => MaxHealthPenalties != 0 || MaxHealthBonuses != 0;
+
         public int CurrentHealth
         {
             get => InternalModel.CurrentHealth;
@@ -165,7 +167,7 @@ namespace BRIX.Mobile.Models.Characters
             OnPropertyChanged(nameof(HealthFromExp));
             OnPropertyChanged(nameof(MaxHealthBonuses));
             OnPropertyChanged(nameof(MaxHealthPenalties));
-
+            OnPropertyChanged(nameof(ShowHealthFormula));
         }
 
         public void UpdateExp()

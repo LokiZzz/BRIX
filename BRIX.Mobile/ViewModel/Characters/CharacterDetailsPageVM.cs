@@ -173,7 +173,22 @@ namespace BRIX.Mobile.ViewModel.Characters
                 return;
             }
 
-            Character.LuckPoints--;
+            if (Character.LuckPoints != 0)
+            {
+                Character.LuckPoints--;
+                await _characterService.UpdateAsync(Character.InternalModel);
+            }
+        }
+
+        [RelayCommand]
+        public async Task ResetLuck()
+        {
+            if (Character == null)
+            {
+                return;
+            }
+
+            Character.LuckPoints = 0;
             await _characterService.UpdateAsync(Character.InternalModel);
         }
 

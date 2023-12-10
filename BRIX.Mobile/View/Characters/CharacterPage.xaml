@@ -157,16 +157,21 @@
                                     </DataTrigger>
                                 </ProgressBar.Triggers>
                             </ProgressBar>
-                            <Label Grid.Row="2" Grid.ColumnSpan="3" HorizontalOptions="End" Margin="0,3,0,0">
+                            <Label 
+                                Grid.Row="2" Grid.ColumnSpan="3" 
+                                HorizontalOptions="End" Margin="0,3,0,0" 
+                                IsVisible="{Binding Character.ShowHealthFormula}">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="{Binding Character.RawMaxHealth}"/>
                                         <Span Text=" + "/>
                                         <Span Text="{Binding Character.HealthFromExp}"/>
-                                        <Span Text=" + "/>
-                                        <Span Text="{Binding Character.MaxHealthBonuses}"/>
-                                        <Span Text=" – "/>
-                                        <Span Text="{Binding Character.MaxHealthPenalties}"/>
+                                        <Span 
+                                            Text=" + " TextColor="{StaticResource BRIXLime}"
+                                            />
+                                        <Span Text="{Binding Character.MaxHealthBonuses}" TextColor="{StaticResource BRIXLime}"/>
+                                        <Span Text=" – " TextColor="{StaticResource BRIXRed}"/>
+                                        <Span Text="{Binding Character.MaxHealthPenalties}" TextColor="{StaticResource BRIXRed}"/>
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>

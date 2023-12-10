@@ -125,6 +125,8 @@ namespace BRIX.Mobile.ViewModel.Characters
             {
                 await HandleBackFromEditing(query);
             }
+
+            query?.Clear();
         }
 
         private Task HandleBackFromEditing(IDictionary<string, object> query)
