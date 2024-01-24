@@ -5,34 +5,24 @@ namespace BRIX.Lexis
     public static class Numbers
     {
         /// <summary>
-        /// Склонения слов, зависящие от числа.
-        /// Формат: ключ: им.п., значение: им.п., род.п., род.п. и мн.ч.
-        /// </summary>
-        private static Dictionary<string, string[]> NumberDeclensions = new()
-        {
-            { "очко", new string[] { "очко", "очка", "очков" } },
-            { "метр", new string[] { "метр", "метра", "метров" } },
-            { "цель", new string[] { "цель", "цели", "целей" } },
-            { "воксель", new string[] { "воксель", "вокселя", "вокселей" } },
-        };
-
-        /// <summary>
         /// Получить склонение от числа на русском языке
         /// </summary>
-        public static string RUSDeclension(int number, string nominative, bool addNumber = true)
+        /// <param name="number">Число, от которого происходит склонение</param>
+        /// <param name="nominative">Форма в именительном падеже (метр)</param>
+        /// <param name="genetive">Форма в родительном падеже (метра)</param>
+        /// <param name="pluralGenetive">Форма в родительном падеже и множественном числе (метров)</param>
+        /// <param name="addNumber">Подставить ли перед склонённым словом число</param>
+        /// <returns></returns>
+        public static string RUSDeclension(
+            int number, 
+            string nominative, 
+            string genetive, 
+            string pluralGenetive, 
+            bool addNumber = true)
         {
-            if(!NumberDeclensions.TryGetValue(nominative, out _))
-            {
-                return string.Empty;
-            }
+            string[] titles = new[] { nominative, genetive, pluralGenetive };
+            int[] cases = [2, 0, 1, 1, 1, 2];
 
-            string[] titles = new[]
-            {
-                NumberDeclensions[nominative][0], // Именительный (день)
-                NumberDeclensions[nominative][1], // Родительный (дня)
-                NumberDeclensions[nominative][2], // Род. п., множественное (дней)
-            };
-            int[] cases = new[] { 2, 0, 1, 1, 1, 2 };
             int searchingСaseIndex;
 
             if (number % 100 > 4 && number % 100 < 20)
@@ -59,9 +49,13 @@ namespace BRIX.Lexis
         /// <summary>
         /// Получить склонение от числительных в формуле костей на русском языке
         /// </summary>
-        public static string RUSDeclension(DicePool dicePool, string nominative)
+        public static string RUSDeclension(
+            DicePool dicePool, 
+            string nominative, 
+            string genetive, 
+            string pluralGenetive)
         {
-            return $"{dicePool} {RUSDeclension(dicePool.LastDigit(), nominative, false)}";
+            return $"{dicePool} {RUSDeclension(dicePool.LastDigit(), nominative, genetive, pluralGenetive, false)}";
         }
 
         /// <summary>

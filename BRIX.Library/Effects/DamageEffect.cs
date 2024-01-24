@@ -6,6 +6,8 @@ namespace BRIX.Library.Effects
 {
     public class DamageEffect : SinglePropEffectBase
     {
+        public string AdditionalProperty { get; set; } = "Additional property";
+
         public override List<Type> RequiredAspects => new() 
         {
             typeof(ActionPointAspect), typeof(TargetSelectionAspect), 
