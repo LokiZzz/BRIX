@@ -121,6 +121,6 @@
     <value>Чтобы использовать эту способность, вы должны потратить {0:prop.ActionPoints--очко,очка,очков} действия.</value>
   </data>
   <data name="DamageEffect" xml:space="preserve">
-    <value>Благодаря этому эффекту способность наносит {0:prop.Impact.Dice} урона. Дополнительное свойство: {0:prop.AdditionalProperty}</value>
+    <value>Благодаря этому эффекту способность наносит {0:prop.Impact.Dice} урона.</value>
   </data>
 </root>

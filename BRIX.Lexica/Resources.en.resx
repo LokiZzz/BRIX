@@ -121,6 +121,6 @@
     <value>To use this ability you have to spend {0:prop.ActionPoints--action point}.</value>
   </data>
   <data name="DamageEffect" xml:space="preserve">
-    <value>Due to this effect, the ability deals {0:prop.Impact} of damage. AdditionalProperty is {0:prop.AdditionalProperty}</value>
+    <value>Due to this effect, the ability deals {0:prop.Impact} of damage.</value>
   </data>
 </root>

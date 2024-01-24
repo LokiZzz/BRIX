@@ -20,9 +20,9 @@ namespace BRIX.Lexica
 
         private static string GetResourceString(string resourceName)
         {
-            ResourceManager temp = new ResourceManager("BRIX.Lexica.Resources", typeof(LexisProvider).Assembly);
+            ResourceManager resources = new ResourceManager("BRIX.Lexica.Resources", typeof(LexisProvider).Assembly);
 
-            return temp.GetString(resourceName) ?? throw new Exception($"Ресурс {resourceName} не найден.");
+            return resources.GetString(resourceName) ?? throw new Exception($"Ресурс {resourceName} не найден.");
         }
 
         private static string GetResourceName(object model)
