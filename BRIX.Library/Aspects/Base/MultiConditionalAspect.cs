@@ -5,7 +5,7 @@ namespace BRIX.Library.Aspects
 {
     public abstract class MultiConditionalAspect<T> : AspectBase where T : Enum
     {
-        public List<(T Type, string Comment)> Conditions { get; set; } = new ();
+        public List<(T Type, string Comment)> Conditions { get; set; } = [];
 
         public override double GetCoefficient()
         {

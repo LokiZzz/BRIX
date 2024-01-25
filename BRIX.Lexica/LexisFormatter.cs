@@ -1,13 +1,6 @@
 ﻿using BRIX.Lexis;
 using BRIX.Library.DiceValue;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Lexica
 {
@@ -59,6 +52,9 @@ namespace BRIX.Lexica
         {
             string[] splittedPropertyFormat = propertyFormat.Split("--");
             object? propertyValue = arg.GetType().GetProperty(splittedPropertyFormat[0])?.GetValue(arg);
+
+            //TODO: switch(propertyValue) case Type1: case Type2: ...
+
             bool haveDeclension = splittedPropertyFormat.Count() > 0;
 
             switch (_culture.Name)

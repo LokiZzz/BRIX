@@ -18,16 +18,16 @@ namespace BRIX.Lexica
             return string.Format(new LexisFormatter(cultureInfo), resourceString, model);
         }
 
+        private static string GetResourceName(object model)
+        {
+            return model.GetType().Name;
+        }
+
         private static string GetResourceString(string resourceName)
         {
             ResourceManager resources = new ResourceManager("BRIX.Lexica.Resources", typeof(LexisProvider).Assembly);
 
-            return resources.GetString(resourceName) ?? throw new Exception($"Ресурс {resourceName} не найден.");
-        }
-
-        private static string GetResourceName(object model)
-        {
-            return model.GetType().Name;
+            return resources.GetString(resourceName) ?? string.Empty;
         }
     }
 }
