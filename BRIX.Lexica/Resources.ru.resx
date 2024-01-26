@@ -120,6 +120,63 @@
   <data name="ActionPointAspect" xml:space="preserve">
     <value>Чтобы использовать эту способность, вы должны потратить {0:prop.ActionPoints--очко,очка,очков} действия.</value>
   </data>
+  <data name="ActivationConditionsAspect" xml:space="preserve">
+    <value>Чтобы способность могла быть активирована, должны соблюдаться некоторые условия. {0:prop.Conditions}</value>
+  </data>
+  <data name="ActivationConditionsAspect_Conditions_EasyActivationCondition" xml:space="preserve">
+    <value>Условие малой сложности</value>
+  </data>
+  <data name="ActivationConditionsAspect_Conditions_HardActivationCondition" xml:space="preserve">
+    <value>Условие высокой сложности</value>
+  </data>
+  <data name="ActivationConditionsAspect_Conditions_MediumActivationCondition" xml:space="preserve">
+    <value>Условие средней сложности</value>
+  </data>
+  <data name="ActivationConditionsAspect_Conditions_NeedToAbleToTalk" xml:space="preserve">
+    <value>Персонаж должен мочь говорить</value>
+  </data>
+  <data name="ActivationConditionsAspect_Conditions_NeedToMove" xml:space="preserve">
+    <value>Персонаж должен мочь двигаться</value>
+  </data>
+  <data name="ActivationConditionsAspect_Conditions_NeedToMoveArm" xml:space="preserve">
+    <value>Персонаж должен мочь двигать рукой</value>
+  </data>
+  <data name="ActivationConditionsAspect_Conditions_NeedToMoveBothArms" xml:space="preserve">
+    <value>Персонаж должен мочь двигать руками</value>
+  </data>
+  <data name="CooldownAspect" xml:space="preserve">
+    <value>Вы можете использовать эту способность {0:prop.UsesCount--раз,раза,раз}. Количество использований восстанавливается через {0:prop.Condition} после первого использования.</value>
+  </data>
+  <data name="CooldownAspect_Condition_Day" xml:space="preserve">
+    <value>1 день</value>
+  </data>
+  <data name="CooldownAspect_Condition_Hour" xml:space="preserve">
+    <value>1 час</value>
+  </data>
+  <data name="CooldownAspect_Condition_HundredYears" xml:space="preserve">
+    <value>100 лет</value>
+  </data>
+  <data name="CooldownAspect_Condition_Minute" xml:space="preserve">
+    <value>1 минуту</value>
+  </data>
+  <data name="CooldownAspect_Condition_Month" xml:space="preserve">
+    <value>1 месяц</value>
+  </data>
+  <data name="CooldownAspect_Condition_Round" xml:space="preserve">
+    <value>1 раунд</value>
+  </data>
+  <data name="CooldownAspect_Condition_TenYears" xml:space="preserve">
+    <value>10 лет</value>
+  </data>
+  <data name="CooldownAspect_Condition_Week" xml:space="preserve">
+    <value>1 неделю</value>
+  </data>
+  <data name="CooldownAspect_Condition_Year" xml:space="preserve">
+    <value>1 год</value>
+  </data>
+  <data name="CooldownAspect_Special_NoneCooldown" xml:space="preserve">
+    <value>Данная способность не требует перезарядки перед очередным использованием.</value>
+  </data>
   <data name="DamageEffect" xml:space="preserve">
     <value>Благодаря этому эффекту способность наносит {0:prop.Impact.Dice} урона.</value>
   </data>

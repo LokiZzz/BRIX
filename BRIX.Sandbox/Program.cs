@@ -6,11 +6,16 @@ using System.Globalization;
 
 Console.WriteLine("Hello, World!");
 
-ActionPointAspect model = new ActionPointAspect() { ActionPoints = 6 };
+ActivationConditionsAspect model = new ActivationConditionsAspect()
+{
+    Conditions = new List<(Enum Type, string Comment)>
+    {
+        (EActivationCondition.NeedToAbleToTalk, string.Empty),
+        (EActivationCondition.NeedToMove, string.Empty),
+        (EActivationCondition.MediumActivationCondition, "Должна быть видна полная луна"),
+    }
+};
 
-Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
-string eng = model.ToLexis();
-Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("ru-RU");
-string rus = model.ToLexis();
+string text = model.ToLexis();
 
-Console.WriteLine(rus);
+Console.WriteLine(text);

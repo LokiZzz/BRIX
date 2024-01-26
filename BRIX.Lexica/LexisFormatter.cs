@@ -1,6 +1,8 @@
 ﻿using BRIX.Lexis;
+using BRIX.Library.Aspects;
 using BRIX.Library.DiceValue;
 using System.Globalization;
+using System.Net;
 
 namespace BRIX.Lexica
 {
@@ -18,7 +20,7 @@ namespace BRIX.Lexica
 
         public object? GetFormat(Type? formatType) => this;
 
-        public string Format(string? format, object? arg, IFormatProvider? formatProvider)
+        public string Format(string? format, object? model, IFormatProvider? formatProvider)
         {
             if (!Equals(formatProvider))
             {
@@ -30,49 +32,92 @@ namespace BRIX.Lexica
                 throw new ArgumentNullException(nameof(format));
             }
 
-            if(arg == null)
+            if(model == null)
             {
                 return string.Empty;
             }
 
-            string[] splittedFormat = format.Split('.');
-            
-            switch(splittedFormat.First())
+            string[] spliitedFormat = format.Split('.');
+            string formatType = spliitedFormat[0];
+            string formatValue = spliitedFormat[1];
+
+            switch (formatType)
             {
                 case PropertyFormatType:
-                    return FormatProperty(splittedFormat[1], arg);
+                    return FormatProperty(formatValue, model);
                 case ComplexFormatType:
                     throw new NotImplementedException();
                 default:
-                    throw new ArgumentException($"Неизвестный формат {splittedFormat.First()}");
+                    throw new ArgumentException($"Неизвестный формат {formatType}");
             }
         }
 
-        private string FormatProperty(string propertyFormat, object arg)
+        private string FormatProperty(string propertyFormat, object model)
         {
             string[] splittedPropertyFormat = propertyFormat.Split("--");
-            object? propertyValue = arg.GetType().GetProperty(splittedPropertyFormat[0])?.GetValue(arg);
+            object? propertyValue = model.GetType().GetProperty(splittedPropertyFormat[0])?.GetValue(model);
+            string? propertyOptions = splittedPropertyFormat.Count() > 1 ? splittedPropertyFormat[1] : null;
 
-            //TODO: switch(propertyValue) case Type1: case Type2: ...
+            switch (propertyValue)
+            {
+                case int or DicePool:
+                    return FormatNumericProperty(propertyValue, propertyOptions);
+                case Enum enumValue:
+                    return FormatEnumProperty(model, propertyFormat, enumValue);
+                case List<(Enum, string)> multiCondition:
+                    return FormatMultiCondition(model, propertyFormat, multiCondition);
+                case string stringValue:
+                    return stringValue;
+                default:
+                    throw new NotImplementedException($"Нет формата для свойства с типом {propertyValue?.GetType()}");
+            }
+        }
 
-            bool haveDeclension = splittedPropertyFormat.Count() > 0;
+        private string FormatMultiCondition(object model, string propertyName, List<(Enum, string)> propertyValue)
+        {
+            string resultString = string.Empty;
+            
+            foreach((Enum Condition, string Comment) entry in propertyValue.Select(x => (x.Item1, x.Item2)))
+            {
+                string resourceName = $"{model.GetType().Name}_{propertyName}_{entry.Condition}";
+                resultString += ResourceHelper.GetResourceString(resourceName);
 
+                if (!string.IsNullOrEmpty(entry.Comment))
+                {
+                    resultString += $": «{entry.Comment}»";
+                }
+
+                resultString += "; ";
+            }
+
+            resultString = resultString.Trim();
+
+            return resultString;
+        }
+
+        private string FormatEnumProperty(object model, string propertyName, Enum propertyValue)
+        {
+            string resourceName = $"{model.GetType().Name}_{propertyName}_{propertyValue}";
+
+            return ResourceHelper.GetResourceString(resourceName);
+        }
+
+        private string FormatNumericProperty(object? propertyValue, string? propertyOptions)
+        {
             switch (_culture.Name)
             {
                 case "en-US":
-                    return FormatPropertyEng(splittedPropertyFormat, propertyValue, haveDeclension);
+                    return FormatNumericPropertyEng(propertyValue, propertyOptions);
                 case "ru-RU":
-                    return FormatPropertyRus(splittedPropertyFormat, propertyValue, haveDeclension);
+                    return FormatNumericPropertyRus(propertyValue, propertyOptions);
                 default:
                     throw new NotImplementedException($"Для культуры {_culture.Name} не предоставлена реализация.");
             }
         }
 
-        private string FormatPropertyEng(string[] splittedPropertyFormat, object? propertyValue, bool haveDeclension)
+        private string FormatNumericPropertyEng(object? propertyValue, string? nominative)
         {
-            string nominative = splittedPropertyFormat[1];
-
-            if(haveDeclension)
+            if(!string.IsNullOrEmpty(nominative))
             {
                 if (propertyValue is int number)
                 {
@@ -95,11 +140,11 @@ namespace BRIX.Lexica
             }
         }
 
-        private string FormatPropertyRus(string[] splittedPropertyFormat, object? propertyValue, bool haveDeclension)
+        private string FormatNumericPropertyRus(object? propertyValue, string? declensionsString)
         {
-            if (haveDeclension)
+            if (!string.IsNullOrEmpty(declensionsString))
             {
-                string[] declensions = splittedPropertyFormat[1].Split(',');
+                string[] declensions = declensionsString.Split(',');
 
                 if (propertyValue is int number)
                 {

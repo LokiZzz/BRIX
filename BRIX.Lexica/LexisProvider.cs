@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using BRIX.Library.Aspects;
+using System.Globalization;
 using System.Resources;
 
 namespace BRIX.Lexica
@@ -7,27 +8,35 @@ namespace BRIX.Lexica
     {
         public static string ToLexis(this object model, CultureInfo? cultureInfo = null)
         {
-            string resourceName = GetResourceName(model);
-            string resourceString = GetResourceString(resourceName);
+            string resourceName = model.GetType().Name;
+            string resourceString = ResourceHelper.GetResourceString(resourceName);
             
             if(cultureInfo == null)
             {
                 cultureInfo = Thread.CurrentThread.CurrentUICulture;
             }
 
+            if (TryHandleSpecialConditions(model, out string formattedString, cultureInfo))
+            {
+                return formattedString;
+            }
+
             return string.Format(new LexisFormatter(cultureInfo), resourceString, model);
         }
 
-        private static string GetResourceName(object model)
+        private static bool TryHandleSpecialConditions(
+            object model, out string formattedString, CultureInfo cultureInfo)
         {
-            return model.GetType().Name;
-        }
+            formattedString = string.Empty;
 
-        private static string GetResourceString(string resourceName)
-        {
-            ResourceManager resources = new ResourceManager("BRIX.Lexica.Resources", typeof(LexisProvider).Assembly);
+            if (model is CooldownAspect cooldownAspect && cooldownAspect.UsesCount == 0)
+            {
+                formattedString = ResourceHelper.GetResourceString("CooldownAspect_Special_NoneCooldown");
 
-            return resources.GetString(resourceName) ?? string.Empty;
+                return true;
+            }
+
+            return false;
         }
     }
 }
