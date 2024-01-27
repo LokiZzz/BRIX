@@ -3,6 +3,7 @@ using BRIX.Library.Aspects;
 using BRIX.Library.DiceValue;
 using System.Globalization;
 using System.Net;
+using System.Reflection;
 
 namespace BRIX.Lexica
 {
@@ -61,7 +62,7 @@ namespace BRIX.Lexica
             switch (propertyValue)
             {
                 case int or DicePool:
-                    return FormatNumericProperty(propertyValue, propertyOptions);
+                    return FormatNumericProperty(model, propertyValue, propertyOptions);
                 case Enum enumValue:
                     return FormatEnumProperty(model, propertyFormat, enumValue);
                 case List<(Enum, string)> multiCondition:
@@ -102,23 +103,33 @@ namespace BRIX.Lexica
             return ResourceHelper.GetResourceString(resourceName);
         }
 
-        private string FormatNumericProperty(object? propertyValue, string? propertyOptions)
+        private string FormatNumericProperty(object model, object? propertyValue, string? propertyOptions)
         {
             switch (_culture.Name)
             {
                 case "en-US":
-                    return FormatNumericPropertyEng(propertyValue, propertyOptions);
+                    return FormatNumericPropertyEng(model, propertyValue, propertyOptions);
                 case "ru-RU":
-                    return FormatNumericPropertyRus(propertyValue, propertyOptions);
+                    return FormatNumericPropertyRus(model, propertyValue, propertyOptions);
                 default:
                     throw new NotImplementedException($"Для культуры {_culture.Name} не предоставлена реализация.");
             }
         }
 
-        private string FormatNumericPropertyEng(object? propertyValue, string? nominative)
+        private string FormatNumericPropertyEng(object model, object? propertyValue, string? declensionString)
         {
-            if(!string.IsNullOrEmpty(nominative))
+            if(!string.IsNullOrEmpty(declensionString))
             {
+                string nominative = declensionString;
+
+                if (declensionString.Contains('@') == true)
+                {
+                    string declensionPropertyName = declensionString.Replace("@", "");
+                    object? optionsPropertyValue = model.GetType().GetProperty(declensionPropertyName)?.GetValue(model);
+                    string resourceName = $"{model.GetType().Name}_{declensionPropertyName}_{optionsPropertyValue}";
+                    nominative = ResourceHelper.GetResourceString(resourceName);
+                }
+
                 if (propertyValue is int number)
                 {
                     return Numbers.ENGDeclension(number, nominative, true);
@@ -140,11 +151,23 @@ namespace BRIX.Lexica
             }
         }
 
-        private string FormatNumericPropertyRus(object? propertyValue, string? declensionsString)
+        private string FormatNumericPropertyRus(object model, object? propertyValue, string? declensionsString)
         {
             if (!string.IsNullOrEmpty(declensionsString))
             {
-                string[] declensions = declensionsString.Split(',');
+                string[] declensions;
+
+                if (declensionsString.Contains('@') == true)
+                {
+                    string declensionPropertyName = declensionsString.Replace("@", "");
+                    object? optionsPropertyValue = model.GetType().GetProperty(declensionPropertyName)?.GetValue(model);
+                    string resourceName = $"{model.GetType().Name}_{declensionPropertyName}_{optionsPropertyValue}";
+                    declensions = ResourceHelper.GetResourceString(resourceName).Split(',');
+                }
+                else
+                {
+                    declensions = declensionsString.Split(',');
+                }
 
                 if (propertyValue is int number)
                 {

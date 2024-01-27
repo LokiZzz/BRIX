@@ -120,7 +120,88 @@
   <data name="ActionPointAspect" xml:space="preserve">
     <value>To use this ability you have to spend {0:prop.ActionPoints--action point}.</value>
   </data>
+  <data name="ActivationConditionsAspect" xml:space="preserve">
+    <value>To activate this ability, certain conditions must be met. {0:prop.Conditions}</value>
+  </data>
+  <data name="ActivationConditionsAspect_Conditions_EasyActivationCondition" xml:space="preserve">
+    <value>Easy difficulty condition</value>
+  </data>
+  <data name="ActivationConditionsAspect_Conditions_HardActivationCondition" xml:space="preserve">
+    <value>Hard difficulty condition</value>
+  </data>
+  <data name="ActivationConditionsAspect_Conditions_MediumActivationCondition" xml:space="preserve">
+    <value>Medium difficulty condition</value>
+  </data>
+  <data name="ActivationConditionsAspect_Conditions_NeedToAbleToTalk" xml:space="preserve">
+    <value>Character need to able to talk</value>
+  </data>
+  <data name="ActivationConditionsAspect_Conditions_NeedToMove" xml:space="preserve">
+    <value>Character need to able to move</value>
+  </data>
+  <data name="ActivationConditionsAspect_Conditions_NeedToMoveArm" xml:space="preserve">
+    <value>Character need to able to move arm</value>
+  </data>
+  <data name="ActivationConditionsAspect_Conditions_NeedToMoveBothArms" xml:space="preserve">
+    <value>Character need to able to move both arms</value>
+  </data>
+  <data name="ActivationConditionsAspect_Special_None" xml:space="preserve">
+    <value>No special conditions are required to activate this ability.</value>
+  </data>
+  <data name="CooldownAspect" xml:space="preserve">
+    <value>You can use this ability {0:prop.UsesCount--time}. The number of uses is restored via {0:prop.Condition} after the first use.</value>
+  </data>
+  <data name="CooldownAspect_Condition_Day" xml:space="preserve">
+    <value>1 day</value>
+  </data>
+  <data name="CooldownAspect_Condition_Hour" xml:space="preserve">
+    <value>1 hour</value>
+  </data>
+  <data name="CooldownAspect_Condition_HundredYears" xml:space="preserve">
+    <value>100 years</value>
+  </data>
+  <data name="CooldownAspect_Condition_Minute" xml:space="preserve">
+    <value>1 minute</value>
+  </data>
+  <data name="CooldownAspect_Condition_Month" xml:space="preserve">
+    <value>1 month</value>
+  </data>
+  <data name="CooldownAspect_Condition_Round" xml:space="preserve">
+    <value>1 round</value>
+  </data>
+  <data name="CooldownAspect_Condition_TenYears" xml:space="preserve">
+    <value>10 years</value>
+  </data>
+  <data name="CooldownAspect_Condition_Week" xml:space="preserve">
+    <value>1 week</value>
+  </data>
+  <data name="CooldownAspect_Condition_Year" xml:space="preserve">
+    <value>1 year</value>
+  </data>
+  <data name="CooldownAspect_Special_None" xml:space="preserve">
+    <value>This ability does not require recharging before the next use.</value>
+  </data>
   <data name="DamageEffect" xml:space="preserve">
     <value>Due to this effect, the ability deals {0:prop.Impact} of damage.</value>
+  </data>
+  <data name="DurationAspect" xml:space="preserve">
+    <value>Effect duration: {0:prop.Duration--@Unit}.</value>
+  </data>
+  <data name="DurationAspect_Special_CanDisable" xml:space="preserve">
+    <value>The character can cancel the effect at any time.</value>
+  </data>
+  <data name="DurationAspect_Unit_Day" xml:space="preserve">
+    <value>day</value>
+  </data>
+  <data name="DurationAspect_Unit_Hour" xml:space="preserve">
+    <value>hour</value>
+  </data>
+  <data name="DurationAspect_Unit_Minute" xml:space="preserve">
+    <value>minute</value>
+  </data>
+  <data name="DurationAspect_Unit_Round" xml:space="preserve">
+    <value>round</value>
+  </data>
+  <data name="DurationAspect_Unit_Year" xml:space="preserve">
+    <value>year</value>
   </data>
 </root>

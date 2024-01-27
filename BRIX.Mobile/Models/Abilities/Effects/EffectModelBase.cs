@@ -29,7 +29,7 @@ namespace BRIX.Mobile.Models.Abilities.Effects
                 ELexisLanguage language = localization.LexisLanguage;
 
                 return InternalModel != null
-                    ? EffectLexis.GetEffectDescription(InternalModel, language)
+                    ? InternalModel.ToLexis()
                     : string.Empty;
             }
         }

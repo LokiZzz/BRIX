@@ -118,18 +118,18 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
             Conditions.Remove(condition);
 
-            (EActivationCondition Type, string Comment) conditionToDelete =
+            (Enum Type, string Comment) conditionToDelete =
                 Aspect.Internal.Conditions.FirstOrDefault(x =>
-                    x.Type == condition.Condition || x.Comment == condition.Text);
+                    x.Type == (Enum)condition.Condition || x.Comment == condition.Text);
             Aspect.Internal.Conditions.Remove(conditionToDelete);
 
             CostMonitor?.UpdateCost();
             OnPropertyChanged(nameof(ShowNoConditionsText));
         }
 
-        private ActivationConditionOptionVM ToConditionVM((EActivationCondition Type, string Comment) condition)
+        private ActivationConditionOptionVM ToConditionVM((Enum Type, string Comment) condition)
         {
-            ActivationConditionOptionVM restrictionVM = new() { Condition = condition.Type };
+            ActivationConditionOptionVM restrictionVM = new() { Condition = (EActivationCondition)condition.Type };
 
             switch (condition.Type)
             {

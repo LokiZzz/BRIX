@@ -28,7 +28,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 ILocalizationResourceManager localization = Resolver.Resolve<ILocalizationResourceManager>();
                 ELexisLanguage language = localization.LexisLanguage;
 
-                return AspectLexis.GetLexis(InternalBase, language);
+                return InternalBase.ToLexis();
             } 
         }
 

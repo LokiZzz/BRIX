@@ -16,27 +16,30 @@ namespace BRIX.Lexica
                 cultureInfo = Thread.CurrentThread.CurrentUICulture;
             }
 
-            if (TryHandleSpecialConditions(model, out string formattedString, cultureInfo))
-            {
-                return formattedString;
-            }
+            string resultString = string.Format(new LexisFormatter(cultureInfo), resourceString, model);
+            resultString = HandleSpecialConditions(model, resultString, cultureInfo);
 
-            return string.Format(new LexisFormatter(cultureInfo), resourceString, model);
+            return resultString;
         }
 
-        private static bool TryHandleSpecialConditions(
-            object model, out string formattedString, CultureInfo cultureInfo)
+        private static string HandleSpecialConditions(object model, string formattedString, CultureInfo cultureInfo)
         {
-            formattedString = string.Empty;
-
-            if (model is CooldownAspect cooldownAspect && cooldownAspect.UsesCount == 0)
+            if (model is CooldownAspect ca && ca.UsesCount == 0)
             {
-                formattedString = ResourceHelper.GetResourceString("CooldownAspect_Special_NoneCooldown");
-
-                return true;
+                formattedString = ResourceHelper.GetResourceString("CooldownAspect_Special_None");
             }
 
-            return false;
+            if (model is ActivationConditionsAspect aca && aca.Conditions.Count() == 0)
+            {
+                formattedString = ResourceHelper.GetResourceString("ActivationConditionsAspect_Special_None");
+            }
+
+            if (model is DurationAspect da && da.CanDisableStatus)
+            {
+                formattedString += " " + ResourceHelper.GetResourceString("DurationAspect_Special_CanDisable");
+            }
+
+            return formattedString;
         }
     }
 }

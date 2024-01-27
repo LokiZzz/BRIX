@@ -5,7 +5,7 @@ namespace BRIX.Library.Aspects
 {
     public class DurationAspect : AspectBase
     {
-        private double _disableStatusCoef => CanDisableStatus ? 1.3 : 1;
+        private double DisableStatusCoef => CanDisableStatus ? 1.3 : 1;
 
         public int Duration { get; set; } = 1;
 
@@ -21,10 +21,10 @@ namespace BRIX.Library.Aspects
             int percent = converter.Convert(Duration);
             double coef = percent.ToCoeficient() * TimeUnitValue[Unit] / 5;
 
-            return coef * _disableStatusCoef;
+            return coef * DisableStatusCoef;
         }
 
-        private Dictionary<ETimeUnit, int> TimeUnitValue = new()
+        private readonly Dictionary<ETimeUnit, int> TimeUnitValue = new()
         {
             { ETimeUnit.Round, 5 },
             { ETimeUnit.Minute, 60 },

@@ -144,6 +144,9 @@
   <data name="ActivationConditionsAspect_Conditions_NeedToMoveBothArms" xml:space="preserve">
     <value>Персонаж должен мочь двигать руками</value>
   </data>
+  <data name="ActivationConditionsAspect_Special_None" xml:space="preserve">
+    <value>Для активации этой способности не требуется никаких особых условий.</value>
+  </data>
   <data name="CooldownAspect" xml:space="preserve">
     <value>Вы можете использовать эту способность {0:prop.UsesCount--раз,раза,раз}. Количество использований восстанавливается через {0:prop.Condition} после первого использования.</value>
   </data>
@@ -174,10 +177,31 @@
   <data name="CooldownAspect_Condition_Year" xml:space="preserve">
     <value>1 год</value>
   </data>
-  <data name="CooldownAspect_Special_NoneCooldown" xml:space="preserve">
+  <data name="CooldownAspect_Special_None" xml:space="preserve">
     <value>Данная способность не требует перезарядки перед очередным использованием.</value>
   </data>
   <data name="DamageEffect" xml:space="preserve">
     <value>Благодаря этому эффекту способность наносит {0:prop.Impact.Dice} урона.</value>
+  </data>
+  <data name="DurationAspect" xml:space="preserve">
+    <value>Длительность эффекта: {0:prop.Duration--@Unit}.</value>
+  </data>
+  <data name="DurationAspect_Special_CanDisable" xml:space="preserve">
+    <value>Персонаж в любой момент может отменить действие эффекта.</value>
+  </data>
+  <data name="DurationAspect_Unit_Day" xml:space="preserve">
+    <value>день,дня,дней</value>
+  </data>
+  <data name="DurationAspect_Unit_Hour" xml:space="preserve">
+    <value>час,часа,часов</value>
+  </data>
+  <data name="DurationAspect_Unit_Minute" xml:space="preserve">
+    <value>минута,минуты,минут</value>
+  </data>
+  <data name="DurationAspect_Unit_Round" xml:space="preserve">
+    <value>раунд,раунда,раундов</value>
+  </data>
+  <data name="DurationAspect_Unit_Year" xml:space="preserve">
+    <value>год,года,лет</value>
   </data>
 </root>
