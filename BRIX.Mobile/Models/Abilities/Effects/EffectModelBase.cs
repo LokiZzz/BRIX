@@ -1,6 +1,4 @@
-﻿using BRIX.Lexica;
-using BRIX.Lexis;
-using BRIX.Library.Effects;
+﻿using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.ViewModel.Abilities.Effects;
@@ -25,9 +23,6 @@ namespace BRIX.Mobile.Models.Abilities.Effects
         {
             get
             {
-                ILocalizationResourceManager localization = Resolver.Resolve<ILocalizationResourceManager>();
-                ELexisLanguage language = localization.LexisLanguage;
-
                 return InternalModel != null
                     ? InternalModel.ToLexis()
                     : string.Empty;

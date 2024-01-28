@@ -1,5 +1,4 @@
-﻿using BRIX.Lexica;
-using BRIX.Library.Aspects;
+﻿using BRIX.Library.Aspects;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.ViewModel.Abilities;
 using BRIX.Mobile.ViewModel.Abilities.Aspects;
@@ -25,9 +24,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
         {
             get
             {
-                ILocalizationResourceManager localization = Resolver.Resolve<ILocalizationResourceManager>();
-                ELexisLanguage language = localization.LexisLanguage;
-
                 return InternalBase.ToLexis();
             } 
         }

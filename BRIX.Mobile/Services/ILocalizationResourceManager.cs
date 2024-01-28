@@ -83,4 +83,12 @@ namespace BRIX.Mobile.Services
             OnPropertyChanged(null);
         }
     }
+
+    public static class MobileLexisProvider
+    {
+        public static string ToLexis(this object model)
+        {
+            return model.ToLexis(Localization.Culture);
+        }
+    }
 }

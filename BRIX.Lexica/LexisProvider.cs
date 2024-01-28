@@ -8,14 +8,17 @@ namespace BRIX.Lexica
     {
         public static string ToLexis(this object model, CultureInfo? cultureInfo = null)
         {
-            string resourceName = model.GetType().Name;
-            string resourceString = ResourceHelper.GetResourceString(resourceName);
-            
-            if(cultureInfo == null)
+            if (cultureInfo == null)
             {
                 cultureInfo = Thread.CurrentThread.CurrentUICulture;
             }
+            else
+            {
+                Thread.CurrentThread.CurrentUICulture = cultureInfo;
+            }
 
+            string resourceName = model.GetType().Name;
+            string resourceString = ResourceHelper.GetResourceString(resourceName);
             string resultString = string.Format(new LexisFormatter(cultureInfo), resourceString, model);
             resultString = HandleSpecialConditions(model, resultString, cultureInfo);
 

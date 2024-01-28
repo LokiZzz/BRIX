@@ -1,6 +1,5 @@
 ﻿using BRIX.Lexica;
 using BRIX.Library.Aspects;
-using System.Globalization;
 
 ActivationConditionsAspect model = new ActivationConditionsAspect()
 {
