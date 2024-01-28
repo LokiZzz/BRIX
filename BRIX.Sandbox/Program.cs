@@ -2,14 +2,14 @@
 using BRIX.Library.Aspects;
 using System.Globalization;
 
-DurationAspect model = new DurationAspect()
+ActivationConditionsAspect model = new ActivationConditionsAspect()
 {
-    Duration = 6,
-    Unit = BRIX.Library.Enums.ETimeUnit.Year,
-    CanDisableStatus = true,
+    Conditions = new List<(EActivationCondition Type, string Comment)>
+    {
+        (EActivationCondition.NeedToAbleToTalk, string.Empty),
+        (EActivationCondition.MediumActivationCondition, "Full moon at the line of sight"),
+    },
 };
-
-Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
 
 string text = model.ToLexis();
 

@@ -1,8 +1,8 @@
 ﻿namespace BRIX.Library.Aspects
 {
-    public class ActivationConditionsAspect : MultiConditionalAspect
+    public class ActivationConditionsAspect : MultiConditionalAspect<EActivationCondition>
     {
-        public override Dictionary<Enum, int> ConditionToCoeficientMap => new Dictionary<Enum, int>
+        public override Dictionary<EActivationCondition, int> ConditionToCoeficientMap => new ()
         {
             { EActivationCondition.NeedToMoveArm, -10 },
             { EActivationCondition.NeedToMoveBothArms, -15 },

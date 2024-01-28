@@ -1,9 +1,11 @@
 ﻿using BRIX.Lexis;
 using BRIX.Library.Aspects;
 using BRIX.Library.DiceValue;
+using System.Collections;
 using System.Globalization;
 using System.Net;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace BRIX.Lexica
 {
@@ -65,7 +67,7 @@ namespace BRIX.Lexica
                     return FormatNumericProperty(model, propertyValue, propertyOptions);
                 case Enum enumValue:
                     return FormatEnumProperty(model, propertyFormat, enumValue);
-                case List<(Enum, string)> multiCondition:
+                case object _ when propertyValue is IEnumerable multiCondition:
                     return FormatMultiCondition(model, propertyFormat, multiCondition);
                 case string stringValue:
                     return stringValue;
@@ -74,18 +76,34 @@ namespace BRIX.Lexica
             }
         }
 
-        private string FormatMultiCondition(object model, string propertyName, List<(Enum, string)> propertyValue)
+        private string FormatMultiCondition(object model, string propertyName, IEnumerable propertyValue)
         {
             string resultString = string.Empty;
             
-            foreach((Enum Condition, string Comment) entry in propertyValue.Select(x => (x.Item1, x.Item2)))
+            foreach(ITuple tupleEntry in propertyValue)
             {
-                string resourceName = $"{model.GetType().Name}_{propertyName}_{entry.Condition}";
+                Enum? condition = default;
+                object? tupleCondition = tupleEntry[0];
+
+                if (tupleCondition != null)
+                {
+                    condition = (Enum)tupleCondition;
+                }
+
+                string comment = string.Empty;
+                object? tupleComment = tupleEntry[1];
+
+                if (tupleComment != null)
+                {
+                    comment = (string)tupleComment;
+                }
+
+                string resourceName = $"{model.GetType().Name}_{propertyName}_{condition}";
                 resultString += ResourceHelper.GetResourceString(resourceName);
 
-                if (!string.IsNullOrEmpty(entry.Comment))
+                if (!string.IsNullOrEmpty(comment))
                 {
-                    resultString += $": «{entry.Comment}»";
+                    resultString += $": «{comment}»";
                 }
 
                 resultString += "; ";

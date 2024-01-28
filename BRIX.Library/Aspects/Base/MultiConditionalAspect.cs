@@ -4,9 +4,9 @@ using System;
 
 namespace BRIX.Library.Aspects
 {
-    public abstract class MultiConditionalAspect : AspectBase
+    public abstract class MultiConditionalAspect<T> : AspectBase where T : Enum
     {
-        public List<(Enum Type, string Comment)> Conditions { get; set; } = [];
+        public List<(T Type, string Comment)> Conditions { get; set; } = [];
 
         public override double GetCoefficient()
         {
@@ -15,10 +15,10 @@ namespace BRIX.Library.Aspects
                 return 1;
             }
 
-            Enum restriction = (Enum)(object)Conditions.First().Type;
+            T restriction = (T)(object)Conditions.First().Type;
             double coeficient = ConditionToCoeficientMap[restriction].ToCoeficient();
 
-            foreach ((Enum Type, string Comment) condition in Conditions.Skip(1))
+            foreach ((T Type, string Comment) condition in Conditions.Skip(1))
             {
                 coeficient *= ConditionToCoeficientMap[condition.Type].ToCoeficient();
             }
@@ -26,6 +26,6 @@ namespace BRIX.Library.Aspects
             return coeficient;
         }
 
-        public abstract Dictionary<Enum, int> ConditionToCoeficientMap { get; }
+        public abstract Dictionary<T, int> ConditionToCoeficientMap { get; }
     }
 }
