@@ -25,40 +25,33 @@ namespace BRIX.Lexica
 
         public string Format(string? format, object? model, IFormatProvider? formatProvider)
         {
-            try
+            if (!Equals(formatProvider))
             {
-                if (!Equals(formatProvider))
-                {
-                    return string.Empty;
-                }
-
-                if (string.IsNullOrEmpty(format))
-                {
-                    throw new ArgumentNullException(nameof(format));
-                }
-
-                if (model == null)
-                {
-                    return string.Empty;
-                }
-
-                string[] spliitedFormat = format.Split('.');
-                string formatType = spliitedFormat[0];
-                string formatValue = spliitedFormat[1];
-
-                switch (formatType)
-                {
-                    case PropertyFormatType:
-                        return FormatProperty(formatValue, model);
-                    case ComplexFormatType:
-                        throw new NotImplementedException();
-                    default:
-                        throw new ArgumentException($"Неизвестный формат {formatType}");
-                }
+                return string.Empty;
             }
-            catch (Exception ex)
+
+            if (string.IsNullOrEmpty(format))
             {
-                return null;
+                throw new ArgumentNullException(nameof(format));
+            }
+
+            if (model == null)
+            {
+                return string.Empty;
+            }
+
+            string[] spliitedFormat = format.Split('.');
+            string formatType = spliitedFormat[0];
+            string formatValue = spliitedFormat[1];
+
+            switch (formatType)
+            {
+                case PropertyFormatType:
+                    return FormatProperty(formatValue, model);
+                case ComplexFormatType:
+                    throw new NotImplementedException();
+                default:
+                    throw new ArgumentException($"Неизвестный формат {formatType}");
             }
         }
 
