@@ -204,4 +204,10 @@
   <data name="DurationAspect_Unit_Year" xml:space="preserve">
     <value>год,года,лет</value>
   </data>
+  <data name="TargetSelectionAspect" xml:space="preserve">
+    <value>Эффект способности применяется {comp.Strategy--NTAD}</value>
+  </data>
+  <data name="TargetSelectionAspect_Strategy_NTAD" xml:space="preserve">
+    <value>к {0.prop.}</value>
+  </data>
 </root>

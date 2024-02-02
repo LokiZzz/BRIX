@@ -1,15 +1,13 @@
 ﻿using BRIX.Lexica;
-using BRIX.Library.Aspects;
+using BRIX.Library.Effects;
+using BRIX.Sandbox;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
-ActivationConditionsAspect model = new ActivationConditionsAspect()
-{
-    Conditions = new List<(EActivationCondition Type, string Comment)>
-    {
-        (EActivationCondition.NeedToAbleToTalk, string.Empty),
-        (EActivationCondition.MediumActivationCondition, "Full moon at the line of sight"),
-    },
-};
+DamageEffect model = new DamageEffect() { Impact = new BRIX.Library.DiceValue.DicePool((3, 6)) };
 
-string text = model.ToLexis();
+string? text = model.ToLexis2();
 
 Console.WriteLine(text);

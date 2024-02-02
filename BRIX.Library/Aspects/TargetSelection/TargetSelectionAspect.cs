@@ -22,15 +22,15 @@ namespace BRIX.Library.Aspects.TargetSelection
 
         public ETargetSelectionStrategy Strategy { get; set; } = ETargetSelectionStrategy.NTargetsAtDistanсeL;
 
-        public NTADSettings NTAD { get; set; } = new NTADSettings();
+        public NTADSettings NTAD { get; set; } = new ();
 
-        public AreaSettings Area { get; set; } = new AreaSettings();
+        public AreaSettings Area { get; set; } = new ();
 
-        public TargetChainSettings TargetChain { get; set; } = new TargetChainSettings();
+        public TargetChainSettings TargetChain { get; set; } = new ();
 
-        public TargetSizeSettings TargetsSizes { get; set; } = new TargetSizeSettings();
+        public TargetSizeSettings TargetsSizes { get; set; } = new ();
 
-        public TargetSelectionRestrictionsSettings TargetSelectionRestrictions { get; set; } = new TargetSelectionRestrictionsSettings();
+        public TargetSelectionRestrictionsSettings TargetSelectionRestrictions { get; set; } = new ();
 
         private double GetNTADCoeficient()
         {
@@ -73,7 +73,7 @@ namespace BRIX.Library.Aspects.TargetSelection
                 .ToCoeficient();
         }
 
-        private Dictionary<EObstacleEquivalent, int> EquivalentToPercentMap => new()
+        private static Dictionary<EObstacleEquivalent, int> EquivalentToPercentMap => new()
         {
             { EObstacleEquivalent.None, 0 },
             { EObstacleEquivalent.PaperSheet, -50 },

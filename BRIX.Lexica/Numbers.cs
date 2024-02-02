@@ -55,7 +55,9 @@ namespace BRIX.Lexis
             string genetive, 
             string pluralGenetive)
         {
-            return $"{dicePool} {RUSDeclension(dicePool.LastDigit(), nominative, genetive, pluralGenetive, false)}";
+            string result = $"{dicePool} {RUSDeclension(dicePool.LastDigit(), nominative, genetive, pluralGenetive, false)}";
+
+            return result;
         }
 
         /// <summary>

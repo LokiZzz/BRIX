@@ -5,7 +5,11 @@ namespace BRIX.Library.Aspects.TargetSelection
 {
     public class TargetSizeSettings
     {
-        private List<ETargetSize> _allowedTargetSizes = new() { ETargetSize.Small, ETargetSize.Medium, ETargetSize.Big };
+        private readonly List<ETargetSize> _allowedTargetSizes = new() 
+        { 
+            ETargetSize.Small, ETargetSize.Medium, ETargetSize.Big 
+        };
+
         public IReadOnlyList<ETargetSize> AllowedTargetSizes => _allowedTargetSizes.AsReadOnly();
 
         public void AddSize(ETargetSize size)

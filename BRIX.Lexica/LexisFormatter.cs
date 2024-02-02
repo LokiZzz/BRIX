@@ -68,7 +68,7 @@ namespace BRIX.Lexica
                 case Enum enumValue:
                     return FormatEnumProperty(model, propertyFormat, enumValue);
                 case object _ when propertyValue is IEnumerable multiCondition:
-                    return FormatMultiCondition(model, propertyFormat, multiCondition);
+                    return FormatMultiConditionProperty(model, propertyFormat, multiCondition);
                 case string stringValue:
                     return stringValue;
                 default:
@@ -76,7 +76,7 @@ namespace BRIX.Lexica
             }
         }
 
-        private string FormatMultiCondition(object model, string propertyName, IEnumerable propertyValue)
+        private string FormatMultiConditionProperty(object model, string propertyName, IEnumerable propertyValue)
         {
             string resultString = string.Empty;
             
@@ -130,7 +130,9 @@ namespace BRIX.Lexica
                 case "ru-RU":
                     return FormatNumericPropertyRus(model, propertyValue, propertyOptions);
                 default:
-                    throw new NotImplementedException($"Для культуры {_culture.Name} не предоставлена реализация.");
+                    throw new NotImplementedException(
+                        $"Для культуры {_culture.Name} не предоставлена реализация склонения от числительных."
+                    );
             }
         }
 
