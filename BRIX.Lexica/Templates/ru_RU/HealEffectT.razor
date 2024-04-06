@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Вылечивает цели @Numbers.RUSDcln(Model.Impact, "очко", "очка", "очков").
+
+@code {
+    [Parameter]
+    public HealEffect Model { get; set; } = new();
+}

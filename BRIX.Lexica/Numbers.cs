@@ -1,9 +1,20 @@
 ﻿using BRIX.Library.DiceValue;
+using Microsoft.AspNetCore.Components;
 
-namespace BRIX.Lexis
+namespace BRIX.Lexica
 {
     public static class Numbers
     {
+        /// <summary>
+        /// Короткий вызов RUSDeclension для чисел в razor-темплейтах.
+        /// </summary>
+        public static MarkupString RUSDcln(
+            int number,
+            string nominative,
+            string genetive,
+            string pluralGenetive,
+            bool addNumber = true) => (MarkupString)RUSDeclension(number, nominative, genetive, pluralGenetive, addNumber);
+
         /// <summary>
         /// Получить склонение от числа на русском языке
         /// </summary>
@@ -20,7 +31,7 @@ namespace BRIX.Lexis
             string pluralGenetive, 
             bool addNumber = true)
         {
-            string[] titles = new[] { nominative, genetive, pluralGenetive };
+            string[] titles = [ nominative, genetive, pluralGenetive ];
             int[] cases = [2, 0, 1, 1, 1, 2];
 
             int searchingСaseIndex;
@@ -47,6 +58,15 @@ namespace BRIX.Lexis
         }
 
         /// <summary>
+        /// Короткий вызов RUSDeclension для костей в razor-темплейтах.
+        /// </summary>
+        public static MarkupString RUSDcln(
+            DicePool dicePool,
+            string nominative,
+            string genetive,
+            string pluralGenetive) => (MarkupString)RUSDeclension(dicePool, nominative, genetive, pluralGenetive);
+
+        /// <summary>
         /// Получить склонение от числительных в формуле костей на русском языке
         /// </summary>
         public static string RUSDeclension(
@@ -59,6 +79,12 @@ namespace BRIX.Lexis
 
             return result;
         }
+
+        /// <summary>
+        /// Короткий вызов ENGDeclension для чисел в razor-темплейтах.
+        /// </summary>
+        public static MarkupString ENGDcln(int number, string nominative, bool addNumber = true) => 
+            (MarkupString)ENGDeclension(number, nominative, addNumber);
 
         /// <summary>
         /// Получить склонение от числа на английском языке
@@ -78,6 +104,12 @@ namespace BRIX.Lexis
 
             return addNumber ? $"{number} {result}" : result;
         }
+
+        /// <summary>
+        /// Короткий вызов ENGDeclension для чисел в razor-темплейтах.
+        /// </summary>
+        public static MarkupString ENGDcln(DicePool dicePool, string nominative) =>
+            (MarkupString)ENGDeclension(dicePool, nominative);
 
         /// <summary>
         /// Получить склонение от числительных в формуле костей на английском языке

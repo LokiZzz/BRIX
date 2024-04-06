@@ -1,9 +1,0 @@
-﻿@using BRIX.Lexis
-@using BRIX.Library.Effects
-
-Благодаря этому эффекту способность наносит @((MarkupString)Numbers.RUSDeclension(Model.Impact, "очко", "очка", "очков")) урона.
-
-@code {
-    [Parameter]
-    public DamageEffect Model { get; set; } = new();
-}

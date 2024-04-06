@@ -5,13 +5,23 @@ using Microsoft.AspNetCore.Components.Web.HtmlRendering;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Globalization;
+using System.Reflection;
 
 namespace BRIX.Lexica
 {
     public static class LexisProvider
     {
-        public static string ToLexis2(this object model, CultureInfo? cultureInfo = null)
+        public static async Task<string> ToLexis2(this object model, CultureInfo? cultureInfo = null)
         {
+            if (cultureInfo == null)
+            {
+                cultureInfo = Thread.CurrentThread.CurrentUICulture;
+            }
+            else
+            {
+                Thread.CurrentThread.CurrentUICulture = cultureInfo;
+            }
+
             IServiceCollection services = new ServiceCollection();
             services.AddLogging();
             IServiceProvider serviceProvider = services.BuildServiceProvider();
@@ -19,23 +29,31 @@ namespace BRIX.Lexica
 
             using HtmlRenderer htmlRenderer = new HtmlRenderer(serviceProvider, loggerFactory);
 
-            string html = htmlRenderer.Dispatcher.InvokeAsync(() =>
+            string html = await htmlRenderer.Dispatcher.InvokeAsync(async () =>
             {
-                var dictionary = new Dictionary<string, object?>
-                {
-                    { "Model", model }
-                };
-
+                Dictionary<string, object?> dictionary = new() { { "Model", model } };
                 ParameterView parameters = ParameterView.FromDictionary(dictionary);
-                HtmlRootComponent output = htmlRenderer.RenderComponentAsync<DamageEffectTamplate>(parameters)
-                    .GetAwaiter()
-                    .GetResult();
+
+                HtmlRootComponent output = await htmlRenderer.RenderComponentAsync(GetTemplateType(model, cultureInfo), parameters);
 
                 return output.ToHtmlString();
 
-            }).GetAwaiter().GetResult();
+            });
 
             return html.Trim() ?? string.Empty;
+        }
+
+        private static Type GetTemplateType(object model, CultureInfo cultureInfo)
+        {
+            string assemblyName = Assembly.GetExecutingAssembly().GetName().Name
+                ?? throw new Exception("Не удалось получить имя сборки.");
+            string fullTypePath = "BRIX.Lexica.Templates." 
+                + $"{cultureInfo.Name.Replace('-', '_')}." 
+                + model.GetType().Name 
+                + "T";
+            Type? templateType = Type.GetType(Assembly.CreateQualifiedName(assemblyName, fullTypePath));
+
+            return templateType ?? throw new NotImplementedException($"Шаблон для {model.GetType()} не найден."); 
         }
 
         public static string ToLexis(this object model, CultureInfo? cultureInfo = null)

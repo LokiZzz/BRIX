@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Temporarily reduces the target's maximum health by @Numbers.ENGDcln(Model.Impact, "point").
+
+@code {
+    [Parameter]
+    public ExhaustionEffect Model { get; set; } = new();
+}

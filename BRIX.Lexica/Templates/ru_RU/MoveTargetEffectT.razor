@@ -1,0 +1,24 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Moves the target @Numbers.ENGDcln(Model.DistanceInMeters, "meter") @GetMovingPath(Model.TargetPath)
+
+@code {
+    [Parameter]
+    public MoveTargetEffect Model { get; set; } = new();
+
+    public static MarkupString GetMovingPath(EMoveTargetPath input)
+    {
+        string resultString = input switch
+        {
+            EMoveTargetPath.StraightToCharacter => "towards the character.",
+            EMoveTargetPath.StraightFromCharacter => "away from the character.",
+            EMoveTargetPath.Straight => "in any direction in a straight line.",
+            EMoveTargetPath.Arbitrary => "along a choosed path. The length of the path should not exceed twice the distance between the start and end points.",
+            EMoveTargetPath.NoPath => "so that the target disappears from its current location and appears in a new one.",
+            _ => TemplateHelper.LexisTemplatingError
+        };
+
+        return (MarkupString)resultString;
+    }
+}

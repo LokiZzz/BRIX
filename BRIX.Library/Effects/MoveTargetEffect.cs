@@ -7,28 +7,21 @@ namespace BRIX.Library.Effects
 {
     public class MoveTargetEffect : EffectBase
     {
-        public override List<Type> RequiredAspects => new()
-        {
-                typeof(ActionPointAspect), typeof(TargetSelectionAspect), typeof(CooldownAspect), 
-                typeof(ActivationConditionsAspect)
-        };
+        public override List<Type> RequiredAspects =>
+        [
+            typeof(ActionPointAspect), typeof(TargetSelectionAspect), typeof(CooldownAspect), 
+            typeof(ActivationConditionsAspect)
+        ];
 
         public int DistanceInMeters { get; set; }
         public EMoveTargetPath TargetPath { get; set; }
-        public EMoveTargetDirectionRestriction DirectionRestriction { get; set; }
 
         public Dictionary<EMoveTargetPath, double> PathTypeToModifier = new()
         {
-            { EMoveTargetPath.StraightBCaT, 0.8 },
+            { EMoveTargetPath.StraightToCharacter, 0.8 },
             { EMoveTargetPath.Straight, 1 },
             { EMoveTargetPath.Arbitrary, 1.5 },
             { EMoveTargetPath.NoPath, 2 },
-        };
-
-        public Dictionary<EMoveTargetDirectionRestriction, double> DirectionRestrictionToModifier = new()
-        {
-            { EMoveTargetDirectionRestriction.OnlyHorizontalSurface, 1 },
-            { EMoveTargetDirectionRestriction.Arbitrary, 2 },
         };
 
         public override int BaseExpCost()
@@ -39,41 +32,32 @@ namespace BRIX.Library.Effects
 
             int distanceExpCost = thrasholdConverter.Convert(DistanceInMeters);
             double pathTypeModifier = PathTypeToModifier[TargetPath];
-            double directionRestrictionModifier = DirectionRestrictionToModifier[DirectionRestriction];
 
-            return (distanceExpCost * pathTypeModifier * directionRestrictionModifier).Round();
+            return (distanceExpCost * pathTypeModifier).Round();
         }
     }
 
     public enum EMoveTargetPath
     {
         /// <summary>
-        /// По прямой между персонажем и его целью в любом направлении
+        /// По прямой по направлению к персонажу
         /// </summary>
-        StraightBCaT = 1,
+        StraightToCharacter = 1,
         /// <summary>
-        /// По прямой
+        /// По прямой по направлению от персонажа
         /// </summary>
-        Straight = 2,
+        StraightFromCharacter = 2,
         /// <summary>
-        /// Произвольный
+        /// По прямой в любом направлении
         /// </summary>
-        Arbitrary = 3,
+        Straight = 3,
+        /// <summary>
+        /// По произвольному пути
+        /// </summary>
+        Arbitrary = 4,
         /// <summary>
         /// Без пути, телепортация
         /// </summary>
-        NoPath = 4
-    }
-
-    public enum EMoveTargetDirectionRestriction
-    {
-        /// <summary>
-        /// Перммещение возможно только в горизонтальной плоскости
-        /// </summary>
-        OnlyHorizontalSurface = 1,
-        /// <summary>
-        /// Пермещение может производится в любых плоскостях
-        /// </summary>
-        Arbitrary = 2
+        NoPath = 5
     }
 }

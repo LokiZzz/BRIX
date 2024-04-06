@@ -1,4 +1,4 @@
-﻿using BRIX.Lexis;
+﻿using BRIX.Lexica;
 using BRIX.Library.Aspects;
 using BRIX.Library.DiceValue;
 using System.Collections;

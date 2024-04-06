@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Наносит @Numbers.RUSDcln(Model.Impact, "очко", "очка", "очков") урона.
+
+@code {
+    [Parameter]
+    public DamageEffect Model { get; set; } = new();
+}

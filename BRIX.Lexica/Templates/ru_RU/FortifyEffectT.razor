@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Временно увеличивает максимальное здоровье цели на @Numbers.RUSDcln(Model.Impact, "очко", "очка", "очков").
+
+@code {
+    [Parameter]
+    public FortifyEffect Model { get; set; } = new();
+}

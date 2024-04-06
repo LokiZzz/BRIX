@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Heals the target for @Numbers.ENGDcln(Model.Impact, "point").
+
+@code {
+    [Parameter]
+    public HealEffect Model { get; set; } = new();
+}
