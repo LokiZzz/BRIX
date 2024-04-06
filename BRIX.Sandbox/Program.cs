@@ -1,11 +1,7 @@
 ﻿using BRIX.Lexica;
 using BRIX.Library.Effects;
 
-MoveTargetEffect model = new ()
-{
-    TargetPath = EMoveTargetPath.NoPath,
-    DistanceInMeters = 15
-};
+WinTheGameEffect model = new ();
 
 string? text = await model.ToLexis2();
 
