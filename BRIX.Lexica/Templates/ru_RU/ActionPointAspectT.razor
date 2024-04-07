@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+
+Для активации необходимо потратить @Numbers.RUSDcln(Model.ActionPoints, "очко", "очка", "очков") действия.
+
+@code {
+    [Parameter]
+    public ActionPointAspect Model { get; set; } = new();
+}

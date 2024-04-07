@@ -1,0 +1,34 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+@using BRIX.Library.Enums
+
+<p>The effect lasts @GetDurationDeclension(Model).</p>
+
+@if (!Model.CanDisableStatus) 
+{
+    <p>The character can cancel the applied effect without spending action points at any time.</p>
+}
+else
+{
+    <p>The character cannot cancel the effect.</p>
+}
+
+@code {
+    [Parameter]
+    public DurationAspect Model { get; set; } = new();
+
+    public static MarkupString GetDurationDeclension(DurationAspect model)
+    {
+        string unit = model.Unit switch
+        {
+            ETimeUnit.Round => "round",
+            ETimeUnit.Minute => "minute",
+            ETimeUnit.Hour => "hour",
+            ETimeUnit.Day => "day",
+            ETimeUnit.Year => "year",
+            _ => TemplateHelper.LexisTemplatingError
+        };
+
+        return Numbers.ENGDcln(model.Duration, unit);
+    }
+}

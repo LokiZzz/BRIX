@@ -1,0 +1,52 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects.TargetSelection
+@using BRIX.Library.Enums
+
+@if (Model.Strategy == ETargetSelectionStrategy.CharacterHimself)
+{
+    <p>Целью является сам персонаж.</p>
+}
+@if (Model.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
+{
+    <p>@Numbers.RUSDcln(Model.NTAD.TargetsCount, "цель", "цели", "целей") на расстоянии @Numbers.RUSDcln(Model.NTAD.DistanceInMeters, "метр", "метра", "метров") от персонажа.</p>
+
+    if(Model.NTAD.IsTargetSelectionIsRandom){
+        <p>Цели должны быть выбраны случайным образом.</p>
+    }
+    else
+    {
+        <p>Цели выбирает сам персонаж.</p>
+    }
+
+    if(Model.NTAD.ObstacleBetweenCharacterAndTarget == EObstacleEquivalent.None)
+    {
+        <p>Препятствия между целью и персонажем не играют роли.</p>
+    }
+    else
+    {
+        <p>Если между персонажем и его целью находится препятствие эквивалентное по прочности @GetDurabilityEquivalent(Model.NTAD.ObstacleBetweenCharacterAndTarget), то эффект не будет применён.</p>
+    }
+}
+
+@code {
+    [Parameter]
+    public TargetSelectionAspect Model { get; set; } = new();
+
+    public static MarkupString GetDurabilityEquivalent(EObstacleEquivalent input)
+    {
+        string resultString = input switch
+        {
+            EObstacleEquivalent.PaperSheet => "листу бумаги",
+            EObstacleEquivalent.DenseVegetation => "плотной растительности",
+            EObstacleEquivalent.LeatherArmor => "кожаному доспеху",
+            EObstacleEquivalent.WoodenPlank => "деревянной доске",
+            EObstacleEquivalent.MetalArmor => "металлическому доспеху",
+            EObstacleEquivalent.BrickWall => "кирпичной стене",
+            EObstacleEquivalent.ThickSteelPlate => "толстому стальному листу",
+            EObstacleEquivalent.MuchMorePowerfullObstacle => "чему-то невообразимо прочному",
+            _ => TemplateHelper.LexisTemplatingError
+        };
+
+        return (MarkupString)resultString;
+    }
+}

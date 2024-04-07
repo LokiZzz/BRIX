@@ -1,0 +1,34 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+@using BRIX.Library.Enums
+
+<p>Эффект длится @GetDurationDeclension(Model).</p>
+
+@if (!Model.CanDisableStatus) 
+{
+    <p>Персонаж может отменить наложенный эффект не тратя очки действий в любой момент.</p>
+}
+else
+{
+    <p>Персонаж не может отменить действие эффекта.</p>
+}
+
+@code {
+    [Parameter]
+    public DurationAspect Model { get; set; } = new();
+
+    public static MarkupString GetDurationDeclension(DurationAspect model)
+    {
+        string[] unitDclns = model.Unit switch
+        {
+            ETimeUnit.Round => [ "раунд", "раунда", "раундов" ],
+            ETimeUnit.Minute => ["минуту", "минуты", "минут"],
+            ETimeUnit.Hour => ["час", "часа", "часов"],
+            ETimeUnit.Day => ["день", "дня", "дней"],
+            ETimeUnit.Year => ["год", "года", "лет"],
+            _ => ["", "", ""]
+        };
+
+        return Numbers.RUSDcln(model.Duration, unitDclns[0], unitDclns[1], unitDclns[2]);
+    }
+}

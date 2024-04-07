@@ -1,0 +1,32 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+
+For the ability to be activated, the following conditions must be met:<br/>
+<ul>
+    @foreach ((EActivationCondition Type, string Comment) condition in Model.Conditions)
+    {
+        <li>@GetActivationConditionString(condition)</li>
+    }
+</ul>
+
+@code {
+    [Parameter]
+    public ActivationConditionsAspect Model { get; set; } = new();
+
+    public static MarkupString GetActivationConditionString((EActivationCondition Type, string Comment) input)
+    {
+        string resultString = input.Type switch
+        {
+            EActivationCondition.NeedToMove => "The character must be able to move;",
+            EActivationCondition.NeedToAbleToTalk => "The character must be able to talk;",
+            EActivationCondition.NeedToMoveArm => "The character must be able to move his arm;",
+            EActivationCondition.NeedToMoveBothArms => "The character must be able to move both arms;",
+            EActivationCondition.EasyActivationCondition => $"Easy condition:: {input.Comment};",
+            EActivationCondition.MediumActivationCondition => $"Medium condition: {input.Comment};",
+            EActivationCondition.HardActivationCondition => $"Hard condition: {input.Comment};",
+            _ => TemplateHelper.LexisTemplatingError
+        };
+
+        return (MarkupString)resultString;
+    }
+}

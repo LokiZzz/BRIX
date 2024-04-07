@@ -5,6 +5,8 @@ namespace BRIX.Library.Aspects
 {
     public class CooldownAspect : SingleConditionAspect<ECooldownOption>
     {
+        public bool NoCooldown => UsesCount == 0;
+
         /// <summary>
         /// В данном определении соответствие проводится не с коэффициентами, а с отношением временного периода и 
         /// раунда, например в минуте 12 раундов (60 сек / 5 сек), поэтому минуте соответствует множитель 12.
@@ -28,7 +30,7 @@ namespace BRIX.Library.Aspects
         /// Количество раз, которое можно использовать способность до того, как ей понадобится перезарядка.
         /// 0 означает, что способность можно использовать любое количество раз без ограничений.
         /// </summary>
-        public int UsesCount { get; set; } = 0;
+        public int UsesCount { get; set; }
 
         public override double GetCoefficient()
         {

@@ -1,0 +1,40 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+
+@if (Model.Condition == ECooldownOption.CannotReset)
+{
+    <p>Персонаж может использовать эту способность только один раз.</p>
+}
+else if (Model.NoCooldown)
+{
+    <p>Этой способности не требуется перезарядка.</p>
+}
+else
+{
+    <p>Способность может быть использована @Numbers.RUSDcln(Model.UsesCount, "раз", "раза", "раз"). После этого ей потребуется перезярдка, которая продлится @GetCooldownOption(Model.Condition).</p>
+}
+
+
+@code {
+    [Parameter]
+    public CooldownAspect Model { get; set; } = new();
+
+    public static MarkupString GetCooldownOption(ECooldownOption input)
+    {
+        string resultString = input switch
+        {
+            ECooldownOption.Round => "раунд",
+            ECooldownOption.Minute => "минуту",
+            ECooldownOption.Hour => "час",
+            ECooldownOption.Day => "день",
+            ECooldownOption.Week => "неделю",
+            ECooldownOption.Month => "месяц",
+            ECooldownOption.Year => "год",
+            ECooldownOption.TenYears => "10 лет",
+            ECooldownOption.HundredYears => "100 лет",
+            _ => TemplateHelper.LexisTemplatingError
+        };
+
+        return (MarkupString)resultString;
+    }
+}

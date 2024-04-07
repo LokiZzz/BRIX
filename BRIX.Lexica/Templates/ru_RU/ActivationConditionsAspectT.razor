@@ -1,0 +1,32 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+
+Чтобы способность могла быть активирована, должны соблюдаться следующие условия:<br/>
+<ul>
+    @foreach ((EActivationCondition Type, string Comment) condition in Model.Conditions)
+    {
+        <li>@GetActivationConditionString(condition)</li>
+    }
+</ul>
+
+@code {
+    [Parameter]
+    public ActivationConditionsAspect Model { get; set; } = new();
+
+    public static MarkupString GetActivationConditionString((EActivationCondition Type, string Comment) input)
+    {
+        string resultString = input.Type switch
+        {
+            EActivationCondition.NeedToMove => "Персонаж должен мочь двигаться;",
+            EActivationCondition.NeedToAbleToTalk => "Персонаж должен мочь говорить;",
+            EActivationCondition.NeedToMoveArm => "Персонаж должен мочь двигать рукой;",
+            EActivationCondition.NeedToMoveBothArms => "Персонаж должен мочь двигать обеими руками;",
+            EActivationCondition.EasyActivationCondition => $"Условие малой сложности: {input.Comment};",
+            EActivationCondition.MediumActivationCondition => $"Условие средней сложности: {input.Comment};",
+            EActivationCondition.HardActivationCondition => $"Условие высокой сложности: {input.Comment};",
+            _ => TemplateHelper.LexisTemplatingError
+        };
+
+        return (MarkupString)resultString;
+    }
+}
