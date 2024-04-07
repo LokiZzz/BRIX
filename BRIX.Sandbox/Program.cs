@@ -10,8 +10,7 @@ TargetSelectionAspect model = new ()
     {
          DistanceInMeters = 15,
          TargetsCount = 5,
-         IsTargetSelectionIsRandom = true,
-         ObstacleBetweenCharacterAndTarget = BRIX.Library.Enums.EObstacleEquivalent.MetalArmor
+         ObstacleBetweenCharacterAndTarget = BRIX.Library.Enums.EObstacleEquivalent.None
     }
 };
 

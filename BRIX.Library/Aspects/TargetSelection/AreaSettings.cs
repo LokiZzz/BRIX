@@ -16,6 +16,10 @@ namespace BRIX.Library.Aspects.TargetSelection
         public EAreaType AreaType { get; set; } = EAreaType.Brick;
         public EObstacleEquivalent ObstacleBetweenCharacterAndArea { get; set; } = EObstacleEquivalent.WoodenPlank;
         public EObstacleEquivalent ObstacleBetweenEpicenterAndTarget { get; set; } = EObstacleEquivalent.WoodenPlank;
+        
+        /// <summary>
+        /// Привязывается ли зона в момент активации к персонажу.
+        /// </summary>
         public bool IsAreaBoundedTo { get; set; } = false;
 
         public IShape? Shape

@@ -1,6 +1,7 @@
 ﻿@using BRIX.Lexica
 @using BRIX.Library.Aspects.TargetSelection
 @using BRIX.Library.Enums
+@using BRIX.Library.Mathematics
 
 @if (Model.Strategy == ETargetSelectionStrategy.CharacterHimself)
 {
@@ -27,6 +28,38 @@
         <p>Если между персонажем и его целью находится препятствие эквивалентное по прочности @GetDurabilityEquivalent(Model.NTAD.ObstacleBetweenCharacterAndTarget), то эффект не будет применён.</p>
     }
 }
+@if (Model.Strategy == ETargetSelectionStrategy.Area)
+{
+    <p>Все цели в @GetShape(Model.Area.Shape) на расстоянии @Numbers.RUSDeclension(Model.Area.DistanceToAreaInMeters, "метра", "метров", "метров") от персонажа.</p>
+    
+    if(Model.Area.ExcludedTargetsCount > 0)
+    {
+        <p>Персонаж может выбрать до @Numbers.RUSDeclension(Model.Area.ExcludedTargetsCount, "цели", "целей", "целей") в зоне, к которым эффект применяться не будет.</p>
+    }
+
+    if (Model.Area.ObstacleBetweenCharacterAndArea == EObstacleEquivalent.None)
+    {
+        <p>Препятствия между зоной действия эффекта и персонажем не играют роли.</p>
+    }
+    else
+    {
+        <p>Если между персонажем и зоной действия эффекта находится препятствие эквивалентное по прочности @GetDurabilityEquivalent(Model.NTAD.ObstacleBetweenCharacterAndTarget), то эффект не будет применён к этой зоне.</p>
+    }
+
+    if (Model.Area.ObstacleBetweenEpicenterAndTarget == EObstacleEquivalent.None)
+    {
+        <p>Препятствия между эпицентром действия эффекта и целями не играют роли.</p>
+    }
+    else
+    {
+        <p>Если между целью и эпицентром зоны действия находится препятствие эквивалентное по прочности @GetDurabilityEquivalent(Model.NTAD.ObstacleBetweenCharacterAndTarget), то эффект не будет применён к этой цели.</p>
+    }
+
+    if(Model.Area.IsAreaBoundedTo)
+    {
+        <p>Область действия привязывается к персонажу и перемещается вместе с ним.</p>
+    }
+}
 
 @code {
     [Parameter]
@@ -44,6 +77,26 @@
             EObstacleEquivalent.BrickWall => "кирпичной стене",
             EObstacleEquivalent.ThickSteelPlate => "толстому стальному листу",
             EObstacleEquivalent.MuchMorePowerfullObstacle => "чему-то невообразимо прочному",
+            _ => TemplateHelper.LexisTemplatingError
+        };
+
+        return (MarkupString)resultString;
+    }
+
+    public static MarkupString GetShape(IShape? shape)
+    {
+        if(shape == null)
+        {
+            return (MarkupString)TemplateHelper.LexisTemplatingError;
+        }
+
+        string resultString = shape switch
+        {
+            Brick brick => $"зоне в форме куба со сторонами {brick.A}, {brick.B} и {Numbers.RUSDeclension(brick.C, "метр", "метра", "метров")}",
+            Sphere sphere => $"зоне в форме сферы с радиусом {Numbers.RUSDeclension(sphere.R, "метр", "метра", "метров")}",
+            Cone cone => $"зоне в форме конуса с высотой {cone.H} и радиусом {Numbers.RUSDeclension(cone.R, "метр", "метра", "метров")}",
+            Cylinder cylinder => $"зоне в форме цилиндра с высотой {cylinder.H} и радиусом {Numbers.RUSDeclension(cylinder.R, "метр", "метра", "метров")}",
+            VoxelArray voxels => $"в зоне сложной формы, состоящей из {Numbers.RUSDeclension(voxels.N, "вокселя", "вокселей", "вокселей")}",
             _ => TemplateHelper.LexisTemplatingError
         };
 
