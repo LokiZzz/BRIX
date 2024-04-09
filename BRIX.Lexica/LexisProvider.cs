@@ -1,5 +1,4 @@
-﻿using BRIX.Library.Aspects;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.Web.HtmlRendering;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,15 +10,23 @@ namespace BRIX.Lexica
 {
     public static class LexisProvider
     {
-        public static async Task<string> ToLexis2(this object model, CultureInfo? cultureInfo = null)
+        public static async Task<string> ToLexis(this object model, CultureInfo? cultureInfo = null)
+        {
+            try
+            {
+                return await ToLexisInternal(model, cultureInfo);
+            }
+            catch(Exception ex)
+            {
+                return $"[LEXIS ERROR: {ex.Message}, {ex.StackTrace}]";
+            }
+        }
+
+        public static async Task<string> ToLexisInternal(object model, CultureInfo? cultureInfo = null)
         {
             if (cultureInfo == null)
             {
                 cultureInfo = Thread.CurrentThread.CurrentUICulture;
-            }
-            else
-            {
-                Thread.CurrentThread.CurrentUICulture = cultureInfo;
             }
 
             IServiceCollection services = new ServiceCollection();
@@ -40,9 +47,20 @@ namespace BRIX.Lexica
 
             });
 
-            return html.Trim() ?? string.Empty;
+            if(string.IsNullOrEmpty(html))
+            {
+                throw new Exception("Ошибка при вызове HtmlRenderer. Вероятно, не найден шаблон или в шаблоне произошла ошибка.");
+            }
+
+            return html.Trim();
         }
 
+        /// <summary>
+        /// Находит тип шаблона (документ лексики) по полному имени в следующем формате: 
+        /// BRIX.Lexica.Templates.ru_RU.NameOfModelT
+        /// Папка с шаблонами должна иметь имя культуры с дефисом заменённым на подчёркивание,
+        /// а шаблон иметь имя модели с буквой «T», добавленной вконце.
+        /// </summary>
         private static Type GetTemplateType(object model, CultureInfo cultureInfo)
         {
             string assemblyName = Assembly.GetExecutingAssembly().GetName().Name
@@ -54,45 +72,6 @@ namespace BRIX.Lexica
             Type? templateType = Type.GetType(Assembly.CreateQualifiedName(assemblyName, fullTypePath));
 
             return templateType ?? throw new NotImplementedException($"Шаблон для {model.GetType()} не найден."); 
-        }
-
-        public static string ToLexis(this object model, CultureInfo? cultureInfo = null)
-        {
-            if (cultureInfo == null)
-            {
-                cultureInfo = Thread.CurrentThread.CurrentUICulture;
-            }
-            else
-            {
-                Thread.CurrentThread.CurrentUICulture = cultureInfo;
-            }
-
-            string resourceName = model.GetType().Name;
-            string resourceString = ResourceHelper.GetResourceString(resourceName);
-            string resultString = string.Format(new LexisFormatter(cultureInfo), resourceString, model);
-            resultString = HandleSpecialConditions(model, resultString, cultureInfo);
-
-            return resultString;
-        }
-
-        private static string HandleSpecialConditions(object model, string formattedString, CultureInfo cultureInfo)
-        {
-            if (model is CooldownAspect ca && ca.UsesCount == 0)
-            {
-                formattedString = ResourceHelper.GetResourceString("CooldownAspect_Special_None");
-            }
-
-            if (model is ActivationConditionsAspect aca && aca.Conditions.Count() == 0)
-            {
-                formattedString = ResourceHelper.GetResourceString("ActivationConditionsAspect_Special_None");
-            }
-
-            if (model is DurationAspect da && da.CanDisableStatus)
-            {
-                formattedString += " " + ResourceHelper.GetResourceString("DurationAspect_Special_CanDisable");
-            }
-
-            return formattedString;
         }
     }
 }

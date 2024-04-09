@@ -37,6 +37,6 @@ TargetSelectionAspect model = new ()
 model.Area.GetConcreteShape<Cone>().H = 10;
 model.Area.GetConcreteShape<Cone>().R = 5;
 
-string? text = await model.ToLexis2();
+string? text = await model.ToLexis();
 
 Console.WriteLine(text);

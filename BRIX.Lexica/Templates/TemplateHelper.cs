@@ -2,6 +2,6 @@
 {
     public static class TemplateHelper
     {
-        public const string LexisTemplatingError = "[ERROR]";
+        public const string LexisTemplatingError = "[LEXIS ERROR]";
     }
 }
