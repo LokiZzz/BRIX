@@ -5,11 +5,11 @@
 
 @if (Model.Strategy == ETargetSelectionStrategy.CharacterHimself)
 {
-    <p>Целью является сам персонаж.</p>
+    <p>Целью эффекта является сам персонаж.</p>
 }
 @if (Model.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
 {
-    <p>@Numbers.RUSDcln(Model.NTAD.TargetsCount, "цель", "цели", "целей") на расстоянии @Numbers.RUSDcln(Model.NTAD.DistanceInMeters, "метр", "метра", "метров") от персонажа.</p>
+    <p>Эффект подействует на @Numbers.RUSDcln(Model.NTAD.TargetsCount, "цель", "цели", "целей") на расстоянии @Numbers.RUSDcln(Model.NTAD.DistanceInMeters, "метр", "метра", "метров") от персонажа.</p>
 
     if(Model.NTAD.IsTargetSelectionIsRandom){
         <p>Цели должны быть выбраны случайным образом.</p>
@@ -25,25 +25,25 @@
     }
     else
     {
-        <p>Если между персонажем и его целью находится препятствие эквивалентное по прочности @GetDurabilityEquivalent(Model.NTAD.ObstacleBetweenCharacterAndTarget), то эффект не будет применён.</p>
+        <p>Если между персонажем и его целью находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.NTAD.ObstacleBetweenCharacterAndTarget), то эффект не будет применён.</p>
     }
 }
 @if (Model.Strategy == ETargetSelectionStrategy.Area)
 {
-    <p>Все цели в @GetShape(Model.Area.Shape) на расстоянии @Numbers.RUSDeclension(Model.Area.DistanceToAreaInMeters, "метра", "метров", "метров") от персонажа.</p>
+    <p>Эффект подействует на  все цели в @GetShape(Model.Area.Shape) на расстоянии @Numbers.RUSDeclension(Model.Area.DistanceToAreaInMeters, "метра", "метров", "метров") от персонажа. Область действия может располагаться под любым углом относительно персонажа.</p>
     
     if(Model.Area.ExcludedTargetsCount > 0)
     {
-        <p>Персонаж может выбрать до @Numbers.RUSDeclension(Model.Area.ExcludedTargetsCount, "цели", "целей", "целей") в зоне, к которым эффект применяться не будет.</p>
+        <p>Персонаж может выбрать @Numbers.RUSDeclension(Model.Area.ExcludedTargetsCount, "цель", "цели", "целей") в области, к которым эффект применяться не будет.</p>
     }
 
     if (Model.Area.ObstacleBetweenCharacterAndArea == EObstacleEquivalent.None)
     {
-        <p>Препятствия между зоной действия эффекта и персонажем не играют роли.</p>
+        <p>Препятствия между областью действия эффекта и персонажем не играют роли.</p>
     }
     else
     {
-        <p>Если между персонажем и зоной действия эффекта находится препятствие эквивалентное по прочности @GetDurabilityEquivalent(Model.NTAD.ObstacleBetweenCharacterAndTarget), то эффект не будет применён к этой зоне.</p>
+        <p>Если между персонажем и областью действия эффекта находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.Area.ObstacleBetweenCharacterAndArea), то эффект не будет применён к этой области.</p>
     }
 
     if (Model.Area.ObstacleBetweenEpicenterAndTarget == EObstacleEquivalent.None)
@@ -52,7 +52,7 @@
     }
     else
     {
-        <p>Если между целью и эпицентром зоны действия находится препятствие эквивалентное по прочности @GetDurabilityEquivalent(Model.NTAD.ObstacleBetweenCharacterAndTarget), то эффект не будет применён к этой цели.</p>
+        <p>Если между целью и эпицентром области действия находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.Area.ObstacleBetweenEpicenterAndTarget), то эффект не будет применён к этой цели.</p>
     }
 
     if(Model.Area.IsAreaBoundedTo)
@@ -61,9 +61,86 @@
     }
 }
 
+@if (Model.TargetChain.IsChainEnabled)
+{
+    <p>После применения эффекта к цели, он применяется по цепочке к @Numbers.RUSDcln(Model.TargetChain.MaxTargetsCount, "другой цели", "другим целям", "другим целям"), максимальное расстояние между целями в цепи: @Numbers.RUSDcln(Model.TargetChain.MaxDistanceBetweenTargets, "метр", "метра", "метров").</p>
+
+    if (Model.TargetChain.ObstacleBetweenTargetsInChain == EObstacleEquivalent.None)
+    {
+        <p>Препятствия между целями в цепи не играют роли.</p>
+    }
+    else
+    {
+        <p>Если между целями в цепи находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.TargetChain.ObstacleBetweenTargetsInChain), то цепь прерывается.</p>
+    }
+}
+
+<p>Эффект может быть применён к целям следующих размеров:</p>
+<ul>
+    @foreach (ETargetSize size in Model.TargetsSizes.AllowedTargetSizes)
+    {
+        <li>@GetSize(size);</li>
+    }
+</ul>
+
+@if(Model.TargetSelectionRestrictions.Conditions.Count() > 0)
+{
+    <p>Чтобы эффект подействовал на цель, она должна иметь следующие свойства:</p>
+    <ul>
+        @foreach ((ETargetSelectionRestrictions Type, string Comment) condition in Model.TargetSelectionRestrictions.Conditions)
+        {
+            <li>@GetSelectionConditionString(condition);</li>
+        }
+    </ul>
+}
+
 @code {
     [Parameter]
     public TargetSelectionAspect Model { get; set; } = new();
+
+    public static MarkupString GetSelectionConditionString((ETargetSelectionRestrictions Type, string Comment) input)
+    {
+        string resultString = input.Type switch
+        {
+            ETargetSelectionRestrictions.SeeTarget => "Персонаж должен видеть цель",
+            ETargetSelectionRestrictions.TargetSeesCharacter => "Цель должна видеть персонажа",
+            ETargetSelectionRestrictions.HearTarget => "Персонаж должен слышать цель",
+            ETargetSelectionRestrictions.TargetHearsCharacter => "Цель должна слышать персонажа",
+
+            ETargetSelectionRestrictions.BeAlive => "Цель должна быть живой",
+            ETargetSelectionRestrictions.BeAnObject => "Цель должна быть предметом",
+            ETargetSelectionRestrictions.BeViable => "Цель должна быть дееспособной",
+
+            ETargetSelectionRestrictions.LowRarityProperty => $"Свойство низкой редкости: {input.Comment}",
+            ETargetSelectionRestrictions.MediumRarityProperty => $"Свойство средней редкости: {input.Comment}",
+            ETargetSelectionRestrictions.HighRarityProperty => $"Свойство высокой редкости: {input.Comment}",
+
+            _ => TemplateHelper.LexisTemplatingError
+        };
+
+        return (MarkupString)resultString;
+    }
+
+    public static MarkupString GetSize(ETargetSize input)
+    {
+        string resultString = input switch
+        {
+            ETargetSize.Tiny => "Крохотный",
+            ETargetSize.Miniature => "Миниатюрный",
+            ETargetSize.Small => "Маленький",
+            ETargetSize.Medium => "Средний",
+            ETargetSize.Big => "Большой",
+            ETargetSize.Huge => "Огромный",
+            ETargetSize.Gigantic => "Гигантский",
+            ETargetSize.Monstrous => "Монструозный",
+            ETargetSize.Colossal => "Колоссальный",
+            ETargetSize.Titanic => "Титанический",
+            ETargetSize.Legendary => "Легендарный",
+            _ => TemplateHelper.LexisTemplatingError
+        };
+
+        return (MarkupString)resultString;
+    }
 
     public static MarkupString GetDurabilityEquivalent(EObstacleEquivalent input)
     {
@@ -92,11 +169,11 @@
 
         string resultString = shape switch
         {
-            Brick brick => $"зоне в форме куба со сторонами {brick.A}, {brick.B} и {Numbers.RUSDeclension(brick.C, "метр", "метра", "метров")}",
-            Sphere sphere => $"зоне в форме сферы с радиусом {Numbers.RUSDeclension(sphere.R, "метр", "метра", "метров")}",
-            Cone cone => $"зоне в форме конуса с высотой {cone.H} и радиусом {Numbers.RUSDeclension(cone.R, "метр", "метра", "метров")}",
-            Cylinder cylinder => $"зоне в форме цилиндра с высотой {cylinder.H} и радиусом {Numbers.RUSDeclension(cylinder.R, "метр", "метра", "метров")}",
-            VoxelArray voxels => $"в зоне сложной формы, состоящей из {Numbers.RUSDeclension(voxels.N, "вокселя", "вокселей", "вокселей")}",
+            Brick brick => $"области в форме куба со сторонами {brick.A}, {brick.B} и {Numbers.RUSDeclension(brick.C, "метр", "метра", "метров")}",
+            Sphere sphere => $"области в форме сферы с радиусом {Numbers.RUSDeclension(sphere.R, "метр", "метра", "метров")}",
+            Cone cone => $"области в форме конуса с высотой {cone.H} и радиусом {Numbers.RUSDeclension(cone.R, "метр", "метра", "метров")}",
+            Cylinder cylinder => $"области в форме цилиндра с высотой {cylinder.H} и радиусом {Numbers.RUSDeclension(cylinder.R, "метр", "метра", "метров")}",
+            VoxelArray voxels => $"в области сложной формы, состоящей из {Numbers.RUSDeclension(voxels.N, "вокселя", "вокселей", "вокселей")}",
             _ => TemplateHelper.LexisTemplatingError
         };
 

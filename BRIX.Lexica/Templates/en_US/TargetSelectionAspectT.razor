@@ -1,0 +1,166 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects.TargetSelection
+@using BRIX.Library.Enums
+@using BRIX.Library.Mathematics
+
+@if (Model.Strategy == ETargetSelectionStrategy.CharacterHimself)
+{
+    <p>The target of the effect is the character itself.</p>
+}
+@if (Model.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
+{
+    <p>The effect will affect @Numbers.ENGDcln(Model.NTAD.TargetsCount, "target") at distance of @Numbers.ENGDcln(Model.NTAD.DistanceInMeters, "meter") from the character.</p>
+
+    if(Model.NTAD.IsTargetSelectionIsRandom){
+        <p>Targets must be selected randomly.</p>
+    }
+    else
+    {
+        <p>The character chooses the goals himself.</p>
+    }
+
+    if(Model.NTAD.ObstacleBetweenCharacterAndTarget == EObstacleEquivalent.None)
+    {
+        <p>Obstacles between the target and the character do not matter.</p>
+    }
+    else
+    {
+        <p>If there is an obstacle between the character and his target that is greater or equivalent in strength to @GetDurabilityEquivalent(Model.NTAD.ObstacleBetweenCharacterAndTarget), then the effect will not be applied.</p>
+    }
+}
+@if (Model.Strategy == ETargetSelectionStrategy.Area)
+{
+    <p>The effect will affect all targets in @GetShape(Model.Area.Shape) at a distance of @Numbers.ENGDcln(Model.Area.DistanceToAreaInMeters, "meter")from the character. The area of effect can be located at any angle relative to the character.</p>
+    
+    if(Model.Area.ExcludedTargetsCount > 0)
+    {
+        <p>The character can select up to @Numbers.ENGDcln(Model.Area.ExcludedTargetsCount, "target") in area to which the effect will not be applied.</p>
+    }
+
+    if (Model.Area.ObstacleBetweenCharacterAndArea == EObstacleEquivalent.None)
+    {
+        <p>Obstacles between the area of effect and the character do not matter.</p>
+    }
+    else
+    {
+        <p>If there is an obstacle between the character and the area of effect of the effect that is greater or equivalent in strength to @GetDurabilityEquivalent(Model.Area.ObstacleBetweenCharacterAndArea), then the effect will not be applied to this area.</p>
+    }
+
+    if (Model.Area.ObstacleBetweenEpicenterAndTarget == EObstacleEquivalent.None)
+    {
+        <p>Obstacles between the epicenter of the effect and the targets do not matter.</p>
+    }
+    else
+    {
+        <p>If there is an obstacle greater than or equivalent in strength to @GetDurabilityEquivalent(Model.Area.ObstacleBetweenEpicenterAndTarget) between the target and the epicenter of the area of effect, then the effect will not be applied to that target.</p>
+    }
+
+    if(Model.Area.IsAreaBoundedTo)
+    {
+        <p>The area of effect is attached to the character and moves with him.</p>
+    }
+}
+
+@if (Model.TargetChain.IsChainEnabled)
+{
+    <p>After applying an effect to a target, it is applied along the chain to @Numbers.ENGDcln(Model.TargetChain.MaxTargetsCount, "other target"), the maximum distance between targets in the chain: @Numbers.ENGDcln(Model.TargetChain.MaxDistanceBetweenTargets, "meter").</p>
+
+    if (Model.TargetChain.ObstacleBetweenTargetsInChain == EObstacleEquivalent.None)
+    {
+        <p>Obstacles between targets in the chain do not matter.</p>
+    }
+    else
+    {
+        <p>If between the targets in the chain there is an obstacle greater or equivalent in strength @GetDurabilityEquivalent(Model.TargetChain.ObstacleBetweenTargetsInChain), then the chain is interrupted.</p>
+    }
+}
+
+<p>The effect can be applied to targets of the following sizes:</p>
+<ul>
+    @foreach (ETargetSize size in Model.TargetsSizes.AllowedTargetSizes)
+    {
+        <li>@GetSize(size);</li>
+    }
+</ul>
+
+@if(Model.TargetSelectionRestrictions.Conditions.Count() > 0)
+{
+    <p>For the effect to affect the target, it must have the following properties:</p>
+    <ul>
+        @foreach ((ETargetSelectionRestrictions Type, string Comment) condition in Model.TargetSelectionRestrictions.Conditions)
+        {
+            <li>@GetSelectionConditionString(condition);</li>
+        }
+    </ul>
+}
+
+@code {
+    [Parameter]
+    public TargetSelectionAspect Model { get; set; } = new();
+
+    public static MarkupString GetSelectionConditionString((ETargetSelectionRestrictions Type, string Comment) input)
+    {
+        string resultString = input.Type switch
+        {
+            ETargetSelectionRestrictions.SeeTarget => "The character must see the target",
+            ETargetSelectionRestrictions.TargetSeesCharacter => "The target must see the character",
+            ETargetSelectionRestrictions.HearTarget => "The character must hear the target",
+            ETargetSelectionRestrictions.TargetHearsCharacter => "The target must hear the character",
+
+            ETargetSelectionRestrictions.BeAlive => "Target must be alive",
+            ETargetSelectionRestrictions.BeAnObject => "Target must be an object",
+            ETargetSelectionRestrictions.BeViable => "Target must be viable",
+
+            ETargetSelectionRestrictions.LowRarityProperty => $"Low rarity property: {input.Comment}",
+            ETargetSelectionRestrictions.MediumRarityProperty => $"Medium rarity property: {input.Comment}",
+            ETargetSelectionRestrictions.HighRarityProperty => $"High rarity property: {input.Comment}",
+
+            _ => TemplateHelper.LexisTemplatingError
+        };
+
+        return (MarkupString)resultString;
+    }
+
+    public static MarkupString GetSize(ETargetSize input)
+    {
+        return (MarkupString)input.ToString();
+    }
+
+    public static MarkupString GetDurabilityEquivalent(EObstacleEquivalent input)
+    {
+        string resultString = input switch
+        {
+            EObstacleEquivalent.PaperSheet => "sheet of paper",
+            EObstacleEquivalent.DenseVegetation => "dense vegetation",
+            EObstacleEquivalent.LeatherArmor => "leather armor",
+            EObstacleEquivalent.WoodenPlank => "wooden plank",
+            EObstacleEquivalent.MetalArmor => "metal armor",
+            EObstacleEquivalent.BrickWall => "brick wall",
+            EObstacleEquivalent.ThickSteelPlate => "thick steel plate",
+            EObstacleEquivalent.MuchMorePowerfullObstacle => "something incredibly durable",
+            _ => TemplateHelper.LexisTemplatingError
+        };
+
+        return (MarkupString)resultString;
+    }
+
+    public static MarkupString GetShape(IShape? shape)
+    {
+        if(shape == null)
+        {
+            return (MarkupString)TemplateHelper.LexisTemplatingError;
+        }
+
+        string resultString = shape switch
+        {
+            Brick brick => $"cube-shaped area with sides of {brick.A}, {brick.B} and {Numbers.ENGDcln(brick.C, "meter")}",
+            Sphere sphere => $"sphere-shaped area with radius of {Numbers.ENGDcln(sphere.R, "meter")}",
+            Cone cone => $"cone-shaped area with height of {cone.H} and radius of {Numbers.ENGDcln(cone.R, "meter")}",
+            Cylinder cylinder => $"cylinder-shaped area with height of {cylinder.H} and radius of {Numbers.ENGDcln(cylinder.R, "meter")}",
+            VoxelArray voxels => $"area of complex shape consisting of {Numbers.ENGDcln(voxels.N, "voxel")}",
+            _ => TemplateHelper.LexisTemplatingError
+        };
+
+        return (MarkupString)resultString;
+    }
+}

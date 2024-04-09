@@ -1,11 +1,11 @@
 ﻿@using BRIX.Lexica
 @using BRIX.Library.Aspects
 
-Чтобы способность могла быть активирована, должны соблюдаться следующие условия:<br/>
+Чтобы способность могла быть активирована, должны соблюдаться следующие условия:
 <ul>
     @foreach ((EActivationCondition Type, string Comment) condition in Model.Conditions)
     {
-        <li>@GetActivationConditionString(condition)</li>
+        <li>@GetActivationConditionString(condition);</li>
     }
 </ul>
 
@@ -17,13 +17,13 @@
     {
         string resultString = input.Type switch
         {
-            EActivationCondition.NeedToMove => "Персонаж должен мочь двигаться;",
-            EActivationCondition.NeedToAbleToTalk => "Персонаж должен мочь говорить;",
-            EActivationCondition.NeedToMoveArm => "Персонаж должен мочь двигать рукой;",
-            EActivationCondition.NeedToMoveBothArms => "Персонаж должен мочь двигать обеими руками;",
-            EActivationCondition.EasyActivationCondition => $"Условие малой сложности: {input.Comment};",
-            EActivationCondition.MediumActivationCondition => $"Условие средней сложности: {input.Comment};",
-            EActivationCondition.HardActivationCondition => $"Условие высокой сложности: {input.Comment};",
+            EActivationCondition.NeedToMove => "Персонаж должен мочь двигаться",
+            EActivationCondition.NeedToAbleToTalk => "Персонаж должен мочь говорить",
+            EActivationCondition.NeedToMoveArm => "Персонаж должен мочь двигать рукой",
+            EActivationCondition.NeedToMoveBothArms => "Персонаж должен мочь двигать обеими руками",
+            EActivationCondition.EasyActivationCondition => $"Условие малой сложности: {input.Comment}",
+            EActivationCondition.MediumActivationCondition => $"Условие средней сложности: {input.Comment}",
+            EActivationCondition.HardActivationCondition => $"Условие высокой сложности: {input.Comment}",
             _ => TemplateHelper.LexisTemplatingError
         };
 
