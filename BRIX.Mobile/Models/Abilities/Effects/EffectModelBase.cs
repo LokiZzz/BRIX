@@ -19,26 +19,18 @@ namespace BRIX.Mobile.Models.Abilities.Effects
 
         public string Name => EffectsDictionary.Collection[GetType()].Name;
 
-        public string Description 
-        {
-            get
-            {
-                return InternalModel != null
-                    ? InternalModel.ToLexis()
-                    : string.Empty;
-            }
-        }
+        public string Description => InternalModel == null ? string.Empty : InternalModel.ToLexis();
 
         public List<AspectModelBase> Aspects { get; protected set; } = [];
 
         public AspectModelBase GetAspect(Type aspectType)
         {
-            return Aspects.Single(x => x.InternalBase.GetType() == aspectType);
+            return Aspects.Single(x => x.InternalModel.GetType() == aspectType);
         }
 
         public void UpdateAspect(AspectModelBase aspect)
         {
-            InternalModel?.SetAspect(aspect.InternalBase);
+            InternalModel?.SetAspect(aspect.InternalModel);
             UpdateAspects();
         }
 

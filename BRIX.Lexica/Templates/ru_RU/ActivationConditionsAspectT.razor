@@ -1,13 +1,20 @@
 ﻿@using BRIX.Lexica
 @using BRIX.Library.Aspects
 
-Чтобы способность могла быть активирована, должны соблюдаться следующие условия:
-<ul>
+@if(Model.Conditions.Count() > 0)
+{
+    <p>Чтобы способность могла быть активирована, должны соблюдаться следующие условия:</p>
+    <ul>
     @foreach ((EActivationCondition Type, string Comment) condition in Model.Conditions)
     {
         <li>@GetActivationConditionString(condition);</li>
     }
-</ul>
+    </ul>
+}
+else
+{
+    <p>Для активации этой способности не требуется особых условий.</p>
+}
 
 @code {
     [Parameter]

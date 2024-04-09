@@ -44,7 +44,6 @@ namespace BRIX.Lexica
                 HtmlRootComponent output = await htmlRenderer.RenderComponentAsync(GetTemplateType(model, cultureInfo), parameters);
 
                 return output.ToHtmlString();
-
             });
 
             if(string.IsNullOrEmpty(html))

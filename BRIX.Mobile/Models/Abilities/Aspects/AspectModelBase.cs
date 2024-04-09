@@ -11,22 +11,16 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
     {
         public AspectModelBase(AspectBase model)
         {
-            InternalBase = model;
+            InternalModel = model;
         }
 
-        public AspectBase InternalBase { get; set; }
+        public AspectBase InternalModel { get; set; }
 
         public AbilityCostMonitorPanelVM CostMonitor { get; set; } = new();
 
         public string Name => AspectsDictionary.Collection[GetType()].Name;
 
-        public string Description 
-        {
-            get
-            {
-                return InternalBase.ToLexis();
-            } 
-        }
+        public string Description => InternalModel == null ? string.Empty : InternalModel.ToLexis();
 
         public void UpdateCost() => CostMonitor?.UpdateCost();
 

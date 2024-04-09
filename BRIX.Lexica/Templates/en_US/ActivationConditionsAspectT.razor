@@ -1,13 +1,20 @@
 ﻿@using BRIX.Lexica
 @using BRIX.Library.Aspects
 
-For the ability to be activated, the following conditions must be met:<br/>
-<ul>
-    @foreach ((EActivationCondition Type, string Comment) condition in Model.Conditions)
-    {
-        <li>@GetActivationConditionString(condition)</li>
-    }
-</ul>
+@if (Model.Conditions.Count() > 0)
+{
+    <p>For the ability to be activated, the following conditions must be met:</p>
+    <ul>
+        @foreach ((EActivationCondition Type, string Comment) condition in Model.Conditions)
+        {
+            <li>@GetActivationConditionString(condition);</li>
+        }
+    </ul>
+}
+else
+{
+    <p>There are no special conditions need to activate this ability.</p>
+}
 
 @code {
     [Parameter]

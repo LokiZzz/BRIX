@@ -88,7 +88,7 @@ namespace BRIX.Mobile.Services
     {
         public static string ToLexis(this object model)
         {
-            return model.ToLexis(Localization.Culture);
+            return model.ToLexis(Localization.Culture).GetAwaiter().GetResult();
         }
     }
 }
