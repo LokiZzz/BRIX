@@ -1,4 +1,4 @@
-﻿using BRIX.Library.Aspects;
+﻿using BRIX.Library.Ability;
 using BRIX.Library.Extensions;
 using BRIX.Utility.Extensions;
 
@@ -59,9 +59,7 @@ namespace BRIX.Library.Characters
                 }
             }
 
-            ActionPointAspect? apAspect = ability.GetAspect<ActionPointAspect>();
-
-            if (apAspect != null && apAspect.ActionPoints > CurrentActionPoints)
+            if (ability.Activation.ActionPoints > CurrentActionPoints)
             {
                 return false;
             }
@@ -85,11 +83,12 @@ namespace BRIX.Library.Characters
                 consumable.Count--;
             }
 
-            ActionPointAspect? apAspect = ability.GetAspect<ActionPointAspect>();
-
-            if (apAspect != null)
+            if (ability.Activation.Strategy == EActivationStrategy.ActionPoints)
             {
-                CurrentActionPoints -= apAspect.ActionPoints;
+                if (CurrentActionPoints > ability.Activation.ActionPoints)
+                {
+                    CurrentActionPoints -= ability.Activation.ActionPoints;
+                }
             }
         }
 
@@ -102,7 +101,7 @@ namespace BRIX.Library.Characters
         {
             if (!Inventory.Items.Any(x => x.Equals(itemToUpdate)))
             {
-                throw new AbilityLogicException("У персонажа не найдено соответствующее материальное обеспечение.");
+                throw new Exception("У персонажа не найдено соответствующее материальное обеспечение.");
             }
 
             Character? copyOfThis = this.Copy();
@@ -132,7 +131,7 @@ namespace BRIX.Library.Characters
         {
             if (!Inventory.Items.Any(x => x.Equals(itemToRemove)))
             {
-                throw new AbilityLogicException("У персонажа не найдено соответствующее материальное обеспечение.");
+                throw new Exception("У персонажа не найдено соответствующее материальное обеспечение.");
             }
 
             if (!CanRemoveMaterialSupport(itemToRemove))

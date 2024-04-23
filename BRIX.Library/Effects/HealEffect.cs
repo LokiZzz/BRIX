@@ -2,6 +2,7 @@
 using BRIX.Library.Aspects;
 using BRIX.Library.DiceValue;
 using BRIX.Library.Extensions;
+using BRIX.Library.Ability;
 
 namespace BRIX.Library.Effects
 {
@@ -9,8 +10,7 @@ namespace BRIX.Library.Effects
     {
         public override List<Type> RequiredAspects => new()
         {
-            typeof(ActionPointAspect), typeof(TargetSelectionAspect),
-            typeof(CooldownAspect), typeof(ActivationConditionsAspect)
+            typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect)
         };
 
         public override int BaseExpCost()

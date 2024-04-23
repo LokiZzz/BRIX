@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BRIX.Library.Characters
+﻿namespace BRIX.Library.Characters
 {
     /// <summary>
     /// Инвентарь персонажа
@@ -34,7 +28,7 @@ namespace BRIX.Library.Characters
             }
         } 
 
-        private IEnumerable<InventoryItem> GoThrough(Container item)
+        private static IEnumerable<InventoryItem> GoThrough(Container item)
         {
             foreach (InventoryItem containerItem in item.Payload)
             {

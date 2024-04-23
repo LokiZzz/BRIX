@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Aspects;
+﻿using BRIX.Library.Ability;
+using BRIX.Library.Aspects;
 using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities.Aspects;
@@ -17,7 +18,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 Name = Localization.AspectActionPoints,
                 Icon = AwesomeRPG.Battery75,
                 EditPage = typeof(ActionPointAspectPage),
-                LibraryAspectType = typeof(ActionPointAspect),
+                LibraryAspectType = typeof(ActionPointAbilityAspect),
             }},
             { typeof(TargetSelectionAspectModel), new AspectUtilityModel() {
                 Name = Localization.AspectTargetSelection,

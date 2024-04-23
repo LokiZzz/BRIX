@@ -23,6 +23,8 @@ namespace BRIX.Library
 
         private HashSet<AspectBase> SynchronizingAspects = new();
 
+        public AbilityActivation Activation { get; set; } = new();
+
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
@@ -96,11 +98,6 @@ namespace BRIX.Library
                 {
                     effect.Attach(existingAspect);
                 }
-                else if(aspect is ActionPointAspect)
-                {
-                    aspect.IsConcording = true;
-                    SynchronizingAspects.Add(aspect);
-                }
             }
 
             _effects.Add(effect);
@@ -162,23 +159,16 @@ namespace BRIX.Library
         /// </summary>
         public void Discord(AspectBase sourceAspectType)
         {
-            if (sourceAspectType is not ActionPointAspect)
-            {
-                SynchronizingAspects.RemoveWhere(x => 
-                    x.GetType().Equals(sourceAspectType.GetType())
-                );
+            SynchronizingAspects.RemoveWhere(x => 
+                x.GetType().Equals(sourceAspectType.GetType())
+            );
 
-                if (_effects.Count() > 1)
-                {
-                    foreach (EffectBase effect in _effects)
-                    {
-                        effect.Detach(sourceAspectType);
-                    }
-                }
-            }
-            else
+            if (_effects.Count() > 1)
             {
-                throw new AbilityLogicException("Нельзя рассинхронизировать аспект очков действий.");
+                foreach (EffectBase effect in _effects)
+                {
+                    effect.Detach(sourceAspectType);
+                }
             }
         }
 

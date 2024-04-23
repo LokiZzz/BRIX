@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Aspects;
+﻿using BRIX.Library.Ability;
+using BRIX.Library.Aspects;
 using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Extensions;
 using BRIX.Library.Mathematics;
@@ -9,8 +10,7 @@ namespace BRIX.Library.Effects
     {
         public override List<Type> RequiredAspects =>
         [
-            typeof(ActionPointAspect), typeof(TargetSelectionAspect), typeof(CooldownAspect), 
-            typeof(ActivationConditionsAspect)
+            typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect)
         ];
 
         public int DistanceInMeters { get; set; }
