@@ -32,7 +32,7 @@ namespace BRIX.Library.Ability
         /// В данном определении соответствие проводится не с коэффициентами, а с отношением временного периода и 
         /// раунда, например в минуте 12 раундов (60 сек / 5 сек), поэтому минуте соответствует множитель 12.
         /// </summary>
-        public Dictionary<ECooldownOption, int> CooldownToCoeficient => new Dictionary<ECooldownOption, int>
+        public Dictionary<ECooldownOption, int> CooldownToPercent => new Dictionary<ECooldownOption, int>
         {
             { ECooldownOption.NoneCooldown, 0 },
             { ECooldownOption.Round,        -10 },
@@ -66,13 +66,13 @@ namespace BRIX.Library.Ability
 
         private double GetCooldownCoefficient()
         {
-            if (UsesCount == 0)
+            if (NoCooldown)
             {
-                return CooldownToCoeficient[Cooldown];
+                return 1;
             }
             else
             {
-                return (CooldownToCoeficient[Cooldown] / UsesCount).ToCoeficient();
+                return (CooldownToPercent[Cooldown] / UsesCount).ToCoeficient();
             }
         }
 

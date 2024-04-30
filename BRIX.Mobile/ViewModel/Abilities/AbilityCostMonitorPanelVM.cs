@@ -1,14 +1,14 @@
-﻿using BRIX.Library.Characters;
-using BRIX.Mobile.Models.Abilities;
+﻿using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.ViewModel.Base;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {
     public partial class AbilityCostMonitorPanelVM : ViewModelBase
     {
+        public Guid DebugGuid = Guid.NewGuid();
+
         /// <summary>
         /// Если есть необходимость, то монитор можно заглушить, создав его через этот конструктор.
         /// При редактировании статусов в эффектах и аспектах нет стоимости способности и таким образом монитор 
