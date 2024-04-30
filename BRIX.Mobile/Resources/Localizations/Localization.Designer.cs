@@ -142,6 +142,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activation settings.
+        /// </summary>
+        public static string ActivationSettings {
+            get {
+                return ResourceManager.GetString("ActivationSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string Add {

@@ -53,7 +53,7 @@ namespace BRIX.Library.Ability
         /// </summary>
         public int UsesCount { get; set; }
 
-        public ETriggerPropbability TriggerProbability { get; set; }
+        public (ETriggerProbability Probability, string Comment) Trigger { get; set; }
 
         private double GetActionPointsCoefficient()
         {
@@ -78,12 +78,12 @@ namespace BRIX.Library.Ability
 
         private double GetTriggerCoefficient()
         {
-            return TriggerProbability switch
+            return Trigger.Probability switch
             {
-                ETriggerPropbability.Low => 2,
-                ETriggerPropbability.Medium => 5,
-                ETriggerPropbability.High => 10,
-                _ => throw new NotImplementedException($"Неизвестная редкость триггера способности {TriggerProbability}")
+                ETriggerProbability.Low => 2,
+                ETriggerProbability.Medium => 5,
+                ETriggerProbability.High => 10,
+                _ => throw new NotImplementedException($"Неизвестная редкость триггера способности {Trigger}")
             };
         }
 
@@ -128,7 +128,7 @@ namespace BRIX.Library.Ability
     /// <summary>
     /// Редкость, с которой
     /// </summary>
-    public enum ETriggerPropbability
+    public enum ETriggerProbability
     {
         Low = 0,
         Medium = 1,

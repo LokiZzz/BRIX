@@ -40,6 +40,19 @@
                     </VerticalStackLayout>
                 </Border>
 
+                <Border Style="{StaticResource BlockBorder}" VerticalOptions="Start" Margin="10,0">
+                    <VerticalStackLayout Spacing="10">
+                        <Label 
+                            Style="{StaticResource TitleLabel}"
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.MaterialSupport}}"/>
+                        <Label Text="{Binding Ability.ActivationDescription}"/>
+                        <Button 
+                            Style="{StaticResource LightButton}" 
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Edit}}"
+                            Command="{Binding EditActivationCommand}"/>
+                    </VerticalStackLayout>
+                </Border>
+                
                 <Border Style="{StaticResource BlockBorder}" Margin="10">
                     <VerticalStackLayout Spacing="10">
                         <Label 

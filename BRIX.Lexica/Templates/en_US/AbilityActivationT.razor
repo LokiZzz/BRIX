@@ -1,7 +1,10 @@
 ﻿@using BRIX.Lexica
+@using BRIX.Library.Ability
 @using BRIX.Library.Aspects
 
-@if (Model.Condition == ECooldownOption.CannotReset)
+<p>To activate ability, you need to spend @Numbers.ENGDcln(Model.ActionPoints, "action point").</p>
+
+@if (Model.Cooldown == ECooldownOption.CannotReset)
 {
     <p>A character can only use this ability once.</p>
 }
@@ -11,13 +14,12 @@ else if (Model.NoCooldown)
 }
 else
 {
-    <p>The ability can be used @Numbers.ENGDcln(Model.UsesCount, "time"). After this, a cooldown will be required, which will last @GetCooldownOption(Model.Condition).</p>
+    <p>The ability can be used @Numbers.ENGDcln(Model.UsesCount, "time"). After this, a cooldown will be required, which will last @GetCooldownOption(Model.Cooldown).</p>
 }
-
 
 @code {
     [Parameter]
-    public CooldownAspect Model { get; set; } = new();
+    public AbilityActivation Model { get; set; } = new();
 
     public static MarkupString GetCooldownOption(ECooldownOption input)
     {

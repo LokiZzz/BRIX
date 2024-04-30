@@ -4,11 +4,11 @@
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              xmlns:v="clr-namespace:BRIX.Mobile.View.Abilities"
-             xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities.Aspects"
-             x:Class="BRIX.Mobile.View.Abilities.Aspects.ActionPointAspectPage"
-             x:DataType="vm:ActionPointAspectPageVM"
+             xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities"
+             x:Class="BRIX.Mobile.View.Abilities.AbilityActivationSettingsPage"
+             x:DataType="vm:AbilityActivationSettingsPageVM"
              Shell.TabBarIsVisible="False"
-             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectActionPoints}}">
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ActivationSettings}}">
 
     <Shell.TitleView>
         <controls:TitleView/>
@@ -21,10 +21,10 @@
                     <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectActionPoints}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ActionPointAspectHint}}"/>
-                        <controls:FramedEntry Text="{Binding Aspect.ActionPoints}" IsReadOnly="True" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectActionPoints}}"/>
+                        <controls:FramedEntry Text="{Binding Activation.ActionPoints}" IsReadOnly="True" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectActionPoints}}"/>
                         <Grid ColumnDefinitions="auto,*,auto" Margin="10">
                             <Label Grid.Column="0" Text="1" VerticalOptions="Center"/>
-                            <Slider Grid.Column="1" Minimum="1" Maximum="50" Value="{Binding Aspect.ActionPoints, Mode=TwoWay}"/>
+                            <Slider Grid.Column="1" Minimum="1" Maximum="50" Value="{Binding Activation.ActionPoints, Mode=TwoWay}"/>
                             <Label Grid.Column="2" Text="50" VerticalOptions="Center"/>
                         </Grid>
                         <Grid ColumnDefinitions="*,*,*,*,*" ColumnSpacing="5">
@@ -34,6 +34,22 @@
                             <Button Grid.Column="3" Style="{StaticResource LightButton}" Text="4" Command="{Binding SetPointsCommand}" CommandParameter="4"/>
                             <Button Grid.Column="4" Style="{StaticResource LightButton}" Text="5" Command="{Binding SetPointsCommand}" CommandParameter="5"/>
                         </Grid>
+                    </VerticalStackLayout>
+                </Border>
+                <Border Style="{StaticResource BlockBorder}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectCooldown}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CooldownAspectHint}}"/>
+                        <controls:PickerButton
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Cooldown}}"
+                            Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Cooldown}}"
+                            ItemSource="{Binding Activation.CooldownOptions}"
+                            SelectedItem="{Binding Activation.SelectedCooldownOption}"
+                            DisplayMember="LocalizedName"/>
+                        <controls:FramedEntry
+                            Text="{Binding Activation.UsesCount}"
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.UsesCount}}"
+                            IsVisible="{Binding Activation.NeedToSetUsesCount}"/>
                     </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>

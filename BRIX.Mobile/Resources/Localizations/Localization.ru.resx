@@ -144,6 +144,9 @@
   <data name="ActivationConditionWarning" xml:space="preserve">
     <value>Такое условие активации уже есть.</value>
   </data>
+  <data name="ActivationSettings" xml:space="preserve">
+    <value>Настройки активации</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>Добавить</value>
   </data>

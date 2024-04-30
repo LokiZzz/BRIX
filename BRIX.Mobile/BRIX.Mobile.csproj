@@ -116,12 +116,21 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>Localization.resx</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\Abilities\AbilityActivationSettingsPage.xaml.cs">
+	    <DependentUpon>AbilityActivationSettingsPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <EmbeddedResource Update="Resources\Localizations\Localization.ru.resx">
 	    <Generator></Generator>
 	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="View\Abilities\AbilityActivationSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

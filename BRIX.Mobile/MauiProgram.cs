@@ -80,6 +80,7 @@ public static class MauiProgram
         builder.RegisterView<AddHealthPage, AddHealthPageVM>();
         builder.RegisterView<AddOrEditInventoryItemPage, AddOrEditInventoryItemPageVM>();
         builder.RegisterView<AOEAbilityPage, AOEAbilityPageVM>();
+        builder.RegisterView<AbilityActivationSettingsPage, AbilityActivationSettingsPageVM>();
         builder.RegisterView<CharacterStatusesPage, CharacterStatusesPageVM>();
         builder.RegisterView<AOEStatusPage, AOEStatusPageVM>();
 
@@ -108,9 +109,7 @@ public static class MauiProgram
         builder.RegisterView<ExhaustionEffectPage, SinglePropEffectPageVMBase<ExhaustionEffect>>();
         builder.RegisterView<WinEffectPage, EffectPageVMBase<EffectGenericModelBase<WinTheGameEffect>>>();
 
-        builder.RegisterView<ActionPointAspectPage, ActionPointAspectPageVM>();
         builder.RegisterView<TargetSelectionAspectPage, TargetSelectionAspectPageVM>();
-        builder.RegisterView<CooldownAspectPage, CooldownAspectPageVM>();
         builder.RegisterView<ActivationConditionsAspectPage, ActivationConditionsAspectPageVM>();
         builder.RegisterView<DurationAspectPage, DurationAspectPageVM>();
     }

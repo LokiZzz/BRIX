@@ -41,7 +41,6 @@ namespace BRIX.Mobile.ViewModel.Abilities
             set => SetProperty(ref _ability, value);
         }
 
-
         private AbilityCostMonitorPanelVM _costMonitor = new();
         public AbilityCostMonitorPanelVM CostMonitor
         {
@@ -203,6 +202,15 @@ namespace BRIX.Mobile.ViewModel.Abilities
             CostMonitor.UpdateCost();
         }
 
+        [RelayCommand]
+        public async Task EditActivation()
+        {
+            await Navigation.NavigateAsync<AbilityActivationSettingsPage>(
+                ENavigationMode.Push,
+                (NavigationParameters.CostMonitor, CostMonitor.Copy())
+            );
+        }
+
         public override Task OnNavigatedAsync()
         {
             switch (Mode)
@@ -258,6 +266,15 @@ namespace BRIX.Mobile.ViewModel.Abilities
                         Ability.UpdateEffect(editedEffect);
                         break;
                 }
+            }
+
+            AbilityActivationModel? editedActivation = query.GetParameterOrDefault<AbilityActivationModel>(
+                NavigationParameters.AbilityActivation
+            );
+
+            if (editedActivation != null)
+            {
+                Ability.Activation = editedActivation;
             }
 
             CostMonitor.UpdateCost();

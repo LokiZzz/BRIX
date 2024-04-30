@@ -1,7 +1,10 @@
 ﻿@using BRIX.Lexica
+@using BRIX.Library.Ability
 @using BRIX.Library.Aspects
 
-@if (Model.Condition == ECooldownOption.CannotReset)
+<p>Для активации необходимо потратить @Numbers.RUSDcln(Model.ActionPoints, "очко", "очка", "очков") действия.</p>
+
+@if (Model.Cooldown == ECooldownOption.CannotReset)
 {
     <p>Персонаж может использовать эту способность только один раз.</p>
 }
@@ -11,13 +14,12 @@ else if (Model.NoCooldown)
 }
 else
 {
-    <p>Способность может быть использована @Numbers.RUSDcln(Model.UsesCount, "раз", "раза", "раз"). После этого ей потребуется перезярдка, которая продлится @GetCooldownOption(Model.Condition).</p>
+    <p>Способность может быть использована @Numbers.RUSDcln(Model.UsesCount, "раз", "раза", "раз"). После этого ей потребуется перезярдка, которая продлится @GetCooldownOption(Model.Cooldown).</p>
 }
-
 
 @code {
     [Parameter]
-    public CooldownAspect Model { get; set; } = new();
+    public AbilityActivation Model { get; set; } = new();
 
     public static MarkupString GetCooldownOption(ECooldownOption input)
     {

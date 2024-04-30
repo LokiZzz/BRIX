@@ -1,6 +1,9 @@
 ﻿using BRIX.Library;
+using BRIX.Library.Ability;
 using BRIX.Library.Characters;
+using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Models.Abilities.Effects;
+using BRIX.Mobile.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 
@@ -13,6 +16,7 @@ namespace BRIX.Mobile.Models.Abilities
         public CharacterAbilityModel(CharacterAbility ability)
         {
             InternalModel = ability;
+            Activation = new(ability.Activation);
             Effects = new ObservableCollection<EffectModelBase>(
                 ability.Effects.Select(EffectModelFactory.GetModel)
             );
@@ -22,6 +26,8 @@ namespace BRIX.Mobile.Models.Abilities
         public Character? Character;
 
         public CharacterAbility InternalModel { get; }
+
+        public AbilityActivationModel Activation { get; set; }
 
         public ObservableCollection<EffectModelBase> Effects { get; set; } = [];
 
@@ -40,6 +46,8 @@ namespace BRIX.Mobile.Models.Abilities
                 InternalModel.Description, value, InternalModel, (ability, desc) => ability.Description = desc
             );
         }
+
+        public string ActivationDescription => InternalModel.Activation.ToLexis();
 
         public string StatusName
         {
