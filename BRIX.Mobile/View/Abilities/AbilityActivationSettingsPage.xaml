@@ -28,11 +28,11 @@
                             <Label Grid.Column="2" Text="50" VerticalOptions="Center"/>
                         </Grid>
                         <Grid ColumnDefinitions="*,*,*,*,*" ColumnSpacing="5">
-                            <Button Grid.Column="0" Style="{StaticResource LightButton}" Text="1" Command="{Binding SetPointsCommand}" CommandParameter="1"/>
-                            <Button Grid.Column="1" Style="{StaticResource LightButton}" Text="2" Command="{Binding SetPointsCommand}" CommandParameter="2"/>
-                            <Button Grid.Column="2" Style="{StaticResource LightButton}" Text="3" Command="{Binding SetPointsCommand}" CommandParameter="3"/>
-                            <Button Grid.Column="3" Style="{StaticResource LightButton}" Text="4" Command="{Binding SetPointsCommand}" CommandParameter="4"/>
-                            <Button Grid.Column="4" Style="{StaticResource LightButton}" Text="5" Command="{Binding SetPointsCommand}" CommandParameter="5"/>
+                            <Button Grid.Column="0" Style="{StaticResource LightButton}" Text="1" Command="{Binding Activation.SetPointsCommand}" CommandParameter="1"/>
+                            <Button Grid.Column="1" Style="{StaticResource LightButton}" Text="2" Command="{Binding Activation.SetPointsCommand}" CommandParameter="2"/>
+                            <Button Grid.Column="2" Style="{StaticResource LightButton}" Text="3" Command="{Binding Activation.SetPointsCommand}" CommandParameter="3"/>
+                            <Button Grid.Column="3" Style="{StaticResource LightButton}" Text="4" Command="{Binding Activation.SetPointsCommand}" CommandParameter="4"/>
+                            <Button Grid.Column="4" Style="{StaticResource LightButton}" Text="5" Command="{Binding Activation.SetPointsCommand}" CommandParameter="5"/>
                         </Grid>
                     </VerticalStackLayout>
                 </Border>
@@ -56,6 +56,6 @@
         </ScrollView>
         <v:AbilityCostMonitorPanel
             Grid.Row="1"
-            BindingContext="{Binding CostMonitor}"/>
+            BindingContext="{Binding Activation.CostMonitor}"/>
     </Grid>
 </ContentPage>

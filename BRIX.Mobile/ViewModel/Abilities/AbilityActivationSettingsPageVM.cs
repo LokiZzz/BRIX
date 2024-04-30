@@ -14,29 +14,14 @@ namespace BRIX.Mobile.ViewModel.Abilities
             set => SetProperty(ref _activation, value);
         }
 
-        private AbilityCostMonitorPanelVM? _costMonitor;
-        public AbilityCostMonitorPanelVM? CostMonitor
-        {
-            get => _costMonitor;
-            set => SetProperty(ref _costMonitor, value);
-        }
-
-        [RelayCommand]
-        private void SetPoints(string points)
-        {
-            int intPoints = int.Parse(points);
-            Activation.ActionPoints = intPoints;
-            CostMonitor?.UpdateCost();
-        }
-
         [RelayCommand]
         public async Task Save()
         {
-            if (CostMonitor?.Ability?.Activation != null)
+            if (Activation != null)
             {
                 await Navigation.Back(
                     stepsBack: 1,
-                    (NavigationParameters.AbilityActivation, CostMonitor.Ability.Activation)
+                    (NavigationParameters.AbilityActivation, Activation)
                 );
             }
             else
@@ -47,12 +32,14 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            CostMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor)
-                ?? throw new Exception("Монитор стоимости не передан в качестве параметра навигации.");
-            
-            CostMonitor.SaveCommand = SaveCommand;
-            Activation = CostMonitor.Ability?.Activation 
-                ?? throw new Exception("Модель способности в мониторе стоимости не инициализрована.");
+            AbilityCostMonitorPanelVM costMonitor = 
+                query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor)
+                    ?? throw new Exception("Монитор стоимости не передан в качестве параметра навигации.");
+
+            Activation = costMonitor?.Ability?.Activation
+                ?? throw new Exception(" Настройки активации не инициализированы."); ;
+            costMonitor.SaveCommand = SaveCommand;
+            Activation.CostMonitor = costMonitor;
         }
     }
 }

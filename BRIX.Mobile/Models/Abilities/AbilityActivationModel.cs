@@ -1,12 +1,13 @@
 ﻿using BRIX.Library.Ability;
 using BRIX.Mobile.Services;
+using BRIX.Mobile.ViewModel.Abilities;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.Models.Abilities
 {
-    public class AbilityActivationModel : ObservableObject
+    public partial class AbilityActivationModel : ObservableObject
     {
         public AbilityActivationModel() : this(new AbilityActivation()) { }
 
@@ -25,15 +26,27 @@ namespace BRIX.Mobile.Models.Abilities
 
         public AbilityActivation InternalModel { get; private set; }
 
+        private AbilityCostMonitorPanelVM? _costMonitor;
+        public AbilityCostMonitorPanelVM? CostMonitor
+        {
+            get => _costMonitor;
+            set => SetProperty(ref _costMonitor, value);
+        }
+
         public int ActionPoints
         {
             get => InternalModel.ActionPoints;
             set
             {
-                SetProperty(InternalModel.ActionPoints, value, InternalModel,
-                    (model, prop) => model.ActionPoints = prop);
+                SetProperty(InternalModel.ActionPoints, value, InternalModel, (model, prop) => {
+                    model.ActionPoints = prop;
+                    CostMonitor?.UpdateCost();
+                });
             }
         }
+
+        [RelayCommand]
+        private void SetPoints(string points) => ActionPoints = int.Parse(points);
 
         public CooldownOptionVM? SelectedCooldownOption
         {
@@ -51,8 +64,10 @@ namespace BRIX.Mobile.Models.Abilities
                 }
 
                 ECooldownOption cooldown = value.Cooldown;
-                SetProperty(InternalModel.Cooldown, cooldown, InternalModel,
-                    (model, prop) => model.Cooldown = prop);
+                SetProperty(InternalModel.Cooldown, cooldown, InternalModel, (model, prop) => {
+                    model.Cooldown = prop;
+                    CostMonitor?.UpdateCost();
+                });
 
                 if (cooldown == ECooldownOption.NoneCooldown || cooldown == ECooldownOption.CannotReset)
                 {
@@ -82,8 +97,10 @@ namespace BRIX.Mobile.Models.Abilities
             get => InternalModel.UsesCount;
             set
             {
-                SetProperty(InternalModel.UsesCount, value, InternalModel,
-                    (model, prop) => model.UsesCount = prop);
+                SetProperty(InternalModel.UsesCount, value, InternalModel, (model, prop) => {
+                    model.UsesCount = prop;
+                    CostMonitor?.UpdateCost();
+                });
             }
         }
 

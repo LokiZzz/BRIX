@@ -46,10 +46,10 @@ namespace BRIX.Mobile.ViewModel.Account
             RememberMe = Preferences.Get(Mobile.Settings.Account.RememberMe, false);
 
             // Set properties & automatically go through this page to the character page
-            if (RememberMe)
+            if (true)
             {
-                Login = Preferences.Get(Mobile.Settings.Account.Login, string.Empty);
-                Password = Preferences.Get(Mobile.Settings.Account.Password, string.Empty);
+                Login = Preferences.Get(Mobile.Settings.Account.Login, "Loki");
+                Password = Preferences.Get(Mobile.Settings.Account.Password, "12345");
 
                 await Navigation.NavigateAsync<CharacterPage>(ENavigationMode.Absolute);
             }
