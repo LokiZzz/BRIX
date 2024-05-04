@@ -29,10 +29,10 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 Character = new(ability.Character);
             }
 
-            UpdatePercents();
+            UpdateCost();
         }
         
-        private CharacterModel? Character;
+        private readonly CharacterModel? Character;
 
         private CharacterAbilityModel? _ability;
         public CharacterAbilityModel? Ability
@@ -103,13 +103,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 return;
             }
 
-            Ability?.UpdateCost();
-            UpdatePercents();
-        }
 
-        private void UpdatePercents()
-        {
-            if(Ability == null)
+            if (Ability == null)
             {
                 return;
             }
@@ -125,7 +120,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 .Where(x => x.InternalModel.Id != Ability.InternalModel.Id)
                 .Sum(x => x.Cost) + Character.InternalModel.ExpInHealth;
 
-            int expSumWithEditingAbility = SpentEXP + Ability.Cost;
+            int abilityCost = Ability?.UpdateCost() ?? 0;
+            int expSumWithEditingAbility = SpentEXP + abilityCost;
 
             PercentWithoutEditingAbility = (double)SpentEXP / Character.Experience;
             PercentWithEditingAbility = (double)expSumWithEditingAbility / Character.Experience;

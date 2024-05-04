@@ -187,6 +187,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                 }
             }
 
+            Character.UpdateHealth();
             await _characterService.UpdateAsync(Character.InternalModel);
         }
 

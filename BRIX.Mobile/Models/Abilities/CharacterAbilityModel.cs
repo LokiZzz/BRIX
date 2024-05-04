@@ -1,7 +1,5 @@
 ﻿using BRIX.Library;
-using BRIX.Library.Ability;
 using BRIX.Library.Characters;
-using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -57,7 +55,16 @@ namespace BRIX.Mobile.Models.Abilities
             );
         }
 
-        public int Cost => InternalModel.ExpCost(Character);
+        private int _cost;
+        public int Cost
+        {
+            get
+            {
+                _cost = InternalModel.ExpCost(Character);
+
+                return _cost;
+            }
+        }
 
         public bool ShowStatusName => InternalModel.HasStatus;
 
@@ -105,9 +112,11 @@ namespace BRIX.Mobile.Models.Abilities
             OnPropertyChanged(nameof(ShowStatusName));
         }
 
-        public void UpdateCost()
+        public int UpdateCost()
         {
             OnPropertyChanged(nameof(Cost));
+
+            return _cost;
         }
     }
 }

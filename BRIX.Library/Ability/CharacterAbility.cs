@@ -45,7 +45,7 @@ namespace BRIX.Library
 
             if (_effects.Count() > 1)
             {
-                effectsCountPenaltyCoef += (_effects.Count() - 1) * deltaPerEffect;
+                effectsCountPenaltyCoef += (_effects.Count - 1) * deltaPerEffect;
             }
 
             int sumOfEffectsExpCost = _effects.Sum(effect => effect.GetExpCost());
