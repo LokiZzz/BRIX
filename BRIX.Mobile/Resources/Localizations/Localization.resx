@@ -147,6 +147,9 @@
   <data name="ActivationSettings" xml:space="preserve">
     <value>Activation settings</value>
   </data>
+  <data name="ActivationTrigger" xml:space="preserve">
+    <value>Activation trigger</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
@@ -456,11 +459,17 @@
   <data name="EnterHardActiovationCondition" xml:space="preserve">
     <value>Specify a condition that is difficult to reproduce or a condition of high rarity. For example, a shooting star in the field of view, a specific day of the year, a volcanic eruption nearby, etc.</value>
   </data>
+  <data name="EnterHighProbabilityTrigger" xml:space="preserve">
+    <value>Enter a high probability trigger, for example: "Character has taken damage."</value>
+  </data>
   <data name="EnterHighRarityRestriction" xml:space="preserve">
     <value>Enter a sign of high rarity, continuing the sentence: "Target...". For example: "Must have a tattoo", "Must be a dragon", "Must be born in June".</value>
   </data>
   <data name="EnterLowActivationCondition" xml:space="preserve">
     <value>Specify an easily reproducible condition or a condition of low rarity. For example, a specific time of day, the presence of a visible sky, the proximity of vessels with liquids, the presence of smooth vertical surfaces, the obligatory sound of music, activation only in the dark, etc.</value>
+  </data>
+  <data name="EnterLowProbabilityTrigger" xml:space="preserve">
+    <value>Enter a low probability trigger, for example: "The character is being attacked by an undead."</value>
   </data>
   <data name="EnterLowRarityRestriction" xml:space="preserve">
     <value>Enter a low rarity property, continuing the sentence: "Target...". For example: "Must be female", "Must be an elf", "Must have a soul", "Must be made of wood".</value>
@@ -471,8 +480,20 @@
   <data name="EnterMediumRarityRestriction" xml:space="preserve">
     <value>Enter a sign of medium rarity, continuing the sentence: Target...". For example: “Must be in armor”, “Must be in water”, “Must breathe”.</value>
   </data>
+  <data name="EnterStandartProbabilityTrigger" xml:space="preserve">
+    <value>Enter a trigger with a standard probability, for example: “An ally was attacked from afar.”</value>
+  </data>
   <data name="Equipment" xml:space="preserve">
     <value>Equipment</value>
+  </data>
+  <data name="ETriggerProbability_High" xml:space="preserve">
+    <value>High probability</value>
+  </data>
+  <data name="ETriggerProbability_Low" xml:space="preserve">
+    <value>Low probability</value>
+  </data>
+  <data name="ETriggerProbability_Standart" xml:space="preserve">
+    <value>Standart probability</value>
   </data>
   <data name="ExhaustionEffectPageHint" xml:space="preserve">
     <value>Temporarily decreases the target's maximum health. The cost scale is progressive and depends on the amount by which health is increased. The amount by which health is reduced can be determined by rolling the dice.</value>
@@ -968,6 +989,12 @@
   </data>
   <data name="Titanic" xml:space="preserve">
     <value>Titanic</value>
+  </data>
+  <data name="Trigger" xml:space="preserve">
+    <value>Trigger</value>
+  </data>
+  <data name="TriggerProbability" xml:space="preserve">
+    <value>Trigger probability</value>
   </data>
   <data name="UsesCount" xml:space="preserve">
     <value>Uses count</value>

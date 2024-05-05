@@ -53,7 +53,7 @@ namespace BRIX.Library.Ability
         /// </summary>
         public int UsesCount { get; set; }
 
-        public (ETriggerProbability Probability, string Comment) Trigger { get; set; }
+        public List<(ETriggerProbability Probability, string Comment)> Triggers { get; set; } = [];
 
         private double GetActionPointsCoefficient()
         {
@@ -76,14 +76,19 @@ namespace BRIX.Library.Ability
             }
         }
 
-        private double GetTriggerCoefficient()
+        private double GetTriggersCoefficient()
         {
-            return Trigger.Probability switch
+            return Triggers.Count == 0 ? 1 : Triggers.Sum(x => GetTriggerCoefficient(x.Probability));
+        }
+
+        private double GetTriggerCoefficient(ETriggerProbability trigger)
+        {
+            return trigger switch
             {
-                ETriggerProbability.Low => 2,
-                ETriggerProbability.Medium => 5,
+                ETriggerProbability.Low => 2.5,
+                ETriggerProbability.Standart => 5,
                 ETriggerProbability.High => 10,
-                _ => throw new NotImplementedException($"Неизвестная редкость триггера способности {Trigger}")
+                _ => throw new NotImplementedException($"Неизвестная редкость триггера способности {trigger}")
             };
         }
 
@@ -92,9 +97,7 @@ namespace BRIX.Library.Ability
             switch (Strategy)
             {
                 case EActivationStrategy.ActionPoints:
-                    return GetActionPointsCoefficient() * GetCooldownCoefficient();
-                case EActivationStrategy.Trigger:
-                    return GetTriggerCoefficient() * GetCooldownCoefficient();
+                    return GetActionPointsCoefficient() * GetCooldownCoefficient() * GetTriggersCoefficient();
                 case EActivationStrategy.Passive:
                     return 10;
                 default:
@@ -106,8 +109,7 @@ namespace BRIX.Library.Ability
     public enum EActivationStrategy
     {
         ActionPoints = 0,
-        Trigger = 1,
-        Passive = 2
+        Passive = 1
     }
 
     public enum ECooldownOption
@@ -131,7 +133,7 @@ namespace BRIX.Library.Ability
     public enum ETriggerProbability
     {
         Low = 0,
-        Medium = 1,
+        Standart = 1,
         High = 2
     }
 }

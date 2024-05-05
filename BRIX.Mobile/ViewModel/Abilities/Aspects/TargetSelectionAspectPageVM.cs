@@ -177,7 +177,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 {
                     if (customRestrictions.Any(x => x == concreteResult.Restriction))
                     {
-                        string message = TargetSelectionAspectPageVM.GetCustomRestrictionHint(concreteResult.Restriction);
+                        string message = GetCustomRestrictionHint(concreteResult.Restriction);
 
                         EntryPopupResult? entryResult = await ShowPopupAsync<EntryPopup, EntryPopupResult, EntryPopupParameters>(
                             new EntryPopupParameters

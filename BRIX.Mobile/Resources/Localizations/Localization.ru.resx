@@ -147,6 +147,9 @@
   <data name="ActivationSettings" xml:space="preserve">
     <value>Настройки активации</value>
   </data>
+  <data name="ActivationTrigger" xml:space="preserve">
+    <value>Триггер активации</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>Добавить</value>
   </data>
@@ -459,11 +462,17 @@
   <data name="EnterHardActiovationCondition" xml:space="preserve">
     <value>Укажите сложно воспроизводимое условие или условие высокой редкости. Например падающая звезда в области видимости, конкретный день в году, извержение вулкана поблизости и т.п.</value>
   </data>
+  <data name="EnterHighProbabilityTrigger" xml:space="preserve">
+    <value>Введите триггер с высокой вероятностью, например: «Персонаж получил урон».</value>
+  </data>
   <data name="EnterHighRarityRestriction" xml:space="preserve">
     <value>Введите признак высокой редкости, продолжая предложение: «Цель...». Например: «Должна иметь татуировку», «Должна быть драконом», «Должна быть рождена в июне».</value>
   </data>
   <data name="EnterLowActivationCondition" xml:space="preserve">
     <value>Укажите легко воспроизводимое условие или условие малой редкости. Например конкретное время суток, наличие видимого неба, близость сосудов с жидкостями, наличие гладких вертикальных поверхностей, обязательное звучание музыки, активация только в темноте и т.п.</value>
+  </data>
+  <data name="EnterLowProbabilityTrigger" xml:space="preserve">
+    <value>Введите триггер с низкой вероятностью, например: «Персонажа атакует нежить».</value>
   </data>
   <data name="EnterLowRarityRestriction" xml:space="preserve">
     <value>Введите признак низкой редкости, продолжая предложение: «Цель...». Например: «Должна быть женского пола», «Должна быть эльфом», «Должна иметь душу», «Должна быть предметом из дерева».</value>
@@ -474,8 +483,20 @@
   <data name="EnterMediumRarityRestriction" xml:space="preserve">
     <value>Введите признак средней редкости, продолжая предложение: «Цель...». Например: «Должна быть в доспехах», «Должна находится в воде», «Должна дышать».</value>
   </data>
+  <data name="EnterStandartProbabilityTrigger" xml:space="preserve">
+    <value>Введите триггер со стандартной вероятностью, например: «Союзника атаковали издали».</value>
+  </data>
   <data name="Equipment" xml:space="preserve">
     <value>Снаряжение</value>
+  </data>
+  <data name="ETriggerProbability_High" xml:space="preserve">
+    <value>Высокая вероятность</value>
+  </data>
+  <data name="ETriggerProbability_Low" xml:space="preserve">
+    <value>Низкая вероятность</value>
+  </data>
+  <data name="ETriggerProbability_Standart" xml:space="preserve">
+    <value>Стандартная вероятность</value>
   </data>
   <data name="ExhaustionEffectPageHint" xml:space="preserve">
     <value>Временно уменьшает количество максимальных очков здоровья цели. Шкала стоимости прогрессивная и зависит от количества, на которое увеличивается здоровье. Количество, на которое уменьшится здоровье может определяться броском костей.</value>
@@ -977,6 +998,12 @@
   </data>
   <data name="Titanic" xml:space="preserve">
     <value>Титанический</value>
+  </data>
+  <data name="Trigger" xml:space="preserve">
+    <value>Триггер</value>
+  </data>
+  <data name="TriggerProbability" xml:space="preserve">
+    <value>Вероятность триггера</value>
   </data>
   <data name="UsesCount" xml:space="preserve">
     <value>Количество использований</value>

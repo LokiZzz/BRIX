@@ -151,6 +151,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activation trigger.
+        /// </summary>
+        public static string ActivationTrigger {
+            get {
+                return ResourceManager.GetString("ActivationTrigger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string Add {
@@ -1078,6 +1087,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter a high probability trigger, for example: &quot;Character has taken damage.&quot;.
+        /// </summary>
+        public static string EnterHighProbabilityTrigger {
+            get {
+                return ResourceManager.GetString("EnterHighProbabilityTrigger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter a sign of high rarity, continuing the sentence: &quot;Target...&quot;. For example: &quot;Must have a tattoo&quot;, &quot;Must be a dragon&quot;, &quot;Must be born in June&quot;..
         /// </summary>
         public static string EnterHighRarityRestriction {
@@ -1092,6 +1110,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string EnterLowActivationCondition {
             get {
                 return ResourceManager.GetString("EnterLowActivationCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a low probability trigger, for example: &quot;The character is being attacked by an undead.&quot;.
+        /// </summary>
+        public static string EnterLowProbabilityTrigger {
+            get {
+                return ResourceManager.GetString("EnterLowProbabilityTrigger", resourceCulture);
             }
         }
         
@@ -1123,11 +1150,47 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter a trigger with a standard probability, for example: “An ally was attacked from afar.”.
+        /// </summary>
+        public static string EnterStandartProbabilityTrigger {
+            get {
+                return ResourceManager.GetString("EnterStandartProbabilityTrigger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Equipment.
         /// </summary>
         public static string Equipment {
             get {
                 return ResourceManager.GetString("Equipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to High probability.
+        /// </summary>
+        public static string ETriggerProbability_High {
+            get {
+                return ResourceManager.GetString("ETriggerProbability_High", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Low probability.
+        /// </summary>
+        public static string ETriggerProbability_Low {
+            get {
+                return ResourceManager.GetString("ETriggerProbability_Low", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standart probability.
+        /// </summary>
+        public static string ETriggerProbability_Standart {
+            get {
+                return ResourceManager.GetString("ETriggerProbability_Standart", resourceCulture);
             }
         }
         
@@ -2613,6 +2676,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Titanic {
             get {
                 return ResourceManager.GetString("Titanic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trigger.
+        /// </summary>
+        public static string Trigger {
+            get {
+                return ResourceManager.GetString("Trigger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trigger probability.
+        /// </summary>
+        public static string TriggerProbability {
+            get {
+                return ResourceManager.GetString("TriggerProbability", resourceCulture);
             }
         }
         
