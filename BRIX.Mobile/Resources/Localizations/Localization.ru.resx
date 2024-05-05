@@ -150,6 +150,12 @@
   <data name="ActivationTrigger" xml:space="preserve">
     <value>Триггер активации</value>
   </data>
+  <data name="ActivationTriggers" xml:space="preserve">
+    <value>Триггеры активации</value>
+  </data>
+  <data name="ActivationTriggersHint" xml:space="preserve">
+    <value>Способность может быть активирована автоматически, если добавить к ней триггеры активации. Триггер — это событие, которое должно произойти, чтобы способность активировалась без траты очков действий. С каждым добавленным триггером способность будет дороже.</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>Добавить</value>
   </data>
@@ -734,6 +740,9 @@
   </data>
   <data name="NotEnoughEXP" xml:space="preserve">
     <value>Не хватает очков опыта!</value>
+  </data>
+  <data name="NoTriggers" xml:space="preserve">
+    <value>У этой способности нет триггеров активации.</value>
   </data>
   <data name="ObstacleBetweenTargetsInChain" xml:space="preserve">
     <value>Препятствия между целями</value>

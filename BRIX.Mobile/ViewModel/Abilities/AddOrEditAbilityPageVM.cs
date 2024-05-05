@@ -4,7 +4,6 @@ using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Base;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.View.Abilities;
@@ -13,7 +12,6 @@ using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.ViewModel.Popups;
 using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Abilities.Effects;
-using BRIX.Mobile.Models.Characters;
 using System.Collections.ObjectModel;
 using BRIX.Mobile.ViewModel.Inventory;
 

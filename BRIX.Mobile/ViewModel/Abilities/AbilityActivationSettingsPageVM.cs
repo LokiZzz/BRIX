@@ -43,7 +43,11 @@ namespace BRIX.Mobile.ViewModel.Abilities
         public ObservableCollection<TriggerOptionVM> Triggers
         {
             get => _triggers;
-            set => SetProperty(ref _triggers, value);
+            set
+            {
+                SetProperty(ref _triggers, value);
+                OnPropertyChanged(nameof(ShowNoTriggersText));
+            }
         }
 
         public bool ShowNoTriggersText => Triggers?.Any() == false;
@@ -75,9 +79,9 @@ namespace BRIX.Mobile.ViewModel.Abilities
                     EntryPopupResult? entryResult = await ShowPopupAsync<EntryPopup, EntryPopupResult, EntryPopupParameters>(
                         new EntryPopupParameters
                         {
-                            Title = Resources.Localizations.Localization.TargetSelectionRestriction,
-                            Message = GetCustomRestrictionHint(concreteResult.Probability),
-                            Placeholder = Resources.Localizations.Localization.TargetProperty,
+                            Title = Resources.Localizations.Localization.ActivationTrigger,
+                            Message = GetTriggerHint(concreteResult.Probability),
+                            Placeholder = Resources.Localizations.Localization.Trigger,
                             ButtonText = Resources.Localizations.Localization.Ok,
                         }
                     );
@@ -88,6 +92,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                     }
 
                     concreteResult.Text = entryResult.Text;
+                    concreteResult = GetTriggerVM((concreteResult.Probability, concreteResult.Text));
                     Triggers.Add(concreteResult);
                     Activation.InternalModel.Triggers.Add((concreteResult.Probability, concreteResult.Text));
                     OnPropertyChanged(nameof(ShowNoTriggersText));
@@ -110,7 +115,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             OnPropertyChanged(nameof(ShowNoTriggersText));
         }
 
-        private static string GetCustomRestrictionHint(ETriggerProbability probability)
+        private static string GetTriggerHint(ETriggerProbability probability)
         {
             return probability switch
             {
@@ -126,16 +131,30 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            AbilityCostMonitorPanelVM costMonitor = 
+            AbilityCostMonitorPanelVM costMonitor =
                 query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor)
                     ?? throw new Exception("Монитор стоимости не передан в качестве параметра навигации.");
+
             Activation = costMonitor?.Ability?.Activation
-                ?? throw new Exception(" Настройки активации не инициализированы."); ;
+                ?? throw new Exception(" Настройки активации не инициализированы.");
             costMonitor.SaveCommand = SaveCommand;
             Activation.CostMonitor = costMonitor;
-            Triggers = new(Activation.InternalModel.Triggers.Select(x => 
-                new TriggerOptionVM { Probability = x.Probability, Text = x.Comment }
-            ));
+
+            Triggers = new(Activation.InternalModel.Triggers.Select(GetTriggerVM));
+        }
+
+        private TriggerOptionVM GetTriggerVM((ETriggerProbability Probability, string Comment) trigger)
+        {
+            string probabiltyText = Localization["ETriggerProbability_" + trigger.Probability.ToString("G")].ToString() 
+                ?? string.Empty;
+            string displayText = $"{probabiltyText}: «{trigger.Comment}»";
+
+            return new TriggerOptionVM
+            {
+                Probability = trigger.Probability,
+                Text = trigger.Comment,
+                DisplayText = displayText
+            };
         }
     }
 
@@ -143,6 +162,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
     {
         public ETriggerProbability Probability { get; set; }
         public string Text { get; set; } = string.Empty;
+
+        public string DisplayText { get; set; } = string.Empty;
 
         public override string ToString() => Text;
     }

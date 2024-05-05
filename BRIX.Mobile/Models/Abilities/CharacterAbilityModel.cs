@@ -25,7 +25,16 @@ namespace BRIX.Mobile.Models.Abilities
 
         public CharacterAbility InternalModel { get; }
 
-        public AbilityActivationModel Activation { get; set; }
+        private AbilityActivationModel _activation = new();
+        public AbilityActivationModel Activation 
+        { 
+            get => _activation;
+            set
+            {
+                _activation = value;
+                InternalModel.Activation = value.InternalModel;
+            }
+        }
 
         public ObservableCollection<EffectModelBase> Effects { get; set; } = [];
 

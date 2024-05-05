@@ -160,6 +160,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activation triggers.
+        /// </summary>
+        public static string ActivationTriggers {
+            get {
+                return ResourceManager.GetString("ActivationTriggers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An ability can be activated automatically if you add activation triggers to it. A trigger is an event that must occur for an ability to activate without spending action points. With each added trigger the ability will become more expensive..
+        /// </summary>
+        public static string ActivationTriggersHint {
+            get {
+                return ResourceManager.GetString("ActivationTriggersHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string Add {
@@ -1884,6 +1902,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string NotEnoughEXP {
             get {
                 return ResourceManager.GetString("NotEnoughEXP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No triggers in this ability..
+        /// </summary>
+        public static string NoTriggers {
+            get {
+                return ResourceManager.GetString("NoTriggers", resourceCulture);
             }
         }
         

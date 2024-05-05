@@ -16,7 +16,7 @@
 
     <Grid RowDefinitions="*,auto">
         <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never" >
-            <VerticalStackLayout Spacing="10">
+            <VerticalStackLayout Spacing="10" Margin="0,0,0,10">
                 <Border Style="{StaticResource BlockBorder}">
                     <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectActionPoints}}"/>
@@ -36,6 +36,7 @@
                         </Grid>
                     </VerticalStackLayout>
                 </Border>
+                
                 <Border Style="{StaticResource BlockBorder}">
                     <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectCooldown}}"/>
@@ -51,6 +52,45 @@
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.UsesCount}}"
                             IsVisible="{Binding Activation.NeedToSetUsesCount}"/>
                     </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource BlockBorder}" VerticalOptions="Start">
+                    <Grid RowDefinitions="auto,auto,auto" RowSpacing="10">
+                        <VerticalStackLayout Grid.Row="0" Spacing="10">
+                            <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ActivationTriggers}}"/>
+                            <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ActivationTriggersHint}}"/>
+                        </VerticalStackLayout>
+
+                        <CollectionView 
+                            Grid.Row="1" 
+                            x:Name="conditionsCollectionView" 
+                            ItemsSource="{Binding Triggers}"
+                            IsVisible="{Binding ShowNoTriggersText, Converter={StaticResource NotConverter}}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="vm:TriggerOptionVM">
+                                    <controls:BasicCollectionItem
+                                        Text="{Binding Text}"
+                                        DeleteCommand="{Binding Source={x:Reference conditionsCollectionView}, Path= BindingContext.DeleteTriggerCommand}"
+                                        CommandParameter="{Binding}"/>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <VerticalStackLayout Grid.Row="2" Spacing="10">
+                            <Label 
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NoTriggers}}"
+                                Margin="0,0,0,5"
+                                IsVisible="{Binding ShowNoTriggersText}"/>
+                            <Button 
+                                Style="{StaticResource LightButton}"
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Add}}"
+                                Command="{Binding AddTriggerCommand}"
+                                Margin="0,0,0,1"/>
+                        </VerticalStackLayout>
+                    </Grid>
                 </Border>
             </VerticalStackLayout>
         </ScrollView>

@@ -98,18 +98,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         public void UpdateCost()
         {
-            if(IsMock)
-            {
-                return;
-            }
-
-
-            if (Ability == null)
-            {
-                return;
-            }
-
-            if (IsMock || Character == null)
+            if(IsMock || Character == null || Ability == null)
             {
                 return;
             }
