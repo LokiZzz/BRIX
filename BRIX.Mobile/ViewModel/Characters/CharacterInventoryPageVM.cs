@@ -30,8 +30,8 @@ namespace BRIX.Mobile.ViewModel.Characters
             _vmConverter = new InventoryItemConverter();
         }
 
-        private ObservableCollection<InventoryItemNodeVM> _inventoryItems = [];
-        public ObservableCollection<InventoryItemNodeVM> InventoryItems
+        private ObservableCollection<InventoryItemNodeVM>? _inventoryItems;
+        public ObservableCollection<InventoryItemNodeVM>? InventoryItems
         {
             get => _inventoryItems;
             set => SetProperty(ref _inventoryItems, value);
