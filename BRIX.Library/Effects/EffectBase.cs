@@ -34,7 +34,7 @@ namespace BRIX.Library.Effects
                 if (aspect != null)
                 {
                     double coeficient = aspect.GetCoefficient();
-                    resultingCost = resultingCost * coeficient;
+                    resultingCost *= coeficient;
                 }
             }
 

@@ -50,7 +50,7 @@ namespace BRIX.Library
 
             int sumOfEffectsExpCost = _effects.Sum(effect => effect.GetExpCost());
             double activationCoef = Activation.GetCoeficient();
-            int expCost = (sumOfEffectsExpCost * effectsCountPenaltyCoef * activationCoef).Round();
+            int expCost = (sumOfEffectsExpCost * activationCoef * effectsCountPenaltyCoef).Round();
 
             if (character != null)
             {

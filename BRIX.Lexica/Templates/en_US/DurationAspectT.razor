@@ -6,11 +6,11 @@
 
 @if (!Model.CanDisableStatus) 
 {
-    <p>The character can cancel the applied effect without spending action points at any time.</p>
+    <p>The character can cancel the applied @(Model.IsConcording ? "effects" : "effect")  without spending action points at any time.</p>
 }
 else
 {
-    <p>The character cannot cancel the effect.</p>
+    <p>The character cannot cancel the @(Model.IsConcording ? "effects" : "effect").</p>
 }
 
 @code {

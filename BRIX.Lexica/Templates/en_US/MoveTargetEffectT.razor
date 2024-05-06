@@ -1,7 +1,7 @@
 ﻿@using BRIX.Lexica
 @using BRIX.Library.Effects
 
-Перемещает цель на @Numbers.RUSDcln(Model.DistanceInMeters, "метр", "метра", "метров") @GetMovingPath(Model.TargetPath)
+Moves the target @Numbers.ENGDcln(Model.DistanceInMeters, "meter") @GetMovingPath(Model.TargetPath)
 
 @code {
     [Parameter]
@@ -11,11 +11,11 @@
     {
         string resultString = input switch
         {
-            EMoveTargetPath.StraightToCharacter => "по направлению к персонажу.",
-            EMoveTargetPath.StraightFromCharacter => "по направлению от персонажа.",
-            EMoveTargetPath.Straight => "в любом направлении по прямой.",
-            EMoveTargetPath.Arbitrary => "по произвольному пути. Длина пути не должна превышать расстояние между стартовой и конечной точкой более чем в два раза.",
-            EMoveTargetPath.NoPath => "так, что цель исчезает со своего текущего места и оказывается в новом.",
+            EMoveTargetPath.StraightToCharacter => "towards the character.",
+            EMoveTargetPath.StraightFromCharacter => "away from the character.",
+            EMoveTargetPath.Straight => "in any direction in a straight line.",
+            EMoveTargetPath.Arbitrary => "along a choosed path. The length of the path should not exceed twice the distance between the start and end points.",
+            EMoveTargetPath.NoPath => "so that the target disappears from its current location and appears in a new one.",
             _ => TemplateHelper.LexisTemplatingError
         };
 
