@@ -10,12 +10,10 @@ namespace BRIX.Library
     {
         public CharacterAbility()
         {
-            Id = Guid.NewGuid();
-        }
-
-        public CharacterAbility(Guid guid)
-        {
-            Id = guid;
+            if (Id == Guid.Empty)
+            { 
+                Id = Guid.NewGuid();
+            }
         }
 
         private readonly List<EffectBase> _effects = new();
@@ -82,12 +80,6 @@ namespace BRIX.Library
         public void AddEffect(EffectBase effect)
         {
             effect.ForceAspectInitialize();
-            IEnumerable<EffectBase> effectsWithSameType = _effects.Where(x => x.GetType().Equals(effect.GetType()));
-
-            if (effectsWithSameType.Any())
-            {
-                effect.Number = effectsWithSameType.Count();
-            }
 
             foreach (AspectBase aspect in effect.Aspects.ToList())
             {
@@ -120,9 +112,7 @@ namespace BRIX.Library
         /// </summary>
         public void UpdateEffect(EffectBase effect)
         {
-            EffectBase effectToRemove = _effects.First(x =>
-                x.Number == effect.Number && x.GetType().Equals(effect.GetType())
-            );
+            EffectBase effectToRemove = _effects.First(x => x.Id == effect.Id);
 
             RemoveEffect(effectToRemove);
             AddEffect(effect);

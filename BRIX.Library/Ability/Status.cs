@@ -60,9 +60,7 @@ namespace BRIX.Library.Ability
 
         public void UpdateEffect(EffectBase effect)
         {
-            EffectBase effectToRemove = _effects.First(x =>
-                x.Number == effect.Number && x.GetType().Equals(effect.GetType())
-            );
+            EffectBase effectToRemove = _effects.First(x => x.Id == effect.Id );
 
             RemoveEffect(effectToRemove);
             AddEffect(effect);
