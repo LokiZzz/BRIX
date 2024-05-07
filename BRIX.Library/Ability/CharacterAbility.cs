@@ -79,6 +79,12 @@ namespace BRIX.Library
 
         public void AddEffect(EffectBase effect)
         {
+            if(_effects.Contains(effect))
+            {
+                return;
+            }
+
+            effect.Id = Guid.NewGuid();
             effect.ForceAspectInitialize();
 
             foreach (AspectBase aspect in effect.Aspects.ToList())
@@ -108,14 +114,20 @@ namespace BRIX.Library
 
         /// <summary>
         /// Удобно для обновления эффекта в способности после его редактирования или улучшения.
-        /// Переданный эффект заменит совпавший по типу и полю Number.
+        /// Переданный эффект заменит совпавший по полю Id.
         /// </summary>
         public void UpdateEffect(EffectBase effect)
         {
-            EffectBase effectToRemove = _effects.First(x => x.Id == effect.Id);
+            EffectBase? effectToReplace = _effects.FirstOrDefault(x => x.Id == effect.Id);
 
-            RemoveEffect(effectToRemove);
-            AddEffect(effect);
+            if (effectToReplace != null)
+            {
+                _effects[_effects.IndexOf(effectToReplace)] = effect;
+            }
+            else
+            {
+                throw new Exception("Эффект, который треубется обновить, не найден.");
+            }
         }
 
         public void RemoveEffect(EffectBase item)

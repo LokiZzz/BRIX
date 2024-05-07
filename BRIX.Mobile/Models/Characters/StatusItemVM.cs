@@ -101,9 +101,8 @@ namespace BRIX.Mobile.Models.Characters
             }
 
             Internal.UpdateEffect(effect.InternalModel);
-            EffectModelBase effectToRemove = Effects.First(x => x.InternalModel?.Id == effect.InternalModel.Id);
-            Effects.Remove(effectToRemove);
-            Effects.Add(effect);
+            int index = Effects.IndexOf(Effects.First(x => x.InternalModel?.Id == effect.InternalModel.Id));
+            Effects[index] = effect;
         }
 
         public void RemoveEffect(EffectModelBase effect)

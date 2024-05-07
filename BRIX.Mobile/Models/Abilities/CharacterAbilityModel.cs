@@ -3,6 +3,7 @@ using BRIX.Library.Characters;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Maui.Controls;
 using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.Models.Abilities
@@ -98,9 +99,8 @@ namespace BRIX.Mobile.Models.Abilities
             }
 
             InternalModel.UpdateEffect(effect.InternalModel);
-            EffectModelBase effectToRemove = Effects.First(x => x.InternalModel?.Id == effect.InternalModel.Id);
-            Effects.Remove(effectToRemove);
-            Effects.Add(effect);
+            int index = Effects.IndexOf(Effects.First(x => x.InternalModel?.Id == effect.InternalModel.Id));
+            Effects[index] = effect;
             OnPropertyChanged(nameof(Cost));
             OnPropertyChanged(nameof(ShowStatusName));
         }

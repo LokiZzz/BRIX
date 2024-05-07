@@ -40,6 +40,11 @@ namespace BRIX.Library.Ability
 
         public void AddEffect(EffectBase effect)
         {
+            if (_effects.Contains(effect))
+            {
+                return;
+            }
+
             effect.ForceAspectInitialize();
 
             if(!effect.Aspects.Any(x => x is DurationAspect))
@@ -47,6 +52,7 @@ namespace BRIX.Library.Ability
                 throw new Exception("Статус не может содержать эффектов без аспекта длительности действия.");
             }
 
+            effect.Id = effect.Id == Guid.Empty ? Guid.NewGuid() : effect.Id;
             _effects.Add(effect);
         }
 
@@ -60,10 +66,16 @@ namespace BRIX.Library.Ability
 
         public void UpdateEffect(EffectBase effect)
         {
-            EffectBase effectToRemove = _effects.First(x => x.Id == effect.Id );
+            EffectBase? effectToReplace = _effects.FirstOrDefault(x => x.Id == effect.Id);
 
-            RemoveEffect(effectToRemove);
-            AddEffect(effect);
+            if (effectToReplace != null)
+            {
+                _effects[_effects.IndexOf(effectToReplace)] = effect;
+            }
+            else
+            {
+                throw new Exception("Эффект, который треубется обновить, не найден.");
+            }
         }
 
         public void RemoveEffect(EffectBase? effect)

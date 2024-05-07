@@ -6,23 +6,10 @@ namespace BRIX.Library.Effects
 {
     public abstract class EffectBase
     {
-        private Guid _id;
-
         /// <summary>
         /// Идентификатор, позволяющий однозначно определять эффект в способности.
         /// </summary>
-        public Guid Id
-        {
-            get
-            {
-                if(_id == Guid.Empty)
-                {
-                    _id = Guid.NewGuid();
-                }
-
-                return _id;
-            }
-        }
+        public Guid Id { get; set; }
 
         public abstract List<Type> RequiredAspects { get; }
 
