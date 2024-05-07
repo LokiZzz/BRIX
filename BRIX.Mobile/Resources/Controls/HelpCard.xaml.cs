@@ -11,6 +11,7 @@ public partial class HelpCard : ContentView
 		InitializeComponent();
         IsVisible = false;
         WeakReferenceMessenger.Default.Register<ShowHelpCardsChanged>(this, UpdateVisibility);
+        WeakReferenceMessenger.Default.Register<CultureChangedMessage>(this, UpdateText);
     }
 
     private void UpdateVisibility(object recipient, ShowHelpCardsChanged message)
@@ -37,6 +38,12 @@ public partial class HelpCard : ContentView
     public void SetText(string text)
     {
         lblHelpText.Text = text;
+    }
+
+    private void UpdateText(object recipient, CultureChangedMessage message)
+    {
+        ILocalizationResourceManager localization = Resolver.Resolve<ILocalizationResourceManager>();
+        lblHelpText.Text = localization[Help]?.ToString() ?? string.Empty;
     }
 
     private static void HelpChanged(BindableObject bindable, object oldValue, object newValue)

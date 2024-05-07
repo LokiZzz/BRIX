@@ -1,5 +1,6 @@
 ﻿using BRIX.Lexica;
 using BRIX.Mobile.Resources.Localizations;
+using CommunityToolkit.Mvvm.Messaging;
 using System.Collections;
 using System.Globalization;
 
@@ -81,6 +82,7 @@ namespace BRIX.Mobile.Services
         {
             Localization.Culture = culture;
             OnPropertyChanged(null);
+            WeakReferenceMessenger.Default.Send(new CultureChangedMessage { CultureInfo = culture });
         }
     }
 
@@ -90,5 +92,10 @@ namespace BRIX.Mobile.Services
         {
             return model.ToLexis(Localization.Culture).GetAwaiter().GetResult();
         }
+    }
+
+    public class CultureChangedMessage 
+    {
+        public CultureInfo? CultureInfo { get; set; }
     }
 }
