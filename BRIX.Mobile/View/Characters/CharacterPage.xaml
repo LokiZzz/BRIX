@@ -17,6 +17,8 @@
             <Setter Property="WidthRequest" Value="-1"/>
             <Setter Property="CornerRadius" Value="0"/>
             <Setter Property="Padding" Value="7,0"/>
+            <Setter Property="Margin" Value="-1
+                    "/>
         </Style>
     </ContentPage.Resources>
     
@@ -234,31 +236,25 @@
                                         Style="{StaticResource SquareIconButton}" 
                                         Text="{x:Static icons:Awesome.PenToSquare}"
                                         Command="{Binding GoToStatusesCommand}"/>
-                                    <Border 
-                                        StrokeShape="RoundRectangle 5"
-                                        Padding="0"
-                                        VerticalOptions="CenterAndExpand"
-                                        BackgroundColor="Transparent">
-                                        <HorizontalStackLayout Spacing="7" Margin="1">
-                                            <Button 
-                                                Style="{StaticResource StatusTimeButton}" 
-                                                Text="{x:Static icons:Awesome.CircleArrowLeft}"
-                                                Command="{Binding DecreaseStatusTimeCommand}"/>
-                                            <Label 
-                                                FontFamily="AwesomeRPG" 
-                                                FontSize="25"
-                                                VerticalOptions="Center"
-                                                HorizontalOptions="Center"
-                                                HorizontalTextAlignment="Center"
-                                                TextColor="{StaticResource BRIXWhite}"
-                                                Text="{x:Static icons:AwesomeRPG.Stopwatch}"
-                                                WidthRequest="25"/>
-                                            <Button 
-                                                Style="{StaticResource StatusTimeButton}" 
-                                                Text="{x:Static icons:Awesome.CircleArrowRight}"
-                                                Command="{Binding IncreaseStatusTimeCommand}"/> 
-                                        </HorizontalStackLayout>
-                                    </Border>
+                                    <HorizontalStackLayout Spacing="7">
+                                        <Button 
+                                            Style="{StaticResource SquareIconButton}" 
+                                            Text="{x:Static icons:Awesome.CircleArrowLeft}"
+                                            Command="{Binding DecreaseStatusTimeCommand}"/>
+                                        <Label 
+                                            FontFamily="AwesomeRPG" 
+                                            FontSize="25"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"
+                                            HorizontalTextAlignment="Center"
+                                            TextColor="{StaticResource BRIXWhite}"
+                                            Text="{x:Static icons:AwesomeRPG.Stopwatch}"
+                                            WidthRequest="25"/>
+                                        <Button 
+                                            Style="{StaticResource SquareIconButton}" 
+                                            Text="{x:Static icons:Awesome.CircleArrowRight}"
+                                            Command="{Binding IncreaseStatusTimeCommand}"/> 
+                                    </HorizontalStackLayout>
                                 </HorizontalStackLayout>
                             </Grid>
                             <Label 

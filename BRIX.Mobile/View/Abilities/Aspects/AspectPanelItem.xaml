@@ -20,7 +20,7 @@
         </Style>
     </ContentView.Resources>
 
-    <Grid HeightRequest="40" WidthRequest="{Binding Source={RelativeSource Self}, Path=Height, Mode=OneWay}" BackgroundColor="Transparent">
+    <Grid HeightRequest="40" WidthRequest="40" BackgroundColor="Transparent">
         <Border 
             StrokeShape="RoundRectangle 5"
             BackgroundColor="{Binding Source={x:Reference this}, Path=ItemBackgroundColor}"/>
