@@ -1,16 +1,14 @@
 ﻿using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Aspects;
-using BRIX.Library.Characters;
+using BRIX.Library.Mathematics;
 using BRIX.Library.DiceValue;
-using BRIX.Library.Extensions;
-using BRIX.Library.Ability;
 
 namespace BRIX.Library.Effects
 {
     /// <summary>
-    /// Временное уменьшение максимального здоровья
+    /// Временное увеличение максимального здоровья.
     /// </summary>
-    public class ExhaustionEffect : DiceImpactEffectBase
+    public class DecelerationEffect : DiceImpactEffectBase
     {
         public override List<Type> RequiredAspects => new List<Type>()
         {
@@ -20,9 +18,7 @@ namespace BRIX.Library.Effects
 
         public override int BaseExpCost()
         {
-            int experienceEquivalent = CharacterCalculator.HealthToExp(Impact.Average());
-
-            return (experienceEquivalent * 0.5).Round();
+            return new ThrasholdCostConverter((1, 50), (2, 500), (3, 5000)).Convert(Impact.Average());
         }
     }
 }

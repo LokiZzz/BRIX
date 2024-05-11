@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Увеличивает максимальное количество очков действия у цели на @Numbers.RUSDcln(Model.Impact, "очко", "очка", "очков").
+
+@code {
+    [Parameter]
+    public AccelerationEffect Model { get; set; } = new();
+}

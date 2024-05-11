@@ -106,6 +106,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Action points.
+        /// </summary>
+        public static string ActionPoints {
+            get {
+                return ResourceManager.GetString("ActionPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Activate.
         /// </summary>
         public static string Activate {
@@ -1033,11 +1042,47 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Acceleration.
+        /// </summary>
+        public static string EffectAcceleration {
+            get {
+                return ResourceManager.GetString("EffectAcceleration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Increases the target&apos;s maximum action points..
+        /// </summary>
+        public static string EffectAccelerationHint {
+            get {
+                return ResourceManager.GetString("EffectAccelerationHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Damage.
         /// </summary>
         public static string EffectDamage {
             get {
                 return ResourceManager.GetString("EffectDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deceleration.
+        /// </summary>
+        public static string EffectDeceleration {
+            get {
+                return ResourceManager.GetString("EffectDeceleration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decreases the target&apos;s maximum action points..
+        /// </summary>
+        public static string EffectDecelerationHint {
+            get {
+                return ResourceManager.GetString("EffectDecelerationHint", resourceCulture);
             }
         }
         

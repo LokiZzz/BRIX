@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Decreases the target's maximum action points by @Numbers.ENGDcln(Model.Impact, "point").
+
+@code {
+    [Parameter]
+    public DecelerationEffect Model { get; set; } = new();
+}

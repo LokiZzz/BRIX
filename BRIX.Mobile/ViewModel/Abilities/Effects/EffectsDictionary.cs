@@ -33,11 +33,22 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 EditPage = typeof(ExhaustionEffectPage),
                 ForStatus = true
             }},
+            { typeof(EffectGenericModelBase<AccelerationEffect>), new EffectTypeVM() {
+                Name = Localization.EffectAcceleration,
+                Icon = AwesomeRPG.Rabbit,
+                EditPage = typeof(AccelerationEffectPage)
+            }},
+            { typeof(EffectGenericModelBase<DecelerationEffect>), new EffectTypeVM() {
+                Name = Localization.EffectDeceleration,
+                Icon = AwesomeRPG.Snail,
+                EditPage = typeof(DecelerationEffectPage)
+            }},
             { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectTypeVM() {
                 Name = Localization.EffectWin,
                 Icon = AwesomeRPG.PerspectiveDiceRandom,
                 EditPage = typeof(WinEffectPage)
             }},
+            
         };
 
         public static string GetName(EffectBase effect)

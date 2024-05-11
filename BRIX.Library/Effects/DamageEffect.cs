@@ -5,7 +5,7 @@ using BRIX.Library.DiceValue;
 
 namespace BRIX.Library.Effects
 {
-    public class DamageEffect : SinglePropEffectBase
+    public class DamageEffect : DiceImpactEffectBase
     {
         public string AdditionalProperty { get; set; } = "Additional property";
 

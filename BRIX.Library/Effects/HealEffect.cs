@@ -6,7 +6,7 @@ using BRIX.Library.Ability;
 
 namespace BRIX.Library.Effects
 {
-    public class HealEffect : SinglePropEffectBase
+    public class HealEffect : DiceImpactEffectBase
     {
         public override List<Type> RequiredAspects => new()
         {

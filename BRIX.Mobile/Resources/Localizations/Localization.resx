@@ -132,6 +132,9 @@
   <data name="ActionPointAspectHint" xml:space="preserve">
     <value>Almost any ability is used by spending action points. The more action points an ability spends, the cheaper it will be in experience points.</value>
   </data>
+  <data name="ActionPoints" xml:space="preserve">
+    <value>Action points</value>
+  </data>
   <data name="Activate" xml:space="preserve">
     <value>Activate</value>
   </data>
@@ -441,8 +444,20 @@
   <data name="EditStatus" xml:space="preserve">
     <value>Edit status</value>
   </data>
+  <data name="EffectAcceleration" xml:space="preserve">
+    <value>Acceleration</value>
+  </data>
+  <data name="EffectAccelerationHint" xml:space="preserve">
+    <value>Increases the target's maximum action points.</value>
+  </data>
   <data name="EffectDamage" xml:space="preserve">
     <value>Damage</value>
+  </data>
+  <data name="EffectDeceleration" xml:space="preserve">
+    <value>Deceleration</value>
+  </data>
+  <data name="EffectDecelerationHint" xml:space="preserve">
+    <value>Decreases the target's maximum action points.</value>
   </data>
   <data name="EffectDuration" xml:space="preserve">
     <value>Effect duration</value>

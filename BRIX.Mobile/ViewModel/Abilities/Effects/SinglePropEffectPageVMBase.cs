@@ -5,7 +5,7 @@ using BRIX.Mobile.Models.Abilities.Effects;
 namespace BRIX.Mobile.ViewModel.Abilities.Effects
 {
     public partial class SinglePropEffectPageVMBase<T> : EffectPageVMBase<EffectGenericModelBase<T>> 
-        where T : SinglePropEffectBase, new()
+        where T : DiceImpactEffectBase, new()
     {
         public override void Initialize()
         {

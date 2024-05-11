@@ -10,7 +10,7 @@ namespace BRIX.Library.Effects
     /// <summary>
     /// Временное увеличение максимального здоровья.
     /// </summary>
-    public class FortifyEffect : SinglePropEffectBase
+    public class FortifyEffect : DiceImpactEffectBase
     {
         public override List<Type> RequiredAspects => new List<Type>()
         {

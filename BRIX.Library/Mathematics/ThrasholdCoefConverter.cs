@@ -1,7 +1,7 @@
 ﻿namespace BRIX.Library.Mathematics
 {
     /// <summary>
-    /// Калькулятор для прогрессивных шкал коэффициентов стоимости.
+    /// Калькулятор для прогрессивных шкал.
     /// </summary>
     public class ThrasholdCostConverter
     {

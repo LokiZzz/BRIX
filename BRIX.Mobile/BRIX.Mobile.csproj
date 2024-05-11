@@ -119,6 +119,12 @@
 	  <Compile Update="View\Abilities\AbilityActivationSettingsPage.xaml.cs">
 	    <DependentUpon>AbilityActivationSettingsPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\Abilities\Effects\DecelerationEffectPage.xaml.cs">
+	    <DependentUpon>DecelerationEffectPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Abilities\Effects\AccelerationEffectPage.xaml.cs">
+	    <DependentUpon>AccelerationEffectPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -129,6 +135,12 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="View\Abilities\AbilityActivationSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Effects\DecelerationEffectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Effects\AccelerationEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

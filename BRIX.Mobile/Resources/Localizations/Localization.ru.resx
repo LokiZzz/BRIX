@@ -132,6 +132,9 @@
   <data name="ActionPointAspectHint" xml:space="preserve">
     <value>Практически любые способности ипользуются посредством траты очков действий. Чем больше очков действий тратит способность, тем дешевле она будет в очках опыта.</value>
   </data>
+  <data name="ActionPoints" xml:space="preserve">
+    <value>Очки действия</value>
+  </data>
   <data name="Activate" xml:space="preserve">
     <value>Активировать</value>
   </data>
@@ -444,8 +447,20 @@
   <data name="EditStatus" xml:space="preserve">
     <value>Изменить статус</value>
   </data>
+  <data name="EffectAcceleration" xml:space="preserve">
+    <value>Ускорение</value>
+  </data>
+  <data name="EffectAccelerationHint" xml:space="preserve">
+    <value>Увеличивает максимальное количество очков действия у цели.</value>
+  </data>
   <data name="EffectDamage" xml:space="preserve">
     <value>Урон</value>
+  </data>
+  <data name="EffectDeceleration" xml:space="preserve">
+    <value>Замедление</value>
+  </data>
+  <data name="EffectDecelerationHint" xml:space="preserve">
+    <value>Уменьшает максимальное количество очков действия у цели.</value>
   </data>
   <data name="EffectDuration" xml:space="preserve">
     <value>Длительность эффекта</value>
