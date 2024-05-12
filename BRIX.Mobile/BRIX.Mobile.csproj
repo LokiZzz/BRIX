@@ -119,11 +119,23 @@
 	  <Compile Update="View\Abilities\AbilityActivationSettingsPage.xaml.cs">
 	    <DependentUpon>AbilityActivationSettingsPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\Abilities\Effects\ReductionEffectPage.xaml.cs">
+	    <DependentUpon>ReductionEffectPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\Abilities\Effects\DecelerationEffectPage.xaml.cs">
 	    <DependentUpon>DecelerationEffectPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="View\Abilities\Effects\AccelerationEffectPage.xaml.cs">
 	    <DependentUpon>AccelerationEffectPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Abilities\Effects\AmplificationEffectPage.xaml.cs">
+	    <DependentUpon>AmplificationEffectPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Abilities\Effects\VulnerabilityEffectPage.xaml.cs">
+	    <DependentUpon>VulnerabilityEffectPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Abilities\Effects\DeffenseEffectPage.xaml.cs">
+	    <DependentUpon>DeffenseEffectPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -137,10 +149,22 @@
 	  <MauiXaml Update="View\Abilities\AbilityActivationSettingsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Effects\ReductionEffectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\DecelerationEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\AccelerationEffectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Effects\AmplificationEffectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Effects\VulnerabilityEffectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Effects\DeffenseEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

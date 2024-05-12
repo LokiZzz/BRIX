@@ -453,6 +453,12 @@
   <data name="EffectAccelerationHint" xml:space="preserve">
     <value>Увеличивает максимальное количество очков действия у цели.</value>
   </data>
+  <data name="EffectAmplification" xml:space="preserve">
+    <value>Усиление</value>
+  </data>
+  <data name="EffectAmplificationHint" xml:space="preserve">
+    <value>Увеличивает урон, который наносит цель.</value>
+  </data>
   <data name="EffectDamage" xml:space="preserve">
     <value>Урон</value>
   </data>
@@ -461,6 +467,12 @@
   </data>
   <data name="EffectDecelerationHint" xml:space="preserve">
     <value>Уменьшает максимальное количество очков действия у цели.</value>
+  </data>
+  <data name="EffectDefense" xml:space="preserve">
+    <value>Защита</value>
+  </data>
+  <data name="EffectDefenseHint" xml:space="preserve">
+    <value>Любой урон по цели уменьшается на указанное значение.</value>
   </data>
   <data name="EffectDuration" xml:space="preserve">
     <value>Длительность эффекта</value>
@@ -474,8 +486,20 @@
   <data name="EffectHeal" xml:space="preserve">
     <value>Лечение</value>
   </data>
+  <data name="EffectReduction" xml:space="preserve">
+    <value>Ослабление</value>
+  </data>
+  <data name="EffectReductionHint" xml:space="preserve">
+    <value>Уменьшает урон, который наносит цель.</value>
+  </data>
   <data name="Effects" xml:space="preserve">
     <value>Эффекты</value>
+  </data>
+  <data name="EffectVulnerability" xml:space="preserve">
+    <value>Уязвимость</value>
+  </data>
+  <data name="EffectVulnerabilityHint" xml:space="preserve">
+    <value>Любой урон по цели увеличивается на указанное значение.</value>
   </data>
   <data name="EffectWin" xml:space="preserve">
     <value>Победа</value>

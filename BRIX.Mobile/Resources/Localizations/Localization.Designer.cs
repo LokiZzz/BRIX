@@ -1060,6 +1060,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Amplification.
+        /// </summary>
+        public static string EffectAmplification {
+            get {
+                return ResourceManager.GetString("EffectAmplification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Increases the damage the target deals..
+        /// </summary>
+        public static string EffectAmplificationHint {
+            get {
+                return ResourceManager.GetString("EffectAmplificationHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Damage.
         /// </summary>
         public static string EffectDamage {
@@ -1083,6 +1101,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string EffectDecelerationHint {
             get {
                 return ResourceManager.GetString("EffectDecelerationHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Defense.
+        /// </summary>
+        public static string EffectDefense {
+            get {
+                return ResourceManager.GetString("EffectDefense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any damage to the target is decreased by the specified amount..
+        /// </summary>
+        public static string EffectDefenseHint {
+            get {
+                return ResourceManager.GetString("EffectDefenseHint", resourceCulture);
             }
         }
         
@@ -1123,11 +1159,47 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reduction.
+        /// </summary>
+        public static string EffectReduction {
+            get {
+                return ResourceManager.GetString("EffectReduction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decreases the damage the target deals..
+        /// </summary>
+        public static string EffectReductionHint {
+            get {
+                return ResourceManager.GetString("EffectReductionHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Effects.
         /// </summary>
         public static string Effects {
             get {
                 return ResourceManager.GetString("Effects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vulnerability.
+        /// </summary>
+        public static string EffectVulnerability {
+            get {
+                return ResourceManager.GetString("EffectVulnerability", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any damage to the target is increased by the specified amount..
+        /// </summary>
+        public static string EffectVulnerabilityHint {
+            get {
+                return ResourceManager.GetString("EffectVulnerabilityHint", resourceCulture);
             }
         }
         

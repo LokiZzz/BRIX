@@ -10,15 +10,16 @@ namespace BRIX.Library.Effects
     /// </summary>
     public class DecelerationEffect : DiceImpactEffectBase
     {
-        public override List<Type> RequiredAspects => new List<Type>()
-        {
+        public override List<Type> RequiredAspects =>
+        [
             typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect),
             typeof(DurationAspect),
-        };
+        ];
 
         public override int BaseExpCost()
         {
-            return new ThrasholdCostConverter((1, 50), (2, 500), (3, 5000)).Convert(Impact.Average());
+            return new ThrasholdCostConverter((1, 50), (2, 200), (3, 1000))
+                .Convert(Impact.Average());
         }
     }
 }

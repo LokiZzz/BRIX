@@ -12,11 +12,11 @@ namespace BRIX.Library.Effects
     /// </summary>
     public class ExhaustionEffect : DiceImpactEffectBase
     {
-        public override List<Type> RequiredAspects => new List<Type>()
-        {
+        public override List<Type> RequiredAspects =>
+        [
             typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect),
             typeof(DurationAspect),
-        };
+        ];
 
         public override int BaseExpCost()
         {

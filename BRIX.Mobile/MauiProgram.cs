@@ -109,6 +109,10 @@ public static class MauiProgram
         builder.RegisterView<ExhaustionEffectPage, SinglePropEffectPageVMBase<ExhaustionEffect>>();
         builder.RegisterView<AccelerationEffectPage, SinglePropEffectPageVMBase<AccelerationEffect>>();
         builder.RegisterView<DecelerationEffectPage, SinglePropEffectPageVMBase<DecelerationEffect>>();
+        builder.RegisterView<DefenseEffectPage, SinglePropEffectPageVMBase<DefenseEffect>>();
+        builder.RegisterView<VulnerabilityEffectPage, SinglePropEffectPageVMBase<VulnerabilityEffect>>();
+        builder.RegisterView<AmplificationEffectPage, SinglePropEffectPageVMBase<AmplificationEffect>>();
+        builder.RegisterView<ReductionEffectPage, SinglePropEffectPageVMBase<ReductionEffect>>();
         builder.RegisterView<WinEffectPage, EffectPageVMBase<EffectGenericModelBase<WinTheGameEffect>>>();
 
         builder.RegisterView<TargetSelectionAspectPage, TargetSelectionAspectPageVM>();

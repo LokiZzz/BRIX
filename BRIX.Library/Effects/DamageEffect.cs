@@ -9,10 +9,10 @@ namespace BRIX.Library.Effects
     {
         public string AdditionalProperty { get; set; } = "Additional property";
 
-        public override List<Type> RequiredAspects => new() 
-        {
+        public override List<Type> RequiredAspects =>
+        [
             typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect)
-        };
+        ];
 
         public override int BaseExpCost()
         {

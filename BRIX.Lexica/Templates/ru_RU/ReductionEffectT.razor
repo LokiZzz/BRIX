@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Любой урон наносимый целью уменьшается на @Numbers.RUSDcln(Model.Impact, "очко", "очка", "очков") урона.
+
+@code {
+    [Parameter]
+    public ReductionEffect Model { get; set; } = new();
+}

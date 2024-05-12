@@ -43,6 +43,27 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 Icon = AwesomeRPG.Snail,
                 EditPage = typeof(DecelerationEffectPage)
             }},
+            { typeof(EffectGenericModelBase<VulnerabilityEffect>), new EffectTypeVM() {
+                Name = Localization.EffectVulnerability,
+                Icon = AwesomeRPG.CrackedShield,
+                EditPage = typeof(VulnerabilityEffectPage)
+            }},
+            { typeof(EffectGenericModelBase<DefenseEffect>), new EffectTypeVM() {
+                Name = Localization.EffectDefense,
+                Icon = AwesomeRPG.Shield,
+                EditPage = typeof(DefenseEffectPage)
+            }},
+            { typeof(EffectGenericModelBase<AmplificationEffect>), new EffectTypeVM() {
+                Name = Localization.EffectAmplification,
+                Icon = AwesomeRPG.HammerDrop,
+                EditPage = typeof(AmplificationEffectPage)
+            }},
+              { typeof(EffectGenericModelBase<ReductionEffect>), new EffectTypeVM() {
+                Name = Localization.EffectReduction,
+                Icon = AwesomeRPG.BleedingEye,
+                EditPage = typeof(ReductionEffectPage)
+            }},
+
             { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectTypeVM() {
                 Name = Localization.EffectWin,
                 Icon = AwesomeRPG.PerspectiveDiceRandom,

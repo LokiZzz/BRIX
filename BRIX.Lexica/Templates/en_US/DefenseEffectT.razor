@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Any damage to the target is decreased by @Numbers.ENGDcln(Model.Impact, "point") of damage.
+
+@code {
+    [Parameter]
+    public DefenseEffect Model { get; set; } = new();
+}

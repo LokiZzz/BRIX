@@ -450,6 +450,12 @@
   <data name="EffectAccelerationHint" xml:space="preserve">
     <value>Increases the target's maximum action points.</value>
   </data>
+  <data name="EffectAmplification" xml:space="preserve">
+    <value>Amplification</value>
+  </data>
+  <data name="EffectAmplificationHint" xml:space="preserve">
+    <value>Increases the damage the target deals.</value>
+  </data>
   <data name="EffectDamage" xml:space="preserve">
     <value>Damage</value>
   </data>
@@ -458,6 +464,12 @@
   </data>
   <data name="EffectDecelerationHint" xml:space="preserve">
     <value>Decreases the target's maximum action points.</value>
+  </data>
+  <data name="EffectDefense" xml:space="preserve">
+    <value>Defense</value>
+  </data>
+  <data name="EffectDefenseHint" xml:space="preserve">
+    <value>Any damage to the target is decreased by the specified amount.</value>
   </data>
   <data name="EffectDuration" xml:space="preserve">
     <value>Effect duration</value>
@@ -471,8 +483,20 @@
   <data name="EffectHeal" xml:space="preserve">
     <value>Heal</value>
   </data>
+  <data name="EffectReduction" xml:space="preserve">
+    <value>Reduction</value>
+  </data>
+  <data name="EffectReductionHint" xml:space="preserve">
+    <value>Decreases the damage the target deals.</value>
+  </data>
   <data name="Effects" xml:space="preserve">
     <value>Effects</value>
+  </data>
+  <data name="EffectVulnerability" xml:space="preserve">
+    <value>Vulnerability</value>
+  </data>
+  <data name="EffectVulnerabilityHint" xml:space="preserve">
+    <value>Any damage to the target is increased by the specified amount.</value>
   </data>
   <data name="EffectWin" xml:space="preserve">
     <value>Win</value>

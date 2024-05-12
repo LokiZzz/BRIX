@@ -8,10 +8,10 @@ namespace BRIX.Library.Effects
 {
     public class HealEffect : DiceImpactEffectBase
     {
-        public override List<Type> RequiredAspects => new()
-        {
+        public override List<Type> RequiredAspects =>
+        [
             typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect)
-        };
+        ];
 
         public override int BaseExpCost()
         {
