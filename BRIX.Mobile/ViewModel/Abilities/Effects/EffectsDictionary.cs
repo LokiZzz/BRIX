@@ -35,12 +35,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             }},
             { typeof(EffectGenericModelBase<AccelerationEffect>), new EffectTypeVM() {
                 Name = Localization.EffectAcceleration,
-                Icon = AwesomeRPG.Rabbit,
+                Icon = AwesomeRPG.FeatherWing,
                 EditPage = typeof(AccelerationEffectPage)
             }},
             { typeof(EffectGenericModelBase<DecelerationEffect>), new EffectTypeVM() {
                 Name = Localization.EffectDeceleration,
-                Icon = AwesomeRPG.Snail,
+                Icon = AwesomeRPG.Anchor,
                 EditPage = typeof(DecelerationEffectPage)
             }},
             { typeof(EffectGenericModelBase<VulnerabilityEffect>), new EffectTypeVM() {
@@ -58,10 +58,15 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 Icon = AwesomeRPG.HammerDrop,
                 EditPage = typeof(AmplificationEffectPage)
             }},
-              { typeof(EffectGenericModelBase<ReductionEffect>), new EffectTypeVM() {
+            { typeof(EffectGenericModelBase<ReductionEffect>), new EffectTypeVM() {
                 Name = Localization.EffectReduction,
                 Icon = AwesomeRPG.BleedingEye,
                 EditPage = typeof(ReductionEffectPage)
+            }},
+            { typeof(CleanseEffectModel), new EffectTypeVM() {
+                Name = Localization.EffectCleanse,
+                Icon = AwesomeRPG.Aura,
+                EditPage = typeof(CleanseEffectPage)
             }},
 
             { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectTypeVM() {

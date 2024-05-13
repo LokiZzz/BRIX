@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Cancels @Numbers.ENGDcln(Model.StatusesCount, "status", plural: "statuses") for targets. @(Model?.StatusesCount > 1 ? "Each of statuses" : "Status") must not exceed @Numbers.ENGDcln(Model.MaxStatusPower, "experience point").
+
+@code {
+    [Parameter]
+    public CleanseEffect Model { get; set; } = new();
+}

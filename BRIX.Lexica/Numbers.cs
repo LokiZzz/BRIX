@@ -83,19 +83,23 @@ namespace BRIX.Lexica
         /// <summary>
         /// Короткий вызов ENGDeclension для чисел в razor-темплейтах.
         /// </summary>
-        public static MarkupString ENGDcln(int number, string nominative, bool addNumber = true) => 
-            (MarkupString)ENGDeclension(number, nominative, addNumber);
+        public static MarkupString ENGDcln(int number, string nominative, bool addNumber = true, string plural = "") =>
+            (MarkupString)ENGDeclension(number, nominative, addNumber, plural);
 
         /// <summary>
         /// Получить склонение от числа на английском языке
         /// </summary>
-        public static string ENGDeclension(int number, string nominative, bool addNumber = true)
+        public static string ENGDeclension(
+            int number, 
+            string nominative, 
+            bool addNumber = true, 
+            string plural = "")
         {
             string result;
 
             if(number != 1)
             {
-                result = nominative + "s";
+                result = string.IsNullOrEmpty(plural) ? nominative +  "s" : plural;
             }
             else
             {

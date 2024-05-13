@@ -119,6 +119,9 @@
 	  <Compile Update="View\Abilities\AbilityActivationSettingsPage.xaml.cs">
 	    <DependentUpon>AbilityActivationSettingsPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\Abilities\Effects\CleanseEffectPage.xaml.cs">
+	    <DependentUpon>CleanseEffectPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\Abilities\Effects\ReductionEffectPage.xaml.cs">
 	    <DependentUpon>ReductionEffectPage.xaml</DependentUpon>
 	  </Compile>
@@ -147,6 +150,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="View\Abilities\AbilityActivationSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Effects\CleanseEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\ReductionEffectPage.xaml">

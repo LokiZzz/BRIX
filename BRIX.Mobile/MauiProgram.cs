@@ -103,6 +103,7 @@ public static class MauiProgram
     private static void AddEffectsAndAspects(MauiAppBuilder builder)
     {
         builder.RegisterView<ChooseEffectPage, ChooseEffectPageVM>();
+
         builder.RegisterView<DamageEffectPage, SinglePropEffectPageVMBase<DamageEffect>>();
         builder.RegisterView<HealEffectPage, SinglePropEffectPageVMBase<HealEffect>>();
         builder.RegisterView<FortifyEffectPage, SinglePropEffectPageVMBase<FortifyEffect>>();
@@ -113,6 +114,7 @@ public static class MauiProgram
         builder.RegisterView<VulnerabilityEffectPage, SinglePropEffectPageVMBase<VulnerabilityEffect>>();
         builder.RegisterView<AmplificationEffectPage, SinglePropEffectPageVMBase<AmplificationEffect>>();
         builder.RegisterView<ReductionEffectPage, SinglePropEffectPageVMBase<ReductionEffect>>();
+        builder.RegisterView<CleanseEffectPage, EffectPageVMBase<CleanseEffectModel>>();
         builder.RegisterView<WinEffectPage, EffectPageVMBase<EffectGenericModelBase<WinTheGameEffect>>>();
 
         builder.RegisterView<TargetSelectionAspectPage, TargetSelectionAspectPageVM>();

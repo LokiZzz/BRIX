@@ -456,6 +456,12 @@
   <data name="EffectAmplificationHint" xml:space="preserve">
     <value>Increases the damage the target deals.</value>
   </data>
+  <data name="EffectCleanse" xml:space="preserve">
+    <value>Cleanse</value>
+  </data>
+  <data name="EffectCleanseHint" xml:space="preserve">
+    <value>Removing statuses from a target. Several statuses can be removed. The character decides which statuses will be removed, but each status must not exceed the status power limit.</value>
+  </data>
   <data name="EffectDamage" xml:space="preserve">
     <value>Damage</value>
   </data>
@@ -707,6 +713,12 @@
   </data>
   <data name="MaterialSupport" xml:space="preserve">
     <value>Material support</value>
+  </data>
+  <data name="MaxCanceledStatusesCount" xml:space="preserve">
+    <value>Statuses count</value>
+  </data>
+  <data name="MaxStatusPower" xml:space="preserve">
+    <value>Max power</value>
   </data>
   <data name="Medium" xml:space="preserve">
     <value>Medium</value>

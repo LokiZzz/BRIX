@@ -3,6 +3,7 @@ using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.ViewModel.Abilities.Effects;
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace BRIX.Mobile.Models.Abilities.Effects
 {
@@ -45,6 +46,28 @@ namespace BRIX.Mobile.Models.Abilities.Effects
                 .Select(AspectModelFactory.GetAspectModel)
                 .Where(x => x != null)
                 .ToList();
+        }
+
+        /// <summary>
+        /// Событие означающее, что было изменено свойство, влияющее на стоимость.
+        /// </summary>
+        public event EventHandler? EffectPropertyChanged;
+
+        /// <summary>
+        /// Если устанавливать свойства через этот метод, то EffectPageVM, подписавшийся на EffectPropertyChanged,
+        /// будет обновлять монитор стоимости автоматически.
+        /// </summary>
+        public bool SetEffectProperty<TModel, T>(
+            T oldValue,
+            T newValue,
+            TModel model,
+            Action<TModel, T> callback,
+            [CallerMemberName] string? propertyName = null) where TModel : class
+        {
+            bool set = SetProperty(oldValue, newValue, model, callback, propertyName);
+            EffectPropertyChanged?.Invoke(this, new EventArgs());
+
+            return set;
         }
     }
 }

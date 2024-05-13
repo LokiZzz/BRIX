@@ -1078,6 +1078,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cleanse.
+        /// </summary>
+        public static string EffectCleanse {
+            get {
+                return ResourceManager.GetString("EffectCleanse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removing statuses from a target. Several statuses can be removed. The character decides which statuses will be removed, but each status must not exceed the status power limit..
+        /// </summary>
+        public static string EffectCleanseHint {
+            get {
+                return ResourceManager.GetString("EffectCleanseHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Damage.
         /// </summary>
         public static string EffectDamage {
@@ -1830,6 +1848,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string MaterialSupport {
             get {
                 return ResourceManager.GetString("MaterialSupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statuses count.
+        /// </summary>
+        public static string MaxCanceledStatusesCount {
+            get {
+                return ResourceManager.GetString("MaxCanceledStatusesCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max power.
+        /// </summary>
+        public static string MaxStatusPower {
+            get {
+                return ResourceManager.GetString("MaxStatusPower", resourceCulture);
             }
         }
         

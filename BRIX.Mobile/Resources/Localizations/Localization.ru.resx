@@ -459,6 +459,12 @@
   <data name="EffectAmplificationHint" xml:space="preserve">
     <value>Увеличивает урон, который наносит цель.</value>
   </data>
+  <data name="EffectCleanse" xml:space="preserve">
+    <value>Очищение</value>
+  </data>
+  <data name="EffectCleanseHint" xml:space="preserve">
+    <value>Снятие статусов с цели. Может быть снято несколько статусов. Какие именно статусы будут сняты решает персонаж, но каждый статус не должен превышать ограничение мощности.</value>
+  </data>
   <data name="EffectDamage" xml:space="preserve">
     <value>Урон</value>
   </data>
@@ -713,6 +719,12 @@
   </data>
   <data name="MaterialSupport" xml:space="preserve">
     <value>Материальное обеспечение</value>
+  </data>
+  <data name="MaxCanceledStatusesCount" xml:space="preserve">
+    <value>Количество</value>
+  </data>
+  <data name="MaxStatusPower" xml:space="preserve">
+    <value>Максимальная мощность</value>
   </data>
   <data name="Medium" xml:space="preserve">
     <value>Средний</value>

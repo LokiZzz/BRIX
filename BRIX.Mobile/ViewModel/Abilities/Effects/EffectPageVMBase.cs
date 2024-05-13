@@ -5,6 +5,7 @@ using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Abilities.Aspects;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Controls;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Effects
 {
@@ -21,7 +22,20 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         public T? Effect
         {
             get => _effect;
-            set => SetProperty(ref _effect, value);
+            set
+            {
+                SetProperty(ref _effect, value);
+
+                if (_effect != null)
+                {
+                    _effect.EffectPropertyChanged += UpdateCost;
+                }
+            }
+        }
+
+        private void UpdateCost(object? sender, EventArgs e)
+        {
+            CostMonitor?.UpdateCost();
         }
 
         private AspectPanelViewModel? _aspects;
