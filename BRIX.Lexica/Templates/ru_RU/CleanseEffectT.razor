@@ -1,7 +1,7 @@
 ﻿@using BRIX.Lexica
 @using BRIX.Library.Effects
 
-Отменяет @Numbers.RUSDcln(Model.StatusesCount, "статус", "статуса", "статусов") цели. @(Model.StatusesCount > 1 ? "Каждый статус" : "Статус") по мощности не должен превышать @Numbers.RUSDcln(Model.MaxStatusPower, "очко", "очка", "очков") опыта.
+Отменяет @Numbers.RUSDcln(Model.StatusesCount, "статус", "статуса", "статусов") цели. @(Model.StatusesCount > 1 ? (MarkupString)"Каждый статус" : (MarkupString)"Статус") по мощности не должен превышать @Numbers.RUSDcln(Model.MaxStatusPower, "очко", "очка", "очков") опыта.
 
 @code {
     [Parameter]

@@ -38,7 +38,7 @@ namespace BRIX.Library.Ability
         private readonly List<EffectBase> _effects = [];
         public IReadOnlyList<EffectBase> Effects => _effects;
 
-        public int Power => Effects.Sum(x => x.GetExpCost());
+        public int Power => Effects?.Sum(x => x.GetExpCost()) ?? 0;
 
         public void AddEffect(EffectBase effect)
         {

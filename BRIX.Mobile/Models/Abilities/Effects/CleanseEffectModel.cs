@@ -2,8 +2,10 @@
 
 namespace BRIX.Mobile.Models.Abilities.Effects
 {
-    public class CleanseEffectModel : EffectGenericModelBase<CleanseEffect>
+    public class CleanseEffectModel(CleanseEffect effect) : EffectGenericModelBase<CleanseEffect>(effect)
     {
+        public CleanseEffectModel() : this(new CleanseEffect()) { }
+
         public int MaxStatusPower
         {
             get => Internal.MaxStatusPower;

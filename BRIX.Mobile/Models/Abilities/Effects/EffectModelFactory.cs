@@ -11,8 +11,8 @@ namespace BRIX.Mobile.Models.Abilities.Effects
             {
                 // Здесь добавляются варианты только для тех эффектов, у которых реализована своя модель,
                 // то есть для те, которые не используют EffectGenericModelBase<T> напрямую, а наследуются от него.
-                //case DamageEffect dmg:
-                //    return new DamageEffectModel(dmg);
+                case CleanseEffect cle:
+                    return new CleanseEffectModel(cle);
                 default:
                 {
                     MethodInfo? method = typeof(EffectModelFactory).GetMethod(
@@ -21,8 +21,8 @@ namespace BRIX.Mobile.Models.Abilities.Effects
                     );
                     MethodInfo? genericMethod = method?.MakeGenericMethod(effect.GetType());
 
-                        return genericMethod?.Invoke(null, new object[] { effect }) as EffectModelBase
-                            ?? throw new Exception($"Модель эффекта не найдена для {effect.GetType()}");
+                    return genericMethod?.Invoke(null, [effect]) as EffectModelBase
+                        ?? throw new Exception($"Модель эффекта не найдена для {effect.GetType()}");
                 }
             }
         }
