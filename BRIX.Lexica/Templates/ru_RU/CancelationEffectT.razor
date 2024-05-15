@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Предотвращает активацию способности с мощностью не превышающей @Numbers.RUSDcln(Model.MaxAbilityPower, "очко", "очка", "очков") опыта.
+
+@code {
+    [Parameter]
+    public CancelationEffect Model { get; set; } = new();
+}

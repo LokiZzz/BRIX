@@ -119,6 +119,9 @@
 	  <Compile Update="View\Abilities\AbilityActivationSettingsPage.xaml.cs">
 	    <DependentUpon>AbilityActivationSettingsPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\Abilities\Effects\CancelationEffectPage.xaml.cs">
+	    <DependentUpon>CancelationEffectPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\Abilities\Effects\CleanseEffectPage.xaml.cs">
 	    <DependentUpon>CleanseEffectPage.xaml</DependentUpon>
 	  </Compile>
@@ -150,6 +153,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="View\Abilities\AbilityActivationSettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Effects\CancelationEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\CleanseEffectPage.xaml">

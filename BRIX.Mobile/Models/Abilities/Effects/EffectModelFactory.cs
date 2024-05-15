@@ -13,6 +13,8 @@ namespace BRIX.Mobile.Models.Abilities.Effects
                 // то есть для те, которые не используют EffectGenericModelBase<T> напрямую, а наследуются от него.
                 case CleanseEffect cle:
                     return new CleanseEffectModel(cle);
+                case CancelationEffect can:
+                    return new CancelationEffectModel(can);
                 default:
                 {
                     MethodInfo? method = typeof(EffectModelFactory).GetMethod(

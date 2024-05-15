@@ -97,6 +97,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Power.
+        /// </summary>
+        public static string AbilityPower {
+            get {
+                return ResourceManager.GetString("AbilityPower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Almost any ability is used by spending action points. The more action points an ability spends, the cheaper it will be in experience points..
         /// </summary>
         public static string ActionPointAspectHint {
@@ -1074,6 +1083,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string EffectAmplificationHint {
             get {
                 return ResourceManager.GetString("EffectAmplificationHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancelation.
+        /// </summary>
+        public static string EffectCancelation {
+            get {
+                return ResourceManager.GetString("EffectCancelation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prevents the target from activating an ability. The effect only triggers if an ability with that effect was activated by a reaction or trigger. The power ability being canceled must not exceed the specified experience point limit..
+        /// </summary>
+        public static string EffectCancelationHint {
+            get {
+                return ResourceManager.GetString("EffectCancelationHint", resourceCulture);
             }
         }
         

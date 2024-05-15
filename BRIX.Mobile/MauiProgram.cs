@@ -115,6 +115,7 @@ public static class MauiProgram
         builder.RegisterView<AmplificationEffectPage, SinglePropEffectPageVMBase<AmplificationEffect>>();
         builder.RegisterView<ReductionEffectPage, SinglePropEffectPageVMBase<ReductionEffect>>();
         builder.RegisterView<CleanseEffectPage, EffectPageVMBase<CleanseEffectModel>>();
+        builder.RegisterView<CancelationEffectPage, EffectPageVMBase<CancelationEffectModel>>();
         builder.RegisterView<WinEffectPage, EffectPageVMBase<EffectGenericModelBase<WinTheGameEffect>>>();
 
         builder.RegisterView<TargetSelectionAspectPage, TargetSelectionAspectPageVM>();

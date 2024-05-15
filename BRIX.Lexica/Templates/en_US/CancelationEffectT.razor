@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Prevents the activation of an ability with a power not exceeding @Numbers.ENGDcln(Model.MaxAbilityPower, " experience point").
+
+@code {
+    [Parameter]
+    public CancelationEffect Model { get; set; } = new();
+}
