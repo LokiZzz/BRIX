@@ -1,5 +1,4 @@
-﻿using BRIX.Library.Ability;
-using BRIX.Library.Aspects;
+﻿using BRIX.Library.Aspects;
 using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Extensions;
 using BRIX.Library.Mathematics;
@@ -13,12 +12,14 @@ namespace BRIX.Library.Effects
             typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect)
         ];
 
-        public int DistanceInMeters { get; set; }
+        public int DistanceInMeters { get; set; } = 1;
+
         public EMoveTargetPath TargetPath { get; set; }
 
         public Dictionary<EMoveTargetPath, double> PathTypeToModifier = new()
         {
             { EMoveTargetPath.StraightToCharacter, 0.8 },
+            { EMoveTargetPath.StraightFromCharacter, 0.8 },
             { EMoveTargetPath.Straight, 1 },
             { EMoveTargetPath.Arbitrary, 1.5 },
             { EMoveTargetPath.NoPath, 2 },
@@ -42,22 +43,22 @@ namespace BRIX.Library.Effects
         /// <summary>
         /// По прямой по направлению к персонажу
         /// </summary>
-        StraightToCharacter = 1,
+        StraightToCharacter = 0,
         /// <summary>
         /// По прямой по направлению от персонажа
         /// </summary>
-        StraightFromCharacter = 2,
+        StraightFromCharacter = 1,
         /// <summary>
         /// По прямой в любом направлении
         /// </summary>
-        Straight = 3,
+        Straight = 2,
         /// <summary>
         /// По произвольному пути
         /// </summary>
-        Arbitrary = 4,
+        Arbitrary = 3,
         /// <summary>
         /// Без пути, телепортация
         /// </summary>
-        NoPath = 5
+        NoPath = 4
     }
 }

@@ -216,6 +216,9 @@
   <data name="Apply" xml:space="preserve">
     <value>Применить</value>
   </data>
+  <data name="Arbitrary" xml:space="preserve">
+    <value>Произвольный путь</value>
+  </data>
   <data name="Area" xml:space="preserve">
     <value>Область</value>
   </data>
@@ -501,6 +504,12 @@
   <data name="EffectHeal" xml:space="preserve">
     <value>Лечение</value>
   </data>
+  <data name="EffectMoveTarget" xml:space="preserve">
+    <value>Перемещение цели</value>
+  </data>
+  <data name="EffectMoveTargetHint" xml:space="preserve">
+    <value>Перемещает цель по заданному пути на заданное расстояние.</value>
+  </data>
   <data name="EffectReduction" xml:space="preserve">
     <value>Ослабление</value>
   </data>
@@ -765,6 +774,12 @@
   <data name="Month" xml:space="preserve">
     <value>Месяц</value>
   </data>
+  <data name="MoveTargetDistance" xml:space="preserve">
+    <value>Дистанция</value>
+  </data>
+  <data name="MoveTargetPath" xml:space="preserve">
+    <value>Путь</value>
+  </data>
   <data name="MuchMorePowerfullObstacle" xml:space="preserve">
     <value>Какое-то очень мощное препятствие</value>
   </data>
@@ -794,6 +809,9 @@
   </data>
   <data name="NoneCooldown" xml:space="preserve">
     <value>Не требует перезарядки</value>
+  </data>
+  <data name="NoPath" xml:space="preserve">
+    <value>Телепортация</value>
   </data>
   <data name="NoSpecialActivationConditions" xml:space="preserve">
     <value>Для этого эффекта не указаны никакие особые условия активации.</value>
@@ -914,6 +932,15 @@
   </data>
   <data name="StatusName" xml:space="preserve">
     <value>Название статуса</value>
+  </data>
+  <data name="Straight" xml:space="preserve">
+    <value>По прямой в любом направлении</value>
+  </data>
+  <data name="StraightFromCharacter" xml:space="preserve">
+    <value>По прямой от персонажа</value>
+  </data>
+  <data name="StraightToCharacter" xml:space="preserve">
+    <value>По прямой к персонажу</value>
   </data>
   <data name="Strategy" xml:space="preserve">
     <value>Стратегия</value>

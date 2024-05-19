@@ -15,6 +15,8 @@ namespace BRIX.Mobile.Models.Abilities.Effects
                     return new CleanseEffectModel(cle);
                 case CancelationEffect can:
                     return new CancelationEffectModel(can);
+                case MoveTargetEffect mte:
+                    return new MoveTargetEffectModel(mte);
                 default:
                 {
                     MethodInfo? method = typeof(EffectModelFactory).GetMethod(

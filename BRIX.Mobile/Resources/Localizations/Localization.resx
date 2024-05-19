@@ -216,6 +216,9 @@
   <data name="Apply" xml:space="preserve">
     <value>Apply</value>
   </data>
+  <data name="Arbitrary" xml:space="preserve">
+    <value>Arbitrary</value>
+  </data>
   <data name="Area" xml:space="preserve">
     <value>Area</value>
   </data>
@@ -498,6 +501,12 @@
   <data name="EffectHeal" xml:space="preserve">
     <value>Heal</value>
   </data>
+  <data name="EffectMoveTarget" xml:space="preserve">
+    <value>Move target</value>
+  </data>
+  <data name="EffectMoveTargetHint" xml:space="preserve">
+    <value>Moves the target along a specified path for a specified distance.</value>
+  </data>
   <data name="EffectReduction" xml:space="preserve">
     <value>Reduction</value>
   </data>
@@ -756,6 +765,12 @@
   <data name="Month" xml:space="preserve">
     <value>Month</value>
   </data>
+  <data name="MoveTargetDistance" xml:space="preserve">
+    <value>Distance</value>
+  </data>
+  <data name="MoveTargetPath" xml:space="preserve">
+    <value>Path</value>
+  </data>
   <data name="MuchMorePowerfullObstacle" xml:space="preserve">
     <value>Some very powerful obstacle</value>
   </data>
@@ -785,6 +800,9 @@
   </data>
   <data name="NoneCooldown" xml:space="preserve">
     <value>No cooldown</value>
+  </data>
+  <data name="NoPath" xml:space="preserve">
+    <value>Teleportation</value>
   </data>
   <data name="NoSpecialActivationConditions" xml:space="preserve">
     <value>There is no special activation conditions.</value>
@@ -905,6 +923,15 @@
   </data>
   <data name="StatusName" xml:space="preserve">
     <value>Status name</value>
+  </data>
+  <data name="Straight" xml:space="preserve">
+    <value>Straight</value>
+  </data>
+  <data name="StraightFromCharacter" xml:space="preserve">
+    <value>Straight from character</value>
+  </data>
+  <data name="StraightToCharacter" xml:space="preserve">
+    <value>Straight to character</value>
   </data>
   <data name="Strategy" xml:space="preserve">
     <value>Strategy</value>

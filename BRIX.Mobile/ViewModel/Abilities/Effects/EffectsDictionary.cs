@@ -73,6 +73,11 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 Icon = AwesomeRPG.Interdiction,
                 EditPage = typeof(CancelationEffectPage)
             }},
+            { typeof(MoveTargetEffectModel), new EffectTypeVM() {
+                Name = Localization.EffectMoveTarget,
+                Icon = AwesomeRPG.PlayerDodge,
+                EditPage = typeof(MoveTargetEffectPage)
+            }},
 
             { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectTypeVM() {
                 Name = Localization.EffectWin,

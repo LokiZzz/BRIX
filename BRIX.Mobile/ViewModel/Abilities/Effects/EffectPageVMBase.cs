@@ -1,11 +1,9 @@
-﻿using BRIX.Mobile.Models.Abilities;
-using BRIX.Mobile.Models.Abilities.Aspects;
+﻿using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Abilities.Aspects;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Controls;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Effects
 {
@@ -114,7 +112,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             CostMonitor?.UpdateCost();
         }
 
-        private void HandleInitial(IDictionary<string, object> query)
+        protected virtual void HandleInitial(IDictionary<string, object> query)
         {
             Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
             Effect = query.GetParameterOrDefault<T>(NavigationParameters.Effect) ?? new T();
@@ -138,14 +136,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 Aspects = new AspectPanelViewModel(CostMonitor, Effect);
             }
 
-            Initialize();
-
             _alreadyInitialized = true;
         }
-
-        /// <summary>
-        /// Метод для дополнительной инициализации деталей интерфейса.
-        /// </summary>
-        public virtual void Initialize() { }
     }
 }

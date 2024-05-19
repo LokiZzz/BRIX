@@ -358,6 +358,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Arbitrary.
+        /// </summary>
+        public static string Arbitrary {
+            get {
+                return ResourceManager.GetString("Arbitrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Area.
         /// </summary>
         public static string Area {
@@ -1204,6 +1213,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Move target.
+        /// </summary>
+        public static string EffectMoveTarget {
+            get {
+                return ResourceManager.GetString("EffectMoveTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moves the target along a specified path for a specified distance..
+        /// </summary>
+        public static string EffectMoveTargetHint {
+            get {
+                return ResourceManager.GetString("EffectMoveTargetHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reduction.
         /// </summary>
         public static string EffectReduction {
@@ -1978,6 +2005,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Distance.
+        /// </summary>
+        public static string MoveTargetDistance {
+            get {
+                return ResourceManager.GetString("MoveTargetDistance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path.
+        /// </summary>
+        public static string MoveTargetPath {
+            get {
+                return ResourceManager.GetString("MoveTargetPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Some very powerful obstacle.
         /// </summary>
         public static string MuchMorePowerfullObstacle {
@@ -2064,6 +2109,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string NoneCooldown {
             get {
                 return ResourceManager.GetString("NoneCooldown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teleportation.
+        /// </summary>
+        public static string NoPath {
+            get {
+                return ResourceManager.GetString("NoPath", resourceCulture);
             }
         }
         
@@ -2424,6 +2478,33 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string StatusName {
             get {
                 return ResourceManager.GetString("StatusName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Straight.
+        /// </summary>
+        public static string Straight {
+            get {
+                return ResourceManager.GetString("Straight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Straight from character.
+        /// </summary>
+        public static string StraightFromCharacter {
+            get {
+                return ResourceManager.GetString("StraightFromCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Straight to character.
+        /// </summary>
+        public static string StraightToCharacter {
+            get {
+                return ResourceManager.GetString("StraightToCharacter", resourceCulture);
             }
         }
         

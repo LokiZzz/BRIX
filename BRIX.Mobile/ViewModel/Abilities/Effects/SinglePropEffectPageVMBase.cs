@@ -7,8 +7,10 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
     public partial class SinglePropEffectPageVMBase<T> : EffectPageVMBase<EffectGenericModelBase<T>> 
         where T : DiceImpactEffectBase, new()
     {
-        public override void Initialize()
+        protected override void HandleInitial(IDictionary<string, object> query)
         {
+            base.HandleInitial(query);
+
             if(Effect == null)
             {
                 throw new Exception("Эффект не инициализирован.");

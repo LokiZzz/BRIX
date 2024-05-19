@@ -4,7 +4,6 @@ using BRIX.Mobile.ViewModel.Base;
 using BRIX.Mobile.ViewModel.Popups;
 using CommunityToolkit.Maui.Views;
 using System.Collections;
-using System.Windows.Input;
 
 namespace BRIX.Mobile.Resources.Controls;
 
