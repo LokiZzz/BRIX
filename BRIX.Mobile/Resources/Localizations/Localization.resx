@@ -294,6 +294,9 @@
   <data name="Browse" xml:space="preserve">
     <value>Browse...</value>
   </data>
+  <data name="Burrow" xml:space="preserve">
+    <value>Burrow</value>
+  </data>
   <data name="CannotReset" xml:space="preserve">
     <value>Not rechargeable (single use)</value>
   </data>
@@ -324,6 +327,9 @@
   <data name="CharacterList_Help" xml:space="preserve">
     <value>Tap to select, swipe right to edit and swipe left to delete.</value>
   </data>
+  <data name="CharacterMovigSpeed" xml:space="preserve">
+    <value>Moving speed (m/AP)</value>
+  </data>
   <data name="CharacterStatusesPageHelp" xml:space="preserve">
     <value>To edit a status, slide the status card to the right; to delete, slide it to the left.</value>
   </data>
@@ -344,6 +350,9 @@
   </data>
   <data name="Clear" xml:space="preserve">
     <value>Clear</value>
+  </data>
+  <data name="Climb" xml:space="preserve">
+    <value>Climb</value>
   </data>
   <data name="Coins" xml:space="preserve">
     <value>Coins</value>
@@ -501,6 +510,12 @@
   <data name="EffectHeal" xml:space="preserve">
     <value>Heal</value>
   </data>
+  <data name="EffectMoveCharacter" xml:space="preserve">
+    <value>Move character</value>
+  </data>
+  <data name="EffectMoveCharacterHint" xml:space="preserve">
+    <value>The effect allows the character to change his position in space according to the rules of movement. Movement speed refers to the distance a character can move by spending one action point.</value>
+  </data>
   <data name="EffectMoveTarget" xml:space="preserve">
     <value>Move target</value>
   </data>
@@ -593,6 +608,9 @@
   </data>
   <data name="FastAdjustment" xml:space="preserve">
     <value>Fast adjustment</value>
+  </data>
+  <data name="Fly" xml:space="preserve">
+    <value>Fly</value>
   </data>
   <data name="FortifyEffectPageHint" xml:space="preserve">
     <value>Temporarily increases the target's maximum health. The cost scale is progressive and depends on the amount by which health is increased. The number of bonus health points can be determined by rolling the dice.</value>
@@ -771,6 +789,9 @@
   <data name="MoveTargetPath" xml:space="preserve">
     <value>Path</value>
   </data>
+  <data name="MovingType" xml:space="preserve">
+    <value>Moving type</value>
+  </data>
   <data name="MuchMorePowerfullObstacle" xml:space="preserve">
     <value>Some very powerful obstacle</value>
   </data>
@@ -936,6 +957,9 @@
   <data name="Strategy" xml:space="preserve">
     <value>Strategy</value>
   </data>
+  <data name="Swim" xml:space="preserve">
+    <value>Swim</value>
+  </data>
   <data name="Switch" xml:space="preserve">
     <value>Switch</value>
   </data>
@@ -1062,6 +1086,9 @@
   <data name="TargetThreeDot" xml:space="preserve">
     <value>Target...</value>
   </data>
+  <data name="Teleportation" xml:space="preserve">
+    <value>Teleportation</value>
+  </data>
   <data name="TenYears" xml:space="preserve">
     <value>10 years</value>
   </data>
@@ -1094,6 +1121,9 @@
   </data>
   <data name="UsesCount" xml:space="preserve">
     <value>Uses count</value>
+  </data>
+  <data name="Walk" xml:space="preserve">
+    <value>Walk</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>

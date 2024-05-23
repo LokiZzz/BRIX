@@ -294,6 +294,9 @@
   <data name="Browse" xml:space="preserve">
     <value>Обзор...</value>
   </data>
+  <data name="Burrow" xml:space="preserve">
+    <value>Пермещение сквозь материю</value>
+  </data>
   <data name="CannotReset" xml:space="preserve">
     <value>Не перезаряжается (одноразовая)</value>
   </data>
@@ -323,6 +326,9 @@
   </data>
   <data name="CharacterList_Help" xml:space="preserve">
     <value>Коснитесь карточки персонажа, чтобы выбрать его, сдвиньте карточку вправо, чтобы редактировать персонажа или сдвиньте карточку влево, чтобы его удалить.</value>
+  </data>
+  <data name="CharacterMovigSpeed" xml:space="preserve">
+    <value>Скорость (м/ОД)</value>
   </data>
   <data name="CharacterStatusesPageHelp" xml:space="preserve">
     <value>Чтобы редактировать статус, сдвиньте карточку статуса вправо, чтобы удалить, сдвиньте её влево.</value>
@@ -504,6 +510,12 @@
   <data name="EffectHeal" xml:space="preserve">
     <value>Лечение</value>
   </data>
+  <data name="EffectMoveCharacter" xml:space="preserve">
+    <value>Перемещение персонажа</value>
+  </data>
+  <data name="EffectMoveCharacterHint" xml:space="preserve">
+    <value>Эффект позволяет персонажу менять своё положение в пространстве по правилам перемещения. Скорость перемещения обозначает расстояние, на которое персонаж может переместиться, потратив одно очко действия.</value>
+  </data>
   <data name="EffectMoveTarget" xml:space="preserve">
     <value>Перемещение цели</value>
   </data>
@@ -596,6 +608,9 @@
   </data>
   <data name="FastAdjustment" xml:space="preserve">
     <value>Быстрая настройка</value>
+  </data>
+  <data name="Fly" xml:space="preserve">
+    <value>Полёт</value>
   </data>
   <data name="FortifyEffectPageHint" xml:space="preserve">
     <value>Временно увеличивает количество максимальных очков здоровья цели. Шкала стоимости прогрессивная и зависит от количества, на которое увеличивается здоровье. Количество бонусных очков здоровья может определяться броском костей.</value>
@@ -780,6 +795,9 @@
   <data name="MoveTargetPath" xml:space="preserve">
     <value>Путь</value>
   </data>
+  <data name="MovingType" xml:space="preserve">
+    <value>Тип перемещения</value>
+  </data>
   <data name="MuchMorePowerfullObstacle" xml:space="preserve">
     <value>Какое-то очень мощное препятствие</value>
   </data>
@@ -945,6 +963,9 @@
   <data name="Strategy" xml:space="preserve">
     <value>Стратегия</value>
   </data>
+  <data name="Swim" xml:space="preserve">
+    <value>Плавание</value>
+  </data>
   <data name="Switch" xml:space="preserve">
     <value>Сменить</value>
   </data>
@@ -1071,6 +1092,9 @@
   <data name="TargetThreeDot" xml:space="preserve">
     <value>Цель...</value>
   </data>
+  <data name="Teleportation" xml:space="preserve">
+    <value>Телепортация</value>
+  </data>
   <data name="TenYears" xml:space="preserve">
     <value>10 лет</value>
   </data>
@@ -1103,6 +1127,9 @@
   </data>
   <data name="UsesCount" xml:space="preserve">
     <value>Количество использований</value>
+  </data>
+  <data name="Walk" xml:space="preserve">
+    <value>Ходьба</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Внимание</value>

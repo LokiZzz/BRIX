@@ -592,6 +592,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Burrow.
+        /// </summary>
+        public static string Burrow {
+            get {
+                return ResourceManager.GetString("Burrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not rechargeable (single use).
         /// </summary>
         public static string CannotReset {
@@ -682,6 +691,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Moving speed (m/AP).
+        /// </summary>
+        public static string CharacterMovigSpeed {
+            get {
+                return ResourceManager.GetString("CharacterMovigSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To edit a status, slide the status card to the right; to delete, slide it to the left..
         /// </summary>
         public static string CharacterStatusesPageHelp {
@@ -741,6 +759,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Clear {
             get {
                 return ResourceManager.GetString("Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Climb.
+        /// </summary>
+        public static string Climb {
+            get {
+                return ResourceManager.GetString("Climb", resourceCulture);
             }
         }
         
@@ -1213,6 +1240,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Move character.
+        /// </summary>
+        public static string EffectMoveCharacter {
+            get {
+                return ResourceManager.GetString("EffectMoveCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The effect allows the character to change his position in space according to the rules of movement. Movement speed refers to the distance a character can move by spending one action point..
+        /// </summary>
+        public static string EffectMoveCharacterHint {
+            get {
+                return ResourceManager.GetString("EffectMoveCharacterHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Move target.
         /// </summary>
         public static string EffectMoveTarget {
@@ -1488,6 +1533,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string FastAdjustment {
             get {
                 return ResourceManager.GetString("FastAdjustment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fly.
+        /// </summary>
+        public static string Fly {
+            get {
+                return ResourceManager.GetString("Fly", resourceCulture);
             }
         }
         
@@ -2023,6 +2077,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Moving type.
+        /// </summary>
+        public static string MovingType {
+            get {
+                return ResourceManager.GetString("MovingType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Some very powerful obstacle.
         /// </summary>
         public static string MuchMorePowerfullObstacle {
@@ -2518,6 +2581,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Swim.
+        /// </summary>
+        public static string Swim {
+            get {
+                return ResourceManager.GetString("Swim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Switch.
         /// </summary>
         public static string Switch {
@@ -2896,6 +2968,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Teleportation.
+        /// </summary>
+        public static string Teleportation {
+            get {
+                return ResourceManager.GetString("Teleportation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 10 years.
         /// </summary>
         public static string TenYears {
@@ -2991,6 +3072,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string UsesCount {
             get {
                 return ResourceManager.GetString("UsesCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Walk.
+        /// </summary>
+        public static string Walk {
+            get {
+                return ResourceManager.GetString("Walk", resourceCulture);
             }
         }
         

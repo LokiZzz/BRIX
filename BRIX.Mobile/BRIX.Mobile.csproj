@@ -125,6 +125,9 @@
 	  <Compile Update="View\Abilities\Effects\CleanseEffectPage.xaml.cs">
 	    <DependentUpon>CleanseEffectPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\Abilities\Effects\MoveCharacterEffectPage.xaml.cs">
+	    <DependentUpon>MoveCharacterEffectPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\Abilities\Effects\MoveTargetEffectPage.xaml.cs">
 	    <DependentUpon>MoveTargetEffectPage.xaml</DependentUpon>
 	  </Compile>
@@ -164,6 +167,9 @@
 	  <MauiXaml Update="View\Abilities\Effects\CleanseEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Effects\MoveCharacterEffectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\MoveTargetEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -186,5 +192,7 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
+
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionBRIXMobileHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>

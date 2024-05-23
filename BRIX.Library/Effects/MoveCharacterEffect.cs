@@ -26,7 +26,7 @@ namespace BRIX.Library.Effects
         {
             // Обрубаем точность до сотых метра (сантиметров).
             int distanceInCm = (DistancePerActionPoint * 100).Round();
-            int distanceBaseCost = new ThrasholdCostConverter((1, 0), (101, 5), (301, 10), (1001, 5))
+            int distanceBaseCost = new ThrasholdCostConverter((1, 1), (101, 5), (301, 10), (1001, 5))
                 .Convert(distanceInCm);
 
             return (distanceBaseCost * MovingTypeToCostCoef[MovingType]).Round();

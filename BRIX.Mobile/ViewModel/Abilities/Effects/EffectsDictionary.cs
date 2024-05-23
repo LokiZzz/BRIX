@@ -78,6 +78,11 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 Icon = AwesomeRPG.PlayerDodge,
                 EditPage = typeof(MoveTargetEffectPage)
             }},
+            { typeof(MoveCharacterEffectModel), new EffectTypeVM() {
+                Name = Localization.EffectMoveCharacter,
+                Icon = AwesomeRPG.Footprint,
+                EditPage = typeof(MoveCharacterEffectPage)
+            }},
 
             { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectTypeVM() {
                 Name = Localization.EffectWin,

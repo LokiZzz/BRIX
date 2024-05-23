@@ -16,6 +16,17 @@ namespace BRIX.Lexica
             bool addNumber = true) => (MarkupString)RUSDeclension(number, nominative, genetive, pluralGenetive, addNumber);
 
         /// <summary>
+        /// Короткий вызов RUSDeclension для чисел в razor-темплейтах.
+        /// </summary>
+        public static MarkupString RUSDcln(
+            double number,
+            string nominative,
+            string genetive,
+            string pluralGenetive,
+            bool addNumber = true) => 
+            (MarkupString)RUSDeclension(Convert.ToInt32(Math.Floor(number)), nominative, genetive, pluralGenetive, addNumber);
+
+        /// <summary>
         /// Получить склонение от числа на русском языке
         /// </summary>
         /// <param name="number">Число, от которого происходит склонение</param>
@@ -85,6 +96,12 @@ namespace BRIX.Lexica
         /// </summary>
         public static MarkupString ENGDcln(int number, string nominative, bool addNumber = true, string plural = "") =>
             (MarkupString)ENGDeclension(number, nominative, addNumber, plural);
+
+        /// <summary>
+        /// Короткий вызов ENGDeclension для чисел в razor-темплейтах.
+        /// </summary>
+        public static MarkupString ENGDcln(double number, string nominative, bool addNumber = true, string plural = "") =>
+            (MarkupString)ENGDeclension(Convert.ToInt32(Math.Floor(number)), nominative, addNumber, plural);
 
         /// <summary>
         /// Получить склонение от числа на английском языке
