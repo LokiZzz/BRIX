@@ -118,6 +118,7 @@ public static class MauiProgram
         builder.RegisterView<CancelationEffectPage, EffectPageVMBase<CancelationEffectModel>>();
         builder.RegisterView<MoveTargetEffectPage, MoveTargetEffectPageVM>();
         builder.RegisterView<MoveCharacterEffectPage, MoveCharacterEffectPageVM>();
+        builder.RegisterView<MoveAreaEffectPage, EffectPageVMBase<MoveAreaEffectModel>>();
 
         builder.RegisterView<WinEffectPage, EffectPageVMBase<EffectGenericModelBase<WinTheGameEffect>>>();
 

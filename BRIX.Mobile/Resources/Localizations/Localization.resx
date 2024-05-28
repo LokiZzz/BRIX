@@ -228,6 +228,12 @@
   <data name="AreaBindingHint" xml:space="preserve">
     <value>An area that exists for some time remains in place and is tied to a certain point in space. But it can also be attached to a character or object and move along with the object of attachment.</value>
   </data>
+  <data name="AreaMovingDistance" xml:space="preserve">
+    <value>Moving distance</value>
+  </data>
+  <data name="AreasCount" xml:space="preserve">
+    <value>Areas count</value>
+  </data>
   <data name="AskAdjust" xml:space="preserve">
     <value>Adjust?</value>
   </data>
@@ -438,6 +444,9 @@
   <data name="DiceValuePopupTitle" xml:space="preserve">
     <value>Dice value</value>
   </data>
+  <data name="DistanceToArea" xml:space="preserve">
+    <value>Distance to area</value>
+  </data>
   <data name="DurationHint" xml:space="preserve">
     <value>You can specify the time for which the effect will last.</value>
   </data>
@@ -509,6 +518,12 @@
   </data>
   <data name="EffectHeal" xml:space="preserve">
     <value>Heal</value>
+  </data>
+  <data name="EffectMoveArea" xml:space="preserve">
+    <value>Move area</value>
+  </data>
+  <data name="EffectMoveAreaHint" xml:space="preserve">
+    <value>Moves the area of ​​effect of an ability a specified distance in any direction.</value>
   </data>
   <data name="EffectMoveCharacter" xml:space="preserve">
     <value>Move character</value>
@@ -750,6 +765,9 @@
   <data name="MaterialSupport" xml:space="preserve">
     <value>Material support</value>
   </data>
+  <data name="MaxAreaPower" xml:space="preserve">
+    <value>Max area power</value>
+  </data>
   <data name="MaxCanceledStatusesCount" xml:space="preserve">
     <value>Statuses count</value>
   </data>
@@ -845,6 +863,9 @@
   </data>
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
+  </data>
+  <data name="OnlyYoursAbilities" xml:space="preserve">
+    <value>Can move only your areas?</value>
   </data>
   <data name="PaperSheet" xml:space="preserve">
     <value>Paper sheet</value>

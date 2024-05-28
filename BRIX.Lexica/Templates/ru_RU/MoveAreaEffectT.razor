@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Пермещает область действия @(Model.OnlyYourAbilities ? "способности персонажа" : "любой способности") на @Numbers.RUSDcln(Model.MovingDistance, "метр", "метра", "метров") в любом направлении.
+
+@code {
+    [Parameter]
+    public MoveAreaEffect Model { get; set; } = new();
+}

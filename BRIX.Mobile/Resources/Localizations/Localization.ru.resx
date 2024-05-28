@@ -228,6 +228,12 @@
   <data name="AreaBindingHint" xml:space="preserve">
     <value>Область, которая существует некоторое время, остаётся на месте и привязывается к некоторой точке в пространстве. Но так же она может быть привзяана к персонажу или предмету и перемещаться вместе с объектом привязки.</value>
   </data>
+  <data name="AreaMovingDistance" xml:space="preserve">
+    <value>Перемещение в метрах</value>
+  </data>
+  <data name="AreasCount" xml:space="preserve">
+    <value>Количество областей</value>
+  </data>
   <data name="AskAdjust" xml:space="preserve">
     <value>Скорректировать?</value>
   </data>
@@ -438,6 +444,9 @@
   <data name="DiceValuePopupTitle" xml:space="preserve">
     <value>Кости</value>
   </data>
+  <data name="DistanceToArea" xml:space="preserve">
+    <value>Расстояние до области</value>
+  </data>
   <data name="DurationHint" xml:space="preserve">
     <value>Вы можете указать время, в течение которого будет действовать эффект.</value>
   </data>
@@ -509,6 +518,12 @@
   </data>
   <data name="EffectHeal" xml:space="preserve">
     <value>Лечение</value>
+  </data>
+  <data name="EffectMoveArea" xml:space="preserve">
+    <value>Перемещение области</value>
+  </data>
+  <data name="EffectMoveAreaHint" xml:space="preserve">
+    <value>Перемещает область действия способность на заданное расстояние в любом направлении.</value>
   </data>
   <data name="EffectMoveCharacter" xml:space="preserve">
     <value>Перемещение персонажа</value>
@@ -753,6 +768,9 @@
   <data name="MaterialSupport" xml:space="preserve">
     <value>Материальное обеспечение</value>
   </data>
+  <data name="MaxAreaPower" xml:space="preserve">
+    <value>Максимальная мощность</value>
+  </data>
   <data name="MaxCanceledStatusesCount" xml:space="preserve">
     <value>Количество</value>
   </data>
@@ -851,6 +869,9 @@
   </data>
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
+  </data>
+  <data name="OnlyYoursAbilities" xml:space="preserve">
+    <value>Можно перемещать только свои области?</value>
   </data>
   <data name="PaperSheet" xml:space="preserve">
     <value>Лист бумаги</value>

@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Moves the area of @(Model.OnlyYourAbilities ? "character ability" : "any ability") by @Numbers.ENGDcln(Model.MovingDistance, "meter") in any direction.
+
+@code {
+    [Parameter]
+    public MoveAreaEffect Model { get; set; } = new();
+}

@@ -394,6 +394,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Moving distance.
+        /// </summary>
+        public static string AreaMovingDistance {
+            get {
+                return ResourceManager.GetString("AreaMovingDistance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Areas count.
+        /// </summary>
+        public static string AreasCount {
+            get {
+                return ResourceManager.GetString("AreasCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adjust?.
         /// </summary>
         public static string AskAdjust {
@@ -1024,6 +1042,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Distance to area.
+        /// </summary>
+        public static string DistanceToArea {
+            get {
+                return ResourceManager.GetString("DistanceToArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You can specify the time for which the effect will last..
         /// </summary>
         public static string DurationHint {
@@ -1236,6 +1263,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string EffectHeal {
             get {
                 return ResourceManager.GetString("EffectHeal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move area.
+        /// </summary>
+        public static string EffectMoveArea {
+            get {
+                return ResourceManager.GetString("EffectMoveArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moves the area of ​​effect of an ability a specified distance in any direction..
+        /// </summary>
+        public static string EffectMoveAreaHint {
+            get {
+                return ResourceManager.GetString("EffectMoveAreaHint", resourceCulture);
             }
         }
         
@@ -1960,6 +2005,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max area power.
+        /// </summary>
+        public static string MaxAreaPower {
+            get {
+                return ResourceManager.GetString("MaxAreaPower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Statuses count.
         /// </summary>
         public static string MaxCanceledStatusesCount {
@@ -2244,6 +2298,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Ok {
             get {
                 return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can move only your areas?.
+        /// </summary>
+        public static string OnlyYoursAbilities {
+            get {
+                return ResourceManager.GetString("OnlyYoursAbilities", resourceCulture);
             }
         }
         
