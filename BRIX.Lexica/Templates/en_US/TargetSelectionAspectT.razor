@@ -30,32 +30,32 @@
 }
 @if (Model.Strategy == ETargetSelectionStrategy.Area)
 {
-    <p>The @(Model.IsConcording ? "effects" : "effect") will affect all targets in @GetShape(Model.Area.Shape) at a distance of @Numbers.ENGDcln(Model.Area.DistanceToAreaInMeters, "meter")from the character. The area of @(Model.IsConcording ? "effects" : "effect") can be located at any angle relative to the character.</p>
+    <p>The @(Model.IsConcording ? "effects" : "effect") will affect all targets in @GetShape(Model.AreaSettings.Area.Shape) at a distance of @Numbers.ENGDcln(Model.AreaSettings.DistanceToAreaInMeters, "meter") from the character. The area of @(Model.IsConcording ? "effects" : "effect") can be located at any angle relative to the character.</p>
     
-    if(Model.Area.ExcludedTargetsCount > 0)
+    if(Model.AreaSettings.ExcludedTargetsCount > 0)
     {
-        <p>The character can select up to @Numbers.ENGDcln(Model.Area.ExcludedTargetsCount, "target") in area to which the @(Model.IsConcording ? "effects" : "effect") will not be applied.</p>
+        <p>The character can select up to @Numbers.ENGDcln(Model.AreaSettings.ExcludedTargetsCount, "target") in area to which the @(Model.IsConcording ? "effects" : "effect") will not be applied.</p>
     }
 
-    if (Model.Area.ObstacleBetweenCharacterAndArea == EObstacleEquivalent.None)
+    if (Model.AreaSettings.ObstacleBetweenCharacterAndArea == EObstacleEquivalent.None)
     {
         <p>Obstacles between the area of @(Model.IsConcording ? "effects" : "effect") and the character do not matter.</p>
     }
     else
     {
-        <p>If there is an obstacle between the character and the area of @(Model.IsConcording ? "effects" : "effect") that is greater or equivalent in strength to @GetDurabilityEquivalent(Model.Area.ObstacleBetweenCharacterAndArea), then the @(Model.IsConcording ? "effects" : "effect") will not be applied to this area.</p>
+        <p>If there is an obstacle between the character and the area of @(Model.IsConcording ? "effects" : "effect") that is greater or equivalent in strength to @GetDurabilityEquivalent(Model.AreaSettings.ObstacleBetweenCharacterAndArea), then the @(Model.IsConcording ? "effects" : "effect") will not be applied to this area.</p>
     }
 
-    if (Model.Area.ObstacleBetweenEpicenterAndTarget == EObstacleEquivalent.None)
+    if (Model.AreaSettings.ObstacleBetweenEpicenterAndTarget == EObstacleEquivalent.None)
     {
         <p>Obstacles between the epicenter of the @(Model.IsConcording ? "effects" : "effect") and the targets do not matter.</p>
     }
     else
     {
-        <p>If there is an obstacle greater than or equivalent in strength to @GetDurabilityEquivalent(Model.Area.ObstacleBetweenEpicenterAndTarget) between the target and the epicenter of the area of @(Model.IsConcording ? "effects" : "effect"), then the @(Model.IsConcording ? "effects" : "effect") will not be applied to that target.</p>
+        <p>If there is an obstacle greater than or equivalent in strength to @GetDurabilityEquivalent(Model.AreaSettings.ObstacleBetweenEpicenterAndTarget) between the target and the epicenter of the area of @(Model.IsConcording ? "effects" : "effect"), then the @(Model.IsConcording ? "effects" : "effect") will not be applied to that target.</p>
     }
 
-    if(Model.Area.IsAreaBoundedTo)
+    if(Model.AreaSettings.IsAreaBoundedTo)
     {
         <p>The area of @(Model.IsConcording ? "effects" : "effect") is attached to the character and moves with him.</p>
     }

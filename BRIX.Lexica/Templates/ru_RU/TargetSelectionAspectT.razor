@@ -30,32 +30,32 @@
 }
 @if (Model.Strategy == ETargetSelectionStrategy.Area)
 {
-    <p>@(Model.IsConcording ? "Эффекты подействуют" : "Эффект подействует") на все цели в @GetShape(Model.Area.Shape) на расстоянии @Numbers.RUSDeclension(Model.Area.DistanceToAreaInMeters, "метра", "метров", "метров") от персонажа. Область действия может располагаться под любым углом относительно персонажа.</p>
+    <p>@(Model.IsConcording ? "Эффекты подействуют" : "Эффект подействует") на все цели в @GetShape(Model.AreaSettings.Area.Shape) на расстоянии @Numbers.RUSDeclension(Model.AreaSettings.DistanceToAreaInMeters, "метра", "метров", "метров") от персонажа. Область действия может располагаться под любым углом относительно персонажа.</p>
     
-    if(Model.Area.ExcludedTargetsCount > 0)
+    if(Model.AreaSettings.ExcludedTargetsCount > 0)
     {
-        <p>Персонаж может выбрать @Numbers.RUSDeclension(Model.Area.ExcludedTargetsCount, "цель", "цели", "целей") в области, к которым @(Model.IsConcording ? "эффекты применяться не будут" : "эффект применяться не будет.")</p>
+        <p>Персонаж может выбрать @Numbers.RUSDeclension(Model.AreaSettings.ExcludedTargetsCount, "цель", "цели", "целей") в области, к которым @(Model.IsConcording ? "эффекты применяться не будут" : "эффект применяться не будет.")</p>
     }
 
-    if (Model.Area.ObstacleBetweenCharacterAndArea == EObstacleEquivalent.None)
+    if (Model.AreaSettings.ObstacleBetweenCharacterAndArea == EObstacleEquivalent.None)
     {
         <p>Препятствия между областью действия @(Model.IsConcording ? "эффектов" : "эффекта") и персонажем не играют роли.</p>
     }
     else
     {
-        <p>Если между персонажем и областью действия @(Model.IsConcording ? "способности" : "эффекта") находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.Area.ObstacleBetweenCharacterAndArea), то @(Model.IsConcording ? "эффекты не будут применены" : "эффект не будет применён") к этой области.</p>
+        <p>Если между персонажем и областью действия @(Model.IsConcording ? "способности" : "эффекта") находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.AreaSettings.ObstacleBetweenCharacterAndArea), то @(Model.IsConcording ? "эффекты не будут применены" : "эффект не будет применён") к этой области.</p>
     }
 
-    if (Model.Area.ObstacleBetweenEpicenterAndTarget == EObstacleEquivalent.None)
+    if (Model.AreaSettings.ObstacleBetweenEpicenterAndTarget == EObstacleEquivalent.None)
     {
         <p>Препятствия между эпицентром действия @(Model.IsConcording ? "способности" : "эффекта") и целями не играют роли.</p>
     }
     else
     {
-        <p>Если между целью и эпицентром области действия находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.Area.ObstacleBetweenEpicenterAndTarget), то @(Model.IsConcording ? "эффекты не будут применены" : "эффект не будет применён") к этой цели.</p>
+        <p>Если между целью и эпицентром области действия находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.AreaSettings.ObstacleBetweenEpicenterAndTarget), то @(Model.IsConcording ? "эффекты не будут применены" : "эффект не будет применён") к этой цели.</p>
     }
 
-    if(Model.Area.IsAreaBoundedTo)
+    if(Model.AreaSettings.IsAreaBoundedTo)
     {
         <p>Область действия привязывается к персонажу и перемещается вместе с ним.</p>
     }

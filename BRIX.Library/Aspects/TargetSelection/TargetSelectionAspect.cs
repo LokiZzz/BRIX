@@ -24,7 +24,7 @@ namespace BRIX.Library.Aspects.TargetSelection
 
         public NTADSettings NTAD { get; set; } = new ();
 
-        public AreaSettings Area { get; set; } = new ();
+        public AreaSettings AreaSettings { get; set; } = new ();
 
         public TargetChainSettings TargetChain { get; set; } = new ();
 
@@ -50,16 +50,16 @@ namespace BRIX.Library.Aspects.TargetSelection
 
         private double GetAreaCoeficient()
         {
-            double distanceCoef = GetDistanceCoeficient(Area.DistanceToAreaInMeters);
-            double volumeCoef = (Area?.Shape?.GetVolume() ?? 0 * 5).ToCoeficient();
+            double distanceCoef = GetDistanceCoeficient(AreaSettings.DistanceToAreaInMeters);
+            double volumeCoef = (AreaSettings?.Area.Shape?.GetVolume() ?? 0 * 5).ToCoeficient();
             double excludedTargetsCoef = new ThrasholdCostConverter((0, 0), (1, 30), (6, 5))
-                .Convert(Area?.ExcludedTargetsCount ?? 0)
+                .Convert(AreaSettings?.ExcludedTargetsCount ?? 0)
                 .ToCoeficient();
-            double areaBoundedToCharacterCoef = Area?.IsAreaBoundedTo == true ? 1.7 : 1;
+            double areaBoundedToCharacterCoef = AreaSettings?.IsAreaBoundedTo == true ? 1.7 : 1;
 
             return distanceCoef * volumeCoef * excludedTargetsCoef
-                * EquivalentToPercentMap[Area?.ObstacleBetweenCharacterAndArea ?? 0].ToCoeficient()
-                * EquivalentToPercentMap[Area?.ObstacleBetweenEpicenterAndTarget ?? 0].ToCoeficient()
+                * EquivalentToPercentMap[AreaSettings?.ObstacleBetweenCharacterAndArea ?? 0].ToCoeficient()
+                * EquivalentToPercentMap[AreaSettings?.ObstacleBetweenEpicenterAndTarget ?? 0].ToCoeficient()
                 * areaBoundedToCharacterCoef
                 * TargetChain.GetCoefficient()
                 * TargetsSizes.GetCoefficient()

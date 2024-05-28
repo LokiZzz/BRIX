@@ -95,42 +95,42 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public EAreaType AreaType
         {
-            get => Internal.Area.AreaType;
+            get => Internal.AreaSettings.Area.ShapeType;
             set
             {
-                SetProperty(Internal.Area.AreaType, value, Internal, 
-                    (model, prop) => model.Area.AreaType = prop);
-                OnShapeParametersChanged(value);
+                SetProperty(Internal.AreaSettings.Area.ShapeType, value, Internal, 
+                    (model, prop) => model.AreaSettings.Area.ShapeType = prop);
+                OnShapeChanged(value);
             }
         }
 
         public int AreaDistance
         {
-            get => Internal.Area.DistanceToAreaInMeters;
+            get => Internal.AreaSettings.DistanceToAreaInMeters;
             set
             {
-                SetProperty(Internal.Area.DistanceToAreaInMeters, value, Internal, 
-                    (model, prop) => model.Area.DistanceToAreaInMeters = prop);
+                SetProperty(Internal.AreaSettings.DistanceToAreaInMeters, value, Internal, 
+                    (model, prop) => model.AreaSettings.DistanceToAreaInMeters = prop);
             }
         }
 
         public int ExcludedTargetsCount
         {
-            get => Internal.Area.ExcludedTargetsCount;
+            get => Internal.AreaSettings.ExcludedTargetsCount;
             set
             {
-                SetProperty(Internal.Area.ExcludedTargetsCount, value, Internal,
-                    (model, prop) => model.Area.ExcludedTargetsCount = prop);
+                SetProperty(Internal.AreaSettings.ExcludedTargetsCount, value, Internal,
+                    (model, prop) => model.AreaSettings.ExcludedTargetsCount = prop);
             }
         }
 
         public bool IsAreaBoundedTo
         {
-            get => Internal.Area.IsAreaBoundedTo;
+            get => Internal.AreaSettings.IsAreaBoundedTo;
             set
             {
-                SetProperty(Internal.Area.IsAreaBoundedTo, value, Internal,
-                    (model, prop) => model.Area.IsAreaBoundedTo = prop);
+                SetProperty(Internal.AreaSettings.IsAreaBoundedTo, value, Internal,
+                    (model, prop) => model.AreaSettings.IsAreaBoundedTo = prop);
             }
         }
 
@@ -141,11 +141,11 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 switch (AreaType)
                 {
                     case EAreaType.Sphere:
-                        return Internal.Area.GetConcreteShape<Sphere>().R;
+                        return Internal.AreaSettings.Area.GetConcreteShape<Sphere>().R;
                     case EAreaType.Cylinder:
-                        return Internal.Area.GetConcreteShape<Cylinder>().R;
+                        return Internal.AreaSettings.Area.GetConcreteShape<Cylinder>().R;
                     case EAreaType.Cone:
-                        return Internal.Area.GetConcreteShape<Cone>().R;
+                        return Internal.AreaSettings.Area.GetConcreteShape<Cone>().R;
                     default:
                         return 1;
                 }
@@ -155,15 +155,15 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 switch (AreaType)
                 {
                     case EAreaType.Sphere:
-                        Sphere sphere = Internal.Area.GetConcreteShape<Sphere>();
+                        Sphere sphere = Internal.AreaSettings.Area.GetConcreteShape<Sphere>();
                         SetProperty(sphere.R, value, sphere, (model, prop) => model.R = prop);
                         break;
                     case EAreaType.Cylinder:
-                        Cylinder cylinder = Internal.Area.GetConcreteShape<Cylinder>();
+                        Cylinder cylinder = Internal.AreaSettings.Area.GetConcreteShape<Cylinder>();
                         SetProperty(cylinder.R, value, cylinder, (model, prop) => model.R = prop);
                         break;
                     case EAreaType.Cone:
-                        Cone cone = Internal.Area.GetConcreteShape<Cone>();
+                        Cone cone = Internal.AreaSettings.Area.GetConcreteShape<Cone>();
                         SetProperty(cone.R, value, cone, (model, prop) => model.R = prop);
                         break;
                 }
@@ -177,9 +177,9 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 switch (AreaType)
                 {
                     case EAreaType.Cylinder:
-                        return Internal.Area.GetConcreteShape<Cylinder>().H;
+                        return Internal.AreaSettings.Area.GetConcreteShape<Cylinder>().H;
                     case EAreaType.Cone:
-                        return Internal.Area.GetConcreteShape<Cone>().H;
+                        return Internal.AreaSettings.Area.GetConcreteShape<Cone>().H;
                     default:
                         return 1;
                 }
@@ -189,11 +189,11 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 switch (AreaType)
                 {
                     case EAreaType.Cylinder:
-                        Cylinder cylinder = Internal.Area.GetConcreteShape<Cylinder>();
+                        Cylinder cylinder = Internal.AreaSettings.Area.GetConcreteShape<Cylinder>();
                         SetProperty(cylinder.H, value, cylinder, (model, prop) => model.H = prop);
                         break;
                     case EAreaType.Cone:
-                        Cone cone = Internal.Area.GetConcreteShape<Cone>();
+                        Cone cone = Internal.AreaSettings.Area.GetConcreteShape<Cone>();
                         SetProperty(cone.H, value, cone, (model, prop) => model.H = prop);
                         break;
                 }
@@ -202,10 +202,10 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public int A
         {
-            get => Internal.Area.Shape is Brick brick ? brick.A : 1;
+            get => Internal.AreaSettings.Area.Shape is Brick brick ? brick.A : 1;
             set
             {
-                if(Internal.Area.Shape is Brick brick)
+                if(Internal.AreaSettings.Area.Shape is Brick brick)
                 {
                     brick.A = value;
                 }
@@ -214,10 +214,10 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public int B
         {
-            get => Internal.Area.Shape is Brick brick ? brick.B : 1;
+            get => Internal.AreaSettings.Area.Shape is Brick brick ? brick.B : 1;
             set
             {
-                if (Internal.Area.Shape is Brick brick)
+                if (Internal.AreaSettings.Area.Shape is Brick brick)
                 {
                     brick.B = value;
                 }
@@ -226,10 +226,10 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public int C
         {
-            get => Internal.Area.Shape is Brick brick ? brick.C : 1;
+            get => Internal.AreaSettings.Area.Shape is Brick brick ? brick.C : 1;
             set
             {
-                if (Internal.Area.Shape is Brick brick)
+                if (Internal.AreaSettings.Area.Shape is Brick brick)
                 {
                     brick.C = value;
                 }
@@ -238,17 +238,17 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public int N
         {
-            get => Internal.Area.Shape is VoxelArray voxels ? voxels.N : 1;
+            get => Internal.AreaSettings.Area.Shape is VoxelArray voxels ? voxels.N : 1;
             set
             {
-                if (Internal.Area.Shape is VoxelArray voxels)
+                if (Internal.AreaSettings.Area.Shape is VoxelArray voxels)
                 {
                     voxels.N = value;
                 }
             }
         }
 
-        private void OnShapeParametersChanged(EAreaType shape)
+        private void OnShapeChanged(EAreaType shape)
         {
             switch (shape)
             {
@@ -275,7 +275,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
         {
             get
             {
-                EObstacleEquivalent equivalent = Internal.Area.ObstacleBetweenCharacterAndArea;
+                EObstacleEquivalent equivalent = Internal.AreaSettings.ObstacleBetweenCharacterAndArea;
 
                 return Obstacles.FirstOrDefault(x => x.Equivalent == equivalent);
             }
@@ -284,8 +284,8 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 if (value != null)
                 {
                     EObstacleEquivalent equivalent = value.Equivalent;
-                    SetProperty(Internal.Area.ObstacleBetweenCharacterAndArea, equivalent, Internal,
-                        (model, prop) => model.Area.ObstacleBetweenCharacterAndArea = prop);
+                    SetProperty(Internal.AreaSettings.ObstacleBetweenCharacterAndArea, equivalent, Internal,
+                        (model, prop) => model.AreaSettings.ObstacleBetweenCharacterAndArea = prop);
                 }
             }
         }
@@ -294,7 +294,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
         {
             get
             {
-                EObstacleEquivalent equivalent = Internal.Area.ObstacleBetweenEpicenterAndTarget;
+                EObstacleEquivalent equivalent = Internal.AreaSettings.ObstacleBetweenEpicenterAndTarget;
 
                 return Obstacles.FirstOrDefault(x => x.Equivalent == equivalent);
             }
@@ -303,8 +303,8 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 if (value != null)
                 {
                     EObstacleEquivalent equivalent = value.Equivalent;
-                    SetProperty(Internal.Area.ObstacleBetweenEpicenterAndTarget, equivalent, Internal,
-                        (model, prop) => model.Area.ObstacleBetweenEpicenterAndTarget = prop);
+                    SetProperty(Internal.AreaSettings.ObstacleBetweenEpicenterAndTarget, equivalent, Internal,
+                        (model, prop) => model.AreaSettings.ObstacleBetweenEpicenterAndTarget = prop);
                 }
             }
         }
