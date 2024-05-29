@@ -10,7 +10,7 @@ namespace BRIX.Mobile.Models.Abilities.Effects
         {
             InternalModel = model;
             model.ForceAspectInitialize();
-            UpdateAspects();
+            InitializeAspects();
         }
 
         public T Internal => GetSpecificEffect<T>();

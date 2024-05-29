@@ -178,9 +178,9 @@
                                     Grid.Row="0" Grid.ColumnSpan="3" 
                                     Style="{StaticResource ShapeScheme}"
                                     Source="Shape/brick_scheme.svg"/>
-                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.A}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaA}}"/>
-                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.B}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaB}}"/>
-                                <controls:FramedEntry Grid.Row="1" Grid.Column="2" Text="{Binding Aspect.C}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaC}}"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.AreaShape.A}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaA}}"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.AreaShape.B}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaB}}"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="2" Text="{Binding Aspect.AreaShape.C}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaC}}"/>
                             </Grid>
                             <!--Sphere-->
                             <Grid RowDefinitions="auto,*" ColumnSpacing="10" IsVisible="{Binding IsSphere}">
@@ -188,7 +188,7 @@
                                     Grid.Row="0"  
                                     Style="{StaticResource ShapeScheme}"
                                     Source="Shape/sphere_scheme.svg"/>
-                                <controls:FramedEntry Grid.Row="1" Text="{Binding Aspect.R}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaR}}"/>
+                                <controls:FramedEntry Grid.Row="1" Text="{Binding Aspect.AreaShape.R}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaR}}"/>
                             </Grid>
                             <!--Cylinder-->
                             <Grid RowDefinitions="auto,*" ColumnDefinitions="*,*" ColumnSpacing="10" IsVisible="{Binding IsCylinder}">
@@ -196,8 +196,8 @@
                                     Grid.Row="0" Grid.ColumnSpan="2" 
                                     Style="{StaticResource ShapeScheme}"
                                     Source="Shape/cylinder_scheme.svg"/>
-                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.H}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaH}}"/>
-                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.R}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaR}}"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.AreaShape.H}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaH}}"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.AreaShape.R}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaR}}"/>
                             </Grid>
                             <!--Cone-->
                             <Grid RowDefinitions="auto,*" ColumnDefinitions="*,*" ColumnSpacing="10" IsVisible="{Binding IsCone}">
@@ -205,8 +205,8 @@
                                     Grid.Row="0" Grid.ColumnSpan="2" 
                                     Style="{StaticResource ShapeScheme}"
                                     Source="Shape/cone_scheme.svg"/>
-                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.H}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaH}}"/>
-                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.R}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaR}}"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.AreaShape.H}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaH}}"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.AreaShape.R}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaR}}"/>
                             </Grid>
                             <!--Voxel array-->
                             <Grid RowDefinitions="auto,*,auto" ColumnSpacing="10" IsVisible="{Binding IsArbitrary}">
@@ -215,7 +215,7 @@
                                     Style="{StaticResource ShapeScheme}"
                                     Source="Shape/cross_scheme.svg"/>
                                 <Label Grid.Row="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionVoxelHint}}" Margin="0,0,0,10"/>
-                                <controls:FramedEntry Grid.Row="2" Text="{Binding Aspect.N}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaN}}"/>
+                                <controls:FramedEntry Grid.Row="2" Text="{Binding Aspect.AreaShape.N}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaN}}"/>
                             </Grid>
                         </Grid>
                     </VerticalStackLayout>

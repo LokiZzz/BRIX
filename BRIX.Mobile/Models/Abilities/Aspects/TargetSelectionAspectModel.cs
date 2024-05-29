@@ -12,6 +12,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
         public TargetSelectionAspectModel(TargetSelectionAspect model) : base(model) 
         {
             Obstacles = ObstacleOptionHelper.GetOptions(Resolver.Resolve<ILocalizationResourceManager>());
+            AreaShape = new VolumeShapeModel(Internal.AreaSettings.Area);
         }
 
         public ETargetSelectionStrategy Strategy
@@ -93,17 +94,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         #region Area
 
-        public EAreaType AreaType
-        {
-            get => Internal.AreaSettings.Area.ShapeType;
-            set
-            {
-                SetProperty(Internal.AreaSettings.Area.ShapeType, value, Internal, 
-                    (model, prop) => model.AreaSettings.Area.ShapeType = prop);
-                OnShapeChanged(value);
-            }
-        }
-
         public int AreaDistance
         {
             get => Internal.AreaSettings.DistanceToAreaInMeters;
@@ -134,140 +124,18 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
         }
 
-        public int R
+        public VolumeShapeModel? _areaShape;
+        public VolumeShapeModel? AreaShape
         {
-            get
-            {
-                switch (AreaType)
-                {
-                    case EAreaType.Sphere:
-                        return Internal.AreaSettings.Area.GetConcreteShape<Sphere>().R;
-                    case EAreaType.Cylinder:
-                        return Internal.AreaSettings.Area.GetConcreteShape<Cylinder>().R;
-                    case EAreaType.Cone:
-                        return Internal.AreaSettings.Area.GetConcreteShape<Cone>().R;
-                    default:
-                        return 1;
-                }
-            }
+            get => _areaShape;
             set
             {
-                switch (AreaType)
-                {
-                    case EAreaType.Sphere:
-                        Sphere sphere = Internal.AreaSettings.Area.GetConcreteShape<Sphere>();
-                        SetProperty(sphere.R, value, sphere, (model, prop) => model.R = prop);
-                        break;
-                    case EAreaType.Cylinder:
-                        Cylinder cylinder = Internal.AreaSettings.Area.GetConcreteShape<Cylinder>();
-                        SetProperty(cylinder.R, value, cylinder, (model, prop) => model.R = prop);
-                        break;
-                    case EAreaType.Cone:
-                        Cone cone = Internal.AreaSettings.Area.GetConcreteShape<Cone>();
-                        SetProperty(cone.R, value, cone, (model, prop) => model.R = prop);
-                        break;
-                }
-            }
-        }
+                _areaShape = value;
 
-        public int H
-        {
-            get
-            {
-                switch (AreaType)
+                if (_areaShape != null)
                 {
-                    case EAreaType.Cylinder:
-                        return Internal.AreaSettings.Area.GetConcreteShape<Cylinder>().H;
-                    case EAreaType.Cone:
-                        return Internal.AreaSettings.Area.GetConcreteShape<Cone>().H;
-                    default:
-                        return 1;
+                    _areaShape.VolumeShapeChanged += (s, e) => UpdateCost();
                 }
-            }
-            set
-            {
-                switch (AreaType)
-                {
-                    case EAreaType.Cylinder:
-                        Cylinder cylinder = Internal.AreaSettings.Area.GetConcreteShape<Cylinder>();
-                        SetProperty(cylinder.H, value, cylinder, (model, prop) => model.H = prop);
-                        break;
-                    case EAreaType.Cone:
-                        Cone cone = Internal.AreaSettings.Area.GetConcreteShape<Cone>();
-                        SetProperty(cone.H, value, cone, (model, prop) => model.H = prop);
-                        break;
-                }
-            }
-        }
-
-        public int A
-        {
-            get => Internal.AreaSettings.Area.Shape is Brick brick ? brick.A : 1;
-            set
-            {
-                if(Internal.AreaSettings.Area.Shape is Brick brick)
-                {
-                    brick.A = value;
-                }
-            }
-        }
-
-        public int B
-        {
-            get => Internal.AreaSettings.Area.Shape is Brick brick ? brick.B : 1;
-            set
-            {
-                if (Internal.AreaSettings.Area.Shape is Brick brick)
-                {
-                    brick.B = value;
-                }
-            }
-        }
-
-        public int C
-        {
-            get => Internal.AreaSettings.Area.Shape is Brick brick ? brick.C : 1;
-            set
-            {
-                if (Internal.AreaSettings.Area.Shape is Brick brick)
-                {
-                    brick.C = value;
-                }
-            }
-        }
-
-        public int N
-        {
-            get => Internal.AreaSettings.Area.Shape is VoxelArray voxels ? voxels.N : 1;
-            set
-            {
-                if (Internal.AreaSettings.Area.Shape is VoxelArray voxels)
-                {
-                    voxels.N = value;
-                }
-            }
-        }
-
-        private void OnShapeChanged(EAreaType shape)
-        {
-            switch (shape)
-            {
-                case EAreaType.Brick:
-                    OnPropertyChanged(nameof(A));
-                    OnPropertyChanged(nameof(B));
-                    OnPropertyChanged(nameof(C));
-                    break;
-                case EAreaType.Sphere:
-                    OnPropertyChanged(nameof(R));
-                    break;
-                case EAreaType.Cone:
-                case EAreaType.Cylinder:
-                    OnPropertyChanged(nameof(H));
-                    OnPropertyChanged(nameof(R));
-                    break;
-                case EAreaType.Arbitrary:
-                    OnPropertyChanged(nameof(N));
-                    break;
             }
         }
 

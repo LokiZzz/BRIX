@@ -33,7 +33,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 SetAREA();
             }
 
-            SetShape(Aspect.AreaType.ToString("G"));
+            SetShape(Aspect.AreaShape.AreaType.ToString("G"));
 
             Restrictions = new(Aspect.Internal.TargetSelectionRestrictions.Conditions.Select(ToRestrictionsVM));
             OnPropertyChanged(nameof(ShowNoRestrictionsText));
@@ -358,7 +358,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             if (Enum.TryParse(shape, out EAreaType parsedShape))
             {
                 Shape = parsedShape;
-                Aspect.AreaType = parsedShape;
+                Aspect.AreaShape.AreaType = parsedShape;
             }
         }
 

@@ -32,10 +32,12 @@ namespace BRIX.Mobile.Models.Abilities.Effects
         public void UpdateAspect(AspectModelBase aspect)
         {
             InternalModel?.SetAspect(aspect.InternalModel);
-            UpdateAspects();
+            int indexOfAspect = Aspects.IndexOf(GetAspect(aspect.InternalModel.GetType()));
+            Aspects[indexOfAspect] = aspect;
+            OnPropertyChanged(nameof(Aspects));
         }
 
-        public void UpdateAspects()
+        public void InitializeAspects()
         {
             if(InternalModel == null)
             {
