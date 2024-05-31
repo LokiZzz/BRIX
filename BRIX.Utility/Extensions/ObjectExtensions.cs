@@ -32,7 +32,7 @@ namespace BRIX.Utility.Extensions
 
             if (IsPrimitive(typeToReflect)) return originalObject;
             if (visited.ContainsKey(originalObject)) return visited[originalObject];
-            if (typeof(Delegate).IsAssignableFrom(typeToReflect)) return null;
+            if (typeof(Delegate).IsAssignableFrom(typeToReflect)) return ((Delegate)originalObject).Clone();
 
             object? cloneObject = CloneMethod?.Invoke(originalObject, null);
 

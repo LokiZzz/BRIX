@@ -8,20 +8,23 @@ using BRIX.Utility.Extensions;
 using System.Diagnostics;
 
 TargetSelectionAspectModel model = new(new VolumeShapeModel());
+model.Id = "1";
 model.AreaShape.MyProperty = 1;
 TargetSelectionAspectModel? copy = model.Copy();
+copy.Id = "2";
 copy.AreaShape.MyProperty = 2;
-copy.AreaShape.MyProperty = 3;
-copy.AreaShape.MyProperty = 4;
 
 Console.WriteLine();
 
 
 public partial class TargetSelectionAspectModel
 {
+    public string Id;
+
     public TargetSelectionAspectModel(VolumeShapeModel shapeModel)
     {
         AreaShape = shapeModel;
+        AreaShape.VolumeShapeChanged += CheckFireEvent;
     }
 
     public VolumeShapeModel? _areaShape;
@@ -29,11 +32,11 @@ public partial class TargetSelectionAspectModel
     {
         get
         {
-            if (_areaShape != null)
-            {
-                _areaShape.VolumeShapeChanged -= CheckFireEvent;
-                _areaShape.VolumeShapeChanged += CheckFireEvent;
-            }
+            //if (_areaShape != null)
+            //{
+            //    _areaShape.VolumeShapeChanged -= CheckFireEvent;
+            //    _areaShape.VolumeShapeChanged += CheckFireEvent;
+            //}
 
             return _areaShape;
         }
@@ -42,6 +45,7 @@ public partial class TargetSelectionAspectModel
 
     private void CheckFireEvent(object? sender, EventArgs e)
     {
+        string stop = Id;
         Debug.WriteLine("Fire!");
     }
 }
@@ -49,6 +53,8 @@ public partial class TargetSelectionAspectModel
 public class VolumeShapeModel
 {
     public event EventHandler? VolumeShapeChanged;
+
+    public bool EventCopied => VolumeShapeChanged != null;
 
     private int myVar;
     public int MyProperty

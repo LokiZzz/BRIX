@@ -124,21 +124,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
         }
 
-        public VolumeShapeModel? _areaShape;
-        public VolumeShapeModel? AreaShape
-        {
-            get
-            {
-                if(_areaShape != null)
-                {
-                    _areaShape.VolumeShapeChanged -= (s, e) => UpdateCost();
-                    _areaShape.VolumeShapeChanged += (s, e) => UpdateCost();
-                }
-
-                return _areaShape;
-            }
-            set => _areaShape = value;
-        }
+        public VolumeShapeModel AreaShape { get; set; }
 
         public ObstacleOptionVM? ObstacleBetweenCharacterAndArea
         {

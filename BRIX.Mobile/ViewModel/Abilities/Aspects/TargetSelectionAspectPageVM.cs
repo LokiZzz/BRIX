@@ -43,6 +43,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 Text = Localization[x.ToString("G")].ToString() ?? string.Empty
             }));
             OnPropertyChanged(nameof(ShowSizesCollection));
+
+            Aspect.AreaShape.CostMonitor = Aspect.CostMonitor;
         }
 
         #region Strategy

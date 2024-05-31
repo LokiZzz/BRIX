@@ -1,20 +1,19 @@
 ﻿using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Mathematics;
+using BRIX.Mobile.ViewModel.Abilities;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {
     public class VolumeShapeModel : ObservableObject
     {
-        public string Id;
-
-        public VolumeShapeModel(VolumeShape volumeShape)
+        public VolumeShapeModel(VolumeShape volumeShape, AbilityCostMonitorPanelVM? costMonitor = null)
         {
             Internal = volumeShape;
-            Id = Guid.NewGuid().ToString();
+            CostMonitor = costMonitor;
         }
 
-        public event EventHandler? VolumeShapeChanged;
+        public AbilityCostMonitorPanelVM? CostMonitor { get; set; }
 
         public VolumeShape Internal { get; set; }
 
@@ -25,7 +24,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             {
                 SetProperty(Internal.ShapeType, value, Internal, (model, prop) => {
                     model.ShapeType = prop;
-                    VolumeShapeChanged?.Invoke(this, EventArgs.Empty);
+                    CostMonitor?.UpdateCost();
                 });
                 OnShapeChanged(value);
             }
@@ -55,21 +54,21 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                         Sphere sphere = Internal.GetConcreteShape<Sphere>();
                         SetProperty(sphere.R, value, sphere, (model, prop) => {
                             model.R = prop;
-                            VolumeShapeChanged?.Invoke(this, EventArgs.Empty);
+                            CostMonitor?.UpdateCost();
                         });
                         break;
                     case EAreaType.Cylinder:
                         Cylinder cylinder = Internal.GetConcreteShape<Cylinder>();
                         SetProperty(cylinder.R, value, cylinder, (model, prop) => {
                             model.R = prop;
-                            VolumeShapeChanged?.Invoke(this, EventArgs.Empty);
+                            CostMonitor?.UpdateCost();
                         });
                         break;
                     case EAreaType.Cone:
                         Cone cone = Internal.GetConcreteShape<Cone>();
                         SetProperty(cone.R, value, cone, (model, prop) => {
                             model.R = prop;
-                            VolumeShapeChanged?.Invoke(this, EventArgs.Empty);
+                            CostMonitor?.UpdateCost();
                         });
                         break;
                 }
@@ -98,14 +97,14 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                         Cylinder cylinder = Internal.GetConcreteShape<Cylinder>();
                         SetProperty(cylinder.H, value, cylinder, (model, prop) => {
                             model.H = prop;
-                            VolumeShapeChanged?.Invoke(this, EventArgs.Empty);
+                            CostMonitor?.UpdateCost();
                         });
                         break;
                     case EAreaType.Cone:
                         Cone cone = Internal.GetConcreteShape<Cone>();
                         SetProperty(cone.H, value, cone, (model, prop) => {
                             model.H = prop;
-                            VolumeShapeChanged?.Invoke(this, EventArgs.Empty);
+                            CostMonitor?.UpdateCost();
                         });
                         break;
                 }
@@ -120,7 +119,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 if (Internal.Shape is Brick brick)
                 {
                     brick.A = value;
-                    VolumeShapeChanged?.Invoke(this, EventArgs.Empty);
+                    CostMonitor?.UpdateCost();
                 }
             }
         }
@@ -133,7 +132,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 if (Internal.Shape is Brick brick)
                 {
                     brick.B = value;
-                    VolumeShapeChanged?.Invoke(this, EventArgs.Empty);
+                    CostMonitor?.UpdateCost();
                 }
             }
         }
@@ -146,7 +145,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 if (Internal.Shape is Brick brick)
                 {
                     brick.C = value;
-                    VolumeShapeChanged?.Invoke(this, EventArgs.Empty);
+                    CostMonitor?.UpdateCost();
                 }
             }
         }
@@ -159,7 +158,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 if (Internal.Shape is VoxelArray voxels)
                 {
                     voxels.N = value;
-                    VolumeShapeChanged?.Invoke(this, EventArgs.Empty);
+                    CostMonitor?.UpdateCost();
                 }
             }
         }
