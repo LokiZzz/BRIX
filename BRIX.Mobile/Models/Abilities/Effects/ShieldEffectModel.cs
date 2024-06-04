@@ -3,8 +3,10 @@ using BRIX.Mobile.Models.Abilities.Aspects;
 
 namespace BRIX.Mobile.Models.Abilities.Effects
 {
-    public class ShieldEffectModel: EffectGenericModelBase<ShieldEffect>
+    public class ShieldEffectModel(ShieldEffect effect) : EffectGenericModelBase<ShieldEffect>(effect)
     {
+        public ShieldEffectModel() : this(new ShieldEffect()) { }
+
         public int Durability
         {
             get => Internal.Durability;

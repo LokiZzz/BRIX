@@ -555,6 +555,12 @@
   <data name="Effects" xml:space="preserve">
     <value>Effects</value>
   </data>
+  <data name="EffectShield" xml:space="preserve">
+    <value>Shield</value>
+  </data>
+  <data name="EffectShieldHint" xml:space="preserve">
+    <value>The effect creates a shield that protects the targets behind it from damage. It has strength expressed in health points.</value>
+  </data>
   <data name="EffectVulnerability" xml:space="preserve">
     <value>Vulnerability</value>
   </data>
@@ -734,6 +740,12 @@
   </data>
   <data name="IsAreaCanBound" xml:space="preserve">
     <value>Аrea can be bound</value>
+  </data>
+  <data name="IsShieldPermeable" xml:space="preserve">
+    <value>Is the shield permeable?</value>
+  </data>
+  <data name="IsShieldTransparent" xml:space="preserve">
+    <value>Is the shield transparent?</value>
   </data>
   <data name="ItemName" xml:space="preserve">
     <value>Name</value>
@@ -953,6 +965,9 @@
   </data>
   <data name="SettingsPageTitle" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="ShieldDurability" xml:space="preserve">
+    <value>Durability</value>
   </data>
   <data name="SignIn" xml:space="preserve">
     <value>Sign In</value>

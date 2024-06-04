@@ -1375,6 +1375,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shield.
+        /// </summary>
+        public static string EffectShield {
+            get {
+                return ResourceManager.GetString("EffectShield", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The effect creates a shield that protects the targets behind it from damage. It has strength expressed in health points..
+        /// </summary>
+        public static string EffectShieldHint {
+            get {
+                return ResourceManager.GetString("EffectShieldHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vulnerability.
         /// </summary>
         public static string EffectVulnerability {
@@ -1911,6 +1929,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string IsAreaCanBound {
             get {
                 return ResourceManager.GetString("IsAreaCanBound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is the shield permeable?.
+        /// </summary>
+        public static string IsShieldPermeable {
+            get {
+                return ResourceManager.GetString("IsShieldPermeable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is the shield transparent?.
+        /// </summary>
+        public static string IsShieldTransparent {
+            get {
+                return ResourceManager.GetString("IsShieldTransparent", resourceCulture);
             }
         }
         
@@ -2568,6 +2604,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string SettingsPageTitle {
             get {
                 return ResourceManager.GetString("SettingsPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Durability.
+        /// </summary>
+        public static string ShieldDurability {
+            get {
+                return ResourceManager.GetString("ShieldDurability", resourceCulture);
             }
         }
         

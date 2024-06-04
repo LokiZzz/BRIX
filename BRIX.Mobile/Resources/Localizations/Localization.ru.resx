@@ -555,6 +555,12 @@
   <data name="Effects" xml:space="preserve">
     <value>Эффекты</value>
   </data>
+  <data name="EffectShield" xml:space="preserve">
+    <value>Щит</value>
+  </data>
+  <data name="EffectShieldHint" xml:space="preserve">
+    <value>Эффект создаёт щит, который защищает находящиеся за ним цели от урона. Имеет прочность, выраженную в очках здоровья.</value>
+  </data>
   <data name="EffectVulnerability" xml:space="preserve">
     <value>Уязвимость</value>
   </data>
@@ -737,6 +743,12 @@
   </data>
   <data name="IsAreaCanBound" xml:space="preserve">
     <value>Область может быть привязана</value>
+  </data>
+  <data name="IsShieldPermeable" xml:space="preserve">
+    <value>Щит может быть проницаем?</value>
+  </data>
+  <data name="IsShieldTransparent" xml:space="preserve">
+    <value>Щит прозрачен?</value>
   </data>
   <data name="ItemName" xml:space="preserve">
     <value>Название</value>
@@ -959,6 +971,9 @@
   </data>
   <data name="SettingsPageTitle" xml:space="preserve">
     <value>Настройки</value>
+  </data>
+  <data name="ShieldDurability" xml:space="preserve">
+    <value>Прочность щита</value>
   </data>
   <data name="SignIn" xml:space="preserve">
     <value>Авторизоваться</value>

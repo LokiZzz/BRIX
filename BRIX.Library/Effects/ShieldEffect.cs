@@ -13,7 +13,7 @@ namespace BRIX.Library.Effects
     {
         public override List<Type> RequiredAspects =>
         [
-            typeof(ActivationConditionsAspect)
+            typeof(AOEAspect), typeof(ActivationConditionsAspect)
         ];
 
         /// <summary>
