@@ -1,0 +1,36 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+@using BRIX.Library.Enums
+@using BRIX.Library.Mathematics
+
+<p>The @(Model.IsConcording ? "effects" : "effect") will affect all targets in @GetShape(Model.AreaShape.Shape) at a distance of @Numbers.ENGDcln(Model.DistanceToArea, "meter") from the character. The area of @(Model.IsConcording ? "effects" : "effect") can be located at any angle relative to the character.</p>
+
+@if (Model.CanBeBounded)
+{
+    <p>The area of @(Model.IsConcording ? "effects" : "effect") is attached to the character and moves with him.</p>
+}
+
+@code {
+    [Parameter]
+    public AOEAspect Model { get; set; } = new();
+
+    public static MarkupString GetShape(IShape? shape)
+    {
+        if(shape == null)
+        {
+            return (MarkupString)TemplateHelper.LexisTemplatingError;
+        }
+
+        string resultString = shape switch
+        {
+            Brick brick => $"cube-shaped area with sides of {brick.A}, {brick.B} and {Numbers.ENGDcln(brick.C, "meter")}",
+            Sphere sphere => $"sphere-shaped area with radius of {Numbers.ENGDcln(sphere.R, "meter")}",
+            Cone cone => $"cone-shaped area with height of {cone.H} and radius of {Numbers.ENGDcln(cone.R, "meter")}",
+            Cylinder cylinder => $"cylinder-shaped area with height of {cylinder.H} and radius of {Numbers.ENGDcln(cylinder.R, "meter")}",
+            VoxelArray voxels => $"area of complex shape consisting of {Numbers.ENGDcln(voxels.N, "voxel")}",
+            _ => TemplateHelper.LexisTemplatingError
+        };
+
+        return (MarkupString)resultString;
+    }
+}

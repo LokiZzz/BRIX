@@ -32,6 +32,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 EditPage = typeof(DurationAspectPage),
                 LibraryAspectType = typeof(DurationAspect),
             }},
+            { typeof(AOEAspectModel), new AspectUtilityModel() {
+                Name = Localization.AspectAOE,
+                Icon = AwesomeRPG.FireRing,
+                EditPage = typeof(AOEAspectPage),
+                LibraryAspectType = typeof(AOEAspect),
+            }},
         };
 
         public static string GetEditPageRoute(EffectBase effect)

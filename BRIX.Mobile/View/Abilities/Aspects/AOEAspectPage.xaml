@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:v="clr-namespace:BRIX.Mobile.View.Abilities"
+             xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities.Aspects"
+             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+             xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+             x:Class="BRIX.Mobile.View.Abilities.Aspects.AOEAspectPage"
+             x:DataType="vm:AOEAspectPageVM"
+             Shell.TabBarIsVisible="False"
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectAOE}}">
+
+    <Shell.TitleView>
+        <controls:TitleView/>
+    </Shell.TitleView>
+
+    <ContentPage.Resources>
+        <Style TargetType="Label" x:Key="StrategyLabel">
+            <Setter Property="TextColor" Value="{StaticResource BRIXWhite}"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="15,0,0,0"/>
+        </Style>
+        <Style TargetType="CheckBox" x:Key="StrategyCheckBox">
+            <Setter Property="HorizontalOptions" Value="End"/>
+            <Setter Property="Margin" Value="0,0,2,0"/>
+            <Setter Property="Color" Value="{StaticResource BRIXWhite}"/>
+        </Style>
+        <Style TargetType="Button" x:Key="StrategyButton">
+            <Setter Property="HeightRequest" Value="35"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource BRIXDim}"/>
+        </Style>
+        <Style TargetType="ImageButton" x:Key="ShapeButton">
+            <Setter Property="BackgroundColor" Value="{StaticResource BRIXDim}"/>
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="WidthRequest" Value="60"/>
+            <Setter Property="Padding" Value="20"/>
+        </Style>
+        <Style TargetType="Image" x:Key="ShapeScheme">
+            <Setter Property="HeightRequest" Value="150"/>
+            <Setter Property="Margin" Value="0,10"/>
+        </Style>
+    </ContentPage.Resources>
+    
+    <Grid RowDefinitions="*,auto">
+        <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never">
+            <VerticalStackLayout Spacing="10" Margin="0,0,0,10">
+                <Border Style="{StaticResource BlockBorder}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectAOE}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectAOEHint}}"/>
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AreaBinding}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AreaBindingHint}}"/>
+                        <HorizontalStackLayout>
+                            <CheckBox IsChecked="{Binding Aspect.AreaCanBeBounded}"/>
+                            <Label 
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center"
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.IsAreaCanBound}}"/>
+                        </HorizontalStackLayout>
+                        <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectAOEDistance}}" Text="{Binding Aspect.AreaDistance}"/>
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Area}}"/>
+                        <FlexLayout JustifyContent="SpaceBetween">
+                            <ImageButton 
+                                Style="{StaticResource ShapeButton}" 
+                                Source="Shape/brick_icon.svg"
+                                Command="{Binding SetShapeCommand}" 
+                                CommandParameter="Brick" 
+                                BackgroundColor="{Binding IsBrick, Converter={StaticResource SelectedToColorConverter}}"/>
+                            <ImageButton 
+                                Style="{StaticResource ShapeButton}" 
+                                Source="Shape/sphere_icon.svg" 
+                                Command="{Binding SetShapeCommand}" 
+                                CommandParameter="Sphere"
+                                BackgroundColor="{Binding IsSphere, Converter={StaticResource SelectedToColorConverter}}"/>
+                            <ImageButton 
+                                Style="{StaticResource ShapeButton}" 
+                                Source="Shape/cylinder_icon.svg" 
+                                Command="{Binding SetShapeCommand}" 
+                                CommandParameter="Cylinder"
+                                BackgroundColor="{Binding IsCylinder, Converter={StaticResource SelectedToColorConverter}}"/>
+                            <ImageButton 
+                                Style="{StaticResource ShapeButton}" 
+                                Source="Shape/cone_icon.svg" 
+                                Command="{Binding SetShapeCommand}" 
+                                CommandParameter="Cone"
+                                BackgroundColor="{Binding IsCone, Converter={StaticResource SelectedToColorConverter}}"/>
+                            <ImageButton 
+                                Style="{StaticResource ShapeButton}" 
+                                Source="Shape/cross_icon.svg" 
+                                Command="{Binding SetShapeCommand}" 
+                                CommandParameter="Arbitrary"
+                                BackgroundColor="{Binding IsArbitrary, Converter={StaticResource SelectedToColorConverter}}"/>
+                        </FlexLayout>
+
+                        <Grid>
+                            <!--Brick-->
+                            <Grid RowDefinitions="auto,*" ColumnDefinitions="*,*,*" ColumnSpacing="10" IsVisible="{Binding IsBrick}">
+                                <Image 
+                                    Grid.Row="0" Grid.ColumnSpan="3" 
+                                    Style="{StaticResource ShapeScheme}"
+                                    Source="Shape/brick_scheme.svg"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.AreaShape.A}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaA}}"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.AreaShape.B}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaB}}"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="2" Text="{Binding Aspect.AreaShape.C}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaC}}"/>
+                            </Grid>
+                            <!--Sphere-->
+                            <Grid RowDefinitions="auto,*" ColumnSpacing="10" IsVisible="{Binding IsSphere}">
+                                <Image 
+                                    Grid.Row="0"  
+                                    Style="{StaticResource ShapeScheme}"
+                                    Source="Shape/sphere_scheme.svg"/>
+                                <controls:FramedEntry Grid.Row="1" Text="{Binding Aspect.AreaShape.R}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaR}}"/>
+                            </Grid>
+                            <!--Cylinder-->
+                            <Grid RowDefinitions="auto,*" ColumnDefinitions="*,*" ColumnSpacing="10" IsVisible="{Binding IsCylinder}">
+                                <Image 
+                                    Grid.Row="0" Grid.ColumnSpan="2" 
+                                    Style="{StaticResource ShapeScheme}"
+                                    Source="Shape/cylinder_scheme.svg"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.AreaShape.H}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaH}}"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.AreaShape.R}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaR}}"/>
+                            </Grid>
+                            <!--Cone-->
+                            <Grid RowDefinitions="auto,*" ColumnDefinitions="*,*" ColumnSpacing="10" IsVisible="{Binding IsCone}">
+                                <Image 
+                                    Grid.Row="0" Grid.ColumnSpan="2" 
+                                    Style="{StaticResource ShapeScheme}"
+                                    Source="Shape/cone_scheme.svg"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="0" Text="{Binding Aspect.AreaShape.H}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaH}}"/>
+                                <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.AreaShape.R}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaR}}"/>
+                            </Grid>
+                            <!--Voxel array-->
+                            <Grid RowDefinitions="auto,*,auto" ColumnSpacing="10" IsVisible="{Binding IsArbitrary}">
+                                <Image 
+                                    Grid.Row="0" 
+                                    Style="{StaticResource ShapeScheme}"
+                                    Source="Shape/cross_scheme.svg"/>
+                                <Label Grid.Row="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionVoxelHint}}" Margin="0,0,0,10"/>
+                                <controls:FramedEntry Grid.Row="2" Text="{Binding Aspect.AreaShape.N}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaN}}"/>
+                            </Grid>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+        <v:AbilityCostMonitorPanel
+            Grid.Row="1"
+            BindingContext="{Binding CostMonitor}"/>
+    </Grid>
+</ContentPage>

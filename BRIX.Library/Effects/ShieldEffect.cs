@@ -5,6 +5,10 @@ using BRIX.Library.Mathematics;
 
 namespace BRIX.Library.Effects
 {
+    /// <summary>
+    /// Создание щита, который имеет собственные очки здоровья (прочность).
+    /// Форма и размер щита определяется аспектом «Зона действия»
+    /// </summary>
     public class ShieldEffect : EffectBase
     {
         public override List<Type> RequiredAspects =>
@@ -15,7 +19,7 @@ namespace BRIX.Library.Effects
         /// <summary>
         /// Прочность щита, исчисляемая в очках здоровья.
         /// </summary>
-        public int Health { get; set; }
+        public int Durability { get; set; }
 
         /// <summary>
         /// Можно ли что-либо видеть сквозь щит.
@@ -27,16 +31,13 @@ namespace BRIX.Library.Effects
         /// </summary>
         public bool CanBePermeable { get; set; }
 
-        public VolumeShape ShieldShape { get; set; } = new();
-
         public override int BaseExpCost()
         {
-            int baseByHealth = (CharacterCalculator.HealthToExp(Health) * 0.5).Round();
+            int baseByHealth = (CharacterCalculator.HealthToExp(Durability) * 0.5).Round();
             double transparentCoef = IsTransparent ? 1.1 : 1;
             double permeableCoef = CanBePermeable ? 2 : 1;
-            double volumeCoef = (ShieldShape.Shape?.GetVolume() ?? 0 * 5).ToCoeficient();
 
-            return (baseByHealth * transparentCoef * permeableCoef * volumeCoef).Round();
+            return (baseByHealth * transparentCoef * permeableCoef).Round();
         }
     }
 }

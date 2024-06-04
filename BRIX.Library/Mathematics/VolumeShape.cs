@@ -12,7 +12,7 @@ namespace BRIX.Library.Mathematics
 
         public EAreaType ShapeType { get; set; } = EAreaType.Brick;
 
-        public IShape? Shape
+        public IShape Shape
         {
             get
             {
@@ -29,7 +29,7 @@ namespace BRIX.Library.Mathematics
                     case EAreaType.Arbitrary:
                         return _voxelArray;
                     default:
-                        return null;
+                        throw new Exception($"Неконсистетное состояние модели {nameof(VolumeShape)}"); ;
                 }
             }
         }

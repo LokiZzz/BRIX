@@ -258,6 +258,15 @@
   <data name="AspectActivationConditions" xml:space="preserve">
     <value>Условия активации</value>
   </data>
+  <data name="AspectAOE" xml:space="preserve">
+    <value>Область эффекта</value>
+  </data>
+  <data name="AspectAOEDistance" xml:space="preserve">
+    <value>Расстояние (D)</value>
+  </data>
+  <data name="AspectAOEHint" xml:space="preserve">
+    <value>Область действия эффекта. Например, форма области с труднопроходимой местностью, форма щита или область, в которую могут быть призваны существа.</value>
+  </data>
   <data name="AspectCooldown" xml:space="preserve">
     <value>Время перезарядки</value>
   </data>

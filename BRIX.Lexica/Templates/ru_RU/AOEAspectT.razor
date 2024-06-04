@@ -1,0 +1,36 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+@using BRIX.Library.Enums
+@using BRIX.Library.Mathematics
+
+<p>@(Model.IsConcording ? "Эффекты действуют" : "Эффект действует") в @GetShape(Model.AreaSettings.Area.Shape) на расстоянии @Numbers.RUSDeclension(Model.AreaSettings.DistanceToAreaInMeters, "метра", "метров", "метров") от персонажа. Область действия может располагаться под любым углом относительно персонажа.</p>
+
+if(Model.AreaSettings.IsAreaBoundedTo)
+{
+    <p>Область действия привязывается к персонажу и перемещается вместе с ним.</p>
+}
+
+@code {
+    [Parameter]
+    public AOEAspect Model { get; set; } = new();
+
+    public static MarkupString GetShape(IShape? shape)
+    {
+        if(shape == null)
+        {
+            return (MarkupString)TemplateHelper.LexisTemplatingError;
+        }
+
+        string resultString = shape switch
+        {
+            Brick brick => $"области в форме куба со сторонами {brick.A}, {brick.B} и {Numbers.RUSDeclension(brick.C, "метр", "метра", "метров")}",
+            Sphere sphere => $"области в форме сферы с радиусом {Numbers.RUSDeclension(sphere.R, "метр", "метра", "метров")}",
+            Cone cone => $"области в форме конуса с высотой {cone.H} и радиусом {Numbers.RUSDeclension(cone.R, "метр", "метра", "метров")}",
+            Cylinder cylinder => $"области в форме цилиндра с высотой {cylinder.H} и радиусом {Numbers.RUSDeclension(cylinder.R, "метр", "метра", "метров")}",
+            VoxelArray voxels => $"в области сложной формы, состоящей из {Numbers.RUSDeclension(voxels.N, "вокселя", "вокселей", "вокселей")}",
+            _ => TemplateHelper.LexisTemplatingError
+        };
+
+        return (MarkupString)resultString;
+    }
+}

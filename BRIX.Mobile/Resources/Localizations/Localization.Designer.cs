@@ -484,6 +484,33 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Area of effect.
+        /// </summary>
+        public static string AspectAOE {
+            get {
+                return ResourceManager.GetString("AspectAOE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distance (D).
+        /// </summary>
+        public static string AspectAOEDistance {
+            get {
+                return ResourceManager.GetString("AspectAOEDistance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Effect area. For example, the shape of an area with difficult terrain, the shape of a shield, or an area where creatures can be summoned..
+        /// </summary>
+        public static string AspectAOEHint {
+            get {
+                return ResourceManager.GetString("AspectAOEHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cooldown.
         /// </summary>
         public static string AspectCooldown {

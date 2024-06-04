@@ -258,6 +258,15 @@
   <data name="AspectActivationConditions" xml:space="preserve">
     <value>Activation conditions</value>
   </data>
+  <data name="AspectAOE" xml:space="preserve">
+    <value>Area of effect</value>
+  </data>
+  <data name="AspectAOEDistance" xml:space="preserve">
+    <value>Distance (D)</value>
+  </data>
+  <data name="AspectAOEHint" xml:space="preserve">
+    <value>Effect area. For example, the shape of an area with difficult terrain, the shape of a shield, or an area where creatures can be summoned.</value>
+  </data>
   <data name="AspectCooldown" xml:space="preserve">
     <value>Cooldown</value>
   </data>
