@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Создаёт@(Model.IsTransparent ? " прозрачный" : "") щит с прочностью в @Numbers.RUSDcln(Model.Durability, "очко", "очка", "очков") здоровья. @(Model.CanBePermeable ? "Щит может быть проницаем по желанию персонажа." : "")
+
+@code {
+    [Parameter]
+    public ShieldEffect Model { get; set; } = new();
+}

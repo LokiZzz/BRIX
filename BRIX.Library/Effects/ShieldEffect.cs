@@ -19,7 +19,7 @@ namespace BRIX.Library.Effects
         /// <summary>
         /// Прочность щита, исчисляемая в очках здоровья.
         /// </summary>
-        public int Durability { get; set; }
+        public int Durability { get; set; } = 10;
 
         /// <summary>
         /// Можно ли что-либо видеть сквозь щит.

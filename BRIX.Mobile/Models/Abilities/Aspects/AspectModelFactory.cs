@@ -1,5 +1,4 @@
-﻿using BRIX.Library.Ability;
-using BRIX.Library.Aspects;
+﻿using BRIX.Library.Aspects;
 using BRIX.Library.Aspects.TargetSelection;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
@@ -14,8 +13,10 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                     return new TargetSelectionAspectModel(tsa);
                 case ActivationConditionsAspect aca:
                     return new ActivationConditionsAspectModel(aca);
-                case DurationAspect rda:
-                    return new DurationAspectModel(rda);
+                case DurationAspect da:
+                    return new DurationAspectModel(da);
+                case AOEAspect aoea:
+                    return new AOEAspectModel(aoea);
                 default: 
                     throw new NotImplementedException($"Для аспекта {aspect.GetType()} не реализована модель.");
             }

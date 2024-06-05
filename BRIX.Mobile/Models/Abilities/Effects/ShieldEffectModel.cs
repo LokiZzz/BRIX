@@ -1,6 +1,4 @@
 ﻿using BRIX.Library.Effects;
-using BRIX.Mobile.Models.Abilities.Aspects;
-
 namespace BRIX.Mobile.Models.Abilities.Effects
 {
     public class ShieldEffectModel(ShieldEffect effect) : EffectGenericModelBase<ShieldEffect>(effect)

@@ -88,6 +88,11 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 Icon = AwesomeRPG.RadialBalance,
                 EditPage = typeof(MoveAreaEffectPage)
             }},
+            { typeof(ShieldEffectModel), new EffectTypeVM() {
+                Name = Localization.EffectShield,
+                Icon = AwesomeRPG.CastleFlag,
+                EditPage = typeof(ShieldEffectPage)
+            }},
 
             { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectTypeVM() {
                 Name = Localization.EffectWin,

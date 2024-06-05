@@ -5,7 +5,7 @@ using BRIX.Library.Extensions;
 
 namespace BRIX.Library.Effects
 {
-    public class ReductionEffect : DiceImpactEffectBase
+    public class AmplificationEffect : DiceImpactEffectBase
     {
         public override List<Type> RequiredAspects =>
         [
@@ -15,7 +15,7 @@ namespace BRIX.Library.Effects
 
         public override int BaseExpCost()
         {
-            return (Impact.Average() * Impact.Average() * 1.1).Round();
+            return (Impact.Average() * Impact.Average() * 0.8).Round();
         }
     }
 }
