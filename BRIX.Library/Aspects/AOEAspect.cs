@@ -16,7 +16,10 @@ namespace BRIX.Library.Aspects
             double distanceCoef = new ThrasholdCostConverter((1, 0), (2, 20), (3, 10), (21, 5), (101, 2), (1001, 1))
                 .Convert(DistanceToArea)
                 .ToCoeficient();
-            double volumeCoef = (AreaShape.Shape.GetVolume() * 5).ToCoeficient();
+
+            int volume = AreaShape.Shape.GetVolume() <= 1 ? 1 : AreaShape.Shape.GetVolume();
+            double volumeCoef = ((volume - 1) * 25).ToCoeficient();
+
             double areaCanBeBoundedCoef = CanBeBounded == true ? 1.7 : 1;
 
             return distanceCoef * volumeCoef * areaCanBeBoundedCoef;

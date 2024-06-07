@@ -5,7 +5,7 @@ namespace BRIX.Library.Aspects.TargetSelection
 {
     public class AreaSettings
     {
-        public int DistanceToAreaInMeters { get; set; } = 0;
+        public int DistanceToAreaInMeters { get; set; } = 1;
         public int ExcludedTargetsCount { get; set; } = 0;
         public EObstacleEquivalent ObstacleBetweenCharacterAndArea { get; set; } = EObstacleEquivalent.WoodenPlank;
         public EObstacleEquivalent ObstacleBetweenEpicenterAndTarget { get; set; } = EObstacleEquivalent.WoodenPlank;

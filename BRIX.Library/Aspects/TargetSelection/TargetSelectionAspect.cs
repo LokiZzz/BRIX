@@ -1,5 +1,6 @@
 ﻿using BRIX.Library.Enums;
 using BRIX.Library.Mathematics;
+using System.Reflection.Metadata;
 
 namespace BRIX.Library.Aspects.TargetSelection
 {
@@ -51,7 +52,10 @@ namespace BRIX.Library.Aspects.TargetSelection
         private double GetAreaCoeficient()
         {
             double distanceCoef = GetDistanceCoeficient(AreaSettings.DistanceToAreaInMeters);
-            double volumeCoef = (AreaSettings?.Area.Shape?.GetVolume() ?? 0 * 5).ToCoeficient();
+
+            int volume = AreaSettings.Area.Shape.GetVolume() <= 1 ? 1 : AreaSettings.Area.Shape.GetVolume();
+            double volumeCoef = ((volume - 1) * 90).ToCoeficient();
+
             double excludedTargetsCoef = new ThrasholdCostConverter((0, 0), (1, 30), (6, 5))
                 .Convert(AreaSettings?.ExcludedTargetsCount ?? 0)
                 .ToCoeficient();
