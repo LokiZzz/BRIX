@@ -216,7 +216,7 @@
   <data name="Apply" xml:space="preserve">
     <value>Применить</value>
   </data>
-  <data name="Arbitrary" xml:space="preserve">
+  <data name="ArbitraryPath" xml:space="preserve">
     <value>Произвольный путь</value>
   </data>
   <data name="Area" xml:space="preserve">
@@ -1172,6 +1172,9 @@
   </data>
   <data name="UsesCount" xml:space="preserve">
     <value>Количество использований</value>
+  </data>
+  <data name="VoxelArrayIsArbitrary" xml:space="preserve">
+    <value>Воксели каждый раз располагаются произвольно</value>
   </data>
   <data name="Walk" xml:space="preserve">
     <value>Ходьба</value>

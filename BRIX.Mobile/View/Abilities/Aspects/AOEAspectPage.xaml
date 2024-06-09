@@ -90,8 +90,8 @@
                                 Style="{StaticResource ShapeButton}" 
                                 Source="Shape/cross_icon.svg" 
                                 Command="{Binding SetShapeCommand}" 
-                                CommandParameter="Arbitrary"
-                                BackgroundColor="{Binding IsArbitrary, Converter={StaticResource SelectedToColorConverter}}"/>
+                                CommandParameter="VoxelArray"
+                                BackgroundColor="{Binding IsVoxelArray, Converter={StaticResource SelectedToColorConverter}}"/>
                         </FlexLayout>
 
                         <Grid>
@@ -132,13 +132,20 @@
                                 <controls:FramedEntry Grid.Row="1" Grid.Column="1" Text="{Binding Aspect.AreaShape.R}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaR}}"/>
                             </Grid>
                             <!--Voxel array-->
-                            <Grid RowDefinitions="auto,*,auto" ColumnSpacing="10" IsVisible="{Binding IsArbitrary}">
+                            <Grid RowDefinitions="auto,*,auto,auto" ColumnSpacing="10" IsVisible="{Binding IsVoxelArray}">
                                 <Image 
                                     Grid.Row="0" 
                                     Style="{StaticResource ShapeScheme}"
                                     Source="Shape/cross_scheme.svg"/>
                                 <Label Grid.Row="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionVoxelHint}}" Margin="0,0,0,10"/>
                                 <controls:FramedEntry Grid.Row="2" Text="{Binding Aspect.AreaShape.N}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaN}}"/>
+                                <HorizontalStackLayout Grid.Row="3" Margin="0,10,0,0">
+                                    <CheckBox IsChecked="{Binding Aspect.AreaShape.IsArbitrary}"/>
+                                    <Label 
+                                        VerticalOptions="Center"
+                                        VerticalTextAlignment="Center"
+                                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.VoxelArrayIsArbitrary}}"/>
+                                </HorizontalStackLayout>
                             </Grid>
                         </Grid>
                     </VerticalStackLayout>

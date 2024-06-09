@@ -26,7 +26,7 @@ namespace BRIX.Library.Mathematics
                         return _cylinder;
                     case EAreaType.Cone:
                         return _cone;
-                    case EAreaType.Arbitrary:
+                    case EAreaType.VoxelArray:
                         return _voxelArray;
                     default:
                         throw new Exception($"Неконсистетное состояние модели {nameof(VolumeShape)}"); ;

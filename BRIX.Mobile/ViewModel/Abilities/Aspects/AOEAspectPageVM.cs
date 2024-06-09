@@ -43,7 +43,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 OnPropertyChanged(nameof(IsCone));
                 OnPropertyChanged(nameof(IsCylinder));
                 OnPropertyChanged(nameof(IsSphere));
-                OnPropertyChanged(nameof(IsArbitrary));
+                OnPropertyChanged(nameof(IsVoxelArray));
             }
         }
 
@@ -51,6 +51,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         public bool IsCone => Shape == EAreaType.Cone;
         public bool IsCylinder => Shape == EAreaType.Cylinder;
         public bool IsSphere => Shape == EAreaType.Sphere;
-        public bool IsArbitrary => Shape == EAreaType.Arbitrary;
+        public bool IsVoxelArray => Shape == EAreaType.VoxelArray;
     }
 }

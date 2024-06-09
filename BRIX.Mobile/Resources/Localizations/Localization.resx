@@ -216,8 +216,8 @@
   <data name="Apply" xml:space="preserve">
     <value>Apply</value>
   </data>
-  <data name="Arbitrary" xml:space="preserve">
-    <value>Arbitrary</value>
+  <data name="ArbitraryPath" xml:space="preserve">
+    <value>Arbitrary path</value>
   </data>
   <data name="Area" xml:space="preserve">
     <value>Area</value>
@@ -1166,6 +1166,9 @@
   </data>
   <data name="UsesCount" xml:space="preserve">
     <value>Uses count</value>
+  </data>
+  <data name="VoxelArrayIsArbitrary" xml:space="preserve">
+    <value>The voxels are arbitrary positioned each time</value>
   </data>
   <data name="Walk" xml:space="preserve">
     <value>Walk</value>

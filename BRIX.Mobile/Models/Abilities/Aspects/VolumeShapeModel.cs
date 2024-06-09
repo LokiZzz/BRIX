@@ -163,6 +163,19 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
         }
 
+        public bool IsArbitrary
+        {
+            get => Internal.Shape is VoxelArray voxels ? voxels.IsArbitrary : false;
+            set
+            {
+                if (Internal.Shape is VoxelArray voxels)
+                {
+                    voxels.IsArbitrary = value;
+                    CostMonitor?.UpdateCost();
+                }
+            }
+        }
+
         private void OnShapeChanged(EAreaType shape)
         {
             switch (shape)
@@ -180,8 +193,9 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                     OnPropertyChanged(nameof(H));
                     OnPropertyChanged(nameof(R));
                     break;
-                case EAreaType.Arbitrary:
+                case EAreaType.VoxelArray:
                     OnPropertyChanged(nameof(N));
+                    OnPropertyChanged(nameof(IsArbitrary));
                     break;
             }
         }

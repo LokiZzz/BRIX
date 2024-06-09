@@ -21,7 +21,7 @@ namespace BRIX.Library.Effects
             { EMoveTargetPath.StraightToCharacter, 0.8 },
             { EMoveTargetPath.StraightFromCharacter, 0.8 },
             { EMoveTargetPath.Straight, 1 },
-            { EMoveTargetPath.Arbitrary, 1.5 },
+            { EMoveTargetPath.ArbitraryPath, 1.5 },
             { EMoveTargetPath.NoPath, 2 },
         };
 
@@ -55,7 +55,7 @@ namespace BRIX.Library.Effects
         /// <summary>
         /// По произвольному пути
         /// </summary>
-        Arbitrary = 3,
+        ArbitraryPath = 3,
         /// <summary>
         /// Без пути, телепортация
         /// </summary>

@@ -6,6 +6,6 @@
         Sphere = 1,
         Cylinder = 2,
         Cone = 3,
-        Arbitrary = 4
+        VoxelArray = 4
     }
 }

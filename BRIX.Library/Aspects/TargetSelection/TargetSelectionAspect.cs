@@ -56,6 +56,11 @@ namespace BRIX.Library.Aspects.TargetSelection
             int volume = AreaSettings.Area.Shape.GetVolume() <= 1 ? 1 : AreaSettings.Area.Shape.GetVolume();
             double volumeCoef = ((volume - 1) * 90).ToCoeficient();
 
+            if(AreaSettings.Area.Shape is VoxelArray voxelArray && voxelArray.IsArbitrary)
+            {
+                volumeCoef *= 4;
+            }
+
             double excludedTargetsCoef = new ThrasholdCostConverter((0, 0), (1, 30), (6, 5))
                 .Convert(AreaSettings?.ExcludedTargetsCount ?? 0)
                 .ToCoeficient();

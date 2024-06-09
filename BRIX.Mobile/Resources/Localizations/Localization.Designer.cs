@@ -358,11 +358,11 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Arbitrary.
+        ///   Looks up a localized string similar to Arbitrary path.
         /// </summary>
-        public static string Arbitrary {
+        public static string ArbitraryPath {
             get {
-                return ResourceManager.GetString("Arbitrary", resourceCulture);
+                return ResourceManager.GetString("ArbitraryPath", resourceCulture);
             }
         }
         
@@ -3207,6 +3207,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string UsesCount {
             get {
                 return ResourceManager.GetString("UsesCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The voxels are arbitrary positioned each time.
+        /// </summary>
+        public static string VoxelArrayIsArbitrary {
+            get {
+                return ResourceManager.GetString("VoxelArrayIsArbitrary", resourceCulture);
             }
         }
         

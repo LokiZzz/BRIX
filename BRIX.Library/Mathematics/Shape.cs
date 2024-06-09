@@ -40,6 +40,11 @@
     {
         public int N { get; set; } = 1;
 
+        /// <summary>
+        /// Является ли массив вокселей произвольным.
+        /// </summary>
+        public bool IsArbitrary { get; set; }
+
         public int GetVolume() => N;
     }
 }
