@@ -98,7 +98,13 @@ namespace BRIX.Library.DiceValue
 
             int newAverage = (average + average * ((double)percent / 100)).Round();
 
-            return FromValue(newAverage, spread);
+            DicePool dicePool = FromValue(newAverage, spread);
+            dicePool.RollOptions.RerollValues = dicePoolToAdjust.RollOptions.RerollValues;
+            dicePool.RollOptions.CriticalPercent = dicePoolToAdjust.RollOptions.CriticalPercent;
+            dicePool.RollOptions.CriticalModifier = dicePoolToAdjust.RollOptions.CriticalModifier;
+            dicePool.RollOptions.ExplodingDepth = dicePoolToAdjust.RollOptions.ExplodingDepth;
+
+            return dicePool;
         }
     }
 }
