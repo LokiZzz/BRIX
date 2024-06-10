@@ -1,5 +1,4 @@
-﻿using BRIX.Library.Aspects.TargetSelection;
-using BRIX.Library.Mathematics;
+﻿using BRIX.Library.Mathematics;
 
 namespace BRIX.Library.Aspects
 {
