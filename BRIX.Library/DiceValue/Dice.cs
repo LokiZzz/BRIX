@@ -35,7 +35,7 @@ namespace BRIX.Library.DiceValue
                 ref mathExpectation
             );
 
-            return mathExpectation;
+            return mathExpectation * Count;
         }
 
         private void GetAverageRecursive(
@@ -51,7 +51,7 @@ namespace BRIX.Library.DiceValue
                     continue;
                 }
 
-                if(i != NumberOfFaces)
+                if(i != NumberOfFaces || currentExplodingDepth == explodingDepth)
                 {
                     double probability = currentExplodingDepth == 0
                         ? 1d / NumberOfFaces
@@ -60,17 +60,8 @@ namespace BRIX.Library.DiceValue
                 }
                 else
                 {
-                    if(currentExplodingDepth == explodingDepth)
-                    {
-                        double probability = 1d / Math.Pow(NumberOfFaces, currentExplodingDepth + 1);
-                        mathExpectation += (i + NumberOfFaces * currentExplodingDepth) * probability;
-                    }
-
-                    if(currentExplodingDepth < explodingDepth)
-                    {
-                        currentExplodingDepth++;
-                        GetAverageRecursive(rerollThis, explodingDepth, currentExplodingDepth, ref mathExpectation);
-                    }
+                    currentExplodingDepth++;
+                    GetAverageRecursive(rerollThis, explodingDepth, currentExplodingDepth, ref mathExpectation);
                 }
             }
         }

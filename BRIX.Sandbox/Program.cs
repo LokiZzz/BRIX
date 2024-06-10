@@ -1,6 +1,6 @@
 ﻿using BRIX.Library.DiceValue;
 
-Dice dice = new Dice(6, 1);
-double avg = dice.Average(explodingDepth: 2);
+Dice dice = new Dice(10, 3);
+double avg = dice.Average(explodingDepth: 4);
 
 Console.WriteLine();
