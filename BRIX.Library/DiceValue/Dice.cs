@@ -47,8 +47,8 @@
                 if(i != NumberOfFaces || currentExplodingDepth == explodingDepth)
                 {
                     double probability = currentExplodingDepth == 0
-                        ? 1d / NumberOfFaces
-                        : 1d / Math.Pow(NumberOfFaces, currentExplodingDepth + 1);
+                        ? 1d / validFaces.Count
+                        : 1d / Math.Pow(validFaces.Count, currentExplodingDepth + 1);
                     mathExpectation += (i + NumberOfFaces * currentExplodingDepth) * probability;
                 }
                 else

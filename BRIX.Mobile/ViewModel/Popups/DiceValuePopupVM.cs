@@ -19,10 +19,7 @@ namespace BRIX.Mobile.ViewModel.Popups
             }
             else
             {
-                if (OnInvalidFormulaEntered != null)
-                {
-                    OnInvalidFormulaEntered(this, EventArgs.Empty);
-                }
+                OnInvalidFormulaEntered?.Invoke(this, EventArgs.Empty);
             }
         }
 

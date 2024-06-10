@@ -1,12 +1,21 @@
 ﻿using BRIX.Library.DiceValue;
 
-DicePool dices = new DicePool((3, 6));
+while (true)
+{
+    string? input = Console.ReadLine();
+    Console.Clear();
 
-int average = dices.Average();
+    bool parsed = DicePool.TryParse(input, out DicePool dice);
 
-dices.RollOptions.CriticalModifier = 2;
-dices.RollOptions.CriticalPercent = 15;
-
-average = dices.Average();
-
-Console.WriteLine();
+    if (parsed && dice != null)
+    {
+        Console.WriteLine($"{dice}");
+        Console.WriteLine($"Avg: {dice.Average()}");
+        Console.WriteLine($"Min: {dice.Min()}");
+        Console.WriteLine($"Max: {dice.Max()}");
+    }
+    else
+    {
+        Console.WriteLine($"FAIL!!!");
+    }
+}

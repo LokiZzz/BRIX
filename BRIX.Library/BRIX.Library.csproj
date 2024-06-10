@@ -7,14 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="DiceValue\DicePool.Strings.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="DiceValue\DicePool.Strings.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BRIX.Utility\BRIX.Utility.csproj" />
   </ItemGroup>
 
