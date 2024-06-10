@@ -1,12 +1,89 @@
-﻿using System.Net;
-using System.Text;
+﻿using System.Text;
 using System.Text.RegularExpressions;
 
 namespace BRIX.Library.DiceValue
 {
     public partial class DicePool
     {
+        public string ToString(string format)
+        {
+            switch (format)
+            {
+                case "F":
+                    return ToFullString();
+                case "R":
+                    return ToRollOptionsString();
+                case "S":
+                    return ToShortString();
+                default:
+                    return ToString();
+            }
+        }
+
+        private string ToFullString()
+        {
+            string shortString = ToShortString();
+            string roString = ToRollOptionsString();
+
+            return string.IsNullOrEmpty(roString)
+                ? shortString
+                : $"{shortString} ({roString})";
+        }
+
         public override string ToString()
+        {
+            StringBuilder builder = new();
+            builder.Append(ToShortString());
+
+            if (RollOptions.RerollValues.Count != 0)
+            {
+                string rerollValues = RollOptions.RerollValues
+                    .Select(x => x.ToString())
+                    .Aggregate((x, y) => $"{x},{y}");
+                builder.Append($"; reroll:{rerollValues}");
+            }
+
+            if (RollOptions.CriticalPercent > 0)
+            {
+                builder.Append($"; crit:{RollOptions.CriticalPercent}x{RollOptions.CriticalModifier}");
+            }
+
+            if (RollOptions.ExplodingDepth > 0)
+            {
+                builder.Append($"; explode:{RollOptions.ExplodingDepth}");
+            }
+
+            return builder.ToString();
+        }
+
+        private string ToRollOptionsString()
+        {
+            StringBuilder builder = new();
+
+            if (RollOptions.RerollValues.Count != 0)
+            {
+                string rerollValues = RollOptions.RerollValues
+                    .Select(x => x.ToString())
+                    .Aggregate((x, y) => $"{x},{y}");
+                builder.Append($"reroll:{rerollValues}");
+            }
+
+            if (RollOptions.CriticalPercent > 0)
+            {
+                if (builder.Length > 0) builder.Append("; ");
+                builder.Append($"crit:{RollOptions.CriticalPercent}x{RollOptions.CriticalModifier}");
+            }
+
+            if (RollOptions.ExplodingDepth > 0)
+            {
+                if (builder.Length > 0) builder.Append("; ");
+                builder.Append($"explode:{RollOptions.ExplodingDepth}");
+            }
+
+            return builder.ToString();
+        }
+
+        private string ToShortString()
         {
             StringBuilder builder = new();
 
@@ -27,24 +104,6 @@ namespace BRIX.Library.DiceValue
             else if (Modifier > 0)
             {
                 builder.Append($"+{Modifier}");
-            }
-
-            if(RollOptions.RerollValues.Count != 0)
-            {
-                string rerollValues = RollOptions.RerollValues
-                    .Select(x => x.ToString())
-                    .Aggregate((x, y) => $"{x},{y}");
-                builder.Append($"; reroll:{rerollValues}");
-            }
-
-            if (RollOptions.CriticalPercent > 0)
-            {
-                builder.Append($"; crit:{RollOptions.CriticalPercent}x{RollOptions.CriticalModifier}");
-            }
-
-            if (RollOptions.ExplodingDepth > 0)
-            {
-                builder.Append($"; explode:{RollOptions.ExplodingDepth}");
             }
 
             return builder.ToString();

@@ -86,7 +86,7 @@ namespace BRIX.Lexica
             string genetive, 
             string pluralGenetive)
         {
-            string result = $"{dicePool} {RUSDeclension(dicePool.LastDigit(), nominative, genetive, pluralGenetive, false)}";
+            string result = $"{dicePool.ToString("F")} {RUSDeclension(dicePool.LastDigit(), nominative, genetive, pluralGenetive, false)}";
 
             return result;
         }
@@ -137,7 +137,7 @@ namespace BRIX.Lexica
         /// </summary>
         public static string ENGDeclension(DicePool dicePool, string nominative)
         {
-            return $"{dicePool} {ENGDeclension(dicePool.LastDigit(), nominative, false)}";
+            return $"{dicePool.ToString("F")} {ENGDeclension(dicePool.LastDigit(), nominative, false)}";
         }
 
         /// <summary>

@@ -1042,6 +1042,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Roll options:.
+        /// </summary>
+        public static string DiceRollOptions {
+            get {
+                return ResourceManager.GetString("DiceRollOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter the value in the format commonly used for dice formulas. For example, 3d6 + 2d4 + 5. In such formulas, the number before «d» means the number of dice, the number after «d» - the number of faces on the dice of this type. You can use custom dice like d11 or d19 if you like..
         /// </summary>
         public static string DiceValuePopupHint {

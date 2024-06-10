@@ -444,6 +444,9 @@
   <data name="DicePoolEditorNoDices" xml:space="preserve">
     <value>The formula is empty, to add elements to the formula, click the «Edit» button.</value>
   </data>
+  <data name="DiceRollOptions" xml:space="preserve">
+    <value>Roll options:</value>
+  </data>
   <data name="DiceValuePopupHint" xml:space="preserve">
     <value>Enter the value in the format commonly used for dice formulas. For example, 3d6 + 2d4 + 5. In such formulas, the number before «d» means the number of dice, the number after «d» - the number of faces on the dice of this type. You can use custom dice like d11 or d19 if you like.</value>
   </data>

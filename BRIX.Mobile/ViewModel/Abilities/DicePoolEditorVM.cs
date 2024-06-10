@@ -23,7 +23,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         public event EventHandler? DicePoolUpdated;
 
-        private DicePool _dices = new DicePool();
+        private DicePool _dices = new();
         public DicePool Dices
         {
             get => _dices;
@@ -34,7 +34,9 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 OnPropertyChanged(nameof(SpreadText));
                 OnPropertyChanged(nameof(Average));
                 OnPropertyChanged(nameof(DiceChunks));
+                OnPropertyChanged(nameof(RollOptions));
                 OnPropertyChanged(nameof(ShowNoDicesMessage));
+                OnPropertyChanged(nameof(ShowRollOptions));
                 FireDicePoolUpdated();
             }
         }
@@ -53,6 +55,10 @@ namespace BRIX.Mobile.ViewModel.Abilities
         public string SpreadText => $"{Dices.Min()} — {Dices.Max()}";
 
         public int Average => Dices.Average();
+
+        public string RollOptions => Dices.ToString("R");
+
+        public bool ShowRollOptions => !string.IsNullOrEmpty(RollOptions);
 
         public bool ShowNoDicesMessage => !DiceChunks.Any();
 
