@@ -30,11 +30,25 @@ namespace BRIX.Library.DiceValue
 
         public bool IsEmpty => Dice.Count == 0 && Modifier == default;
 
-        public int Average() => Dice.Sum(x => x.Average()).Round() + Modifier;
+        public DiceRollOptions RollOptions { get; private set; } = new();
 
         public int Min() => Dice.Sum(x => x.Count) + Modifier;
 
         public int Max() => Dice.Sum(x => x.NumberOfFaces * x.Count) + Modifier;
+
+        public int Average()
+        {
+            double average = Dice.Sum(x => x.Average(RollOptions.RerollValues, RollOptions.ExplodeDepth)) + Modifier;
+
+            if(RollOptions.CriticalPercent > 0 && RollOptions.CriticalModifier > 1)
+            {
+                double criticalValue = average * RollOptions.CriticalModifier;
+                double criticalChance = RollOptions.CriticalPercent / 100d;
+                average += criticalValue * criticalChance;
+            }
+
+            return average.Round();
+        }
 
         /// <summary>
         /// Добавляет в пул копию переданных костей.

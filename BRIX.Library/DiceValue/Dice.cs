@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Extensions;
+using System.Net;
 
 namespace BRIX.Library.DiceValue
 {
@@ -21,15 +22,11 @@ namespace BRIX.Library.DiceValue
         /// </summary>
         public double Average(List<int>? rerollValues = null, int explodingDepth = 0)
         {
-            List<int>? rerollThis = rerollValues?
-                .Where(x => x > 0 && x < NumberOfFaces)
-                .ToList();
-
             double mathExpectation = 0;
             
             // M(x)=Σpx
             GetAverageRecursive(
-                rerollThis, 
+                rerollValues, 
                 explodingDepth, 
                 currentExplodingDepth: 0,
                 ref mathExpectation
@@ -39,18 +36,17 @@ namespace BRIX.Library.DiceValue
         }
 
         private void GetAverageRecursive(
-            List<int>? rerollThis, 
+            List<int>? rerollValues, 
             int explodingDepth,
             int currentExplodingDepth,
             ref double mathExpectation)
         {
-            foreach (int i in Enumerable.Range(1, NumberOfFaces))
-            {
-                if (rerollThis?.Any(x => x == i) == true)
-                {
-                    continue;
-                }
+            List<int> validFaces = Enumerable.Range(1, NumberOfFaces)
+                .Where(x => rerollValues?.Any(y => y == x) != true)
+                .ToList();
 
+            foreach (int i in validFaces)
+            {
                 if(i != NumberOfFaces || currentExplodingDepth == explodingDepth)
                 {
                     double probability = currentExplodingDepth == 0
@@ -61,7 +57,7 @@ namespace BRIX.Library.DiceValue
                 else
                 {
                     currentExplodingDepth++;
-                    GetAverageRecursive(rerollThis, explodingDepth, currentExplodingDepth, ref mathExpectation);
+                    GetAverageRecursive(rerollValues, explodingDepth, currentExplodingDepth, ref mathExpectation);
                 }
             }
         }
