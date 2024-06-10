@@ -1,6 +1,5 @@
 ﻿using BRIX.Library.DiceValue;
 using BRIX.Mobile.ViewModel.Base;
-using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 

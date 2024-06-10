@@ -1,7 +1,4 @@
-﻿using BRIX.Library.Extensions;
-using System.Net;
-
-namespace BRIX.Library.DiceValue
+﻿namespace BRIX.Library.DiceValue
 {
     public class Dice
     {
@@ -60,6 +57,26 @@ namespace BRIX.Library.DiceValue
                     GetAverageRecursive(rerollValues, explodingDepth, currentExplodingDepth, ref mathExpectation);
                 }
             }
+        }
+
+        public int Min(List<int>? rerollValues)
+        {
+            int lowestValue = Enumerable.Range(1, NumberOfFaces)
+                .Where(x => rerollValues?.Any(y => y == x) != true)
+                .Min();
+
+            return lowestValue * Count;
+        }
+
+        public int Max(List<int>? rerollValues, int explodingDepth)
+        {
+            int highestValue = Enumerable.Range(1, NumberOfFaces)
+                .Where(x => rerollValues?.Any(y => y == x) != true)
+                .Max();
+
+            return highestValue == NumberOfFaces
+                ? highestValue * (explodingDepth + 1) * Count
+                : highestValue * Count;
         }
     }
 }

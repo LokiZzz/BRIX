@@ -32,13 +32,20 @@ namespace BRIX.Library.DiceValue
 
         public DiceRollOptions RollOptions { get; private set; } = new();
 
-        public int Min() => Dice.Sum(x => x.Count) + Modifier;
+        public int Min() => Dice.Sum(x => x.Min(RollOptions.RerollValues)) + Modifier;
 
-        public int Max() => Dice.Sum(x => x.NumberOfFaces * x.Count) + Modifier;
+        public int Max()
+        {
+            int dicesMax = Dice.Sum(x => x.Max(RollOptions.RerollValues, RollOptions.ExplodingDepth));
+            dicesMax += Modifier;
+            dicesMax *= RollOptions.CriticalModifier;
+
+            return dicesMax;
+        }
 
         public int Average()
         {
-            double average = Dice.Sum(x => x.Average(RollOptions.RerollValues, RollOptions.ExplodeDepth)) + Modifier;
+            double average = Dice.Sum(x => x.Average(RollOptions.RerollValues, RollOptions.ExplodingDepth)) + Modifier;
 
             if(RollOptions.CriticalPercent > 0 && RollOptions.CriticalModifier > 1)
             {

@@ -44,12 +44,12 @@ namespace BRIX.Library.DiceValue
 		public static partial Regex ModRegex();
 
 		/// <summary>
-		/// Парсит строку вида 3d6+d8+4 (reroll:1,2; crit:13x3roll; explode:2)
+		/// Парсит строку вида 3d6+d8+4; reroll:1,2; crit:13x3; explode:2;
 		/// reroll: переброс значений, указанных косле двоеточия.
 		/// crit: первое число означает шанс, второе число — это модификатор,
 		/// в случае прока значение умножается на второе число (модификатор), либо, если указан ключ roll,
 		/// умножается только константа, а количество бросаемых костей умножается на модификатор.
-		/// explode: при выпадении максимальных значений кость
+		/// explode: при выпадении максимальных значений кость.
 		/// </summary>
 		public static bool TryParse(string input, out DicePool? parsedDicePool)
 		{
@@ -67,7 +67,6 @@ namespace BRIX.Library.DiceValue
 
 		public static bool TryParseInternal(string input, out DicePool? parsedDicePool)
 		{
-			input = input.Replace('к', 'd');
 			parsedDicePool = null;
 
 			if (!IsValidDicePool(input))
