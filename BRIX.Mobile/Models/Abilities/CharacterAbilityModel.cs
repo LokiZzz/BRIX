@@ -1,9 +1,8 @@
-﻿using BRIX.Library;
+﻿using BRIX.Library.Abilities;
 using BRIX.Library.Characters;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Microsoft.Maui.Controls;
 using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.Models.Abilities

@@ -14,6 +14,7 @@ using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.ViewModel.Abilities.Effects;
 using System.Collections.ObjectModel;
 using BRIX.Mobile.ViewModel.Inventory;
+using BRIX.Library.Abilities;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {
@@ -157,7 +158,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 }
             );
 
-            if (result != null && result.SelectedItems.Any())
+            if (result != null && result.SelectedItems.Count != 0)
             {
                 IEnumerable<InventoryItemNodeVM> itemNodes = result.SelectedItems.Cast<InventoryItemNodeVM>();
 

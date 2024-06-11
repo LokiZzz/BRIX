@@ -1,4 +1,4 @@
-﻿using BRIX.Library.Ability;
+﻿using BRIX.Library.Abilities;
 using BRIX.Library.Extensions;
 using BRIX.Utility.Extensions;
 
@@ -105,10 +105,8 @@ namespace BRIX.Library.Characters
             }
 
             Character? copyOfThis = this.Copy();
-            MaterialSupport? existingItem = Inventory.Items
-                .Single(x => x.Equals(itemToUpdate)) as MaterialSupport;
 
-            if (existingItem != null)
+            if (Inventory.Items.Single(x => x.Equals(itemToUpdate)) is MaterialSupport existingItem)
             {
                 copyOfThis?.Inventory.Swap(existingItem, itemToUpdate);
             }

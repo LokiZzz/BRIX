@@ -2,7 +2,7 @@
 using BRIX.Library.Effects;
 using BRIX.Library.Enums;
 
-namespace BRIX.Library.Ability
+namespace BRIX.Library.Abilities
 {
     public class Status
     {

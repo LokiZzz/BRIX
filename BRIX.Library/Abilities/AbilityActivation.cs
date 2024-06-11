@@ -1,14 +1,13 @@
-﻿using BRIX.Library.Aspects;
-using BRIX.Library.Mathematics;
+﻿using BRIX.Library.Mathematics;
 
-namespace BRIX.Library.Ability
+namespace BRIX.Library.Abilities
 {
     public class AbilityActivation
     {
         public EActivationStrategy Strategy { get; set; } = EActivationStrategy.ActionPoints;
 
-        private int _minActionPoints = 1;
-        private int _maxActionPoints = 50;
+        private readonly int _minActionPoints = 1;
+        private readonly int _maxActionPoints = 50;
         private int _actionPoints = 1;
         public int ActionPoints
         {
@@ -32,7 +31,7 @@ namespace BRIX.Library.Ability
         /// В данном определении соответствие проводится не с коэффициентами, а с отношением временного периода и 
         /// раунда, например в минуте 12 раундов (60 сек / 5 сек), поэтому минуте соответствует множитель 12.
         /// </summary>
-        public Dictionary<ECooldownOption, int> CooldownToPercent => new Dictionary<ECooldownOption, int>
+        public static Dictionary<ECooldownOption, int> CooldownToPercent => new()
         {
             { ECooldownOption.NoneCooldown, 0 },
             { ECooldownOption.Round,        -10 },
@@ -81,7 +80,7 @@ namespace BRIX.Library.Ability
             return Triggers.Count == 0 ? 1 : Triggers.Sum(x => GetTriggerCoefficient(x.Probability));
         }
 
-        private double GetTriggerCoefficient(ETriggerProbability trigger)
+        private static double GetTriggerCoefficient(ETriggerProbability trigger)
         {
             return trigger switch
             {
@@ -94,15 +93,13 @@ namespace BRIX.Library.Ability
 
         public double GetCoeficient()
         {
-            switch (Strategy)
+            return Strategy switch
             {
-                case EActivationStrategy.ActionPoints:
-                    return GetActionPointsCoefficient() * GetCooldownCoefficient() * GetTriggersCoefficient();
-                case EActivationStrategy.Passive:
-                    return 10;
-                default:
-                    throw new NotImplementedException($"Неизвестная стратегия активации способности {Strategy}");
-            }
+                EActivationStrategy.ActionPoints => 
+                    GetActionPointsCoefficient() * GetCooldownCoefficient() * GetTriggersCoefficient(),
+                EActivationStrategy.Passive => 10,
+                _ => throw new NotImplementedException($"Неизвестная стратегия активации способности {Strategy}"),
+            };
         }
     }
 

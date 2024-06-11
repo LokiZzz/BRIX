@@ -1,4 +1,4 @@
-﻿using BRIX.Library.Ability;
+﻿using BRIX.Library.Abilities;
 using BRIX.Library.Characters;
 using System;
 using System.Collections.Generic;

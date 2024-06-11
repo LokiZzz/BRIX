@@ -1,14 +1,12 @@
-﻿using BRIX.Library.Ability;
-using BRIX.Library.Aspects;
-using BRIX.Library.Characters;
+﻿using BRIX.Library.Aspects;
 using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
 
-namespace BRIX.Library
+namespace BRIX.Library.Abilities
 {
-    public class CharacterAbility
+    public class Ability
     {
-        public CharacterAbility()
+        public Ability()
         {
             if (Id == Guid.Empty)
             { 
@@ -16,10 +14,10 @@ namespace BRIX.Library
             }
         }
 
-        private readonly List<EffectBase> _effects = new();
+        protected readonly List<EffectBase> _effects = [];
         public IReadOnlyCollection<EffectBase> Effects => _effects;
 
-        private HashSet<AspectBase> SynchronizingAspects = new();
+        private readonly HashSet<AspectBase> SynchronizingAspects = [];
 
         public AbilityActivation Activation { get; set; } = new();
 
@@ -32,16 +30,13 @@ namespace BRIX.Library
 
         /// <summary>
         /// Получить стоимость способности в очках опыта. 
-        /// Можно передать персонажа, для которого будет рассчитана индивидуальная стоимость.
-        /// Индивидуальная стоимость может происходить из того, что у персонажа будет материальное обеспечение для
-        /// данной способности.
         /// </summary>
-        public int ExpCost(Character? character = null)
+        public int ExpCost()
         {
             double effectsCountPenaltyCoef = 1;
             double deltaPerEffect = 0.2;
 
-            if (_effects.Count() > 1)
+            if (_effects.Count > 1)
             {
                 effectsCountPenaltyCoef += (_effects.Count - 1) * deltaPerEffect;
             }
@@ -49,23 +44,6 @@ namespace BRIX.Library
             int sumOfEffectsExpCost = _effects.Sum(effect => effect.GetExpCost());
             double activationCoef = Activation.GetCoeficient();
             int expCost = (sumOfEffectsExpCost * activationCoef * effectsCountPenaltyCoef).Round();
-
-            if (character != null)
-            {
-                IEnumerable<AbilityMaterialSupport> abilityMaterialSupport = character.MaterialSupport
-                    .Where(x => x.AbilityId == Id);
-
-                foreach (AbilityMaterialSupport item in abilityMaterialSupport)
-                {
-                    MaterialSupport? concreteItem = character.Inventory.Items
-                        .Single(x => x.Id == item.MaterialSupportId) as MaterialSupport;
-
-                    if (concreteItem != null)
-                    {
-                        expCost -= concreteItem.ToExpEquivalent().Round();
-                    }
-                }
-            }
 
             return expCost <= 1 ? 1 : expCost;
         }
@@ -148,7 +126,7 @@ namespace BRIX.Library
         {
             SynchronizingAspects.Add(sourceAspect);
 
-            if (_effects.Count() > 1)
+            if (_effects.Count > 1)
             {
                 foreach(EffectBase effect in _effects)
                 {
@@ -166,7 +144,7 @@ namespace BRIX.Library
                 x.GetType().Equals(sourceAspectType.GetType())
             );
 
-            if (_effects.Count() > 1)
+            if (_effects.Count > 1)
             {
                 foreach (EffectBase effect in _effects)
                 {
@@ -177,9 +155,11 @@ namespace BRIX.Library
 
         public Status BuildStatus()
         {
-            Status status = new Status();
+            Status status = new()
+            {
+                Name = string.IsNullOrEmpty(StatusName) ? Name : StatusName
+            };
 
-            status.Name = string.IsNullOrEmpty(StatusName) ? Name : StatusName;
             status.AddEffects(_effects.Where(x => x.Aspects.Any(x => x is DurationAspect)));
 
             return status;

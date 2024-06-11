@@ -5,7 +5,7 @@ while (true)
     string? input = Console.ReadLine();
     Console.Clear();
 
-    bool parsed = DicePool.TryParse(input, out DicePool dice);
+    bool parsed = DicePool.TryParse(input ?? string.Empty, out DicePool? dice);
 
     if (parsed && dice != null)
     {

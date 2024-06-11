@@ -2,8 +2,6 @@
 using BRIX.Library.Aspects;
 using BRIX.Library.Characters;
 using BRIX.Library.Extensions;
-using BRIX.Library.DiceValue;
-using BRIX.Library.Ability;
 
 namespace BRIX.Library.Effects
 {

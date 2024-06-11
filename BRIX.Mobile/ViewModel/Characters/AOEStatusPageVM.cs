@@ -1,4 +1,5 @@
 ﻿using BRIX.Library;
+using BRIX.Library.Abilities;
 using BRIX.Library.Aspects;
 using BRIX.Library.Characters;
 using BRIX.Mobile.Models.Abilities.Effects;
@@ -17,16 +18,11 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
-    public partial class AOEStatusPageVM : ViewModelBase, IQueryAttributable
+    public partial class AOEStatusPageVM(ICharacterService characterService) : ViewModelBase, IQueryAttributable
     {
-        public AOEStatusPageVM(ICharacterService characterService)
-        {
-            CharacterService = characterService;
-        }
-
         private Character? _currentCharacrter;
 
-        public ICharacterService CharacterService { get; }
+        public ICharacterService CharacterService { get; } = characterService;
 
         EEditingMode _mode;
 
@@ -106,7 +102,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if(result != null && result?.SelectedItem != null)
             {
-                Library.Ability.Status status = ((CharacterAbility)result.SelectedItem).BuildStatus();
+                Status status = ((CharacterAbility)result.SelectedItem).BuildStatus();
                 Status = new StatusItemVM(status);
             }
         }
@@ -117,7 +113,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             {
                 _mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
                 Status = query.GetParameterOrDefault<StatusItemVM>(NavigationParameters.Status)
-                    ?? new StatusItemVM(new Library.Ability.Status());
+                    ?? new StatusItemVM(new Status());
                 InitializeTitle();
                 _currentCharacrter = await CharacterService.GetCurrentCharacterGuaranteed();
             }

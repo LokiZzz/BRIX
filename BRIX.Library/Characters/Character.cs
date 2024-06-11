@@ -1,4 +1,4 @@
-﻿using BRIX.Library.Ability;
+﻿using BRIX.Library.Abilities;
 using BRIX.Library.Effects;
 
 namespace BRIX.Library.Characters
@@ -15,12 +15,12 @@ namespace BRIX.Library.Characters
         public string Name { get; set; } = string.Empty;
         public string Backstory { get; set; } = string.Empty;
         public string Appearance { get; set; } = string.Empty;
-        public List<string> Tags { get; set; } = new();
-        public List<CharacterProject> Projects { get; set; } = new();
-        public List<CharacterAbility> Abilities { get; set; } = new();
-        public List<AbilityMaterialSupport> MaterialSupport { get; set; } = new();
+        public List<string> Tags { get; set; } = [];
+        public List<CharacterProject> Projects { get; set; } = [];
+        public List<CharacterAbility> Abilities { get; set; } = [];
+        public List<AbilityMaterialSupport> MaterialSupport { get; set; } = [];
         public Inventory Inventory { get; set; } = new();
-        public List<Status> Statuses { get; set; } = new();
+        public List<Status> Statuses { get; set; } = [];
 
         /// <summary>
         /// Способности, создающие статус.
@@ -29,9 +29,9 @@ namespace BRIX.Library.Characters
         {
             get
             {
-                if(!Abilities.Any())
+                if(Abilities.Count == 0)
                 {
-                    return new List<CharacterAbility>();
+                    return [];
                 }
 
                 return Abilities.Where(x => x.HasStatus).ToList();
@@ -90,7 +90,7 @@ namespace BRIX.Library.Characters
         /// <summary>
         /// Здесь зависимость от способностей, но временно считается по простому.
         /// </summary>
-        public int MaxActionPoints => 5;
+        public static int MaxActionPoints => 5;
         public int CurrentActionPoints { get; set; } = 5;
 
         public CharacterPortrait Portrait { get; set; } = new();
@@ -104,7 +104,7 @@ namespace BRIX.Library.Characters
                 .SelectMany(x => x.Effects.Where(x => x is FortifyEffect))
                 .Cast<FortifyEffect>();
             int fortifyBonus = fortifyStatusEffects
-                .Where(x => x.Impact.Dice?.Any() == false)
+                .Where(x => x.Impact.Dice.Count == 0)
                 .Sum(x => x.Impact.Modifier);
 
             return fortifyBonus;
@@ -117,7 +117,7 @@ namespace BRIX.Library.Characters
                 .SelectMany(x => x.Effects.Where(x => x is ExhaustionEffect))
                 .Cast<ExhaustionEffect>();
             int exhaustionBonus = exhaustionStatusEffects
-                .Where(x => x.Impact.Dice?.Any() == false)
+                .Where(x => x.Impact.Dice.Count == 0)
                 .Sum(x => x.Impact.Modifier);
 
             return -exhaustionBonus;

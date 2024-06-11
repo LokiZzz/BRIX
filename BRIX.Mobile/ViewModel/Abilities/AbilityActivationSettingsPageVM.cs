@@ -1,4 +1,4 @@
-﻿using BRIX.Library.Ability;
+﻿using BRIX.Library.Abilities;
 using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Services;

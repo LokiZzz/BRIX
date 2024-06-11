@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using BRIX.Library.Ability;
+using BRIX.Library.Abilities;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.ViewModel.Abilities.Effects;
 using BRIX.Library.Effects;

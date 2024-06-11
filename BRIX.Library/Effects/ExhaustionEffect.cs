@@ -1,9 +1,7 @@
 ﻿using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Aspects;
 using BRIX.Library.Characters;
-using BRIX.Library.DiceValue;
 using BRIX.Library.Extensions;
-using BRIX.Library.Ability;
 
 namespace BRIX.Library.Effects
 {

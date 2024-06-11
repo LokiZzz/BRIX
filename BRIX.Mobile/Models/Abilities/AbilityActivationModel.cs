@@ -1,4 +1,4 @@
-﻿using BRIX.Library.Ability;
+﻿using BRIX.Library.Abilities;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.ViewModel.Abilities;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -85,7 +85,7 @@ namespace BRIX.Mobile.Models.Abilities
             }
         }
 
-        private ObservableCollection<CooldownOptionVM> _cooldownOptions = new();
+        private ObservableCollection<CooldownOptionVM> _cooldownOptions = [];
         public ObservableCollection<CooldownOptionVM> CooldownOptions
         {
             get => _cooldownOptions;

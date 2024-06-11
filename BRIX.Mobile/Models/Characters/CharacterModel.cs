@@ -3,7 +3,7 @@ using BRIX.Library.Characters;
 using System.Collections.ObjectModel;
 using BRIX.Mobile.Models.Abilities;
 using System.Collections.Specialized;
-using BRIX.Library.Ability;
+using BRIX.Library.Abilities;
 
 namespace BRIX.Mobile.Models.Characters
 {
