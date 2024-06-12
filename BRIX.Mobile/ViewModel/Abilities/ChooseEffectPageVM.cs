@@ -35,13 +35,9 @@ namespace BRIX.Mobile.ViewModel.Abilities
         {
             if (Effects.Any()) return Task.CompletedTask;
 
+            // Добавить if _forStatus
             IEnumerable<EffectTypeVM> effects = EffectsDictionary.Collection.Select(x => x.Value);
                 
-            if(_forStatus)
-            {
-                effects = effects.Where(x => x.ForStatus);
-            }
-
             Effects = new(effects);
 
             return Task.CompletedTask;

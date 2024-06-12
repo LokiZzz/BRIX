@@ -25,13 +25,11 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 Name = Localization.EffectFortify,
                 Icon = AwesomeRPG.HeartTower,
                 EditPage = typeof(FortifyEffectPage),
-                ForStatus = true
             }},
             { typeof(EffectGenericModelBase<ExhaustionEffect>), new EffectTypeVM() {
                 Name = Localization.EffectExhaustion,
                 Icon = AwesomeRPG.BleedingHearts,
                 EditPage = typeof(ExhaustionEffectPage),
-                ForStatus = true
             }},
             { typeof(EffectGenericModelBase<AccelerationEffect>), new EffectTypeVM() {
                 Name = Localization.EffectAcceleration,

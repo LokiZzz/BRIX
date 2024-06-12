@@ -1,7 +1,4 @@
 ﻿using BRIX.Library.Abilities;
-using BRIX.Library.Aspects;
-using BRIX.Library.Characters;
-using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
@@ -11,27 +8,17 @@ using BRIX.Mobile.ViewModel.Base;
 using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
-    public partial class CharacterStatusesPageVM : ViewModelBase, IQueryAttributable
+    public partial class CharacterStatusesPageVM(ICharacterService characterService, IAssetsService assetsService) 
+        : ViewModelBase, IQueryAttributable
     {
-        public CharacterStatusesPageVM(ICharacterService characterService, IAssetsService assetsService)
-        {
-            CharacterService = characterService;
-            AssetsService = assetsService;
-        }
-
         private CharacterModel? _currentCharacter;
 
-        public ICharacterService CharacterService { get; }
-        public IAssetsService AssetsService { get; }
+        public ICharacterService CharacterService { get; } = characterService;
+        public IAssetsService AssetsService { get; } = assetsService;
 
         [ObservableProperty]
         public ObservableCollection<StatusItemVM> _statuses = [];
@@ -134,6 +121,8 @@ namespace BRIX.Mobile.ViewModel.Characters
                 await AssetsService.SaveStatuses(statuses);
                 Statuses = new(statuses.Select(x => new StatusItemVM(x)));
             }
+
+            query?.Clear();
         }
     }
 }
