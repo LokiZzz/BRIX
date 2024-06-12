@@ -26,7 +26,7 @@ namespace BRIX.Library.Abilities
         public string Description { get; set; } = string.Empty;
         public string StatusName { get; set; } = string.Empty;
 
-        public bool HasStatus => Effects?.Any(x => x.Aspects.Any(x => x is DurationAspect)) == true;
+        public bool HasStatus => Effects?.Any(x => x.HasStatus) == true;
 
         /// <summary>
         /// Получить стоимость способности в очках опыта. 

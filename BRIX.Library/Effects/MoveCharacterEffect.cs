@@ -4,6 +4,9 @@ using BRIX.Library.Mathematics;
 
 namespace BRIX.Library.Effects
 {
+    /// <summary>
+    /// Перемещение персонажа.
+    /// </summary>
     public class MoveCharacterEffect : EffectBase
     {
         public override List<Type> RequiredAspects => [typeof(ActivationConditionsAspect)];

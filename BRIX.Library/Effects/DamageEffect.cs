@@ -3,6 +3,9 @@ using BRIX.Library.Aspects.TargetSelection;
 
 namespace BRIX.Library.Effects
 {
+    /// <summary>
+    /// Урон.
+    /// </summary>
     public class DamageEffect : DiceImpactEffectBase
     {
         public string AdditionalProperty { get; set; } = "Additional property";

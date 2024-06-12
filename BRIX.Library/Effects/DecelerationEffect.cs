@@ -1,15 +1,16 @@
 ﻿using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Aspects;
 using BRIX.Library.Mathematics;
-using BRIX.Library.DiceValue;
 
 namespace BRIX.Library.Effects
 {
     /// <summary>
-    /// Временное увеличение максимального здоровья.
+    /// Замедление. Уменьшение максимального количества очков действия.
     /// </summary>
     public class DecelerationEffect : DiceImpactEffectBase
     {
+        public override bool HasStatus => true;
+
         public override List<Type> RequiredAspects =>
         [
             typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect),

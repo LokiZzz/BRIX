@@ -15,7 +15,7 @@ namespace BRIX.Library.Effects
 
         public List<AspectBase> Aspects = [];
 
-        public bool HasStatus => RequiredAspects?.Any(x => x.Equals(typeof(DurationAspect))) == true;
+        public virtual bool HasStatus => false;
 
         public abstract int BaseExpCost();
 

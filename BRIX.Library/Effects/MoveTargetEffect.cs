@@ -5,6 +5,9 @@ using BRIX.Library.Mathematics;
 
 namespace BRIX.Library.Effects
 {
+    /// <summary>
+    /// Перемещение цели.
+    /// </summary>
     public class MoveTargetEffect : EffectBase
     {
         public override List<Type> RequiredAspects =>

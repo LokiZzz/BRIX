@@ -1,12 +1,16 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Aspects.TargetSelection;
-using BRIX.Library.DiceValue;
 using BRIX.Library.Extensions;
 
 namespace BRIX.Library.Effects
 {
+    /// <summary>
+    /// Защита. Уменьшение входящего урона.
+    /// </summary>
     public class DefenseEffect : DiceImpactEffectBase
     {
+        public override bool HasStatus => true;
+
         public override List<Type> RequiredAspects =>
         [
             typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect),

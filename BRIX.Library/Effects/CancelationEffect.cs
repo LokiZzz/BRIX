@@ -1,13 +1,11 @@
 ﻿using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Aspects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Library.Effects
 {
+    /// <summary>
+    /// Отмена. Отмена активации способности.
+    /// </summary>
     public class CancelationEffect : EffectBase
     {
         public override List<Type> RequiredAspects =>

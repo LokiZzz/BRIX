@@ -5,7 +5,7 @@ using BRIX.Library.Extensions;
 namespace BRIX.Library.Effects
 {
     /// <summary>
-    /// Эффект «Очищение». Снимает статусы с цели.
+    /// Очищение. Снимает статусы с цели.
     /// </summary>
     public class CleanseEffect : EffectBase
     {

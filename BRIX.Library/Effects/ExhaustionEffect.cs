@@ -6,10 +6,12 @@ using BRIX.Library.Extensions;
 namespace BRIX.Library.Effects
 {
     /// <summary>
-    /// Временное уменьшение максимального здоровья
+    /// Истощение. Временное уменьшение максимального здоровья
     /// </summary>
     public class ExhaustionEffect : DiceImpactEffectBase
     {
+        public override bool HasStatus => true;
+
         public override List<Type> RequiredAspects =>
         [
             typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect),

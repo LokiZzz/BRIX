@@ -6,10 +6,12 @@ using BRIX.Library.Extensions;
 namespace BRIX.Library.Effects
 {
     /// <summary>
-    /// Временное увеличение максимального здоровья.
+    /// Укрепление. Временное увеличение максимального здоровья.
     /// </summary>
     public class FortifyEffect : DiceImpactEffectBase
     {
+        public override bool HasStatus => true;
+
         public override List<Type> RequiredAspects =>
         [
             typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect),

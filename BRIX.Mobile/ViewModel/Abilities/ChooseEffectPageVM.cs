@@ -13,7 +13,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
     public partial class ChooseEffectPageVM : ViewModelBase, IQueryAttributable
     {
         [ObservableProperty]
-        private ObservableCollection<EffectTypeVM> _effects = new();
+        private ObservableCollection<EffectTypeVM> _effects = [];
 
         [RelayCommand]
         public async Task Choose(EffectTypeVM effectToChoose)
@@ -35,8 +35,9 @@ namespace BRIX.Mobile.ViewModel.Abilities
         {
             if (Effects.Any()) return Task.CompletedTask;
 
-            // Добавить if _forStatus
-            IEnumerable<EffectTypeVM> effects = EffectsDictionary.Collection.Select(x => x.Value);
+            IEnumerable<EffectTypeVM> effects = _forStatus
+                ? EffectsDictionary.Collection.Where(x => x.Value.Effect?.HasStatus == true).Select(x => x.Value)
+                : EffectsDictionary.Collection.Select(x => x.Value);
                 
             Effects = new(effects);
 
@@ -48,11 +49,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            if (_costMonitor == null)
-            {
-                _costMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
-            }
-
+            _costMonitor ??= query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
             _forStatus = query.GetParameterOrDefault<bool>(NavigationParameters.ForStatus);
 
             query.Clear();

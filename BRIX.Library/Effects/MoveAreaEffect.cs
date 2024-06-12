@@ -1,10 +1,12 @@
-﻿using BRIX.Library.Aspects.TargetSelection;
-using BRIX.Library.Aspects;
+﻿using BRIX.Library.Aspects;
 using BRIX.Library.Extensions;
 using BRIX.Library.Mathematics;
 
 namespace BRIX.Library.Effects
 {
+    /// <summary>
+    /// Перемещение области действия способности.
+    /// </summary>
     public class MoveAreaEffect : EffectBase
     {
         public override List<Type> RequiredAspects =>

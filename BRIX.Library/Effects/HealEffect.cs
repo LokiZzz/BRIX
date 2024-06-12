@@ -4,6 +4,9 @@ using BRIX.Library.Extensions;
 
 namespace BRIX.Library.Effects
 {
+    /// <summary>
+    /// Лечение.
+    /// </summary>
     public class HealEffect : DiceImpactEffectBase
     {
         public override List<Type> RequiredAspects =>
