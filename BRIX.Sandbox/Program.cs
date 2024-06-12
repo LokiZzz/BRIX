@@ -1,21 +1,14 @@
-﻿using BRIX.Library.DiceValue;
+﻿using BRIX.Library.Abilities;
+using BRIX.Library.Characters;
+using BRIX.Library.DiceValue;
+using BRIX.Library.Effects;
 
-while (true)
-{
-    string? input = Console.ReadLine();
-    Console.Clear();
+NPC goblin = new() { Name = "Мусорный гоблин", Health = 7 };
+Ability stab = new() { Name = "Пырнуть ножом" };
+stab.AddEffect(new DamageEffect() { Impact = new DicePool((1, 4)) });
+stab.AddEffect(new ExhaustionEffect() { Impact = new DicePool(5) });
+goblin.Abilities.Add(stab);
 
-    bool parsed = DicePool.TryParse(input ?? string.Empty, out DicePool? dice);
+int goblinPower = goblin.Power;
 
-    if (parsed && dice != null)
-    {
-        Console.WriteLine($"{dice}");
-        Console.WriteLine($"Avg: {dice.Average()}");
-        Console.WriteLine($"Min: {dice.Min()}");
-        Console.WriteLine($"Max: {dice.Max()}");
-    }
-    else
-    {
-        Console.WriteLine($"FAIL!!!");
-    }
-}
+Console.WriteLine(goblinPower);

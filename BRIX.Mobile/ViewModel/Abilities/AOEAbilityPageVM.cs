@@ -232,7 +232,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 _characterCopy = (await _characterService.GetCurrentCharacter()).Copy();
                 Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
                 Ability = query.GetParameterOrDefault<CharacterAbilityModel>(NavigationParameters.Ability)
-                    ?? new CharacterAbilityModel(new CharacterAbility());
+                    ?? new CharacterAbilityModel(new Ability());
                 Ability.Character = _characterCopy;
                 IntitializeCostMonitor();
                 IntitializeMaterialSupport();

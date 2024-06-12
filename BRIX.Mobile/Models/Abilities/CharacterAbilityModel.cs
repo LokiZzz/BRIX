@@ -9,9 +9,9 @@ namespace BRIX.Mobile.Models.Abilities
 {
     public class CharacterAbilityModel : ObservableObject
     {
-        public CharacterAbilityModel() : this(new CharacterAbility()) { }
+        public CharacterAbilityModel() : this(new Ability()) { }
 
-        public CharacterAbilityModel(CharacterAbility ability)
+        public CharacterAbilityModel(Ability ability)
         {
             InternalModel = ability;
             Activation = new(ability.Activation);
@@ -23,7 +23,7 @@ namespace BRIX.Mobile.Models.Abilities
 
         public Character? Character;
 
-        public CharacterAbility InternalModel { get; }
+        public Ability InternalModel { get; }
 
         private AbilityActivationModel _activation = new();
         public AbilityActivationModel Activation 

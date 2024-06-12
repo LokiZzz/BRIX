@@ -102,7 +102,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if(result != null && result?.SelectedItem != null)
             {
-                Status status = ((CharacterAbility)result.SelectedItem).BuildStatus();
+                Status status = ((Ability)result.SelectedItem).BuildStatus();
                 Status = new StatusItemVM(status);
             }
         }

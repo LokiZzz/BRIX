@@ -9,10 +9,10 @@
     /// </summary>
     public static class CharacterCalculator
     {
-        private static int _expPerLevel = 100;
-        private static int _experienceModifier = _expPerLevel / 2;
+        private static readonly int _expPerLevel = 100;
+        private static readonly int _experienceModifier = _expPerLevel / 2;
 
-        public static int HealthPerLevel = 10;
+        public const int HealthPerLevel = 10;
 
         public static int GetExpForLevel(int level) => _experienceModifier * level * (level + 1);
 

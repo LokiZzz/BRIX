@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Aspects;
+using BRIX.Library.Characters;
 using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
 
@@ -31,7 +32,7 @@ namespace BRIX.Library.Abilities
         /// <summary>
         /// Получить стоимость способности в очках опыта. 
         /// </summary>
-        public int ExpCost()
+        public int ExpCost(Func<int, int>? calculateWithDelegate = null)
         {
             double effectsCountPenaltyCoef = 1;
             double deltaPerEffect = 0.2;
@@ -44,6 +45,35 @@ namespace BRIX.Library.Abilities
             int sumOfEffectsExpCost = _effects.Sum(effect => effect.GetExpCost());
             double activationCoef = Activation.GetCoeficient();
             int expCost = (sumOfEffectsExpCost * activationCoef * effectsCountPenaltyCoef).Round();
+
+            if(calculateWithDelegate != null)
+            {
+                expCost = calculateWithDelegate(expCost);
+            }
+
+            return expCost <= 1 ? 1 : expCost;
+        }
+
+        public int ExpCost(Character? character)
+        {
+            int expCost = ExpCost();
+
+            if (character != null)
+            {
+                IEnumerable<AbilityMaterialSupport> abilityMaterialSupport = character.MaterialSupport
+                    .Where(x => x.AbilityId == Id);
+
+                foreach (AbilityMaterialSupport item in abilityMaterialSupport)
+                {
+                    InventoryItem matirealSupport = character.Inventory.Items
+                        .Single(x => x.Id == item.MaterialSupportId);
+
+                    if (matirealSupport is MaterialSupport concreteItem)
+                    {
+                        expCost -= concreteItem.ToExpEquivalent().Round();
+                    }
+                }
+            }
 
             return expCost <= 1 ? 1 : expCost;
         }

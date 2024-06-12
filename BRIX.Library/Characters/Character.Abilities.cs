@@ -6,7 +6,7 @@ namespace BRIX.Library.Characters
 {
     public partial class Character
     {
-        public List<MaterialSupport> GetMaterialSupportForAbility(CharacterAbility ability)
+        public List<MaterialSupport> GetMaterialSupportForAbility(Ability ability)
         {
             List<Guid> itemsGuids = MaterialSupport
                 .Where(x => x.AbilityId == ability.Id)
@@ -19,7 +19,7 @@ namespace BRIX.Library.Characters
                 .ToList();
         }
 
-        public List<Consumable> GetConsumablesForAbility(CharacterAbility ability)
+        public List<Consumable> GetConsumablesForAbility(Ability ability)
         {
             List<Guid> itemsGuids = MaterialSupport
                 .Where(x => x.AbilityId == ability.Id)
@@ -36,7 +36,7 @@ namespace BRIX.Library.Characters
         /// Возвращает доступность способности. 
         /// Передаваемая способность должна содержаться в коллекции Abilities.
         /// </summary>
-        public bool GetAbilityAvailability(CharacterAbility ability)
+        public bool GetAbilityAvailability(Ability ability)
         {
             if (!Abilities.Contains(ability))
             {
@@ -71,7 +71,7 @@ namespace BRIX.Library.Characters
         /// Активация способности персонажем — трата расходников и очков действий.
         /// </summary>
         /// <param name="ability"></param>
-        public void ActivateAbility(CharacterAbility ability)
+        public void ActivateAbility(Ability ability)
         {
             if (!Abilities.Contains(ability) || !GetAbilityAvailability(ability))
             {

@@ -9,13 +9,13 @@ namespace BRIX.Library.Characters
         public string Name { get; set; } = string.Empty;
         public List<string> Tags { get; set; } = [];
 
-        public List<CharacterAbility> Abilities { get; set; } = [];
+        public List<Ability> Abilities { get; set; } = [];
         public List<Status> Statuses { get; set; } = [];
 
         /// <summary>
         /// Способности, создающие статус.
         /// </summary>
-        public List<CharacterAbility> StatusAbilities
+        public List<Ability> StatusAbilities
         {
             get
             {
