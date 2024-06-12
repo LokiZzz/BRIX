@@ -27,7 +27,7 @@
             int healthDiff = Math.Abs(Health - expectedHealth);
             int expDiff = CharacterCalculator.HealthToExp(healthDiff);
 
-            return expectedHealth > Health ? powerByAbilities + expDiff : powerByAbilities - expDiff;
+            return expectedHealth < Health ? powerByAbilities + expDiff : powerByAbilities - expDiff;
         }
     }
 }
