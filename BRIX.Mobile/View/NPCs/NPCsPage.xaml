@@ -56,7 +56,7 @@
                                     <SwipeView.RightItems>
                                         <SwipeItems Mode="Execute">
                                             <SwipeItemView
-                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.DeleteNPCCommand}"
+                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.RemoveNPCCommand}"
                                                 CommandParameter="{Binding}">
                                                 <Border Style="{StaticResource SmallSwipeViewBorder}">
                                                     <Label Style="{StaticResource SmallSwipeViewDeleteLabel}"/>

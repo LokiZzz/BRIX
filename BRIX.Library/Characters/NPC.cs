@@ -7,7 +7,7 @@
             Id = Id == Guid.Empty ? Guid.NewGuid() : Id;
         }
 
-        public int Health { get; set; }
+        public int Health { get; set; } = 10;
 
         public override int RawMaxHealth => Health;
 

@@ -891,6 +891,12 @@
   <data name="NPC" xml:space="preserve">
     <value>NPC</value>
   </data>
+  <data name="NPCName" xml:space="preserve">
+    <value>Имя или название</value>
+  </data>
+  <data name="NPCPower" xml:space="preserve">
+    <value>Мощность:</value>
+  </data>
   <data name="ObstacleBetweenTargetsInChain" xml:space="preserve">
     <value>Препятствия между целями</value>
   </data>
@@ -947,6 +953,9 @@
   </data>
   <data name="Remove" xml:space="preserve">
     <value>Удалить</value>
+  </data>
+  <data name="RemoveNPCQuestion" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить этого NPC?</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Сбросить</value>

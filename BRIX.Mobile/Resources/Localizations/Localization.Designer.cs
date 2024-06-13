@@ -2365,6 +2365,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string NPCName {
+            get {
+                return ResourceManager.GetString("NPCName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Power:.
+        /// </summary>
+        public static string NPCPower {
+            get {
+                return ResourceManager.GetString("NPCPower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Obstacles between targets.
         /// </summary>
         public static string ObstacleBetweenTargetsInChain {
@@ -2532,6 +2550,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Remove {
             get {
                 return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this NPC?.
+        /// </summary>
+        public static string RemoveNPCQuestion {
+            get {
+                return ResourceManager.GetString("RemoveNPCQuestion", resourceCulture);
             }
         }
         

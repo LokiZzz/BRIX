@@ -34,6 +34,12 @@ namespace BRIX.Mobile.Models.NPCs
             set => SetProperty(Internal.Name, value, Internal, (character, name) => character.Name = name);
         }
 
+        public string Description
+        {
+            get => Internal.Description;
+            set => SetProperty(Internal.Description, value, Internal, (character, desc) => character.Description = desc);
+        }
+
         public int Power => Internal.Power;
 
         public ObservableCollection<CharacterTagVM> Tags { get; set; }
@@ -48,6 +54,11 @@ namespace BRIX.Mobile.Models.NPCs
         {
             Tags.Remove(tag);
             Internal.Tags.Remove(Internal.Tags.Single(x => x == tag.Text));
+        }
+
+        internal void RemoveAbility(Guid id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -885,6 +885,12 @@
   <data name="NPC" xml:space="preserve">
     <value>NPC</value>
   </data>
+  <data name="NPCName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NPCPower" xml:space="preserve">
+    <value>Power:</value>
+  </data>
   <data name="ObstacleBetweenTargetsInChain" xml:space="preserve">
     <value>Obstacles between targets</value>
   </data>
@@ -941,6 +947,9 @@
   </data>
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>
+  </data>
+  <data name="RemoveNPCQuestion" xml:space="preserve">
+    <value>Are you sure you want to delete this NPC?</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
