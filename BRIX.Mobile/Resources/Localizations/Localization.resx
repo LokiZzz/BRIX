@@ -183,6 +183,9 @@
   <data name="AdditionalHealth" xml:space="preserve">
     <value>Additional health</value>
   </data>
+  <data name="AddNPC" xml:space="preserve">
+    <value>Add NPC</value>
+  </data>
   <data name="AddOrEditAbilityPageTitle_Add" xml:space="preserve">
     <value>Add ability</value>
   </data>
@@ -473,6 +476,9 @@
   </data>
   <data name="EditInventoryItem" xml:space="preserve">
     <value>Edit item</value>
+  </data>
+  <data name="EditNPC" xml:space="preserve">
+    <value>Edit NPC</value>
   </data>
   <data name="EditProject" xml:space="preserve">
     <value>Edit project</value>
@@ -875,6 +881,9 @@
   </data>
   <data name="NoTriggers" xml:space="preserve">
     <value>No triggers in this ability.</value>
+  </data>
+  <data name="NPC" xml:space="preserve">
+    <value>NPC</value>
   </data>
   <data name="ObstacleBetweenTargetsInChain" xml:space="preserve">
     <value>Obstacles between targets</value>

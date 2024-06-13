@@ -158,6 +158,12 @@
 	  <Compile Update="View\Abilities\Effects\DeffenseEffectPage.xaml.cs">
 	    <DependentUpon>DeffenseEffectPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\NPCs\AOENPCsPage.xaml.cs">
+	    <DependentUpon>AOENPCsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\NPCs\NPCsPage.xaml.cs">
+	    <DependentUpon>NPCsPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -207,6 +213,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\DeffenseEffectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\NPCs\AOENPCsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\NPCs\NPCsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

@@ -259,6 +259,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add NPC.
+        /// </summary>
+        public static string AddNPC {
+            get {
+                return ResourceManager.GetString("AddNPC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add ability.
         /// </summary>
         public static string AddOrEditAbilityPageTitle_Add {
@@ -1128,6 +1137,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string EditInventoryItem {
             get {
                 return ResourceManager.GetString("EditInventoryItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit NPC.
+        /// </summary>
+        public static string EditNPC {
+            get {
+                return ResourceManager.GetString("EditNPC", resourceCulture);
             }
         }
         
@@ -2334,6 +2352,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string NoTriggers {
             get {
                 return ResourceManager.GetString("NoTriggers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NPC.
+        /// </summary>
+        public static string NPC {
+            get {
+                return ResourceManager.GetString("NPC", resourceCulture);
             }
         }
         

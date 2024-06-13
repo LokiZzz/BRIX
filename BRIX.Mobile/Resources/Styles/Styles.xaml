@@ -377,4 +377,18 @@
         <Setter Property="FontSize" Value="36"/>
     </Style>
 
+    <Style TargetType="Border" x:Key="SmallSwipeViewBorder" BasedOn="{StaticResource SwipeViewBorder}">
+        <Setter Property="WidthRequest" Value="35"/>
+        <Setter Property="HeightRequest" Value="35"/>
+        <Setter Property="Padding" Value="0"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="SmallSwipeViewEditLabel" BasedOn="{StaticResource SwipeViewEditLabel}">
+        <Setter Property="FontSize" Value="24"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="SmallSwipeViewDeleteLabel" BasedOn="{StaticResource SwipeViewDeleteLabel}">
+        <Setter Property="FontSize" Value="24"/>
+    </Style>
+
 </ResourceDictionary>

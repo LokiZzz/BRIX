@@ -183,6 +183,9 @@
   <data name="AdditionalHealth" xml:space="preserve">
     <value>Дополнительное здоровье</value>
   </data>
+  <data name="AddNPC" xml:space="preserve">
+    <value>Добавить NPC</value>
+  </data>
   <data name="AddOrEditAbilityPageTitle_Add" xml:space="preserve">
     <value>Новая способность</value>
   </data>
@@ -473,6 +476,9 @@
   </data>
   <data name="EditInventoryItem" xml:space="preserve">
     <value>Изменить предмет</value>
+  </data>
+  <data name="EditNPC" xml:space="preserve">
+    <value>Изменить NPC</value>
   </data>
   <data name="EditProject" xml:space="preserve">
     <value>Изменить проект</value>
@@ -881,6 +887,9 @@
   </data>
   <data name="NoTriggers" xml:space="preserve">
     <value>У этой способности нет триггеров активации.</value>
+  </data>
+  <data name="NPC" xml:space="preserve">
+    <value>NPC</value>
   </data>
   <data name="ObstacleBetweenTargetsInChain" xml:space="preserve">
     <value>Препятствия между целями</value>

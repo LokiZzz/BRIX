@@ -10,6 +10,7 @@ using BRIX.Mobile.View.Account;
 using BRIX.Mobile.View.Characters;
 using BRIX.Mobile.View.Details;
 using BRIX.Mobile.View.Inventory;
+using BRIX.Mobile.View.NPCs;
 using BRIX.Mobile.View.Popups;
 using BRIX.Mobile.View.Settings;
 using BRIX.Mobile.ViewModel;
@@ -20,6 +21,7 @@ using BRIX.Mobile.ViewModel.Account;
 using BRIX.Mobile.ViewModel.Characters;
 using BRIX.Mobile.ViewModel.Details;
 using BRIX.Mobile.ViewModel.Inventory;
+using BRIX.Mobile.ViewModel.NPCs;
 using BRIX.Mobile.ViewModel.Popups;
 using BRIX.Mobile.ViewModel.Settings;
 using CommunityToolkit.Maui;
@@ -85,6 +87,9 @@ public static class MauiProgram
         builder.RegisterView<AOEStatusPage, AOEStatusPageVM>();
 
         AddEffectsAndAspects(builder);
+
+        builder.RegisterView<NPCsPage, NPCsPageVM>(false);
+        builder.RegisterView<AOENPCsPage, AOENPCsPageVM>();
 
         builder.RegisterView<SettingsPage, SettingsPageVM>(false);
 

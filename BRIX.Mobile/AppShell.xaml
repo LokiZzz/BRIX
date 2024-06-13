@@ -6,9 +6,11 @@
     xmlns:characters="clr-namespace:BRIX.Mobile.View.Characters"
     xmlns:account="clr-namespace:BRIX.Mobile.View.Account"
     xmlns:settings="clr-namespace:BRIX.Mobile.View.Settings"
+    xmlns:npc="clr-namespace:BRIX.Mobile.View.NPCs"
     xmlns:localization="clr-namespace:BRIX.Mobile.Resources.Localizations"
     xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
     xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+    xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
     xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel"
     x:DataType="vm:AppShellVM"
     FlyoutBackgroundColor="{StaticResource BRIXDark}"
@@ -100,6 +102,16 @@
                 Route="CharacterDetailsPage"/>
         </Tab>
         
+    </controls:IconFontFlyoutItem>
+
+    <controls:IconFontFlyoutItem 
+        Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NPC}}"
+        GlyphFont="AwesomeRPG"
+        Glyph="{x:Static icons:AwesomeRPG.Hydra}">
+            <ShellContent 
+                Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NPC}}"
+                ContentTemplate="{DataTemplate npc:NPCsPage}"
+                Route="SettingsPage" />
     </controls:IconFontFlyoutItem>
 
     <controls:IconFontFlyoutItem 

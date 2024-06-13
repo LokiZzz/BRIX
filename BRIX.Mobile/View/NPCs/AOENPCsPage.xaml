@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.NPCs"
+             xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+             xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             x:Class="BRIX.Mobile.View.NPCs.AOENPCsPage"
+             x:DataType="vm:AOENPCsPageVM"
+             ControlTemplate="{StaticResource BusyPageTemplate}"
+             Title="{Binding Title}">
+
+    <Shell.TitleView>
+        <controls:TitleView/>
+    </Shell.TitleView>
+
+    <Grid RowDefinitions="*,auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout>
+                
+            </VerticalStackLayout>
+        </ScrollView>
+        <Border Grid.Row="1" Style="{StaticResource EmptyShadowBorder}"/>
+    </Grid>
+</ContentPage>
