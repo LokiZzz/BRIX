@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Characters;
+using BRIX.Mobile.Models.NPCs;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.NPCs;
@@ -12,8 +13,8 @@ namespace BRIX.Mobile.ViewModel.NPCs
     {
         private readonly ICharacterService _characterService = characterService;
 
-        private ObservableCollection<NPCItemVM> _npcs = [];
-        public ObservableCollection<NPCItemVM> NPCs
+        private ObservableCollection<NPCModel> _npcs = [];
+        public ObservableCollection<NPCModel> NPCs
         {
             get => _npcs;
             set => SetProperty(ref _npcs, value);
@@ -29,20 +30,26 @@ namespace BRIX.Mobile.ViewModel.NPCs
 
 
         [RelayCommand]
-        public async Task EditNPC()
+        public async Task EditNPC(NPCModel item)
         {
             await Navigation.NavigateAsync<AOENPCsPage>(
-                (NavigationParameters.EditMode, EEditingMode.Edit)
+                (NavigationParameters.EditMode, EEditingMode.Edit),
+                (NavigationParameters.NPC, EEditingMode.Edit)
             );
         }
 
         [RelayCommand]
-        public async Task RemmoveNPC()
+        public async Task RemmoveNPC(NPCModel item)
         {
-            // Remover NPC
+            await _characterService.RemoveNPC(item.Internal);
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            HandleBackFormEditing(query);
+        }
+
+        private void HandleBackFormEditing(IDictionary<string, object> query)
         {
             
         }
@@ -50,18 +57,12 @@ namespace BRIX.Mobile.ViewModel.NPCs
         public override async Task OnNavigatedAsync()
         {
             List<NPC> npcs = await _characterService.GetNPCs();
-            NPCs = new(npcs.Select(x => new NPCItemVM { Name = x.Name, Power = x.Power }))
-            {
-                new NPCItemVM { Name = "Мусорный гоблин", Power = 70 },
-                new NPCItemVM { Name = "Дьявольская гидра", Power = 66666 },
-                new NPCItemVM { Name = "Крыса по имени Генри", Power = 5 },
-            };
+            NPCs = new(npcs.Select(x => new NPCModel(x)));
+            //{
+            //    new NPCItemVM { Name = "Мусорный гоблин", Power = 70 },
+            //    new NPCItemVM { Name = "Дьявольская гидра", Power = 66666 },
+            //    new NPCItemVM { Name = "Крыса по имени Генри", Power = 5 },
+            //};
         }
-    }
-
-    public partial class NPCItemVM
-    {
-        public string Name { get; set; } = string.Empty;
-        public int Power { get; set; }
     }
 }

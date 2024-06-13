@@ -15,7 +15,9 @@ namespace BRIX.Mobile.Services
         public Task RemoveAllAsync();
 
         // Временное решение для прототипа:
-        public Task SaveNPCs(List<NPC> npcToSave);
+        public Task AddNPC(NPC npcToSave);
+        public Task UpdateNPC(NPC npcToSave);
+        public Task RemoveNPC(NPC npcToRemove);
         public Task<List<NPC>> GetNPCs();
     }
 
@@ -25,9 +27,26 @@ namespace BRIX.Mobile.Services
         private readonly string _charactersFileName = "Characters.txt";
         private readonly string _npcsFileName = "NPCs.txt";
 
-        public async Task SaveNPCs(List<NPC> npcToSave)
+        public async Task AddNPC(NPC npcToSave)
         {
-            await _storage.WriteJsonAsync(_npcsFileName, npcToSave);
+            List<NPC> npcs = await GetNPCs();
+            npcs.Add(npcToSave);
+            await _storage.WriteJsonAsync(_npcsFileName, npcs);
+        }
+
+        public async Task UpdateNPC(NPC npcToSave)
+        {
+            List<NPC> npcs = await GetNPCs();
+            int index = npcs.IndexOf(npcs.First(x => x.Id == npcToSave.Id));
+            npcs[index] = npcToSave;
+            await _storage.WriteJsonAsync(_npcsFileName, npcs);
+        }
+
+        public async Task RemoveNPC(NPC npcToRemove)
+        {
+            List<NPC> npcs = await GetNPCs();
+            npcs.Remove(npcs.First(x => x.Id == npcToRemove.Id));
+            await _storage.WriteJsonAsync(_npcsFileName, npcs);
         }
 
         public async Task<List<NPC>> GetNPCs()

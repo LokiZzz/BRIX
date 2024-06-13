@@ -21,7 +21,7 @@ namespace BRIX.Mobile.Models.Abilities
             OnPropertyChanged(nameof(ShowStatusName));
         }
 
-        public Character? Character;
+        public CharacterBase? Character;
 
         public Ability InternalModel { get; }
 
@@ -69,7 +69,14 @@ namespace BRIX.Mobile.Models.Abilities
         {
             get
             {
-                _cost = InternalModel.ExpCost(Character);
+                if (Character is Character playerCharacter)
+                {
+                    _cost = InternalModel.ExpCost(playerCharacter);
+                }
+                else
+                {
+                    _cost = InternalModel.ExpCost();
+                }
 
                 return _cost;
             }

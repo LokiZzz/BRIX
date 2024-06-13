@@ -2,8 +2,6 @@
 using BRIX.Library.Characters;
 using System.Collections.ObjectModel;
 using BRIX.Mobile.Models.Abilities;
-using System.Collections.Specialized;
-using BRIX.Library.Abilities;
 
 namespace BRIX.Mobile.Models.Characters
 {
@@ -123,17 +121,13 @@ namespace BRIX.Mobile.Models.Characters
         {
             get
             {
-                switch (HealthPercent)
+                return HealthPercent switch
                 {
-                    case > .50:
-                        return EHealthState.Fine;
-                    case < .50 and >= .25:
-                        return EHealthState.Bad;
-                    case < .25:
-                        return EHealthState.Critical;
-                    default:
-                        return EHealthState.Fine;
-                }
+                    > .50 => EHealthState.Fine,
+                    < .50 and >= .25 => EHealthState.Bad,
+                    < .25 => EHealthState.Critical,
+                    _ => EHealthState.Fine,
+                };
             }
         }
 

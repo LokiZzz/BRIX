@@ -32,7 +32,7 @@ namespace BRIX.Library.Abilities
         /// <summary>
         /// Получить стоимость способности в очках опыта. 
         /// </summary>
-        public int ExpCost(Func<int, int>? calculateWithDelegate = null)
+        public int ExpCost()
         {
             double effectsCountPenaltyCoef = 1;
             double deltaPerEffect = 0.2;
@@ -45,11 +45,6 @@ namespace BRIX.Library.Abilities
             int sumOfEffectsExpCost = _effects.Sum(effect => effect.GetExpCost());
             double activationCoef = Activation.GetCoeficient();
             int expCost = (sumOfEffectsExpCost * activationCoef * effectsCountPenaltyCoef).Round();
-
-            if(calculateWithDelegate != null)
-            {
-                expCost = calculateWithDelegate(expCost);
-            }
 
             return expCost <= 1 ? 1 : expCost;
         }

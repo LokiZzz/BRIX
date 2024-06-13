@@ -1,4 +1,5 @@
-﻿using BRIX.Mobile.Models.Abilities;
+﻿using BRIX.Library.Characters;
+using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.Input;
@@ -24,9 +25,9 @@ namespace BRIX.Mobile.ViewModel.Abilities
             Ability = ability;
             SaveCommand = saveCommand;
 
-            if(ability?.Character != null)
+            if(ability?.Character != null && ability.Character is Character playerCharacter)
             {
-                Character = new(ability.Character);
+                Character = new(playerCharacter);
             }
 
             UpdateCost();

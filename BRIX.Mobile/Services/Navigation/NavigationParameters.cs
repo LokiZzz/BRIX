@@ -16,5 +16,6 @@
         public const string Project = nameof(Project);
         public const string Status = nameof(Status);
         public const string ForStatus = nameof(ForStatus);
+        public const string NPC = nameof(NPC);
     }
 }

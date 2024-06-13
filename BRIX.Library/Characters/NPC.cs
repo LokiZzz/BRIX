@@ -2,6 +2,11 @@
 {
     public class NPC : CharacterBase
     {
+        public NPC() 
+        {
+            Id = Id == Guid.Empty ? Guid.NewGuid() : Id;
+        }
+
         public int Health { get; set; }
 
         public override int RawMaxHealth => Health;
