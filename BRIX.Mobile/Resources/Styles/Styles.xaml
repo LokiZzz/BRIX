@@ -384,11 +384,11 @@
     </Style>
 
     <Style TargetType="Label" x:Key="SmallSwipeViewEditLabel" BasedOn="{StaticResource SwipeViewEditLabel}">
-        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontSize" Value="18"/>
     </Style>
 
     <Style TargetType="Label" x:Key="SmallSwipeViewDeleteLabel" BasedOn="{StaticResource SwipeViewDeleteLabel}">
-        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontSize" Value="18"/>
     </Style>
 
 </ResourceDictionary>

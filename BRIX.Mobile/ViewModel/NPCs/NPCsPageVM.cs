@@ -80,7 +80,7 @@ namespace BRIX.Mobile.ViewModel.NPCs
                         break;
                 }
             }
-        }
+        } 
 
         public override async Task OnNavigatedAsync()
         {

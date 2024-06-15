@@ -2,6 +2,7 @@
 using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Models.NPCs;
 using BRIX.Mobile.Resources.Localizations;
+using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Abilities;
 using BRIX.Mobile.ViewModel.Base;
@@ -11,8 +12,10 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace BRIX.Mobile.ViewModel.NPCs
 {
-    public partial class AOENPCsPageVM : ViewModelBase, IQueryAttributable
+    public partial class AOENPCsPageVM(ICharacterService characterService) : ViewModelBase, IQueryAttributable
     {
+        private readonly ICharacterService _characterService = characterService;
+
         private EEditingMode _mode;
 
         private NPCModel _npc = new ();
@@ -66,23 +69,44 @@ namespace BRIX.Mobile.ViewModel.NPCs
             );
         }
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             ApplyMode(query);
 
-            switch(_mode)
-            {
-                case EEditingMode.Edit:
-                    NPC = query.GetParameterOrDefault<NPCModel>(NavigationParameters.NPC) ?? new();
-                    break;
-            }
-
+            await HandleBackFormEditing(query);
             query.Clear();
+        }
+
+        private async Task HandleBackFormEditing(IDictionary<string, object> query)
+        {
+            CharacterAbilityModel? editedAbility =
+                query.GetParameterOrDefault<CharacterAbilityModel>(NavigationParameters.Ability);
+
+            if (editedAbility != null && NPC != null)
+            {
+                EEditingMode mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
+
+                switch (mode)
+                {
+                    case EEditingMode.Add:
+                        NPC.AddAbility(editedAbility);
+                        break;
+                    case EEditingMode.Edit:
+                        NPC.UpdateAbility(editedAbility);
+                        break;
+                }
+
+                await _characterService.UpdateNPC(NPC.Internal);
+            }
         }
 
         private void ApplyMode(IDictionary<string, object> query)
         {
-            _mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
+            if (_mode == EEditingMode.None)
+            {
+                _mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
+                NPC = query.GetParameterOrDefault<NPCModel>(NavigationParameters.NPC) ?? new();
+            }
 
             Title = _mode switch
             {

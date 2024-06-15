@@ -7,48 +7,51 @@
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              x:DataType="vm:ChooseEffectPageVM"
              Shell.TabBarIsVisible="False"
-             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Effects}}" 
-             Padding="10">
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Effects}}"
+             Padding="0">
 
     <Shell.TitleView>
         <controls:TitleView/>
     </Shell.TitleView>
 
-    <Grid>
-        <CollectionView x:Name="collectionView" ItemsSource="{Binding Effects}" >
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="10" VerticalItemSpacing="10"/>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="vm:EffectTypeVM">
-                    <Border Style="{StaticResource BlockBorder}" Padding="0" HeightRequest="75">
-                        <Grid>
-                            <Button 
-                                BackgroundColor="{StaticResource BRIXMedium}"
-                                Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.ChooseCommand}"
-                                CommandParameter="{Binding}"/>
-                            <Label 
-                                FontFamily="AwesomeRPG" 
-                                FontSize="60"
-                                Opacity="0.2"
-                                Text="{Binding Icon}" 
-                                TextColor="{StaticResource BRIXDim}" 
-                                VerticalOptions="Center" 
-                                VerticalTextAlignment="Center"
-                                HorizontalOptions="End"
-                                Margin="5"/>
-                            <Label 
-                                Style="{StaticResource ParagraphTitleLabel}" 
-                                Text="{Binding Name}" 
-                                FontSize="20"
-                                Margin="15,0"
-                                VerticalOptions="Center" 
-                                VerticalTextAlignment="Center"
-                                HorizontalOptions="Start"/>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+    <Grid RowDefinitions="*,auto">
+        <Grid Grid.Row="0" Margin="10,0,10,0">
+            <CollectionView Grid.Row="0" x:Name="collectionView" ItemsSource="{Binding Effects}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="10" VerticalItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:EffectTypeVM">
+                        <Border Style="{StaticResource BlockBorder}" Padding="0" HeightRequest="75">
+                            <Grid>
+                                <Button 
+                                    BackgroundColor="{StaticResource BRIXMedium}"
+                                    Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.ChooseCommand}"
+                                    CommandParameter="{Binding}"/>
+                                <Label 
+                                    FontFamily="AwesomeRPG" 
+                                    FontSize="60"
+                                    Opacity="0.2"
+                                    Text="{Binding Icon}" 
+                                    TextColor="{StaticResource BRIXDim}" 
+                                    VerticalOptions="Center" 
+                                    VerticalTextAlignment="Center"
+                                    HorizontalOptions="End"
+                                    Margin="5"/>
+                                <Label 
+                                    Style="{StaticResource ParagraphTitleLabel}" 
+                                    Text="{Binding Name}" 
+                                    FontSize="20"
+                                    Margin="15,0"
+                                    VerticalOptions="Center" 
+                                    VerticalTextAlignment="Center"
+                                    HorizontalOptions="Start"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+        <Border Grid.Row="1" Style="{StaticResource EmptyShadowBorder}"/>
     </Grid>
 </ContentPage>
