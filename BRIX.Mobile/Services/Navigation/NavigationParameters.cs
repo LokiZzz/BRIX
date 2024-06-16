@@ -4,6 +4,7 @@
     {
         public const string Character = nameof(Character);
         public const string Ability = nameof(Character);
+        public const string EditAbilityForCharacter = nameof(EditAbilityForCharacter);
         public const string AbilityActivation = nameof(AbilityActivation);
         public const string Effect = nameof(Effect);
         public const string Aspect = nameof(Aspect);

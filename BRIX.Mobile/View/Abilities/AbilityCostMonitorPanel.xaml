@@ -24,9 +24,9 @@
     
     <Border Style="{StaticResource LowBlockWithShadowBorder}">
         <Grid RowDefinitions="auto,auto,auto,auto,auto">
-            <Grid Grid.Row="0" ColumnDefinitions="auto,*">
-                <Label Grid.Column="0" IsVisible="{Binding IsMock, Converter={StaticResource NotConverter}}" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AbilityCost}}" />
-                <HorizontalStackLayout Grid.Column="1" IsVisible="{Binding IsMock, Converter={StaticResource NotConverter}}" HorizontalOptions="End" Spacing="10">
+            <Grid Grid.Row="0" ColumnDefinitions="auto,*" IsVisible="{Binding ShowCost}">
+                <Label Grid.Column="0"  Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AbilityCost}}" />
+                <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" Spacing="10">
                     <Label 
                         Style="{StaticResource TitleLabel}" 
                         Text="{Binding Ability.Cost}"/>
@@ -35,7 +35,7 @@
                         Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EXP}}"/>
                 </HorizontalStackLayout>
             </Grid>
-            <Grid Grid.Row="2" IsVisible="{Binding IsMock, Converter={StaticResource NotConverter}}">
+            <Grid Grid.Row="2" IsVisible="{Binding ShowExpEconomics}">
                 <ProgressBar 
                     Progress="{Binding PercentWithEditingAbility}" 
                     ProgressColor="{StaticResource BRIXOrange}">
@@ -61,7 +61,7 @@
                     </ProgressBar.Triggers>
                 </ProgressBar>
             </Grid>
-            <Grid Grid.Row="3" IsVisible="{Binding IsMock, Converter={StaticResource NotConverter}}" ColumnDefinitions="auto,*">
+            <Grid Grid.Row="3" IsVisible="{Binding ShowExpEconomics}" ColumnDefinitions="auto,*">
                 <HorizontalStackLayout Grid.Column="0" Spacing="5">
                     <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EXPAlreadySpent}}"/>
                     <Label Text="{Binding SpentEXP}" />

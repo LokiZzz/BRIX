@@ -18,7 +18,7 @@
 
     <Grid RowDefinitions="*,auto">
         <ScrollView Grid.Row="0">
-            <VerticalStackLayout>
+            <VerticalStackLayout Spacing="10">
                 <Border Style="{StaticResource BlockBorder}" Margin="10,0">
                     <VerticalStackLayout>
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NPC}}"/>
@@ -33,6 +33,56 @@
                             Text="{Binding NPC.Health}" 
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Health}}"/>
                     </VerticalStackLayout>
+                </Border>
+                <Border Style="{StaticResource BlockBorder}" Margin="10,0">
+                    <controls:ArrowExpander 
+                        x:Name="expander"
+                        Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.FastNPCCreation}}"
+                        Margin="0">
+                        <controls:ArrowExpander.ExpanderContent>
+                            <Grid 
+                                RowDefinitions="auto,auto,auto,auto" ColumnDefinitions="*,*"
+                                RowSpacing="10" ColumnSpacing="10">
+                                <controls:FramedEntry
+                                    Grid.Row="0" Grid.Column="0"
+                                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Health}}"
+                                    Text="{Binding FastNPC.FastHealth}"/>
+                                <controls:FramedEntry
+                                    Grid.Row="0" Grid.Column="1"
+                                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Speed}}"
+                                    Text="{Binding FastNPC.FastSpeed}"/>
+                                <controls:FramedEntry
+                                    Grid.Row="1" Grid.Column="0"
+                                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NPCAttackDistance}}"
+                                    Text="{Binding FastNPC.FastAttackDistance}"/>
+                                <controls:FramedEntry
+                                    Grid.Row="1" Grid.Column="1"
+                                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Damage}}"
+                                    Text="{Binding FastNPC.FastDamage}"/>
+                                <Grid Grid.Row="2" Grid.ColumnSpan="2" ColumnDefinitions="3*,*" ColumnSpacing="10">
+                                    <controls:FramedEntry
+                                        Grid.Column="0"
+                                        Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DesiredPower}}"
+                                        Text="{Binding FastNPC.FastPower}"/>
+                                    <Button
+                                        Grid.Column="1" VerticalOptions="End"
+                                        HeightRequest="50"
+                                        Style="{StaticResource LightButton}"
+                                        Text="{x:Static icons:Awesome.ArrowRotateRight}"
+                                        FontFamily="Awesome"
+                                        Command="{Binding FastNPC.UpdateByDesiredPowerCommand}"/>
+                                </Grid>
+                                
+                                <Button
+                                    Grid.Row="3" Grid.ColumnSpan="2"
+                                    Margin="0,5,0,0"
+                                    Style="{StaticResource LightButton}"
+                                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Create}}"
+                                    Command="{Binding FastCreateCommand}"/>
+                            </Grid>
+                        </controls:ArrowExpander.ExpanderContent>
+                    </controls:ArrowExpander>
+                    
                 </Border>
                 <Grid RowDefinitions="auto,auto,*" RowSpacing="10" Margin="0,10">
                     <Label 

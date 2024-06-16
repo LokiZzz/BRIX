@@ -119,6 +119,9 @@
 	  <Compile Update="View\Abilities\AbilityActivationSettingsPage.xaml.cs">
 	    <DependentUpon>AbilityActivationSettingsPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\Abilities\AOEAbilityPage.xaml.cs">
+	    <DependentUpon>AOEAbilityPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\Abilities\Aspects\AOEAspectPage.xaml.cs">
 	    <DependentUpon>AOEAspectPage.xaml</DependentUpon>
 	  </Compile>

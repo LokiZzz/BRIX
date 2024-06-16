@@ -8,8 +8,6 @@ namespace BRIX.Mobile.ViewModel.Abilities
 {
     public partial class AbilityCostMonitorPanelVM : ViewModelBase
     {
-        public Guid DebugGuid = Guid.NewGuid();
-
         /// <summary>
         /// Если есть необходимость, то монитор можно заглушить, создав его через этот конструктор.
         /// При редактировании статусов в эффектах и аспектах нет стоимости способности и таким образом монитор 
@@ -17,7 +15,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
         /// </summary>
         public AbilityCostMonitorPanelVM()
         {
-            IsMock = true;
+            ShowCost = false;
+            ShowExpEconomics = false;
         }
 
         public AbilityCostMonitorPanelVM(CharacterAbilityModel ability, IAsyncRelayCommand saveCommand)
@@ -29,6 +28,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
             {
                 Character = new(playerCharacter);
             }
+
+            ShowExpEconomics = Character != null;
 
             UpdateCost();
         }
@@ -90,17 +91,31 @@ namespace BRIX.Mobile.ViewModel.Abilities
             set => SetProperty(ref _saveCommand, value);
         }
 
-        private bool _isMock;
-        public bool IsMock
+        private bool _showCost = true;
+        public bool ShowCost
         {
-            get => _isMock;
-            set => SetProperty(ref _isMock, value);
+            get => _showCost;
+            set => SetProperty(ref _showCost, value);
+        }
+
+        private bool _showExpEconomics = true;
+        public bool ShowExpEconomics
+        {
+            get => _showExpEconomics;
+            set => SetProperty(ref _showExpEconomics, value);
         }
 
         public void UpdateCost()
         {
-            if(IsMock || Character == null || Ability == null)
+            if(Ability == null)
             {
+                return;
+            }
+
+            if(Character == null)
+            {
+                Ability.UpdateCost();
+
                 return;
             }
 

@@ -42,9 +42,10 @@ namespace BRIX.Library.Effects
             return resultingCost.Round();
         }
 
-        public T? GetAspect<T>() where T : AspectBase
+        public T GetAspect<T>() where T : AspectBase
         {
-            return GetAspect(typeof(T)) as T;
+            return GetAspect(typeof(T)) as T 
+                ?? throw new Exception($"У данного эффекта отсутствует аспект {typeof(T)}");
         }
 
         /// <summary>

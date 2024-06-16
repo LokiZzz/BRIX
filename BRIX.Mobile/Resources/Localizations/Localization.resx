@@ -288,6 +288,9 @@
   <data name="AspectTargetSelection" xml:space="preserve">
     <value>Target selection</value>
   </data>
+  <data name="Attack" xml:space="preserve">
+    <value>Attack</value>
+  </data>
   <data name="Average" xml:space="preserve">
     <value>Average:</value>
   </data>
@@ -402,6 +405,9 @@
   <data name="CountPostfix" xml:space="preserve">
     <value>pcs.</value>
   </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
   <data name="CreateNewCharacter" xml:space="preserve">
     <value>Create new character</value>
   </data>
@@ -443,6 +449,9 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
+  </data>
+  <data name="DesiredPower" xml:space="preserve">
+    <value>Desired power</value>
   </data>
   <data name="DicePoolEditorNoDices" xml:space="preserve">
     <value>The formula is empty, to add elements to the formula, click the «Edit» button.</value>
@@ -647,6 +656,9 @@
   </data>
   <data name="FastAdjustment" xml:space="preserve">
     <value>Fast adjustment</value>
+  </data>
+  <data name="FastNPCCreation" xml:space="preserve">
+    <value>Fast creation</value>
   </data>
   <data name="Fly" xml:space="preserve">
     <value>Fly</value>
@@ -885,11 +897,17 @@
   <data name="NPC" xml:space="preserve">
     <value>NPC</value>
   </data>
+  <data name="NPCAttackDistance" xml:space="preserve">
+    <value>Attack distance</value>
+  </data>
   <data name="NPCName" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="NPCPower" xml:space="preserve">
     <value>Power:</value>
+  </data>
+  <data name="NPCSpeed" xml:space="preserve">
+    <value>Speed (map)</value>
   </data>
   <data name="ObstacleBetweenTargetsInChain" xml:space="preserve">
     <value>Obstacles between targets</value>
@@ -1001,6 +1019,9 @@
   </data>
   <data name="Small" xml:space="preserve">
     <value>Small</value>
+  </data>
+  <data name="Speed" xml:space="preserve">
+    <value>Speed</value>
   </data>
   <data name="Spread" xml:space="preserve">
     <value>Spread:</value>

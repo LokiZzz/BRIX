@@ -118,7 +118,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             Effect = query.GetParameterOrDefault<T>(NavigationParameters.Effect) ?? new T();
             CostMonitor = query.GetParameterOrDefault<AbilityCostMonitorPanelVM>(NavigationParameters.CostMonitor);
 
-            if (CostMonitor?.Ability != null && CostMonitor?.IsMock == false)
+            if (CostMonitor?.Ability != null && CostMonitor?.ShowCost == true)
             {
                 switch (Mode)
                 {

@@ -54,6 +54,13 @@ namespace BRIX.Mobile.ViewModel.Abilities
             set => SetProperty(ref _mode, value);
         }
 
+        private bool _forCharacter;
+        public bool ForCharacter
+        {
+            get => _forCharacter;
+            set => SetProperty(ref _forCharacter, value);
+        }
+
         private string _title = string.Empty;
         public string Title
         {
@@ -84,24 +91,30 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         public async Task Save()
         {
-            if(_characterCopy == null)
+            if (_characterCopy == null)
             {
-                return;
+                await Navigation.Back(
+                    stepsBack: 1,
+                    (NavigationParameters.EditMode, Mode),
+                    (NavigationParameters.Ability, Ability)
+                );
             }
-
-            if(CostMonitor.EXPOverflow)
+            else
             {
-                await Alert(Localization.AbilityEXPOverflowMessage);
+                if (CostMonitor.EXPOverflow)
+                {
+                    await Alert(Localization.AbilityEXPOverflowMessage);
 
-                return;
+                    return;
+                }
+
+                await Navigation.Back(
+                    stepsBack: 1,
+                    (NavigationParameters.EditMode, Mode),
+                    (NavigationParameters.Ability, Ability),
+                    (NavigationParameters.MaterialSupport, _characterCopy.MaterialSupport)
+                );
             }
-
-            await Navigation.Back(
-                stepsBack: 1,
-                (NavigationParameters.EditMode, Mode), 
-                (NavigationParameters.Ability, Ability),
-                (NavigationParameters.MaterialSupport, _characterCopy.MaterialSupport)
-            );
         }
 
         [RelayCommand]
@@ -229,13 +242,19 @@ namespace BRIX.Mobile.ViewModel.Abilities
         {
             if (Mode == EEditingMode.None)
             {
-                _characterCopy = (await _characterService.GetCurrentCharacter()).Copy();
+                ForCharacter = query.GetParameterOrDefault<bool>(NavigationParameters.EditAbilityForCharacter);
                 Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
                 Ability = query.GetParameterOrDefault<CharacterAbilityModel>(NavigationParameters.Ability)
                     ?? new CharacterAbilityModel(new Ability());
-                Ability.Character = _characterCopy;
+
+                if (ForCharacter)
+                {
+                    _characterCopy = (await _characterService.GetCurrentCharacter()).Copy();
+                    Ability.Character = _characterCopy;
+                    IntitializeMaterialSupport();
+                }
+
                 IntitializeCostMonitor();
-                IntitializeMaterialSupport();
             }
             else
             {

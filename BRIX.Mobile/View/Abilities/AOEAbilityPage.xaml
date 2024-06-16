@@ -53,7 +53,7 @@
                     </VerticalStackLayout>
                 </Border>
                 
-                <Border Style="{StaticResource BlockBorder}" Margin="10,0">
+                <Border Style="{StaticResource BlockBorder}" Margin="10,0" IsVisible="{Binding ForCharacter}">
                     <VerticalStackLayout Spacing="10">
                         <Label 
                             Style="{StaticResource TitleLabel}"

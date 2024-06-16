@@ -574,6 +574,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attack.
+        /// </summary>
+        public static string Attack {
+            get {
+                return ResourceManager.GetString("Attack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Average:.
         /// </summary>
         public static string Average {
@@ -916,6 +925,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create.
+        /// </summary>
+        public static string Create {
+            get {
+                return ResourceManager.GetString("Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create new character.
         /// </summary>
         public static string CreateNewCharacter {
@@ -1038,6 +1056,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Description {
             get {
                 return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Desired power.
+        /// </summary>
+        public static string DesiredPower {
+            get {
+                return ResourceManager.GetString("DesiredPower", resourceCulture);
             }
         }
         
@@ -1650,6 +1677,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string FastAdjustment {
             get {
                 return ResourceManager.GetString("FastAdjustment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fast creation.
+        /// </summary>
+        public static string FastNPCCreation {
+            get {
+                return ResourceManager.GetString("FastNPCCreation", resourceCulture);
             }
         }
         
@@ -2365,6 +2401,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attack distance.
+        /// </summary>
+        public static string NPCAttackDistance {
+            get {
+                return ResourceManager.GetString("NPCAttackDistance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string NPCName {
@@ -2379,6 +2424,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string NPCPower {
             get {
                 return ResourceManager.GetString("NPCPower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Speed (map).
+        /// </summary>
+        public static string NPCSpeed {
+            get {
+                return ResourceManager.GetString("NPCSpeed", resourceCulture);
             }
         }
         
@@ -2712,6 +2766,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Small {
             get {
                 return ResourceManager.GetString("Small", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Speed.
+        /// </summary>
+        public static string Speed {
+            get {
+                return ResourceManager.GetString("Speed", resourceCulture);
             }
         }
         

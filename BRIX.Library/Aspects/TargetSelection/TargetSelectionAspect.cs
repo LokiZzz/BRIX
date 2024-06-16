@@ -75,7 +75,7 @@ namespace BRIX.Library.Aspects.TargetSelection
                 * TargetSelectionRestrictions.GetCoefficient();
         }
 
-        private double GetDistanceCoeficient(int distance)
+        public static double GetDistanceCoeficient(int distance)
         {
             return new ThrasholdCostConverter((1, 0), (2, 20), (3, 10), (21, 5), (101, 2), (1001, 1))
                 .Convert(distance)

@@ -288,6 +288,9 @@
   <data name="AspectTargetSelection" xml:space="preserve">
     <value>Выбор цели</value>
   </data>
+  <data name="Attack" xml:space="preserve">
+    <value>Атака</value>
+  </data>
   <data name="Average" xml:space="preserve">
     <value>Среднее:</value>
   </data>
@@ -399,6 +402,9 @@
   <data name="CountPostfix" xml:space="preserve">
     <value>шт.</value>
   </data>
+  <data name="Create" xml:space="preserve">
+    <value>Создать</value>
+  </data>
   <data name="CreateNewCharacter" xml:space="preserve">
     <value>Создать персонажа</value>
   </data>
@@ -443,6 +449,9 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>Описание</value>
+  </data>
+  <data name="DesiredPower" xml:space="preserve">
+    <value>Желаемая мощность</value>
   </data>
   <data name="DicePoolEditorNoDices" xml:space="preserve">
     <value>Формула пуста, чтобы добавить элементы в формулу, нажмите кнопку «Изменить».</value>
@@ -647,6 +656,9 @@
   </data>
   <data name="FastAdjustment" xml:space="preserve">
     <value>Быстрая настройка</value>
+  </data>
+  <data name="FastNPCCreation" xml:space="preserve">
+    <value>Быстрое создание</value>
   </data>
   <data name="Fly" xml:space="preserve">
     <value>Полёт</value>
@@ -1007,6 +1019,9 @@
   </data>
   <data name="Small" xml:space="preserve">
     <value>Маленький</value>
+  </data>
+  <data name="Speed" xml:space="preserve">
+    <value>Скорость</value>
   </data>
   <data name="Spread" xml:space="preserve">
     <value>Разброс:</value>

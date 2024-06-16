@@ -55,7 +55,8 @@ namespace BRIX.Mobile.ViewModel.Characters
         private async Task Add()
         {
             await Navigation.NavigateAsync<AOEAbilityPage>(
-                (NavigationParameters.EditMode, EEditingMode.Add)
+                (NavigationParameters.EditMode, EEditingMode.Add),
+                (NavigationParameters.EditAbilityForCharacter, true)
             );
         }
 
@@ -64,7 +65,8 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             await Navigation.NavigateAsync<AOEAbilityPage>(
                 (NavigationParameters.Ability, ability.Copy()),
-                (NavigationParameters.EditMode, EEditingMode.Edit)
+                (NavigationParameters.EditMode, EEditingMode.Edit),
+                (NavigationParameters.EditAbilityForCharacter, true)
             );
         }
 

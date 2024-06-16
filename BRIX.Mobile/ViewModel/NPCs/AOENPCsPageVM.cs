@@ -1,4 +1,8 @@
-﻿using BRIX.Library.Characters;
+﻿using BRIX.Library.Abilities;
+using BRIX.Library.Aspects.TargetSelection;
+using BRIX.Library.Characters;
+using BRIX.Library.DiceValue;
+using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Models.NPCs;
 using BRIX.Mobile.Resources.Localizations;
@@ -30,6 +34,25 @@ namespace BRIX.Mobile.ViewModel.NPCs
         {
             get => _title;
             set => SetProperty(ref _title, value);
+        }
+
+        private FastNPCCreationVM _fastNPC = new();
+        public FastNPCCreationVM FastNPC
+        {
+            get => _fastNPC;
+            set => SetProperty(ref _fastNPC, value);
+        }
+
+        [RelayCommand]
+        private void FastCreate()
+        {
+            NPCModel? potentialNPC = FastNPC.PotentialNPC.Copy();
+
+            if (potentialNPC != null)
+            {
+                NPC = potentialNPC;
+            }
+            
         }
 
         [RelayCommand]
