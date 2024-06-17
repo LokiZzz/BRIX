@@ -46,13 +46,14 @@ namespace BRIX.Mobile.ViewModel.NPCs
         [RelayCommand]
         private void FastCreate()
         {
-            NPCModel? potentialNPC = FastNPC.PotentialNPC.Copy();
-
-            if (potentialNPC != null)
+            if (FastNPC.PotentialNPC != null)
             {
-                NPC = potentialNPC;
+                FastNPC.PotentialNPC.Name = NPC.Name;
+                FastNPC.PotentialNPC.Description = NPC.Description;
+
+                NPC = FastNPC.PotentialNPC.Copy() ?? throw new Exception("Ошибка копирования NPC.");
             }
-            
+
         }
 
         [RelayCommand]

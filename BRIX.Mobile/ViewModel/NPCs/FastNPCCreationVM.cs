@@ -84,16 +84,18 @@ namespace BRIX.Mobile.ViewModel.NPCs
         public void UpdateByDesiredPower()
         {
             int fastPower = FastPower;
+            int healthPower = (fastPower * 1.5).Round();
+            int attackPower = (fastPower * 0.5).Round();
 
-            _fastHealth = CharacterCalculator.ExpToHealth(fastPower);
+            _fastHealth = CharacterCalculator.ExpToHealth(healthPower);
 
             if (_fastSpeed > 1)
             {
                 int speedCost = new MoveCharacterEffect { DistancePerActionPoint = _fastSpeed }.GetExpCost();
 
-                if (fastPower - speedCost >= 0)
+                if (attackPower - speedCost >= 0)
                 {
-                    fastPower -= speedCost;
+                    attackPower -= speedCost;
                 }
                 else
                 {
@@ -101,7 +103,8 @@ namespace BRIX.Mobile.ViewModel.NPCs
                 }
             }
 
-            int averageDamage = Math.Sqrt(fastPower / _fastAttackDistance).Round();
+            double distanceCoef = TargetSelectionAspect.GetDistanceCoeficient(_fastAttackDistance);
+            int averageDamage = Math.Sqrt(attackPower / distanceCoef).Round();
             _fastDamage = DicePool.FromValue(averageDamage, 0.5).ToString();
 
             OnPropertyChanged(nameof(FastHealth));

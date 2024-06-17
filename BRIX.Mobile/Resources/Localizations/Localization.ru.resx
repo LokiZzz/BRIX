@@ -712,7 +712,7 @@
     <value>{0} часов</value>
   </data>
   <data name="HoursLeft" xml:space="preserve">
-    <value>Hours left</value>
+    <value>Часов осталось</value>
   </data>
   <data name="Huge" xml:space="preserve">
     <value>Огромный</value>
@@ -902,6 +902,9 @@
   </data>
   <data name="NPC" xml:space="preserve">
     <value>NPC</value>
+  </data>
+  <data name="NPCAttackDistance" xml:space="preserve">
+    <value>Дистанция атаки</value>
   </data>
   <data name="NPCName" xml:space="preserve">
     <value>Имя или название</value>
@@ -1234,7 +1237,7 @@
     <value>{0} лет</value>
   </data>
   <data name="YearsLeft" xml:space="preserve">
-    <value>YearsLeft</value>
+    <value>Лет осталось</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Да</value>
