@@ -20,9 +20,9 @@
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Spacing="10">
                 <Border Style="{StaticResource BlockBorder}" Margin="10,0">
-                    <Grid RowDefinitions="auto,auto,auto" ColumnDefinitions="*,*" RowSpacing="10" ColumnSpacing="10">
+                    <Grid RowDefinitions="auto,auto,auto" ColumnDefinitions="*,*,*" RowSpacing="10" ColumnSpacing="10">
                         <Label
-                            Grid.Row="0" Grid.ColumnSpan="2"
+                            Grid.Row="0" Grid.ColumnSpan="3"
                             Style="{StaticResource TitleLabel}"
                             Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Party}}"/>
                         <controls:FramedEntry
@@ -33,8 +33,12 @@
                             Grid.Row="1" Grid.Column="1"
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EXP}}"
                             Text="{Binding CharacterExp}"/>
+                        <controls:FramedEntry
+                            Grid.Row="1" Grid.Column="2"
+                            Placeholder="Divider"
+                            Text="{Binding Divider}"/>
                         <Button
-                            Grid.Row="2" Grid.ColumnSpan="2"
+                            Grid.Row="2" Grid.ColumnSpan="3"
                             Style="{StaticResource LightButton}"
                             Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Add}}"
                             Command="{Binding AddCharacterCommand}"/>
@@ -64,8 +68,8 @@
                                 <Grid Margin="10,0">
                                     <Border Style="{StaticResource BlockBorder}" >
                                         <Grid ColumnDefinitions="*,auto">
-                                            <Label Grid.Column="0" Text="{Binding Count}" />
-                                            <Label Grid.Column="1" Text="{Binding Power}" />
+                                            <Label Grid.Column="0" Text="{Binding Count, StringFormat='{0}x'}" />
+                                            <Label Grid.Column="1" Text="{Binding Power, StringFormat='{0} EXP'}" />
                                         </Grid>
                                     </Border>
                                 </Grid>
@@ -118,8 +122,8 @@
                                 <Grid Margin="10,0">
                                     <Border Style="{StaticResource BlockBorder}" >
                                         <Grid ColumnDefinitions="*,auto">
-                                            <Label Grid.Column="0" Text="{Binding Count}" />
-                                            <Label Grid.Column="1" Text="{Binding Power}" />
+                                            <Label Grid.Column="0" Text="{Binding Count, StringFormat='{0}x'}" />
+                                            <Label Grid.Column="1" Text="{Binding Power, StringFormat='{0} EXP'}" />
                                         </Grid>
                                     </Border>
                                 </Grid>
@@ -130,8 +134,8 @@
             </VerticalStackLayout>
         </ScrollView>
         <Border Grid.Row="1" Style="{StaticResource LowBlockWithShadowBorder}">
-            <VerticalStackLayout Spacing="5" Margin="10,0,10,30">
-                <Label Style="{StaticResource TitleLabel}" Text="{Binding DifficultyText}">
+            <Grid RowSpacing="5" RowDefinitions="auto,auto" ColumnDefinitions="auto,*" Margin="10,0,10,30">
+                <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{Binding DifficultyText}">
                     <Label.Triggers>
                         <DataTrigger TargetType="Label" Binding="{Binding Difficulty}" Value="0">
                             <Setter Property="TextColor" Value="{StaticResource BRIXLime}" />
@@ -140,15 +144,27 @@
                             <Setter Property="TextColor" Value="{StaticResource BRIXWhite}" />
                         </DataTrigger>
                         <DataTrigger TargetType="Label" Binding="{Binding Difficulty}" Value="2">
-                            <Setter Property="TextColor" Value="{StaticResource BRIXOrange}" />
+                            <Setter Property="TextColor" Value="{StaticResource BRIXRed}" />
                         </DataTrigger>
                         <DataTrigger TargetType="Label" Binding="{Binding Difficulty}" Value="3">
-                            <Setter Property="TextColor" Value="{StaticResource BRIXRed}" />
+                            <Setter Property="TextColor" Value="{StaticResource BRIXPink}" />
                         </DataTrigger>
                     </Label.Triggers>
                 </Label>
-                <Label Text="{Binding VersusText}"/>
-            </VerticalStackLayout>
+                <Label Grid.Row="1" Grid.Column="0" Text="{Binding VersusText}"/>
+                <Label 
+                    Grid.Row="0" Grid.Column="1" 
+                    Style="{StaticResource TitleLabel}" 
+                    Text="{Binding ExpReward, StringFormat='{0} EXP'}"
+                    HorizontalOptions="End"/>
+                <HorizontalStackLayout Spacing="5" Grid.Row="1" Grid.Column="1" HorizontalOptions="End">
+                    <Label Text="{Binding CoinsReward}" TextColor="{StaticResource BRIXOrange}"/>
+                    <Label 
+                        FontFamily="Awesome" Text="{x:Static icons:Awesome.Coins}" 
+                        TextColor="{StaticResource BRIXOrange}"/>
+                </HorizontalStackLayout>
+                
+            </Grid>
         </Border>
     </Grid>
 </ContentPage>

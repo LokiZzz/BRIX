@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Enums;
+﻿using BRIX.Library.DiceValue;
+using BRIX.Library.Enums;
 using BRIX.Library.Extensions;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Settings;
@@ -78,6 +79,31 @@ namespace BRIX.Mobile.ViewModel.NPCs
             set => SetProperty(ref _difficulty, value);
         }
 
+        private int _expReward = 0;
+        public int ExpReward
+        {
+            get => _expReward;
+            set => SetProperty(ref _expReward, value);
+        }
+
+        private string _coinsReward = "0";
+        public string CoinsReward
+        {
+            get => _coinsReward;
+            set => SetProperty(ref _coinsReward, value);
+        }
+
+        private int _divider = 2;
+        public int Divider
+        {
+            get => _divider;
+            set
+            {
+                SetProperty(ref _divider, value);
+                UpdateStatistics();
+            }
+        }
+
         [RelayCommand]
         public void AddCharacter()
         {
@@ -122,6 +148,8 @@ namespace BRIX.Mobile.ViewModel.NPCs
                 Difficulty = EEncounterDifficulty.Normal;
                 DifficultyText = Localization.NormalDifficulty;
                 VersusText = string.Empty;
+                ExpReward = 0;
+                CoinsReward = "0";
 
                 return;
             }
@@ -130,7 +158,7 @@ namespace BRIX.Mobile.ViewModel.NPCs
             string percentString = percent > 0 ? $"+{percent}" : $"{percent}";
             VersusText = $"{charactersPower} vs {npcsPower} ({percentString}%)";
 
-            double coef = npcsPower / charactersPower;
+            double coef = (double)npcsPower / charactersPower;
             Difficulty = coef switch
             {
                 <= 0.5 => EEncounterDifficulty.Easy,
@@ -148,6 +176,12 @@ namespace BRIX.Mobile.ViewModel.NPCs
                 EEncounterDifficulty.Nightmare => Localization.NightmareDifficulty,
                 _ => throw new Exception("Не найден текст уровня сложности столкновения.")
             };
+
+            int partyMembersCount = Party.Sum(x => x.Count);
+            ExpReward = ((double)npcsPower / Divider / partyMembersCount).Round();
+            int coinsValue = ((double)ExpReward / Divider).Round();
+            DicePool coinsRewardDicePool = DicePool.FromValue(coinsValue, 0.5);
+            CoinsReward = coinsRewardDicePool.ToString() + $" ({coinsValue})";
         }
 
         public override Task OnNavigatedAsync()
