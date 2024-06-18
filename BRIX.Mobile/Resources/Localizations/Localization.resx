@@ -588,6 +588,9 @@
   <data name="EffectWin" xml:space="preserve">
     <value>Win</value>
   </data>
+  <data name="Encounter" xml:space="preserve">
+    <value>Encounter</value>
+  </data>
   <data name="EnterHardActiovationCondition" xml:space="preserve">
     <value>Specify a condition that is difficult to reproduce or a condition of high rarity. For example, a shooting star in the field of view, a specific day of the year, a volcanic eruption nearby, etc.</value>
   </data>
@@ -926,6 +929,9 @@
   </data>
   <data name="PaperSheet" xml:space="preserve">
     <value>Paper sheet</value>
+  </data>
+  <data name="Party" xml:space="preserve">
+    <value>Party</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>

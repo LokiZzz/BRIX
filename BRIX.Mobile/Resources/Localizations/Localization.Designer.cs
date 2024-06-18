@@ -1474,6 +1474,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Encounter.
+        /// </summary>
+        public static string Encounter {
+            get {
+                return ResourceManager.GetString("Encounter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Specify a condition that is difficult to reproduce or a condition of high rarity. For example, a shooting star in the field of view, a specific day of the year, a volcanic eruption nearby, etc..
         /// </summary>
         public static string EnterHardActiovationCondition {
@@ -2487,6 +2496,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string PaperSheet {
             get {
                 return ResourceManager.GetString("PaperSheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Party.
+        /// </summary>
+        public static string Party {
+            get {
+                return ResourceManager.GetString("Party", resourceCulture);
             }
         }
         

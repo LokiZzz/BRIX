@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.NPCs"
+             xmlns:m="clr-namespace:BRIX.Mobile.Models.NPCs"
+             xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+             xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             x:Class="BRIX.Mobile.View.NPCs.EncounterCalculatorPage"
+             x:DataType="vm:EncounterCalculatorPageVM"
+             ControlTemplate="{StaticResource BusyPageTemplate}"
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NPC}}"
+             Padding="0">
+
+    <Shell.TitleView>
+        <controls:TitleView/>
+    </Shell.TitleView>
+
+    <Grid RowDefinitions="*,auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="10">
+                <Border Style="{StaticResource BlockBorder}" Margin="10,0">
+                    <Grid RowDefinitions="auto,auto,auto" ColumnDefinitions="*,*" RowSpacing="10" ColumnSpacing="10">
+                        <Label
+                            Grid.Row="0" Grid.ColumnSpan="2"
+                            Style="{StaticResource TitleLabel}"
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Party}}"/>
+                        <controls:FramedEntry
+                            Grid.Row="1" Grid.Column="0"
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Count}}"
+                            Text="{Binding CharacterCount}"/>
+                        <controls:FramedEntry
+                            Grid.Row="1" Grid.Column="1"
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EXP}}"
+                            Text="{Binding CharacterExp}"/>
+                        <Button
+                            Grid.Row="2" Grid.ColumnSpan="2"
+                            Style="{StaticResource LightButton}"
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Add}}"
+                            Command="{Binding AddCharacterCommand}"/>
+                    </Grid>
+                </Border>
+                <CollectionView
+                    x:Name="charactersCollectionView" 
+                    ItemsSource="{Binding Party}"
+                    IsVisible="{Binding ShowCharacters}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:CalculatorItemVM">
+                            <SwipeView Threshold="75">
+                                <SwipeView.RightItems>
+                                    <SwipeItems Mode="Execute">
+                                        <SwipeItemView
+                                            Command="{Binding Source={x:Reference charactersCollectionView}, Path= BindingContext.RemoveCharacterCommand}"
+                                            CommandParameter="{Binding}">
+                                            <Border Style="{StaticResource SmallSwipeViewBorder}">
+                                                <Label Style="{StaticResource SmallSwipeViewDeleteLabel}"/>
+                                            </Border>
+                                        </SwipeItemView>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <Grid Margin="10,0">
+                                    <Border Style="{StaticResource BlockBorder}" >
+                                        <Grid ColumnDefinitions="*,auto">
+                                            <Label Grid.Column="0" Text="{Binding Count}" />
+                                            <Label Grid.Column="1" Text="{Binding Power}" />
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Border Style="{StaticResource BlockBorder}" Margin="10,0">
+                    <Grid RowDefinitions="auto,auto,auto" ColumnDefinitions="*,*" RowSpacing="10" ColumnSpacing="10">
+                        <Label
+                            Grid.Row="0" Grid.ColumnSpan="2"
+                            Style="{StaticResource TitleLabel}"
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NPC}}"/>
+                        <controls:FramedEntry
+                            Grid.Row="1" Grid.Column="0"
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Count}}"
+                            Text="{Binding NPCCount}"/>
+                        <controls:FramedEntry
+                            Grid.Row="1" Grid.Column="1"
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NPCPower}}"
+                            Text="{Binding NPCExp}"/>
+                        <Button
+                            Grid.Row="2" Grid.ColumnSpan="2"
+                            Style="{StaticResource LightButton}"
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Add}}"
+                            Command="{Binding AddNPCCommand}"/>
+                    </Grid>
+                </Border>
+                <CollectionView 
+                    x:Name="npcCollectionView" 
+                    ItemsSource="{Binding NPCs}"
+                    IsVisible="{Binding ShowCharacters}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:CalculatorItemVM">
+                            <SwipeView Threshold="75">
+                                <SwipeView.RightItems>
+                                    <SwipeItems Mode="Execute">
+                                        <SwipeItemView
+                                            Command="{Binding Source={x:Reference npcCollectionView}, Path= BindingContext.RemoveNPCCommand}"
+                                            CommandParameter="{Binding}">
+                                            <Border Style="{StaticResource SmallSwipeViewBorder}">
+                                                <Label Style="{StaticResource SmallSwipeViewDeleteLabel}"/>
+                                            </Border>
+                                        </SwipeItemView>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <Grid Margin="10,0">
+                                    <Border Style="{StaticResource BlockBorder}" >
+                                        <Grid ColumnDefinitions="*,auto">
+                                            <Label Grid.Column="0" Text="{Binding Count}" />
+                                            <Label Grid.Column="1" Text="{Binding Power}" />
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+        <Border Grid.Row="1" Style="{StaticResource EmptyShadowBorder}"/>
+    </Grid>
+</ContentPage>

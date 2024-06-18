@@ -101,17 +101,29 @@
                 ContentTemplate="{DataTemplate characters:CharacterDetailsPage}"
                 Route="CharacterDetailsPage"/>
         </Tab>
-        
     </controls:IconFontFlyoutItem>
 
     <controls:IconFontFlyoutItem 
         Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NPC}}"
         GlyphFont="AwesomeRPG"
         Glyph="{x:Static icons:AwesomeRPG.Hydra}">
+        <Tab
+            Icon="{FontImage FontFamily=AwesomeRPG, Glyph={x:Static icons:AwesomeRPG.Hydra}}"
+            Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NPC}}">
             <ShellContent 
                 Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NPC}}"
                 ContentTemplate="{DataTemplate npc:NPCsPage}"
-                Route="SettingsPage" />
+                Route="NPCsPage" />
+        </Tab>
+        <Tab
+            Icon="{FontImage FontFamily=AwesomeRPG, Glyph={x:Static icons:AwesomeRPG.CrossedSwords}}"
+            Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Encounter}}">
+            <ShellContent
+                ContentTemplate="{DataTemplate npc:EncounterCalculatorPage}"
+                Route="EncounterPage"/>
+        </Tab>
+
+        
     </controls:IconFontFlyoutItem>
 
     <controls:IconFontFlyoutItem 

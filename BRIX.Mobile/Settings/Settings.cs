@@ -13,4 +13,9 @@
         public const string ShowCharactersListHelp = nameof(ShowCharactersListHelp);
         public const string ShowAbilitiesListHelp = nameof(ShowAbilitiesListHelp);
     }
+
+    public static class Other
+    {
+        public const string Party = nameof(Party);
+    }
 }

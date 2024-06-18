@@ -90,6 +90,7 @@ public static class MauiProgram
 
         builder.RegisterView<NPCsPage, NPCsPageVM>(false);
         builder.RegisterView<AOENPCsPage, AOENPCsPageVM>();
+        builder.RegisterView<EncounterCalculatorPage, EncounterCalculatorPageVM>(false);
 
         builder.RegisterView<SettingsPage, SettingsPageVM>(false);
 

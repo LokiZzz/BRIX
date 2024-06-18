@@ -588,6 +588,9 @@
   <data name="EffectWin" xml:space="preserve">
     <value>Победа</value>
   </data>
+  <data name="Encounter" xml:space="preserve">
+    <value>Столкновение</value>
+  </data>
   <data name="EnterHardActiovationCondition" xml:space="preserve">
     <value>Укажите сложно воспроизводимое условие или условие высокой редкости. Например падающая звезда в области видимости, конкретный день в году, извержение вулкана поблизости и т.п.</value>
   </data>
@@ -929,6 +932,9 @@
   </data>
   <data name="PaperSheet" xml:space="preserve">
     <value>Лист бумаги</value>
+  </data>
+  <data name="Party" xml:space="preserve">
+    <value>Партия</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
