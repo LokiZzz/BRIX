@@ -41,7 +41,7 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="m:NPCModel">
-                                <SwipeView Threshold="50">
+                                <SwipeView Threshold="75">
                                     <SwipeView.LeftItems>
                                         <SwipeItems Mode="Execute">
                                             <SwipeItemView

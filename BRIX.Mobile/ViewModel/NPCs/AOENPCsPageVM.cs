@@ -48,6 +48,7 @@ namespace BRIX.Mobile.ViewModel.NPCs
         {
             if (FastNPC.PotentialNPC != null)
             {
+                FastNPC.PotentialNPC.Internal.Id = NPC.Internal.Id;
                 FastNPC.PotentialNPC.Name = NPC.Name;
                 FastNPC.PotentialNPC.Description = NPC.Description;
 
