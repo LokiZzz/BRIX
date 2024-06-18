@@ -1141,6 +1141,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Easy difficulty.
+        /// </summary>
+        public static string EasyDifficulty {
+            get {
+                return ResourceManager.GetString("EasyDifficulty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string Edit {
@@ -1744,6 +1753,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hard difficulty.
+        /// </summary>
+        public static string HardDifficulty {
+            get {
+                return ResourceManager.GetString("HardDifficulty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Character have no active statuses..
         /// </summary>
         public static string HaveNoActiveStatuses {
@@ -2338,6 +2356,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nightmare difficulty.
+        /// </summary>
+        public static string NightmareDifficulty {
+            get {
+                return ResourceManager.GetString("NightmareDifficulty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string No {
@@ -2370,6 +2397,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string NoPath {
             get {
                 return ResourceManager.GetString("NoPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Normal difficulty.
+        /// </summary>
+        public static string NormalDifficulty {
+            get {
+                return ResourceManager.GetString("NormalDifficulty", resourceCulture);
             }
         }
         

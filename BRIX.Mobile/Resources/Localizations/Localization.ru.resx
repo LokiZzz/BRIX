@@ -477,6 +477,9 @@
   <data name="EasyActivationCondition" xml:space="preserve">
     <value>Условие малой сложности</value>
   </data>
+  <data name="EasyDifficulty" xml:space="preserve">
+    <value>Низкая сложность</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Изменить</value>
   </data>
@@ -677,6 +680,9 @@
   </data>
   <data name="HardActivationCondition" xml:space="preserve">
     <value>Условие высокой сложности</value>
+  </data>
+  <data name="HardDifficulty" xml:space="preserve">
+    <value>Высокая сложность</value>
   </data>
   <data name="HaveNoActiveStatuses" xml:space="preserve">
     <value>У персонажа нет активных статусов.</value>
@@ -882,6 +888,9 @@
   <data name="NewCharacterHealth" xml:space="preserve">
     <value>Здоровье персонажа:</value>
   </data>
+  <data name="NightmareDifficulty" xml:space="preserve">
+    <value>Кошмарная сложность</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>Нет</value>
   </data>
@@ -893,6 +902,9 @@
   </data>
   <data name="NoPath" xml:space="preserve">
     <value>Телепортация</value>
+  </data>
+  <data name="NormalDifficulty" xml:space="preserve">
+    <value>Нормальная сложность</value>
   </data>
   <data name="NoSpecialActivationConditions" xml:space="preserve">
     <value>Для этого эффекта не указаны никакие особые условия активации.</value>

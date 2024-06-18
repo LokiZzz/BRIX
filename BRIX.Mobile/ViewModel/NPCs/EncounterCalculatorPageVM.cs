@@ -1,4 +1,7 @@
-﻿using BRIX.Mobile.Settings;
+﻿using BRIX.Library.Enums;
+using BRIX.Library.Extensions;
+using BRIX.Mobile.Resources.Localizations;
+using BRIX.Mobile.Settings;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
@@ -54,12 +57,34 @@ namespace BRIX.Mobile.ViewModel.NPCs
             set => SetProperty(ref _npcExp, value);
         }
 
+        private string _difficultyText = string.Empty;
+        public string DifficultyText
+        {
+            get => _difficultyText;
+            set => SetProperty(ref _difficultyText, value);
+        }
+
+        private string _versusText = string.Empty;
+        public string VersusText
+        {
+            get => _versusText;
+            set => SetProperty(ref _versusText, value);
+        }
+
+        private EEncounterDifficulty _difficulty;
+        public EEncounterDifficulty Difficulty
+        {
+            get => _difficulty;
+            set => SetProperty(ref _difficulty, value);
+        }
+
         [RelayCommand]
         public void AddCharacter()
         {
-            Party.Add(new CalculatorItemVM { Count = $"{CharacterCount}x", Power = $"{CharacterExp} exp" });
+            Party.Add(new CalculatorItemVM { Count = CharacterCount, Power = CharacterExp });
             Preferences.Set(Other.Party, JsonConvert.SerializeObject(Party));
             OnPropertyChanged(nameof(ShowCharacters));
+            UpdateStatistics();
         }
 
         [RelayCommand]
@@ -68,13 +93,15 @@ namespace BRIX.Mobile.ViewModel.NPCs
             Party.Remove(item);
             Preferences.Set(Other.Party, JsonConvert.SerializeObject(Party));
             OnPropertyChanged(nameof(ShowCharacters));
+            UpdateStatistics();
         }
 
         [RelayCommand]
         public void AddNPC()
         {
-            NPCs.Add(new CalculatorItemVM { Count = $"{NPCCount}x", Power = $"{NPCExp} exp" });
+            NPCs.Add(new CalculatorItemVM { Count = NPCCount, Power = NPCExp });
             OnPropertyChanged(nameof(ShowNPC));
+            UpdateStatistics();
         }
 
         [RelayCommand]
@@ -82,6 +109,45 @@ namespace BRIX.Mobile.ViewModel.NPCs
         {
             NPCs.Remove(item);
             OnPropertyChanged(nameof(ShowNPC));
+            UpdateStatistics();
+        }
+
+        private void UpdateStatistics()
+        {
+            int charactersPower = Party.Sum(x => x.Count * x.Power);
+            int npcsPower = NPCs.Sum(x => x.Count * x.Power);
+
+            if(charactersPower == 0 || npcsPower == 0)
+            {
+                Difficulty = EEncounterDifficulty.Normal;
+                DifficultyText = Localization.NormalDifficulty;
+                VersusText = string.Empty;
+
+                return;
+            }
+
+            int percent = ((double)(npcsPower - charactersPower) / charactersPower * 100).Round();
+            string percentString = percent > 0 ? $"+{percent}" : $"{percent}";
+            VersusText = $"{charactersPower} vs {npcsPower} ({percentString}%)";
+
+            double coef = npcsPower / charactersPower;
+            Difficulty = coef switch
+            {
+                <= 0.5 => EEncounterDifficulty.Easy,
+                <= 1 => EEncounterDifficulty.Normal,
+                <= 2 => EEncounterDifficulty.Hard,
+                > 2 => EEncounterDifficulty.Nightmare,
+                _ => throw new Exception("Ошибка расчёта сложности столкновения.")
+            };
+
+            DifficultyText = Difficulty switch
+            {
+                EEncounterDifficulty.Easy => Localization.EasyDifficulty,
+                EEncounterDifficulty.Normal => Localization.NormalDifficulty,
+                EEncounterDifficulty.Hard => Localization.HardDifficulty,
+                EEncounterDifficulty.Nightmare => Localization.NightmareDifficulty,
+                _ => throw new Exception("Не найден текст уровня сложности столкновения.")
+            };
         }
 
         public override Task OnNavigatedAsync()
@@ -97,13 +163,15 @@ namespace BRIX.Mobile.ViewModel.NPCs
             OnPropertyChanged(nameof(ShowCharacters));
             OnPropertyChanged(nameof(ShowNPC));
 
+            UpdateStatistics();
+
             return Task.CompletedTask;
         }
     }
 
     public class CalculatorItemVM
     {
-        public string Count { get; set; } = string.Empty;
-        public string Power { get; set; } = string.Empty;
+        public int Count { get; set; }
+        public int Power { get; set; }
     }
 }

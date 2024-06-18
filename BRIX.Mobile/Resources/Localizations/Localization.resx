@@ -477,6 +477,9 @@
   <data name="EasyActivationCondition" xml:space="preserve">
     <value>Low difficulty condition</value>
   </data>
+  <data name="EasyDifficulty" xml:space="preserve">
+    <value>Easy difficulty</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
@@ -678,6 +681,9 @@
   <data name="HardActivationCondition" xml:space="preserve">
     <value>Hard difficulty condition</value>
   </data>
+  <data name="HardDifficulty" xml:space="preserve">
+    <value>Hard difficulty</value>
+  </data>
   <data name="HaveNoActiveStatuses" xml:space="preserve">
     <value>Character have no active statuses.</value>
   </data>
@@ -876,6 +882,9 @@
   <data name="NewCharacterHealth" xml:space="preserve">
     <value>Character health:</value>
   </data>
+  <data name="NightmareDifficulty" xml:space="preserve">
+    <value>Nightmare difficulty</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
@@ -887,6 +896,9 @@
   </data>
   <data name="NoPath" xml:space="preserve">
     <value>Teleportation</value>
+  </data>
+  <data name="NormalDifficulty" xml:space="preserve">
+    <value>Normal difficulty</value>
   </data>
   <data name="NoSpecialActivationConditions" xml:space="preserve">
     <value>There is no special activation conditions.</value>

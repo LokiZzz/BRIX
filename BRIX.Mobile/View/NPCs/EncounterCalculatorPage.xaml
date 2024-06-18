@@ -129,6 +129,26 @@
                 </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
-        <Border Grid.Row="1" Style="{StaticResource EmptyShadowBorder}"/>
+        <Border Grid.Row="1" Style="{StaticResource LowBlockWithShadowBorder}">
+            <VerticalStackLayout Spacing="5" Margin="10,0,10,30">
+                <Label Style="{StaticResource TitleLabel}" Text="{Binding DifficultyText}">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding Difficulty}" Value="0">
+                            <Setter Property="TextColor" Value="{StaticResource BRIXLime}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Label" Binding="{Binding Difficulty}" Value="1">
+                            <Setter Property="TextColor" Value="{StaticResource BRIXWhite}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Label" Binding="{Binding Difficulty}" Value="2">
+                            <Setter Property="TextColor" Value="{StaticResource BRIXOrange}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Label" Binding="{Binding Difficulty}" Value="3">
+                            <Setter Property="TextColor" Value="{StaticResource BRIXRed}" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <Label Text="{Binding VersusText}"/>
+            </VerticalStackLayout>
+        </Border>
     </Grid>
 </ContentPage>
