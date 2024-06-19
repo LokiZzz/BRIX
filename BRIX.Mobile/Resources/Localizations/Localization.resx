@@ -567,6 +567,12 @@
   <data name="EffectMoveTargetHint" xml:space="preserve">
     <value>Moves the target along a specified path for a specified distance.</value>
   </data>
+  <data name="EffectPeriodicDamage" xml:space="preserve">
+    <value>Periodic damage</value>
+  </data>
+  <data name="EffectPeriodicDamageHint" xml:space="preserve">
+    <value>Deals damage to the target once per round for a certain number of rounds.</value>
+  </data>
   <data name="EffectReduction" xml:space="preserve">
     <value>Reduction</value>
   </data>

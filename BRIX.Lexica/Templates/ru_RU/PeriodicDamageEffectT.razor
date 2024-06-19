@@ -1,0 +1,10 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+@using BRIX.Library.Effects
+
+Наносит @Numbers.RUSDcln(Model.Impact, "очко", "очка", "очков") урона в начале хода цели @Numbers.RUSDcln(Model.GetAspect<DurationAspect>()?.Duration ?? 0, "раунд", "раунда", "раундов").
+
+@code {
+    [Parameter]
+    public DamageEffect Model { get; set; } = new();
+}

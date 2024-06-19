@@ -567,6 +567,12 @@
   <data name="EffectMoveTargetHint" xml:space="preserve">
     <value>Перемещает цель по заданному пути на заданное расстояние.</value>
   </data>
+  <data name="EffectPeriodicDamage" xml:space="preserve">
+    <value>Периодический урон</value>
+  </data>
+  <data name="EffectPeriodicDamageHint" xml:space="preserve">
+    <value>Наносит цели урон раз в раунд определённое количество раундов.</value>
+  </data>
   <data name="EffectReduction" xml:space="preserve">
     <value>Ослабление</value>
   </data>

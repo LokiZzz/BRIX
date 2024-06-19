@@ -126,6 +126,7 @@ public static class MauiProgram
         builder.RegisterView<MoveCharacterEffectPage, MoveCharacterEffectPageVM>();
         builder.RegisterView<MoveAreaEffectPage, EffectPageVMBase<MoveAreaEffectModel>>();
         builder.RegisterView<ShieldEffectPage, EffectPageVMBase<ShieldEffectModel>>();
+        builder.RegisterView<PeriodicDamageEffectPage, SinglePropEffectPageVMBase<PeriodicDamageEffect>>();
 
         builder.RegisterView<WinEffectPage, EffectPageVMBase<EffectGenericModelBase<WinTheGameEffect>>>();
 

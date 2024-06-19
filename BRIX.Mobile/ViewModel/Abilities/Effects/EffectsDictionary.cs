@@ -107,6 +107,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 EditPage = typeof(ShieldEffectPage),
                 Effect = new ShieldEffect()
             }},
+            { typeof(EffectGenericModelBase<PeriodicDamageEffect>), new EffectTypeVM() {
+                Name = Localization.EffectPeriodicDamage,
+                Icon = AwesomeRPG.BleedingHearts,
+                EditPage = typeof(PeriodicDamageEffectPage),
+                Effect = new PeriodicDamageEffect()
+            }},
 
             { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectTypeVM() {
                 Name = Localization.EffectWin,

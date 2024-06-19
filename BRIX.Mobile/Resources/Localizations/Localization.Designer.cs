@@ -1411,6 +1411,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Periodic damage.
+        /// </summary>
+        public static string EffectPeriodicDamage {
+            get {
+                return ResourceManager.GetString("EffectPeriodicDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deals damage to the target once per round for a certain number of rounds..
+        /// </summary>
+        public static string EffectPeriodicDamageHint {
+            get {
+                return ResourceManager.GetString("EffectPeriodicDamageHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reduction.
         /// </summary>
         public static string EffectReduction {
