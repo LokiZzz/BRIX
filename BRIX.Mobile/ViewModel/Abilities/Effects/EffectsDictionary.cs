@@ -113,6 +113,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 EditPage = typeof(PeriodicDamageEffectPage),
                 Effect = new PeriodicDamageEffect()
             }},
+            { typeof(EffectGenericModelBase<DifficultTerrainEffect>), new EffectTypeVM() {
+                Name = Localization.EffectDifficultTerrain,
+                Icon = AwesomeRPG.Lava,
+                EditPage = typeof(DifficultTerrainEffectPage),
+                Effect = new DifficultTerrainEffect()
+            }},
 
             { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectTypeVM() {
                 Name = Localization.EffectWin,
@@ -120,7 +126,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 EditPage = typeof(WinEffectPage),
                 Effect = new WinTheGameEffect()
             }},
-            
         };
 
         public static string GetName(EffectBase effect)

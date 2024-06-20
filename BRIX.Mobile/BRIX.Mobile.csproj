@@ -131,6 +131,9 @@
 	  <Compile Update="View\Abilities\Effects\CleanseEffectPage.xaml.cs">
 	    <DependentUpon>CleanseEffectPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\Abilities\Effects\DifficultTerrainEffectPage.xaml.cs">
+	    <DependentUpon>DifficultTerrainEffectPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\Abilities\Effects\PeriodicDamageEffectPage.xaml.cs">
 	    <DependentUpon>PeriodicDamageEffectPage.xaml</DependentUpon>
 	  </Compile>
@@ -192,6 +195,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\CleanseEffectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Effects\DifficultTerrainEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\PeriodicDamageEffectPage.xaml">

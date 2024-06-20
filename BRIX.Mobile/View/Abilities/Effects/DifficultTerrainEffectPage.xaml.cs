@@ -4,9 +4,9 @@ using BRIX.Mobile.ViewModel.Abilities.Effects;
 
 namespace BRIX.Mobile.View.Abilities.Effects;
 
-public partial class PeriodicDamageEffectPage : ContentPage
+public partial class DifficultTerrainEffectPage : ContentPage
 {
-	public PeriodicDamageEffectPage(DiceImpactEffectPageVMBase<PeriodicDamageEffect> context)
+	public DifficultTerrainEffectPage(SinglePropEffectPageVMBase<DifficultTerrainEffect> context)
 	{
 		InitializeComponent();
 		BindingContext = context;

@@ -110,23 +110,24 @@ public static class MauiProgram
     {
         builder.RegisterView<ChooseEffectPage, ChooseEffectPageVM>();
 
-        builder.RegisterView<DamageEffectPage, SinglePropEffectPageVMBase<DamageEffect>>();
-        builder.RegisterView<HealEffectPage, SinglePropEffectPageVMBase<HealEffect>>();
-        builder.RegisterView<FortifyEffectPage, SinglePropEffectPageVMBase<FortifyEffect>>();
-        builder.RegisterView<ExhaustionEffectPage, SinglePropEffectPageVMBase<ExhaustionEffect>>();
-        builder.RegisterView<AccelerationEffectPage, SinglePropEffectPageVMBase<AccelerationEffect>>();
-        builder.RegisterView<DecelerationEffectPage, SinglePropEffectPageVMBase<DecelerationEffect>>();
-        builder.RegisterView<DefenseEffectPage, SinglePropEffectPageVMBase<DefenseEffect>>();
-        builder.RegisterView<VulnerabilityEffectPage, SinglePropEffectPageVMBase<VulnerabilityEffect>>();
-        builder.RegisterView<AmplificationEffectPage, SinglePropEffectPageVMBase<AmplificationEffect>>();
-        builder.RegisterView<ReductionEffectPage, SinglePropEffectPageVMBase<ReductionEffect>>();
+        builder.RegisterView<DamageEffectPage, DiceImpactEffectPageVMBase<DamageEffect>>();
+        builder.RegisterView<HealEffectPage, DiceImpactEffectPageVMBase<HealEffect>>();
+        builder.RegisterView<FortifyEffectPage, DiceImpactEffectPageVMBase<FortifyEffect>>();
+        builder.RegisterView<ExhaustionEffectPage, DiceImpactEffectPageVMBase<ExhaustionEffect>>();
+        builder.RegisterView<AccelerationEffectPage, DiceImpactEffectPageVMBase<AccelerationEffect>>();
+        builder.RegisterView<DecelerationEffectPage, DiceImpactEffectPageVMBase<DecelerationEffect>>();
+        builder.RegisterView<DefenseEffectPage, DiceImpactEffectPageVMBase<DefenseEffect>>();
+        builder.RegisterView<VulnerabilityEffectPage, DiceImpactEffectPageVMBase<VulnerabilityEffect>>();
+        builder.RegisterView<AmplificationEffectPage, DiceImpactEffectPageVMBase<AmplificationEffect>>();
+        builder.RegisterView<ReductionEffectPage, DiceImpactEffectPageVMBase<ReductionEffect>>();
         builder.RegisterView<CleanseEffectPage, EffectPageVMBase<CleanseEffectModel>>();
         builder.RegisterView<CancelationEffectPage, EffectPageVMBase<CancelationEffectModel>>();
         builder.RegisterView<MoveTargetEffectPage, MoveTargetEffectPageVM>();
         builder.RegisterView<MoveCharacterEffectPage, MoveCharacterEffectPageVM>();
         builder.RegisterView<MoveAreaEffectPage, EffectPageVMBase<MoveAreaEffectModel>>();
         builder.RegisterView<ShieldEffectPage, EffectPageVMBase<ShieldEffectModel>>();
-        builder.RegisterView<PeriodicDamageEffectPage, SinglePropEffectPageVMBase<PeriodicDamageEffect>>();
+        builder.RegisterView<PeriodicDamageEffectPage, DiceImpactEffectPageVMBase<PeriodicDamageEffect>>();
+        builder.RegisterView<DifficultTerrainEffectPage, SinglePropEffectPageVMBase<DifficultTerrainEffect>>();
 
         builder.RegisterView<WinEffectPage, EffectPageVMBase<EffectGenericModelBase<WinTheGameEffect>>>();
 

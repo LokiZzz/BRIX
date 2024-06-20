@@ -5,7 +5,7 @@ namespace BRIX.Mobile.View.Abilities.Effects;
 
 public partial class ReductionEffectPage : ContentPage
 {
-	public ReductionEffectPage(SinglePropEffectPageVMBase<ReductionEffect> context)
+	public ReductionEffectPage(DiceImpactEffectPageVMBase<ReductionEffect> context)
 	{
 		InitializeComponent();
 		BindingContext = context;

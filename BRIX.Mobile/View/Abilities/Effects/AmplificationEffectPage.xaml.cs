@@ -5,7 +5,7 @@ namespace BRIX.Mobile.View.Abilities.Effects;
 
 public partial class AmplificationEffectPage : ContentPage
 {
-	public AmplificationEffectPage(SinglePropEffectPageVMBase<AmplificationEffect> context)
+	public AmplificationEffectPage(DiceImpactEffectPageVMBase<AmplificationEffect> context)
 	{
 		InitializeComponent();
 		BindingContext = context;

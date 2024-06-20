@@ -5,7 +5,7 @@ namespace BRIX.Mobile.View.Abilities.Effects;
 
 public partial class DefenseEffectPage : ContentPage
 {
-	public DefenseEffectPage(SinglePropEffectPageVMBase<DefenseEffect> context)
+	public DefenseEffectPage(DiceImpactEffectPageVMBase<DefenseEffect> context)
 	{
 		InitializeComponent();
 		BindingContext = context;

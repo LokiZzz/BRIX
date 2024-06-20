@@ -537,6 +537,12 @@
   <data name="EffectDefenseHint" xml:space="preserve">
     <value>Любой урон по цели уменьшается на указанное значение.</value>
   </data>
+  <data name="EffectDifficultTerrain" xml:space="preserve">
+    <value>Сложная местность</value>
+  </data>
+  <data name="EffectDifficultTerrainHint" xml:space="preserve">
+    <value>Создаёт местность с заданным классом сложности</value>
+  </data>
   <data name="EffectDuration" xml:space="preserve">
     <value>Длительность эффекта</value>
   </data>
@@ -1205,6 +1211,9 @@
   </data>
   <data name="TenYears" xml:space="preserve">
     <value>10 лет</value>
+  </data>
+  <data name="TerrainDifficultyClass" xml:space="preserve">
+    <value>Класс сложности</value>
   </data>
   <data name="TheTarget" xml:space="preserve">
     <value>Цель...</value>

@@ -5,7 +5,7 @@ namespace BRIX.Mobile.View.Abilities.Effects;
 
 public partial class FortifyEffectPage : ContentPage
 {
-	public FortifyEffectPage(SinglePropEffectPageVMBase<FortifyEffect> context)
+	public FortifyEffectPage(DiceImpactEffectPageVMBase<FortifyEffect> context)
 	{
 		InitializeComponent();
 		BindingContext = context;

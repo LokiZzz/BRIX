@@ -25,7 +25,7 @@
                             Style="{StaticResource TitleLabel}" 
                             Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ActionPoints}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectAccelerationHint}}"/>
-                        <abilitiesview:DicePoolEditor BindingContext="{Binding DicePoolEditor}"/>
+                        <abilitiesview:DicePoolEditor BindingContext="{Binding DicePoolEditor}" ShowFastAdjustment="False"/>
                     </VerticalStackLayout>
                 </Border>
                 <aspectsview:AspectsPanelView BindingContext="{Binding Aspects}"/>

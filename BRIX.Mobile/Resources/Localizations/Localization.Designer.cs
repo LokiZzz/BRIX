@@ -1321,6 +1321,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Difficult terrain.
+        /// </summary>
+        public static string EffectDifficultTerrain {
+            get {
+                return ResourceManager.GetString("EffectDifficultTerrain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creates a difficult terrain with specified difficulty class..
+        /// </summary>
+        public static string EffectDifficultTerrainHint {
+            get {
+                return ResourceManager.GetString("EffectDifficultTerrainHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Effect duration.
         /// </summary>
         public static string EffectDuration {
@@ -3315,6 +3333,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string TenYears {
             get {
                 return ResourceManager.GetString("TenYears", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Difficulty class.
+        /// </summary>
+        public static string TerrainDifficultyClass {
+            get {
+                return ResourceManager.GetString("TerrainDifficultyClass", resourceCulture);
             }
         }
         

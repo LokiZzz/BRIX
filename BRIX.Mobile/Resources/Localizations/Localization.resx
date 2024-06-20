@@ -537,6 +537,12 @@
   <data name="EffectDefenseHint" xml:space="preserve">
     <value>Any damage to the target is decreased by the specified amount.</value>
   </data>
+  <data name="EffectDifficultTerrain" xml:space="preserve">
+    <value>Difficult terrain</value>
+  </data>
+  <data name="EffectDifficultTerrainHint" xml:space="preserve">
+    <value>Creates a difficult terrain with specified difficulty class.</value>
+  </data>
   <data name="EffectDuration" xml:space="preserve">
     <value>Effect duration</value>
   </data>
@@ -1202,6 +1208,9 @@
   </data>
   <data name="TenYears" xml:space="preserve">
     <value>10 years</value>
+  </data>
+  <data name="TerrainDifficultyClass" xml:space="preserve">
+    <value>Difficulty class</value>
   </data>
   <data name="TheTarget" xml:space="preserve">
     <value>The target...</value>

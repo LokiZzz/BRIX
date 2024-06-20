@@ -1,0 +1,10 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+@using BRIX.Library.Effects
+
+Создаёт местность с классом сложности @Model.Impact.
+
+@code {
+    [Parameter]
+    public DifficultTerrainEffect Model { get; set; } = new();
+}

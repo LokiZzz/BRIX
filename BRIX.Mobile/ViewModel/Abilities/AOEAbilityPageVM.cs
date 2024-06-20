@@ -146,6 +146,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
             {
                 Ability.RemoveEffect(effectToRemove);
             }
+
+            CostMonitor.UpdateCost();
         }
 
         [RelayCommand]

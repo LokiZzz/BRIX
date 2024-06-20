@@ -6,7 +6,7 @@ namespace BRIX.Mobile.View.Abilities.Effects;
 
 public partial class AccelerationEffectPage : ContentPage
 {
-	public AccelerationEffectPage(SinglePropEffectPageVMBase<AccelerationEffect> context)
+	public AccelerationEffectPage(DiceImpactEffectPageVMBase<AccelerationEffect> context)
 	{
 		InitializeComponent();
 		BindingContext = context;
