@@ -15,8 +15,8 @@
     </Shell.TitleView>
 
     <Grid RowDefinitions="*,auto">
-        <Grid Grid.Row="0" Margin="10,0,10,0">
-            <CollectionView Grid.Row="0" x:Name="collectionView" ItemsSource="{Binding Effects}">
+        <ScrollView Grid.Row="0" Margin="10,0,10,0">
+            <CollectionView Grid.Row="0" x:Name="collectionView" ItemsSource="{Binding Effects}" Margin="0,10">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="10" VerticalItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
@@ -51,7 +51,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </Grid>
+        </ScrollView>
         <Border Grid.Row="1" Style="{StaticResource EmptyShadowBorder}"/>
     </Grid>
 </ContentPage>
