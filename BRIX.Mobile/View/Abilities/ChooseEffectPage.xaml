@@ -30,14 +30,14 @@
                                     CommandParameter="{Binding}"/>
                                 <Label 
                                     FontFamily="AwesomeRPG" 
-                                    FontSize="60"
-                                    Opacity="0.2"
+                                    FontSize="70"
+                                    Opacity="0.15"
                                     Text="{Binding Icon}" 
                                     TextColor="{StaticResource BRIXDim}" 
                                     VerticalOptions="Center" 
                                     VerticalTextAlignment="Center"
-                                    HorizontalOptions="End"
-                                    Margin="5"/>
+                                    HorizontalOptions="Center"
+                                    Margin="-5"/>
                                 <Label 
                                     Style="{StaticResource ParagraphTitleLabel}" 
                                     Text="{Binding Name}" 
@@ -45,7 +45,7 @@
                                     Margin="15,0"
                                     VerticalOptions="Center" 
                                     VerticalTextAlignment="Center"
-                                    HorizontalOptions="Start"/>
+                                    HorizontalOptions="Center"/>
                             </Grid>
                         </Border>
                     </DataTemplate>
