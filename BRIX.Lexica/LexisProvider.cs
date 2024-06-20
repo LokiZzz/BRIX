@@ -34,14 +34,17 @@ namespace BRIX.Lexica
             IServiceProvider serviceProvider = services.BuildServiceProvider();
             ILoggerFactory loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
 
-            using HtmlRenderer htmlRenderer = new HtmlRenderer(serviceProvider, loggerFactory);
+            using HtmlRenderer htmlRenderer = new(serviceProvider, loggerFactory);
 
             string html = await htmlRenderer.Dispatcher.InvokeAsync(async () =>
             {
                 Dictionary<string, object?> dictionary = new() { { "Model", model } };
                 ParameterView parameters = ParameterView.FromDictionary(dictionary);
 
-                HtmlRootComponent output = await htmlRenderer.RenderComponentAsync(GetTemplateType(model, cultureInfo), parameters);
+                HtmlRootComponent output = await htmlRenderer.RenderComponentAsync(
+                    GetTemplateType(model, cultureInfo), 
+                    parameters
+                );
 
                 return output.ToHtmlString();
             });

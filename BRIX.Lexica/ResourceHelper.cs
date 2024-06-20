@@ -8,7 +8,7 @@ namespace BRIX.Lexica
         {
             try
             {
-                ResourceManager resources = new ResourceManager(
+                ResourceManager resources = new(
                     "BRIX.Lexica.Resources", 
                     typeof(LexisProvider).Assembly
                 );

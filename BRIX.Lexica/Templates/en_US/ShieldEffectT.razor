@@ -1,7 +1,7 @@
 ﻿@using BRIX.Lexica
 @using BRIX.Library.Effects
 
-Creates @(Model.IsTransparent ? " transparent" : "") shield with durability equals @Numbers.ENGDcln(Model.Durability, "health point"). @(Model.CanBePermeable ? "The shield can be permeable at the character's request." : "")
+Creates @(Model.IsTransparent ? " transparent" : "") shield with durability equals @Numbers.ENGDcln(Model.Durability, "health point"). @((MarkupString)(Model.CanBePermeable ? $"The shield can be permeable at the character's request." : ""))
 
 @code {
     [Parameter]
