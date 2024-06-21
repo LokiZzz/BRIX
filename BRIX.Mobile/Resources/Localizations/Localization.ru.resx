@@ -525,6 +525,12 @@
   <data name="EffectDamage" xml:space="preserve">
     <value>Урон</value>
   </data>
+  <data name="EffectDangerousTerrain" xml:space="preserve">
+    <value>Опасная местность</value>
+  </data>
+  <data name="EffectDangerousTerrainHint" xml:space="preserve">
+    <value>Создаёт область, наносящую урон персонажу, который начал в ней ход или переместился в ней на 1 метр.</value>
+  </data>
   <data name="EffectDeceleration" xml:space="preserve">
     <value>Замедление</value>
   </data>

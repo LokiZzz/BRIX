@@ -1285,6 +1285,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dangerous terrain.
+        /// </summary>
+        public static string EffectDangerousTerrain {
+            get {
+                return ResourceManager.GetString("EffectDangerousTerrain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creates an area that deals damage to a character who has started a move in it or moved 1 meter within it..
+        /// </summary>
+        public static string EffectDangerousTerrainHint {
+            get {
+                return ResourceManager.GetString("EffectDangerousTerrainHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deceleration.
         /// </summary>
         public static string EffectDeceleration {

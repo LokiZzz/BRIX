@@ -525,6 +525,12 @@
   <data name="EffectDamage" xml:space="preserve">
     <value>Damage</value>
   </data>
+  <data name="EffectDangerousTerrain" xml:space="preserve">
+    <value>Dangerous terrain</value>
+  </data>
+  <data name="EffectDangerousTerrainHint" xml:space="preserve">
+    <value>Creates an area that deals damage to a character who has started a move in it or moved 1 meter within it.</value>
+  </data>
   <data name="EffectDeceleration" xml:space="preserve">
     <value>Deceleration</value>
   </data>

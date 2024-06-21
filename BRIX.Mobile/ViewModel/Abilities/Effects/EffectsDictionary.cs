@@ -119,6 +119,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 EditPage = typeof(DifficultTerrainEffectPage),
                 Effect = new DifficultTerrainEffect()
             }},
+            { typeof(EffectGenericModelBase<DangerousTerrainEffect>), new EffectTypeVM() {
+                Name = Localization.EffectDangerousTerrain,
+                Icon = AwesomeRPG.BearTrap,
+                EditPage = typeof(DangerousTerrainEffectPage),
+                Effect = new DangerousTerrainEffect()
+            }},
 
             { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectTypeVM() {
                 Name = Localization.EffectWin,

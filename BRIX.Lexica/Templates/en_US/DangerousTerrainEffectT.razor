@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Creates an area that causes @Numbers.ENGDcln(Model.Impact, "point") of damage to characters who started a turn in it or moved 1 meter within it.
+
+@code {
+    [Parameter]
+    public DangerousTerrainEffect Model { get; set; } = new();
+}
