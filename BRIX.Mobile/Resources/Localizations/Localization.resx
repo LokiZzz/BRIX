@@ -610,7 +610,7 @@
     <value>The effect creates a shield that protects the targets behind it from damage. It has strength expressed in health points.</value>
   </data>
   <data name="EffectSummonCreature" xml:space="preserve">
-    <value>SummonCreature</value>
+    <value>Summon creature</value>
   </data>
   <data name="EffectSummonCreatureHint" xml:space="preserve">
     <value>Summons creatures to the battlefield.</value>

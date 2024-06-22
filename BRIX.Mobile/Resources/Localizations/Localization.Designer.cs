@@ -1537,7 +1537,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SummonCreature.
+        ///   Looks up a localized string similar to Summon creature.
         /// </summary>
         public static string EffectSummonCreature {
             get {

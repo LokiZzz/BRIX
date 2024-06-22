@@ -23,6 +23,8 @@ namespace BRIX.Mobile.Models.Abilities.Effects
                     return new MoveAreaEffectModel(mae);
                 case ShieldEffect se:
                     return new ShieldEffectModel(se);
+                case SummonCreatureEffect sce:
+                    return new SummonCreatureEffectModel(sce);
                 default:
                 {
                     MethodInfo? method = typeof(EffectModelFactory).GetMethod(

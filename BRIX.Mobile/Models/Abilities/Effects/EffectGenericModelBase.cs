@@ -11,8 +11,11 @@ namespace BRIX.Mobile.Models.Abilities.Effects
             InternalModel = model;
             model.ForceAspectInitialize();
             InitializeAspects();
+            Initialize(model);
         }
 
         public T Internal => GetSpecificEffect<T>();
+
+        public virtual void Initialize(T model) { }
     }
 }

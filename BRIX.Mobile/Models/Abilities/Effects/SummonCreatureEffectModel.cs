@@ -7,9 +7,13 @@ namespace BRIX.Mobile.Models.Abilities.Effects
     public class SummonCreatureEffectModel(SummonCreatureEffect effect) 
         : EffectGenericModelBase<SummonCreatureEffect>(effect)
     {
-        public SummonCreatureEffectModel() : this(new SummonCreatureEffect()) 
+        public SummonCreatureEffectModel() : this(new SummonCreatureEffect()) { }
+
+        public override void Initialize(SummonCreatureEffect effect)
         {
-            Creatures = new(Internal.Creatures.Select(x => new SummoningCreaturesVM { 
+            base.Initialize(effect);
+            Creatures = new(effect.Creatures.Select(x => new SummoningCreaturesVM
+            {
                 Count = x.Count,
                 Creature = new NPCModel(x.Creature)
             }));
