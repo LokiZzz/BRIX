@@ -24,10 +24,7 @@ namespace BRIX.Lexica
 
         public static async Task<string> ToLexisInternal(object model, CultureInfo? cultureInfo = null)
         {
-            if (cultureInfo == null)
-            {
-                cultureInfo = Thread.CurrentThread.CurrentUICulture;
-            }
+            cultureInfo ??= Thread.CurrentThread.CurrentUICulture;
 
             IServiceCollection services = new ServiceCollection();
             services.AddLogging();

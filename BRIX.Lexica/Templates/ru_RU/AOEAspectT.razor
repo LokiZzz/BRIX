@@ -5,7 +5,7 @@
 
 <p>@(Model.IsConcording ? "Эффекты действуют" : "Эффект действует") в @GetShape(Model.AreaShape.Shape) на расстоянии @Numbers.RUSDeclension(Model.DistanceToArea, "метра", "метров", "метров") от персонажа. Область действия может располагаться под любым углом относительно персонажа.</p>
 
-if(Model.AreaSettings.IsAreaBoundedTo)
+@if (Model.CanBeBounded)
 {
     <p>Область действия привязывается к персонажу и перемещается вместе с ним.</p>
 }

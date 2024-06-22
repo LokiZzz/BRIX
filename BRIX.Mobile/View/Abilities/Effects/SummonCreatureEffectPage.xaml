@@ -11,7 +11,8 @@
              xmlns:aspectsview="clr-namespace:BRIX.Mobile.View.Abilities.Aspects"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              Shell.TabBarIsVisible="False"
-             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectSummonCreature}}">
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectSummonCreature}}"
+             Padding="0">
 
     <Shell.TitleView>
         <controls:TitleView/>
@@ -20,7 +21,7 @@
     <Grid RowDefinitions="*,auto">
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Spacing="10" Margin="0,0,0,10">
-                <Border Style="{StaticResource BlockBorder}">
+                <Border Style="{StaticResource BlockBorder}" Margin="10,0">
                     <VerticalStackLayout Spacing="10">
                         <Label 
                             Style="{StaticResource TitleLabel}" 
@@ -28,21 +29,21 @@
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectSummonCreatureHint}}"/>
                     </VerticalStackLayout>
                 </Border>
-                <Grid RowDefinitions="auto,auto,*" Margin="0,0,0,-10">
+                <Grid RowDefinitions="auto,auto,*" RowSpacing="10">
                     <Label 
                         Grid.Row="0"
+                        Margin="10,0"
                         Style="{StaticResource TitleLabel}" 
                         Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Creatures}}"/>
                     <Button
                         Grid.Row="1"
                         Style="{StaticResource LightPlusButton}" 
                         Command="{Binding AddCreatureCommand}"
-                        Margin="10,0,10,10"/>
+                        Margin="10,0"/>
                     <CollectionView 
                         Grid.Row="2" 
                         x:Name="collectionView" 
-                        ItemsSource="{Binding Effect.Creatures}" 
-                        Margin="0,1,0,10">
+                        ItemsSource="{Binding Effect.Creatures}">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                         </CollectionView.ItemsLayout>
@@ -52,7 +53,7 @@
                                     <SwipeView.LeftItems>
                                         <SwipeItems Mode="Execute">
                                             <SwipeItemView
-                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.EditNPCCommand}"
+                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.EditCreatureCommand}"
                                                 CommandParameter="{Binding}">
                                                 <Border Style="{StaticResource SmallSwipeViewBorder}">
                                                     <Label Style="{StaticResource SmallSwipeViewEditLabel}" />
@@ -75,7 +76,7 @@
                                         <Border Style="{StaticResource BlockBorder}" >
                                             <Grid ColumnDefinitions="*,auto,auto">
                                                 <Label Grid.Column="0" Text="{Binding Creature.Name}" />
-                                                <Label Grid.Column="1" Text="{Binding Count}" />
+                                                <Label Grid.Column="1" Text="{Binding Count}" Margin="0,0,20,0"/>
                                                 <Label Grid.Column="2" Text="{Binding Creature.Power}" />
                                             </Grid>
                                         </Border>
@@ -85,10 +86,10 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </Grid>
-                <aspectsview:AspectsPanelView BindingContext="{Binding Aspects}"/>
+                <aspectsview:AspectsPanelView BindingContext="{Binding Aspects}" Margin="10,0"/>
             </VerticalStackLayout>
         </ScrollView>
-        <abilitiesview:AbilityCostMonitorPanel Grid.Row="1" BindingContext="{Binding CostMonitor}"/>
+        <abilitiesview:AbilityCostMonitorPanel Grid.Row="1" BindingContext="{Binding CostMonitor}" Margin="10,0"/>
     </Grid>
 
 </ContentPage>

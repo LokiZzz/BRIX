@@ -13,7 +13,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
     public partial class SummonCreatureEffectPageVM : EffectPageVMBase<SummonCreatureEffectModel>
     {
         [RelayCommand]
-        public async Task AddNPC()
+        public async Task AddCreature()
         {
             await Navigation.NavigateAsync<AOENPCsPage>(
                 (NavigationParameters.EditMode, EEditingMode.Add)
@@ -22,7 +22,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
 
         [RelayCommand]
-        public async Task EditNPC(SummoningCreaturesVM item)
+        public async Task EditCreature(SummoningCreaturesVM item)
         {
             await Navigation.NavigateAsync<AOENPCsPage>(
                 (NavigationParameters.EditMode, EEditingMode.Edit),
@@ -31,7 +31,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         }
 
         [RelayCommand]
-        public async Task RemoveNPC(SummoningCreaturesVM item)
+        public async Task RemoveCreature(SummoningCreaturesVM item)
         {
             AlertPopupResult? result = await Ask(Localization.RemoveNPCQuestion);
 
@@ -39,7 +39,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             {
                 if (Effect != null)
                 {
-                    
+                    Effect.RemoveCreature(item);
+                    CostMonitor?.UpdateCost();
                 }
             }
         }
@@ -61,22 +62,15 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 switch (mode)
                 {
                     case EEditingMode.Add:
-                        Effect?.Creatures.Add(new SummoningCreaturesVM { Creature = npc });
-                        Effect.Inter
+                        Effect?.AddCreature(npc);
                         break;
                     case EEditingMode.Edit:
-                        await _characterService.UpdateNPC(npc.Internal);
-                        int index = NPCs.IndexOf(NPCs.First(x => x.Internal.Id == npc.Internal.Id));
-                        NPCs[index] = npc;
+                        Effect?.UpdateCreature(npc);
                         break;
                 }
-            }
-        }
 
-        public override async Task OnNavigatedAsync()
-        {
-            List<NPC> npcs = await _characterService.GetNPCs();
-            NPCs = new(npcs.Select(x => new NPCModel(x)));
+                CostMonitor?.UpdateCost();
+            }
         }
     }
 }

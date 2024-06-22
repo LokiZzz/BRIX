@@ -131,6 +131,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 EditPage = typeof(InvisibilityEffectPage),
                 Effect = new InvisibiltyEffect()
             }},
+            { typeof(SummonCreatureEffectModel), new EffectTypeVM() {
+                Name = Localization.EffectSummonCreature,
+                Icon = AwesomeRPG.Cat,
+                EditPage = typeof(SummonCreatureEffectPage),
+                Effect = new SummonCreatureEffect()
+            }},
 
             { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectTypeVM() {
                 Name = Localization.EffectWin,
