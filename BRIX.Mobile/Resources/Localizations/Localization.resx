@@ -414,6 +414,9 @@
   <data name="CreateStatusFromAbility" xml:space="preserve">
     <value>From ability...</value>
   </data>
+  <data name="Creatures" xml:space="preserve">
+    <value>Creatures</value>
+  </data>
   <data name="CurrentAdjustment" xml:space="preserve">
     <value>Current (+0%)</value>
   </data>
@@ -561,6 +564,12 @@
   <data name="EffectHeal" xml:space="preserve">
     <value>Heal</value>
   </data>
+  <data name="EffectInvisibility" xml:space="preserve">
+    <value>Invisibility</value>
+  </data>
+  <data name="EffectInvisibilityHint" xml:space="preserve">
+    <value>Makes targets invisible.</value>
+  </data>
   <data name="EffectMoveArea" xml:space="preserve">
     <value>Move area</value>
   </data>
@@ -599,6 +608,12 @@
   </data>
   <data name="EffectShieldHint" xml:space="preserve">
     <value>The effect creates a shield that protects the targets behind it from damage. It has strength expressed in health points.</value>
+  </data>
+  <data name="EffectSummonCreature" xml:space="preserve">
+    <value>SummonCreature</value>
+  </data>
+  <data name="EffectSummonCreatureHint" xml:space="preserve">
+    <value>Summons creatures to the battlefield.</value>
   </data>
   <data name="EffectVulnerability" xml:space="preserve">
     <value>Vulnerability</value>

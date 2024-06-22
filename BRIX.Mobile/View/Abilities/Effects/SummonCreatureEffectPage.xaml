@@ -1,46 +1,53 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.NPCs"
-             xmlns:m="clr-namespace:BRIX.Mobile.Models.NPCs"
+             x:Class="BRIX.Mobile.View.Abilities.Effects.SummonCreatureEffectPage"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
-             xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
-             x:Class="BRIX.Mobile.View.NPCs.NPCsPage"
-             x:DataType="vm:NPCsPageVM"
-             ControlTemplate="{StaticResource BusyPageTemplate}"
-             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NPC}}"
-             Padding="0">
+             xmlns:abilitiesvm="clr-namespace:BRIX.Mobile.ViewModel.Abilities"
+             xmlns:effectsvm="clr-namespace:BRIX.Mobile.ViewModel.Abilities.Effects"
+             xmlns:m="clr-namespace:BRIX.Mobile.Models.Abilities.Effects"
+             xmlns:abilitiesview="clr-namespace:BRIX.Mobile.View.Abilities"
+             xmlns:aspectsview="clr-namespace:BRIX.Mobile.View.Abilities.Aspects"
+             xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+             Shell.TabBarIsVisible="False"
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectSummonCreature}}">
 
     <Shell.TitleView>
         <controls:TitleView/>
     </Shell.TitleView>
 
-    <ContentPage.Resources>
-        <Style TargetType="Label" x:Key="NPCNameLabel" BasedOn="{StaticResource TitleLabel}">
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-    </ContentPage.Resources>
-    
     <Grid RowDefinitions="*,auto">
         <ScrollView Grid.Row="0">
-            <VerticalStackLayout>
-                <Grid RowDefinitions="auto,*" Margin="0,0,0,-10">
-                    <Button
+            <VerticalStackLayout Spacing="10" Margin="0,0,0,10">
+                <Border Style="{StaticResource BlockBorder}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label 
+                            Style="{StaticResource TitleLabel}" 
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectSummonCreature}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectSummonCreatureHint}}"/>
+                    </VerticalStackLayout>
+                </Border>
+                <Grid RowDefinitions="auto,auto,*" Margin="0,0,0,-10">
+                    <Label 
                         Grid.Row="0"
+                        Style="{StaticResource TitleLabel}" 
+                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Creatures}}"/>
+                    <Button
+                        Grid.Row="1"
                         Style="{StaticResource LightPlusButton}" 
-                        Command="{Binding AddNPCCommand}"
+                        Command="{Binding AddCreatureCommand}"
                         Margin="10,0,10,10"/>
                     <CollectionView 
-                            Grid.Row="1" 
-                            x:Name="collectionView" 
-                            ItemsSource="{Binding NPCs}" 
-                            Margin="0,1,0,10">
+                        Grid.Row="2" 
+                        x:Name="collectionView" 
+                        ItemsSource="{Binding Effect.Creatures}" 
+                        Margin="0,1,0,10">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="m:NPCModel">
+                            <DataTemplate x:DataType="m:SummoningCreaturesVM">
                                 <SwipeView Threshold="75">
                                     <SwipeView.LeftItems>
                                         <SwipeItems Mode="Execute">
@@ -56,7 +63,7 @@
                                     <SwipeView.RightItems>
                                         <SwipeItems Mode="Execute">
                                             <SwipeItemView
-                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.RemoveNPCCommand}"
+                                                Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.RemoveCreatureCommand}"
                                                 CommandParameter="{Binding}">
                                                 <Border Style="{StaticResource SmallSwipeViewBorder}">
                                                     <Label Style="{StaticResource SmallSwipeViewDeleteLabel}"/>
@@ -66,9 +73,10 @@
                                     </SwipeView.RightItems>
                                     <Grid Margin="10,0">
                                         <Border Style="{StaticResource BlockBorder}" >
-                                            <Grid ColumnDefinitions="*,auto">
-                                                <Label Grid.Column="0" Text="{Binding Name}" />
-                                                <Label Grid.Column="1" Text="{Binding Power}" />
+                                            <Grid ColumnDefinitions="*,auto,auto">
+                                                <Label Grid.Column="0" Text="{Binding Creature.Name}" />
+                                                <Label Grid.Column="1" Text="{Binding Count}" />
+                                                <Label Grid.Column="2" Text="{Binding Creature.Power}" />
                                             </Grid>
                                         </Border>
                                     </Grid>
@@ -77,8 +85,10 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </Grid>
+                <aspectsview:AspectsPanelView BindingContext="{Binding Aspects}"/>
             </VerticalStackLayout>
         </ScrollView>
-        <Border Grid.Row="1" Style="{StaticResource EmptyShadowBorder}"/>
+        <abilitiesview:AbilityCostMonitorPanel Grid.Row="1" BindingContext="{Binding CostMonitor}"/>
     </Grid>
+
 </ContentPage>

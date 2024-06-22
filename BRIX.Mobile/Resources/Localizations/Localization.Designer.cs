@@ -952,6 +952,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Creatures.
+        /// </summary>
+        public static string Creatures {
+            get {
+                return ResourceManager.GetString("Creatures", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current (+0%).
         /// </summary>
         public static string CurrentAdjustment {
@@ -1393,6 +1402,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invisibility.
+        /// </summary>
+        public static string EffectInvisibility {
+            get {
+                return ResourceManager.GetString("EffectInvisibility", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Makes targets invisible..
+        /// </summary>
+        public static string EffectInvisibilityHint {
+            get {
+                return ResourceManager.GetString("EffectInvisibilityHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Move area.
         /// </summary>
         public static string EffectMoveArea {
@@ -1506,6 +1533,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string EffectShieldHint {
             get {
                 return ResourceManager.GetString("EffectShieldHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SummonCreature.
+        /// </summary>
+        public static string EffectSummonCreature {
+            get {
+                return ResourceManager.GetString("EffectSummonCreature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summons creatures to the battlefield..
+        /// </summary>
+        public static string EffectSummonCreatureHint {
+            get {
+                return ResourceManager.GetString("EffectSummonCreatureHint", resourceCulture);
             }
         }
         

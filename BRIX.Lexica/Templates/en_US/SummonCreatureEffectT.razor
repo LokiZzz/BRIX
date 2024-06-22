@@ -1,0 +1,32 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Characters
+@using BRIX.Library.Effects
+
+Summons a @GetCreatureEnumeration() to the battlefield.
+
+@code {
+    [Parameter]
+    public SummonCreatureEffect Model { get; set; } = new();
+
+    public MarkupString GetCreatureEnumeration()
+    {
+        string enumeration = string.Empty;
+
+        foreach((int Count, NPC Creature) item in Model.Creatures)
+        {
+            if (!string.IsNullOrEmpty(enumeration))
+            {
+                enumeration += "; ";
+            }
+
+            if(item.Count > 1)
+            {
+                enumeration += $"{item.Count}x ";
+            }
+
+            enumeration += item.Creature.Name;
+        }
+
+        return (MarkupString)enumeration;
+    }
+}

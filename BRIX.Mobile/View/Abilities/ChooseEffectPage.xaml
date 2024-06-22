@@ -43,8 +43,9 @@
                                     Text="{Binding Name}" 
                                     FontSize="20"
                                     Margin="15,0"
-                                    VerticalOptions="Center" 
                                     VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center" 
                                     HorizontalOptions="Center"/>
                             </Grid>
                         </Border>

@@ -125,10 +125,16 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 EditPage = typeof(DangerousTerrainEffectPage),
                 Effect = new DangerousTerrainEffect()
             }},
+            { typeof(EffectGenericModelBase<InvisibiltyEffect>), new EffectTypeVM() {
+                Name = Localization.EffectInvisibility,
+                Icon = AwesomeRPG.Hood,
+                EditPage = typeof(InvisibilityEffectPage),
+                Effect = new InvisibiltyEffect()
+            }},
 
             { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectTypeVM() {
                 Name = Localization.EffectWin,
-                Icon = AwesomeRPG.PerspectiveDiceRandom,
+                Icon = AwesomeRPG.Cheese,
                 EditPage = typeof(WinEffectPage),
                 Effect = new WinTheGameEffect()
             }},

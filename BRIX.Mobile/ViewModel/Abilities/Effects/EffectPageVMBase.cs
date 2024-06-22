@@ -83,6 +83,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 HandleInitial(query);
             }
 
+            HandleBack(query);
+
             if (CostMonitor != null)
             {
                 CostMonitor.SaveCommand = SaveCommand;
@@ -138,5 +140,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
             _alreadyInitialized = true;
         }
+
+        protected virtual void HandleBack(IDictionary<string, object> query) { }
     }
 }

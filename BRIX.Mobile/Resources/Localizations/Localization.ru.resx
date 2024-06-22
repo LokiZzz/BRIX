@@ -411,6 +411,9 @@
   <data name="CreateStatusFromAbility" xml:space="preserve">
     <value>Из способности...</value>
   </data>
+  <data name="Creatures" xml:space="preserve">
+    <value>Существа</value>
+  </data>
   <data name="CurrentAdjustment" xml:space="preserve">
     <value>Сейчас (+0%)</value>
   </data>
@@ -561,6 +564,12 @@
   <data name="EffectHeal" xml:space="preserve">
     <value>Лечение</value>
   </data>
+  <data name="EffectInvisibility" xml:space="preserve">
+    <value>Невидимость</value>
+  </data>
+  <data name="EffectInvisibilityHint" xml:space="preserve">
+    <value>Делает цели невидимыми.</value>
+  </data>
   <data name="EffectMoveArea" xml:space="preserve">
     <value>Перемещение области</value>
   </data>
@@ -599,6 +608,12 @@
   </data>
   <data name="EffectShieldHint" xml:space="preserve">
     <value>Эффект создаёт щит, который защищает находящиеся за ним цели от урона. Имеет прочность, выраженную в очках здоровья.</value>
+  </data>
+  <data name="EffectSummonCreature" xml:space="preserve">
+    <value>Призыв существ</value>
+  </data>
+  <data name="EffectSummonCreatureHint" xml:space="preserve">
+    <value>Призывает существ на поле боя.</value>
   </data>
   <data name="EffectVulnerability" xml:space="preserve">
     <value>Уязвимость</value>

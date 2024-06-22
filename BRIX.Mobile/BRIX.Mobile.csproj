@@ -128,6 +128,9 @@
 	  <Compile Update="View\Abilities\Effects\CancelationEffectPage.xaml.cs">
 	    <DependentUpon>CancelationEffectPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\Abilities\Effects\SummonCreatureEffectPage.xaml.cs">
+	    <DependentUpon>SummonCreatureEffectPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\Abilities\Effects\CleanseEffectPage.xaml.cs">
 	    <DependentUpon>CleanseEffectPage.xaml</DependentUpon>
 	  </Compile>
@@ -136,6 +139,9 @@
 	  </Compile>
 	  <Compile Update="View\Abilities\Effects\DifficultTerrainEffectPage.xaml.cs">
 	    <DependentUpon>DifficultTerrainEffectPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Abilities\Effects\InvisibilityEffectPage.xaml.cs">
+	    <DependentUpon>InvisibilityEffectPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="View\Abilities\Effects\PeriodicDamageEffectPage.xaml.cs">
 	    <DependentUpon>PeriodicDamageEffectPage.xaml</DependentUpon>
@@ -197,6 +203,9 @@
 	  <MauiXaml Update="View\Abilities\Effects\CancelationEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Effects\SummonCreatureEffectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\CleanseEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -204,6 +213,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\DifficultTerrainEffectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Effects\InvisibilityEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\PeriodicDamageEffectPage.xaml">
