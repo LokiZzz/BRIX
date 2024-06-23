@@ -4,11 +4,14 @@ namespace BRIX.Library.Aspects.TargetSelection
 {
     public class TargetSelectionRestrictionsSettings
     {
-        public List<(ETargetSelectionRestrictions Type, string Comment)> Conditions { get; set; } = new ();
+        public List<(ETargetSelectionRestrictions Type, string Comment)> Conditions { get; set; } = 
+        [
+            (ETargetSelectionRestrictions.SeeTarget, string.Empty)
+        ];
 
         public double GetCoefficient()
         {
-            if (!Conditions.Any())
+            if (Conditions.Count == 0)
             {
                 return 1;
             }

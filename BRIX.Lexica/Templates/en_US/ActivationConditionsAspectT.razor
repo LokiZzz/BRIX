@@ -24,13 +24,13 @@ else
     {
         string resultString = input.Type switch
         {
-            EActivationCondition.NeedToMove => "The character must be able to move;",
-            EActivationCondition.NeedToAbleToTalk => "The character must be able to talk;",
-            EActivationCondition.NeedToMoveArm => "The character must be able to move his arm;",
-            EActivationCondition.NeedToMoveBothArms => "The character must be able to move both arms;",
-            EActivationCondition.EasyActivationCondition => $"Easy condition:: {input.Comment};",
-            EActivationCondition.MediumActivationCondition => $"Medium condition: {input.Comment};",
-            EActivationCondition.HardActivationCondition => $"Hard condition: {input.Comment};",
+            EActivationCondition.NeedToMove => "The character must be able to move",
+            EActivationCondition.NeedToAbleToTalk => "The character must be able to talk",
+            EActivationCondition.NeedToMoveArm => "The character must be able to move his arm",
+            EActivationCondition.NeedToMoveBothArms => "The character must be able to move both arms",
+            EActivationCondition.EasyActivationCondition => $"Easy condition:: {input.Comment}",
+            EActivationCondition.MediumActivationCondition => $"Medium condition: {input.Comment}",
+            EActivationCondition.HardActivationCondition => $"Hard condition: {input.Comment}",
             _ => TemplateHelper.LexisTemplatingError
         };
 

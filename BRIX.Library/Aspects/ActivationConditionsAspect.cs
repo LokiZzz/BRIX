@@ -2,6 +2,11 @@
 {
     public class ActivationConditionsAspect : MultiConditionalAspect<EActivationCondition>
     {
+        public ActivationConditionsAspect()
+        {
+            Conditions = [(EActivationCondition.NeedToMoveArm, string.Empty)];
+        }
+
         public override Dictionary<EActivationCondition, int> ConditionToCoeficientMap => new ()
         {
             { EActivationCondition.NeedToMoveArm, -10 },
