@@ -5,17 +5,12 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {
-    public class VolumeShapeModel : ObservableObject
+    public class VolumeShapeModel(VolumeShape volumeShape, AbilityCostMonitorPanelVM? costMonitor = null) 
+        : ObservableObject
     {
-        public VolumeShapeModel(VolumeShape volumeShape, AbilityCostMonitorPanelVM? costMonitor = null)
-        {
-            Internal = volumeShape;
-            CostMonitor = costMonitor;
-        }
+        public AbilityCostMonitorPanelVM? CostMonitor { get; set; } = costMonitor;
 
-        public AbilityCostMonitorPanelVM? CostMonitor { get; set; }
-
-        public VolumeShape Internal { get; set; }
+        public VolumeShape Internal { get; set; } = volumeShape;
 
         public EAreaType AreaType
         {
@@ -34,17 +29,13 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
         {
             get
             {
-                switch (AreaType)
+                return AreaType switch
                 {
-                    case EAreaType.Sphere:
-                        return Internal.GetConcreteShape<Sphere>().R;
-                    case EAreaType.Cylinder:
-                        return Internal.GetConcreteShape<Cylinder>().R;
-                    case EAreaType.Cone:
-                        return Internal.GetConcreteShape<Cone>().R;
-                    default:
-                        return 1;
-                }
+                    EAreaType.Sphere => Internal.GetConcreteShape<Sphere>().R,
+                    EAreaType.Cylinder => Internal.GetConcreteShape<Cylinder>().R,
+                    EAreaType.Cone => Internal.GetConcreteShape<Cone>().R,
+                    _ => 1,
+                };
             }
             set
             {
@@ -79,15 +70,12 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
         {
             get
             {
-                switch (AreaType)
+                return AreaType switch
                 {
-                    case EAreaType.Cylinder:
-                        return Internal.GetConcreteShape<Cylinder>().H;
-                    case EAreaType.Cone:
-                        return Internal.GetConcreteShape<Cone>().H;
-                    default:
-                        return 1;
-                }
+                    EAreaType.Cylinder => Internal.GetConcreteShape<Cylinder>().H,
+                    EAreaType.Cone => Internal.GetConcreteShape<Cone>().H,
+                    _ => 1,
+                };
             }
             set
             {
@@ -165,7 +153,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 
         public bool IsArbitrary
         {
-            get => Internal.Shape is VoxelArray voxels ? voxels.IsArbitrary : false;
+            get => Internal.Shape is VoxelArray voxels && voxels.IsArbitrary;
             set
             {
                 if (Internal.Shape is VoxelArray voxels)

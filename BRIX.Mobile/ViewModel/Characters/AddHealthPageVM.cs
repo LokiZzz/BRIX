@@ -11,14 +11,9 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
-    public partial class AddHealthPageVM : ViewModelBase
+    public partial class AddHealthPageVM(ICharacterService characterService) : ViewModelBase
     {
-        public ICharacterService CharacterService { get; }
-
-        public AddHealthPageVM(ICharacterService characterService)
-        {
-            CharacterService = characterService;
-        }
+        public ICharacterService CharacterService { get; } = characterService;
 
         private bool _invokeHPCalc = true;
         private bool _invokeEXPCalc = true;

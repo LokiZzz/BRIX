@@ -64,6 +64,7 @@ namespace BRIX.Library.Effects
 
                     if (aspect != null)
                     {
+                        aspect.Initialize();
                         Aspects.Add(aspect);
                     }
                 }

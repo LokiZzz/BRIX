@@ -132,6 +132,18 @@
   <data name="AbilityPower" xml:space="preserve">
     <value>Мощность</value>
   </data>
+  <data name="AbleToMove" xml:space="preserve">
+    <value>Персонаж может свободно двигаться</value>
+  </data>
+  <data name="AbleToMoveBothArms" xml:space="preserve">
+    <value>Персонаж может двигать обеими руками</value>
+  </data>
+  <data name="AbleToMoveOneArm" xml:space="preserve">
+    <value>Персонаж может двигать одной рукой</value>
+  </data>
+  <data name="AbleToTalk" xml:space="preserve">
+    <value>Персонаж может говорить</value>
+  </data>
   <data name="ActionPointAspectHint" xml:space="preserve">
     <value>Практически любые способности ипользуются посредством траты очков действий. Чем больше очков действий тратит способность, тем дешевле она будет в очках опыта.</value>
   </data>
@@ -911,18 +923,6 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>Имя</value>
-  </data>
-  <data name="NeedToAbleToTalk" xml:space="preserve">
-    <value>Персонаж может говорить</value>
-  </data>
-  <data name="NeedToMove" xml:space="preserve">
-    <value>Персонаж может свободно двигаться</value>
-  </data>
-  <data name="NeedToMoveArm" xml:space="preserve">
-    <value>Персонаж может двигать одной рукой</value>
-  </data>
-  <data name="NeedToMoveBothArms" xml:space="preserve">
-    <value>Персонаж может двигать обеими руками</value>
   </data>
   <data name="NewCharacterHealth" xml:space="preserve">
     <value>Здоровье персонажа:</value>

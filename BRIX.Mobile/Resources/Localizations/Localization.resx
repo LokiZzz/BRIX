@@ -132,6 +132,18 @@
   <data name="AbilityPower" xml:space="preserve">
     <value>Power</value>
   </data>
+  <data name="AbleToMove" xml:space="preserve">
+    <value>Character can move freely</value>
+  </data>
+  <data name="AbleToMoveBothArms" xml:space="preserve">
+    <value>Сharacter can move with both hands</value>
+  </data>
+  <data name="AbleToMoveOneArm" xml:space="preserve">
+    <value>Сharacter can move with one hand</value>
+  </data>
+  <data name="AbleToTalk" xml:space="preserve">
+    <value>Character can talk</value>
+  </data>
   <data name="ActionPointAspectHint" xml:space="preserve">
     <value>Almost any ability is used by spending action points. The more action points an ability spends, the cheaper it will be in experience points.</value>
   </data>
@@ -905,18 +917,6 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
-  </data>
-  <data name="NeedToAbleToTalk" xml:space="preserve">
-    <value>Character can talk</value>
-  </data>
-  <data name="NeedToMove" xml:space="preserve">
-    <value>Character can move freely</value>
-  </data>
-  <data name="NeedToMoveArm" xml:space="preserve">
-    <value>Сharacter can move with one hand</value>
-  </data>
-  <data name="NeedToMoveBothArms" xml:space="preserve">
-    <value>Сharacter can move with both hands</value>
   </data>
   <data name="NewCharacterHealth" xml:space="preserve">
     <value>Character health:</value>

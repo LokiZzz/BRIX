@@ -14,7 +14,7 @@ namespace BRIX.Mobile.Services
 
     public class LocalStorage : ILocalStorage
     {
-        private JsonSerializerSettings _settings => new()
+        private static JsonSerializerSettings Settings => new()
         {
             Formatting = Formatting.Indented,
             TypeNameHandling = TypeNameHandling.All,
@@ -51,7 +51,7 @@ namespace BRIX.Mobile.Services
 
             string json = await File.ReadAllTextAsync(path);
 
-            return JsonConvert.DeserializeObject<T>(json, _settings);
+            return JsonConvert.DeserializeObject<T>(json, LocalStorage.Settings);
         }
 
         public Task WriteAllTextAsync(string fileName, string text)
@@ -63,7 +63,7 @@ namespace BRIX.Mobile.Services
 
         public async Task WriteJsonAsync<T>(string path, T collection) where T : class, new()
         {
-            string json = JsonConvert.SerializeObject(collection, _settings);
+            string json = JsonConvert.SerializeObject(collection, LocalStorage.Settings);
             await WriteAllTextAsync(path, json);
         }
     }

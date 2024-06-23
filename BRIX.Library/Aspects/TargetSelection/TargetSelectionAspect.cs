@@ -6,19 +6,20 @@ namespace BRIX.Library.Aspects.TargetSelection
 {
     public class TargetSelectionAspect : AspectBase
     {
+        public override void Initialize()
+        {
+            base.Initialize();
+            TargetSelectionRestrictions.Conditions = [(ETargetSelectionRestrictions.SeeTarget, string.Empty)];
+        }
+
         public override double GetCoefficient()
         {
-            switch (Strategy)
+            return Strategy switch
             {
-                    
-                case ETargetSelectionStrategy.Area:
-                    return GetAreaCoeficient();
-                case ETargetSelectionStrategy.NTargetsAtDistanсeL:
-                    return GetNTADCoeficient();
-                case ETargetSelectionStrategy.CharacterHimself:
-                default:
-                    return 1;
-            }
+                ETargetSelectionStrategy.Area => GetAreaCoeficient(),
+                ETargetSelectionStrategy.NTargetsAtDistanсeL => GetNTADCoeficient(),
+                _ => 1,
+            };
         }
 
         public ETargetSelectionStrategy Strategy { get; set; } = ETargetSelectionStrategy.NTargetsAtDistanсeL;

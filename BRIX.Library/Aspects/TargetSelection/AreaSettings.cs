@@ -7,8 +7,8 @@ namespace BRIX.Library.Aspects.TargetSelection
     {
         public int DistanceToAreaInMeters { get; set; } = 1;
         public int ExcludedTargetsCount { get; set; } = 0;
-        public EObstacleEquivalent ObstacleBetweenCharacterAndArea { get; set; } = EObstacleEquivalent.WoodenPlank;
-        public EObstacleEquivalent ObstacleBetweenEpicenterAndTarget { get; set; } = EObstacleEquivalent.WoodenPlank;
+        public EObstacleEquivalent ObstacleBetweenCharacterAndArea { get; set; } = EObstacleEquivalent.MetalArmor;
+        public EObstacleEquivalent ObstacleBetweenEpicenterAndTarget { get; set; } = EObstacleEquivalent.MetalArmor;
         
         /// <summary>
         /// Привязывается ли зона в момент активации к персонажу или предмету.

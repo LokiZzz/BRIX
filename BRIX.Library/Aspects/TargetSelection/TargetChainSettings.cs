@@ -8,7 +8,7 @@ namespace BRIX.Library.Aspects.TargetSelection
         public bool IsChainEnabled { get; set; }
         public int MaxDistanceBetweenTargets { get; set; } = 1;
         public int MaxTargetsCount { get; set; } = 2;
-        public EObstacleEquivalent ObstacleBetweenTargetsInChain { get; set; } = EObstacleEquivalent.WoodenPlank;
+        public EObstacleEquivalent ObstacleBetweenTargetsInChain { get; set; } = EObstacleEquivalent.MetalArmor;
 
         public double GetCoefficient()
         {

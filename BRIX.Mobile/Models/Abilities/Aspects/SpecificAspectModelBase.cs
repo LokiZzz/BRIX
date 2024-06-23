@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {
-    public abstract class SpecificAspectModelBase<T> : AspectModelBase where T : AspectBase, new()
+    public abstract class SpecificAspectModelBase<T>(T model) : AspectModelBase(model) where T : AspectBase, new()
     {
-        public SpecificAspectModelBase(T model) : base(model) { }
-
         public T Internal => (T)InternalModel;
     }
 }

@@ -8,5 +8,7 @@
         public bool IsConcording { get; set; }
 
         public abstract double GetCoefficient();
+
+        public virtual void Initialize() { }
     }
 }

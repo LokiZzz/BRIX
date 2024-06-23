@@ -106,6 +106,42 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Character can move freely.
+        /// </summary>
+        public static string AbleToMove {
+            get {
+                return ResourceManager.GetString("AbleToMove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сharacter can move with both hands.
+        /// </summary>
+        public static string AbleToMoveBothArms {
+            get {
+                return ResourceManager.GetString("AbleToMoveBothArms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сharacter can move with one hand.
+        /// </summary>
+        public static string AbleToMoveOneArm {
+            get {
+                return ResourceManager.GetString("AbleToMoveOneArm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Character can talk.
+        /// </summary>
+        public static string AbleToTalk {
+            get {
+                return ResourceManager.GetString("AbleToTalk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Almost any ability is used by spending action points. The more action points an ability spends, the cheaper it will be in experience points..
         /// </summary>
         public static string ActionPointAspectHint {
@@ -2424,42 +2460,6 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Character can talk.
-        /// </summary>
-        public static string NeedToAbleToTalk {
-            get {
-                return ResourceManager.GetString("NeedToAbleToTalk", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Character can move freely.
-        /// </summary>
-        public static string NeedToMove {
-            get {
-                return ResourceManager.GetString("NeedToMove", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Сharacter can move with one hand.
-        /// </summary>
-        public static string NeedToMoveArm {
-            get {
-                return ResourceManager.GetString("NeedToMoveArm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Сharacter can move with both hands.
-        /// </summary>
-        public static string NeedToMoveBothArms {
-            get {
-                return ResourceManager.GetString("NeedToMoveBothArms", resourceCulture);
             }
         }
         

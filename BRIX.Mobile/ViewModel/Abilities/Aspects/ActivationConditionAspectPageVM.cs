@@ -10,15 +10,10 @@ using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 {
-    public partial class ActivationConditionsAspectPageVM : AspectPageVMBase<ActivationConditionsAspectModel>
+    public partial class ActivationConditionsAspectPageVM(ILocalizationResourceManager localization) 
+        : AspectPageVMBase<ActivationConditionsAspectModel>
     {
-        private readonly ILocalizationResourceManager Localization;
-
-        public ActivationConditionsAspectPageVM(ILocalizationResourceManager localization)
-        {
-            Localization = localization;
-        }
-
+        private readonly ILocalizationResourceManager Localization = localization;
         private ObservableCollection<ActivationConditionOptionVM> _conditions = [];
         public ObservableCollection<ActivationConditionOptionVM> Conditions
         {
@@ -63,7 +58,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
                 if (customConditions.Any(x => x == concreteResult.Condition))
                 {
-                    string message = GetCustomConditionHint(concreteResult.Condition);
+                    string message = ActivationConditionsAspectPageVM.GetCustomConditionHint(concreteResult.Condition);
 
                     EntryPopupResult? entryResult = await ShowPopupAsync<EntryPopup, EntryPopupResult, EntryPopupParameters>(
                         new EntryPopupParameters
@@ -127,36 +122,33 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
         private ActivationConditionOptionVM ToConditionVM((EActivationCondition Type, string Comment) condition)
         {
-            ActivationConditionOptionVM restrictionVM = new() { Condition = (EActivationCondition)condition.Type };
-
-            switch (condition.Type)
+            ActivationConditionOptionVM restrictionVM = new()
             {
-                case EActivationCondition.EasyActivationCondition:
-                case EActivationCondition.MediumActivationCondition:
-                case EActivationCondition.HardActivationCondition:
-                    restrictionVM.Text = condition.Comment;
-                    break;
-                default:
-                    restrictionVM.Text = Localization[condition.Type.ToString("G")].ToString() ?? string.Empty;
-                    break;
-            }
-
+                Condition = condition.Type,
+                Text = condition.Type switch
+                {
+                    EActivationCondition.EasyActivationCondition
+                    or EActivationCondition.MediumActivationCondition
+                    or EActivationCondition.HardActivationCondition
+                        => condition.Comment,
+                    _ => Localization[condition.Type.ToString("G")].ToString() ?? string.Empty,
+                }
+            };
             return restrictionVM;
         }
 
-        private string GetCustomConditionHint(EActivationCondition condition)
+        private static string GetCustomConditionHint(EActivationCondition condition)
         {
-            switch (condition)
+            return condition switch
             {
-                case EActivationCondition.EasyActivationCondition:
-                    return Resources.Localizations.Localization.EnterLowActivationCondition;
-                case EActivationCondition.MediumActivationCondition:
-                    return Resources.Localizations.Localization.EnterMediumActiovationCondition;
-                case EActivationCondition.HardActivationCondition:
-                    return Resources.Localizations.Localization.EnterHardActiovationCondition;
-                default:
-                    return string.Empty;
-            }
+                EActivationCondition.EasyActivationCondition => 
+                    Resources.Localizations.Localization.EnterLowActivationCondition,
+                EActivationCondition.MediumActivationCondition => 
+                    Resources.Localizations.Localization.EnterMediumActiovationCondition,
+                EActivationCondition.HardActivationCondition => 
+                    Resources.Localizations.Localization.EnterHardActiovationCondition,
+                _ => string.Empty,
+            };
         }
 
         public override void Initialize()

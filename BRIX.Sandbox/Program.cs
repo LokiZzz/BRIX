@@ -1,13 +1,20 @@
 ﻿using BRIX.Library.Abilities;
+using BRIX.Library.Aspects;
 using BRIX.Library.Characters;
 using BRIX.Library.DiceValue;
 using BRIX.Library.Effects;
+using BRIX.Utility.Extensions;
+using Newtonsoft.Json;
+using System.Net.Http.Json;
+using System.Text.Json.Serialization;
 
-NPC goblin = new() { Name = "Мусорный гоблин", Health = 5 };
-Ability stab = new() { Name = "Пырнуть ножом" };
-stab.AddEffect(new DamageEffect() { Impact = new DicePool((1, 4)) });
-goblin.Abilities.Add(stab);
+//ActivationConditionsAspect aspect = new();
+//aspect = aspect.Copy();
 
-int goblinPower = goblin.Power;
+//string json = JsonConvert.SerializeObject(aspect);
+//aspect = JsonConvert.DeserializeObject<ActivationConditionsAspect>(json);
 
-Console.WriteLine(goblinPower);
+//json = JsonConvert.SerializeObject(aspect);
+//aspect = JsonConvert.DeserializeObject<ActivationConditionsAspect>(json);
+
+Console.WriteLine();

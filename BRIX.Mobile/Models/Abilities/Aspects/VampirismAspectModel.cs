@@ -5,10 +5,8 @@ using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {
-    public partial class VampirismAspectModel : SpecificAspectModelBase<VampirismAspect>
+    public partial class VampirismAspectModel(VampirismAspect model) : SpecificAspectModelBase<VampirismAspect>(model)
     {
-        public VampirismAspectModel(VampirismAspect model) : base(model) { }
-
         public int VampirismPercent
         {
             get => Internal.VampirismPercent;

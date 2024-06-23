@@ -8,7 +8,6 @@ using BRIX.Mobile.Models.NPCs;
 using BRIX.Mobile.Resources.Localizations;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 
 namespace BRIX.Mobile.ViewModel.NPCs
 {

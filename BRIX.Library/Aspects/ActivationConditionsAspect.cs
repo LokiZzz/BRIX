@@ -2,12 +2,18 @@
 {
     public class ActivationConditionsAspect : MultiConditionalAspect<EActivationCondition>
     {
+        public override void Initialize()
+        {
+            base.Initialize();
+            Conditions = [(EActivationCondition.AbleToMove, string.Empty)];
+        }
+
         public override Dictionary<EActivationCondition, int> ConditionToCoeficientMap => new ()
         {
-            { EActivationCondition.NeedToMoveArm, -10 },
-            { EActivationCondition.NeedToMoveBothArms, -15 },
-            { EActivationCondition.NeedToAbleToTalk, -15 },
-            { EActivationCondition.NeedToMove, -20 },
+            { EActivationCondition.AbleToMoveOneArm, -10 },
+            { EActivationCondition.AbleToMoveBothArms, -15 },
+            { EActivationCondition.AbleToTalk, -15 },
+            { EActivationCondition.AbleToMove, -20 },
 
             { EActivationCondition.EasyActivationCondition, -20 },
             { EActivationCondition.MediumActivationCondition, -40 },
@@ -17,10 +23,10 @@
 
     public enum EActivationCondition
     {
-        NeedToMove = 1,
-        NeedToMoveArm = 2,
-        NeedToMoveBothArms = 3,
-        NeedToAbleToTalk = 4,
+        AbleToMove = 1,
+        AbleToMoveOneArm = 2,
+        AbleToMoveBothArms = 3,
+        AbleToTalk = 4,
 
         EasyActivationCondition = 5,
         MediumActivationCondition = 6,
