@@ -1,6 +1,9 @@
 ﻿using BRIX.Library.Effects;
 using BRIX.Mobile.Models.NPCs;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 
 namespace BRIX.Mobile.Models.Abilities.Effects
 {
@@ -23,7 +26,7 @@ namespace BRIX.Mobile.Models.Abilities.Effects
 
         public void AddCreature(NPCModel npc, int count = 1)
         {
-            Internal.Creatures.Add((count, npc.Internal));
+            Internal.Creatures.Add(new CreaturesGroup { Count = count, Creature = npc.Internal });
             Creatures.Add(new SummoningCreaturesVM { Count = count, Creature = npc });
         }
 
@@ -36,11 +39,15 @@ namespace BRIX.Mobile.Models.Abilities.Effects
         public void UpdateCreature(NPCModel newNPC)
         {
             // Internal
-            (int Count, Library.Characters.NPC Creature) creatureToUpdate = Internal.Creatures.First(x => 
-                x.Creature.Id == newNPC.Internal.Id
+            CreaturesGroup creatureToUpdate = Internal.Creatures.First(x => 
+                x.Creature?.Id == newNPC.Internal.Id
             );
             int index = Internal.Creatures.IndexOf(creatureToUpdate);
-            Internal.Creatures[index] = (creatureToUpdate.Count, newNPC.Internal);
+            Internal.Creatures[index] = new CreaturesGroup 
+            { 
+                Count = creatureToUpdate.Count, 
+                Creature = newNPC.Internal 
+            };
 
             // VM collection
             SummoningCreaturesVM creatureVMToUpdate = Creatures.First(x =>
@@ -49,12 +56,36 @@ namespace BRIX.Mobile.Models.Abilities.Effects
             index = Creatures.IndexOf(creatureVMToUpdate);
             Creatures[index] = new SummoningCreaturesVM { Count = creatureVMToUpdate.Count, Creature = newNPC };
         }
+
+        public void IncreaseCreaturesCount(SummoningCreaturesVM item)
+        {
+            item.Count++;
+            var internalCreature = Internal.Creatures.First(x => x.Creature.Id == item.Creature.Internal.Id);
+            internalCreature.Count++;
+        }
+
+        public void DecreaseCreaturesCount(SummoningCreaturesVM item)
+        {
+            item.Count--;
+            var internalCreature = Internal.Creatures.First(x => x.Creature.Id == item.Creature.Internal.Id);
+            internalCreature.Count--;
+        }
     }
 
-    public class SummoningCreaturesVM
+    public class SummoningCreaturesVM : ObservableObject
     {
-        public NPCModel Creature { get; set; } = new();
+        private NPCModel _creature = new();
+        public NPCModel Creature
+        {
+            get => _creature;
+            set => SetProperty(ref _creature, value);
+        }
 
-        public int Count { get; set; } = 1;
+        private int _count = 1;
+        public int Count
+        {
+            get => _count;
+            set => SetProperty(ref _count, value);
+        }
     }
 }

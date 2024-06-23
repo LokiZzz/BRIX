@@ -11,11 +11,18 @@ namespace BRIX.Library.Effects
             typeof(AOEAspect), typeof(DurationAspect), typeof(ActivationConditionsAspect)
         ];
 
-        public List<(int Count, NPC Creature)> Creatures { get; set; } = [];
+        public List<CreaturesGroup> Creatures { get; set; } = [];
 
         public override int BaseExpCost()
         {
             return (Creatures.Sum(x => x.Count * x.Creature.Power) * 0.85).Round();
         }
+    }
+
+    public class CreaturesGroup
+    {
+        public NPC Creature { get; set; } = new();
+
+        public int Count { get; set; }
     }
 }

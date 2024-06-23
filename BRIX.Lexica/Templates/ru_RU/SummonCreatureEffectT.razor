@@ -12,7 +12,7 @@
     {
         string enumeration = string.Empty;
 
-        foreach((int Count, NPC Creature) item in Model.Creatures)
+        foreach(CreaturesGroup item in Model.Creatures)
         {
             if (!string.IsNullOrEmpty(enumeration))
             {

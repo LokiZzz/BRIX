@@ -45,6 +45,23 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             }
         }
 
+        [RelayCommand]
+        public void IncreaseCreaturesCount(SummoningCreaturesVM item)
+        {
+            Effect?.IncreaseCreaturesCount(item);
+            CostMonitor?.UpdateCost();
+        }
+
+        [RelayCommand]
+        public void DecreaseCreaturesCount(SummoningCreaturesVM item)
+        {
+            if(item.Count > 1)
+            {
+                Effect?.DecreaseCreaturesCount(item);
+                CostMonitor?.UpdateCost();
+            }
+        }
+
         protected override void HandleBack(IDictionary<string, object> query)
         {
             HandleBackFormEditing(query);

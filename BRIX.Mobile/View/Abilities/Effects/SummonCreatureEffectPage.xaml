@@ -18,6 +18,17 @@
         <controls:TitleView/>
     </Shell.TitleView>
 
+    <ContentPage.Resources>
+        <Style TargetType="Button" x:Key="SmallLghitSquareIconButton" BasedOn="{StaticResource SquareIconButton}">
+            <Setter Property="BorderWidth" Value="1"/>
+            <Setter Property="BorderColor" Value="{StaticResource BRIXWhite}"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="WidthRequest" Value="25"/>
+            <Setter Property="HeightRequest" Value="25"/>
+        </Style>
+    </ContentPage.Resources>
+    
     <Grid RowDefinitions="*,auto">
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Spacing="10" Margin="0,0,0,10">
@@ -74,10 +85,31 @@
                                     </SwipeView.RightItems>
                                     <Grid Margin="10,0">
                                         <Border Style="{StaticResource BlockBorder}" >
-                                            <Grid ColumnDefinitions="*,auto,auto">
-                                                <Label Grid.Column="0" Text="{Binding Creature.Name}" />
-                                                <Label Grid.Column="1" Text="{Binding Count}" Margin="0,0,20,0"/>
-                                                <Label Grid.Column="2" Text="{Binding Creature.Power}" />
+                                            <Grid ColumnDefinitions="auto,*,auto,auto,auto" ColumnSpacing="10">
+                                                <Label 
+                                                    Grid.Column="3" 
+                                                    Text="{Binding Count, StringFormat='x{0}'}"
+                                                    VerticalOptions="Center"/>
+                                                <Label 
+                                                    Grid.Column="0" 
+                                                    Text="{Binding Creature.Name}"
+                                                    VerticalOptions="Center"/>
+                                                <Label 
+                                                    Grid.Column="1" 
+                                                    Text="{Binding Creature.Power, StringFormat='{0} exp'}" 
+                                                    VerticalOptions="Center" />
+                                                <Button 
+                                                    Grid.Column="2"
+                                                    Style="{StaticResource SmallLghitSquareIconButton}"
+                                                    Text="{x:Static icons:Awesome.Minus}"
+                                                    Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.DecreaseCreaturesCountCommand}"
+                                                    CommandParameter="{Binding}"/>
+                                                <Button 
+                                                    Grid.Column="4"
+                                                    Style="{StaticResource SmallLghitSquareIconButton}"
+                                                    Text="{x:Static icons:Awesome.Plus}"
+                                                    Command="{Binding Source={x:Reference collectionView}, Path= BindingContext.IncreaseCreaturesCountCommand}"
+                                                    CommandParameter="{Binding}"/>
                                             </Grid>
                                         </Border>
                                     </Grid>
