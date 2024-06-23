@@ -7,7 +7,7 @@ namespace BRIX.Library.Aspects
     /// </summary>
     public class VampirismAspect : AspectBase
     {
-        public int VampirismPercent { get; set; } = 50;
+        public int VampirismPercent { get; set; } = 0;
 
         public override double GetCoefficient()
         {

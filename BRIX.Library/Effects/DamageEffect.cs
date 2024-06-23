@@ -12,7 +12,7 @@ namespace BRIX.Library.Effects
 
         public override List<Type> RequiredAspects =>
         [
-            typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect)
+            typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect), typeof(VampirismAspect)
         ];
 
         public override int BaseExpCost()

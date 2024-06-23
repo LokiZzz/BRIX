@@ -6,6 +6,11 @@ namespace BRIX.Library.Mathematics
     {
         public static double ToCoeficient(this int percents)
         {
+            if(percents == 0)
+            {
+                return 1;
+            }
+
             if (percents < -100)
             {
                 throw new ArgumentException("Негативный коэффициент должен находится между 0 и 1.");

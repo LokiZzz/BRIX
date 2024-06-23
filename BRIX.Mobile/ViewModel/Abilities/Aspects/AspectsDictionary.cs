@@ -38,6 +38,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 EditPage = typeof(AOEAspectPage),
                 LibraryAspectType = typeof(AOEAspect),
             }},
+            { typeof(VampirismAspectModel), new AspectUtilityModel() {
+                Name = Localization.AspectVampirism,
+                Icon = AwesomeRPG.BatSword,
+                EditPage = typeof(VampirismAspectPage),
+                LibraryAspectType = typeof(VampirismAspect),
+            }},
         };
 
         public static string GetEditPageRoute(EffectBase effect)

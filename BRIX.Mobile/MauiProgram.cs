@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Effects;
+﻿using BRIX.Library.Aspects;
+using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Resources.Handlers;
 using BRIX.Mobile.Services;
@@ -138,6 +139,7 @@ public static class MauiProgram
         builder.RegisterView<ActivationConditionsAspectPage, ActivationConditionsAspectPageVM>();
         builder.RegisterView<DurationAspectPage, DurationAspectPageVM>();
         builder.RegisterView<AOEAspectPage, AOEAspectPageVM>();
+        builder.RegisterView<VampirismAspectPage, VampirismAspectPageVM>();
     }
 
     /// <param name="registerRoute"> Set false if view already registered in AppShell.xaml </param>

@@ -574,6 +574,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vampirism.
+        /// </summary>
+        public static string AspectVampirism {
+            get {
+                return ResourceManager.GetString("AspectVampirism", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heals a character by percent of the damage he inflicted..
+        /// </summary>
+        public static string AspectVampirismHint {
+            get {
+                return ResourceManager.GetString("AspectVampirismHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Attack.
         /// </summary>
         public static string Attack {
@@ -3495,6 +3513,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string UsesCount {
             get {
                 return ResourceManager.GetString("UsesCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Percent.
+        /// </summary>
+        public static string VampirismPercent {
+            get {
+                return ResourceManager.GetString("VampirismPercent", resourceCulture);
             }
         }
         

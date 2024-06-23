@@ -288,6 +288,12 @@
   <data name="AspectTargetSelection" xml:space="preserve">
     <value>Target selection</value>
   </data>
+  <data name="AspectVampirism" xml:space="preserve">
+    <value>Vampirism</value>
+  </data>
+  <data name="AspectVampirismHint" xml:space="preserve">
+    <value>Heals a character by percent of the damage he inflicted.</value>
+  </data>
   <data name="Attack" xml:space="preserve">
     <value>Attack</value>
   </data>
@@ -1262,6 +1268,9 @@
   </data>
   <data name="UsesCount" xml:space="preserve">
     <value>Uses count</value>
+  </data>
+  <data name="VampirismPercent" xml:space="preserve">
+    <value>Percent</value>
   </data>
   <data name="VoxelArrayIsArbitrary" xml:space="preserve">
     <value>The voxels are arbitrary positioned each time</value>

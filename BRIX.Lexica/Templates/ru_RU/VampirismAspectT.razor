@@ -1,0 +1,10 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+@using BRIX.Library.Effects
+
+<p>Исцеляет персонажа на @(Model.VampirismPercent)% от нанесённого урона.</p>
+
+@code {
+    [Parameter]
+    public VampirismAspect Model { get; set; } = new();
+}

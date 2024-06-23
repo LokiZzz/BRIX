@@ -17,6 +17,8 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                     return new DurationAspectModel(da);
                 case AOEAspect aoea:
                     return new AOEAspectModel(aoea);
+                case VampirismAspect va:
+                    return new VampirismAspectModel(va);
                 default: 
                     throw new NotImplementedException($"Для аспекта {aspect.GetType()} не реализована модель.");
             }
