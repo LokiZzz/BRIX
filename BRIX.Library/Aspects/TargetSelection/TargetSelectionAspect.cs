@@ -43,7 +43,7 @@ namespace BRIX.Library.Aspects.TargetSelection
             double randomSelectionCoef = NTAD?.IsTargetSelectionIsRandom == true ? 0.8 : 1;
 
             return distanceCoef * countCoef
-                * EquivalentToPercentMap[NTAD?.ObstacleBetweenCharacterAndTarget ?? 0].ToCoeficient()
+                * ObstacleEquivalent.Map[NTAD?.ObstacleBetweenCharacterAndTarget ?? 0].ToCoeficient()
                 * randomSelectionCoef
                 * TargetChain.GetCoefficient()
                 * TargetsSizes.GetCoefficient()
@@ -68,8 +68,8 @@ namespace BRIX.Library.Aspects.TargetSelection
             double areaBoundedToCharacterCoef = AreaSettings?.IsAreaBoundedTo == true ? 1.7 : 1;
 
             return distanceCoef * volumeCoef * excludedTargetsCoef
-                * EquivalentToPercentMap[AreaSettings?.ObstacleBetweenCharacterAndArea ?? 0].ToCoeficient()
-                * EquivalentToPercentMap[AreaSettings?.ObstacleBetweenEpicenterAndTarget ?? 0].ToCoeficient()
+                * ObstacleEquivalent.Map[AreaSettings?.ObstacleBetweenCharacterAndArea ?? 0].ToCoeficient()
+                * ObstacleEquivalent.Map[AreaSettings?.ObstacleBetweenEpicenterAndTarget ?? 0].ToCoeficient()
                 * areaBoundedToCharacterCoef
                 * TargetChain.GetCoefficient()
                 * TargetsSizes.GetCoefficient()
@@ -82,18 +82,5 @@ namespace BRIX.Library.Aspects.TargetSelection
                 .Convert(distance)
                 .ToCoeficient();
         }
-
-        private static Dictionary<EObstacleEquivalent, int> EquivalentToPercentMap => new()
-        {
-            { EObstacleEquivalent.None, 0 },
-            { EObstacleEquivalent.PaperSheet, -50 },
-            { EObstacleEquivalent.DenseVegetation, -25 },
-            { EObstacleEquivalent.LeatherArmor, -10 },
-            { EObstacleEquivalent.WoodenPlank, 0 },
-            { EObstacleEquivalent.MetalArmor, 100 },
-            { EObstacleEquivalent.BrickWall, 500 },
-            { EObstacleEquivalent.ThickSteelPlate, 1000 },
-            { EObstacleEquivalent.MuchMorePowerfullObstacle, 5000 },
-        };
     }
 }

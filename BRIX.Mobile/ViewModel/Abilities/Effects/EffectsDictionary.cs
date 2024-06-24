@@ -137,6 +137,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 EditPage = typeof(SummonCreatureEffectPage),
                 Effect = new SummonCreatureEffect()
             }},
+            { typeof(EffectGenericModelBase<RevengeEffect>), new EffectTypeVM() {
+                Name = Localization.EffectRevenge,
+                Icon = AwesomeRPG.Mirror,
+                EditPage = typeof(RevengeEffectPage),
+                Effect = new RevengeEffect()
+            }},
 
             { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectTypeVM() {
                 Name = Localization.EffectWin,

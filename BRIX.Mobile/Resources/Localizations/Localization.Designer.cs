@@ -1564,6 +1564,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Revenge.
+        /// </summary>
+        public static string EffectRevenge {
+            get {
+                return ResourceManager.GetString("EffectRevenge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The character declares activation and starts accumulating incoming damage for a set number of rounds. Before this time expires, the character can use the reaction and deal all the accumulated damage to the opponents..
+        /// </summary>
+        public static string EffectRevengeHint {
+            get {
+                return ResourceManager.GetString("EffectRevengeHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Effects.
         /// </summary>
         public static string Effects {
@@ -2793,6 +2811,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Reset {
             get {
                 return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration in rounds.
+        /// </summary>
+        public static string RevengeDuration {
+            get {
+                return ResourceManager.GetString("RevengeDuration", resourceCulture);
             }
         }
         

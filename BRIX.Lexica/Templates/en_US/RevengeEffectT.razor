@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+The character @Numbers.ENGDcln(Model.Impact, "round") accumulates incoming damage in order to return it to opponents later.
+
+@code {
+    [Parameter]
+    public RevengeEffect Model { get; set; } = new();
+}

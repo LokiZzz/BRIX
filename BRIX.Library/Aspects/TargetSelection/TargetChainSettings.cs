@@ -14,7 +14,7 @@ namespace BRIX.Library.Aspects.TargetSelection
         {
             if (IsChainEnabled)
             {
-                double obstacleCoef = EquivalentToPercentMap[ObstacleBetweenTargetsInChain].ToCoeficient();
+                double obstacleCoef = ObstacleEquivalent.Map[ObstacleBetweenTargetsInChain].ToCoeficient();
 
                 return ((75 + MaxDistanceBetweenTargets) * MaxTargetsCount).ToCoeficient() * obstacleCoef;
             }
@@ -23,18 +23,5 @@ namespace BRIX.Library.Aspects.TargetSelection
                 return 1;
             }
         }
-
-        private Dictionary<EObstacleEquivalent, int> EquivalentToPercentMap => new()
-        {
-            { EObstacleEquivalent.None, 0 },
-            { EObstacleEquivalent.PaperSheet, -50 },
-            { EObstacleEquivalent.DenseVegetation, -25 },
-            { EObstacleEquivalent.LeatherArmor, -10 },
-            { EObstacleEquivalent.WoodenPlank, 0 },
-            { EObstacleEquivalent.MetalArmor, 100 },
-            { EObstacleEquivalent.BrickWall, 500 },
-            { EObstacleEquivalent.ThickSteelPlate, 1000 },
-            { EObstacleEquivalent.MuchMorePowerfullObstacle, 5000 },
-        };
     }
 }

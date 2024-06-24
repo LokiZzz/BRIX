@@ -8,8 +8,6 @@ namespace BRIX.Library.Effects
     /// </summary>
     public class DamageEffect : DiceImpactEffectBase
     {
-        public string AdditionalProperty { get; set; } = "Additional property";
-
         public override List<Type> RequiredAspects =>
         [
             typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect), typeof(VampirismAspect)

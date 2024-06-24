@@ -131,6 +131,9 @@
 	  <Compile Update="View\Abilities\Effects\CancelationEffectPage.xaml.cs">
 	    <DependentUpon>CancelationEffectPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\Abilities\Effects\RevengeEffectPage.xaml.cs">
+	    <DependentUpon>RevengeEffectPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\Abilities\Effects\SummonCreatureEffectPage.xaml.cs">
 	    <DependentUpon>SummonCreatureEffectPage.xaml</DependentUpon>
 	  </Compile>
@@ -207,6 +210,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\CancelationEffectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Effects\RevengeEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\SummonCreatureEffectPage.xaml">

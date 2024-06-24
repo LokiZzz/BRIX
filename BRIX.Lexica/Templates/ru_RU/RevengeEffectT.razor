@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Персонаж @Numbers.RUSDcln(Model.Impact, "раунд", "раунда", "раундов") копит входящий урон, чтобы потом вернуть его противникам.
+
+@code {
+    [Parameter]
+    public RevengeEffect Model { get; set; } = new();
+}
