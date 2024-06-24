@@ -9,6 +9,7 @@
              xmlns:aspectsview="clr-namespace:BRIX.Mobile.View.Abilities.Aspects"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              x:Class="BRIX.Mobile.View.Abilities.Effects.DangerousTerrainEffectPage"
+             x:DataType="effectsvm:DangerousTerrainEffectPageVM"
              Shell.TabBarIsVisible="False"
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectDangerousTerrain}}">
 
@@ -26,6 +27,17 @@
                             Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Damage}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectDangerousTerrainHint}}"/>
                         <abilitiesview:DicePoolEditor BindingContext="{Binding DicePoolEditor}"/>
+                        <Label 
+                            Style="{StaticResource TitleLabel}" 
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Disposable}}"/>
+                        <HorizontalStackLayout Spacing="10">
+                            <CheckBox 
+                                Color="{StaticResource BRIXWhite}"
+                                IsChecked="{Binding Effect.IsAreaDisposable}"/>
+                            <Label 
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.IsAreaDisposable}}"
+                                VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Border>
                 <aspectsview:AspectsPanelView BindingContext="{Binding Aspects}"/>

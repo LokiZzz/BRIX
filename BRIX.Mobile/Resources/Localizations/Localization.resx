@@ -489,6 +489,9 @@
   <data name="DiceValuePopupTitle" xml:space="preserve">
     <value>Dice value</value>
   </data>
+  <data name="Disposable" xml:space="preserve">
+    <value>Disposable</value>
+  </data>
   <data name="DistanceToArea" xml:space="preserve">
     <value>Distance to area</value>
   </data>
@@ -827,6 +830,9 @@
   </data>
   <data name="IsAreaCanBound" xml:space="preserve">
     <value>Аrea can be bound</value>
+  </data>
+  <data name="IsAreaDisposable" xml:space="preserve">
+    <value>Does the area trigger once and disappear?</value>
   </data>
   <data name="IsShieldPermeable" xml:space="preserve">
     <value>Is the shield permeable?</value>

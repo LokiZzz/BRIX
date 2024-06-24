@@ -138,7 +138,7 @@
                                         <Border Style="{StaticResource BlockBorder}" >
                                             <VerticalStackLayout Spacing="5">
                                                 <Label Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
-                                                <Label Text="{Binding Description}" />
+                                                <Label Text="{Binding Description}" TextType="Html"/>
                                             </VerticalStackLayout>
                                         </Border>
                                     </Grid>

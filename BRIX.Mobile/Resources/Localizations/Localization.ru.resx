@@ -489,6 +489,9 @@
   <data name="DiceValuePopupTitle" xml:space="preserve">
     <value>Кости</value>
   </data>
+  <data name="Disposable" xml:space="preserve">
+    <value>Одноразовость</value>
+  </data>
   <data name="DistanceToArea" xml:space="preserve">
     <value>Расстояние до области</value>
   </data>
@@ -830,6 +833,9 @@
   </data>
   <data name="IsAreaCanBound" xml:space="preserve">
     <value>Область может быть привязана</value>
+  </data>
+  <data name="IsAreaDisposable" xml:space="preserve">
+    <value>Область срабатывает один раз и пропадает?</value>
   </data>
   <data name="IsShieldPermeable" xml:space="preserve">
     <value>Щит может быть проницаем?</value>

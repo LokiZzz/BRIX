@@ -25,6 +25,8 @@ namespace BRIX.Mobile.Models.Abilities.Effects
                     return new ShieldEffectModel(se);
                 case SummonCreatureEffect sce:
                     return new SummonCreatureEffectModel(sce);
+                case DangerousTerrainEffect dte:
+                    return new DangerousTerrainEffectModel(dte);
                 default:
                 {
                     MethodInfo? method = typeof(EffectModelFactory).GetMethod(

@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Aspects;
+using BRIX.Library.Extensions;
 
 namespace BRIX.Library.Effects
 {
@@ -14,6 +15,13 @@ namespace BRIX.Library.Effects
             typeof(ActivationConditionsAspect), typeof(VampirismAspect)
         ];
 
-        public override int BaseExpCost() => Impact.Average() * Impact.Average();
+        public bool IsAreaDisposable { get; set; }
+
+        public override int BaseExpCost()
+        {
+            double disposableCoef = IsAreaDisposable ? 0.3 : 1;
+
+            return (Impact.Average() * Impact.Average() * disposableCoef).Round();
+        }
     }
 }

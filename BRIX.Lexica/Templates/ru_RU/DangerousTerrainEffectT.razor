@@ -3,6 +3,11 @@
 
 Создаёт область, наносящую @Numbers.RUSDcln(Model.Impact, "очко", "очка", "очков") урона персонажам, которые начали в ней ход или переместились в ней на 1 метр.
 
+@if (Model.IsAreaDisposable)
+{
+    <p>Область исчезнет сразу после первого срабатывания.</p>
+}
+
 @code {
     [Parameter]
     public DangerousTerrainEffect Model { get; set; } = new();

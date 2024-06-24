@@ -1177,6 +1177,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disposable.
+        /// </summary>
+        public static string Disposable {
+            get {
+                return ResourceManager.GetString("Disposable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Distance to area.
         /// </summary>
         public static string DistanceToArea {
@@ -2190,6 +2199,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string IsAreaCanBound {
             get {
                 return ResourceManager.GetString("IsAreaCanBound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Does the area trigger once and disappear?.
+        /// </summary>
+        public static string IsAreaDisposable {
+            get {
+                return ResourceManager.GetString("IsAreaDisposable", resourceCulture);
             }
         }
         

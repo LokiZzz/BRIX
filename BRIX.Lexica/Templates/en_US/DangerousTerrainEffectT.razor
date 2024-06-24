@@ -1,7 +1,12 @@
 ﻿@using BRIX.Lexica
 @using BRIX.Library.Effects
 
-Creates an area that causes @Numbers.ENGDcln(Model.Impact, "point") of damage to characters who started a turn in it or moved 1 meter within it.
+<p>Creates an area that causes @Numbers.ENGDcln(Model.Impact, "point") of damage to characters who started a turn in it or moved 1 meter within it.</p>
+
+@if(Model.IsAreaDisposable)
+{
+    <p>Area will disappear if it deal damage at least once.</p>
+}
 
 @code {
     [Parameter]
