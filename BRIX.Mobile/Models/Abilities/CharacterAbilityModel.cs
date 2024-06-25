@@ -1,8 +1,10 @@
 ﻿using BRIX.Library.Abilities;
 using BRIX.Library.Characters;
+using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Maui.Controls;
 using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.Models.Abilities
@@ -17,6 +19,9 @@ namespace BRIX.Mobile.Models.Abilities
             Activation = new(ability.Activation);
             Effects = new ObservableCollection<EffectModelBase>(
                 ability.Effects.Select(EffectModelFactory.GetModel)
+            );
+            ConcordedAspects = new ObservableCollection<AspectModelBase>(
+                ability.ConcordedAspects.Select(AspectModelFactory.GetAspectModel)
             );
             OnPropertyChanged(nameof(ShowStatusName));
         }
@@ -37,6 +42,8 @@ namespace BRIX.Mobile.Models.Abilities
         }
 
         public ObservableCollection<EffectModelBase> Effects { get; set; } = [];
+
+        public ObservableCollection<AspectModelBase> ConcordedAspects { get; set; } = [];
 
         public string Name
         {
@@ -120,6 +127,19 @@ namespace BRIX.Mobile.Models.Abilities
 
             InternalModel.RemoveEffect(effect.InternalModel);
             Effects.Remove(effect);
+            OnPropertyChanged(nameof(Cost));
+            OnPropertyChanged(nameof(ShowStatusName));
+        }
+
+        public void UpdateConcordedAspect(AspectModelBase aspectModel)
+        {
+            InternalModel.UpdateConcordedAspect(aspectModel.Internal);
+
+            int index = ConcordedAspects.IndexOf(
+                ConcordedAspects.First(x => x.Internal.GetType().Equals(aspectModel.Internal.GetType()))
+            );
+            ConcordedAspects[index] = aspectModel;
+
             OnPropertyChanged(nameof(Cost));
             OnPropertyChanged(nameof(ShowStatusName));
         }

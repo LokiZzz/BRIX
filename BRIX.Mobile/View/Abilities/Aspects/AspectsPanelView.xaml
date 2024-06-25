@@ -5,7 +5,7 @@
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities.Aspects"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              x:Class="BRIX.Mobile.View.Abilities.Aspects.AspectsPanelView"
-             x:DataType="vm:AspectPanelViewModel">
+             x:DataType="vm:AspectPanelVM">
 
     <Border Style="{StaticResource BlockBorder}">
         <Grid RowDefinitions="auto,auto,auto" RowSpacing="5">

@@ -1,4 +1,5 @@
-﻿using BRIX.Mobile.Models.Abilities.Aspects;
+﻿using BRIX.Mobile.Models.Abilities;
+using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Base;
@@ -20,6 +21,13 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         {
             get => _effect;
             set => SetProperty(ref _effect, value);
+        }
+
+        private CharacterAbilityModel? _ability;
+        public CharacterAbilityModel? Ability
+        {
+            get => _ability;
+            set => SetProperty(ref _ability, value);
         }
 
         private T? _aspect;
@@ -50,15 +58,22 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             T? temp = query.GetParameterOrDefault<T>(NavigationParameters.Aspect);
             Aspect = temp;
 
-            if (Aspect != null && CostMonitor != null && Effect != null)
+            if (Aspect != null && CostMonitor != null)
             {
                 Aspect.CostMonitor = CostMonitor;
-
                 Initialize();
 
-                Effect.UpdateAspect(Aspect);
-                CostMonitor.Ability?.UpdateEffect(Effect);
+                if (Effect != null)
+                {
+                    Effect.UpdateAspect(Aspect);
+                    CostMonitor.Ability?.UpdateEffect(Effect);
+                }
+                else
+                {
+                    CostMonitor.Ability.UpdateConcordedAspect(Aspect);
+                }
             }
+
 
             query.Clear();
         }

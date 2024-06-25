@@ -18,7 +18,7 @@ namespace BRIX.Library.Abilities
         protected readonly List<EffectBase> _effects = [];
         public IReadOnlyCollection<EffectBase> Effects => _effects;
 
-        private readonly HashSet<AspectBase> SynchronizingAspects = [];
+        public readonly List<AspectBase> ConcordedAspects = [];
 
         public AbilityActivation Activation { get; set; } = new();
 
@@ -73,13 +73,6 @@ namespace BRIX.Library.Abilities
             return expCost <= 1 ? 1 : expCost;
         }
 
-        public T? GetAspect<T>() where T : AspectBase
-        {
-            AspectBase? aspect = SynchronizingAspects.FirstOrDefault(x => x.GetType().Equals(typeof(T)));
-
-            return aspect as T;
-        }
-
         public void AddEffect(EffectBase effect)
         {
             if(_effects.Contains(effect))
@@ -92,8 +85,8 @@ namespace BRIX.Library.Abilities
 
             foreach (AspectBase aspect in effect.Aspects.ToList())
             {
-                AspectBase? existingAspect = SynchronizingAspects.FirstOrDefault(
-                    x => x.GetType().Equals(SynchronizingAspects.GetType())
+                AspectBase? existingAspect = ConcordedAspects.FirstOrDefault(
+                    x => x.GetType().Equals(ConcordedAspects.GetType())
                 );
 
                 if (existingAspect != null)
@@ -108,11 +101,6 @@ namespace BRIX.Library.Abilities
         public IEnumerable<T?> GetEffects<T>() where T : EffectBase
         {
             return _effects.Where(x => x is T).Select(x => x as T);
-        }
-
-        public void Clear()
-        {
-            _effects.Clear();
         }
 
         /// <summary>
@@ -138,9 +126,13 @@ namespace BRIX.Library.Abilities
             _effects.Remove(item);
         }
 
-        public bool Contains(EffectBase item)
+        public void UpdateConcordedAspect(AspectBase aspect)
         {
-            return _effects.Contains(item);
+            int index = ConcordedAspects.IndexOf(
+                ConcordedAspects.First(x => x.GetType().Equals(aspect.GetType()))
+            );
+            ConcordedAspects[index] = aspect;
+            Concord(aspect);
         }
 
         /// <summary>
@@ -149,7 +141,7 @@ namespace BRIX.Library.Abilities
         /// </summary>
         public void Concord(AspectBase sourceAspect)
         {
-            SynchronizingAspects.Add(sourceAspect);
+            ConcordedAspects.Add(sourceAspect);
 
             if (_effects.Count > 1)
             {
@@ -163,18 +155,13 @@ namespace BRIX.Library.Abilities
         /// <summary>
         /// Отмена согласования. В каждом эффекте ссылка на общий аспект будет заменена его копией.
         /// </summary>
-        public void Discord(AspectBase sourceAspectType)
+        public void Discord(Type aspectType)
         {
-            SynchronizingAspects.RemoveWhere(x => 
-                x.GetType().Equals(sourceAspectType.GetType())
-            );
+            ConcordedAspects.RemoveAll(x => x.GetType().Equals(aspectType));
 
-            if (_effects.Count > 1)
+            foreach (EffectBase effect in _effects)
             {
-                foreach (EffectBase effect in _effects)
-                {
-                    effect.Detach(sourceAspectType);
-                }
+                effect.Detach(aspectType);
             }
         }
 

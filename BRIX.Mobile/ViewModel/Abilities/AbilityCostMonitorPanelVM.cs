@@ -36,8 +36,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
         
         private readonly CharacterModel? Character;
 
-        private CharacterAbilityModel? _ability;
-        public CharacterAbilityModel? Ability
+        private CharacterAbilityModel _ability = new();
+        public CharacterAbilityModel Ability
         {
             get => _ability;
             set => SetProperty(ref _ability, value);

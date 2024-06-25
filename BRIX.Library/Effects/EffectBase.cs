@@ -111,13 +111,11 @@ namespace BRIX.Library.Effects
         /// Передаваемый экземпляр не имеет значения, важен лишь его тип.
         /// </summary>
         /// <param name="sourceAspect">Любой экземпляр необходимого типа.</param>
-        public void Detach(AspectBase aspectToDetach)
+        public void Detach(Type aspectType)
         {
-            AspectBase searchingAspect = GetAspect(aspectToDetach.GetType());
-            
-            if (searchingAspect != null)
+            if (RequiredAspects.Any(x => x.Equals(aspectType)))
             {
-                int index = Aspects.FindIndex(x => x.GetType().Equals(searchingAspect.GetType()));
+                int index = Aspects.FindIndex(x => x.GetType().Equals(aspectType));
                 AspectBase? aspectCopy = Aspects[index].Copy();
 
                 if (aspectCopy != null)

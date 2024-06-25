@@ -9,6 +9,7 @@
              xmlns:inv="clr-namespace:BRIX.Mobile.ViewModel.Inventory"
              xmlns:models="clr-namespace:BRIX.Mobile.Models.Abilities.Effects"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+             xmlns:aspectsview="clr-namespace:BRIX.Mobile.View.Abilities.Aspects"
              x:DataType="vm:AOEAbilityPageVM"
              Shell.TabBarIsVisible="False"
              Title="{Binding Title}"
@@ -52,7 +53,9 @@
                             Command="{Binding EditActivationCommand}"/>
                     </VerticalStackLayout>
                 </Border>
-                
+
+                <aspectsview:AspectsPanelView BindingContext="{Binding Aspects}"/>
+
                 <Border Style="{StaticResource BlockBorder}" Margin="10,0" IsVisible="{Binding ForCharacter}">
                     <VerticalStackLayout Spacing="10">
                         <Label 

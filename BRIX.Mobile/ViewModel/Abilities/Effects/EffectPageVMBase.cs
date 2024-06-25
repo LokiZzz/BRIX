@@ -36,8 +36,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             CostMonitor?.UpdateCost();
         }
 
-        private AspectPanelViewModel? _aspects;
-        public AspectPanelViewModel? Aspects
+        private AspectPanelVM? _aspects;
+        public AspectPanelVM? Aspects
         {
             get => _aspects;
             set => SetProperty(ref _aspects, value);
@@ -135,7 +135,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
 
             if (CostMonitor != null)
             {
-                Aspects = new AspectPanelViewModel(CostMonitor, Effect);
+                Aspects = new AspectPanelVM(CostMonitor, Effect);
             }
 
             _alreadyInitialized = true;

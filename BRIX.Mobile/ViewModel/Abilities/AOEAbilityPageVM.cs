@@ -15,6 +15,8 @@ using BRIX.Mobile.ViewModel.Abilities.Effects;
 using System.Collections.ObjectModel;
 using BRIX.Mobile.ViewModel.Inventory;
 using BRIX.Library.Abilities;
+using BRIX.Mobile.ViewModel.Abilities.Aspects;
+using BRIX.Mobile.Models.Abilities.Aspects;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {
@@ -38,6 +40,13 @@ namespace BRIX.Mobile.ViewModel.Abilities
         {
             get => _ability;
             set => SetProperty(ref _ability, value);
+        }
+
+        private AspectPanelVM? _aspects;
+        public AspectPanelVM? ConcordedAspects
+        {
+            get => _aspects;
+            set => SetProperty(ref _aspects, value);
         }
 
         private AbilityCostMonitorPanelVM _costMonitor = new();
@@ -257,6 +266,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 }
 
                 IntitializeCostMonitor();
+                ConcordedAspects = new AspectPanelVM(CostMonitor);
             }
             else
             {
@@ -295,6 +305,15 @@ namespace BRIX.Mobile.ViewModel.Abilities
             if (editedActivation != null)
             {
                 Ability.Activation = editedActivation;
+            }
+
+            AspectModelBase? editedConcordedAspect = query.GetParameterOrDefault<AspectModelBase>(
+                NavigationParameters.Aspect
+            );
+
+            if (editedConcordedAspect != null)
+            {
+                Ability.UpdateConcordedAspect(editedConcordedAspect);
             }
 
             CostMonitor.UpdateCost();
