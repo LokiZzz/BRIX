@@ -5,7 +5,8 @@
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities.Aspects"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              x:Class="BRIX.Mobile.View.Abilities.Aspects.AspectsPanelView"
-             x:DataType="vm:AspectPanelVM">
+             x:DataType="vm:AspectPanelVM" 
+             IsVisible="{Binding ShowPanel}">
 
     <Border Style="{StaticResource BlockBorder}">
         <Grid RowDefinitions="auto,auto,auto" RowSpacing="5">
@@ -45,14 +46,26 @@
             <Grid RowDefinitions="auto,*,auto" Grid.Row="2">
                 <Label Grid.Row="0" Style="{StaticResource TitleLabel}" Text="{Binding SelectedAspect.Name}" />
                 <Label Grid.Row="1" Text="{Binding SelectedAspect.Description}" TextType="Html"/>
-                <Grid Grid.Row="2" ColumnDefinitions="*,*">
+                <Grid Grid.Row="2" ColumnDefinitions="*,*" IsVisible="{Binding ShowEditAndConcord}" ColumnSpacing="10">
                     <Button 
-                        Grid.ColumnSpan="2"
+                        Grid.Column="0"
+                        Style="{StaticResource LightButton}"
+                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Concord}}" 
+                        Command="{Binding ConcordSelectedAspectCommand}"
+                        Margin="1"/>
+                    <Button 
+                        Grid.Column="1"
                         Style="{StaticResource LightButton}"
                         Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Edit}}" 
                         Command="{Binding NavigateToAspectCommand}"
-                        Margin="1,10,1,1"/>
+                        Margin="1"/>
                 </Grid>
+                <Button
+                    Grid.Row="2"
+                    Style="{StaticResource LightButton}"
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Discord}}"
+                    IsVisible="{Binding ShowEditAndConcord, Converter={StaticResource NotConverter}}"
+                    Command="{Binding DiscordSelectedAspectCommand}"/>
             </Grid>
         </Grid>
     </Border>

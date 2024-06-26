@@ -264,6 +264,9 @@
   <data name="AskDeleteStatus" xml:space="preserve">
     <value>Are you sure you want to delete status «{0}»?</value>
   </data>
+  <data name="AskIfYouWantToConcord" xml:space="preserve">
+    <value>Are you sure you want to concord the aspect? This aspect will be synchronized with other effects and the old settings will be lost.</value>
+  </data>
   <data name="AskToDeleteInventoryItem" xml:space="preserve">
     <value>Are you sure you want to delete «{0}»?</value>
   </data>
@@ -405,6 +408,9 @@
   <data name="CommonName" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="Concord" xml:space="preserve">
+    <value>Concord</value>
+  </data>
   <data name="Consumable" xml:space="preserve">
     <value>Consumable</value>
   </data>
@@ -488,6 +494,9 @@
   </data>
   <data name="DiceValuePopupTitle" xml:space="preserve">
     <value>Dice value</value>
+  </data>
+  <data name="Discord" xml:space="preserve">
+    <value>Discord</value>
   </data>
   <data name="Disposable" xml:space="preserve">
     <value>Disposable</value>

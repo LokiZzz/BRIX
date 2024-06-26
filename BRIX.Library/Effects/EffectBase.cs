@@ -102,7 +102,7 @@ namespace BRIX.Library.Effects
             {
                 int index = Aspects.FindIndex(x => x.GetType().Equals(aspectToConcord.GetType()));
                 Aspects[index] = sourceAspect;
-                Aspects[index].IsConcording = true;
+                Aspects[index].IsConcorded = true;
             }
         }
 
@@ -121,7 +121,7 @@ namespace BRIX.Library.Effects
                 if (aspectCopy != null)
                 {
                     Aspects[index] = aspectCopy;
-                    Aspects[index].IsConcording = false;
+                    Aspects[index].IsConcorded = false;
                 }
             }
         }

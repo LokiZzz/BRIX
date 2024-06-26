@@ -5,7 +5,7 @@
         /// <summary>
         /// Показывает, синхронизируется ли аспект с другими аспектами того же типа в других эффектах способности.
         /// </summary>
-        public bool IsConcording { get; set; }
+        public bool IsConcorded { get; set; }
 
         public abstract double GetCoefficient();
 

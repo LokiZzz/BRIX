@@ -502,6 +502,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to concord the aspect? This aspect will be synchronized with other effects and the old settings will be lost..
+        /// </summary>
+        public static string AskIfYouWantToConcord {
+            get {
+                return ResourceManager.GetString("AskIfYouWantToConcord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete «{0}»?.
         /// </summary>
         public static string AskToDeleteInventoryItem {
@@ -925,6 +934,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Concord.
+        /// </summary>
+        public static string Concord {
+            get {
+                return ResourceManager.GetString("Concord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Consumable.
         /// </summary>
         public static string Consumable {
@@ -1173,6 +1191,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string DiceValuePopupTitle {
             get {
                 return ResourceManager.GetString("DiceValuePopupTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discord.
+        /// </summary>
+        public static string Discord {
+            get {
+                return ResourceManager.GetString("Discord", resourceCulture);
             }
         }
         

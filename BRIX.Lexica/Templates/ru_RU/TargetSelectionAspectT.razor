@@ -5,11 +5,11 @@
 
 @if (Model.Strategy == ETargetSelectionStrategy.CharacterHimself)
 {
-    <p>Целью @(Model.IsConcording ? "эффектов" : "эффекта") является сам персонаж.</p>
+    <p>Целью @(Model.IsConcorded ? "эффектов" : "эффекта") является сам персонаж.</p>
 }
 @if (Model.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
 {
-    <p>@(Model.IsConcording ? "Эффекты подействуют" : "Эффект подействует")  на @Numbers.RUSDcln(Model.NTAD.TargetsCount, "цель", "цели", "целей") на расстоянии @Numbers.RUSDcln(Model.NTAD.DistanceInMeters, "метр", "метра", "метров") от персонажа.</p>
+    <p>@(Model.IsConcorded ? "Эффекты подействуют" : "Эффект подействует")  на @Numbers.RUSDcln(Model.NTAD.TargetsCount, "цель", "цели", "целей") на расстоянии @Numbers.RUSDcln(Model.NTAD.DistanceInMeters, "метр", "метра", "метров") от персонажа.</p>
 
     if(Model.NTAD.IsTargetSelectionIsRandom){
         <p>Цели должны быть выбраны случайным образом.</p>
@@ -25,34 +25,34 @@
     }
     else
     {
-        <p>Если между персонажем и его целью находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.NTAD.ObstacleBetweenCharacterAndTarget), то @(Model.IsConcording ? "эффекты не будут применены" : "эффект не будет применён.")</p>
+        <p>Если между персонажем и его целью находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.NTAD.ObstacleBetweenCharacterAndTarget), то @(Model.IsConcorded ? "эффекты не будут применены" : "эффект не будет применён.")</p>
     }
 }
 @if (Model.Strategy == ETargetSelectionStrategy.Area)
 {
-    <p>@(Model.IsConcording ? "Эффекты подействуют" : "Эффект подействует") на все цели в @GetShape(Model.AreaSettings.Area.Shape) на расстоянии @Numbers.RUSDeclension(Model.AreaSettings.DistanceToAreaInMeters, "метра", "метров", "метров") от персонажа. Область действия может располагаться под любым углом относительно персонажа.</p>
+    <p>@(Model.IsConcorded ? "Эффекты подействуют" : "Эффект подействует") на все цели в @GetShape(Model.AreaSettings.Area.Shape) на расстоянии @Numbers.RUSDeclension(Model.AreaSettings.DistanceToAreaInMeters, "метра", "метров", "метров") от персонажа. Область действия может располагаться под любым углом относительно персонажа.</p>
     
     if(Model.AreaSettings.ExcludedTargetsCount > 0)
     {
-        <p>Персонаж может выбрать @Numbers.RUSDeclension(Model.AreaSettings.ExcludedTargetsCount, "цель", "цели", "целей") в области, к которым @(Model.IsConcording ? "эффекты применяться не будут" : "эффект применяться не будет.")</p>
+        <p>Персонаж может выбрать @Numbers.RUSDeclension(Model.AreaSettings.ExcludedTargetsCount, "цель", "цели", "целей") в области, к которым @(Model.IsConcorded ? "эффекты применяться не будут" : "эффект применяться не будет.")</p>
     }
 
     if (Model.AreaSettings.ObstacleBetweenCharacterAndArea == EObstacleEquivalent.None)
     {
-        <p>Препятствия между областью действия @(Model.IsConcording ? "эффектов" : "эффекта") и персонажем не играют роли.</p>
+        <p>Препятствия между областью действия @(Model.IsConcorded ? "эффектов" : "эффекта") и персонажем не играют роли.</p>
     }
     else
     {
-        <p>Если между персонажем и областью действия @(Model.IsConcording ? "способности" : "эффекта") находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.AreaSettings.ObstacleBetweenCharacterAndArea), то @(Model.IsConcording ? "эффекты не будут применены" : "эффект не будет применён") к этой области.</p>
+        <p>Если между персонажем и областью действия @(Model.IsConcorded ? "способности" : "эффекта") находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.AreaSettings.ObstacleBetweenCharacterAndArea), то @(Model.IsConcorded ? "эффекты не будут применены" : "эффект не будет применён") к этой области.</p>
     }
 
     if (Model.AreaSettings.ObstacleBetweenEpicenterAndTarget == EObstacleEquivalent.None)
     {
-        <p>Препятствия между эпицентром действия @(Model.IsConcording ? "способности" : "эффекта") и целями не играют роли.</p>
+        <p>Препятствия между эпицентром действия @(Model.IsConcorded ? "способности" : "эффекта") и целями не играют роли.</p>
     }
     else
     {
-        <p>Если между целью и эпицентром области действия находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.AreaSettings.ObstacleBetweenEpicenterAndTarget), то @(Model.IsConcording ? "эффекты не будут применены" : "эффект не будет применён") к этой цели.</p>
+        <p>Если между целью и эпицентром области действия находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.AreaSettings.ObstacleBetweenEpicenterAndTarget), то @(Model.IsConcorded ? "эффекты не будут применены" : "эффект не будет применён") к этой цели.</p>
     }
 
     if(Model.AreaSettings.IsAreaBoundedTo)
@@ -64,7 +64,7 @@
 {
     @if (Model.TargetChain.IsChainEnabled)
     {
-        <p>После применения @(Model.IsConcording ? "эффектов" : "эффекта") к цели, он применяется по цепочке к @Numbers.RUSDcln(Model.TargetChain.MaxTargetsCount, "другой цели", "другим целям", "другим целям"), максимальное расстояние между целями в цепи: @Numbers.RUSDcln(Model.TargetChain.MaxDistanceBetweenTargets, "метр", "метра", "метров").</p>
+        <p>После применения @(Model.IsConcorded ? "эффектов" : "эффекта") к цели, он применяется по цепочке к @Numbers.RUSDcln(Model.TargetChain.MaxTargetsCount, "другой цели", "другим целям", "другим целям"), максимальное расстояние между целями в цепи: @Numbers.RUSDcln(Model.TargetChain.MaxDistanceBetweenTargets, "метр", "метра", "метров").</p>
 
         if (Model.TargetChain.ObstacleBetweenTargetsInChain == EObstacleEquivalent.None)
         {
@@ -76,7 +76,7 @@
         }
     }
 
-    <p>@(Model.IsConcording ? "Эффекты" : "Эффект") может быть применён к целям следующих размеров:</p>
+    <p>@(Model.IsConcorded ? "Эффекты" : "Эффект") может быть применён к целям следующих размеров:</p>
     <ul>
         @foreach (ETargetSize size in Model.TargetsSizes.AllowedTargetSizes)
         {
@@ -86,7 +86,7 @@
 
     @if(Model.TargetSelectionRestrictions.Conditions.Count() > 0)
     {
-        <p>Чтобы @(Model.IsConcording ? "эффекты подействовали" : "эффекта подействовал") на цель, она должна иметь следующие свойства:</p>
+        <p>Чтобы @(Model.IsConcorded ? "эффекты подействовали" : "эффекта подействовал") на цель, она должна иметь следующие свойства:</p>
         <ul>
             @foreach ((ETargetSelectionRestrictions Type, string Comment) condition in Model.TargetSelectionRestrictions.Conditions)
             {

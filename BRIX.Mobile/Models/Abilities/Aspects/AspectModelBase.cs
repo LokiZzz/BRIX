@@ -7,20 +7,17 @@ using System.Runtime.CompilerServices;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {
-    public abstract partial class AspectModelBase : ObservableObject 
+    public abstract partial class AspectModelBase(AspectBase model) : ObservableObject 
     {
-        public AspectModelBase(AspectBase model)
-        {
-            Internal = model;
-        }
+        public AspectBase InternalModel { get; set; } = model;
 
-        public AspectBase Internal { get; set; }
+        public bool IsConcorded => InternalModel.IsConcorded;
 
         public AbilityCostMonitorPanelVM CostMonitor { get; set; } = new();
 
         public string Name => AspectsDictionary.Collection[GetType()].Name;
 
-        public string Description => Internal == null ? string.Empty : Internal.ToLexis();
+        public string Description => InternalModel == null ? string.Empty : InternalModel.ToLexis();
 
         public void UpdateCost() => CostMonitor?.UpdateCost();
 

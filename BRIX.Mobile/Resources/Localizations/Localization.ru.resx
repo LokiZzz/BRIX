@@ -264,6 +264,9 @@
   <data name="AskDeleteStatus" xml:space="preserve">
     <value>Вы уверены, что хотите удалить статус «{0}»?</value>
   </data>
+  <data name="AskIfYouWantToConcord" xml:space="preserve">
+    <value>Вы уверены, что хотите согласовать аспект? Этот аспект будет синхронизирован с другими эффектами и старые настройки будут сброшены.</value>
+  </data>
   <data name="AskToDeleteInventoryItem" xml:space="preserve">
     <value>Вы уверены, что хотите удалить «{0}»?</value>
   </data>
@@ -402,6 +405,9 @@
   <data name="CommonName" xml:space="preserve">
     <value>Название</value>
   </data>
+  <data name="Concord" xml:space="preserve">
+    <value>Согласовать</value>
+  </data>
   <data name="Consumable" xml:space="preserve">
     <value>Расходник</value>
   </data>
@@ -488,6 +494,9 @@
   </data>
   <data name="DiceValuePopupTitle" xml:space="preserve">
     <value>Кости</value>
+  </data>
+  <data name="Discord" xml:space="preserve">
+    <value>Рассогласовать</value>
   </data>
   <data name="Disposable" xml:space="preserve">
     <value>Одноразовость</value>

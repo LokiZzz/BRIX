@@ -3,7 +3,7 @@
 @using BRIX.Library.Enums
 @using BRIX.Library.Mathematics
 
-<p>@(Model.IsConcording ? "Эффекты действуют" : "Эффект действует") в @GetShape(Model.AreaShape.Shape) на расстоянии @Numbers.RUSDeclension(Model.DistanceToArea, "метра", "метров", "метров") от персонажа. Область действия может располагаться под любым углом относительно персонажа.</p>
+<p>@(Model.IsConcorded ? "Эффекты действуют" : "Эффект действует") в @GetShape(Model.AreaShape.Shape) на расстоянии @Numbers.RUSDeclension(Model.DistanceToArea, "метра", "метров", "метров") от персонажа. Область действия может располагаться под любым углом относительно персонажа.</p>
 
 @if (Model.CanBeBounded)
 {

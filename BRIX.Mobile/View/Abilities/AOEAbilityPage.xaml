@@ -54,7 +54,9 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <aspectsview:AspectsPanelView BindingContext="{Binding Aspects}"/>
+                <aspectsview:AspectsPanelView 
+                    BindingContext="{Binding ConcordedAspects}" 
+                    Margin="10,0"/>
 
                 <Border Style="{StaticResource BlockBorder}" Margin="10,0" IsVisible="{Binding ForCharacter}">
                     <VerticalStackLayout Spacing="10">

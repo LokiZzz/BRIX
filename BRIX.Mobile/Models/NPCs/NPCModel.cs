@@ -54,27 +54,27 @@ namespace BRIX.Mobile.Models.NPCs
 
         public void AddAbility(CharacterAbilityModel ability)
         {
-            Internal.Abilities.Add(ability.InternalModel);
+            Internal.Abilities.Add(ability.Internal);
             Abilities.Add(ability);
         }
 
         public void RemoveAbility(Guid abilityGuid)
         {
             Internal.Abilities.RemoveAll(x => x.Id == abilityGuid);
-            Abilities.Remove(Abilities.First(x => x.InternalModel.Id == abilityGuid));
+            Abilities.Remove(Abilities.First(x => x.Internal.Id == abilityGuid));
         }
 
         public void UpdateAbility(CharacterAbilityModel ability)
         {
             int indexOfOldAbility = Abilities.IndexOf(
-                Abilities.First(x => x.InternalModel.Id == ability.InternalModel.Id)
+                Abilities.First(x => x.Internal.Id == ability.Internal.Id)
             );
             Abilities[indexOfOldAbility] = ability;
 
             indexOfOldAbility = Internal.Abilities.IndexOf(
-                Internal.Abilities.First(x => x.Id == ability.InternalModel.Id)
+                Internal.Abilities.First(x => x.Id == ability.Internal.Id)
             );
-            Internal.Abilities[indexOfOldAbility] = ability.InternalModel;
+            Internal.Abilities[indexOfOldAbility] = ability.Internal;
         }
 
         public ObservableCollection<CharacterTagVM> Tags { get; set; }

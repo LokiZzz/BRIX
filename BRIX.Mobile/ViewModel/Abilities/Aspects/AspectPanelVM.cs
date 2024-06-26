@@ -1,8 +1,9 @@
-﻿using BRIX.Mobile.Models.Abilities;
-using BRIX.Mobile.Models.Abilities.Aspects;
+﻿using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Models.Abilities.Effects;
+using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Base;
+using BRIX.Mobile.ViewModel.Popups;
 using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -13,6 +14,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
     {
         private readonly EffectModelBase? _aspectOwnerEffect;
         private readonly AbilityCostMonitorPanelVM _costMonitor;
+
+        private EAspectScope _scope;
 
         public AspectPanelVM(AbilityCostMonitorPanelVM costMonitor, EffectModelBase effect)
         {
@@ -36,6 +39,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             {
                 SelectedAspect = AspectsCollection.First();
             }
+
+            OnPropertyChanged(nameof(ShowPanel));
         }
 
         public AspectPanelVM(AbilityCostMonitorPanelVM costMonitor)
@@ -57,6 +62,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             {
                 SelectedAspect = AspectsCollection.First();
             }
+
+            OnPropertyChanged(nameof(ShowPanel));
         }
 
         private ObservableCollection<AspectUtilityModel> _aspectsCollection = [];
@@ -70,8 +77,16 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         public AspectUtilityModel SelectedAspect
         {
             get => _selectedAspect;
-            set => SetProperty(ref _selectedAspect, value);
+            set
+            {
+                SetProperty(ref _selectedAspect, value);
+                OnPropertyChanged(nameof(ShowEditAndConcord));
+            }
         }
+
+        public bool ShowEditAndConcord => SelectedAspect.ConcreteAspect?.IsConcorded == false;
+        
+        public bool ShowPanel => AspectsCollection.Any();
 
         [RelayCommand]
         public async Task NavigateToAspect()
@@ -110,10 +125,35 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             }
         }
 
+        [RelayCommand]
+        public async Task ConcordSelectedAspect()
+        {
+            AlertPopupResult? result = await Ask(Localization.AskIfYouWantToConcord);
+
+            if (result?.Answer == EAlertPopupResult.Yes)
+            {
+                AspectModelBase aspectToEdit = _costMonitor.Ability.ConcordedAspects
+                    .First(x => x.GetType().Equals(SelectedAspect.LibraryAspectType));
+                _costMonitor.Ability.Concord(aspectToEdit);
+                OnPropertyChanged(nameof(ShowEditAndConcord));
+                OnPropertyChanged(nameof(ShowPanel));
+            }
+        }
+
+        [RelayCommand]
+        public void DiscordSelectedAspect()
+        {
+            AspectModelBase aspectToEdit = _costMonitor.Ability.ConcordedAspects
+                .First(x => x.GetType().Equals(SelectedAspect.LibraryAspectType));
+            _costMonitor.Ability.Discord(aspectToEdit);
+            OnPropertyChanged(nameof(ShowEditAndConcord));
+            OnPropertyChanged(nameof(ShowPanel));
+        }
+
         public void UpdateAspect(AspectModelBase aspect)
         {
             AspectUtilityModel aspectToUpdate = AspectsCollection
-                .Single(x => x.LibraryAspectType == aspect.Internal.GetType());
+                .Single(x => x.LibraryAspectType == aspect.InternalModel.GetType());
 
             if (aspectToUpdate != null)
             {
@@ -123,6 +163,8 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 SelectedAspect = newAspectUtilityModel;
             }
         }
+
+        private Aspect
 
         private AspectUtilityModel GetAspectModel(AspectModelBase aspect)
         {
@@ -135,10 +177,18 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 if (model != null)
                 {
                     model.Description = aspect.Description;
+                    model.ConcreteAspect = aspect;
                 }
+
             }
 
             return model ?? throw new Exception($"В AspectsDictionary не найдена модель для {aspect?.GetType()}");
         }
+    }
+
+    public enum EAspectScope
+    {
+        Effect = 0,
+        Ability = 1
     }
 }

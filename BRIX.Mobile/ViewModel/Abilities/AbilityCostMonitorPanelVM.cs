@@ -122,7 +122,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             Exp = Character.Experience;
 
             SpentEXP = Character.Abilities
-                .Where(x => x.InternalModel.Id != Ability.InternalModel.Id)
+                .Where(x => x.Internal.Id != Ability.Internal.Id)
                 .Sum(x => x.Cost) + Character.InternalModel.ExpInHealth;
 
             int abilityCost = Ability?.UpdateCost() ?? 0;

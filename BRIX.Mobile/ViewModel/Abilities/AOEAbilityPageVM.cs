@@ -190,7 +190,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 {
                     MaterialSupport.Add(item);
                     _characterCopy.MaterialSupport.Add(new AbilityMaterialSupport { 
-                        AbilityId = Ability.InternalModel.Id,
+                        AbilityId = Ability.Internal.Id,
                         MaterialSupportId = item.InternalModel.Id
                     });
                 }
@@ -218,7 +218,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
             MaterialSupport.Remove(itemToRemove);
             _characterCopy.MaterialSupport.RemoveAll(x => 
-                x.AbilityId == Ability.InternalModel.Id
+                x.AbilityId == Ability.Internal.Id
                 && x.MaterialSupportId == itemToRemove.InternalModel.Id
             );
 
@@ -328,7 +328,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 return;
             }
 
-            List<InventoryItemNodeVM> materials = _characterCopy.GetMaterialSupportForAbility(Ability.InternalModel)
+            List<InventoryItemNodeVM> materials = _characterCopy.GetMaterialSupportForAbility(Ability.Internal)
                 .Select(_inventoryConverter.ToVM)
                 .ToList();
 

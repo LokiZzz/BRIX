@@ -5,11 +5,11 @@
 
 @if (Model.Strategy == ETargetSelectionStrategy.CharacterHimself)
 {
-    <p>The target of the @(Model.IsConcording ? "effects" : "effect") is the character itself.</p>
+    <p>The target of the @(Model.IsConcorded ? "effects" : "effect") is the character itself.</p>
 }
 @if (Model.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
 {
-    <p>The @(Model.IsConcording ? "effects" : "effect") will affect @Numbers.ENGDcln(Model.NTAD.TargetsCount, "target") at distance of @Numbers.ENGDcln(Model.NTAD.DistanceInMeters, "meter") from the character.</p>
+    <p>The @(Model.IsConcorded ? "effects" : "effect") will affect @Numbers.ENGDcln(Model.NTAD.TargetsCount, "target") at distance of @Numbers.ENGDcln(Model.NTAD.DistanceInMeters, "meter") from the character.</p>
 
     if(Model.NTAD.IsTargetSelectionIsRandom){
         <p>Targets must be selected randomly.</p>
@@ -25,46 +25,46 @@
     }
     else
     {
-        <p>If there is an obstacle between the character and his target that is greater or equivalent in strength to @GetDurabilityEquivalent(Model.NTAD.ObstacleBetweenCharacterAndTarget), then the @(Model.IsConcording ? "effects" : "effect") will not be applied.</p>
+        <p>If there is an obstacle between the character and his target that is greater or equivalent in strength to @GetDurabilityEquivalent(Model.NTAD.ObstacleBetweenCharacterAndTarget), then the @(Model.IsConcorded ? "effects" : "effect") will not be applied.</p>
     }
 }
 @if (Model.Strategy == ETargetSelectionStrategy.Area)
 {
-    <p>The @(Model.IsConcording ? "effects" : "effect") will affect all targets in @GetShape(Model.AreaSettings.Area.Shape) at a distance of @Numbers.ENGDcln(Model.AreaSettings.DistanceToAreaInMeters, "meter") from the character. The area of @(Model.IsConcording ? "effects" : "effect") can be located at any angle relative to the character.</p>
+    <p>The @(Model.IsConcorded ? "effects" : "effect") will affect all targets in @GetShape(Model.AreaSettings.Area.Shape) at a distance of @Numbers.ENGDcln(Model.AreaSettings.DistanceToAreaInMeters, "meter") from the character. The area of @(Model.IsConcorded ? "effects" : "effect") can be located at any angle relative to the character.</p>
     
     if(Model.AreaSettings.ExcludedTargetsCount > 0)
     {
-        <p>The character can select up to @Numbers.ENGDcln(Model.AreaSettings.ExcludedTargetsCount, "target") in area to which the @(Model.IsConcording ? "effects" : "effect") will not be applied.</p>
+        <p>The character can select up to @Numbers.ENGDcln(Model.AreaSettings.ExcludedTargetsCount, "target") in area to which the @(Model.IsConcorded ? "effects" : "effect") will not be applied.</p>
     }
 
     if (Model.AreaSettings.ObstacleBetweenCharacterAndArea == EObstacleEquivalent.None)
     {
-        <p>Obstacles between the area of @(Model.IsConcording ? "effects" : "effect") and the character do not matter.</p>
+        <p>Obstacles between the area of @(Model.IsConcorded ? "effects" : "effect") and the character do not matter.</p>
     }
     else
     {
-        <p>If there is an obstacle between the character and the area of @(Model.IsConcording ? "effects" : "effect") that is greater or equivalent in strength to @GetDurabilityEquivalent(Model.AreaSettings.ObstacleBetweenCharacterAndArea), then the @(Model.IsConcording ? "effects" : "effect") will not be applied to this area.</p>
+        <p>If there is an obstacle between the character and the area of @(Model.IsConcorded ? "effects" : "effect") that is greater or equivalent in strength to @GetDurabilityEquivalent(Model.AreaSettings.ObstacleBetweenCharacterAndArea), then the @(Model.IsConcorded ? "effects" : "effect") will not be applied to this area.</p>
     }
 
     if (Model.AreaSettings.ObstacleBetweenEpicenterAndTarget == EObstacleEquivalent.None)
     {
-        <p>Obstacles between the epicenter of the @(Model.IsConcording ? "effects" : "effect") and the targets do not matter.</p>
+        <p>Obstacles between the epicenter of the @(Model.IsConcorded ? "effects" : "effect") and the targets do not matter.</p>
     }
     else
     {
-        <p>If there is an obstacle greater than or equivalent in strength to @GetDurabilityEquivalent(Model.AreaSettings.ObstacleBetweenEpicenterAndTarget) between the target and the epicenter of the area of @(Model.IsConcording ? "effects" : "effect"), then the @(Model.IsConcording ? "effects" : "effect") will not be applied to that target.</p>
+        <p>If there is an obstacle greater than or equivalent in strength to @GetDurabilityEquivalent(Model.AreaSettings.ObstacleBetweenEpicenterAndTarget) between the target and the epicenter of the area of @(Model.IsConcorded ? "effects" : "effect"), then the @(Model.IsConcorded ? "effects" : "effect") will not be applied to that target.</p>
     }
 
     if(Model.AreaSettings.IsAreaBoundedTo)
     {
-        <p>The area of @(Model.IsConcording ? "effects" : "effect") is attached to the character and moves with him.</p>
+        <p>The area of @(Model.IsConcorded ? "effects" : "effect") is attached to the character and moves with him.</p>
     }
 }
 @if(Model.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL || Model.Strategy == ETargetSelectionStrategy.Area)
 {
     @if (Model.TargetChain.IsChainEnabled)
     {
-        <p>After applying an @(Model.IsConcording ? "effects" : "effect") to a target, it is applied along the chain to @Numbers.ENGDcln(Model.TargetChain.MaxTargetsCount, "other target"), the maximum distance between targets in the chain: @Numbers.ENGDcln(Model.TargetChain.MaxDistanceBetweenTargets, "meter").</p>
+        <p>After applying an @(Model.IsConcorded ? "effects" : "effect") to a target, it is applied along the chain to @Numbers.ENGDcln(Model.TargetChain.MaxTargetsCount, "other target"), the maximum distance between targets in the chain: @Numbers.ENGDcln(Model.TargetChain.MaxDistanceBetweenTargets, "meter").</p>
 
         if (Model.TargetChain.ObstacleBetweenTargetsInChain == EObstacleEquivalent.None)
         {
@@ -76,7 +76,7 @@
         }
     }
 
-    <p>The @(Model.IsConcording ? "effects" : "effect") can be applied to targets of the following sizes:</p>
+    <p>The @(Model.IsConcorded ? "effects" : "effect") can be applied to targets of the following sizes:</p>
     <ul>
         @foreach (ETargetSize size in Model.TargetsSizes.AllowedTargetSizes)
         {
@@ -86,7 +86,7 @@
 
     @if(Model.TargetSelectionRestrictions.Conditions.Count() > 0)
     {
-        <p>For the @(Model.IsConcording ? "effects" : "effect") to affect the target, it must have the following properties:</p>
+        <p>For the @(Model.IsConcorded ? "effects" : "effect") to affect the target, it must have the following properties:</p>
         <ul>
             @foreach ((ETargetSelectionRestrictions Type, string Comment) condition in Model.TargetSelectionRestrictions.Conditions)
             {

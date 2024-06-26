@@ -9,6 +9,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
 {
     public abstract class SpecificAspectModelBase<T>(T model) : AspectModelBase(model) where T : AspectBase, new()
     {
-        public T Internal => (T)base.Internal;
+        public T Internal => (T)base.InternalModel;
     }
 }

@@ -3,11 +3,11 @@
 @using BRIX.Library.Enums
 @using BRIX.Library.Mathematics
 
-<p>The @(Model.IsConcording ? "effects" : "effect") will be active in @GetShape(Model.AreaShape.Shape) at a distance of @Numbers.ENGDcln(Model.DistanceToArea, "meter") from the character. The area of @(Model.IsConcording ? "effects" : "effect") can be located at any angle relative to the character.</p>
+<p>The @(Model.IsConcorded ? "effects" : "effect") will be active in @GetShape(Model.AreaShape.Shape) at a distance of @Numbers.ENGDcln(Model.DistanceToArea, "meter") from the character. The area of @(Model.IsConcorded ? "effects" : "effect") can be located at any angle relative to the character.</p>
 
 @if (Model.CanBeBounded)
 {
-    <p>The area of @(Model.IsConcording ? "effects" : "effect") is attached to the character and moves with him.</p>
+    <p>The area of @(Model.IsConcorded ? "effects" : "effect") is attached to the character and moves with him.</p>
 }
 
 @code {

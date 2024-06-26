@@ -15,7 +15,7 @@ namespace BRIX.Mobile.Models.Abilities
 
         public CharacterAbilityModel(Ability ability)
         {
-            InternalModel = ability;
+            Internal = ability;
             Activation = new(ability.Activation);
             Effects = new ObservableCollection<EffectModelBase>(
                 ability.Effects.Select(EffectModelFactory.GetModel)
@@ -28,7 +28,7 @@ namespace BRIX.Mobile.Models.Abilities
 
         public CharacterBase? Character;
 
-        public Ability InternalModel { get; }
+        public Ability Internal { get; }
 
         private AbilityActivationModel _activation = new();
         public AbilityActivationModel Activation 
@@ -37,7 +37,7 @@ namespace BRIX.Mobile.Models.Abilities
             set
             {
                 _activation = value;
-                InternalModel.Activation = value.InternalModel;
+                Internal.Activation = value.InternalModel;
             }
         }
 
@@ -47,27 +47,27 @@ namespace BRIX.Mobile.Models.Abilities
 
         public string Name
         {
-            get => InternalModel.Name;
+            get => Internal.Name;
             set => SetProperty(
-                InternalModel.Name, value, InternalModel, (character, name) => character.Name = name
+                Internal.Name, value, Internal, (character, name) => character.Name = name
             );
         }
 
         public string Description
         {
-            get => InternalModel.Description;
+            get => Internal.Description;
             set => SetProperty(
-                InternalModel.Description, value, InternalModel, (ability, desc) => ability.Description = desc
+                Internal.Description, value, Internal, (ability, desc) => ability.Description = desc
             );
         }
 
-        public string ActivationDescription => InternalModel.Activation.ToLexis();
+        public string ActivationDescription => Internal.Activation.ToLexis();
 
         public string StatusName
         {
-            get => InternalModel.StatusName;
+            get => Internal.StatusName;
             set => SetProperty(
-                InternalModel.StatusName, value, InternalModel, (character, status) => character.StatusName = status
+                Internal.StatusName, value, Internal, (character, status) => character.StatusName = status
             );
         }
 
@@ -78,18 +78,18 @@ namespace BRIX.Mobile.Models.Abilities
             {
                 if (Character is Character playerCharacter)
                 {
-                    _cost = InternalModel.ExpCost(playerCharacter);
+                    _cost = Internal.ExpCost(playerCharacter);
                 }
                 else
                 {
-                    _cost = InternalModel.ExpCost();
+                    _cost = Internal.ExpCost();
                 }
 
                 return _cost;
             }
         }
 
-        public bool ShowStatusName => InternalModel.HasStatus;
+        public bool ShowStatusName => Internal.HasStatus;
 
         public void AddEffect(EffectModelBase effect)
         {
@@ -98,7 +98,7 @@ namespace BRIX.Mobile.Models.Abilities
                 throw new Exception("Не инициализирована модель" + nameof(effect.InternalModel));
             }
 
-            InternalModel.AddEffect(effect.InternalModel);
+            Internal.AddEffect(effect.InternalModel);
             Effects.Add(effect);
             OnPropertyChanged(nameof(Cost));
             OnPropertyChanged(nameof(ShowStatusName));
@@ -111,7 +111,7 @@ namespace BRIX.Mobile.Models.Abilities
                 throw new ArgumentNullException(nameof(effect));
             }
 
-            InternalModel.UpdateEffect(effect.InternalModel);
+            Internal.UpdateEffect(effect.InternalModel);
             int index = Effects.IndexOf(Effects.First(x => x.InternalModel?.Id == effect.InternalModel.Id));
             Effects[index] = effect;
             OnPropertyChanged(nameof(Cost));
@@ -125,7 +125,7 @@ namespace BRIX.Mobile.Models.Abilities
                 throw new ArgumentNullException(nameof(effect));
             }
 
-            InternalModel.RemoveEffect(effect.InternalModel);
+            Internal.RemoveEffect(effect.InternalModel);
             Effects.Remove(effect);
             OnPropertyChanged(nameof(Cost));
             OnPropertyChanged(nameof(ShowStatusName));
@@ -133,15 +133,34 @@ namespace BRIX.Mobile.Models.Abilities
 
         public void UpdateConcordedAspect(AspectModelBase aspectModel)
         {
-            InternalModel.UpdateConcordedAspect(aspectModel.Internal);
+            Internal.UpdateConcordedAspect(aspectModel.InternalModel);
 
             int index = ConcordedAspects.IndexOf(
-                ConcordedAspects.First(x => x.Internal.GetType().Equals(aspectModel.Internal.GetType()))
+                ConcordedAspects.First(x => x.InternalModel.GetType().Equals(aspectModel.InternalModel.GetType()))
             );
             ConcordedAspects[index] = aspectModel;
 
             OnPropertyChanged(nameof(Cost));
             OnPropertyChanged(nameof(ShowStatusName));
+        }
+
+        public void Concord(AspectModelBase aspect)
+        {
+            ConcordedAspects.Add(aspect);
+            Internal.Concord(aspect.InternalModel);
+
+            OnPropertyChanged(nameof(Cost));
+        }
+
+        public void Discord(AspectModelBase aspect)
+        {
+            AspectModelBase aspectToRemove = ConcordedAspects.First(x =>
+                x.InternalModel.GetType().Equals(aspect.InternalModel.GetType())
+            );
+            ConcordedAspects.Remove(aspectToRemove);
+            Internal.Discord(aspect.InternalModel.GetType());
+
+            OnPropertyChanged(nameof(Cost));
         }
 
         public int UpdateCost()
