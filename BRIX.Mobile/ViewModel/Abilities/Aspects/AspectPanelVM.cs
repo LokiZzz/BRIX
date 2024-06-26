@@ -41,6 +41,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             }
 
             OnPropertyChanged(nameof(ShowPanel));
+            _scope = EAspectScope.Effect;
         }
 
         public AspectPanelVM(AbilityCostMonitorPanelVM costMonitor)
@@ -64,6 +65,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             }
 
             OnPropertyChanged(nameof(ShowPanel));
+            _scope = EAspectScope.Ability;
         }
 
         private ObservableCollection<AspectUtilityModel> _aspectsCollection = [];
@@ -101,7 +103,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 throw new ArgumentNullException(nameof(SelectedAspect.EditPage));
             }
 
-            if (_aspectOwnerEffect != null)
+            if (_scope == EAspectScope.Effect && _aspectOwnerEffect != null)
             {
                 AspectModelBase aspectToEdit = _aspectOwnerEffect.GetAspect(SelectedAspect.LibraryAspectType);
                 await Navigation.NavigateAsync(
@@ -112,7 +114,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                     (NavigationParameters.Aspect, aspectToEdit.Copy())
                 );
             }
-            else
+            else if(_scope == EAspectScope.Ability)
             {
                 AspectModelBase aspectToEdit = _costMonitor.Ability.ConcordedAspects
                     .First(x => x.GetType().Equals(SelectedAspect.LibraryAspectType));
@@ -163,8 +165,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 SelectedAspect = newAspectUtilityModel;
             }
         }
-
-        private Aspect
 
         private AspectUtilityModel GetAspectModel(AspectModelBase aspect)
         {
