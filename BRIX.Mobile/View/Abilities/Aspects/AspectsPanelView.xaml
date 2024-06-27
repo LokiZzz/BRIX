@@ -46,26 +46,36 @@
             <Grid RowDefinitions="auto,*,auto" Grid.Row="2">
                 <Label Grid.Row="0" Style="{StaticResource TitleLabel}" Text="{Binding SelectedAspect.Name}" />
                 <Label Grid.Row="1" Text="{Binding SelectedAspect.Description}" TextType="Html"/>
-                <Grid Grid.Row="2" ColumnDefinitions="*,*" IsVisible="{Binding ShowEditAndConcord}" ColumnSpacing="10">
+                <Grid 
+                    Grid.Row="2" 
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="10"
+                    Margin="0,0,0,1">
                     <Button 
                         Grid.Column="0"
                         Style="{StaticResource LightButton}"
                         Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Concord}}" 
                         Command="{Binding ConcordSelectedAspectCommand}"
-                        Margin="1"/>
+                        IsVisible="{Binding ShowConcord}"/>
+                    <Button
+                        Grid.Column="0"
+                        Style="{StaticResource LightButton}"
+                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Discord}}"
+                        Command="{Binding DiscordSelectedAspectCommand}"
+                        IsVisible="{Binding ShowDiscord}"/>
                     <Button 
                         Grid.Column="1"
                         Style="{StaticResource LightButton}"
                         Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Edit}}" 
                         Command="{Binding NavigateToAspectCommand}"
-                        Margin="1"/>
+                        IsVisible="{Binding ShowEdit}"/>
+                    <Button
+                        Grid.ColumnSpan="2"
+                        Style="{StaticResource LightButton}"
+                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Discord}}"
+                        Command="{Binding DiscordSelectedAspectCommand}"
+                        IsVisible="{Binding ShowBigDiscord}"/>
                 </Grid>
-                <Button
-                    Grid.Row="2"
-                    Style="{StaticResource LightButton}"
-                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Discord}}"
-                    IsVisible="{Binding ShowEditAndConcord, Converter={StaticResource NotConverter}}"
-                    Command="{Binding DiscordSelectedAspectCommand}"/>
             </Grid>
         </Grid>
     </Border>

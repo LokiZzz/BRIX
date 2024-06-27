@@ -296,6 +296,9 @@ namespace BRIX.Mobile.ViewModel.Abilities
                         Ability.UpdateEffect(editedEffect);
                         break;
                 }
+
+                Ability.UpdateConcordanceByEffect(editedEffect);
+                ConcordedAspects?.UpdateVisibilityProperties();
             }
 
             AbilityActivationModel? editedActivation = query.GetParameterOrDefault<AbilityActivationModel>(

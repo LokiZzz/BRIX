@@ -15,10 +15,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         private readonly EffectModelBase? _aspectOwnerEffect;
         private readonly AbilityCostMonitorPanelVM _costMonitor;
 
-        private EAspectScope _scope;
+        private readonly EAspectScope _scope;
 
         public AspectPanelVM(AbilityCostMonitorPanelVM costMonitor, EffectModelBase effect)
         {
+            _scope = EAspectScope.Effect;
+
             if(costMonitor?.Ability != null && !costMonitor.Ability.Effects.Contains(effect))
             {
                 throw new ArgumentException(
@@ -28,51 +30,58 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
             _aspectOwnerEffect = effect;
             _costMonitor = costMonitor ?? throw new Exception("Передан не инициализированный CostMonitor.");
-
-            List<AspectUtilityModel> aspects = effect.Aspects
-                .Select(GetAspectModel)
-                .Where(x => x != null)
-                .ToList();
-            AspectsCollection = new ObservableCollection<AspectUtilityModel>(aspects);
-
-            if (AspectsCollection.Any())
-            {
-                SelectedAspect = AspectsCollection.First();
-            }
-
-            OnPropertyChanged(nameof(ShowPanel));
-            _scope = EAspectScope.Effect;
+            InitializeAspects();
+            UpdateVisibilityProperties();
         }
 
         public AspectPanelVM(AbilityCostMonitorPanelVM costMonitor)
         {
+            _scope = EAspectScope.Ability;
             _costMonitor = costMonitor ?? throw new Exception("Передан не инициализированный CostMonitor.");
 
-            if(costMonitor.Ability == null)
+            if (costMonitor.Ability == null)
             {
                 throw new Exception("Передан не инициализированный CostMonitor, Ability == null.");
             }
 
-            List<AspectUtilityModel> aspects = costMonitor.Ability.ConcordedAspects
-                .Select(GetAspectModel)
-                .Where(x => x != null)
-                .ToList();
-            AspectsCollection = new ObservableCollection<AspectUtilityModel>(aspects);
+            InitializeAspects();
+            UpdateVisibilityProperties();
+        }
+
+        private void InitializeAspects()
+        {
+            if (_scope == EAspectScope.Ability)
+            {
+                List<AspectUtilityModel> aspects = _costMonitor.Ability.ConcordedAspects
+                    .Select(GetAspectModel)
+                    .Where(x => x != null)
+                    .ToList();
+                AspectsCollection = new ObservableCollection<AspectUtilityModel>(aspects);
+            }
+            else if(_scope == EAspectScope.Effect && _aspectOwnerEffect != null)
+            {
+                List<AspectUtilityModel> aspects = _aspectOwnerEffect.Aspects
+                    .Select(GetAspectModel)
+                    .Where(x => x != null)
+                    .ToList();
+                AspectsCollection = new ObservableCollection<AspectUtilityModel>(aspects);
+            }
 
             if (AspectsCollection.Any())
             {
                 SelectedAspect = AspectsCollection.First();
             }
-
-            OnPropertyChanged(nameof(ShowPanel));
-            _scope = EAspectScope.Ability;
         }
 
         private ObservableCollection<AspectUtilityModel> _aspectsCollection = [];
         public ObservableCollection<AspectUtilityModel> AspectsCollection
         {
             get => _aspectsCollection;
-            set => SetProperty(ref _aspectsCollection, value);
+            set
+            {
+                SetProperty(ref _aspectsCollection, value);
+                UpdateVisibilityProperties();
+            }
         }
 
         private AspectUtilityModel _selectedAspect = new();
@@ -82,13 +91,9 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             set
             {
                 SetProperty(ref _selectedAspect, value);
-                OnPropertyChanged(nameof(ShowEditAndConcord));
+                UpdateVisibilityProperties();
             }
         }
-
-        public bool ShowEditAndConcord => SelectedAspect.ConcreteAspect?.IsConcorded == false;
-        
-        public bool ShowPanel => AspectsCollection.Any();
 
         [RelayCommand]
         public async Task NavigateToAspect()
@@ -117,7 +122,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             else if(_scope == EAspectScope.Ability)
             {
                 AspectModelBase aspectToEdit = _costMonitor.Ability.ConcordedAspects
-                    .First(x => x.GetType().Equals(SelectedAspect.LibraryAspectType));
+                    .First(x => x.InternalModel.GetType().Equals(SelectedAspect.LibraryAspectType));
                 await Navigation.NavigateAsync(
                     SelectedAspect.EditPage.Name,
                     Services.ENavigationMode.Push,
@@ -130,26 +135,40 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         public async Task ConcordSelectedAspect()
         {
+            if(_scope == EAspectScope.Ability || _aspectOwnerEffect == null)
+            {
+                throw new Exception(
+                    $"Согласовать аспект можно только из эффекта."
+                );
+            }
+
             AlertPopupResult? result = await Ask(Localization.AskIfYouWantToConcord);
 
             if (result?.Answer == EAlertPopupResult.Yes)
             {
-                AspectModelBase aspectToEdit = _costMonitor.Ability.ConcordedAspects
-                    .First(x => x.GetType().Equals(SelectedAspect.LibraryAspectType));
+                AspectModelBase aspectToEdit = _aspectOwnerEffect.Aspects
+                    .First(x => x.InternalModel.GetType().Equals(SelectedAspect.LibraryAspectType));
                 _costMonitor.Ability.Concord(aspectToEdit);
-                OnPropertyChanged(nameof(ShowEditAndConcord));
-                OnPropertyChanged(nameof(ShowPanel));
+                UpdateVisibilityProperties();
             }
         }
 
         [RelayCommand]
         public void DiscordSelectedAspect()
         {
-            AspectModelBase aspectToEdit = _costMonitor.Ability.ConcordedAspects
-                .First(x => x.GetType().Equals(SelectedAspect.LibraryAspectType));
+            AspectModelBase aspectToEdit = _scope switch
+            {
+                EAspectScope.Effect => _aspectOwnerEffect?.Aspects
+                    .First(x => x.InternalModel.GetType().Equals(SelectedAspect.LibraryAspectType))
+                    ?? throw new Exception("Эффект аспекта не определён."),
+                EAspectScope.Ability => _costMonitor.Ability.ConcordedAspects
+                    .First(x => x.InternalModel.GetType().Equals(SelectedAspect.LibraryAspectType)),
+                _ => throw new Exception("Аспект для рассогласования не определён.")
+            };
+
             _costMonitor.Ability.Discord(aspectToEdit);
-            OnPropertyChanged(nameof(ShowEditAndConcord));
-            OnPropertyChanged(nameof(ShowPanel));
+            InitializeAspects();
+            UpdateVisibilityProperties();
         }
 
         public void UpdateAspect(AspectModelBase aspect)
@@ -184,6 +203,26 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
             return model ?? throw new Exception($"В AspectsDictionary не найдена модель для {aspect?.GetType()}");
         }
+
+        #region Visibility
+
+        public bool ShowEdit => _scope == EAspectScope.Ability
+            || SelectedAspect.ConcreteAspect?.IsConcorded == false;
+        public bool ShowConcord => SelectedAspect.ConcreteAspect?.IsConcorded == false;
+        public bool ShowDiscord => SelectedAspect.ConcreteAspect?.IsConcorded == true && ShowEdit;
+        public bool ShowBigDiscord => SelectedAspect.ConcreteAspect?.IsConcorded == true && !ShowEdit;
+        public bool ShowPanel => AspectsCollection.Any();
+
+        public void UpdateVisibilityProperties()
+        {
+            OnPropertyChanged(nameof(ShowEdit));
+            OnPropertyChanged(nameof(ShowConcord));
+            OnPropertyChanged(nameof(ShowDiscord));
+            OnPropertyChanged(nameof(ShowBigDiscord));
+            OnPropertyChanged(nameof(ShowPanel));
+        }
+
+        #endregion
     }
 
     public enum EAspectScope

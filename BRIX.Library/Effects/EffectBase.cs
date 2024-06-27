@@ -100,9 +100,8 @@ namespace BRIX.Library.Effects
 
             if (aspectToConcord != null)
             {
-                int index = Aspects.FindIndex(x => x.GetType().Equals(aspectToConcord.GetType()));
-                Aspects[index] = sourceAspect;
-                Aspects[index].IsConcorded = true;
+                aspectToConcord.IsConcorded = true;
+                SetAspect(aspectToConcord);
             }
         }
 

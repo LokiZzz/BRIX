@@ -4,7 +4,6 @@ using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Microsoft.Maui.Controls;
 using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.Models.Abilities
@@ -161,6 +160,25 @@ namespace BRIX.Mobile.Models.Abilities
             Internal.Discord(aspect.InternalModel.GetType());
 
             OnPropertyChanged(nameof(Cost));
+        }
+
+        public void UpdateConcordanceByEffect(EffectModelBase effect)
+        {
+            foreach (AspectModelBase aspect in effect.Aspects)
+            {
+                AspectModelBase? existingConcordedAspect = ConcordedAspects.FirstOrDefault(x =>
+                    x.InternalModel.GetType().Equals(aspect.InternalModel.GetType())
+                );
+
+                if (aspect.IsConcorded && existingConcordedAspect == null)
+                {
+                    Concord(aspect);
+                }
+                else if(!aspect.IsConcorded && existingConcordedAspect != null)
+                {
+                    Discord(aspect);
+                }
+            }
         }
 
         public int UpdateCost()
