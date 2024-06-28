@@ -48,7 +48,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             UpdateVisibilityProperties();
         }
 
-        private void InitializeAspects()
+        public void InitializeAspects()
         {
             if (_scope == EAspectScope.Ability)
             {
@@ -145,7 +145,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             AlertPopupResult? result = await Ask(Localization.AskIfYouWantToConcord);
 
             if (result?.Answer == EAlertPopupResult.Yes)
-            {
+            { // rename: aspectToConcord
                 AspectModelBase aspectToEdit = _aspectOwnerEffect.Aspects
                     .First(x => x.InternalModel.GetType().Equals(SelectedAspect.LibraryAspectType));
                 _costMonitor.Ability.Concord(aspectToEdit);

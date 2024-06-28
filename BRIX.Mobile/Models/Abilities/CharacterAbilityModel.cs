@@ -16,9 +16,7 @@ namespace BRIX.Mobile.Models.Abilities
         {
             Internal = ability;
             Activation = new(ability.Activation);
-            Effects = new ObservableCollection<EffectModelBase>(
-                ability.Effects.Select(EffectModelFactory.GetModel)
-            );
+            InitializeEffects();
             ConcordedAspects = new ObservableCollection<AspectModelBase>(
                 ability.ConcordedAspects.Select(AspectModelFactory.GetAspectModel)
             );
@@ -40,7 +38,12 @@ namespace BRIX.Mobile.Models.Abilities
             }
         }
 
-        public ObservableCollection<EffectModelBase> Effects { get; set; } = [];
+        private ObservableCollection<EffectModelBase> _effects = [];
+        public ObservableCollection<EffectModelBase> Effects
+        {
+            get => _effects;
+            set => SetProperty(ref _effects, value);
+        }
 
         public ObservableCollection<AspectModelBase> ConcordedAspects { get; set; } = [];
 
@@ -158,6 +161,7 @@ namespace BRIX.Mobile.Models.Abilities
             );
             ConcordedAspects.Remove(aspectToRemove);
             Internal.Discord(aspect.InternalModel.GetType());
+            InitializeEffects();
 
             OnPropertyChanged(nameof(Cost));
         }
@@ -186,6 +190,13 @@ namespace BRIX.Mobile.Models.Abilities
             OnPropertyChanged(nameof(Cost));
 
             return _cost;
+        }
+
+        private void InitializeEffects()
+        {
+            Effects = new ObservableCollection<EffectModelBase>(
+                Internal.Effects.Select(EffectModelFactory.GetModel)
+            );
         }
     }
 }
