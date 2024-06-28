@@ -131,8 +131,16 @@ namespace BRIX.Library.Abilities
             int index = ConcordedAspects.IndexOf(
                 ConcordedAspects.First(x => x.GetType().Equals(aspect.GetType()))
             );
+
             ConcordedAspects[index] = aspect;
-            Concord(aspect);
+
+            if (_effects.Count > 1)
+            {
+                foreach (EffectBase effect in _effects)
+                {
+                    effect.Attach(aspect);
+                }
+            }
         }
 
         /// <summary>
@@ -141,6 +149,11 @@ namespace BRIX.Library.Abilities
         /// </summary>
         public void Concord(AspectBase sourceAspect)
         {
+            if(!ConcordedAspects.Any(x => x.GetType().Equals(sourceAspect.GetType())))
+            {
+                return;
+            }
+
             ConcordedAspects.Add(sourceAspect);
 
             if (_effects.Count > 1)

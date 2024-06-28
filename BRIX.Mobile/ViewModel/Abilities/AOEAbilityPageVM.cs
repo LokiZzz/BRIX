@@ -318,6 +318,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             if (editedConcordedAspect != null)
             {
                 Ability.UpdateConcordedAspect(editedConcordedAspect);
+                ConcordedAspects?.UpdateAspect(editedConcordedAspect);
             }
 
             CostMonitor.UpdateCost();

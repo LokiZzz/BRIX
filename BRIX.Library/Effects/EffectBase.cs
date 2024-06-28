@@ -96,12 +96,10 @@ namespace BRIX.Library.Effects
         /// <param name="sourceAspect">Аспект, на который ссылаются несколько эффектов.</param>
         public void Attach(AspectBase sourceAspect)
         {
-            AspectBase aspectToConcord = GetAspect(sourceAspect.GetType());
-
-            if (aspectToConcord != null)
+            if (RequiredAspects.Any(x => x.Equals(sourceAspect.GetType())))
             {
-                aspectToConcord.IsConcorded = true;
-                SetAspect(aspectToConcord);
+                sourceAspect.IsConcorded = true;
+                SetAspect(sourceAspect);
             }
         }
 

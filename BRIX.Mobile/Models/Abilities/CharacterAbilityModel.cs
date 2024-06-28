@@ -142,6 +142,8 @@ namespace BRIX.Mobile.Models.Abilities
             );
             ConcordedAspects[index] = aspectModel;
 
+            InitializeEffects();
+
             OnPropertyChanged(nameof(Cost));
             OnPropertyChanged(nameof(ShowStatusName));
         }
@@ -150,6 +152,7 @@ namespace BRIX.Mobile.Models.Abilities
         {
             ConcordedAspects.Add(aspect);
             Internal.Concord(aspect.InternalModel);
+            InitializeEffects();
 
             OnPropertyChanged(nameof(Cost));
         }

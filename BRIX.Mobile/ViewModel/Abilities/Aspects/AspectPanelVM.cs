@@ -145,10 +145,10 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             AlertPopupResult? result = await Ask(Localization.AskIfYouWantToConcord);
 
             if (result?.Answer == EAlertPopupResult.Yes)
-            { // rename: aspectToConcord
-                AspectModelBase aspectToEdit = _aspectOwnerEffect.Aspects
+            {
+                AspectModelBase aspectToConcord = _aspectOwnerEffect.Aspects
                     .First(x => x.InternalModel.GetType().Equals(SelectedAspect.LibraryAspectType));
-                _costMonitor.Ability.Concord(aspectToEdit);
+                _costMonitor.Ability.Concord(aspectToConcord);
                 UpdateVisibilityProperties();
             }
         }
@@ -156,7 +156,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         public void DiscordSelectedAspect()
         {
-            AspectModelBase aspectToEdit = _scope switch
+            AspectModelBase aspectToDiscord = _scope switch
             {
                 EAspectScope.Effect => _aspectOwnerEffect?.Aspects
                     .First(x => x.InternalModel.GetType().Equals(SelectedAspect.LibraryAspectType))
@@ -166,7 +166,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 _ => throw new Exception("Аспект для рассогласования не определён.")
             };
 
-            _costMonitor.Ability.Discord(aspectToEdit);
+            _costMonitor.Ability.Discord(aspectToDiscord);
             InitializeAspects();
             UpdateVisibilityProperties();
         }
