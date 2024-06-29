@@ -772,7 +772,7 @@
     <value>Влитые очки опыта</value>
   </data>
   <data name="HearTarget" xml:space="preserve">
-    <value>Нужно слышать</value>
+    <value>Должна быть слышимой</value>
   </data>
   <data name="Help" xml:space="preserve">
     <value>Помощь</value>
@@ -1072,7 +1072,7 @@
     <value>Сохранить</value>
   </data>
   <data name="SeeTarget" xml:space="preserve">
-    <value>Нужно видеть</value>
+    <value>Должна быть видимой</value>
   </data>
   <data name="SelectCharacterPortrait" xml:space="preserve">
     <value>Выберите портрет персонажа</value>

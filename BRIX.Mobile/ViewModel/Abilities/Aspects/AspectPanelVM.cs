@@ -69,7 +69,15 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
             if (AspectsCollection.Any())
             {
-                SelectedAspect = AspectsCollection.First();
+                if (SelectedAspect.IsEmpty)
+                {
+                    SelectedAspect = AspectsCollection.First();
+                }
+                else
+                {
+                    SelectedAspect = AspectsCollection
+                        .First(x => x.LibraryAspectType == SelectedAspect.LibraryAspectType);
+                }
             }
         }
 

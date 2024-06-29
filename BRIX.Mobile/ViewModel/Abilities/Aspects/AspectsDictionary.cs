@@ -60,5 +60,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         public Type? EditPage { get; set; }
         public Type? LibraryAspectType { get; set; }
         public AspectModelBase? ConcreteAspect { get; set; }
+
+        public bool IsEmpty => LibraryAspectType == null;
     }
 }
