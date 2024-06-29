@@ -14,7 +14,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
     {
         private readonly EffectModelBase? _aspectOwnerEffect;
         private readonly AbilityCostMonitorPanelVM _costMonitor;
-
         private readonly EAspectScope _scope;
 
         public AspectPanelVM(AbilityCostMonitorPanelVM costMonitor, EffectModelBase effect)
@@ -31,7 +30,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             _aspectOwnerEffect = effect;
             _costMonitor = costMonitor ?? throw new Exception("Передан не инициализированный CostMonitor.");
             InitializeAspects();
-            UpdateVisibilityProperties();
         }
 
         public AspectPanelVM(AbilityCostMonitorPanelVM costMonitor)
@@ -45,7 +43,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             }
 
             InitializeAspects();
-            UpdateVisibilityProperties();
         }
 
         public void InitializeAspects()
@@ -164,7 +161,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
                 _costMonitor.Ability.Concord(aspectToConcord);
                 InitializeAspects();
-                UpdateVisibilityProperties();
             }
         }
 
@@ -188,7 +184,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
             _costMonitor.Ability.Discord(aspectToDiscord);
             InitializeAspects();
-            UpdateVisibilityProperties();
         }
 
         public void UpdateAspect(AspectModelBase aspect)
@@ -232,6 +227,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         public bool ShowDiscord => SelectedAspect.ConcreteAspect?.IsConcorded == true && ShowEdit;
         public bool ShowBigDiscord => SelectedAspect.ConcreteAspect?.IsConcorded == true && !ShowEdit;
         public bool ShowPanel => AspectsCollection.Any();
+        public bool ShowConcordedIcon => ShowDiscord || ShowBigDiscord;
 
         public void UpdateVisibilityProperties()
         {
@@ -240,6 +236,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             OnPropertyChanged(nameof(ShowDiscord));
             OnPropertyChanged(nameof(ShowBigDiscord));
             OnPropertyChanged(nameof(ShowPanel));
+            OnPropertyChanged(nameof(ShowConcordedIcon));
         }
 
         #endregion

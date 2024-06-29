@@ -132,7 +132,12 @@ namespace BRIX.Mobile.Models.Abilities
             OnPropertyChanged(nameof(Cost));
             OnPropertyChanged(nameof(ShowStatusName));
         }
-
+        
+        /// <summary>
+        /// Обновляет согласованный аспект в способности, используется по возвращении на
+        /// страницу способности после редактирования аспекта (и для соединения способности
+        /// с редактируемым аспектом на странице редактирования аспекта).
+        /// </summary>
         public void UpdateConcordedAspect(AspectModelBase aspectModel)
         {
             Internal.UpdateConcordedAspect(aspectModel.InternalModel);
@@ -169,6 +174,11 @@ namespace BRIX.Mobile.Models.Abilities
             OnPropertyChanged(nameof(Cost));
         }
 
+        /// <summary>
+        /// Используется при возвращении на страницу способности после редактирования эффекта.
+        /// Происходит проверка на предмет согласованных и рассогласованных эффектов и способность
+        /// синхронизируется по согласованности с настройками в эффекте.
+        /// </summary>
         public void UpdateConcordanceByEffect(EffectModelBase effect)
         {
             foreach (AspectModelBase aspect in effect.Aspects)

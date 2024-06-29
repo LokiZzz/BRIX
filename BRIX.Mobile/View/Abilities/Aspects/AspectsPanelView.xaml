@@ -4,6 +4,7 @@
              xmlns:v="clr-namespace:BRIX.Mobile.View.Abilities.Aspects"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities.Aspects"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              x:Class="BRIX.Mobile.View.Abilities.Aspects.AspectsPanelView"
              x:DataType="vm:AspectPanelVM" 
              IsVisible="{Binding ShowPanel}">
@@ -44,7 +45,16 @@
             </CollectionView>
             
             <Grid RowDefinitions="auto,*,auto" Grid.Row="2">
-                <Label Grid.Row="0" Style="{StaticResource TitleLabel}" Text="{Binding SelectedAspect.Name}" />
+                <HorizontalStackLayout Grid.Row="0" Spacing="10">
+                    <Label 
+                        FontSize="20"
+                        FontFamily="Awesome"
+                        Text="{x:Static icons:Awesome.ArrowsRotate}"
+                        TextColor="{StaticResource BRIXLime}"
+                        IsVisible="{Binding ShowConcordedIcon}"
+                        VerticalOptions="Center"/>
+                    <Label Style="{StaticResource TitleLabel}" Text="{Binding SelectedAspect.Name}" />
+                </HorizontalStackLayout>
                 <Label Grid.Row="1" Text="{Binding SelectedAspect.Description}" TextType="Html"/>
                 <Grid 
                     Grid.Row="2" 
