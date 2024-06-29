@@ -33,9 +33,9 @@
         </Style>
         <Style TargetType="ImageButton" x:Key="ShapeButton">
             <Setter Property="BackgroundColor" Value="{StaticResource BRIXDim}"/>
-            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="HeightRequest" Value="60"/>
             <Setter Property="WidthRequest" Value="60"/>
-            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Padding" Value="10"/>
         </Style>
         <Style TargetType="Image" x:Key="ShapeScheme">
             <Setter Property="HeightRequest" Value="150"/>

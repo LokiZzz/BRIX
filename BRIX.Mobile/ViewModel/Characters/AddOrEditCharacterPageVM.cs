@@ -9,16 +9,12 @@ using BRIX.Mobile.Resources.Localizations;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
-    public partial class AOECharacterPageVM : ViewModelBase, IQueryAttributable
+    public partial class AOECharacterPageVM(
+        ICharacterService characterService, 
+        ILocalizationResourceManager localization) : ViewModelBase, IQueryAttributable
     {
-        private readonly ICharacterService _characterService;
-        private readonly ILocalizationResourceManager _localization;
-
-        public AOECharacterPageVM(ICharacterService characterService, ILocalizationResourceManager localization)
-        {
-            _characterService = characterService;
-            _localization = localization;
-        }
+        private readonly ICharacterService _characterService = characterService;
+        private readonly ILocalizationResourceManager _localization = localization;
 
         [ObservableProperty]
         private CharacterModel _character = new(new());
