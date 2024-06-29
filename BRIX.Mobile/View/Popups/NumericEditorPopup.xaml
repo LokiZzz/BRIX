@@ -68,7 +68,6 @@
                     Text="{x:Static icons:Awesome.CircleLeft}" 
                     Grid.Row="4" Grid.Column="2" 
                     Command="{Binding BackspaceCommand}"/>
-
                 <Button 
                     Style="{StaticResource ImageButton}" 
                     Text="{x:Static icons:Awesome.CircleMinus}" 

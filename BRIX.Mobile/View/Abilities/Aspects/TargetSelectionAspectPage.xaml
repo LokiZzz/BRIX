@@ -31,12 +31,12 @@
             <Setter Property="HeightRequest" Value="35"/>
             <Setter Property="BackgroundColor" Value="{StaticResource BRIXDim}"/>
         </Style>
-        <Style TargetType="ImageButton" x:Key="ShapeButton">
+        <Style TargetType="Border" x:Key="ShapeBorderButton">
             <Setter Property="BackgroundColor" Value="{StaticResource BRIXDim}"/>
             <Setter Property="HeightRequest" Value="60"/>
             <Setter Property="WidthRequest" Value="60"/>
             <Setter Property="Padding" Value="10"/>
-            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 5"/>
         </Style>
         <Style TargetType="Image" x:Key="ShapeScheme">
             <Setter Property="HeightRequest" Value="150"/>
@@ -140,36 +140,46 @@
                         </HorizontalStackLayout>
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Area}}"/>
                         <FlexLayout JustifyContent="SpaceBetween">
-                            <ImageButton 
-                                Style="{StaticResource ShapeButton}" 
-                                Source="Shape/brick_icon.svg"
-                                Command="{Binding SetShapeCommand}" 
-                                CommandParameter="Brick" 
-                                BackgroundColor="{Binding IsBrick, Converter={StaticResource SelectedToColorConverter}}"/>
-                            <ImageButton 
-                                Style="{StaticResource ShapeButton}" 
-                                Source="Shape/sphere_icon.svg" 
-                                Command="{Binding SetShapeCommand}" 
-                                CommandParameter="Sphere"
-                                BackgroundColor="{Binding IsSphere, Converter={StaticResource SelectedToColorConverter}}"/>
-                            <ImageButton 
-                                Style="{StaticResource ShapeButton}" 
-                                Source="Shape/cylinder_icon.svg" 
-                                Command="{Binding SetShapeCommand}" 
-                                CommandParameter="Cylinder"
-                                BackgroundColor="{Binding IsCylinder, Converter={StaticResource SelectedToColorConverter}}"/>
-                            <ImageButton 
-                                Style="{StaticResource ShapeButton}" 
-                                Source="Shape/cone_icon.svg" 
-                                Command="{Binding SetShapeCommand}" 
-                                CommandParameter="Cone"
-                                BackgroundColor="{Binding IsCone, Converter={StaticResource SelectedToColorConverter}}"/>
-                            <ImageButton 
-                                Style="{StaticResource ShapeButton}" 
-                                Source="Shape/cross_icon.svg" 
-                                Command="{Binding SetShapeCommand}" 
-                                CommandParameter="VoxelArray"
-                                BackgroundColor="{Binding IsVoxelArray, Converter={StaticResource SelectedToColorConverter}}"/>
+                            <Border 
+                                Style="{StaticResource ShapeBorderButton}" 
+                                BackgroundColor="{Binding IsBrick, Converter={StaticResource SelectedToColorConverter}}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SetShapeCommand}" CommandParameter="Brick"/>
+                                </Border.GestureRecognizers>
+                                <Image Source="Shape/brick_icon.svg"/>
+                            </Border>
+                            <Border 
+                                Style="{StaticResource ShapeBorderButton}" 
+                                BackgroundColor="{Binding IsSphere, Converter={StaticResource SelectedToColorConverter}}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SetShapeCommand}" CommandParameter="Sphere"/>
+                                </Border.GestureRecognizers>
+                                <Image Source="Shape/sphere_icon.svg"/>
+                            </Border>
+                            <Border 
+                                Style="{StaticResource ShapeBorderButton}" 
+                                BackgroundColor="{Binding IsCylinder, Converter={StaticResource SelectedToColorConverter}}">      
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SetShapeCommand}" CommandParameter="Cylinder"/>
+                                </Border.GestureRecognizers>
+                                <Image Source="Shape/cylinder_icon.svg"/>
+                            </Border>
+                            <Border 
+                                Style="{StaticResource ShapeBorderButton}" 
+                                BackgroundColor="{Binding IsCone, Converter={StaticResource SelectedToColorConverter}}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SetShapeCommand}" CommandParameter="Cone"/>
+                                </Border.GestureRecognizers>
+                                <Image Source="Shape/cone_icon.svg"/>
+                            </Border>
+                            <Border 
+                                Style="{StaticResource ShapeBorderButton}" 
+                                BackgroundColor="{Binding IsVoxelArray, Converter={StaticResource SelectedToColorConverter}}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SetShapeCommand}" CommandParameter="VoxelArray"/>
+                                </Border.GestureRecognizers>
+                                <Image Source="Shape/cross_icon.svg"/>
+                            </Border>
                         </FlexLayout>
 
                         <Grid>
