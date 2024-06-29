@@ -37,6 +37,18 @@ namespace BRIX.Mobile.Models.Abilities.Effects
             OnPropertyChanged(nameof(Aspects));
         }
 
+        public void Attach(AspectModelBase aspect)
+        {
+            InternalModel?.Attach(aspect.InternalModel);
+            InitializeAspects();
+        }
+
+        public void Detach(AspectModelBase aspect)
+        {
+            InternalModel?.Detach(aspect.InternalModel.GetType());
+            InitializeAspects();
+        }
+
         public void InitializeAspects()
         {
             if(InternalModel == null)

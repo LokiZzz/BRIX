@@ -149,7 +149,7 @@ namespace BRIX.Library.Abilities
         /// </summary>
         public void Concord(AspectBase sourceAspect)
         {
-            if(!ConcordedAspects.Any(x => x.GetType().Equals(sourceAspect.GetType())))
+            if(ConcordedAspects.Any(x => x.GetType().Equals(sourceAspect.GetType())))
             {
                 return;
             }

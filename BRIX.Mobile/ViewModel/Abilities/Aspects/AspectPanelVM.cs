@@ -148,7 +148,14 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             {
                 AspectModelBase aspectToConcord = _aspectOwnerEffect.Aspects
                     .First(x => x.InternalModel.GetType().Equals(SelectedAspect.LibraryAspectType));
+
+                if (_aspectOwnerEffect != null)
+                {
+                    _aspectOwnerEffect.Attach(aspectToConcord);
+                }
+
                 _costMonitor.Ability.Concord(aspectToConcord);
+                InitializeAspects();
                 UpdateVisibilityProperties();
             }
         }
@@ -165,6 +172,11 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                     .First(x => x.InternalModel.GetType().Equals(SelectedAspect.LibraryAspectType)),
                 _ => throw new Exception("Аспект для рассогласования не определён.")
             };
+
+            if(_aspectOwnerEffect != null)
+            {
+                _aspectOwnerEffect.Detach(aspectToDiscord);
+            }
 
             _costMonitor.Ability.Discord(aspectToDiscord);
             InitializeAspects();
