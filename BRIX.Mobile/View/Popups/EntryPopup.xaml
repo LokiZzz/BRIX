@@ -7,20 +7,31 @@
     xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Popups"
     x:DataType="vm:EntryPopupVM"
     x:Class="BRIX.Mobile.View.Popups.EntryPopup"
-    Color="Transparent">
+    Color="{StaticResource BRIXTranparentDark}"
+    HorizontalOptions="Fill"
+    VerticalOptions="Fill">
 
-    <Border Style="{StaticResource BlockBorder}" WidthRequest="350">
-        <VerticalStackLayout>
-            <Label Style="{StaticResource ParagraphTitleLabel}" Text="{Binding Title}"/>
-            <Label Text="{Binding Message}" LineBreakMode="WordWrap"/>
-            <controls:FramedEntry
-                x:Name="entry"
-                Placeholder="{Binding Placeholder}"
-                Text="{Binding Text}"/>
-            <HorizontalStackLayout Margin="0,20,0,0" Spacing="10" HorizontalOptions="End">
-                <Button Text="{Binding ButtonText}" Command="{Binding FireOkCommand}" MinimumWidthRequest="100" Style="{StaticResource SmallerButton}"/>
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
-    </Border>
+    <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding CloseCommand}" />
+        </Grid.GestureRecognizers>
 
+        <Border 
+            Style="{StaticResource BlockBorder}" 
+            WidthRequest="350"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <VerticalStackLayout>
+                <Label Style="{StaticResource ParagraphTitleLabel}" Text="{Binding Title}"/>
+                <Label Text="{Binding Message}" LineBreakMode="WordWrap"/>
+                <controls:FramedEntry
+                    x:Name="entry"
+                    Placeholder="{Binding Placeholder}"
+                    Text="{Binding Text}"/>
+                <HorizontalStackLayout Margin="0,20,0,0" Spacing="10" HorizontalOptions="End">
+                    <Button Text="{Binding ButtonText}" Command="{Binding FireOkCommand}" MinimumWidthRequest="100" Style="{StaticResource SmallerButton}"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
 </mct:Popup>

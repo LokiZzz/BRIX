@@ -45,6 +45,7 @@
 
     <Color x:Key="BRIXWhite">#FFFFFE</Color>
     <Color x:Key="BRIXDark">#16161A</Color>
+    <Color x:Key="BRIXTranparentDark">#BF16161A</Color>
     <Color x:Key="BRIXMedium">#242629</Color>
     <Color x:Key="BRIXTranparentMedium">#BF242629</Color>
     <Color x:Key="BRIXDim">#78808A</Color>

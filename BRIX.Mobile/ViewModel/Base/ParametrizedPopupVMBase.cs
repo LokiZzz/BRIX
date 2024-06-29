@@ -1,10 +1,17 @@
 ﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.Input;
 
 namespace BRIX.Mobile.ViewModel.Base
 {
     public abstract partial class PopupVMBase : ViewModelBase
     {
         public Popup? View { get; set; }
+
+        [RelayCommand]
+        public void Close()
+        {
+            View?.Close();
+        }
     }
 
     public abstract partial class ParametrizedPopupVMBase<T> : PopupVMBase

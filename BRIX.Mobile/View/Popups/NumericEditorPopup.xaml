@@ -8,80 +8,92 @@
     xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
     x:Class="BRIX.Mobile.View.Popups.NumericEditorPopup"
     x:DataType="vm:NumericEditorPopupVM"
-    Color="Transparent">
+    Color="{StaticResource BRIXTranparentDark}"
+    HorizontalOptions="Fill"
+    VerticalOptions="Fill">
 
-    <Border Style="{StaticResource BlockBorder}" VerticalOptions="Start">
-        <Border.Resources>
-            <Style TargetType="Button" x:Key="NumericButton">
-                <Setter Property="BackgroundColor" Value="Transparent"/>
-                <Setter Property="BorderColor" Value="{StaticResource BRIXLight}"/>
-                <Setter Property="BorderWidth" Value="1"/>
-                <Setter Property="FontSize" Value="24"/>
-                <Setter Property="TextColor" Value="{StaticResource BRIXLight}"/>
-            </Style>
-            <Style TargetType="Button" x:Key="ImageButton" BasedOn="{StaticResource NumericButton}">
-                <Setter Property="FontFamily" Value="Awesome"/>
-                <Setter Property="BorderColor" Value="{StaticResource BRIXLight}"/>
-                <Setter Property="TextColor" Value="{StaticResource BRIXLight}"/>
-            </Style>
-        </Border.Resources>
-        
-        <Grid RowDefinitions="auto,*,*,*,*,*" ColumnDefinitions="*,*,*" ColumnSpacing="10" RowSpacing="10">
-            <controls:FramedEntry 
-                Grid.Row="0" 
-                Grid.ColumnSpan="3" 
-                Placeholder="{Binding EditorTitle}"
-                Text="{Binding Value}"
-                IsReadOnly="True"/>
+    <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding CloseCommand}" />
+        </Grid.GestureRecognizers>
 
-            <Button Style="{StaticResource NumericButton}" Text="7" Grid.Row="1" Grid.Column="0" Command="{Binding EnterNumberCommand}" CommandParameter="7"/>
-            <Button Style="{StaticResource NumericButton}" Text="8" Grid.Row="1" Grid.Column="1" Command="{Binding EnterNumberCommand}" CommandParameter="8"/>
-            <Button Style="{StaticResource NumericButton}" Text="9" Grid.Row="1" Grid.Column="2" Command="{Binding EnterNumberCommand}" CommandParameter="9"/>
+        <Border 
+            Style="{StaticResource BlockBorder}" 
+            WidthRequest="250"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <Border.Resources>
+                <Style TargetType="Button" x:Key="NumericButton">
+                    <Setter Property="BackgroundColor" Value="Transparent"/>
+                    <Setter Property="BorderColor" Value="{StaticResource BRIXLight}"/>
+                    <Setter Property="BorderWidth" Value="1"/>
+                    <Setter Property="FontSize" Value="24"/>
+                    <Setter Property="TextColor" Value="{StaticResource BRIXLight}"/>
+                </Style>
+                <Style TargetType="Button" x:Key="ImageButton" BasedOn="{StaticResource NumericButton}">
+                    <Setter Property="FontFamily" Value="Awesome"/>
+                    <Setter Property="BorderColor" Value="{StaticResource BRIXLight}"/>
+                    <Setter Property="TextColor" Value="{StaticResource BRIXLight}"/>
+                </Style>
+            </Border.Resources>
 
-            <Button Style="{StaticResource NumericButton}" Text="4" Grid.Row="2" Grid.Column="0" Command="{Binding EnterNumberCommand}" CommandParameter="4"/>
-            <Button Style="{StaticResource NumericButton}" Text="5" Grid.Row="2" Grid.Column="1" Command="{Binding EnterNumberCommand}" CommandParameter="5"/>
-            <Button Style="{StaticResource NumericButton}" Text="6" Grid.Row="2" Grid.Column="2" Command="{Binding EnterNumberCommand}" CommandParameter="6"/>
+            <Grid RowDefinitions="auto,*,*,*,*,*" ColumnDefinitions="*,*,*" ColumnSpacing="10" RowSpacing="10">
+                <controls:FramedEntry 
+                    Grid.Row="0" 
+                    Grid.ColumnSpan="3" 
+                    Placeholder="{Binding EditorTitle}"
+                    Text="{Binding Value}"
+                    IsReadOnly="True"/>
 
-            <Button Style="{StaticResource NumericButton}" Text="1" Grid.Row="3" Grid.Column="0" Command="{Binding EnterNumberCommand}" CommandParameter="1"/>
-            <Button Style="{StaticResource NumericButton}" Text="2" Grid.Row="3" Grid.Column="1" Command="{Binding EnterNumberCommand}" CommandParameter="2"/>
-            <Button Style="{StaticResource NumericButton}" Text="3" Grid.Row="3" Grid.Column="2" Command="{Binding EnterNumberCommand}" CommandParameter="3"/>
+                <Button Style="{StaticResource NumericButton}" Text="7" Grid.Row="1" Grid.Column="0" Command="{Binding EnterNumberCommand}" CommandParameter="7"/>
+                <Button Style="{StaticResource NumericButton}" Text="8" Grid.Row="1" Grid.Column="1" Command="{Binding EnterNumberCommand}" CommandParameter="8"/>
+                <Button Style="{StaticResource NumericButton}" Text="9" Grid.Row="1" Grid.Column="2" Command="{Binding EnterNumberCommand}" CommandParameter="9"/>
 
-            <Button 
-                Style="{StaticResource ImageButton}" 
-                Text="{x:Static icons:Awesome.CircleXmark}" 
-                Grid.Row="4" Grid.Column="0" 
-                Command="{Binding ClearCommand}"/>
-            <Button Style="{StaticResource NumericButton}" Text="0" Grid.Row="4" Grid.Column="1" Command="{Binding EnterNumberCommand}" CommandParameter="0"/>
-            <Button 
-                Style="{StaticResource ImageButton}" 
-                Text="{x:Static icons:Awesome.CircleLeft}" 
-                Grid.Row="4" Grid.Column="2" 
-                Command="{Binding BackspaceCommand}"/>
+                <Button Style="{StaticResource NumericButton}" Text="4" Grid.Row="2" Grid.Column="0" Command="{Binding EnterNumberCommand}" CommandParameter="4"/>
+                <Button Style="{StaticResource NumericButton}" Text="5" Grid.Row="2" Grid.Column="1" Command="{Binding EnterNumberCommand}" CommandParameter="5"/>
+                <Button Style="{StaticResource NumericButton}" Text="6" Grid.Row="2" Grid.Column="2" Command="{Binding EnterNumberCommand}" CommandParameter="6"/>
 
-            <Button 
-                Style="{StaticResource ImageButton}" 
-                Text="{x:Static icons:Awesome.CircleMinus}" 
-                BorderColor="{StaticResource BRIXRed}" 
-                TextColor="{StaticResource BRIXRed}" 
-                Grid.Row="5" Grid.Column="0" 
-                Command="{Binding SubstractCommand}"
-                Margin="0,0,0,2"/>
-            <Button 
-                Style="{StaticResource ImageButton}" 
-                Text="{x:Static icons:Awesome.CircleCheck}" 
-                BorderColor="{StaticResource BRIXViolet}" 
-                TextColor="{StaticResource BRIXViolet}" 
-                Grid.Row="6" Grid.Column="1" 
-                Command="{Binding SetCommand}"
-                Margin="0,0,0,2"/>
-            <Button 
-                Style="{StaticResource ImageButton}" 
-                Text="{x:Static icons:Awesome.CirclePlus}" 
-                BorderColor="{StaticResource BRIXLime}" 
-                TextColor="{StaticResource BRIXLime}" 
-                Grid.Row="7" Grid.Column="2" 
-                Command="{Binding AddCommand}"
-                Margin="0,0,0,2"/>
-        </Grid>
-    </Border>
+                <Button Style="{StaticResource NumericButton}" Text="1" Grid.Row="3" Grid.Column="0" Command="{Binding EnterNumberCommand}" CommandParameter="1"/>
+                <Button Style="{StaticResource NumericButton}" Text="2" Grid.Row="3" Grid.Column="1" Command="{Binding EnterNumberCommand}" CommandParameter="2"/>
+                <Button Style="{StaticResource NumericButton}" Text="3" Grid.Row="3" Grid.Column="2" Command="{Binding EnterNumberCommand}" CommandParameter="3"/>
+
+                <Button 
+                    Style="{StaticResource ImageButton}" 
+                    Text="{x:Static icons:Awesome.CircleXmark}" 
+                    Grid.Row="4" Grid.Column="0" 
+                    Command="{Binding ClearCommand}"/>
+                <Button Style="{StaticResource NumericButton}" Text="0" Grid.Row="4" Grid.Column="1" Command="{Binding EnterNumberCommand}" CommandParameter="0"/>
+                <Button 
+                    Style="{StaticResource ImageButton}" 
+                    Text="{x:Static icons:Awesome.CircleLeft}" 
+                    Grid.Row="4" Grid.Column="2" 
+                    Command="{Binding BackspaceCommand}"/>
+
+                <Button 
+                    Style="{StaticResource ImageButton}" 
+                    Text="{x:Static icons:Awesome.CircleMinus}" 
+                    BorderColor="{StaticResource BRIXRed}" 
+                    TextColor="{StaticResource BRIXRed}" 
+                    Grid.Row="5" Grid.Column="0" 
+                    Command="{Binding SubstractCommand}"
+                    Margin="0,0,0,2"/>
+                <Button 
+                    Style="{StaticResource ImageButton}" 
+                    Text="{x:Static icons:Awesome.CircleCheck}" 
+                    BorderColor="{StaticResource BRIXViolet}" 
+                    TextColor="{StaticResource BRIXViolet}" 
+                    Grid.Row="6" Grid.Column="1" 
+                    Command="{Binding SetCommand}"
+                    Margin="0,0,0,2"/>
+                <Button 
+                    Style="{StaticResource ImageButton}" 
+                    Text="{x:Static icons:Awesome.CirclePlus}" 
+                    BorderColor="{StaticResource BRIXLime}" 
+                    TextColor="{StaticResource BRIXLime}" 
+                    Grid.Row="7" Grid.Column="2" 
+                    Command="{Binding AddCommand}"
+                    Margin="0,0,0,2"/>
+            </Grid>
+        </Border>
+    </Grid>
 </mct:Popup>

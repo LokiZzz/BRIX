@@ -11,4 +11,9 @@ public partial class AlertPopup : Popup
         context.View = this;
         BindingContext = context;
     }
+
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+
+    }
 }

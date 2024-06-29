@@ -8,46 +8,56 @@
     xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
     x:Class="BRIX.Mobile.View.Popups.PickerPopup"
     x:DataType="vm:PickerPopupVM"
-    Color="Transparent">
+    Color="{StaticResource BRIXTranparentDark}"
+    HorizontalOptions="Fill"
+    VerticalOptions="Fill">
 
-    <Border Style="{StaticResource BlockBorder}" WidthRequest="350">
-        <VerticalStackLayout Spacing="10">
-            <Label 
-                Text="{Binding Title}" 
-                Style="{StaticResource TitleLabel}"/>
-            <Label 
-                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ListIsEmpty}}" 
-                Margin="0,0,0,10"
-                IsVisible="{Binding ShowListEmptyMessage}"/>
-            <CollectionView 
-                x:Name="pickerCollection"
-                ItemsSource="{Binding Items}"
-                SelectionMode="{Binding Mode}"
-                SelectedItem="{Binding SelectedItem}"
-                SelectionChanged="pickerCollection_SelectionChanged"
-                IsVisible="{Binding ShowListEmptyMessage, Converter={StaticResource NotConverter}}">
-                <CollectionView.Behaviors>
-                    <mct:EventToCommandBehavior
+    <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding CloseCommand}" />
+        </Grid.GestureRecognizers>
+
+        <Border 
+            Style="{StaticResource BlockBorder}" WidthRequest="350"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <VerticalStackLayout Spacing="10">
+                <Label 
+                    Text="{Binding Title}" 
+                    Style="{StaticResource TitleLabel}"/>
+                <Label 
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ListIsEmpty}}" 
+                    Margin="0,0,0,10"
+                    IsVisible="{Binding ShowListEmptyMessage}"/>
+                <CollectionView 
+                    x:Name="pickerCollection"
+                    ItemsSource="{Binding Items}"
+                    SelectionMode="{Binding Mode}"
+                    SelectedItem="{Binding SelectedItem}"
+                    SelectionChanged="pickerCollection_SelectionChanged"
+                    IsVisible="{Binding ShowListEmptyMessage, Converter={StaticResource NotConverter}}">
+                    <CollectionView.Behaviors>
+                        <mct:EventToCommandBehavior
                         EventName="SelectionChanged"
                         Command="{Binding SelectItemCommand}"/>
-                </CollectionView.Behaviors>
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="vm:PickerItemVM">
-                        <controls:PickerItem Text="{Binding Text}"/>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            <Button 
-                WidthRequest="100" 
-                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Ok}}"
-                Command="{Binding OkCommand}"
-                IsVisible="{Binding ShowOk}"
-                HorizontalOptions="End"
-                Style="{StaticResource SmallerButton}"/>
-        </VerticalStackLayout>
-    </Border>
-
+                    </CollectionView.Behaviors>
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:PickerItemVM">
+                            <controls:PickerItem Text="{Binding Text}"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Button 
+                    WidthRequest="100" 
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Ok}}"
+                    Command="{Binding OkCommand}"
+                    IsVisible="{Binding ShowOk}"
+                    HorizontalOptions="End"
+                    Style="{StaticResource SmallerButton}"/>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
 </mct:Popup>

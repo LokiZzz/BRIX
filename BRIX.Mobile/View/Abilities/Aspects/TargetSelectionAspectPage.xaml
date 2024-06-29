@@ -36,6 +36,7 @@
             <Setter Property="HeightRequest" Value="60"/>
             <Setter Property="WidthRequest" Value="60"/>
             <Setter Property="Padding" Value="10"/>
+            <Setter Property="CornerRadius" Value="5"/>
         </Style>
         <Style TargetType="Image" x:Key="ShapeScheme">
             <Setter Property="HeightRequest" Value="150"/>
