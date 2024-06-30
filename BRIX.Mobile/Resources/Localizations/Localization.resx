@@ -270,6 +270,9 @@
   <data name="AskToDeleteInventoryItem" xml:space="preserve">
     <value>Are you sure you want to delete «{0}»?</value>
   </data>
+  <data name="AskWantToResetAllCharactersData" xml:space="preserve">
+    <value>Are you sure you want to reset all characters data?</value>
+  </data>
   <data name="AspectActionPoints" xml:space="preserve">
     <value>Action points</value>
   </data>
@@ -999,6 +1002,9 @@
   <data name="OnlyYoursAbilities" xml:space="preserve">
     <value>Can move only your areas?</value>
   </data>
+  <data name="OtherSettings" xml:space="preserve">
+    <value>Other settings</value>
+  </data>
   <data name="PaperSheet" xml:space="preserve">
     <value>Paper sheet</value>
   </data>
@@ -1049,6 +1055,12 @@
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
+  </data>
+  <data name="ResetCharactersData" xml:space="preserve">
+    <value>Reset characters data</value>
+  </data>
+  <data name="ResetHelpCards" xml:space="preserve">
+    <value>Reset help cards</value>
   </data>
   <data name="RevengeDuration" xml:space="preserve">
     <value>Duration in rounds</value>

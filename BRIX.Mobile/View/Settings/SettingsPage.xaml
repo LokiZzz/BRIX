@@ -38,8 +38,13 @@
             <VerticalStackLayout>
                 <Label 
                     Style="{StaticResource TitleLabel}"
-                    Text="Other settings"/>
-                <Button Text="Reset help cards" Command="{Binding ResetHelpCardsCommand}"/>
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.OtherSettings}}"/>
+                <Button 
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ResetHelpCards}}" 
+                    Command="{Binding ResetHelpCardsCommand}"/>
+                <Button 
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ResetCharactersData}}" 
+                    Command="{Binding ResetCharactersDataCommand}"/>
             </VerticalStackLayout>
         </Border>
     </VerticalStackLayout>

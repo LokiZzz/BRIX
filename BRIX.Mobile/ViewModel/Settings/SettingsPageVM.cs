@@ -12,16 +12,12 @@ using System.Globalization;
 
 namespace BRIX.Mobile.ViewModel.Settings
 {
-    public partial class SettingsPageVM : ViewModelBase
+    public partial class SettingsPageVM(ILocalizationResourceManager localization, ICharacterService characterService)
+        : ViewModelBase
     {
-        private readonly ILocalizationResourceManager _localization;
-
-        public SettingsPageVM(ILocalizationResourceManager localization)
-        {
-            _localization = localization;
-        }
-
-        private ObservableCollection<CultureInfoVM> _cultures = new();
+        private readonly ILocalizationResourceManager _localization = localization;
+        private readonly ICharacterService _characterService = characterService;
+        private ObservableCollection<CultureInfoVM> _cultures = [];
         public ObservableCollection<CultureInfoVM> Cultures
         {
             get => _cultures;
@@ -55,6 +51,18 @@ namespace BRIX.Mobile.ViewModel.Settings
             }
 
             WeakReferenceMessenger.Default.Send<ShowHelpCardsChanged>();
+        }
+
+        [RelayCommand]
+        public async Task ResetCharactersData()
+        {
+            Popups.AlertPopupResult? result = await Ask(Localization.AskWantToResetAllCharactersData);
+
+            if(result?.Answer == Popups.EAlertPopupResult.Yes)
+            {
+                await _characterService.RemoveAllAsync();
+                WeakReferenceMessenger.Default.Send(new ShowCharacterTabsChanged(false));
+            }
         }
 
         public override Task OnNavigatedAsync()

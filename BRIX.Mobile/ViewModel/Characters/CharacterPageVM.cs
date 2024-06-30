@@ -16,11 +16,16 @@ using BRIX.Library.Enums;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
-    public partial class CharacterPageVM(ICharacterService characterService, ILocalizationResourceManager localization) 
-        : ViewModelBase
+    public partial class CharacterPageVM : ViewModelBase
     {
-        private readonly ICharacterService _characterService = characterService;
-        private readonly ILocalizationResourceManager _localization = localization;
+        private readonly ICharacterService _characterService;
+        private readonly ILocalizationResourceManager _localization;
+
+        public CharacterPageVM(ICharacterService characterService, ILocalizationResourceManager localization)
+        {
+            _characterService = characterService;
+            _localization = localization;
+        }
 
         [ObservableProperty]
         private CharacterModel? _character;

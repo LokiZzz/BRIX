@@ -98,6 +98,7 @@ namespace BRIX.Mobile.Services
         public async Task RemoveAllAsync()
         {
             await _storage.WriteJsonAsync(_charactersFileName, new List<Character>());
+            await SelectCurrentCharacter(null);
         }
 
         public async Task<Character> UpdateAsync(Character character)

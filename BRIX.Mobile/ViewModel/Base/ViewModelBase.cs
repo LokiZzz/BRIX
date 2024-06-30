@@ -21,14 +21,12 @@ namespace BRIX.Mobile.ViewModel.Base
 
         public virtual Task OnNavigatedAsync() => Task.CompletedTask;
 
-        protected async Task<TResult?> ShowPopupAsync<TPopup, TResult, TParams>(TParams parameters) 
+        protected static async Task<TResult?> ShowPopupAsync<TPopup, TResult, TParams>(TParams parameters) 
             where TPopup : Popup where TResult : class where TParams : class
         {
             TPopup popupToShow = Resolver.Resolve<TPopup>();
-            ParametrizedPopupVMBase<TParams>? viewModel = 
-                popupToShow.BindingContext as ParametrizedPopupVMBase<TParams>;
 
-            if (viewModel != null)
+            if (popupToShow.BindingContext is ParametrizedPopupVMBase<TParams> viewModel)
             {
                 viewModel.Parameters = parameters;
             }
@@ -48,7 +46,7 @@ namespace BRIX.Mobile.ViewModel.Base
             return result as TResult;
         }
 
-        protected async Task<TResult?> ShowPopupAsync<TPopup, TResult>() where TPopup : Popup where TResult : class
+        protected static async Task<TResult?> ShowPopupAsync<TPopup, TResult>() where TPopup : Popup where TResult : class
         {
             Popup popupToShow = Resolver.Resolve<TPopup>();
             Page? mainPage = Application.Current?.MainPage;
@@ -66,7 +64,7 @@ namespace BRIX.Mobile.ViewModel.Base
             return result as TResult;
         }
 
-        protected async Task ShowPopupAsync<TPopup>() where TPopup : Popup
+        protected static async Task ShowPopupAsync<TPopup>() where TPopup : Popup
         {
             Popup popupToShow = Resolver.Resolve<TPopup>();
             Page? mainPage = Application.Current?.MainPage;
@@ -81,21 +79,21 @@ namespace BRIX.Mobile.ViewModel.Base
             }
         }
 
-        protected async Task<AlertPopupResult?> Alert(AlertPopupParameters parameters)
+        protected static async Task<AlertPopupResult?> Alert(AlertPopupParameters parameters)
         {
             return await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
                 parameters
             );
         }
 
-        protected async Task<AlertPopupResult?> Alert(string message)
+        protected static async Task<AlertPopupResult?> Alert(string message)
         {
             return await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
                 new AlertPopupParameters { Message = message }
             );
         }
 
-        protected async Task<AlertPopupResult?> Ask(string message)
+        protected static async Task<AlertPopupResult?> Ask(string message)
         {
             return await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
                 new AlertPopupParameters 

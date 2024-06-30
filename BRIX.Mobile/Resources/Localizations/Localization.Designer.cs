@@ -520,6 +520,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to reset all characters data?.
+        /// </summary>
+        public static string AskWantToResetAllCharactersData {
+            get {
+                return ResourceManager.GetString("AskWantToResetAllCharactersData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Action points.
         /// </summary>
         public static string AspectActionPoints {
@@ -2707,6 +2716,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Other settings.
+        /// </summary>
+        public static string OtherSettings {
+            get {
+                return ResourceManager.GetString("OtherSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Paper sheet.
         /// </summary>
         public static string PaperSheet {
@@ -2856,6 +2874,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Reset {
             get {
                 return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset characters data.
+        /// </summary>
+        public static string ResetCharactersData {
+            get {
+                return ResourceManager.GetString("ResetCharactersData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset help cards.
+        /// </summary>
+        public static string ResetHelpCards {
+            get {
+                return ResourceManager.GetString("ResetHelpCards", resourceCulture);
             }
         }
         
