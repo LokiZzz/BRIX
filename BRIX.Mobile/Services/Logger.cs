@@ -7,7 +7,7 @@
         public static void LogError(Exception ex)
         {
             string date = DateTime.Now.ToString("MM/dd/yy HH:mm");
-            string message = $"{date}: {ex.Message}{Environment.NewLine}";
+            string message = $"{date}:: {ex.GetType()}: {ex.Message}{Environment.NewLine}";
 
             if(ex.StackTrace != null)
             {
