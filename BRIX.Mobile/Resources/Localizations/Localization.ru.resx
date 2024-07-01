@@ -423,6 +423,9 @@
   <data name="CooldownAspectHint" xml:space="preserve">
     <value>Укажите какое время требуется способности, чтобы она перезарядилась и могла использоваться вновь. Вы также можете выбрать количество раз, которое вы можете использовать способность, прежде чем ей понадобится перезарядка.</value>
   </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Скоприровать</value>
+  </data>
   <data name="Count" xml:space="preserve">
     <value>Количество</value>
   </data>
@@ -876,6 +879,9 @@
   <data name="Login" xml:space="preserve">
     <value>Логин</value>
   </data>
+  <data name="LogWasCopiedSuccessfully" xml:space="preserve">
+    <value>Лог был успешно скопирован в буфер обмена.</value>
+  </data>
   <data name="LowRarityProperty" xml:space="preserve">
     <value>Должна иметь признак малой редкости</value>
   </data>
@@ -1046,6 +1052,9 @@
   </data>
   <data name="ProjectSteps" xml:space="preserve">
     <value>Шагов всего</value>
+  </data>
+  <data name="ReadLog" xml:space="preserve">
+    <value>Прочитать лог</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Запомнить меня</value>

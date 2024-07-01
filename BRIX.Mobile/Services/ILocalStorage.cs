@@ -7,7 +7,9 @@ namespace BRIX.Mobile.Services
         string GetAppDataPath();
         bool FileExists(string fileName);
         Task WriteAllTextAsync(string fileName, string text);
+        void WriteAllText(string fileName, string text);
         Task<string> ReadAllTextAsync(string fileName);
+        string ReadAllText(string fileName);
         Task<T?> ReadJson<T>(string fileName) where T : class, new();
         Task WriteJsonAsync<T>(string fileName, T collection) where T : class, new();
     }
@@ -40,6 +42,18 @@ namespace BRIX.Mobile.Services
             return await File.ReadAllTextAsync(path);
         }
 
+        public string ReadAllText(string fileName)
+        {
+            string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
+
+            if (!File.Exists(path))
+            {
+                WriteAllText(path, string.Empty);
+            }
+
+            return File.ReadAllText(path);
+        }
+
         public async Task<T?> ReadJson<T>(string fileName) where T : class, new()
         {
             string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
@@ -51,7 +65,7 @@ namespace BRIX.Mobile.Services
 
             string json = await File.ReadAllTextAsync(path);
 
-            return JsonConvert.DeserializeObject<T>(json, LocalStorage.Settings);
+            return JsonConvert.DeserializeObject<T>(json, Settings);
         }
 
         public Task WriteAllTextAsync(string fileName, string text)
@@ -61,9 +75,16 @@ namespace BRIX.Mobile.Services
             return File.WriteAllTextAsync(path, text);
         }
 
+        public void WriteAllText(string fileName, string text)
+        {
+            string path = Path.Combine(FileSystem.AppDataDirectory, fileName);
+
+            File.WriteAllText(path, text);
+        }
+
         public async Task WriteJsonAsync<T>(string path, T collection) where T : class, new()
         {
-            string json = JsonConvert.SerializeObject(collection, LocalStorage.Settings);
+            string json = JsonConvert.SerializeObject(collection, Settings);
             await WriteAllTextAsync(path, json);
         }
     }

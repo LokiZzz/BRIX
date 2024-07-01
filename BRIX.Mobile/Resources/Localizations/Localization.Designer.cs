@@ -988,6 +988,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy.
+        /// </summary>
+        public static string Copy {
+            get {
+                return ResourceManager.GetString("Copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Count.
         /// </summary>
         public static string Count {
@@ -2329,6 +2338,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log was copied successfully!.
+        /// </summary>
+        public static string LogWasCopiedSuccessfully {
+            get {
+                return ResourceManager.GetString("LogWasCopiedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Must have an low rarity property.
         /// </summary>
         public static string LowRarityProperty {
@@ -2838,6 +2856,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string ProjectSteps {
             get {
                 return ResourceManager.GetString("ProjectSteps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read log.
+        /// </summary>
+        public static string ReadLog {
+            get {
+                return ResourceManager.GetString("ReadLog", resourceCulture);
             }
         }
         

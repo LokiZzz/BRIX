@@ -191,6 +191,9 @@
 	  <Compile Update="View\NPCs\NPCsPage.xaml.cs">
 	    <DependentUpon>NPCsPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\Settings\LogPage.xaml.cs">
+	    <DependentUpon>LogPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -270,6 +273,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\NPCs\NPCsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Settings\LogPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

@@ -94,6 +94,7 @@ public static class MauiProgram
         builder.RegisterView<EncounterCalculatorPage, EncounterCalculatorPageVM>(false);
 
         builder.RegisterView<SettingsPage, SettingsPageVM>(false);
+        builder.RegisterView<LogPage, LogPageVM>();
 
         AddPopups(builder);
     }

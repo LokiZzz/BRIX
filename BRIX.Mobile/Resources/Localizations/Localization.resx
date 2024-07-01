@@ -426,6 +426,9 @@
   <data name="CooldownAspectHint" xml:space="preserve">
     <value>Specify how long it takes for the ability to recharge and be able to use it again. You can also choose the number of times you can use the ability before it needs a cooldown.</value>
   </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
   <data name="Count" xml:space="preserve">
     <value>Count</value>
   </data>
@@ -873,6 +876,9 @@
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="LogWasCopiedSuccessfully" xml:space="preserve">
+    <value>Log was copied successfully!</value>
+  </data>
   <data name="LowRarityProperty" xml:space="preserve">
     <value>Must have an low rarity property</value>
   </data>
@@ -1043,6 +1049,9 @@
   </data>
   <data name="ProjectSteps" xml:space="preserve">
     <value>Steps count</value>
+  </data>
+  <data name="ReadLog" xml:space="preserve">
+    <value>Read log</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me</value>

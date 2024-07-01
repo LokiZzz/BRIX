@@ -65,6 +65,12 @@ namespace BRIX.Mobile.ViewModel.Settings
             }
         }
 
+        [RelayCommand]
+        public async Task ReadLog()
+        {
+            await Navigation.NavigateAsync<LogPage>();
+        }
+
         public override Task OnNavigatedAsync()
         {
             Cultures = new(_localization.Cultures.Select(x => new CultureInfoVM { CultureInfo = x }));

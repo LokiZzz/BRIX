@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BRIX.Mobile.View.Settings.LogPage"
+             xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Settings"
+             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+             xmlns:local="clr-namespace:BRIX.Mobile.View.Settings"
+             x:DataType="vm:LogPageVM"
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.SettingsPageTitle}}">
+    
+    <Shell.TitleView>
+        <controls:TitleView/>
+    </Shell.TitleView>
+
+    <ContentPage.Resources>
+        <Style TargetType="VerticalStackLayout">
+            <Setter Property="Spacing" Value="10"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*,auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="10" Margin="0,10,0,0">
+                <Label Text="{Binding Log}"/>
+            </VerticalStackLayout>
+        </ScrollView>
+        <Border Style="{StaticResource LowBlockWithShadowBorder}" Grid.Row="1">
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Button
+                    Grid.Column="0"
+                    Style="{StaticResource LightButton}"
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Clear}}"
+                    Command="{Binding ClearCommand}"
+                    Margin="0,0,0,10"/>
+                <Button
+                    Grid.Column="1"
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Copy}}"
+                    Command="{Binding CopyCommand}"
+                    Margin="0,0,0,10"/>
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>

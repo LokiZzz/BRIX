@@ -45,6 +45,9 @@
                 <Button 
                     Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ResetCharactersData}}" 
                     Command="{Binding ResetCharactersDataCommand}"/>
+                <Button 
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ReadLog}}" 
+                    Command="{Binding ReadLogCommand}"/>
             </VerticalStackLayout>
         </Border>
     </VerticalStackLayout>
