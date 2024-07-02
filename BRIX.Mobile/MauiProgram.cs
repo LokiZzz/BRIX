@@ -45,7 +45,8 @@ public static class MauiProgram
 				fonts.AddFont("Font Awesome 6 Free-Solid-900.otf", "Awesome");
 				fonts.AddFont("Font Awesome 6 Brands-Regular-400.otf", "AwesomeBrands");
 				fonts.AddFont("rpgawesome-webfont.ttf", "AwesomeRPG");
-            });
+            })
+            .ConfigureEssentials(essentials => essentials.UseVersionTracking());
 
         builder.RegisterServices();
         builder.RegisterViews();

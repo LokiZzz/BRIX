@@ -17,10 +17,9 @@ namespace BRIX.Mobile.ViewModel
 
         [ObservableProperty]
         private bool _showCharacterTabs = false;
+
+        public string Version { get; set; } = "Ver. " + VersionTracking.Default.CurrentVersion.ToString();
     }
 
-    public class ShowCharacterTabsChanged : ValueChangedMessage<bool> 
-    { 
-        public ShowCharacterTabsChanged(bool show) : base(show) { } 
-    }
+    public class ShowCharacterTabsChanged(bool show) : ValueChangedMessage<bool>(show) { }
 }

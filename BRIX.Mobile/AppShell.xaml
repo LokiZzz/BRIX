@@ -122,8 +122,6 @@
                 ContentTemplate="{DataTemplate npc:EncounterCalculatorPage}"
                 Route="EncounterPage"/>
         </Tab>
-
-        
     </controls:IconFontFlyoutItem>
 
     <controls:IconFontFlyoutItem 
@@ -135,4 +133,12 @@
             ContentTemplate="{DataTemplate settings:SettingsPage}"
             Route="SettingsPage" />
     </controls:IconFontFlyoutItem>
+
+    <Shell.FlyoutFooter>
+        <Label 
+            Style="{StaticResource TitleLabel}" 
+            Text="{Binding Version}" 
+            TextColor="{StaticResource BRIXLight}"
+            Margin="20"/>
+    </Shell.FlyoutFooter>
 </Shell>
