@@ -2,6 +2,7 @@
 using BRIX.Library.Characters;
 using System.Collections.ObjectModel;
 using BRIX.Mobile.Models.Abilities;
+using BRIX.Mobile.Services;
 
 namespace BRIX.Mobile.Models.Characters
 {

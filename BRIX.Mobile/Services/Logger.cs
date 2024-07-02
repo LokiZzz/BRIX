@@ -1,4 +1,6 @@
-﻿namespace BRIX.Mobile.Services
+﻿using Newtonsoft.Json;
+
+namespace BRIX.Mobile.Services
 {
     public static class Logger
     {
@@ -6,25 +8,28 @@
 
         public static void LogError(Exception ex)
         {
-            string date = DateTime.Now.ToString("MM/dd/yy HH:mm");
-            string message = $"{date}:: {ex.GetType()}: {ex.Message}{Environment.NewLine}";
+            string date = DateTime.Now.ToString("MM/dd/yy HH:mm:ss");
+            string message = $"{date} :: {ex.GetType()}: {ex.Message}{Environment.NewLine}";
 
-            if(ex.StackTrace != null)
+            if (ex.StackTrace != null)
             {
                 message += $"{ex.StackTrace}{Environment.NewLine}";
             }
 
-            LocalStorage localStorage = new ();
+            WriteLogMessage(message);
+        }
 
-            if (localStorage.FileExists(_logFile))
+        public static void LogInfo(string messageText, object? objectToLog = null)
+        {
+            string date = DateTime.Now.ToString("MM/dd/yy HH:mm:ss");
+            string message = $"{date} :: {messageText}{Environment.NewLine}";
+
+            if (objectToLog != null)
             {
-                string existingLog = localStorage.ReadAllText(_logFile);
-                localStorage.WriteAllText(_logFile, message + existingLog);
+                message += JsonConvert.SerializeObject(objectToLog) + Environment.NewLine;
             }
-            else
-            {
-                localStorage.WriteAllText(_logFile, message);
-            }
+
+            WriteLogMessage(message);
         }
 
         public static string GetLog()
@@ -49,6 +54,19 @@
             {
                 localStorage.WriteAllText(_logFile, string.Empty);
             }
+        }
+
+        private static void WriteLogMessage(string message)
+        {
+            LocalStorage localStorage = new();
+            string existingLog = string.Empty;
+
+            if (localStorage.FileExists(_logFile))
+            {
+                existingLog = localStorage.ReadAllText(_logFile);
+            }
+            
+            localStorage.WriteAllText(_logFile, message + Environment.NewLine + existingLog);
         }
     }
 }

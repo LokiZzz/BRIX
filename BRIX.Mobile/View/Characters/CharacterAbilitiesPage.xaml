@@ -5,7 +5,7 @@
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
-             xmlns:lib="clr-namespace:BRIX.Library.Abilities;assembly=BRIX.Library"
+             xmlns:models="clr-namespace:BRIX.Mobile.Models.Abilities"
              x:Class="BRIX.Mobile.View.Characters.CharacterAbilitiesPage"
              x:DataType="vm:CharacterAbilitiesPageVM"
              Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CharacterAbilitiesPageTitle}}"
@@ -32,7 +32,7 @@
                             <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="lib:Ability">
+                            <DataTemplate x:DataType="models:CharacterAbilityModel">
                                 <SwipeView Threshold="100">
                                     <SwipeView.LeftItems>
                                         <SwipeItems Mode="Execute">
