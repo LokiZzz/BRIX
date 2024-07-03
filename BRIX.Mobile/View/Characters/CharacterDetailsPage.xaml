@@ -23,16 +23,17 @@
             <Grid>
                 <VerticalStackLayout Spacing="10">
                     <!--Backstory-->
-                    <Border Style="{StaticResource SideMarginBlockBorder}">
-                        <Grid Margin="-15">
+                    <Border Style="{StaticResource SideMarginBlockBorder}" Padding="0">
+                        <Grid >
                             <Image 
                                 Source="{Binding Character.PortraitImage}" 
                                 Opacity="0.2" 
                                 MaximumHeightRequest="{Binding Source={x:Reference expander}, Path=Height}"
-                                Aspect="AspectFill"/>
+                                Aspect="AspectFill"
+                                Margin="-15"/>
                             <controls:ArrowExpander 
-                                x:Name="expander"
                                 Margin="15"
+                                x:Name="expander"
                                 Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Backstory}}">
                                 <controls:ArrowExpander.ExpanderContent>
                                     <Label Text="{Binding Character.Backstory}"/>
@@ -88,9 +89,9 @@
                             </FlexLayout>
                         </VerticalStackLayout>
                     </Border>
-                    <!--Tags-->
+                    <!--Luck-->
                     <Border Style="{StaticResource SideMarginBlockBorder}" Padding="0">
-                        <Grid ColumnDefinitions="*,*,auto" ColumnSpacing="10">
+                        <Grid ColumnDefinitions="*,auto,auto" ColumnSpacing="10">
                             <Label 
                                 Grid.Column="0" Style="{StaticResource TitleLabel}" 
                                 Text="{lcz:Format ValuePath=Character.LuckPoints, FormatPath={x:Static lcz:LocalizationKeys.LuckPoints}}"
