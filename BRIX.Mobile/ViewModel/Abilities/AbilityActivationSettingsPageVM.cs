@@ -115,6 +115,15 @@ namespace BRIX.Mobile.ViewModel.Abilities
             OnPropertyChanged(nameof(ShowNoTriggersText));
         }
 
+        [RelayCommand]
+        private void SetPoints(string points)
+        {
+            if (int.TryParse(points, out int actionPointsToSet))
+            {
+                Activation.ActionPoints = actionPointsToSet;
+            }
+        }
+
         private static string GetTriggerHint(ETriggerProbability probability)
         {
             return probability switch

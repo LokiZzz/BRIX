@@ -45,9 +45,6 @@ namespace BRIX.Mobile.Models.Abilities
             }
         }
 
-        [RelayCommand]
-        private void SetPoints(string points) => ActionPoints = int.Parse(points);
-
         public CooldownOptionVM? SelectedCooldownOption
         {
             get

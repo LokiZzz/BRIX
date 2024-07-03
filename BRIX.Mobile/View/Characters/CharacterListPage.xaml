@@ -52,44 +52,31 @@
                                     </SwipeItemView>
                                 </SwipeItems>
                             </SwipeView.RightItems>
-                            <Grid Margin="10,0" >
-                                <Border 
-                                    Style="{StaticResource BlockBorder}"
-                                    Padding="0"
-                                    HeightRequest="250" 
-                                    StrokeShape="RoundRectangle 10,50,50,10">
-                                    <Grid>
-                                        <controls:ZoomContainer 
-                                            BackgroundColor="{StaticResource BRIXMedium}" 
-                                            InputTransparent="True"
-                                            ContentX="{Binding PortraitX}"
-                                            ContentY="{Binding PortraitY}"
-                                            ContentScale="{Binding PortraitS}">
-                                            <Image Source="{Binding PortraitImage}" IsAnimationPlaying="True"/>
-                                        </controls:ZoomContainer>
-                                        <Grid Margin="10">
-                                            <Label 
-                                                FontFamily="Awesome" 
-                                                Text="{x:Static icons:Awesome.ImagePortrait}" 
-                                                FontSize="120" 
-                                                IsVisible="{Binding ShowImagePlaceholder}"
-                                                VerticalOptions="Center"
-                                                HorizontalOptions="Center"
-                                                Opacity="0.5"/>
-                                            <Border Style="{StaticResource TransparentBorder}" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
-                                                <Label Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
-                                            </Border>
-                                            <Border Style="{StaticResource TransparentBorder}" VerticalOptions="End" HorizontalOptions="End" Padding="10,5">
-                                                <Label Style="{StaticResource TitleLabel}" Text="{lcz:Format ValuePath=Level, FormatPath={x:Static lcz:LocalizationKeys.LevelFormat}}"/>
-                                            </Border>
-                                        </Grid>
-                                    </Grid>
-                                </Border>
 
-                                <Grid.GestureRecognizers>
+                            <Border 
+                                Style="{StaticResource SideMarginBlockBorder}"
+                                Padding="0"
+                                HeightRequest="120"
+                                StrokeShape="RoundRectangle 10,50,50,10">
+                                <Grid>
+                                    <Image Source="{Binding PortraitImage}" Aspect="AspectFill" IsAnimationPlaying="True"/>
+                                    <Grid Margin="10">
+                                        <Border Style="{StaticResource TransparentBorder}" VerticalOptions="Start" HorizontalOptions="Start" Padding="10,5">
+                                            <Label Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
+                                        </Border>
+                                        <Border Style="{StaticResource TransparentBorder}" VerticalOptions="End" HorizontalOptions="End" Padding="10,5">
+                                            <Label 
+                                                Style="{StaticResource TitleLabel}" 
+                                                Text="{lcz:Format ValuePath=Level, FormatPath={x:Static lcz:LocalizationKeys.LevelFormat}}"
+                                                Margin="1"/>
+                                        </Border>
+                                    </Grid>
+                                </Grid>
+
+                                <Border.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={x:Reference listView}, Path= BindingContext.SelectCommand}" CommandParameter="{Binding .}"/>
-                                </Grid.GestureRecognizers>
-                            </Grid>
+                                </Border.GestureRecognizers>
+                            </Border>
                         </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

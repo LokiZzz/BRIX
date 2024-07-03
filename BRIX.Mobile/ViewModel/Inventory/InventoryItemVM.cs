@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Characters;
+using BRIX.Library.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -125,7 +126,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             {
                 if(InternalModel is MaterialSupport materialSupport)
                 {
-                    return $"– {materialSupport.ToExpEquivalent()} EXP";
+                    return $"– {materialSupport.ToExpEquivalent().Round()} EXP";
                 }
                 else
                 {

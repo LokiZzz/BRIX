@@ -35,6 +35,7 @@ namespace BRIX.Mobile.Models.Abilities
             {
                 _activation = value;
                 Internal.Activation = value.InternalModel;
+                OnPropertyChanged(nameof(ActivationDescription));
             }
         }
 
