@@ -79,6 +79,12 @@
                         Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Edit}}" 
                         Command="{Binding NavigateToAspectCommand}"
                         IsVisible="{Binding ShowEdit}"/>
+                    <Button 
+                        Grid.ColumnSpan="2"
+                        Style="{StaticResource LightButton}"
+                        Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Edit}}" 
+                        Command="{Binding NavigateToAspectCommand}"
+                        IsVisible="{Binding ShowBigEdit}"/>
                     <Button
                         Grid.ColumnSpan="2"
                         Style="{StaticResource LightButton}"

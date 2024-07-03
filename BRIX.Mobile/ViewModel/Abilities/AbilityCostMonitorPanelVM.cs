@@ -125,7 +125,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 .Where(x => x.Internal.Id != Ability.Internal.Id)
                 .Sum(x => x.Cost) + Character.InternalModel.ExpInHealth;
 
-            int abilityCost = Ability?.UpdateCost() ?? 0;
+            int abilityCost = Ability.Cost;
             int expSumWithEditingAbility = SpentEXP + abilityCost;
 
             PercentWithoutEditingAbility = (double)SpentEXP / Character.Experience;
@@ -134,6 +134,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             AvailiableExp = Exp - expSumWithEditingAbility;
 
             OnPropertyChanged(nameof(EXPOverflow));
+            Ability.UpdateCost();
         }
     }
 }

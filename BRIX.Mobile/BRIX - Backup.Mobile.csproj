@@ -43,42 +43,42 @@
 	  <ApplicationTitle>BRIX</ApplicationTitle>
 	  <ApplicationId>com.gloomydragon.brix.mobile</ApplicationId>
 	  <ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
-	  <ApplicationVersion>2</ApplicationVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|AnyCPU'">
 	  <ApplicationTitle>BRIX</ApplicationTitle>
 	  <ApplicationId>com.gloomydragon.brix.mobile</ApplicationId>
 	  <ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
-	  <ApplicationVersion>2</ApplicationVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationTitle>BRIX</ApplicationTitle>
 	  <ApplicationId>com.gloomydragon.brix.mobile</ApplicationId>
 	  <ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
-	  <ApplicationVersion>2</ApplicationVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
 	  <ApplicationTitle>BRIX</ApplicationTitle>
 	  <ApplicationId>com.gloomydragon.brix.mobile</ApplicationId>
 	  <ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
-	  <ApplicationVersion>2</ApplicationVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">
 	  <ApplicationTitle>BRIX</ApplicationTitle>
 	  <ApplicationId>com.gloomydragon.brix.mobile</ApplicationId>
 	  <ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
-	  <ApplicationVersion>2</ApplicationVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationTitle>BRIX</ApplicationTitle>
 	  <ApplicationId>com.gloomydragon.brix.mobile</ApplicationId>
 	  <ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
-	  <ApplicationVersion>2</ApplicationVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
 	<ItemGroup>

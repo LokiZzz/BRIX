@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.NPCs"
-             xmlns:lib="clr-namespace:BRIX.Library.Abilities;assembly=BRIX.Library"
+             xmlns:m="clr-namespace:BRIX.Mobile.Models.Abilities"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
@@ -100,7 +100,7 @@
                                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="lib:Ability">
+                                <DataTemplate x:DataType="m:CharacterAbilityModel">
                                     <SwipeView Threshold="100">
                                         <SwipeView.LeftItems>
                                             <SwipeItems Mode="Execute">

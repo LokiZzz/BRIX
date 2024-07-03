@@ -16,11 +16,17 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         private readonly AbilityCostMonitorPanelVM _costMonitor;
         private readonly EAspectScope _scope;
 
+        private bool IsDiscordedScope => _scope == EAspectScope.Effect || _scope == EAspectScope.StatusEffect;
+
         public AspectPanelVM(AbilityCostMonitorPanelVM costMonitor, EffectModelBase effect)
         {
-            _scope = EAspectScope.Effect;
+            _scope = costMonitor.ShowCost ? EAspectScope.Effect : EAspectScope.StatusEffect;
 
-            if(costMonitor?.Ability != null && !costMonitor.Ability.Effects.Contains(effect))
+            bool needToCheckReferences = costMonitor?.Ability != null
+                && !costMonitor.Ability.Effects.Contains(effect)
+                && costMonitor.ShowCost;
+
+            if (needToCheckReferences)
             {
                 throw new ArgumentException(
                     "Инициализируя модель аспекта, необходимо передавать способность и её (!!!) эффект."
@@ -55,7 +61,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                     .ToList();
                 AspectsCollection = new ObservableCollection<AspectUtilityModel>(aspects);
             }
-            else if(_scope == EAspectScope.Effect && _aspectOwnerEffect != null)
+            else if(IsDiscordedScope && _aspectOwnerEffect != null)
             {
                 List<AspectUtilityModel> aspects = _aspectOwnerEffect.Aspects
                     .Select(GetAspectModel)
@@ -113,7 +119,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 throw new ArgumentNullException(nameof(SelectedAspect.EditPage));
             }
 
-            if (_scope == EAspectScope.Effect && _aspectOwnerEffect != null)
+            if (IsDiscordedScope && _aspectOwnerEffect != null)
             {
                 AspectModelBase aspectToEdit = _aspectOwnerEffect.GetAspect(SelectedAspect.LibraryAspectType);
                 await Navigation.NavigateAsync(
@@ -140,6 +146,11 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         public async Task ConcordSelectedAspect()
         {
+            if(_scope == EAspectScope.StatusEffect)
+            {
+                return;
+            }
+
             if(_scope == EAspectScope.Ability || _aspectOwnerEffect == null)
             {
                 throw new Exception(
@@ -164,6 +175,11 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         [RelayCommand]
         public void DiscordSelectedAspect()
         {
+            if (_scope == EAspectScope.StatusEffect)
+            {
+                return;
+            }
+
             AspectModelBase aspectToDiscord = _scope switch
             {
                 EAspectScope.Effect => _aspectOwnerEffect?.Aspects
@@ -215,11 +231,17 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
         #region Visibility
 
-        public bool ShowEdit => _scope == EAspectScope.Ability
-            || SelectedAspect.ConcreteAspect?.IsConcorded == false;
-        public bool ShowConcord => SelectedAspect.ConcreteAspect?.IsConcorded == false;
-        public bool ShowDiscord => SelectedAspect.ConcreteAspect?.IsConcorded == true && ShowEdit;
-        public bool ShowBigDiscord => SelectedAspect.ConcreteAspect?.IsConcorded == true && !ShowEdit;
+        public bool ShowEdit => (_scope == EAspectScope.Ability
+            || SelectedAspect.ConcreteAspect?.IsConcorded == false)
+            && _scope != EAspectScope.StatusEffect;
+        public bool ShowBigEdit => _scope == EAspectScope.StatusEffect;
+        public bool ShowConcord => SelectedAspect.ConcreteAspect?.IsConcorded == false 
+            && _scope != EAspectScope.StatusEffect;
+        public bool ShowDiscord => SelectedAspect.ConcreteAspect?.IsConcorded == true && ShowEdit 
+            && _scope != EAspectScope.StatusEffect;
+        public bool ShowBigDiscord => SelectedAspect.ConcreteAspect?.IsConcorded == true 
+            && !ShowEdit
+            && _scope != EAspectScope.StatusEffect;
         public bool ShowPanel => AspectsCollection.Any();
         public bool ShowConcordedIcon => ShowDiscord || ShowBigDiscord;
 
@@ -239,6 +261,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
     public enum EAspectScope
     {
         Effect = 0,
-        Ability = 1
+        Ability = 1,
+        StatusEffect = 2
     }
 }

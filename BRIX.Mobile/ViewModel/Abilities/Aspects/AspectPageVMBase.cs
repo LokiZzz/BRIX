@@ -66,11 +66,15 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 if (Effect != null)
                 {
                     Effect.UpdateAspect(Aspect);
-                    CostMonitor.Ability?.UpdateEffect(Effect);
+
+                    if (CostMonitor.ShowCost)
+                    {
+                        CostMonitor.Ability?.UpdateEffect(Effect);
+                    }
                 }
                 else
                 {
-                    CostMonitor.Ability.UpdateConcordedAspect(Aspect);
+                    CostMonitor.Ability?.UpdateConcordedAspect(Aspect);
                 }
             }
 
