@@ -1,8 +1,4 @@
 ﻿using BRIX.Library.Abilities;
-using BRIX.Library.Aspects.TargetSelection;
-using BRIX.Library.Characters;
-using BRIX.Library.DiceValue;
-using BRIX.Library.Effects;
 using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Models.NPCs;
 using BRIX.Mobile.Resources.Localizations;
@@ -94,15 +90,15 @@ namespace BRIX.Mobile.ViewModel.NPCs
             );
         }
 
-        public async void ApplyQueryAttributes(IDictionary<string, object> query)
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             ApplyMode(query);
 
-            await HandleBackFormEditing(query);
+            HandleBackFormEditing(query);
             query.Clear();
         }
 
-        private async Task HandleBackFormEditing(IDictionary<string, object> query)
+        private void HandleBackFormEditing(IDictionary<string, object> query)
         {
             CharacterAbilityModel? editedAbility =
                 query.GetParameterOrDefault<CharacterAbilityModel>(NavigationParameters.Ability);
@@ -120,8 +116,6 @@ namespace BRIX.Mobile.ViewModel.NPCs
                         NPC.UpdateAbility(editedAbility);
                         break;
                 }
-
-                await _characterService.UpdateNPC(NPC.Internal);
             }
         }
 
