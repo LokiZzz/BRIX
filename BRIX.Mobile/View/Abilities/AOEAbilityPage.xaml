@@ -66,22 +66,23 @@
                         <CollectionView ItemsSource="{Binding MaterialSupport}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="inv:InventoryItemNodeVM">
-                                    <Border StrokeShape="RoundRectangle 5" BackgroundColor="{StaticResource BRIXDim}" Padding="5">
-                                        <VerticalStackLayout>
-                                            <Grid ColumnDefinitions="auto,*">
-                                                <HorizontalStackLayout Grid.Column="0" Margin="3,0,0,0" Spacing="5">
-                                                    <Image Source="{Binding Icon}" HeightRequest="16"/>
-                                                    <Label Text="{Binding Name}"/>
-                                                    <Label Text="{Binding Count}" IsVisible="{Binding ShowCount}"/>
-                                                    <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CountPostfix}}" IsVisible="{Binding ShowCount}"/>
-                                                </HorizontalStackLayout>
-                                                <HorizontalStackLayout Grid.Column="1" Spacing="10" HorizontalOptions="End" Margin="0,0,3,0">
-                                                    <Label Text="{Binding EXPBonus}"/>
-                                                    <Label TextColor="{StaticResource BRIXOrange}" Text="{Binding Price}" IsVisible="{Binding ShowPrice}"/>
-                                                    <Label TextColor="{StaticResource BRIXOrange}" FontFamily="Awesome" Text="{x:Static icons:Awesome.Coins}" IsVisible="{Binding ShowPrice}" VerticalOptions="Center" VerticalTextAlignment="Center" Margin="0,0,0,1"/>
-                                                </HorizontalStackLayout>
+                                    <Border StrokeShape="RoundRectangle 5" BackgroundColor="{StaticResource BRIXDim}" Padding="5" Margin="0,0,0,2">
+                                        <Grid ColumnDefinitions="auto,*,auto,auto,auto,auto" ColumnSpacing="5">
+                                            <Image Grid.Column="0" Source="{Binding Icon}" HeightRequest="16"/>
+                                            <Label Grid.Column="1" Text="{Binding Name}" LineBreakMode="TailTruncation"/>
+                                            <Label Grid.Column="2" Text="{Binding Count}" IsVisible="{Binding ShowCount}"/>
+                                            <Label Grid.Column="3" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CountPostfix}}" IsVisible="{Binding ShowCount}"/>
+                                            <Label Grid.Column="4" TextColor="{StaticResource BRIXOrange}" Text="{Binding PriceString}" IsVisible="{Binding ShowPrice}"/>
+                                            <Label 
+                                                Grid.Column="5"
+                                                TextColor="{StaticResource BRIXOrange}" 
+                                                FontFamily="Awesome" 
+                                                Text="{x:Static icons:Awesome.Coins}" 
+                                                IsVisible="{Binding ShowPrice}"
+                                                VerticalOptions="Center"
+                                                VerticalTextAlignment="Center"
+                                                Margin="0,0,0,1"/>
                                             </Grid>
-                                        </VerticalStackLayout>
                                         <Border.GestureRecognizers>
                                             <TapGestureRecognizer 
                                                 NumberOfTapsRequired="2" 
