@@ -22,6 +22,6 @@ namespace BRIX.Library.Effects
             typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect), typeof(VampirismAspect)
         ];
 
-        public override int BaseExpCost() => Impact * 100;
+        public override int BaseExpCost() => Impact * 750;
     }
 }

@@ -86,7 +86,7 @@
 
     @if(Model.TargetSelectionRestrictions.Conditions.Count() > 0)
     {
-        <p>Чтобы @(Model.IsConcorded ? "эффекты подействовали" : "эффекта подействовал") на цель, она должна иметь следующие свойства:</p>
+        <p>Чтобы @(Model.IsConcorded ? "эффекты подействовали" : "эффект подействовал") на цель, она должна иметь следующие свойства:</p>
         <ul>
             @foreach ((ETargetSelectionRestrictions Type, string Comment) condition in Model.TargetSelectionRestrictions.Conditions)
             {

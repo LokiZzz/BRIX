@@ -396,6 +396,9 @@
   <data name="Clear" xml:space="preserve">
     <value>Очистить</value>
   </data>
+  <data name="Climb" xml:space="preserve">
+    <value>Лазание</value>
+  </data>
   <data name="Coins" xml:space="preserve">
     <value>Монеты</value>
   </data>
