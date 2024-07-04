@@ -184,8 +184,8 @@
                             <LinearItemsLayout 
                                 Orientation="Horizontal" 
                                 ItemSpacing="20" 
-                                SnapPointsAlignment="Start" 
-                                SnapPointsType="MandatorySingle"/>
+                                SnapPointsAlignment="Center" 
+                                SnapPointsType="Mandatory"/>
                         </CarouselView.ItemsLayout>
                         <CarouselView.ItemTemplate>
                             <DataTemplate x:DataType="vm:ExperienceInfoVM">
