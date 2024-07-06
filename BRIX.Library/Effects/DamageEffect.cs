@@ -13,18 +13,21 @@ namespace BRIX.Library.Effects
             typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect), typeof(VampirismAspect)
         ];
 
-        public override int BaseExpCost()
+        public override int GetExpCost()
         {
-            int damageToHimselfCoef = 1;
-
             TargetSelectionAspect? targetSelection = GetAspect<TargetSelectionAspect>();
 
+            // Если способность наносит урон самому персонажу, то все остальные аспекты игнорируются.
+            // Эффект в таком случае не добавляет к стоимости, а уменьшает её.
             if (targetSelection?.Strategy == ETargetSelectionStrategy.CharacterHimself)
             {
-                damageToHimselfCoef = -1;
+                return -BaseExpCost();
             }
 
-            return Impact.Average() * Impact.Average() * damageToHimselfCoef;
+            // Иначе рассчёт происходит как обычно.
+            return base.GetExpCost();
         }
+
+        public override int BaseExpCost() => Impact.Average() * Impact.Average();
     }
 }

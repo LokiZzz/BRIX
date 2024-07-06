@@ -19,7 +19,7 @@ namespace BRIX.Library.Effects
 
         public abstract int BaseExpCost();
 
-        public int GetExpCost()
+        public virtual int GetExpCost()
         {
             double resultingCost = BaseExpCost();
 

@@ -2,6 +2,7 @@
 using BRIX.Library.Characters;
 using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
+using System.Net;
 
 namespace BRIX.Library.Abilities
 {
@@ -36,12 +37,16 @@ namespace BRIX.Library.Abilities
         {
             double effectsCountPenaltyCoef = 1;
             double deltaPerEffect = 0.2;
+            // Есть эффекты, которые уменьшают стоимость способности.
+            // Такие эффекты не учитываются в коэффициенте количества эффектов.
+            int effectiveEffectsCount = _effects.Where(x => x.GetExpCost() > 0).Count();
 
-            if (_effects.Count > 1)
+            if (effectiveEffectsCount > 1)
             {
-                effectsCountPenaltyCoef += (_effects.Count - 1) * deltaPerEffect;
+                effectsCountPenaltyCoef += (effectiveEffectsCount - 1) * deltaPerEffect;
             }
 
+            List<(Type Effect, int Cost)> effectsCosts = _effects.Select(x => (x.GetType(), x.GetExpCost())).ToList();
             int sumOfEffectsExpCost = _effects.Sum(effect => effect.GetExpCost());
             double activationCoef = Activation.GetCoeficient();
             int expCost = (sumOfEffectsExpCost * activationCoef * effectsCountPenaltyCoef).Round();

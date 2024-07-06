@@ -45,12 +45,19 @@ public partial class App : Application
         MainPage = serviceProvider.GetService<AppShell>();
 
         AppDomain.CurrentDomain.FirstChanceException += CurrentDomain_FirstChanceException;
-
-        //throw new Exception("Some error");
     }
 
-    private void CurrentDomain_FirstChanceException(object? sender, FirstChanceExceptionEventArgs e)
+    private static readonly List<Type> ExceptionTypesToIgnore = [typeof(FormatException)];
+
+    private void CurrentDomain_FirstChanceException(object? sender, FirstChanceExceptionEventArgs args)
     {
-        Logger.LogError(e.Exception);
+        bool ignoreException = ExceptionTypesToIgnore.Any(x => x.Equals(args.Exception.GetType()));
+
+        if (ignoreException)
+        {
+            return;
+        }
+
+        Logger.LogError(args.Exception);
     }
 }
