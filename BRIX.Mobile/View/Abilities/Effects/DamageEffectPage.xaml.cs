@@ -6,7 +6,7 @@ namespace BRIX.Mobile.View.Abilities.Effects;
 
 public partial class DamageEffectPage : ContentPage
 {
-	public DamageEffectPage(DiceImpactEffectPageVMBase<DamageEffect> context)
+	public DamageEffectPage(DamageEffectPageVM context)
 	{
 		InitializeComponent();
 		BindingContext = context;

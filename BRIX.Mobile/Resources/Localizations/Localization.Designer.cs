@@ -2581,6 +2581,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An ability can have only one effect, causing damage to the character itself..
+        /// </summary>
+        public static string NoMoreThanOneSelfDamageEffectMessage {
+            get {
+                return ResourceManager.GetString("NoMoreThanOneSelfDamageEffectMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to n/a.
         /// </summary>
         public static string None {
@@ -3621,6 +3630,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Titanic {
             get {
                 return ResourceManager.GetString("Titanic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The maximum damage to the character itself should not exceed its maximum health points..
+        /// </summary>
+        public static string TooMuchSelfharmMessage {
+            get {
+                return ResourceManager.GetString("TooMuchSelfharmMessage", resourceCulture);
             }
         }
         

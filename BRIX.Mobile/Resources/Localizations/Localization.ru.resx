@@ -966,6 +966,9 @@
   <data name="No" xml:space="preserve">
     <value>Нет</value>
   </data>
+  <data name="NoMoreThanOneSelfDamageEffectMessage" xml:space="preserve">
+    <value>Способность может иметь только один эффект, наносящий урон самому персонажу.</value>
+  </data>
   <data name="None" xml:space="preserve">
     <value>n/a</value>
   </data>
@@ -1310,6 +1313,9 @@
   </data>
   <data name="Titanic" xml:space="preserve">
     <value>Титанический</value>
+  </data>
+  <data name="TooMuchSelfharmMessage" xml:space="preserve">
+    <value>Максимальный урон самому персонажу не должен превышать его максимальное количество очков здоровья.</value>
   </data>
   <data name="Trigger" xml:space="preserve">
     <value>Триггер</value>

@@ -957,6 +957,9 @@
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="NoMoreThanOneSelfDamageEffectMessage" xml:space="preserve">
+    <value>An ability can have only one effect, causing damage to the character itself.</value>
+  </data>
   <data name="None" xml:space="preserve">
     <value>n/a</value>
   </data>
@@ -1304,6 +1307,9 @@
   </data>
   <data name="Titanic" xml:space="preserve">
     <value>Titanic</value>
+  </data>
+  <data name="TooMuchSelfharmMessage" xml:space="preserve">
+    <value>The maximum damage to the character itself should not exceed its maximum health points.</value>
   </data>
   <data name="Trigger" xml:space="preserve">
     <value>Trigger</value>

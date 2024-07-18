@@ -34,7 +34,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             UpdateCost();
         }
         
-        private readonly CharacterModel? Character;
+        public readonly CharacterModel? Character;
 
         private CharacterAbilityModel _ability = new();
         public CharacterAbilityModel Ability

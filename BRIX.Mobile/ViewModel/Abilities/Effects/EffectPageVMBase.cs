@@ -5,6 +5,7 @@ using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Abilities.Aspects;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.Options;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Effects
 {
@@ -54,22 +55,27 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
         [RelayCommand]
         private async Task Save()
         {
-            switch (Mode)
+            if (await Validate())
             {
-                case EEditingMode.Add:
-                    await Navigation.Back(stepsBack: 2,
-                        (NavigationParameters.Effect, Effect),
-                        (NavigationParameters.EditMode, Mode)
-                    );
-                    break;
-                case EEditingMode.Edit:
-                    await Navigation.Back(stepsBack: 1,
-                        (NavigationParameters.Effect, Effect),
-                        (NavigationParameters.EditMode, Mode)
-                    );
-                    break;
+                switch (Mode)
+                {
+                    case EEditingMode.Add:
+                        await Navigation.Back(stepsBack: 2,
+                            (NavigationParameters.Effect, Effect),
+                            (NavigationParameters.EditMode, Mode)
+                        );
+                        break;
+                    case EEditingMode.Edit:
+                        await Navigation.Back(stepsBack: 1,
+                            (NavigationParameters.Effect, Effect),
+                            (NavigationParameters.EditMode, Mode)
+                        );
+                        break;
+                }
             }
         }
+
+        protected virtual Task<bool> Validate() => Task.FromResult(true);
 
         private bool _alreadyInitialized = false;
 

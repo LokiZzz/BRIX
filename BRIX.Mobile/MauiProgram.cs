@@ -113,7 +113,7 @@ public static class MauiProgram
     {
         builder.RegisterView<ChooseEffectPage, ChooseEffectPageVM>();
 
-        builder.RegisterView<DamageEffectPage, DiceImpactEffectPageVMBase<DamageEffect>>();
+        builder.RegisterView<DamageEffectPage, DamageEffectPageVM>();
         builder.RegisterView<HealEffectPage, DiceImpactEffectPageVMBase<HealEffect>>();
         builder.RegisterView<FortifyEffectPage, DiceImpactEffectPageVMBase<FortifyEffect>>();
         builder.RegisterView<ExhaustionEffectPage, DiceImpactEffectPageVMBase<ExhaustionEffect>>();
