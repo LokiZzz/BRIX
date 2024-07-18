@@ -3,6 +3,7 @@ using BRIX.Library.Characters;
 using System.Collections.ObjectModel;
 using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Services;
+using BRIX.Library.Extensions;
 
 namespace BRIX.Mobile.Models.Characters
 {
@@ -278,5 +279,82 @@ namespace BRIX.Mobile.Models.Characters
                 InternalModel.Statuses[InternalModel.Statuses.IndexOf(existingStatus.Internal)] = status.Internal;
             }
         }
+
+        #region Speed
+
+        public double WalkSpeed
+        {
+            get => InternalModel.Speed.Walk;
+            set
+            {
+                SetProperty(InternalModel.Speed.Walk, value, InternalModel, (character, x) => character.Speed.Walk = x);
+                OnPropertyChanged(nameof(WalkMAP));
+            }
+        }
+
+        public double WalkMAP => (WalkSpeed / 5).Round(2);
+
+        public double SwimSpeed
+        {
+            get => InternalModel.Speed.Swim;
+            set
+            {
+                SetProperty(InternalModel.Speed.Walk, value, InternalModel, (character, x) => character.Speed.Walk = x);
+                OnPropertyChanged(nameof(SwimMAP));
+            }
+        }
+
+        public double SwimMAP => (SwimSpeed / 5).Round(2);
+
+        public double ClimbSpeed
+        {
+            get => InternalModel.Speed.Climb;
+            set
+            {
+                SetProperty(InternalModel.Speed.Walk, value, InternalModel, (character, x) => character.Speed.Walk = x);
+                OnPropertyChanged(nameof(ClimbMAP));
+            }
+        }
+
+        public double ClimbMAP => (ClimbSpeed / 5).Round(2);
+
+        public double FlySpeed
+        {
+            get => InternalModel.Speed.Fly;
+            set
+            {
+                SetProperty(InternalModel.Speed.Walk, value, InternalModel, (character, x) => character.Speed.Walk = x);
+                OnPropertyChanged(nameof(FlyMAP));
+            }
+        }
+
+        public double FlyMAP => (FlySpeed / 5).Round(2);
+
+        public double BurrowSpeed
+        {
+            get => InternalModel.Speed.Burrow;
+            set
+            {
+                SetProperty(InternalModel.Speed.Walk, value, InternalModel, (character, x) => character.Speed.Walk = x);
+                OnPropertyChanged(nameof(BurrowMAP));
+            }
+        }
+
+        public double BurrowMAP => (BurrowSpeed / 5).Round(2);
+
+        public double TeleportationSpeed
+        {
+            get => InternalModel.Speed.Teleportation;
+            set
+            {
+                SetProperty(InternalModel.Speed.Walk, value, InternalModel, (character, x) => character.Speed.Walk = x);
+                OnPropertyChanged(nameof(TeleportationMAP));
+            }
+        }
+
+        public double TeleportationMAP => (TeleportationSpeed / 5).Round(2);
+
+
+        #endregion
     }
 }

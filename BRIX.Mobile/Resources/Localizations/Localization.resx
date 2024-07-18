@@ -885,6 +885,9 @@
   <data name="LuckPoints" xml:space="preserve">
     <value>Luck</value>
   </data>
+  <data name="MAPUnit" xml:space="preserve">
+    <value>m/AP</value>
+  </data>
   <data name="MarkOfFate" xml:space="preserve">
     <value>Mark of fate</value>
   </data>

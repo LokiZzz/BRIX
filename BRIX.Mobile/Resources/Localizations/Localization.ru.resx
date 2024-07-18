@@ -891,6 +891,9 @@
   <data name="LuckPoints" xml:space="preserve">
     <value>Удача</value>
   </data>
+  <data name="MAPUnit" xml:space="preserve">
+    <value>м/ОД</value>
+  </data>
   <data name="MarkOfFate" xml:space="preserve">
     <value>Метка судьбы</value>
   </data>

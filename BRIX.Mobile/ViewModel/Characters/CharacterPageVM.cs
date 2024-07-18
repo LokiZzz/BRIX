@@ -209,6 +209,12 @@ namespace BRIX.Mobile.ViewModel.Characters
             await _characterService.UpdateAsync(Character.InternalModel);
         }
 
+        [RelayCommand]
+        public async Task EditSpeed()
+        {
+            await Navigation.NavigateAsync<AddHealthPage>();
+        }
+
         /// <summary>
         /// Добывает статусы с наименьшей единицей времени (Раунды, Минуты, Часы, Дни, Года).
         /// </summary>

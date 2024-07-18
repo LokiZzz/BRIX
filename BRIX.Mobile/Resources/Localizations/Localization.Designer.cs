@@ -2365,6 +2365,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to m/AP.
+        /// </summary>
+        public static string MAPUnit {
+            get {
+                return ResourceManager.GetString("MAPUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mark of fate.
         /// </summary>
         public static string MarkOfFate {

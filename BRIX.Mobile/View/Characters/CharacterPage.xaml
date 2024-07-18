@@ -178,6 +178,52 @@
                             </Label>
                         </Grid>
                     </Border>
+                    <!--Speed-->
+                    <Border Style="{StaticResource SideMarginBlockBorder}">
+                        <Grid ColumnDefinitions="*,auto,auto" RowDefinitions="auto,auto" ColumnSpacing="10" RowSpacing="10">
+                            <Label 
+                                Grid.Row="0" Grid.Column="0"
+                                Style="{StaticResource TitleLabel}" 
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Speed}}"/>
+                            <HorizontalStackLayout Grid.Row="0"  Grid.Column="1" Spacing="5">
+                                <Label Style="{StaticResource TitleLabel}" Text="{Binding Character.WalkSpeed}" Margin="0,0,10,0"/>
+                                <Label Style="{StaticResource TitleLabel}" Text="{Binding Character.WalkMAP, StringFormat='({0}'}"/>
+                                <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.MAPUnit}, StringFormat='{0})'}"/>
+                            </HorizontalStackLayout>
+                            <Button
+                                Grid.Row="0" Grid.Column="2"
+                                Style="{StaticResource SquareIconButton}"
+                                FontFamily="AwesomeRPG"
+                                Text="{x:Static icons:AwesomeRPG.Footprint}"
+                                Command="{Binding EditSpeedCommand}"/>
+                            <!--<Label Grid.Row="1" Grid.ColumnSpan="3">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Swim}}"/>
+                                        <Span Text=": "/>
+                                        <Span Text="{Binding Character.SwimSpeed}"/>
+                                        <Span Text="{Binding Character.SwimMAP, StringFormat=' ({0}); '}"/>
+                                        <Span Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Climb}}"/>
+                                        <Span Text=": "/>
+                                        <Span Text="{Binding Character.ClimbSpeed}"/>
+                                        <Span Text="{Binding Character.ClimbMAP, StringFormat=' ({0}); '}"/>
+                                        <Span Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Fly}}"/>
+                                        <Span Text=": "/>
+                                        <Span Text="{Binding Character.FlySpeed}"/>
+                                        <Span Text="{Binding Character.FlyMAP, StringFormat=' ({0}); '}"/>
+                                        <Span Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Burrow}}"/>
+                                        <Span Text=": "/>
+                                        <Span Text="{Binding Character.BurrowSpeed}"/>
+                                        <Span Text="{Binding Character.BurrowMAP, StringFormat=' ({0}); '}"/>
+                                        <Span Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Teleportation}}"/>
+                                        <Span Text=": "/>
+                                        <Span Text="{Binding Character.TeleportationSpeed}"/>
+                                        <Span Text="{Binding Character.TeleportationMAP, StringFormat=' ({0});'}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>-->
+                        </Grid>
+                    </Border>
                     <!--EXP-->
                     <CarouselView ItemsSource="{Binding ExpCards}" Loop="False" IndicatorView="experienceCarouselIndicator">
                         <CarouselView.ItemsLayout>
