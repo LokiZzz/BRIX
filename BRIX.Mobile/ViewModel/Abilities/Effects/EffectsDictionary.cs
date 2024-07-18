@@ -89,12 +89,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 EditPage = typeof(MoveTargetEffectPage),
                 Effect = new MoveTargetEffect()
             }},
-            { typeof(MoveCharacterEffectModel), new EffectTypeVM() {
-                Name = Localization.EffectMoveCharacter,
-                Icon = AwesomeRPG.Footprint,
-                EditPage = typeof(MoveCharacterEffectPage),
-                Effect = new MoveCharacterEffect()
-            }},
             { typeof(MoveAreaEffectModel), new EffectTypeVM() {
                 Name = Localization.EffectMoveArea,
                 Icon = AwesomeRPG.RadialBalance,

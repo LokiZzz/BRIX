@@ -126,7 +126,6 @@ public static class MauiProgram
         builder.RegisterView<CleanseEffectPage, EffectPageVMBase<CleanseEffectModel>>();
         builder.RegisterView<CancelationEffectPage, EffectPageVMBase<CancelationEffectModel>>();
         builder.RegisterView<MoveTargetEffectPage, MoveTargetEffectPageVM>();
-        builder.RegisterView<MoveCharacterEffectPage, MoveCharacterEffectPageVM>();
         builder.RegisterView<MoveAreaEffectPage, EffectPageVMBase<MoveAreaEffectModel>>();
         builder.RegisterView<ShieldEffectPage, EffectPageVMBase<ShieldEffectModel>>();
         builder.RegisterView<PeriodicDamageEffectPage, DiceImpactEffectPageVMBase<PeriodicDamageEffect>>();

@@ -48,9 +48,6 @@
     <Content Update="Templates\en_US\DamageEffectT.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
-    <Content Update="Templates\en_US\MoveCharacterEffectT.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
     <Content Update="Templates\ru_RU\AOEAspectT.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>

@@ -120,10 +120,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             }
 
             Exp = Character.Experience;
-
-            SpentEXP = Character.Abilities
-                .Where(x => x.Internal.Id != Ability.Internal.Id)
-                .Sum(x => x.Cost) + Character.InternalModel.ExpInHealth;
+            SpentEXP = Character.InternalModel.GetSpentExp(Ability.Internal.Id);
 
             int abilityCost = Ability.Cost;
             int expSumWithEditingAbility = SpentEXP + abilityCost;

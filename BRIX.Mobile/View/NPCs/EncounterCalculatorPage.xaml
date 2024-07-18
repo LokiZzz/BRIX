@@ -89,7 +89,7 @@
                             Text="{Binding NPCCount}"/>
                         <controls:FramedEntry
                             Grid.Row="1" Grid.Column="1"
-                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NPCPower}}"
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NPCPowerField}}"
                             Text="{Binding NPCExp}"/>
                         <Button
                             Grid.Row="2" Grid.ColumnSpan="2"

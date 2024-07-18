@@ -170,9 +170,6 @@
 	  <Compile Update="View\Abilities\Effects\MoveAreaEffectPage.xaml.cs">
 	    <DependentUpon>MoveAreaEffectPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\Abilities\Effects\MoveCharacterEffectPage.xaml.cs">
-	    <DependentUpon>MoveCharacterEffectPage.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="View\Abilities\Effects\MoveTargetEffectPage.xaml.cs">
 	    <DependentUpon>MoveTargetEffectPage.xaml</DependentUpon>
 	  </Compile>
@@ -252,9 +249,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\MoveAreaEffectPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\Abilities\Effects\MoveCharacterEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\MoveTargetEffectPage.xaml">

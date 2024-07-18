@@ -90,7 +90,7 @@ namespace BRIX.Mobile.ViewModel.NPCs
 
             if (_fastSpeed > 1)
             {
-                int speedCost = new MoveCharacterEffect { DistancePerActionPoint = _fastSpeed }.GetExpCost();
+                int speedCost = new CharacterSpeed() { Walk = _fastSpeed }.GetExpCost();
 
                 if (attackPower - speedCost >= 0)
                 {
@@ -123,10 +123,7 @@ namespace BRIX.Mobile.ViewModel.NPCs
 
             if (FastSpeed > 1)
             {
-                Ability speedAbility = new();
-                speedAbility.Name = $"{Localization.Speed} {FastSpeed}";
-                speedAbility.AddEffect(new MoveCharacterEffect { DistancePerActionPoint = FastSpeed });
-                PotentialNPC.AddAbility(new(speedAbility));
+                PotentialNPC.Internal.Speed.Walk = FastSpeed;
             }
 
             if (!string.IsNullOrEmpty(FastDamage))

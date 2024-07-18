@@ -1,4 +1,6 @@
-﻿namespace BRIX.Library.Characters
+﻿using BRIX.Library.Abilities;
+
+namespace BRIX.Library.Characters
 {
     public partial class Character : CharacterBase
     {
@@ -53,8 +55,17 @@
 
         public int ExpToLevelUp => CharacterCalculator.GetExpToLevelUp(Experience);
         public int AvailableExp => Experience - SpentExp;
-        public int SpentExp => ExpSpentOnAbilities + ExpInHealth;
+        public int SpentExp => GetSpentExp();
         public int ExpSpentOnAbilities => Abilities.Sum(x => x.ExpCost(this));
+
+        public int GetSpentExp(Guid? excludeAbilityId = null)
+        {
+            return Abilities
+                .Where(x => excludeAbilityId == null || x.Id != excludeAbilityId)
+                .Sum(x => x.ExpCost(this))
+                + ExpInHealth
+                + Speed.GetExpCost();
+        }
 
         public override int RawMaxHealth => Level * CharacterCalculator.HealthPerLevel;
         public int HealthFromExp => CharacterCalculator.ExpToHealth(ExpInHealth);

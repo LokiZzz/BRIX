@@ -40,6 +40,8 @@ namespace BRIX.Library.Characters
         public static int MaxActionPoints => 5;
         public int CurrentActionPoints { get; set; } = 5;
 
+        public CharacterSpeed Speed { get; set; } = new();
+
         protected virtual int GetMaxHealth()
         {
             return RawMaxHealth + MaxHealthBonuses + MaxHealthPenalties;

@@ -993,6 +993,9 @@
   <data name="NPCPower" xml:space="preserve">
     <value>Power:</value>
   </data>
+  <data name="NPCPowerField" xml:space="preserve">
+    <value>Power</value>
+  </data>
   <data name="NPCSpeed" xml:space="preserve">
     <value>Speed (map)</value>
   </data>

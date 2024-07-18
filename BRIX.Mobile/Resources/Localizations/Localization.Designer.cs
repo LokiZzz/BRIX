@@ -2689,6 +2689,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Power.
+        /// </summary>
+        public static string NPCPowerField {
+            get {
+                return ResourceManager.GetString("NPCPowerField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Speed (map).
         /// </summary>
         public static string NPCSpeed {

@@ -21,9 +21,10 @@
         private int GetNPCPower()
         {
             int powerByAbilities = Abilities.Sum(x => x.ExpCost());
+            int powerBySpeed = Speed.GetExpCost();
             int powerByHealth = CharacterCalculator.HealthToExp(Health);
 
-            return (powerByAbilities + powerByHealth) / 2;
+            return (powerByAbilities + powerBySpeed + powerByHealth) / 2;
         }
     }
 }

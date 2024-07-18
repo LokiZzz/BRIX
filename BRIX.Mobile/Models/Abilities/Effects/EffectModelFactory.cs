@@ -17,8 +17,6 @@ namespace BRIX.Mobile.Models.Abilities.Effects
                     return new CancelationEffectModel(can);
                 case MoveTargetEffect mte:
                     return new MoveTargetEffectModel(mte);
-                case MoveCharacterEffect mce:
-                    return new MoveCharacterEffectModel(mce);
                 case MoveAreaEffect mae:
                     return new MoveAreaEffectModel(mae);
                 case ShieldEffect se:
