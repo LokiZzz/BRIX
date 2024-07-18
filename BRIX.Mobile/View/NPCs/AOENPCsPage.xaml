@@ -140,8 +140,11 @@
             </VerticalStackLayout>
         </ScrollView>
         <Border Grid.Row="1" Style="{StaticResource LowBlockWithShadowBorder}">
-            <Grid ColumnDefinitions="auto,*" RowDefinitions="auto,auto" RowSpacing="10" Margin="10">
-                <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NPCPower}}"/>
+            <Grid ColumnDefinitions="auto,*" RowDefinitions="auto,auto" RowSpacing="10" Margin="10,0,10,10">
+                <Label 
+                    Grid.Row="0" Grid.Column="0" 
+                    Style="{StaticResource TitleLabel}" 
+                    Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.NPCPower}}"/>
                 <Label 
                     Grid.Row="0" Grid.Column="1" 
                     Style="{StaticResource TitleLabel}" 
