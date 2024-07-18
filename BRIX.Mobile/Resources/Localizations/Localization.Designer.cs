@@ -3499,7 +3499,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A voxel is a 1x1 meter cube. From such voxels, you can make an array — the figure of the area in which the effect will be applied to the targets. In the picture an area of ​​five voxels is composed as an example..
+        ///   Looks up a localized string similar to A voxel is a 1x1 meter cube. From such voxels, you can make an array — the figure of the area in which the effect will be applied to the targets. In the picture an area of ​​five voxels is composed as an example. The maximum distance between adjacent voxels should not exceed the distance from the character to the area..
         /// </summary>
         public static string TargetSelectionVoxelHint {
             get {

@@ -7,17 +7,13 @@ namespace BRIX.Library.DiceValue
     {
         public string ToString(string format)
         {
-            switch (format)
+            return format switch
             {
-                case "F":
-                    return ToFullString();
-                case "R":
-                    return ToRollOptionsString();
-                case "S":
-                    return ToShortString();
-                default:
-                    return ToString();
-            }
+                "F" => ToFullString(),
+                "R" => ToRollOptionsString(),
+                "S" => ToShortString(),
+                _ => ToString(),
+            };
         }
 
         private string ToFullString()
@@ -182,6 +178,7 @@ namespace BRIX.Library.DiceValue
         private static DicePool ParseDiceFormula(string input)
         {
             DicePool parsedDicePool = new();
+            input = input.Replace('к', 'd');
             string[] splittedString = input.Split('+');
 
             foreach (string entry in splittedString)
@@ -191,10 +188,7 @@ namespace BRIX.Library.DiceValue
                     string[] splittedDice = entry.Split("d");
 
                     parsedDicePool.Add(
-                        new Dice(
-                            int.Parse(splittedDice[1]),
-                            int.Parse(splittedDice[0])
-                        )
+                        new Dice(int.Parse(splittedDice[1]), int.Parse(splittedDice[0]))
                     );
                 }
                 else if (DiceRegex().IsMatch(entry))

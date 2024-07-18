@@ -19,9 +19,11 @@ namespace BRIX.Library.Effects
 
         public override int BaseExpCost()
         {
-            double disposableCoef = IsAreaDisposable ? 0.3 : 1;
+            // Способ наносить урон именно этим способом может быть более или менее эффективным, чем прямой метод.
+            // В зависимости от реального положения дел во время плейтеста эта пара коэффициентов могут меняться.
+            double areaMethodCoefficient = IsAreaDisposable ? 0.3 : 0.9;
 
-            return (Impact.Average() * Impact.Average() * disposableCoef).Round();
+            return (Impact.CostLikeDamageEffect() * areaMethodCoefficient).Round();
         }
     }
 }

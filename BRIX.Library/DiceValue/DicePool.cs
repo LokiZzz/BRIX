@@ -43,18 +43,20 @@ namespace BRIX.Library.DiceValue
             return dicesMax;
         }
 
-        public int Average()
+        public int Average() => PreciseAverage().Round();
+
+        public double PreciseAverage()
         {
             double average = Dice.Sum(x => x.Average(RollOptions.RerollValues, RollOptions.ExplodingDepth)) + Modifier;
 
-            if(RollOptions.CriticalPercent > 0 && RollOptions.CriticalModifier > 1)
+            if (RollOptions.CriticalPercent > 0 && RollOptions.CriticalModifier > 1)
             {
                 double criticalValue = average * RollOptions.CriticalModifier;
                 double criticalChance = RollOptions.CriticalPercent / 100d;
                 average += criticalValue * criticalChance;
             }
 
-            return average.Round();
+            return average;
         }
 
         /// <summary>

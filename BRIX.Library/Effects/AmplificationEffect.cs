@@ -19,7 +19,12 @@ namespace BRIX.Library.Effects
 
         public override int BaseExpCost()
         {
-            return (Impact.Average() * Impact.Average() * 0.8).Round();
+            // Коэффициент эффективности. Если услить только одного персонажа, у которого способность наносит урон 
+            // сразу нескольким противникам, то мощь партии начинает неконтролируемо расти, поэтому усиление должно
+            // быть дороже, чем сам урон.
+            int effectivenessCoef = 2;
+
+            return Impact.CostLikeDamageEffect() * effectivenessCoef;
         }
     }
 }

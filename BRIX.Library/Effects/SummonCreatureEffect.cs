@@ -15,7 +15,7 @@ namespace BRIX.Library.Effects
 
         public override int BaseExpCost()
         {
-            return (Creatures.Sum(x => x.Count * x.Creature.Power) * 0.85).Round();
+            return (Creatures.Sum(x => x.Count * x.Creature.Power) * 0.95).Round();
         }
     }
 

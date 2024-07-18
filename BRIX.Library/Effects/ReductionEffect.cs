@@ -19,7 +19,7 @@ namespace BRIX.Library.Effects
 
         public override int BaseExpCost()
         {
-            return (Impact.Average() * Impact.Average() * 1.1).Round();
+            return (Impact.CostLikeDamageEffect() * 1.1).Round();
         }
     }
 }

@@ -227,13 +227,16 @@
                                     Source="Shape/cross_scheme.svg"/>
                                 <Label Grid.Row="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionVoxelHint}}" Margin="0,0,0,10"/>
                                 <controls:FramedEntry Grid.Row="2" Text="{Binding Aspect.AreaShape.N}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaN}}"/>
-                                <HorizontalStackLayout Grid.Row="3" Margin="0,10,0,0">
-                                    <CheckBox IsChecked="{Binding Aspect.AreaShape.IsArbitrary}"/>
+                                <Grid Grid.Row="3" ColumnDefinitions="auto,*" Margin="0,10,0,0" ColumnSpacing="10">
+                                    <CheckBox 
+                                        Grid.Column="0"
+                                        IsChecked="{Binding Aspect.AreaShape.IsArbitrary}"/>
                                     <Label 
+                                        Grid.Column="1"
                                         VerticalOptions="Center"
                                         VerticalTextAlignment="Center"
                                         Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.VoxelArrayIsArbitrary}}"/>
-                                </HorizontalStackLayout>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </VerticalStackLayout>

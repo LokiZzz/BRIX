@@ -20,7 +20,7 @@ namespace BRIX.Library.Effects
 
         public override int BaseExpCost()
         {
-            return Impact * 25;
+            return Impact * 10;
         }
     }
 }

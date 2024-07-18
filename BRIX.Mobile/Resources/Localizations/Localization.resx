@@ -1264,7 +1264,7 @@
     <value>It is necessary to choose a target selection strategy, there are only two of them:</value>
   </data>
   <data name="TargetSelectionVoxelHint" xml:space="preserve">
-    <value>A voxel is a 1x1 meter cube. From such voxels, you can make an array — the figure of the area in which the effect will be applied to the targets. In the picture an area of ​​five voxels is composed as an example.</value>
+    <value>A voxel is a 1x1 meter cube. From such voxels, you can make an array — the figure of the area in which the effect will be applied to the targets. In the picture an area of ​​five voxels is composed as an example. The maximum distance between adjacent voxels should not exceed the distance from the character to the area.</value>
   </data>
   <data name="TargetsSizes" xml:space="preserve">
     <value>Targets sizes</value>
