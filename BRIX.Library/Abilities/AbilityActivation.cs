@@ -8,7 +8,8 @@ namespace BRIX.Library.Abilities
 
         private readonly int _minActionPoints = 1;
         private readonly int _maxActionPoints = 50;
-        private int _actionPoints = 1;
+
+        private int _actionPoints = 3;
         public int ActionPoints
         {
             get => _actionPoints;
@@ -54,13 +55,29 @@ namespace BRIX.Library.Abilities
 
         public List<(ETriggerProbability Probability, string Comment)> Triggers { get; set; } = [];
 
-        private double GetActionPointsCoefficient()
+        double GetActionPointsCoefficient()
         {
-            int percent = new ThrasholdCostConverter((1, 0), (2, 20), (3, 10), (6, 1))
-                .Convert(ActionPoints);
-            double coef = (-percent).ToCoeficient();
+            double coef = ActionPoints switch
+            {
+                1 => 3,
+                2 => 1.5,
+                3 => 1,
+                4 => 0.75,
+                5 => 0.65,
+                >= 6 and <= 50 => GetThrasholdedCoeficient(),
+                _ => 0.05
+            };
 
             return coef;
+
+            // После 5 увеличение кол-ва очков действий даёт следующие скидки:
+            // 6-10 по -3%; 11-15 по -2%; 16-50 по -1% за каждое очко действий.
+            double GetThrasholdedCoeficient()
+            {
+                return (-new ThrasholdCostConverter((1, 0), (5, 35), (6, 3), (11, 2), (16, 1))
+                    .Convert(ActionPoints))
+                    .ToCoeficient();
+            }
         }
 
         private double GetCooldownCoefficient()

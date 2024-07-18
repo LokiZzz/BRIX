@@ -59,7 +59,7 @@
 
         private void AddSteps((int Thrashold, int Delta)[] steps)
         {
-            steps = steps.OrderBy(x => x.Item1).ToArray();
+            steps = [.. steps.OrderBy(x => x.Thrashold)];
 
             LinkedListNode<ThresholdStep> current = new(
                 new ThresholdStep
@@ -71,13 +71,13 @@
 
             Steps.AddFirst(current);
 
-            foreach ((int Thrashold, int Delta) step in steps.Skip(1))
+            foreach ((int Thrashold, int Delta) in steps.Skip(1))
             {
                 LinkedListNode<ThresholdStep> next = new(
                     new ThresholdStep
                     {
-                        Thrashold = step.Thrashold,
-                        Delta = step.Delta
+                        Thrashold = Thrashold,
+                        Delta = Delta
                     }
                 );
 
