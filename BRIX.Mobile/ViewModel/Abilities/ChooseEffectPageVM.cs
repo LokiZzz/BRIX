@@ -1,4 +1,6 @@
-﻿using BRIX.Mobile.Models.Abilities;
+﻿using BRIX.Library.Characters;
+using BRIX.Library.Effects;
+using BRIX.Mobile.Models.NPCs;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Abilities.Effects;
@@ -35,10 +37,16 @@ namespace BRIX.Mobile.ViewModel.Abilities
         {
             if (Effects.Any()) return Task.CompletedTask;
 
-            IEnumerable<EffectTypeVM> effects = _forStatus
-                ? EffectsDictionary.Collection.Where(x => x.Value.Effect?.HasStatus == true).Select(x => x.Value)
-                : EffectsDictionary.Collection.Select(x => x.Value);
+            List<EffectTypeVM> effects = EffectsDictionary.Collection
+                .Where(x => x.Value.Effect?.HasStatus == true || !_forStatus)
+                .Select(x => x.Value)
+                .ToList();
                 
+            if(_costMonitor?.Ability.Character != null && _costMonitor?.Ability.Character is NPC)
+            {
+                effects.Remove(effects.Single(x => x.Effect is SummonCreatureEffect));
+            }
+
             Effects = new(effects);
 
             return Task.CompletedTask;
