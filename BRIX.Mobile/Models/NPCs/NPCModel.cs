@@ -17,6 +17,7 @@ namespace BRIX.Mobile.Models.NPCs
                 new CharacterAbilityModel(x) { Character = npc })
             );
             Tags = new(npc.Tags.Select(x => new CharacterTagVM { Text = x }));
+            Speed = new CharacterSpeedModel(npc.Speed, () => OnPropertyChanged(nameof(Power)));
         }
 
         public NPC Internal { get; }
@@ -49,6 +50,8 @@ namespace BRIX.Mobile.Models.NPCs
                 OnPropertyChanged(nameof(Power));
             }
         }
+
+        public CharacterSpeedModel Speed { get; set; }
 
         public int Power => Internal.Power;
 

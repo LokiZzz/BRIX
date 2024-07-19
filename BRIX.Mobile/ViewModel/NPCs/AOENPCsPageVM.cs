@@ -125,6 +125,7 @@ namespace BRIX.Mobile.ViewModel.NPCs
             {
                 _mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
                 NPC = query.GetParameterOrDefault<NPCModel>(NavigationParameters.NPC) ?? new();
+                NPC = new NPCModel(NPC.Internal);
             }
 
             Title = _mode switch

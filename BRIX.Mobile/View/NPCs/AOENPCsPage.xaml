@@ -82,7 +82,70 @@
                             </Grid>
                         </controls:ArrowExpander.ExpanderContent>
                     </controls:ArrowExpander>
-                    
+                </Border>
+                <Border Style="{StaticResource BlockBorder}" Margin="10,0">
+                    <controls:ArrowExpander Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Speed}}" Margin="0">
+                        <controls:ArrowExpander.ExpanderContent>
+                            <Grid 
+                                RowDefinitions="auto,*,*,*,*,*,*" ColumnDefinitions="3*,*" 
+                                RowSpacing="10" ColumnSpacing="10">
+                                <controls:FramedEntry
+                                    Grid.Row="1" Grid.Column="0"
+                                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Walk}}"
+                                    Text="{Binding NPC.Speed.Walk}"/>
+                                <controls:FramedEntry
+                                    Grid.Row="1" Grid.Column="1"
+                                    IsReadOnly="True"
+                                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.MAPUnit}}"
+                                    Text="{Binding NPC.Speed.WalkMAP}"/>
+                                <controls:FramedEntry
+                                    Grid.Row="2" Grid.Column="0"
+                                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Swim}}"
+                                    Text="{Binding NPC.Speed.Swim}"/>
+                                <controls:FramedEntry
+                                    Grid.Row="2" Grid.Column="1"
+                                    IsReadOnly="True"
+                                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.MAPUnit}}"
+                                    Text="{Binding NPC.Speed.SwimMAP}"/>
+                                <controls:FramedEntry
+                                    Grid.Row="3" Grid.Column="0"
+                                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Climb}}"
+                                    Text="{Binding NPC.Speed.Climb}"/>
+                                <controls:FramedEntry
+                                    Grid.Row="3" Grid.Column="1"
+                                    IsReadOnly="True"
+                                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.MAPUnit}}"
+                                    Text="{Binding NPC.Speed.ClimbMAP}"/>
+                                <controls:FramedEntry
+                                    Grid.Row="4" Grid.Column="0"
+                                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Fly}}"
+                                    Text="{Binding NPC.Speed.Fly}"/>
+                                <controls:FramedEntry
+                                    Grid.Row="4" Grid.Column="1"
+                                    IsReadOnly="True"
+                                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.MAPUnit}}"
+                                    Text="{Binding NPC.Speed.FlyMAP}"/>
+                                <controls:FramedEntry
+                                    Grid.Row="5" Grid.Column="0"
+                                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Burrow}}"
+                                    Text="{Binding NPC.Speed.Burrow}"/>
+                                <controls:FramedEntry
+                                    Grid.Row="5" Grid.Column="1"
+                                    IsReadOnly="True"
+                                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.MAPUnit}}"
+                                    Text="{Binding NPC.Speed.BurrowMAP}"/>
+                                <controls:FramedEntry
+                                    Grid.Row="6" Grid.Column="0"
+                                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Teleportation}}"
+                                    Text="{Binding NPC.Speed.Teleportation}"/>
+                                <controls:FramedEntry
+                                    Grid.Row="6" Grid.Column="1"
+                                    IsReadOnly="True"
+                                    Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.MAPUnit}}"
+                                    Text="{Binding NPC.Speed.TeleportationMAP}"/>
+                            </Grid>                            
+                        </controls:ArrowExpander.ExpanderContent>
+                    </controls:ArrowExpander>
                 </Border>
                 <Grid RowDefinitions="auto,auto,*" RowSpacing="10" Margin="0,10">
                     <Label 
