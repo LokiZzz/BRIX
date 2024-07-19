@@ -3,11 +3,6 @@ using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {

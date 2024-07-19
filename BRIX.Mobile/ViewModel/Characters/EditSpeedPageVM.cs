@@ -1,68 +1,51 @@
-﻿using BRIX.Library.Characters;
+﻿using BRIX.Mobile.Models.Characters;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
+using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.Input;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
-    public partial class EditSpeedPageVM(ICharacterService characterService) : ViewModelBase
+    public partial class EditSpeedPageVM(ICharacterService characterService) : ViewModelBase, IQueryAttributable
     {
         public ICharacterService CharacterService { get; } = characterService;
 
-
-        private int _expSpent;
-        public int ExpSpent
+        private CharacterModel? _character;
+        public CharacterModel? Character
         {
-            get => _expSpent;
-            set
-            {
-                //if(SetProperty(ref _expSpent, value) && _invokeHPCalc)
-                //{
-                //    _invokeEXPCalc = false;
-                //    AdditionalHealth = CharacterCalculator.ExpToHealth(_expSpent);
-                //    _invokeEXPCalc = true;
-                //}
-
-                //OnPropertyChanged(nameof(ExperienceLeft));
-            }
+            get => _character;
+            set => SetProperty(ref _character, value);
         }
-
-        private int _experienceOverall;
-        public int ExperienceOverall
-        {
-            get => _experienceOverall;
-            set => SetProperty(ref _experienceOverall, value);
-        }
-
-        private int _expSpentOnAbilities;
-        public int ExperienceLeft => ExperienceOverall - ExpSpent - _expSpentOnAbilities;
 
         [RelayCommand]
         public async Task Save()
         {
-            //if(ExperienceLeft < 0)
-            //{
-            //    await Alert(Localization.AddHealthNotEnoughExpAlert);
+            if (Character != null)
+            {
+                if(Character.FreeExperience < 0)
+                {
+                    await Alert(Localization.NotEnoughEXPForSpeed);
 
-            //    return;
-            //}
+                    return;
+                }
 
-            //Character currentCharacter = await CharacterService.GetCurrentCharacterGuaranteed();
-            //currentCharacter.ExpInHealth = ExpSpent;
-            //await CharacterService.UpdateAsync(currentCharacter);
-            //await Navigation.Back();
+                await CharacterService.UpdateAsync(Character.InternalModel);
+            }
+
+            await Navigation.Back();
         }
 
-        public override async Task OnNavigatedAsync()
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            //Character currentCharacter = await CharacterService.GetCurrentCharacterGuaranteed();
-            //ExpSpent = currentCharacter.ExpInHealth;
-            //_rawHealth = currentCharacter.RawMaxHealth;
-            //_expSpentOnAbilities = currentCharacter.ExpSpentOnAbilities;
-            //OnPropertyChanged(nameof(NewHealth));
-            //ExperienceOverall = currentCharacter.Experience;
-            //OnPropertyChanged(nameof(ExperienceLeft));
+            CharacterModel? character = query.GetParameterOrDefault<CharacterModel>(NavigationParameters.Character);
+
+            if(character != null)
+            {
+                Character = new CharacterModel(character.InternalModel);
+            }
+
+            query.Clear();
         }
     }
 }

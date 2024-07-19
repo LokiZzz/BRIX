@@ -375,6 +375,9 @@
   <data name="CharacterMovigSpeed" xml:space="preserve">
     <value>Скорость (м/ОД)</value>
   </data>
+  <data name="CharacterSpeed_Help" xml:space="preserve">
+    <value>Скорость персонажа — это расстояние в метрах, которое он может пройти за один раунд, не затрачивая очки действий. Также персонаж может дополнительно тратить очки действий и перемещаться на расстояние, равное одной пятой от скорости за каждое очко действия, это расстояние измеряется в м/ОД или в «модах». При перемещении по клеткам мод или сумма модов округляется до целого числа.</value>
+  </data>
   <data name="CharacterStatusesPageHelp" xml:space="preserve">
     <value>Чтобы редактировать статус, сдвиньте карточку статуса вправо, чтобы удалить, сдвиньте её влево.</value>
   </data>
@@ -735,6 +738,9 @@
   <data name="EXPLeft" xml:space="preserve">
     <value>Осталось: </value>
   </data>
+  <data name="EXPSpentToSpeed" xml:space="preserve">
+    <value>Затраченный опыт:</value>
+  </data>
   <data name="EXPStillAvailiable" xml:space="preserve">
     <value>Осталось:</value>
   </data>
@@ -990,6 +996,9 @@
   <data name="NotEnoughEXP" xml:space="preserve">
     <value>Не хватает очков опыта!</value>
   </data>
+  <data name="NotEnoughEXPForSpeed" xml:space="preserve">
+    <value>Недостаточно очков опыта для таких изменений скорости.</value>
+  </data>
   <data name="NoTriggers" xml:space="preserve">
     <value>У этой способности нет триггеров активации.</value>
   </data>
@@ -1139,6 +1148,9 @@
   </data>
   <data name="Speed" xml:space="preserve">
     <value>Скорость</value>
+  </data>
+  <data name="SpeedAdjustment" xml:space="preserve">
+    <value>Настройка скорости</value>
   </data>
   <data name="Spread" xml:space="preserve">
     <value>Разброс:</value>

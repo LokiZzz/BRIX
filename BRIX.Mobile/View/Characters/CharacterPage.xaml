@@ -114,6 +114,50 @@
                                 Opacity=".75"/>
                         </Grid>
                     </Border>
+                    <!--EXP-->
+                    <CarouselView ItemsSource="{Binding ExpCards}" Loop="False" IndicatorView="experienceCarouselIndicator">
+                        <CarouselView.ItemsLayout>
+                            <LinearItemsLayout 
+                                Orientation="Horizontal" 
+                                ItemSpacing="20" 
+                                SnapPointsAlignment="Center" 
+                                SnapPointsType="Mandatory"/>
+                        </CarouselView.ItemsLayout>
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate x:DataType="vm:ExperienceInfoVM">
+                                <Border Style="{StaticResource BlockBorder}">
+                                    <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
+                                        <Label Text="{Binding Title}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center"/>
+                                        <Label Grid.Row="0" Grid.Column="1" Margin="0,0,15,0" VerticalTextAlignment="Center">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Style="{StaticResource TitleLabel}" Text="{Binding Current}"/>
+                                                    <Span Style="{StaticResource TitleLabel}" Text=" / "/>
+                                                    <Span Style="{StaticResource TitleLabel}" Text="{Binding Target}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Button 
+                                            Grid.Row="0" Grid.Column="2" 
+                                            Style="{StaticResource SquareIconButton}"
+                                            FontFamily="{Binding IconFont}"
+                                            Text="{Binding Icon}" 
+                                            Command="{Binding DoCardActionCommand}"/>
+                                        <ProgressBar 
+                                            Margin="0,5,0,-5"
+                                            Grid.Row="1" Grid.ColumnSpan="3"
+                                            Progress="{Binding Percent}"
+                                            ProgressColor="{StaticResource BRIXLime}"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                    <IndicatorView 
+                        x:Name="experienceCarouselIndicator"
+                        IndicatorColor="{StaticResource BRIXDim}"
+                        SelectedIndicatorColor="{StaticResource BRIXWhite}"
+                        HorizontalOptions="Center"/>    
                     <!--Health-->
                     <Border Style="{StaticResource SideMarginBlockBorder}">
                         <Grid RowDefinitions="auto,auto,auto" ColumnDefinitions="*,auto,auto">
@@ -180,14 +224,14 @@
                     </Border>
                     <!--Speed-->
                     <Border Style="{StaticResource SideMarginBlockBorder}">
-                        <Grid ColumnDefinitions="*,auto,auto" RowDefinitions="auto,auto" ColumnSpacing="10" RowSpacing="10">
+                        <Grid ColumnDefinitions="auto,*,auto" RowDefinitions="auto,auto" ColumnSpacing="10" RowSpacing="20">
                             <Label 
                                 Grid.Row="0" Grid.Column="0"
                                 Style="{StaticResource TitleLabel}" 
                                 Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Speed}}"/>
                             <HorizontalStackLayout Grid.Row="0"  Grid.Column="1" Spacing="5">
-                                <Label Style="{StaticResource TitleLabel}" Text="{Binding Character.WalkSpeed}" Margin="0,0,10,0"/>
-                                <Label Style="{StaticResource TitleLabel}" Text="{Binding Character.WalkMAP, StringFormat='({0}'}"/>
+                                <Label Style="{StaticResource TitleLabel}" Text="{Binding Character.Speed.Walk}" Margin="0,0,10,0"/>
+                                <Label Style="{StaticResource TitleLabel}" Text="{Binding Character.Speed.WalkMAP, StringFormat='({0}'}"/>
                                 <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.MAPUnit}, StringFormat='{0})'}"/>
                             </HorizontalStackLayout>
                             <Button
@@ -196,6 +240,75 @@
                                 FontFamily="AwesomeRPG"
                                 Text="{x:Static icons:AwesomeRPG.Footprint}"
                                 Command="{Binding EditSpeedCommand}"/>
+                            <Grid
+                                Grid.Row="2" Grid.ColumnSpan="3"
+                                ColumnDefinitions="*,*,*,*,*" RowDefinitions="*,*" RowSpacing="10">
+                                <Grid.Resources>
+                                    <Style TargetType="Label">
+                                        <Setter Property="VerticalOptions" Value="Center"/>
+                                        <Setter Property="VerticalTextAlignment" Value="Center"/>
+                                        <Setter Property="HorizontalOptions" Value="Center"/>
+                                        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                                    </Style>
+                                </Grid.Resources>
+
+                                <Label 
+                                    Grid.Row="0" Grid.Column="0" FontSize="24"
+                                    FontFamily="AwesomeRPG" Text="{x:Static icons:AwesomeRPG.Fish}"/>
+                                <Label 
+                                    Grid.Row="0" Grid.Column="1" FontSize="24"
+                                    FontFamily="AwesomeRPG" Text="{x:Static icons:AwesomeRPG.Gecko}"/>
+                                <Label 
+                                    Grid.Row="0" Grid.Column="2" FontSize="24"
+                                    FontFamily="AwesomeRPG" Text="{x:Static icons:AwesomeRPG.FeatheredWing}"/>
+                                <Label 
+                                    Grid.Row="0" Grid.Column="3" FontSize="24"
+                                    FontFamily="AwesomeRPG" Text="{x:Static icons:AwesomeRPG.Shovel}"/>
+                                <Label 
+                                    Grid.Row="0" Grid.Column="4" FontSize="24"
+                                    FontFamily="AwesomeRPG" Text="{x:Static icons:AwesomeRPG.PlayerTeleport}"/>
+
+                                <Label Grid.Row="1" Grid.Column="0">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Character.Speed.Swim}"/>
+                                            <Span Text="{Binding Character.Speed.SwimMAP, StringFormat=' ({0})'}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Grid.Row="1" Grid.Column="1">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Character.Speed.Climb}"/>
+                                            <Span Text="{Binding Character.Speed.ClimbMAP, StringFormat=' ({0})'}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Grid.Row="1" Grid.Column="2">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Character.Speed.Fly}"/>
+                                            <Span Text="{Binding Character.Speed.FlyMAP, StringFormat=' ({0})'}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Grid.Row="1" Grid.Column="3">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Character.Speed.Burrow}"/>
+                                            <Span Text="{Binding Character.Speed.BurrowMAP, StringFormat=' ({0})'}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Grid.Row="1" Grid.Column="4">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Character.Speed.Teleportation}"/>
+                                            <Span Text="{Binding Character.Speed.TeleportationMAP, StringFormat=' ({0})'}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </Grid>
                             <!--<Label Grid.Row="1" Grid.ColumnSpan="3">
                                 <Label.FormattedText>
                                     <FormattedString>
@@ -224,50 +337,6 @@
                             </Label>-->
                         </Grid>
                     </Border>
-                    <!--EXP-->
-                    <CarouselView ItemsSource="{Binding ExpCards}" Loop="False" IndicatorView="experienceCarouselIndicator">
-                        <CarouselView.ItemsLayout>
-                            <LinearItemsLayout 
-                                Orientation="Horizontal" 
-                                ItemSpacing="20" 
-                                SnapPointsAlignment="Center" 
-                                SnapPointsType="Mandatory"/>
-                        </CarouselView.ItemsLayout>
-                        <CarouselView.ItemTemplate>
-                            <DataTemplate x:DataType="vm:ExperienceInfoVM">
-                                <Border Style="{StaticResource BlockBorder}">
-                                    <Grid RowDefinitions="auto,auto" ColumnDefinitions="*,auto,auto">
-                                        <Label Text="{Binding Title}" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center"/>
-                                        <Label Grid.Row="0" Grid.Column="1" Margin="0,0,15,0" VerticalTextAlignment="Center">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span Style="{StaticResource TitleLabel}" Text="{Binding Current}"/>
-                                                    <Span Style="{StaticResource TitleLabel}" Text=" / "/>
-                                                    <Span Style="{StaticResource TitleLabel}" Text="{Binding Target}"/>
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
-                                        <Button 
-                                            Grid.Row="0" Grid.Column="2" 
-                                            Style="{StaticResource SquareIconButton}"
-                                            FontFamily="{Binding IconFont}"
-                                            Text="{Binding Icon}" 
-                                            Command="{Binding DoCardActionCommand}"/>
-                                        <ProgressBar 
-                                            Margin="0,5,0,-5"
-                                            Grid.Row="1" Grid.ColumnSpan="3"
-                                            Progress="{Binding Percent}"
-                                            ProgressColor="{StaticResource BRIXLime}"/>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </CarouselView.ItemTemplate>
-                    </CarouselView>
-                    <IndicatorView 
-                        x:Name="experienceCarouselIndicator"
-                        IndicatorColor="{StaticResource BRIXDim}"
-                        SelectedIndicatorColor="{StaticResource BRIXWhite}"
-                        HorizontalOptions="Center"/>
                     <!--Statuses-->
                     <Border Style="{StaticResource SideMarginBlockBorder}">
                         <VerticalStackLayout Spacing="10">

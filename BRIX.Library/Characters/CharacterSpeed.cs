@@ -34,38 +34,35 @@ namespace BRIX.Library.Characters
         public int GetExpCost()
         {
             // Все расчёты далее происходят не в метрах, а в сантиметрах, для достижения необходимой точности.
-            ThrasholdCostConverter converter = new ((1, 1), (101, 5), (301, 10), (1001, 5));
+            ThrasholdCostConverter converter = new ((1, 1), (101, 2), (201, 4), (301, 2));
 
-            // m/AP — это м/ОД, то есть метры расстояния за очко действия.
-            // Эта величина равна 1/5 от значения скорости.
-            // Для ходьбы, плавания и лазания стоимость улучшения вычисляется через прирост к стандартной скорости.
+            int walk = ((Walk - _walkDefault) * 100).Round();
+            int walkCost = converter.Convert(walk);
 
-            int mapWalk = ((Walk - _walkDefault) / 5 * 100).Round();
-            int walkCost = converter.Convert(mapWalk);
+            int swim = ((Swim - _swimDefault) * 100).Round();
+            int swimCost = converter.Convert(swim);
 
-            int mapSwim = ((Swim - _swimDefault) / 5 * 100).Round();
-            int swimCost = converter.Convert(mapSwim);
+            int climb = ((Climb - _climbDefault) * 100).Round();
+            int climbCost = converter.Convert(climb);
 
-            int mapClimb = ((Climb - _climbDefault) / 5 * 100).Round();
-            int climbCost = converter.Convert(mapClimb);
+            int fly = (Fly * 100).Round();
+            int flyCost = converter.Convert(fly);
 
-            int mapFly = (Fly / 5 * 100).Round();
-            int flyCost = converter.Convert(mapFly);
+            int burrow = (Burrow * 100).Round();
+            int burrowCost = converter.Convert(burrow);
 
-            int mapBurrow = (Burrow / 5 * 100).Round();
-            int burrowCost = converter.Convert(mapBurrow);
-
-            int mapTeleportation = (Teleportation / 5 * 100).Round();
-            int teleportationCost = converter.Convert(mapTeleportation);
+            int teleportation = (Teleportation * 100).Round();
+            int teleportationCost = converter.Convert(teleportation);
 
             // Разные виды скорости стоят по разному.
-
-            return walkCost
+            int cost = walkCost
                 + swimCost
                 + (climbCost * 1.5).Round()
                 + flyCost * 2
                 + burrowCost * 2
                 + teleportationCost * 4;
+
+            return cost > 0 ? cost : 0;
         }
     }
 }

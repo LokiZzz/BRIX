@@ -375,6 +375,9 @@
   <data name="CharacterMovigSpeed" xml:space="preserve">
     <value>Moving speed (m/AP)</value>
   </data>
+  <data name="CharacterSpeed_Help" xml:space="preserve">
+    <value>A character's speed is the distance in meters that he can walk in one round without spending action points. Also, the character can additionally spend action points and move a distance equal to one fifth of the speed for each action point, this distance is measured in m/AP or in «MAPs». When moving using grid, the MAP or the sum of the MAPs is rounded to an integer.</value>
+  </data>
   <data name="CharacterStatusesPageHelp" xml:space="preserve">
     <value>To edit a status, slide the status card to the right; to delete, slide it to the left.</value>
   </data>
@@ -732,6 +735,9 @@
   <data name="EXPLeft" xml:space="preserve">
     <value>Left: </value>
   </data>
+  <data name="EXPSpentToSpeed" xml:space="preserve">
+    <value>Spent exp:</value>
+  </data>
   <data name="EXPStillAvailiable" xml:space="preserve">
     <value>Availiable:</value>
   </data>
@@ -981,6 +987,9 @@
   <data name="NotEnoughEXP" xml:space="preserve">
     <value>Not enough experience points!</value>
   </data>
+  <data name="NotEnoughEXPForSpeed" xml:space="preserve">
+    <value>Not enough EXP for such speed adjustments.</value>
+  </data>
   <data name="NoTriggers" xml:space="preserve">
     <value>No triggers in this ability.</value>
   </data>
@@ -1133,6 +1142,9 @@
   </data>
   <data name="Speed" xml:space="preserve">
     <value>Speed</value>
+  </data>
+  <data name="SpeedAdjustment" xml:space="preserve">
+    <value>Speed adjustment</value>
   </data>
   <data name="Spread" xml:space="preserve">
     <value>Spread:</value>

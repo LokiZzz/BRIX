@@ -13,19 +13,15 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Messaging;
 using BRIX.Library.Enums;
+using BRIX.Utility.Extensions;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
-    public partial class CharacterPageVM : ViewModelBase
+    public partial class CharacterPageVM(ICharacterService characterService, ILocalizationResourceManager localization) 
+        : ViewModelBase
     {
-        private readonly ICharacterService _characterService;
-        private readonly ILocalizationResourceManager _localization;
-
-        public CharacterPageVM(ICharacterService characterService, ILocalizationResourceManager localization)
-        {
-            _characterService = characterService;
-            _localization = localization;
-        }
+        private readonly ICharacterService _characterService = characterService;
+        private readonly ILocalizationResourceManager _localization = localization;
 
         [ObservableProperty]
         private CharacterModel? _character;
@@ -212,7 +208,9 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         public async Task EditSpeed()
         {
-            await Navigation.NavigateAsync<AddHealthPage>();
+            await Navigation.NavigateAsync<EditSpeedPage>(
+                (NavigationParameters.Character, Character.Copy())
+            );
         }
 
         /// <summary>

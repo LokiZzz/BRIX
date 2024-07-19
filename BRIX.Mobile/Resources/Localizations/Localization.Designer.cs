@@ -835,6 +835,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A character&apos;s speed is the distance in meters that he can walk in one round without spending action points. Also, the character can additionally spend action points and move a distance equal to one fifth of the speed for each action point, this distance is measured in m/AP or in «MAPs». When moving using grid, the MAP or the sum of the MAPs is rounded to an integer..
+        /// </summary>
+        public static string CharacterSpeed_Help {
+            get {
+                return ResourceManager.GetString("CharacterSpeed_Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To edit a status, slide the status card to the right; to delete, slide it to the left..
         /// </summary>
         public static string CharacterStatusesPageHelp {
@@ -1906,6 +1915,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Spent exp:.
+        /// </summary>
+        public static string EXPSpentToSpeed {
+            get {
+                return ResourceManager.GetString("EXPSpentToSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Availiable:.
         /// </summary>
         public static string EXPStillAvailiable {
@@ -2653,6 +2671,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not enough EXP for such speed adjustments..
+        /// </summary>
+        public static string NotEnoughEXPForSpeed {
+            get {
+                return ResourceManager.GetString("NotEnoughEXPForSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No triggers in this ability..
         /// </summary>
         public static string NoTriggers {
@@ -3108,6 +3135,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Speed {
             get {
                 return ResourceManager.GetString("Speed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Speed adjustment.
+        /// </summary>
+        public static string SpeedAdjustment {
+            get {
+                return ResourceManager.GetString("SpeedAdjustment", resourceCulture);
             }
         }
         
