@@ -4,8 +4,6 @@ namespace BRIX.Library.Abilities
 {
     public class AbilityActivation
     {
-        public EActivationStrategy Strategy { get; set; } = EActivationStrategy.ActionPoints;
-
         private readonly int _minActionPoints = 1;
         private readonly int _maxActionPoints = 50;
 
@@ -110,20 +108,15 @@ namespace BRIX.Library.Abilities
 
         public double GetCoeficient()
         {
-            return Strategy switch
+            if(Triggers.Count > 0)
             {
-                EActivationStrategy.ActionPoints => 
-                    GetActionPointsCoefficient() * GetCooldownCoefficient() * GetTriggersCoefficient(),
-                EActivationStrategy.Passive => 10,
-                _ => throw new NotImplementedException($"Неизвестная стратегия активации способности {Strategy}"),
-            };
+                return GetCooldownCoefficient() * GetTriggersCoefficient();
+            }
+            else
+            {
+                return GetActionPointsCoefficient() * GetCooldownCoefficient();
+            }
         }
-    }
-
-    public enum EActivationStrategy
-    {
-        ActionPoints = 0,
-        Passive = 1
     }
 
     public enum ECooldownOption

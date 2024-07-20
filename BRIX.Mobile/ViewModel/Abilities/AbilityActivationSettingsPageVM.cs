@@ -1,6 +1,7 @@
 ﻿using BRIX.Library.Abilities;
 using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Mobile.Models.Abilities;
+using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Popups;
@@ -14,7 +15,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
     public partial class AbilityActivationSettingsPageVM(ILocalizationResourceManager localization) 
         : ViewModelBase, IQueryAttributable
     {
-        public ILocalizationResourceManager Localization { get; } = localization;
+        public ILocalizationResourceManager LocalizationManager { get; } = localization;
 
         private AbilityActivationModel _activation = new();
         public AbilityActivationModel Activation
@@ -28,6 +29,13 @@ namespace BRIX.Mobile.ViewModel.Abilities
         {
             if (Activation != null)
             {
+                if (Activation.InternalModel.Triggers.Count > 0 && Activation.ActionPoints != 1)
+                {
+                    await Alert(Localization.ActionPointsMustBeOneIfTriggersExists);
+
+                    return;
+                }
+
                 await Navigation.Back(
                     stepsBack: 1,
                     (NavigationParameters.AbilityActivation, Activation)
@@ -59,7 +67,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 .Select(x => new TriggerOptionVM
                 {
                     Probability = x,
-                    Text = Localization["ETriggerProbability_" + x.ToString("G")].ToString() ?? string.Empty
+                    Text = LocalizationManager["ETriggerProbability_" + x.ToString("G")].ToString() ?? string.Empty
                 })
                 .Select(x => x as object)
                 .ToList();
@@ -154,7 +162,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
 
         private TriggerOptionVM GetTriggerVM((ETriggerProbability Probability, string Comment) trigger)
         {
-            string probabiltyText = Localization["ETriggerProbability_" + trigger.Probability.ToString("G")].ToString() 
+            string probabiltyText = LocalizationManager["ETriggerProbability_" + trigger.Probability.ToString("G")].ToString() 
                 ?? string.Empty;
             string displayText = $"{probabiltyText}: «{trigger.Comment}»";
 

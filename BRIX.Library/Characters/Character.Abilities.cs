@@ -83,12 +83,9 @@ namespace BRIX.Library.Characters
                 consumable.Count--;
             }
 
-            if (ability.Activation.Strategy == EActivationStrategy.ActionPoints)
+            if (CurrentActionPoints > ability.Activation.ActionPoints)
             {
-                if (CurrentActionPoints > ability.Activation.ActionPoints)
-                {
-                    CurrentActionPoints -= ability.Activation.ActionPoints;
-                }
+                CurrentActionPoints -= ability.Activation.ActionPoints;
             }
         }
 

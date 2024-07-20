@@ -12,10 +12,8 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace BRIX.Mobile.ViewModel.NPCs
 {
-    public partial class AOENPCsPageVM(ICharacterService characterService) : ViewModelBase, IQueryAttributable
+    public partial class AOENPCsPageVM : ViewModelBase, IQueryAttributable
     {
-        private readonly ICharacterService _characterService = characterService;
-
         private EEditingMode _mode;
 
         private NPCModel _npc = new ();

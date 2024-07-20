@@ -150,6 +150,9 @@
   <data name="ActionPoints" xml:space="preserve">
     <value>Очки действия</value>
   </data>
+  <data name="ActionPointsMustBeOneIfTriggersExists" xml:space="preserve">
+    <value>Очки действий должны равняться единице, если у способности есть триггеры активации.</value>
+  </data>
   <data name="Activate" xml:space="preserve">
     <value>Активировать</value>
   </data>

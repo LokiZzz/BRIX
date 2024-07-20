@@ -84,8 +84,11 @@ namespace BRIX.Mobile.ViewModel.NPCs
 
         public override async Task OnNavigatedAsync()
         {
-            List<NPC> npcs = await _characterService.GetNPCs();
-            NPCs = new(npcs.Select(x => new NPCModel(x)));
+            if (NPCs.Count == 0)
+            {
+                List<NPC> npcs = await _characterService.GetNPCs();
+                NPCs = new(npcs.Select(x => new NPCModel(x)));
+            }
         }
     }
 }

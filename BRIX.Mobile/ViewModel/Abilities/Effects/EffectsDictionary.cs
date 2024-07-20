@@ -1,5 +1,4 @@
 ﻿using BRIX.Library.Effects;
-using BRIX.Mobile.Services;
 using BRIX.Mobile.View.IconFonts;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.View.Abilities.Effects;
