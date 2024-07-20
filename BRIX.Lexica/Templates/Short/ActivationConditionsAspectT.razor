@@ -1,9 +1,16 @@
 ﻿@using BRIX.Lexica
 @using BRIX.Library.Aspects
 
-Conditions: @Model.Conditions.ToAggregatedString(x => $"{x.Type} ({x.Comment})");
+Conditions: @Model.Conditions.ToAggregatedString(ToString);
 
 @code {
     [Parameter]
     public ActivationConditionsAspect Model { get; set; } = new();
+
+    public string ToString((EActivationCondition Condition, string Comment) item)
+    {
+        return string.IsNullOrEmpty(item.Comment)
+            ? item.Condition.ToString()
+            : $"{item.Condition} ({item.Comment})";
+    }
 }

@@ -58,11 +58,6 @@ namespace BRIX.Lexica
                 return output.ToHtmlString();
             });
 
-            if(string.IsNullOrEmpty(html))
-            {
-                throw new Exception("Ошибка при вызове HtmlRenderer. Вероятно, не найден шаблон или в шаблоне произошла ошибка.");
-            }
-
             return html.Trim();
         }
 

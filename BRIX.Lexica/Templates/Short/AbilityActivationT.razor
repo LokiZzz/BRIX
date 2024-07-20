@@ -2,9 +2,27 @@
 @using BRIX.Library.Abilities
 @using BRIX.Library.Aspects
 
-AP: @Model.ActionPoints; CD: @Model.UsesCount/@Model.Cooldown.ToString(); AT: @Model.Triggers.ToAggregatedString(x => $"{x.Comment} ({x.Probability})");
-
+@if (true)
+{
+    <text>AP: @Model.ActionPoints;</text>
+}
+@if(@Model.Triggers.Count > 0)
+{
+    <text> Triggers: @Model.Triggers.ToAggregatedString(ToString);</text>
+}
+@if(@Model.Cooldown != ECooldownOption.NoneCooldown)
+{
+    <text> CD: @Model.UsesCount/@Model.Cooldown.ToString();</text>
+}
+    
 @code {
     [Parameter]
     public AbilityActivation Model { get; set; } = new();
+
+    public string ToString((ETriggerProbability Type, string Comment) item)
+    {
+        return string.IsNullOrEmpty(item.Comment)
+            ? item.Type.ToString()
+            : $"{item.Type} ({item.Comment})";
+    }
 }

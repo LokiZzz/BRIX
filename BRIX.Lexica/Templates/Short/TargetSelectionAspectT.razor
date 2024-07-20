@@ -31,11 +31,18 @@
 
     @if (Model.TargetSelectionRestrictions.Conditions.Count > 0)
     {
-        <text> Restrictions: @Model.TargetSelectionRestrictions.Conditions.ToAggregatedString(x => $"{x.Type} ({x.Comment})");</text>
+        <text> Restrictions: @Model.TargetSelectionRestrictions.Conditions.ToAggregatedString(ToString);</text>
     }
 }
 
 @code {
     [Parameter]
     public TargetSelectionAspect Model { get; set; } = new();
+
+    public string ToString((ETargetSelectionRestrictions Type, string Comment) item)
+    {
+        return string.IsNullOrEmpty(item.Comment)
+            ? item.Type.ToString()
+            : $"{item.Type} ({item.Comment})";
+    }
 }
