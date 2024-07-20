@@ -10,6 +10,10 @@ using BRIX.Mobile.Models.Abilities;
 using CommunityToolkit.Mvvm.Messaging;
 using BRIX.Utility.Extensions;
 using BRIX.Mobile.Models.Characters;
+using BRIX.Library.Effects;
+using BRIX.Library.Abilities;
+using BRIX.Lexica;
+using BRIX.Library.Aspects;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
@@ -81,6 +85,34 @@ namespace BRIX.Mobile.ViewModel.Characters
                     await _characterService.UpdateAsync(Character.InternalModel);
                 }
             }
+        }
+
+        [RelayCommand]
+        private static async Task ShowDescription(CharacterAbilityModel abilityModel)
+        {
+            string shortAbilityDescription = string.Empty;
+            Ability ability = abilityModel.Internal;
+
+            foreach (EffectBase effect in ability.Effects)
+            {
+                shortAbilityDescription += "* " + await effect.ToShortLexis() + " :: ";
+
+                foreach(AspectBase aspect in effect.Aspects)
+                {
+                    shortAbilityDescription += await aspect.ToShortLexis();
+                }
+
+                shortAbilityDescription += Environment.NewLine;
+            }
+
+            await Alert(
+                new AlertPopupParameters
+                {
+                    Mode = EAlertMode.ShowMessage,
+                    Title = abilityModel.Name,
+                    Message = shortAbilityDescription
+                }
+            );
         }
 
         public override async Task OnNavigatedAsync()

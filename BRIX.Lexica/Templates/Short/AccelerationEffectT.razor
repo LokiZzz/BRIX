@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Acceleration: @Model.Impact;
+
+@code {
+    [Parameter]
+    public AccelerationEffect Model { get; set; } = new();
+}

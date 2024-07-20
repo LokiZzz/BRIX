@@ -1,0 +1,41 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects.TargetSelection
+@using BRIX.Library.Enums
+@using BRIX.Library.Mathematics
+
+@if (Model.Strategy == ETargetSelectionStrategy.CharacterHimself)
+{
+    <text>TSA: self;</text>
+}
+@if (Model.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
+{
+    <text>NTAD: @Model.NTAD.TargetsCount at @Model.NTAD.DistanceInMeters m; Obstacle: @Model.NTAD.ObstacleBetweenCharacterAndTarget;</text>
+
+    @if(Model.NTAD.IsTargetSelectionIsRandom)
+    {
+        <text> Random: @Model.NTAD.IsTargetSelectionIsRandom;</text>
+    }
+}
+@if (Model.Strategy == ETargetSelectionStrategy.Area)
+{
+    <text>AREA: @Model.AreaSettings.Area.Shape.ToString() at @Model.AreaSettings.DistanceToAreaInMeters m; Exclude: @Model.AreaSettings.ExcludedTargetsCount; AreaObstacle: @Model.AreaSettings.ObstacleBetweenCharacterAndArea; EpicentreObstacle: @Model.AreaSettings.ObstacleBetweenEpicenterAndTarget; Bounded: @Model.AreaSettings.IsAreaBoundedTo;</text>
+}
+@if(Model.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL || Model.Strategy == ETargetSelectionStrategy.Area)
+{
+    @if (Model.TargetChain.IsChainEnabled)
+    {
+        <text> Chain: @Model.TargetChain.MaxTargetsCount with @Model.TargetChain.MaxDistanceBetweenTargets m; ChainObstacle: @Model.TargetChain.ObstacleBetweenTargetsInChain;</text>
+    }
+
+    <text> Sizes: @Model.TargetsSizes.AllowedTargetSizes.ToAggregatedString(x => x.ToString());</text>
+
+    @if (Model.TargetSelectionRestrictions.Conditions.Count > 0)
+    {
+        <text> Restrictions: @Model.TargetSelectionRestrictions.Conditions.ToAggregatedString(x => $"{x.Type} ({x.Comment})");</text>
+    }
+}
+
+@code {
+    [Parameter]
+    public TargetSelectionAspect Model { get; set; } = new();
+}

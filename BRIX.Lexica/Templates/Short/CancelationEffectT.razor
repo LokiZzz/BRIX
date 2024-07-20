@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Cancelation: MAX @Model.MaxAbilityPower;
+
+@code {
+    [Parameter]
+    public CancelationEffect Model { get; set; } = new();
+}

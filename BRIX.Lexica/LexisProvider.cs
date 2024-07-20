@@ -10,11 +10,25 @@ namespace BRIX.Lexica
 {
     public static class LexisProvider
     {
+        public static async Task<string> ToShortLexis(this object model)
+        {
+            try
+            {
+                return await ToLexisInternal(model, "Short");
+            }
+            catch (Exception ex)
+            {
+                return $"[LEXIS ERROR: {ex.Message}, {ex.StackTrace}]";
+            }
+        }
+
         public static async Task<string> ToLexis(this object model, CultureInfo? cultureInfo = null)
         {
             try
             {
-                return await ToLexisInternal(model, cultureInfo);
+                cultureInfo ??= Thread.CurrentThread.CurrentUICulture;
+
+                return await ToLexisInternal(model, cultureInfo.Name);
             }
             catch(Exception ex)
             {
@@ -22,10 +36,8 @@ namespace BRIX.Lexica
             }
         }
 
-        public static async Task<string> ToLexisInternal(object model, CultureInfo? cultureInfo = null)
+        private static async Task<string> ToLexisInternal(object model, string cultureFolderName)
         {
-            cultureInfo ??= Thread.CurrentThread.CurrentUICulture;
-
             IServiceCollection services = new ServiceCollection();
             services.AddLogging();
             IServiceProvider serviceProvider = services.BuildServiceProvider();
@@ -39,7 +51,7 @@ namespace BRIX.Lexica
                 ParameterView parameters = ParameterView.FromDictionary(dictionary);
 
                 HtmlRootComponent output = await htmlRenderer.RenderComponentAsync(
-                    GetTemplateType(model, cultureInfo), 
+                    GetTemplateType(model, cultureFolderName), 
                     parameters
                 );
 
@@ -60,12 +72,12 @@ namespace BRIX.Lexica
         /// Папка с шаблонами должна иметь имя культуры с дефисом заменённым на подчёркивание,
         /// а шаблон иметь имя модели с буквой «T», добавленной вконце.
         /// </summary>
-        private static Type GetTemplateType(object model, CultureInfo cultureInfo)
+        private static Type GetTemplateType(object model, string folderName)
         {
             string assemblyName = Assembly.GetExecutingAssembly().GetName().Name
                 ?? throw new Exception("Не удалось получить имя сборки.");
             string fullTypePath = "BRIX.Lexica.Templates." 
-                + $"{cultureInfo.Name.Replace('-', '_')}." 
+                + $"{folderName.Replace('-', '_')}." 
                 + model.GetType().Name 
                 + "T";
             Type? templateType = Type.GetType(Assembly.CreateQualifiedName(assemblyName, fullTypePath));

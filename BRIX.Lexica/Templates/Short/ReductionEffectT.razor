@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Reduction: @Model.Impact;
+
+@code {
+    [Parameter]
+    public ReductionEffect Model { get; set; } = new();
+}

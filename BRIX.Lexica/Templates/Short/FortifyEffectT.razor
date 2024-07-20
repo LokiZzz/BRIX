@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Fortify: @Model.Impact;
+
+@code {
+    [Parameter]
+    public FortifyEffect Model { get; set; } = new();
+}

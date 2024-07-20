@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Amplification: @Model.Impact;
+
+@code {
+    [Parameter]
+    public AmplificationEffect Model { get; set; } = new();
+}

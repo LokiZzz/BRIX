@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Cleanse: Power @Model.MaxStatusPower, Count: @Model.StatusesCount;
+
+@code {
+    [Parameter]
+    public CleanseEffect Model { get; set; } = new();
+}

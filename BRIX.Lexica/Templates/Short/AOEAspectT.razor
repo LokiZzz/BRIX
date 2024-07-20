@@ -1,0 +1,11 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+@using BRIX.Library.Enums
+@using BRIX.Library.Mathematics
+
+AOE: @Model.AreaShape.Shape.ToString();
+
+@code {
+    [Parameter]
+    public AOEAspect Model { get; set; } = new();
+}

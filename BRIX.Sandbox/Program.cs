@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Abilities;
+﻿using BRIX.Lexica;
+using BRIX.Library.Abilities;
 using BRIX.Library.Aspects;
 using BRIX.Library.Characters;
 using BRIX.Library.DiceValue;
@@ -9,32 +10,17 @@ using Newtonsoft.Json;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 
-//while(true)
-//{
-//    int ap = int.Parse(Console.ReadLine());
-//    Console.WriteLine($"Coef: {GetActionPointsCoefficient(ap)}");
-//}
+AbilityActivation activation = new()
+{
+    ActionPoints = 3,
+    Cooldown = ECooldownOption.Minute,
+    UsesCount = 2,
+    Triggers = [(ETriggerProbability.Medium, "Триггер 1"), (ETriggerProbability.High, "Триггер 2")]
+};
 
-//double GetActionPointsCoefficient(int actionPoints)
-//{
-//    double coef = actionPoints switch
-//    {
-//        1 => 3,
-//        2 => 1.5,
-//        3 => 1,
-//        4 => 0.75,
-//        5 => 0.65,
-//        >= 6 and <=50 => GetThrasholdedCoeficient(),
-//        _ => 0.05
-//    };
+AbilityActivation activ2 = new();
 
-//    return coef;
+Console.WriteLine(await activation.ToShortLexis());
+Console.WriteLine(await activ2.ToShortLexis());
 
-//    // 6-10 по -3%; 11-15 по -2%; 16-50 по -1%; 
-//    double GetThrasholdedCoeficient()
-//    {
-//        return (-new ThrasholdCostConverter((1, 0), (5, 35), (6, 3), (11, 2), (16, 1))
-//            .Convert(actionPoints))
-//            .ToCoeficient();
-//    }
-//}
+Console.ReadLine();

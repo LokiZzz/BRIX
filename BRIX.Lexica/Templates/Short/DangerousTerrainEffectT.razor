@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+DangerousTerrain: @Model.Impact; Disposable: @Model.IsAreaDisposable;
+
+@code {
+    [Parameter]
+    public DangerousTerrainEffect Model { get; set; } = new();
+}

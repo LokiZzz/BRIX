@@ -1,0 +1,10 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Abilities
+@using BRIX.Library.Aspects
+
+AP: @Model.ActionPoints; CD: @Model.UsesCount/@Model.Cooldown.ToString(); AT: @Model.Triggers.ToAggregatedString(x => $"{x.Comment} ({x.Probability})");
+
+@code {
+    [Parameter]
+    public AbilityActivation Model { get; set; } = new();
+}

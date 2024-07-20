@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Heal: @Model.Impact;
+
+@code {
+    [Parameter]
+    public HealEffect Model { get; set; } = new();
+}

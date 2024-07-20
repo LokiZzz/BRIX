@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+
+Conditions: @Model.Conditions.ToAggregatedString(x => $"{x.Type} ({x.Comment})");
+
+@code {
+    [Parameter]
+    public ActivationConditionsAspect Model { get; set; } = new();
+}

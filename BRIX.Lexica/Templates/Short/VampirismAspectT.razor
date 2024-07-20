@@ -1,0 +1,13 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+@using BRIX.Library.Effects
+
+@if(Model.VampirismPercent > 0)
+{
+    <text>Vampirism: @Model.VampirismPercent;</text>
+}
+
+@code {
+    [Parameter]
+    public VampirismAspect Model { get; set; } = new();
+}

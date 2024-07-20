@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Defense: @Model.Impact;
+
+@code {
+    [Parameter]
+    public DefenseEffect Model { get; set; } = new();
+}

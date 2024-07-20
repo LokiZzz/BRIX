@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Dmg: @Model.Impact;
+
+@code {
+    [Parameter]
+    public DamageEffect Model { get; set; } = new();
+}

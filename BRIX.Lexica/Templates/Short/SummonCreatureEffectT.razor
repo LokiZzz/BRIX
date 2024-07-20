@@ -1,0 +1,10 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Characters
+@using BRIX.Library.Effects
+
+Summon: @Model.Creatures.ToAggregatedString(x => x.Creature.Name);
+
+@code {
+    [Parameter]
+    public SummonCreatureEffect Model { get; set; } = new();
+}

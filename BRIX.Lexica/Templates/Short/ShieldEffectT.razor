@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Shield: @Model.Durability; CanBePermeable: @Model.CanBePermeable; IsTransparent: @Model.IsTransparent;
+
+@code {
+    [Parameter]
+    public ShieldEffect Model { get; set; } = new();
+}

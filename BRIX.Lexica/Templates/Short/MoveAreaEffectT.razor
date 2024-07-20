@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+MoveAbility: @Model.MovingDistance m; OnlyYours: @Model.OnlyYourAbilities; MaxDistance: @Model.DistanceToArea; MaxPower: @Model.MaxAbilityPower;
+
+@code {
+    [Parameter]
+    public MoveAreaEffect Model { get; set; } = new();
+}

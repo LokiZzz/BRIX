@@ -12,6 +12,11 @@
         public int C { get; set; } = 1;
 
         public int GetVolume() => A * B * C;
+
+        public override string ToString()
+        {
+            return $"Brick({A}x{B}x{C})";
+        }
     }
 
     public class Sphere : IShape
@@ -19,6 +24,11 @@
         public int R { get; set; } = 1;
 
         public int GetVolume() => 4 * R * R * R; // 4/3 * 3.14 * R^3
+        
+        public override string ToString()
+        {
+            return $"Sphere({R})";
+        }
     }
 
     public class Cylinder : IShape
@@ -27,6 +37,11 @@
         public int H { get; set; } = 1;
 
         public int GetVolume() => 3 * R * R * H;
+
+        public override string ToString()
+        {
+            return $"Cylinder({H} R{R})";
+        }
     }
     public class Cone : IShape
     {
@@ -34,6 +49,11 @@
         public int H { get; set; } = 1;
 
         public int GetVolume() => R * R * H;
+
+        public override string ToString()
+        {
+            return $"Cone({H} R{R})";
+        }
     }
 
     public class VoxelArray : IShape
@@ -46,5 +66,12 @@
         public bool IsArbitrary { get; set; }
 
         public int GetVolume() => N;
+
+        public override string ToString()
+        {
+            string arbitrary = IsArbitrary ? ", arbitrary" : "";
+
+            return $"Voxels({N}{arbitrary})";
+        }
     }
 }

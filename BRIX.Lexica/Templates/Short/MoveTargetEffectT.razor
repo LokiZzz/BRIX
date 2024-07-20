@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+MoveTarget: @Model.DistanceInMeters m; Path: @Model.TargetPath; 
+
+@code {
+    [Parameter]
+    public MoveTargetEffect Model { get; set; } = new();
+}

@@ -1,0 +1,10 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+@using BRIX.Library.Effects
+
+PeriodicDmg: @Model.Impact;
+
+@code {
+    [Parameter]
+    public PeriodicDamageEffect Model { get; set; } = new();
+}
