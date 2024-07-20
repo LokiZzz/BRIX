@@ -138,7 +138,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             {
                 ETriggerProbability.Low =>
                     Resources.Localizations.Localization.EnterLowProbabilityTrigger,
-                ETriggerProbability.Standart =>
+                ETriggerProbability.Medium =>
                     Resources.Localizations.Localization.EnterStandartProbabilityTrigger,
                 ETriggerProbability.High =>
                     Resources.Localizations.Localization.EnterHighProbabilityTrigger,

@@ -17,6 +17,17 @@ else
     <p>The ability can be used @Numbers.ENGDcln(Model.UsesCount, "time"). After this, a cooldown will be required, which will last @GetCooldownOption(Model.Cooldown).</p>
 }
 
+@if(Model.Triggers.Count > 0)
+{
+    <p>Activation triggers:</p>
+    <ul>
+        @foreach ((ETriggerProbability Probability, string Comment) in Model.Triggers)
+        {
+            <li>@GetTriggerString(Probability, Comment);</li>
+        }
+    </ul>
+}
+
 @code {
     [Parameter]
     public AbilityActivation Model { get; set; } = new();
@@ -34,6 +45,19 @@ else
             ECooldownOption.Year => "1 year",
             ECooldownOption.TenYears => "10 years",
             ECooldownOption.HundredYears => "100 years",
+            _ => TemplateHelper.LexisTemplatingError
+        };
+
+        return (MarkupString)resultString;
+    }
+
+    public static MarkupString GetTriggerString(ETriggerProbability Probability, string Comment)
+    {
+        string resultString = Probability switch
+        {
+            ETriggerProbability.Low => Comment + (" (low probability)"),
+            ETriggerProbability.Medium => Comment + (" (medium probability)"),
+            ETriggerProbability.High => Comment + (" (high probability)"),
             _ => TemplateHelper.LexisTemplatingError
         };
 

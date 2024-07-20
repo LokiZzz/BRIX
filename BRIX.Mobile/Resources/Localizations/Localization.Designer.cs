@@ -1845,9 +1845,9 @@ namespace BRIX.Mobile.Resources.Localizations {
         /// <summary>
         ///   Looks up a localized string similar to Standart probability.
         /// </summary>
-        public static string ETriggerProbability_Standart {
+        public static string ETriggerProbability_Medium {
             get {
-                return ResourceManager.GetString("ETriggerProbability_Standart", resourceCulture);
+                return ResourceManager.GetString("ETriggerProbability_Medium", resourceCulture);
             }
         }
         

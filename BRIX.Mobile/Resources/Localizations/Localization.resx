@@ -711,7 +711,7 @@
   <data name="ETriggerProbability_Low" xml:space="preserve">
     <value>Low probability</value>
   </data>
-  <data name="ETriggerProbability_Standart" xml:space="preserve">
+  <data name="ETriggerProbability_Medium" xml:space="preserve">
     <value>Standart probability</value>
   </data>
   <data name="ExhaustionEffectPageHint" xml:space="preserve">

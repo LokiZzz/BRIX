@@ -17,6 +17,17 @@ else
     <p>Способность может быть использована @Numbers.RUSDcln(Model.UsesCount, "раз", "раза", "раз"). После этого ей потребуется перезярдка, которая продлится @GetCooldownOption(Model.Cooldown).</p>
 }
 
+@if (Model.Triggers.Count > 0)
+{
+    <p>Триггеры активации:</p>
+    <ul>
+        @foreach ((ETriggerProbability Probability, string Comment) in Model.Triggers)
+        {
+            <li>@GetTriggerString(Probability, Comment);</li>
+        }
+    </ul>
+}
+
 @code {
     [Parameter]
     public AbilityActivation Model { get; set; } = new();
@@ -34,6 +45,19 @@ else
             ECooldownOption.Year => "год",
             ECooldownOption.TenYears => "10 лет",
             ECooldownOption.HundredYears => "100 лет",
+            _ => TemplateHelper.LexisTemplatingError
+        };
+
+        return (MarkupString)resultString;
+    }
+
+    public static MarkupString GetTriggerString(ETriggerProbability Probability, string Comment)
+    {
+        string resultString = Probability switch
+        {
+            ETriggerProbability.Low => Comment + (" (низкая вероятность)"),
+            ETriggerProbability.Medium => Comment + (" (средняя вероятность)"),
+            ETriggerProbability.High => Comment + (" (высокая вероятность)"),
             _ => TemplateHelper.LexisTemplatingError
         };
 
