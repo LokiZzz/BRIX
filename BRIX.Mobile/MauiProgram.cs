@@ -54,6 +54,8 @@ public static class MauiProgram
         MauiApp app = builder.Build();
         app.UseServicePool();
 
+        ILocalStorage localStorage = Resolver.Resolve<ILocalStorage>();
+
         return app;
 	}
 
@@ -63,7 +65,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<INavigationService, NavigationService>();
         builder.Services.AddSingleton<ICharacterService, JsonCharacterService>();
         builder.Services.AddSingleton<IAssetsService, JsonAssetsService>();
-        builder.Services.AddSingleton<ILocalStorage, LocalStorage>();
+        builder.Services.AddSingleton<ILocalStorage, PreferencesStorage>();
         builder.Services.AddSingleton<ILocalizationResourceManager, LocalizationResourceManager>();
     }
 

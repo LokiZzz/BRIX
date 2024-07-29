@@ -34,39 +34,22 @@ namespace BRIX.Mobile.Services
 
         public static string GetLog()
         {
-            LocalStorage localStorage = new();
+            ILocalStorage localStorage = Resolver.Resolve<ILocalStorage>();
 
-            if (localStorage.FileExists(_logFile))
-            {
-                return localStorage.ReadAllText(_logFile);
-            }
-            else
-            {
-                return string.Empty;
-            }
+            return localStorage.ReadText(_logFile);
         }
 
         public static void ClearLog()
         {
-            LocalStorage localStorage = new();
-
-            if (localStorage.FileExists(_logFile))
-            {
-                localStorage.WriteAllText(_logFile, string.Empty);
-            }
+            ILocalStorage localStorage = Resolver.Resolve<ILocalStorage>();
+            localStorage.WriteText(_logFile, string.Empty);
         }
 
         private static void WriteLogMessage(string message)
         {
-            LocalStorage localStorage = new();
-            string existingLog = string.Empty;
-
-            if (localStorage.FileExists(_logFile))
-            {
-                existingLog = localStorage.ReadAllText(_logFile);
-            }
-            
-            localStorage.WriteAllText(_logFile, message + Environment.NewLine + existingLog);
+            ILocalStorage localStorage = Resolver.Resolve<ILocalStorage>();
+            string existingLog = localStorage.ReadText(_logFile);
+            localStorage.WriteText(_logFile, message + Environment.NewLine + existingLog);
         }
     }
 }
