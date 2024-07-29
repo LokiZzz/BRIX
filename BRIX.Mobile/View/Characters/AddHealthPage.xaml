@@ -58,6 +58,19 @@
                         </Grid>
                     </VerticalStackLayout>
                 </Border>
+                
+                <Border Style="{StaticResource BlockBorder}">
+                    <VerticalStackLayout>
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TemporaryHealth}}"/>
+                        <controls:FramedEntry
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.HealthModificator}}"
+                            Text="{Binding Modificator}"/>
+                        <Button 
+                            Style="{StaticResource LightButton}" 
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Reset}}" 
+                            Command="{Binding ResetTempCommand}"/>
+                    </VerticalStackLayout>    
+                </Border>
             </VerticalStackLayout>
         </ScrollView>
 

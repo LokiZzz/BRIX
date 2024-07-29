@@ -1,4 +1,8 @@
-﻿using BRIX.Library.Characters;
+﻿using BRIX.Lexica.Templates.en_US;
+using BRIX.Library.Abilities;
+using BRIX.Library.Characters;
+using BRIX.Library.DiceValue;
+using BRIX.Library.Effects;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.ViewModel.Base;
@@ -48,7 +52,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         private int _rawHealth;
-        public int NewHealth => _rawHealth + AdditionalHealth;
+        public int NewHealth => _rawHealth + AdditionalHealth + Modificator;
 
         private int _experienceOverall;
         public int ExperienceOverall
@@ -59,6 +63,17 @@ namespace BRIX.Mobile.ViewModel.Characters
 
         private int _expSpentOnAbilities;
         public int ExperienceLeft => ExperienceOverall - ExpSpent - _expSpentOnAbilities;
+
+        private int _modificator;
+        public int Modificator
+        {
+            get => _modificator;
+            set
+            {
+                SetProperty(ref _modificator, value);
+                OnPropertyChanged(nameof(NewHealth));
+            }
+        }
 
         [RelayCommand]
         public async Task Save()
@@ -72,8 +87,42 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             Character currentCharacter = await CharacterService.GetCurrentCharacterGuaranteed();
             currentCharacter.ExpInHealth = ExpSpent;
+
+            HandleModificator(currentCharacter);
+
             await CharacterService.UpdateAsync(currentCharacter);
             await Navigation.Back();
+        }
+
+        private void HandleModificator(Character currentCharacter)
+        {
+            if(Modificator == _oldModificator || NewHealth < 0)
+            {
+                return;
+            }
+
+            currentCharacter.Statuses.Clear();
+            Status status = new();
+
+            if(Modificator > 0)
+            {
+                status.AddEffect(new FortifyEffect { Impact = new DicePool(Modificator) });
+                currentCharacter.CurrentHealth += Modificator - _oldModificator;
+            }
+            else if(Modificator < 0)
+            {
+                status.AddEffect(new ExhaustionEffect { Impact = new DicePool(-Modificator) });
+
+                if(currentCharacter.CurrentHealth > currentCharacter.MaxHealth)
+                {
+                    currentCharacter.CurrentHealth = currentCharacter.MaxHealth;
+                }
+            }
+
+            if (status.Effects.Count > 0)
+            {
+                currentCharacter.Statuses.Add(status);
+            }
         }
 
         [RelayCommand]
@@ -95,6 +144,14 @@ namespace BRIX.Mobile.ViewModel.Characters
             ExpSpent = 0;
         }
 
+        [RelayCommand]
+        public void ResetTemp()
+        {
+            Modificator = 0;
+        }
+
+        private int _oldModificator = 0;
+
         public override async Task OnNavigatedAsync()
         {
             Character currentCharacter = await CharacterService.GetCurrentCharacterGuaranteed();
@@ -104,6 +161,24 @@ namespace BRIX.Mobile.ViewModel.Characters
             OnPropertyChanged(nameof(NewHealth));
             ExperienceOverall = currentCharacter.Experience;
             OnPropertyChanged(nameof(ExperienceLeft));
+
+            Status? fortifyStatus = currentCharacter.Statuses.FirstOrDefault(x => x.Effects.Any(y => y is FortifyEffect));
+            FortifyEffect? fortifyEffect = fortifyStatus?.Effects.FirstOrDefault(x => x is FortifyEffect) as FortifyEffect;
+
+            if(fortifyEffect != null)
+            {
+                Modificator = fortifyEffect.Impact.Average();
+            }
+
+            Status? exhStatus = currentCharacter.Statuses.FirstOrDefault(x => x.Effects.Any(y => y is ExhaustionEffect));
+            ExhaustionEffect? exhEffect = exhStatus?.Effects.FirstOrDefault(x => x is ExhaustionEffect) as ExhaustionEffect;
+
+            if (exhEffect != null)
+            {
+                Modificator = -exhEffect.Impact.Average();
+            }
+
+            _oldModificator = Modificator;
         }
     }
 }

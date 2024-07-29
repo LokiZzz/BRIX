@@ -727,10 +727,10 @@
     <value>Experience</value>
   </data>
   <data name="ExperienceLeft" xml:space="preserve">
-    <value>Experience left: {0}</value>
+    <value>Experience left:</value>
   </data>
   <data name="ExperienceOverall" xml:space="preserve">
-    <value>Experience overall: {0}</value>
+    <value>Experience overall:</value>
   </data>
   <data name="ExperienceToLevelup" xml:space="preserve">
     <value>Experience</value>
@@ -779,6 +779,9 @@
   </data>
   <data name="Health" xml:space="preserve">
     <value>Health</value>
+  </data>
+  <data name="HealthModificator" xml:space="preserve">
+    <value>Modificator</value>
   </data>
   <data name="HealthSpentAllExp" xml:space="preserve">
     <value>Spend all EXP</value>
@@ -1301,6 +1304,9 @@
   </data>
   <data name="Teleportation" xml:space="preserve">
     <value>Teleportation</value>
+  </data>
+  <data name="TemporaryHealth" xml:space="preserve">
+    <value>Temporary</value>
   </data>
   <data name="TenYears" xml:space="preserve">
     <value>10 years</value>

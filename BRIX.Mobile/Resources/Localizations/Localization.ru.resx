@@ -783,6 +783,9 @@
   <data name="Health" xml:space="preserve">
     <value>Здоровье</value>
   </data>
+  <data name="HealthModificator" xml:space="preserve">
+    <value>Модификатор</value>
+  </data>
   <data name="HealthSpentAllExp" xml:space="preserve">
     <value>Влить весь опыт</value>
   </data>
@@ -1307,6 +1310,9 @@
   </data>
   <data name="Teleportation" xml:space="preserve">
     <value>Телепортация</value>
+  </data>
+  <data name="TemporaryHealth" xml:space="preserve">
+    <value>Временные изменения</value>
   </data>
   <data name="TenYears" xml:space="preserve">
     <value>10 лет</value>

@@ -208,15 +208,11 @@
                                 IsVisible="{Binding Character.ShowHealthFormula}">
                                 <Label.FormattedText>
                                     <FormattedString>
-                                        <Span Text="{Binding Character.RawMaxHealth}"/>
-                                        <Span Text=" + "/>
-                                        <Span Text="{Binding Character.HealthFromExp}"/>
                                         <Span 
-                                            Text=" + " TextColor="{StaticResource BRIXLime}"
-                                            />
-                                        <Span Text="{Binding Character.MaxHealthBonuses}" TextColor="{StaticResource BRIXLime}"/>
-                                        <Span Text=" – " TextColor="{StaticResource BRIXRed}"/>
-                                        <Span Text="{Binding Character.MaxHealthPenalties}" TextColor="{StaticResource BRIXRed}"/>
+                                            Text="{Binding Character.RawMaxHealth}"/>
+                                        <Span Text="{Binding Character.HealthFromExp, StringFormat=' + {0}'}"/>
+                                        <Span Text="{Binding Character.MaxHealthBonusString}" TextColor="{StaticResource BRIXLime}"/>
+                                        <Span Text="{Binding Character.MaxHealthPenaltyString}" TextColor="{StaticResource BRIXRed}"/>
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
@@ -338,7 +334,7 @@
                         </Grid>
                     </Border>
                     <!--Statuses-->
-                    <Border Style="{StaticResource SideMarginBlockBorder}">
+                    <!--<Border Style="{StaticResource SideMarginBlockBorder}">
                         <VerticalStackLayout Spacing="10">
                             <Grid ColumnDefinitions="*,auto" >
                                 <Label 
@@ -395,7 +391,7 @@
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
                         </VerticalStackLayout>
-                    </Border>
+                    </Border>-->
                 </VerticalStackLayout>
             </Grid>
         </ScrollView>

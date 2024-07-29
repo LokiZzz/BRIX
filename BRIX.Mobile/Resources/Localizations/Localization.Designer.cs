@@ -1888,7 +1888,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Experience left: {0}.
+        ///   Looks up a localized string similar to Experience left:.
         /// </summary>
         public static string ExperienceLeft {
             get {
@@ -1897,7 +1897,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Experience overall: {0}.
+        ///   Looks up a localized string similar to Experience overall:.
         /// </summary>
         public static string ExperienceOverall {
             get {
@@ -2046,6 +2046,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Health {
             get {
                 return ResourceManager.GetString("Health", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modificator.
+        /// </summary>
+        public static string HealthModificator {
+            get {
+                return ResourceManager.GetString("HealthModificator", resourceCulture);
             }
         }
         
@@ -3612,6 +3621,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Teleportation {
             get {
                 return ResourceManager.GetString("Teleportation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temporary.
+        /// </summary>
+        public static string TemporaryHealth {
+            get {
+                return ResourceManager.GetString("TemporaryHealth", resourceCulture);
             }
         }
         
