@@ -117,6 +117,10 @@ namespace BRIX.Mobile.ViewModel.Characters
                 {
                     Character = new CharacterModel(currentCharacter);
                 }
+                else
+                {
+                    Character = null;
+                }
             }
         }
 

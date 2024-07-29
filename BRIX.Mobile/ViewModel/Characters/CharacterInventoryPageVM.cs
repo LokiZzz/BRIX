@@ -63,13 +63,20 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             if(InventoryItems == null || force)
             {
-                _currentCharacter = await _characterService.GetCurrentCharacterGuaranteed();
+                _currentCharacter = await _characterService.GetCurrentCharacter();
 
-                InventoryItems = new(
-                    _currentCharacter.Inventory.Content.Select(_vmConverter.ToVM).ToList()
-                );
+                if (_currentCharacter != null)
+                {
+                    InventoryItems = new(
+                        _currentCharacter.Inventory.Content.Select(_vmConverter.ToVM).ToList()
+                    );
 
-                Coins = _currentCharacter.Inventory.Coins;
+                    Coins = _currentCharacter.Inventory.Coins;
+                }
+                else
+                {
+                    InventoryItems = null;
+                }
             }
         }
 

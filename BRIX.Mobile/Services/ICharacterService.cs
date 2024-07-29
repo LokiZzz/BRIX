@@ -81,13 +81,9 @@ namespace BRIX.Mobile.Services
         public async Task RemoveAsync(Guid id)
         {
             List<Character> characters = await _storage.ReadJson<List<Character>>(_charactersFileName) ?? [];
-
-            if (characters.Count != 0)
-            {
-                Character character = characters.Single(character => character.Id == id);
-                characters.Remove(character);
-                await _storage.WriteJsonAsync(_charactersFileName, characters);
-            }
+            Character character = characters.Single(character => character.Id == id);
+            characters.Remove(character);
+            await _storage.WriteJsonAsync(_charactersFileName, characters);
 
             if (characters.Count == 0)
             {

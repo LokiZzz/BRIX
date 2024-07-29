@@ -5,6 +5,8 @@ using BRIX.Mobile.ViewModel.Base;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using BRIX.Mobile.Resources.Localizations;
+using CommunityToolkit.Mvvm.Messaging;
+using System.Reflection;
 
 
 namespace BRIX.Mobile.ViewModel.Characters
@@ -36,6 +38,8 @@ namespace BRIX.Mobile.ViewModel.Characters
                     await _characterService.UpdateAsync(Character.InternalModel);
                     break;
             }
+
+            WeakReferenceMessenger.Default.Send(Character);
 
             await Navigation.Back(
                 stepsBack: 1,

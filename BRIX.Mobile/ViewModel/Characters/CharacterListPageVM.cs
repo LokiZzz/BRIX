@@ -62,6 +62,9 @@ namespace BRIX.Mobile.ViewModel.Characters
             {
                 await _characterService.RemoveAsync(character.Id);
                 Characters.Remove(character);
+                CharacterBM? current = await _characterService.GetCurrentCharacter();
+                CharacterModel? model = current == null ? null : new CharacterModel(current);
+                WeakReferenceMessenger.Default.Send(new CurrentCharacterChanged(model));
             }
         }
 
@@ -99,5 +102,5 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
     }
 
-    public class CurrentCharacterChanged(CharacterModel character) : ValueChangedMessage<CharacterModel>(character) { }
+    public class CurrentCharacterChanged(CharacterModel? character = null) : ValueChangedMessage<CharacterModel?>(character) { }
 }
