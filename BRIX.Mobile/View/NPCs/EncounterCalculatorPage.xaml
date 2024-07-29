@@ -101,7 +101,7 @@
                 <CollectionView 
                     x:Name="npcCollectionView" 
                     ItemsSource="{Binding NPCs}"
-                    IsVisible="{Binding ShowCharacters}">
+                    IsVisible="{Binding ShowNPC}">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                     </CollectionView.ItemsLayout>
@@ -134,36 +134,40 @@
             </VerticalStackLayout>
         </ScrollView>
         <Border Grid.Row="1" Style="{StaticResource LowBlockWithShadowBorder}">
-            <Grid RowSpacing="5" RowDefinitions="auto,auto" ColumnDefinitions="auto,*" Margin="10,0,10,30">
-                <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{Binding DifficultyText}">
-                    <Label.Triggers>
-                        <DataTrigger TargetType="Label" Binding="{Binding Difficulty}" Value="0">
-                            <Setter Property="TextColor" Value="{StaticResource BRIXLime}" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Label" Binding="{Binding Difficulty}" Value="1">
-                            <Setter Property="TextColor" Value="{StaticResource BRIXWhite}" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Label" Binding="{Binding Difficulty}" Value="2">
-                            <Setter Property="TextColor" Value="{StaticResource BRIXRed}" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Label" Binding="{Binding Difficulty}" Value="3">
-                            <Setter Property="TextColor" Value="{StaticResource BRIXPink}" />
-                        </DataTrigger>
-                    </Label.Triggers>
-                </Label>
-                <Label Grid.Row="1" Grid.Column="0" Text="{Binding VersusText}"/>
-                <Label 
-                    Grid.Row="0" Grid.Column="1" 
-                    Style="{StaticResource TitleLabel}" 
-                    Text="{Binding ExpReward, StringFormat='{0} EXP'}"
-                    HorizontalOptions="End"/>
-                <HorizontalStackLayout Spacing="5" Grid.Row="1" Grid.Column="1" HorizontalOptions="End">
-                    <Label Text="{Binding CoinsReward}" TextColor="{StaticResource BRIXOrange}"/>
+            <Grid RowSpacing="5" RowDefinitions="auto,auto" Margin="10,0,10,30">
+                <Grid Grid.Row="0" ColumnDefinitions="auto,*">
+                    <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{Binding DifficultyText}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Difficulty}" Value="0">
+                                <Setter Property="TextColor" Value="{StaticResource BRIXLime}" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding Difficulty}" Value="1">
+                                <Setter Property="TextColor" Value="{StaticResource BRIXWhite}" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding Difficulty}" Value="2">
+                                <Setter Property="TextColor" Value="{StaticResource BRIXRed}" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding Difficulty}" Value="3">
+                                <Setter Property="TextColor" Value="{StaticResource BRIXPink}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
                     <Label 
+                        Grid.Column="1" 
+                        Style="{StaticResource TitleLabel}" 
+                        Text="{Binding ExpReward, StringFormat='{0} EXP'}"
+                        HorizontalOptions="End"/>
+                </Grid>
+
+                <Grid Grid.Row="1" ColumnDefinitions="auto,*">
+                    <Label Grid.Column="0" Text="{Binding VersusText}"/>
+                    <HorizontalStackLayout Spacing="5" Grid.Column="1" HorizontalOptions="End">
+                        <Label Text="{Binding CoinsReward}" TextColor="{StaticResource BRIXOrange}"/>
+                        <Label 
                         FontFamily="Awesome" Text="{x:Static icons:Awesome.Coins}" 
                         TextColor="{StaticResource BRIXOrange}"/>
-                </HorizontalStackLayout>
-                
+                    </HorizontalStackLayout>
+                </Grid>
             </Grid>
         </Border>
     </Grid>
