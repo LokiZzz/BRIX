@@ -90,34 +90,12 @@ namespace BRIX.Mobile.ViewModel.Characters
         [RelayCommand]
         private static async Task ShowDescription(CharacterAbilityModel abilityModel)
         {
-            string shortAbilityDescription = string.Empty;
-            Ability ability = abilityModel.Internal;
-
-            shortAbilityDescription += await ability.Activation.ToShortLexis() + Environment.NewLine;
-
-            foreach (EffectBase effect in ability.Effects)
-            {
-                shortAbilityDescription += "* " + await effect.ToShortLexis() + " :: ";
-
-                foreach(AspectBase aspect in effect.Aspects)
-                {
-                    if(effect.Aspects.IndexOf(aspect) > 0)
-                    {
-                        shortAbilityDescription += ' ';
-                    }
-
-                    shortAbilityDescription += await aspect.ToShortLexis();
-                }
-
-                shortAbilityDescription += Environment.NewLine;
-            }
-
             await Alert(
                 new AlertPopupParameters
                 {
                     Mode = EAlertMode.ShowMessage,
                     Title = abilityModel.Name,
-                    Message = shortAbilityDescription
+                    Message = await abilityModel.Internal.ToFullShortLexis()
                 }
             );
         }

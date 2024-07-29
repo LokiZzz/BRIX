@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BRIX.Library.Abilities;
+using BRIX.Library.Aspects;
+using BRIX.Library.Effects;
+using Microsoft.AspNetCore.Components;
 
 namespace BRIX.Lexica
 {
@@ -25,6 +23,32 @@ namespace BRIX.Lexica
 
                 return (MarkupString)result;
             }
+        }
+
+        public static async Task<string> ToFullShortLexis(this Ability ability)
+        {
+            string shortAbilityDescription = string.Empty;
+
+            shortAbilityDescription += await ability.Activation.ToShortLexis() + Environment.NewLine;
+
+            foreach (EffectBase effect in ability.Effects)
+            {
+                shortAbilityDescription += "* " + await effect.ToShortLexis() + " :: ";
+
+                foreach (AspectBase aspect in effect.Aspects)
+                {
+                    if (effect.Aspects.IndexOf(aspect) > 0)
+                    {
+                        shortAbilityDescription += ' ';
+                    }
+
+                    shortAbilityDescription += await aspect.ToShortLexis();
+                }
+
+                shortAbilityDescription += Environment.NewLine;
+            }
+
+            return shortAbilityDescription;
         }
     }
 }

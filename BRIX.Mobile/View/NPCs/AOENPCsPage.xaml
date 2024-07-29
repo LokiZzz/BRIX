@@ -193,6 +193,9 @@
                                                     <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
                                                 </Grid>
                                             </Border>
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference listView}, Path= BindingContext.ShowDescriptionCommand}" CommandParameter="{Binding .}"/>
+                                            </Grid.GestureRecognizers>
                                         </Grid>
                                     </SwipeView>
                                 </DataTemplate>

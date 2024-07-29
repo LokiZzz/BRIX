@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Abilities;
+﻿using BRIX.Lexica;
+using BRIX.Library.Abilities;
 using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Models.NPCs;
 using BRIX.Mobile.Resources.Localizations;
@@ -85,6 +86,19 @@ namespace BRIX.Mobile.ViewModel.NPCs
             await Navigation.Back(stepsBack: 1, 
                 (NavigationParameters.NPC, NPC),
                 (NavigationParameters.EditMode, _mode)
+            );
+        }
+
+        [RelayCommand]
+        private static async Task ShowDescription(CharacterAbilityModel abilityModel)
+        {
+            await Alert(
+                new AlertPopupParameters
+                {
+                    Mode = EAlertMode.ShowMessage,
+                    Title = abilityModel.Name,
+                    Message = await abilityModel.Internal.ToFullShortLexis()
+                }
             );
         }
 
