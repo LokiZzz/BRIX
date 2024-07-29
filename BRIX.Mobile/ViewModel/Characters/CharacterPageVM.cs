@@ -26,8 +26,12 @@ namespace BRIX.Mobile.ViewModel.Characters
         [ObservableProperty]
         private CharacterModel? _character;
 
-        [ObservableProperty]
-        private bool _playerHaveCharacter;
+        private bool _showImagePlaceholder = true;
+        public bool ShowImagePlaceholder
+        {
+            get => _showImagePlaceholder;
+            set => SetProperty(ref _showImagePlaceholder, value);
+        }
 
         [ObservableProperty]
         private bool _showNoCharacterText;
@@ -35,11 +39,11 @@ namespace BRIX.Mobile.ViewModel.Characters
         [ObservableProperty]
         private ObservableCollection<ExperienceInfoVM> _expCards = [];
 
-        private bool _showImagePlaceholder = true;
-        public bool ShowImagePlaceholder
+        private bool _playerHaveCharacter;
+        public bool PlayerHaveCharacter
         {
-            get => _showImagePlaceholder;
-            set => SetProperty(ref _showImagePlaceholder, value);
+            get => _playerHaveCharacter;
+            set => SetProperty(ref _playerHaveCharacter, value);
         }
 
         [RelayCommand]

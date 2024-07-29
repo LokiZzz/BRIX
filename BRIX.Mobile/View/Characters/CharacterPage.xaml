@@ -33,7 +33,8 @@
                 <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.PenToSquare}" 
                         Command="{Binding Source={x:Reference CharacterContentPage}, Path= BindingContext.EditCommand}"/>
                 <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.FileImage}" 
-                        Command="{Binding Source={x:Reference CharacterContentPage}, Path= BindingContext.PictureCommand}"/>
+                        Command="{Binding Source={x:Reference CharacterContentPage}, Path= BindingContext.PictureCommand}"
+                        IsVisible="{Binding Source={x:Reference CharacterContentPage}, Path= BindingContext.PlayerHaveCharacter}"/>
                 <Button Style="{StaticResource SquareIconButton}" Text="{x:Static icons:Awesome.PeopleArrows}" 
                         Command="{Binding Source={x:Reference CharacterContentPage}, Path= BindingContext.SwitchCommand}"/>
             </HorizontalStackLayout>
