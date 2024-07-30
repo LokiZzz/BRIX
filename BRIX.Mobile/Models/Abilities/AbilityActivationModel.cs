@@ -101,8 +101,7 @@ namespace BRIX.Mobile.Models.Abilities
             }
         }
 
-        public bool NeedToSetUsesCount => SelectedCooldownOption?.Cooldown != ECooldownOption.NoneCooldown
-            && SelectedCooldownOption?.Cooldown != ECooldownOption.CannotReset;
+        public bool NeedToSetUsesCount => SelectedCooldownOption?.Cooldown != ECooldownOption.NoneCooldown;
     }
 
     public class CooldownOptionVM
