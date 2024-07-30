@@ -4,7 +4,7 @@
 
 <p>The effect lasts @GetDurationDeclension(Model).</p>
 
-@if (!Model.CanDisableStatus) 
+@if (Model.CanDisableStatus) 
 {
     <p>The character can cancel the applied @(Model.IsConcorded ? "effects" : "effect")  without spending action points at any time.</p>
 }

@@ -4,7 +4,7 @@
 
 <p>Эффект длится @GetDurationDeclension(Model).</p>
 
-@if (!Model.CanDisableStatus) 
+@if (Model.CanDisableStatus) 
 {
     <p>Персонаж может отменить @(Model.IsConcorded ? "наложенные эффекты" : "наложенный эффект")  не тратя очки действий в любой момент.</p>
 }
