@@ -1255,7 +1255,7 @@
     <value>Target selection restriction</value>
   </data>
   <data name="TargetSelectionRestrictionHint" xml:space="preserve">
-    <value>The ability will only work on targets that match the specified properties. The target...</value>
+    <value>The ability will only work on targets that match the specified properties. If there are any restriction, character cannot be a target of effect. The target...</value>
   </data>
   <data name="TargetSelectionRestrictionWarning" xml:space="preserve">
     <value>Such restriction type already added.</value>
@@ -1285,7 +1285,7 @@
     <value>Distance in meters</value>
   </data>
   <data name="TargetSelectionStratedyNTADHint" xml:space="preserve">
-    <value>With this strategy, the effect is applied to a limited number of targets that are no further than the set range.</value>
+    <value>With this strategy, the effect is applied to a limited number of targets that are no further than the set range. You can not choose same target multiple times.</value>
   </data>
   <data name="TargetSelectionStrategyHint" xml:space="preserve">
     <value>It is necessary to choose a target selection strategy, there are only two of them:</value>

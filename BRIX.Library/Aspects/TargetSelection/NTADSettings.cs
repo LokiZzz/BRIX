@@ -2,6 +2,9 @@
 
 namespace BRIX.Library.Aspects.TargetSelection
 {
+    /// <summary>
+    /// Заданное количество уникальных целей на заданном расстоянии. 
+    /// </summary>
     public class NTADSettings
     {
         public int TargetsCount { get; set; } = 1;

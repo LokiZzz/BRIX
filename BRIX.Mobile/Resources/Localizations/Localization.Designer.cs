@@ -3472,7 +3472,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The ability will only work on targets that match the specified properties. The target....
+        ///   Looks up a localized string similar to The ability will only work on targets that match the specified properties. If there are any restriction, character cannot be a target of effect. The target....
         /// </summary>
         public static string TargetSelectionRestrictionHint {
             get {
@@ -3562,7 +3562,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to With this strategy, the effect is applied to a limited number of targets that are no further than the set range..
+        ///   Looks up a localized string similar to With this strategy, the effect is applied to a limited number of targets that are no further than the set range. You can not choose same target multiple times..
         /// </summary>
         public static string TargetSelectionStratedyNTADHint {
             get {
