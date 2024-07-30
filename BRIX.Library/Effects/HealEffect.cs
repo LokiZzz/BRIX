@@ -9,6 +9,8 @@ namespace BRIX.Library.Effects
     /// </summary>
     public class HealEffect : DiceImpactEffectBase
     {
+        public override bool IsPositive => true;
+
         public override List<Type> RequiredAspects =>
         [
             typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect)

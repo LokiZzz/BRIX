@@ -75,7 +75,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             PickerPopupResult? result = await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
                 new()
                 {
-                    Title = Resources.Localizations.Localization.TriggerProbability,
+                    Title = Localization.TriggerProbability,
                     Items = allTriggers,
                 }
             );
@@ -87,10 +87,10 @@ namespace BRIX.Mobile.ViewModel.Abilities
                     EntryPopupResult? entryResult = await ShowPopupAsync<EntryPopup, EntryPopupResult, EntryPopupParameters>(
                         new EntryPopupParameters
                         {
-                            Title = Resources.Localizations.Localization.ActivationTrigger,
+                            Title = Localization.ActivationTrigger,
                             Message = GetTriggerHint(concreteResult.Probability),
-                            Placeholder = Resources.Localizations.Localization.Trigger,
-                            ButtonText = Resources.Localizations.Localization.Ok,
+                            Placeholder = Localization.Trigger,
+                            ButtonText = Localization.Ok,
                         }
                     );
 
@@ -137,11 +137,11 @@ namespace BRIX.Mobile.ViewModel.Abilities
             return probability switch
             {
                 ETriggerProbability.Low =>
-                    Resources.Localizations.Localization.EnterLowProbabilityTrigger,
+                    Localization.EnterLowProbabilityTrigger,
                 ETriggerProbability.Medium =>
-                    Resources.Localizations.Localization.EnterStandartProbabilityTrigger,
+                    Localization.EnterStandartProbabilityTrigger,
                 ETriggerProbability.High =>
-                    Resources.Localizations.Localization.EnterHighProbabilityTrigger,
+                    Localization.EnterHighProbabilityTrigger,
                 _ => string.Empty,
             };
         }

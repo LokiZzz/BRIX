@@ -66,7 +66,7 @@ namespace BRIX.Mobile.Models.Abilities
                     CostMonitor?.UpdateCost();
                 });
 
-                if (cooldown == ECooldownOption.NoneCooldown || cooldown == ECooldownOption.CannotReset)
+                if (cooldown == ECooldownOption.NoneCooldown)
                 {
                     UsesCount = 0;
                 }

@@ -10,6 +10,8 @@ namespace BRIX.Library.Effects
     /// </summary>
     public class MoveTargetEffect : EffectBase
     {
+        public override bool IsPositive => true;
+        
         public override List<Type> RequiredAspects =>
         [
             typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect)

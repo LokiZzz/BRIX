@@ -9,6 +9,8 @@ namespace BRIX.Library.Effects
     /// </summary>
     public class CleanseEffect : EffectBase
     {
+        public override bool IsPositive => true;
+
         public override List<Type> RequiredAspects =>
         [
             typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect)

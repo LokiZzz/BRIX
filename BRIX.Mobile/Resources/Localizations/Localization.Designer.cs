@@ -3472,7 +3472,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The ability will only work on targets that match the specified properties. If there are any restriction, character cannot be a target of effect. The target....
+        ///   Looks up a localized string similar to The ability will only work on targets that match the specified properties. If there are any restriction, character cannot be a target of the positive effect. The target....
         /// </summary>
         public static string TargetSelectionRestrictionHint {
             get {

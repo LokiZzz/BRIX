@@ -10,6 +10,7 @@ namespace BRIX.Library.Effects
     public class DefenseEffect : DiceImpactEffectBase
     {
         public override bool HasStatus => true;
+        public override bool IsPositive => true;
 
         public override List<Type> RequiredAspects =>
         [

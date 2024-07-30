@@ -89,6 +89,10 @@ namespace BRIX.Mobile.Services
             {
                 await SelectCurrentCharacter(null);
             }
+            else
+            {
+                await SelectCurrentCharacter(characters.First());
+            }
         }
 
         public async Task RemoveAllAsync()

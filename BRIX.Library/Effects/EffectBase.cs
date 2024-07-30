@@ -17,6 +17,12 @@ namespace BRIX.Library.Effects
 
         public virtual bool HasStatus => false;
 
+        /// <summary>
+        /// Является ли эффект позитивным.
+        /// Позитивным называется эффект, чьим бенефициаром является его цель.
+        /// </summary>
+        public virtual bool IsPositive => false;
+
         public abstract int BaseExpCost();
 
         public virtual int GetExpCost()

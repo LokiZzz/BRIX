@@ -1255,7 +1255,7 @@
     <value>Target selection restriction</value>
   </data>
   <data name="TargetSelectionRestrictionHint" xml:space="preserve">
-    <value>The ability will only work on targets that match the specified properties. If there are any restriction, character cannot be a target of effect. The target...</value>
+    <value>The ability will only work on targets that match the specified properties. If there are any restriction, character cannot be a target of the positive effect. The target...</value>
   </data>
   <data name="TargetSelectionRestrictionWarning" xml:space="preserve">
     <value>Such restriction type already added.</value>
