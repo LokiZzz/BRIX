@@ -100,7 +100,10 @@
         /// </summary>
         public override bool IsAvailable => _isAvailable;
 
-        public override double ExpModifier => 0.1;
+        /// <summary>
+        /// Какую долю относительно 1 очка опыта составляет 1 монета стоимости.
+        /// </summary>
+        public override double ExpModifier => 0.20;
 
         public void SetIsAvailable(bool isAvailable) => _isAvailable = isAvailable;
     }
@@ -113,7 +116,7 @@
         /// </summary>
         public override bool IsAvailable => Count > 0;
 
-        public override double ExpModifier => 10;
+        public override double ExpModifier => 5;
 
         public void Spend() => Count--;
     }

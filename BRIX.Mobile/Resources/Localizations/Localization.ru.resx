@@ -228,6 +228,9 @@
   <data name="AddStatus" xml:space="preserve">
     <value>Добавить статус</value>
   </data>
+  <data name="AlertNPCCannotHaveRecharge" xml:space="preserve">
+    <value>NPC не может </value>
+  </data>
   <data name="Appearance" xml:space="preserve">
     <value>Внешность</value>
   </data>

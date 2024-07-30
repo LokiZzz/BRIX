@@ -228,6 +228,9 @@
   <data name="AddStatus" xml:space="preserve">
     <value>Add status</value>
   </data>
+  <data name="AlertNPCCannotHaveRecharge" xml:space="preserve">
+    <value>NPC cannot have an ability with recharge option.</value>
+  </data>
   <data name="Appearance" xml:space="preserve">
     <value>Appearance</value>
   </data>

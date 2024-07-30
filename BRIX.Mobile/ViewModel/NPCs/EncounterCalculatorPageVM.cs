@@ -179,7 +179,7 @@ namespace BRIX.Mobile.ViewModel.NPCs
 
             int partyMembersCount = Party.Sum(x => x.Count);
             ExpReward = ((double)npcsPower / Divider / partyMembersCount).Round();
-            int coinsValue = ((double)ExpReward / Divider).Round();
+            int coinsValue = ((double)ExpReward / (Divider * 2)).Round();
             DicePool coinsRewardDicePool = DicePool.FromValue(coinsValue, 0.5);
             CoinsReward = coinsRewardDicePool.ToString() + $" ({coinsValue})";
         }

@@ -1,9 +1,7 @@
 ﻿using BRIX.Lexica;
-using BRIX.Library.Abilities;
 using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Models.NPCs;
 using BRIX.Mobile.Resources.Localizations;
-using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Abilities;
 using BRIX.Mobile.ViewModel.Base;

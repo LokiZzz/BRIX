@@ -394,6 +394,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NPC cannot have an ability with recharge option..
+        /// </summary>
+        public static string AlertNPCCannotHaveRecharge {
+            get {
+                return ResourceManager.GetString("AlertNPCCannotHaveRecharge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Appearance.
         /// </summary>
         public static string Appearance {
