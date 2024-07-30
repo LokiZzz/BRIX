@@ -2,6 +2,7 @@
 using BRIX.Library.Characters;
 using System.Collections.ObjectModel;
 using BRIX.Mobile.Models.Abilities;
+using BRIX.Library.Abilities;
 
 namespace BRIX.Mobile.Models.Characters
 {
@@ -199,14 +200,14 @@ namespace BRIX.Mobile.Models.Characters
 
         public void AddAbility(CharacterAbilityModel ability)
         {
-            InternalModel.Abilities.Add(ability.Internal);
+            InternalModel.AddAbility(ability.Internal);
             Abilities.Add(ability);
         }
 
-        public void RemoveAbility(Guid abilityGuid)
+        public void RemoveAbility(CharacterAbilityModel ability)
         {
-            InternalModel.Abilities.RemoveAll(x => x.Id == abilityGuid);
-            Abilities.Remove(Abilities.First(x => x.Internal.Id == abilityGuid));
+            InternalModel.RemoveAbility(ability.Internal);
+            Abilities.Remove(Abilities.First(x => x.Internal.Id == ability.Internal.Id));
         }
 
         /// <summary>
@@ -218,11 +219,7 @@ namespace BRIX.Mobile.Models.Characters
                 Abilities.First(x => x.Internal.Id == ability.Internal.Id)
             );
             Abilities[indexOfOldAbility] = ability;
-
-            indexOfOldAbility = InternalModel.Abilities.IndexOf(
-                InternalModel.Abilities.First(x => x.Id == ability.Internal.Id)
-            );
-            InternalModel.Abilities[indexOfOldAbility] = ability.Internal;
+            InternalModel.UpdateAbility(ability.Internal);
         }
 
         public ObservableCollection<CharacterTagVM> Tags { get; set; }

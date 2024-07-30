@@ -10,6 +10,38 @@ namespace BRIX.Library.Characters
         public List<string> Tags { get; set; } = [];
 
         public List<Ability> Abilities { get; set; } = [];
+
+        public bool AddAbility(Ability ability)
+        {
+            if(ValidateAbility(ability))
+            {
+                Abilities.Add(ability);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool UpdateAbility(Ability ability)
+        {
+            if(ValidateAbility(ability) && Abilities.Any(x => x.Id == ability.Id))
+            {
+                int index = Abilities.IndexOf(Abilities.First(x => x.Id == ability.Id));
+                Abilities[index] = ability;
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public void RemoveAbility(Ability ability) => Abilities.RemoveAll(x => x.Id == ability.Id);
+        
+        public void ClearAbilities() => Abilities.Clear();
+
+        protected virtual bool ValidateAbility(Ability ability) => true;
+
         public List<Status> Statuses { get; set; } = [];
 
         /// <summary>

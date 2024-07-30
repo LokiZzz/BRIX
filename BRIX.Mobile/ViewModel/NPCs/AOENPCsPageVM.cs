@@ -76,7 +76,7 @@ namespace BRIX.Mobile.ViewModel.NPCs
 
             if (result?.Answer == EAlertPopupResult.Yes)
             {
-                NPC.RemoveAbility(ability.Internal.Id);
+                NPC.RemoveAbility(ability);
             }
         }
 

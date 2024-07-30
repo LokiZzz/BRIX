@@ -57,15 +57,15 @@ namespace BRIX.Mobile.Models.NPCs
 
         public void AddAbility(CharacterAbilityModel ability)
         {
-            Internal.Abilities.Add(ability.Internal);
+            Internal.AddAbility(ability.Internal);
             Abilities.Add(ability);
             OnPropertyChanged(nameof(Power));
         }
 
-        public void RemoveAbility(Guid abilityGuid)
+        public void RemoveAbility(CharacterAbilityModel ability)
         {
-            Internal.Abilities.RemoveAll(x => x.Id == abilityGuid);
-            Abilities.Remove(Abilities.First(x => x.Internal.Id == abilityGuid));
+            Internal.RemoveAbility(ability.Internal);
+            Abilities.Remove(Abilities.First(x => x.Internal.Id == ability.Internal.Id));
             OnPropertyChanged(nameof(Power));
         }
 
@@ -75,11 +75,7 @@ namespace BRIX.Mobile.Models.NPCs
                 Abilities.First(x => x.Internal.Id == ability.Internal.Id)
             );
             Abilities[indexOfOldAbility] = ability;
-
-            indexOfOldAbility = Internal.Abilities.IndexOf(
-                Internal.Abilities.First(x => x.Id == ability.Internal.Id)
-            );
-            Internal.Abilities[indexOfOldAbility] = ability.Internal;
+            Internal.UpdateAbility(ability.Internal);
             OnPropertyChanged(nameof(Power));
         }
 

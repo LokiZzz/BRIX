@@ -1,4 +1,6 @@
-﻿namespace BRIX.Library.Characters
+﻿using BRIX.Library.Abilities;
+
+namespace BRIX.Library.Characters
 {
     public class NPC : CharacterBase
     {
@@ -25,6 +27,13 @@
             int powerByHealth = CharacterCalculator.HealthToExp(Health);
 
             return (powerByAbilities + powerBySpeed + powerByHealth) / 2;
+        }
+
+        protected override bool ValidateAbility(Ability ability)
+        {
+            // Проверить нет ли призыва и перезарядок
+
+            return true;
         }
     }
 }

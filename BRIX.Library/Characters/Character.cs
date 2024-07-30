@@ -1,6 +1,4 @@
-﻿using BRIX.Library.Abilities;
-
-namespace BRIX.Library.Characters
+﻿namespace BRIX.Library.Characters
 {
     public partial class Character : CharacterBase
     {

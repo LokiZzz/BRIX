@@ -81,7 +81,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             {
                 if (Character != null)
                 {
-                    Character.RemoveAbility(ability.Internal.Id);
+                    Character.RemoveAbility(ability);
                     await _characterService.UpdateAsync(Character.InternalModel);
                 }
             }

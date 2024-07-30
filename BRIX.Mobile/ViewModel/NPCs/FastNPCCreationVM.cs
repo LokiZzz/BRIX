@@ -117,7 +117,7 @@ namespace BRIX.Mobile.ViewModel.NPCs
         private void UpdatePotentialNPC()
         {
             PotentialNPC.Abilities.Clear();
-            PotentialNPC.Internal.Abilities.Clear();
+            PotentialNPC.Internal.ClearAbilities();
 
             PotentialNPC.Health = FastHealth == 0 ? 10 : FastHealth;
 
