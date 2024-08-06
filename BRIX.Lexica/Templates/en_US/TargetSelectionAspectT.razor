@@ -64,7 +64,7 @@
 {
     @if (Model.TargetChain.IsChainEnabled)
     {
-        <p>After applying an @(Model.IsConcorded ? "effects" : "effect") to a target, it is applied along the chain to @Numbers.ENGDcln(Model.TargetChain.MaxTargetsCount, "other target"), the maximum distance between targets in the chain: @Numbers.ENGDcln(Model.TargetChain.MaxDistanceBetweenTargets, "meter").</p>
+        <p>After applying an @(Model.IsConcorded ? "effects" : "effect") to a target, it is applied along the chain up to @Numbers.ENGDcln(Model.TargetChain.MaxTargetsCount, "target"), the maximum distance between targets in the chain: @Numbers.ENGDcln(Model.TargetChain.MaxDistanceBetweenTargets, "meter").</p>
 
         if (Model.TargetChain.ObstacleBetweenTargetsInChain == EObstacleEquivalent.None)
         {

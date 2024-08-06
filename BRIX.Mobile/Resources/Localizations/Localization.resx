@@ -129,6 +129,9 @@
   <data name="AbilityEXPOverflowMessage" xml:space="preserve">
     <value>You cannot save such parameters to the ability, as you do not have enough experience points for this. Weaken the ability or exit editing without saving using the back button in the top left corner.</value>
   </data>
+  <data name="AbilityNeedToRecharge" xml:space="preserve">
+    <value>The number of uses per day is limited.</value>
+  </data>
   <data name="AbilityPower" xml:space="preserve">
     <value>Power</value>
   </data>
@@ -433,7 +436,7 @@
     <value>Cooldown</value>
   </data>
   <data name="CooldownAspectHint" xml:space="preserve">
-    <value>Specify how long it takes for the ability to recharge and be able to use it again. You can also choose the number of times you can use the ability before it needs a cooldown.</value>
+    <value>Specify whether the number of uses of the ability per day is limited and how many uses per day are available.</value>
   </data>
   <data name="Copy" xml:space="preserve">
     <value>Copy</value>

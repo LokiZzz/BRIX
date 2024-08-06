@@ -64,7 +64,7 @@
 {
     @if (Model.TargetChain.IsChainEnabled)
     {
-        <p>После применения @(Model.IsConcorded ? "эффектов" : "эффекта") к цели, он применяется по цепочке к @Numbers.RUSDcln(Model.TargetChain.MaxTargetsCount, "другой цели", "другим целям", "другим целям"), максимальное расстояние между целями в цепи: @Numbers.RUSDcln(Model.TargetChain.MaxDistanceBetweenTargets, "метр", "метра", "метров").</p>
+        <p>Эффект применяется по цепочке к @Numbers.RUSDcln(Model.TargetChain.MaxTargetsCount, "цели", "целям", "целям"), максимальное расстояние между целями в цепи: @Numbers.RUSDcln(Model.TargetChain.MaxDistanceBetweenTargets, "метр", "метра", "метров").</p>
 
         if (Model.TargetChain.ObstacleBetweenTargetsInChain == EObstacleEquivalent.None)
         {

@@ -10,17 +10,4 @@ using Newtonsoft.Json;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 
-AbilityActivation activation = new()
-{
-    ActionPoints = 3,
-    Cooldown = ECooldownOption.Minute,
-    UsesCount = 2,
-    Triggers = [(ETriggerProbability.Medium, "Триггер 1"), (ETriggerProbability.High, "Триггер 2")]
-};
-
-AbilityActivation activ2 = new();
-
-Console.WriteLine(await activation.ToShortLexis());
-Console.WriteLine(await activ2.ToShortLexis());
-
 Console.ReadLine();

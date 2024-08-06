@@ -24,7 +24,7 @@
                         <controls:FramedEntry Text="{Binding Activation.ActionPoints}" Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectActionPoints}}"/>
                         <Grid ColumnDefinitions="auto,*,auto" Margin="10">
                             <Label Grid.Column="0" Text="1" VerticalOptions="Center"/>
-                            <Slider Grid.Column="1" Minimum="1" Maximum="50" Value="{Binding Activation.ActionPoints, Mode=TwoWay}"/>
+                            <Slider Grid.Column="1" Minimum="1" Maximum="25" Value="{Binding Activation.ActionPoints, Mode=TwoWay}"/>
                             <Label Grid.Column="2" Text="50" VerticalOptions="Center"/>
                         </Grid>
                         <Grid ColumnDefinitions="*,*,*,*,*" ColumnSpacing="5">
@@ -41,16 +41,18 @@
                     <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectCooldown}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CooldownAspectHint}}"/>
-                        <controls:PickerButton
-                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Cooldown}}"
-                            Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Cooldown}}"
-                            ItemSource="{Binding Activation.CooldownOptions}"
-                            SelectedItem="{Binding Activation.SelectedCooldownOption}"
-                            DisplayMember="LocalizedName"/>
+                        <HorizontalStackLayout Spacing="10">
+                            <CheckBox 
+                                Color="{StaticResource BRIXWhite}"
+                                IsChecked="{Binding Activation.HasCooldown}"/>
+                            <Label 
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AbilityNeedToRecharge}}"
+                                VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
                         <controls:FramedEntry
                             Text="{Binding Activation.UsesCount}"
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.UsesCount}}"
-                            IsVisible="{Binding Activation.NeedToSetUsesCount}"/>
+                            IsVisible="{Binding Activation.HasCooldown}"/>
                     </VerticalStackLayout>
                 </Border>
 

@@ -8,13 +8,9 @@ namespace BRIX.Library.Abilities
 {
     public class Ability
     {
-        public Ability()
-        {
-            if (Id == Guid.Empty)
-            { 
-                Id = Guid.NewGuid();
-            }
-        }
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
 
         protected readonly List<EffectBase> _effects = [];
         public IReadOnlyCollection<EffectBase> Effects => _effects;
@@ -23,20 +19,15 @@ namespace BRIX.Library.Abilities
 
         public AbilityActivation Activation { get; set; } = new();
 
-        public Guid Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
         public string StatusName { get; set; } = string.Empty;
 
         public bool HasStatus => Effects?.Any(x => x.HasStatus) == true;
 
-        /// <summary>
-        /// Получить стоимость способности в очках опыта. 
-        /// </summary>
         public int ExpCost()
         {
             double effectsCountPenaltyCoef = 1;
             double deltaPerEffect = 0.2;
+
             // Есть эффекты, которые уменьшают стоимость способности.
             // Такие эффекты не учитываются в коэффициенте количества эффектов.
             int effectiveEffectsCount = _effects.Where(x => x.GetExpCost() > 0).Count();
@@ -46,10 +37,8 @@ namespace BRIX.Library.Abilities
                 effectsCountPenaltyCoef += (effectiveEffectsCount - 1) * deltaPerEffect;
             }
 
-            List<(Type Effect, int Cost)> effectsCosts = _effects.Select(x => (x.GetType(), x.GetExpCost())).ToList();
-            int sumOfEffectsExpCost = _effects.Sum(effect => effect.GetExpCost());
-            double activationCoef = Activation.GetCoeficient();
-            int expCost = (sumOfEffectsExpCost * activationCoef * effectsCountPenaltyCoef).Round();
+            int effectsCost = _effects.Sum(effect => effect.GetExpCost());
+            int expCost = (Activation.Apply(effectsCost) * effectsCountPenaltyCoef).Round();
 
             return expCost <= 1 ? 1 : expCost;
         }
@@ -101,11 +90,6 @@ namespace BRIX.Library.Abilities
             }
 
             _effects.Add(effect);
-        }
-
-        public IEnumerable<T?> GetEffects<T>() where T : EffectBase
-        {
-            return _effects.Where(x => x is T).Select(x => x as T);
         }
 
         /// <summary>

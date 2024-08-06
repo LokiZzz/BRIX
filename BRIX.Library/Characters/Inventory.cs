@@ -7,7 +7,7 @@
     {
         public int Coins { get; set; } = 100;
 
-        public List<InventoryItem> Content = new();
+        public List<InventoryItem> Content = [];
 
         public IEnumerable<InventoryItem> Items
         {
@@ -59,9 +59,7 @@
 
         public override bool Equals(object? otherObject)
         {
-            InventoryItem? other = otherObject as InventoryItem;
-
-            if (other == null)
+            if (otherObject is not InventoryItem other)
             {
                 return false;
             }
@@ -78,7 +76,7 @@
     public class Container : InventoryItem
     {
 
-        public List<InventoryItem> Payload = new();
+        public List<InventoryItem> Payload = [];
     }
 
     public abstract class MaterialSupport : InventoryItem
@@ -103,7 +101,7 @@
         /// <summary>
         /// Какую долю относительно 1 очка опыта составляет 1 монета стоимости.
         /// </summary>
-        public override double ExpModifier => 0.20;
+        public override double ExpModifier => 0.5;
 
         public void SetIsAvailable(bool isAvailable) => _isAvailable = isAvailable;
     }
@@ -116,7 +114,7 @@
         /// </summary>
         public override bool IsAvailable => Count > 0;
 
-        public override double ExpModifier => 5;
+        public override double ExpModifier => 4;
 
         public void Spend() => Count--;
     }

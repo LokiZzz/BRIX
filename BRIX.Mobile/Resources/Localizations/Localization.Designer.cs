@@ -97,6 +97,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The number of uses per day is limited..
+        /// </summary>
+        public static string AbilityNeedToRecharge {
+            get {
+                return ResourceManager.GetString("AbilityNeedToRecharge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Power.
         /// </summary>
         public static string AbilityPower {
@@ -1006,7 +1015,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Specify how long it takes for the ability to recharge and be able to use it again. You can also choose the number of times you can use the ability before it needs a cooldown..
+        ///   Looks up a localized string similar to Specify whether the number of uses of the ability per day is limited and how many uses per day are available..
         /// </summary>
         public static string CooldownAspectHint {
             get {

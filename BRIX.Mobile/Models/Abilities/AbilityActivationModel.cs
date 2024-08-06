@@ -7,24 +7,11 @@ using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.Models.Abilities
 {
-    public partial class AbilityActivationModel : ObservableObject
+    public partial class AbilityActivationModel(AbilityActivation activation) : ObservableObject
     {
         public AbilityActivationModel() : this(new AbilityActivation()) { }
 
-        public AbilityActivationModel(AbilityActivation activation)
-        {
-            InternalModel = activation;
-
-            ILocalizationResourceManager localization = Resolver.Resolve<ILocalizationResourceManager>();
-
-            CooldownOptions = new(Enum.GetValues<ECooldownOption>().Select(x => new CooldownOptionVM
-            {
-                Cooldown = x,
-                LocalizedName = localization[x.ToString("G")].ToString() ?? string.Empty,
-            }));
-        }
-
-        public AbilityActivation InternalModel { get; private set; }
+        public AbilityActivation InternalModel { get; private set; } = activation;
 
         private AbilityCostMonitorPanelVM? _costMonitor;
         public AbilityCostMonitorPanelVM? CostMonitor
@@ -38,6 +25,11 @@ namespace BRIX.Mobile.Models.Abilities
             get => InternalModel.ActionPoints;
             set
             {
+                if(value < 1 || value > 25)
+                {
+                    return;
+                }
+
                 SetProperty(InternalModel.ActionPoints, value, InternalModel, (model, prop) => {
                     model.ActionPoints = prop;
                     CostMonitor?.UpdateCost();
@@ -45,71 +37,26 @@ namespace BRIX.Mobile.Models.Abilities
             }
         }
 
-        public CooldownOptionVM? SelectedCooldownOption
+        public bool HasCooldown
         {
-            get
-            {
-                ECooldownOption cooldown = InternalModel.Cooldown;
-
-                return CooldownOptions.FirstOrDefault(x => x.Cooldown == cooldown);
-            }
+            get => InternalModel.UsesCountPerDay != 0;
             set
             {
-                if (value == null)
-                {
-                    return;
-                }
-
-                ECooldownOption cooldown = value.Cooldown;
-                SetProperty(InternalModel.Cooldown, cooldown, InternalModel, (model, prop) => {
-                    model.Cooldown = prop;
-                    CostMonitor?.UpdateCost();
-                });
-
-                if (cooldown == ECooldownOption.NoneCooldown)
-                {
-                    UsesCount = 0;
-                }
-                else
-                {
-                    if (UsesCount <= 0)
-                    {
-                        UsesCount = 1;
-                    }
-                }
-
-                OnPropertyChanged(nameof(NeedToSetUsesCount));
+                UsesCount = value ? 1 : 0;
             }
-        }
-
-        private ObservableCollection<CooldownOptionVM> _cooldownOptions = [];
-        public ObservableCollection<CooldownOptionVM> CooldownOptions
-        {
-            get => _cooldownOptions;
-            set => SetProperty(ref _cooldownOptions, value);
         }
 
         public int UsesCount
         {
-            get => InternalModel.UsesCount;
+            get => InternalModel.UsesCountPerDay;
             set
             {
-                SetProperty(InternalModel.UsesCount, value, InternalModel, (model, prop) => {
-                    model.UsesCount = prop;
+                SetProperty(InternalModel.UsesCountPerDay, value, InternalModel, (model, prop) => {
+                    model.UsesCountPerDay = prop;
                     CostMonitor?.UpdateCost();
                 });
+                OnPropertyChanged(nameof(HasCooldown));
             }
         }
-
-        public bool NeedToSetUsesCount => SelectedCooldownOption?.Cooldown != ECooldownOption.NoneCooldown;
-    }
-
-    public class CooldownOptionVM
-    {
-        public string LocalizedName { get; set; } = string.Empty;
-
-        public ECooldownOption Cooldown { get; set; }
-
-        public override string ToString() => LocalizedName;
     }
 }

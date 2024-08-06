@@ -4,17 +4,13 @@
 
 <p>To activate ability, you need to spend @Numbers.ENGDcln(Model.ActionPoints, "action point").</p>
 
-@if (Model.Cooldown == ECooldownOption.CannotReset)
-{
-    <p>A character can only use this ability once.</p>
-}
-else if (Model.NoCooldown)
+@if (Model.NoCooldown)
 {
     <p>The ability does not require recharging.</p>
 }
 else
 {
-    <p>The ability can be used @Numbers.ENGDcln(Model.UsesCount, "time"). After this, a cooldown will be required, which will last @GetCooldownOption(Model.Cooldown).</p>
+    <p>The ability can be used @Numbers.ENGDcln(Model.UsesCountPerDay, "time") per day.</p>
 }
 
 @if(Model.Triggers.Count > 0)
@@ -31,25 +27,6 @@ else
 @code {
     [Parameter]
     public AbilityActivation Model { get; set; } = new();
-
-    public static MarkupString GetCooldownOption(ECooldownOption input)
-    {
-        string resultString = input switch
-        {
-            ECooldownOption.Round => "1 round",
-            ECooldownOption.Minute => "1 minute",
-            ECooldownOption.Hour => "1 hour",
-            ECooldownOption.Day => "1 day",
-            ECooldownOption.Week => "1 week",
-            ECooldownOption.Month => "1 month",
-            ECooldownOption.Year => "1 year",
-            ECooldownOption.TenYears => "10 years",
-            ECooldownOption.HundredYears => "100 years",
-            _ => TemplateHelper.LexisTemplatingError
-        };
-
-        return (MarkupString)resultString;
-    }
 
     public static MarkupString GetTriggerString(ETriggerProbability Probability, string Comment)
     {

@@ -6,13 +6,13 @@
 {
     <text>AP: @Model.ActionPoints;</text>
 }
-@if(@Model.Triggers.Count > 0)
+@if (Model.Triggers.Count > 0)
 {
     <text> Triggers: @Model.Triggers.ToAggregatedString(ToString);</text>
 }
-@if(@Model.Cooldown != ECooldownOption.NoneCooldown)
+@if(Model.HasCooldown)
 {
-    <text> CD: @Model.UsesCount/@Model.Cooldown.ToString();</text>
+    <text> CD: @Model.UsesCountPerDay;</text>
 }
     
 @code {
