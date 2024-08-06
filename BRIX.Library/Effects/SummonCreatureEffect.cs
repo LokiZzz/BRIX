@@ -15,7 +15,15 @@ namespace BRIX.Library.Effects
 
         public override int BaseExpCost()
         {
-            return (Creatures.Sum(x => x.Count * x.Creature.Power) * 0.95).Round();
+            return Creatures.Sum(x => x.Count * Math.Min(x.Count, 3) * GetPowerForSummon(x.Creature));
+        }
+
+        private int GetPowerForSummon(NPC creature)
+        {
+            double initialPower = creature.Power;
+            initialPower *= creature.Abilities.Any(x => x.Effects.Any(y => y is VulnerabilityEffect)) ? 3.5 : 1;
+            
+            return Math.Max(initialPower.Round(), 50);
         }
     }
 
