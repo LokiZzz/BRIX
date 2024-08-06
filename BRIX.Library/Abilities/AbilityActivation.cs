@@ -43,16 +43,20 @@ namespace BRIX.Library.Abilities
         {
             double resultCost = exp;
 
-            resultCost *= ActionPoints switch
+            if (Triggers.Count == 0)
             {
-                1 => 10, // sqrt(3/1) = (9 -> 10)
-                2 => 2.5, // (2.25 -> 2.5)
-                3 => 1, // base
-                4 => 0.7, // sqrt(3/4) = (0.5625 -> 0.7)
-                5 => 0.5, // (0.36 -> 0.5)
-                >= 6 and <= 25 => GetActionPointCoeficient(),
-                _ => 0.05
-            };
+                resultCost *= ActionPoints switch
+                {
+                    1 => 10, // sqrt(3/1) = (9 -> 10)
+                    2 => 2.5, // (2.25 -> 2.5)
+                    3 => 1, // base
+                    4 => 0.7, // sqrt(3/4) = (0.5625 -> 0.7)
+                    5 => 0.5, // (0.36 -> 0.5)
+                    >= 6 and <= 25 => GetActionPointCoeficient(),
+                    _ => 0.05
+                };
+
+            }
 
             if (HasCooldown)
             {

@@ -169,11 +169,11 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Action points should be equal to one if the ability has activation triggers..
+        ///   Looks up a localized string similar to Action points should be equal to three if the ability has activation triggers..
         /// </summary>
-        public static string ActionPointsMustBeOneIfTriggersExists {
+        public static string ActionPointsMustBeThreeIfTriggersExists {
             get {
-                return ResourceManager.GetString("ActionPointsMustBeOneIfTriggersExists", resourceCulture);
+                return ResourceManager.GetString("ActionPointsMustBeThreeIfTriggersExists", resourceCulture);
             }
         }
         

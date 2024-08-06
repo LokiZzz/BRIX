@@ -1,7 +1,7 @@
 ﻿@using BRIX.Lexica
 @using BRIX.Library.Effects
 
-Dmg: @Model.Impact;
+Dmg: @((MarkupString)Model.Impact.ToString());
 
 @code {
     [Parameter]

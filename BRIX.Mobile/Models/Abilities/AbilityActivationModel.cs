@@ -42,7 +42,14 @@ namespace BRIX.Mobile.Models.Abilities
             get => InternalModel.UsesCountPerDay != 0;
             set
             {
-                UsesCount = value ? 1 : 0;
+                if(value && UsesCount == 0)
+                {
+                    UsesCount = 1;
+                }
+                else if(!value)
+                {
+                    UsesCount = 0;
+                }
             }
         }
 

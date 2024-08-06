@@ -29,9 +29,9 @@ namespace BRIX.Mobile.ViewModel.Abilities
         {
             if (Activation != null)
             {
-                if (Activation.InternalModel.Triggers.Count > 0 && Activation.ActionPoints != 1)
+                if (Activation.InternalModel.Triggers.Count > 0 && Activation.ActionPoints != 3)
                 {
-                    await Alert(Localization.ActionPointsMustBeOneIfTriggersExists);
+                    await Alert(Localization.ActionPointsMustBeThreeIfTriggersExists);
 
                     return;
                 }
