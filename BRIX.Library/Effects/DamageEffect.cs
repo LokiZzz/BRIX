@@ -24,13 +24,11 @@ namespace BRIX.Library.Effects
 
         public override int GetExpCost()
         {
-            TargetSelectionAspect? targetSelection = GetAspect<TargetSelectionAspect>();
-
             // Если способность наносит урон самому персонажу, то все остальные аспекты игнорируются.
             // Эффект в таком случае не добавляет к стоимости, а уменьшает её.
-            if (targetSelection?.Strategy == ETargetSelectionStrategy.CharacterHimself)
+            if (GetAspect<TargetSelectionAspect>()?.Strategy == ETargetSelectionStrategy.CharacterHimself)
             {
-                return -BaseExpCost();
+                return (- 5 * Impact.PreciseAverage()).Round();
             }
 
             // Иначе рассчёт происходит как обычно.
