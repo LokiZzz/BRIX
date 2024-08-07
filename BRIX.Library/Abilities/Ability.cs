@@ -52,7 +52,10 @@ namespace BRIX.Library.Abilities
             {
                 if (effect is DamageEffect dmg)
                 {
-                    DamageEffect overallEffect = new DamageEffect { Aspects = dmg.Aspects, Impact = overallDamageImpact };
+                    // Хитрый способ, который позволяет расчитвать стоимость эффекта урона с учётом других уже
+                    // добавленных эффектов того же типа. Позволяет расчитывать разные эффекты так же, как если бы 
+                    // вместо добавления нового эффекта был просто увеличен урон.
+                    DamageEffect overallEffect = new() { Aspects = dmg.Aspects, Impact = overallDamageImpact };
                     int costBefore = overallEffect.GetExpCost();
                     overallDamageImpact.Add([dmg.Impact]);
                     int costAfter = overallEffect.GetExpCost();
