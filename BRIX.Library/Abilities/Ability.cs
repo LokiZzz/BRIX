@@ -1,5 +1,6 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Characters;
+using BRIX.Library.DiceValue;
 using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
 using System.Net;
@@ -36,11 +37,34 @@ namespace BRIX.Library.Abilities
             {
                 effectsCountPenaltyCoef += (effectiveEffectsCount - 1) * deltaPerEffect;
             }
-
-            int effectsCost = _effects.Sum(effect => effect.GetExpCost());
+            int effectsCost = GetEffectsExpCost();
             int expCost = (Activation.Apply(effectsCost) * effectsCountPenaltyCoef).Round();
 
             return expCost <= 1 ? 1 : expCost;
+        }
+
+        private int GetEffectsExpCost()
+        {
+            int expCost = 0;
+            DicePool overallDamageImpact = new ();
+
+            foreach (EffectBase effect in _effects)
+            {
+                if (effect is DamageEffect dmg)
+                {
+                    DamageEffect overallEffect = new DamageEffect { Aspects = dmg.Aspects, Impact = overallDamageImpact };
+                    int costBefore = overallEffect.GetExpCost();
+                    overallDamageImpact.Add([dmg.Impact]);
+                    int costAfter = overallEffect.GetExpCost();
+                    expCost += costAfter - costBefore;
+                }
+                else
+                {
+                    expCost += effect.GetExpCost();
+                }
+            }
+
+            return expCost;
         }
 
         public int ExpCost(Character? character)

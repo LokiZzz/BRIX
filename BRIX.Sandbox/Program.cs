@@ -10,4 +10,18 @@ using Newtonsoft.Json;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 
+Ability ability1 = new();
+
+ability1.AddEffect(new DamageEffect { Impact = new((1, 4)) });
+ability1.AddEffect(new DamageEffect { Impact = new((1, 4)) });
+
+int cost1 = ability1.ExpCost();
+
+Ability ability2 = new();
+
+ability2.AddEffect(new DamageEffect { Impact = new((2, 4)) });
+
+int cost2 = ability1.ExpCost();
+
+
 Console.ReadLine();

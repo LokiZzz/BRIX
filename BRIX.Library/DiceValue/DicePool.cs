@@ -62,10 +62,28 @@ namespace BRIX.Library.DiceValue
         /// <summary>
         /// Добавляет в пул копию переданных костей.
         /// </summary>
-        public void Add(Dice dice)
+        public void Add(Dice dice, int? modifier = null)
         {
             Dice.Add(new Dice(dice.NumberOfFaces, dice.Count));
+
+            if(modifier != null)
+            {
+                Modifier += modifier.Value;
+            }
+
             Normalize();
+        }
+
+        /// <summary>
+        /// Добавляет к пулу другой пул.
+        /// </summary>
+        public void Add(List<DicePool> pool)
+        {
+            foreach (DicePool dicePool in pool)
+            {
+                Modifier += dicePool.Modifier;
+                dicePool.Dice.ForEach(x => Add(x));
+            }
         }
 
         private void SetDice((int, int)[] dice)
