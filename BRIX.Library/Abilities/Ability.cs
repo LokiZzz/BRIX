@@ -50,21 +50,37 @@ namespace BRIX.Library.Abilities
 
             foreach (EffectBase effect in _effects)
             {
-                if (effect is DamageEffect dmg)
+                // Хитрый способ, который позволяет рассчитывать стоимость наносящего урон эффекта с учётом других уже
+                // добавленных подобных эффектов. Позволяет рассчитывать разные эффекты так же, как если бы вместо
+                // добавления нового эффекта был просто увеличен урон.
+
+                // Проверяем относится ли эффект к наносящим урон.
+                DiceImpactEffectBase? overallEffect = effect switch
                 {
-                    // Хитрый способ, который позволяет расчитвать стоимость эффекта урона с учётом других уже
-                    // добавленных эффектов того же типа. Позволяет расчитывать разные эффекты так же, как если бы 
-                    // вместо добавления нового эффекта был просто увеличен урон.
-                    DamageEffect overallEffect = new() { Aspects = dmg.Aspects, Impact = overallDamageImpact };
+                    PeriodicDamageEffect pdmg => new PeriodicDamageEffect() { Aspects = pdmg.Aspects, Impact = overallDamageImpact },
+                    DamageEffect dmg => new DamageEffect() { Aspects = dmg.Aspects, Impact = overallDamageImpact },
+                    VulnerabilityEffect vul => new VulnerabilityEffect() { Aspects = vul.Aspects, Impact = overallDamageImpact },
+                    AmplificationEffect amp => new AmplificationEffect() { Aspects = amp.Aspects, Impact = overallDamageImpact },
+                    _ => null
+                };
+
+                if (overallEffect != null)
+                {
+                    // Если относится, то вычисляем его стоимость как если бы он был частью большого общего эффекта.
+                    // Вычисляем стоимость абстрактного общего эффекта до добавления очередного урона и после добавления.
+                    // Разница между этими значениями — и есть относительная стоимость текущего эффекта.
                     int costBefore = overallEffect.GetExpCost();
-                    overallDamageImpact.Add([dmg.Impact]);
+                    DiceImpactEffectBase impactEffect = (DiceImpactEffectBase)effect;
+                    overallDamageImpact.Add([impactEffect.Impact]);
                     int costAfter = overallEffect.GetExpCost();
+
                     expCost += costAfter - costBefore;
                 }
                 else
                 {
                     expCost += effect.GetExpCost();
                 }
+                
             }
 
             return expCost;
