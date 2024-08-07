@@ -47,8 +47,8 @@ namespace BRIX.Library.Abilities
             {
                 resultCost *= ActionPoints switch
                 {
-                    1 => 10, // sqrt(3/1) = (9 -> 10)
-                    2 => 2.5, // (2.25 -> 2.5)
+                    1 => 14, // sqrt(3/1) = (9 -> 14)
+                    2 => 3, // (2.25 -> 3)
                     3 => 1, // base
                     4 => 0.7, // sqrt(3/4) = (0.5625 -> 0.7)
                     5 => 0.5, // (0.36 -> 0.5)
@@ -60,7 +60,7 @@ namespace BRIX.Library.Abilities
 
             if (HasCooldown)
             {
-                resultCost *= (-75 / UsesCountPerDay).ToCoeficient();
+                resultCost *= (-25 / UsesCountPerDay).ToCoeficient();
             }
 
             if (Triggers.Count > 0)
