@@ -18,6 +18,11 @@
     {
         <p>The character chooses the targets himself.</p>
     }
+
+    if (Model.NeedToSeeTarget)
+    {
+        <p>Character must see the targets.</p>
+    }
 }
 @if (Model.Strategy == ETargetSelectionStrategy.Area)
 {
@@ -26,6 +31,11 @@
     if(Model.AreaSettings.ExcludedTargetsCount > 0)
     {
         <p>The character can select up to @Numbers.ENGDcln(Model.AreaSettings.ExcludedTargetsCount, "target") in area to which the @(Model.IsConcorded ? "effects" : "effect") will not be applied.</p>
+    }
+
+    if (Model.NeedToSeeTarget)
+    {
+        <p>Character must see the center of the area.</p>
     }
 }
 @if(Model.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL || Model.Strategy == ETargetSelectionStrategy.Area)

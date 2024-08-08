@@ -28,6 +28,11 @@
     }
 
     <text> Sizes: @Model.TargetsSizes.AllowedTargetSizes.ToAggregatedString(x => x.ToString());</text>
+
+    @if (Model.NeedToSeeTarget)
+    {
+        <text> NeedToSeeTargetOrCenter;</text>
+    }
 }
 
 @code {

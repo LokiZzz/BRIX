@@ -24,6 +24,12 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
         }
 
+        public bool NeedToSeeTarget
+        {
+            get => Internal.NeedToSeeTarget;
+            set => SetProperty(Internal.NeedToSeeTarget, value, Internal, (model, prop) => model.NeedToSeeTarget = prop);
+        }
+
         #region NTAD
 
         public int NTADCount

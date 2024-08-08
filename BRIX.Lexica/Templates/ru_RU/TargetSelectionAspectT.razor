@@ -18,6 +18,10 @@
     {
         <p>Цели выбирает сам персонаж.</p>
     }
+    if (Model.NeedToSeeTarget)
+    {
+        <p>Персонаж должен видеть цели.</p>
+    }
 }
 @if (Model.Strategy == ETargetSelectionStrategy.Area)
 {
@@ -26,6 +30,10 @@
     if(Model.AreaSettings.ExcludedTargetsCount > 0)
     {
         <p>Персонаж может выбрать @Numbers.RUSDeclension(Model.AreaSettings.ExcludedTargetsCount, "цель", "цели", "целей") в области, к которым @(Model.IsConcorded ? "эффекты применяться не будут" : "эффект применяться не будет.")</p>
+    }
+    if (Model.NeedToSeeTarget)
+    {
+        <p>Персонаж должен видеть центр области действия.</p>
     }
 }
 @if(Model.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL || Model.Strategy == ETargetSelectionStrategy.Area)

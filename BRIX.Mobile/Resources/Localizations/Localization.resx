@@ -378,6 +378,9 @@
   <data name="CharacterMovigSpeed" xml:space="preserve">
     <value>Moving speed (m/AP)</value>
   </data>
+  <data name="CharacterMustSeeTarget" xml:space="preserve">
+    <value>Character must see target.</value>
+  </data>
   <data name="CharacterSpeed_Help" xml:space="preserve">
     <value>A character's speed is the distance in meters that he can walk in one round without spending action points. Also, the character can additionally spend action points and move a distance equal to one fifth of the speed for each action point, this distance is measured in m/AP or in «MAPs». When moving using grid, the MAP or the sum of the MAPs is rounded to an integer.</value>
   </data>
@@ -1251,12 +1254,6 @@
   <data name="TargetSelectionNTADObstacleHint" xml:space="preserve">
     <value>The effect cannot be applied to the target if there is an obstacle equal to or stronger than the equivalent durability between it and the character.</value>
   </data>
-  <data name="TargetSelectionRestriction" xml:space="preserve">
-    <value>Target selection restriction</value>
-  </data>
-  <data name="TargetSelectionRestrictionHint" xml:space="preserve">
-    <value>The ability will only work on targets that match the specified properties. If there are any restriction, character cannot be a target of the positive effect. The target...</value>
-  </data>
   <data name="TargetSelectionRestrictionWarning" xml:space="preserve">
     <value>Such restriction type already added.</value>
   </data>
@@ -1301,6 +1298,15 @@
   </data>
   <data name="TargetThreeDot" xml:space="preserve">
     <value>Target...</value>
+  </data>
+  <data name="TargetVisibility" xml:space="preserve">
+    <value>Target visibility</value>
+  </data>
+  <data name="TargetVisibilityAREAHint" xml:space="preserve">
+    <value>If this option is enabled, the character can position the area of action within the distance only if he sees the place where the geometric center of the area will be located. In chains, it is enough to see the first target.</value>
+  </data>
+  <data name="TargetVisibilityNTADHint" xml:space="preserve">
+    <value>If this option is enabled, the effects will be applied only to those targets that the character can see. It is assumed that the viewing angle of the character is 180 degrees. The character can decide which way he is looking just before activating the ability. In chains, it is enough to see the first target.</value>
   </data>
   <data name="Teleportation" xml:space="preserve">
     <value>Teleportation</value>

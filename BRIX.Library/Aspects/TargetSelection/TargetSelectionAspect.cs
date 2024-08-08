@@ -29,7 +29,7 @@ namespace BRIX.Library.Aspects.TargetSelection
 
         public TargetSizeSettings TargetsSizes { get; set; } = new ();
 
-        public bool NeedToSeeTarget { get; set; } = new ();
+        public bool NeedToSeeTarget { get; set; } = true;
 
         private double GetNTADCoeficient()
         {

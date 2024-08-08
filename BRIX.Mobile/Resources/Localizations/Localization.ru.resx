@@ -378,6 +378,9 @@
   <data name="CharacterMovigSpeed" xml:space="preserve">
     <value>Скорость (м/ОД)</value>
   </data>
+  <data name="CharacterMustSeeTarget" xml:space="preserve">
+    <value>Персонаж должен видеть цель.</value>
+  </data>
   <data name="CharacterSpeed_Help" xml:space="preserve">
     <value>Скорость персонажа — это расстояние в метрах, которое он может пройти за один раунд, не затрачивая очки действий. Также персонаж может дополнительно тратить очки действий и перемещаться на расстояние, равное одной пятой от скорости за каждое очко действия, это расстояние измеряется в м/ОД или в «модах». При перемещении по клеткам мод или сумма модов округляется до целого числа.</value>
   </data>
@@ -1257,12 +1260,6 @@
   <data name="TargetSelectionNTADObstacleHint" xml:space="preserve">
     <value>Эффект не может быть применён к цели, если между ней и персонажем находится препятствие равное эквиваленту прочности или прочнее него.</value>
   </data>
-  <data name="TargetSelectionRestriction" xml:space="preserve">
-    <value>Ограничение выбора целей</value>
-  </data>
-  <data name="TargetSelectionRestrictionHint" xml:space="preserve">
-    <value>Способность будет работать только на целях, которые соответсвуют указанным свойствам. Если установлено хотя бы одно ограничение, то сам персонаж не может быть целью позитивного эффекта. Цель...</value>
-  </data>
   <data name="TargetSelectionRestrictionWarning" xml:space="preserve">
     <value>Ограничение такого типа уже добавлено.</value>
   </data>
@@ -1307,6 +1304,15 @@
   </data>
   <data name="TargetThreeDot" xml:space="preserve">
     <value>Цель...</value>
+  </data>
+  <data name="TargetVisibility" xml:space="preserve">
+    <value>Видимость цели</value>
+  </data>
+  <data name="TargetVisibilityAREAHint" xml:space="preserve">
+    <value>Если данная опция включена, то персонаж может расположить область действия в пределах дистанции, только если видит место, где будет расположен геометрический центр области. В цепях целей достаточно видеть первую цель.</value>
+  </data>
+  <data name="TargetVisibilityNTADHint" xml:space="preserve">
+    <value>Если данная опция включена, то эффекты будет применены только к тем целям, которых персонаж может видеть. При этом считается, что угол обзора персонажа — 180 градусов. Персонаж может решить в какую сторону он смотрит непосредственно перед активацией способности. В цепях целей достаточно видеть первую цель.</value>
   </data>
   <data name="Teleportation" xml:space="preserve">
     <value>Телепортация</value>

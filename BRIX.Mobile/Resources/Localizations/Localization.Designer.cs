@@ -844,6 +844,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Character must see target..
+        /// </summary>
+        public static string CharacterMustSeeTarget {
+            get {
+                return ResourceManager.GetString("CharacterMustSeeTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A character&apos;s speed is the distance in meters that he can walk in one round without spending action points. Also, the character can additionally spend action points and move a distance equal to one fifth of the speed for each action point, this distance is measured in m/AP or in «MAPs». When moving using grid, the MAP or the sum of the MAPs is rounded to an integer..
         /// </summary>
         public static string CharacterSpeed_Help {
@@ -3463,24 +3472,6 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Target selection restriction.
-        /// </summary>
-        public static string TargetSelectionRestriction {
-            get {
-                return ResourceManager.GetString("TargetSelectionRestriction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The ability will only work on targets that match the specified properties. If there are any restriction, character cannot be a target of the positive effect. The target....
-        /// </summary>
-        public static string TargetSelectionRestrictionHint {
-            get {
-                return ResourceManager.GetString("TargetSelectionRestrictionHint", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Such restriction type already added..
         /// </summary>
         public static string TargetSelectionRestrictionWarning {
@@ -3612,6 +3603,33 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string TargetThreeDot {
             get {
                 return ResourceManager.GetString("TargetThreeDot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target visibility.
+        /// </summary>
+        public static string TargetVisibility {
+            get {
+                return ResourceManager.GetString("TargetVisibility", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If this option is enabled, the character can position the area of action within the distance only if he sees the place where the geometric center of the area will be located. In chains, it is enough to see the first target..
+        /// </summary>
+        public static string TargetVisibilityAREAHint {
+            get {
+                return ResourceManager.GetString("TargetVisibilityAREAHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If this option is enabled, the effects will be applied only to those targets that the character can see. It is assumed that the viewing angle of the character is 180 degrees. The character can decide which way he is looking just before activating the ability. In chains, it is enough to see the first target..
+        /// </summary>
+        public static string TargetVisibilityNTADHint {
+            get {
+                return ResourceManager.GetString("TargetVisibilityNTADHint", resourceCulture);
             }
         }
         
