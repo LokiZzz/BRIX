@@ -6,14 +6,13 @@ namespace BRIX.Library.Aspects.TargetSelection
     public class AreaSettings
     {
         public int DistanceToAreaInMeters { get; set; } = 1;
+
         public int ExcludedTargetsCount { get; set; } = 0;
-        public EObstacleEquivalent ObstacleBetweenCharacterAndArea { get; set; } = EObstacleEquivalent.MetalArmor;
-        public EObstacleEquivalent ObstacleBetweenEpicenterAndTarget { get; set; } = EObstacleEquivalent.MetalArmor;
         
         /// <summary>
-        /// Привязывается ли зона в момент активации к персонажу или предмету.
+        /// Огибает ли область углы.
         /// </summary>
-        public bool IsAreaBoundedTo { get; set; } = false;
+        public bool SpreadsAroundCorners { get; set; } = false;
 
         public VolumeShape Area { get; set; } = new();
     }

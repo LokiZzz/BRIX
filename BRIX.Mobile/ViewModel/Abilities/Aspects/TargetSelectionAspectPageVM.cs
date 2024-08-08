@@ -35,8 +35,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
             SetShape(Aspect.AreaShape.AreaType.ToString("G"));
 
-            Restrictions = new(Aspect.Internal.TargetSelectionRestrictions.Conditions.Select(ToRestrictionsVM));
-            OnPropertyChanged(nameof(ShowNoRestrictionsText));
             Sizes = new(Aspect.Internal.TargetsSizes.AllowedTargetSizes.Select(x => new TargetSizeVM
             {
                 Size = x,
@@ -126,144 +124,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         }
 
         public bool ShowNTADAndAREASettings => IsNTAD || IsAREA;
-
-        #endregion
-
-        #region Targets selection restrictions
-
-        private ObservableCollection<TargetSelectionRestrictionPropertyVM> _restrictions = [];
-        public ObservableCollection<TargetSelectionRestrictionPropertyVM> Restrictions
-        {
-            get => _restrictions;
-            set => SetProperty(ref _restrictions, value);
-        }
-
-        public bool ShowNoRestrictionsText => Restrictions?.Any() == false;
-
-        [RelayCommand]
-        public async Task AddRestriction()
-        {
-            if (Aspect == null)
-            {
-                throw new ArgumentNullException(nameof(Aspect));
-            }
-
-            List<ETargetSelectionRestrictions> customRestrictions =
-            [
-                ETargetSelectionRestrictions.LowRarityProperty,
-                ETargetSelectionRestrictions.MediumRarityProperty,
-                ETargetSelectionRestrictions.HighRarityProperty,
-            ];
-
-            List<object> allRestrictions = Enum.GetValues<ETargetSelectionRestrictions>()
-                .Select(x => new TargetSelectionRestrictionPropertyVM { 
-                    Restriction = x, 
-                    Text = Localization[x.ToString("G")].ToString() ?? string.Empty 
-                })
-                .Where(x => !Restrictions.Any(y => y.Restriction == x.Restriction) 
-                    || customRestrictions.Any(y => y == x.Restriction))
-                .Select(x => x as object)
-                .ToList();
-
-            PickerPopupResult? result = await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
-                new()
-                {
-                    Title = Resources.Localizations.Localization.TargetThreeDot,
-                    Items = allRestrictions,
-                }
-            );
-
-            if (result != null)
-            {
-                if (result.SelectedItem is TargetSelectionRestrictionPropertyVM concreteResult)
-                {
-                    if (customRestrictions.Any(x => x == concreteResult.Restriction))
-                    {
-                        string message = GetCustomRestrictionHint(concreteResult.Restriction);
-
-                        EntryPopupResult? entryResult = await ShowPopupAsync<EntryPopup, EntryPopupResult, EntryPopupParameters>(
-                            new EntryPopupParameters
-                            {
-                                Title = Resources.Localizations.Localization.TargetSelectionRestriction,
-                                Message = message,
-                                Placeholder = Resources.Localizations.Localization.TargetProperty,
-                                ButtonText = Resources.Localizations.Localization.Ok,
-                            }
-                        );
-
-                        if (entryResult == null)
-                        {
-                            return;
-                        }
-
-                        concreteResult.Text = entryResult.Text;
-                    }
-
-                    if (Restrictions.Any(x => x.Restriction == concreteResult.Restriction && x.Text == concreteResult.Text))
-                    {
-                        await Alert(Resources.Localizations.Localization.TargetSelectionRestrictionWarning);
-
-                        return;
-                    }
-
-                    Restrictions.Add(concreteResult);
-                    Aspect.Internal.TargetSelectionRestrictions.Conditions.Add((concreteResult.Restriction, concreteResult.Text));
-                    OnPropertyChanged(nameof(ShowNoRestrictionsText));
-                }
-            }
-
-            CostMonitor?.UpdateCost();
-        } 
-
-        [RelayCommand]
-        public void DeleteRestriction(TargetSelectionRestrictionPropertyVM property)
-        {
-            if (Aspect == null)
-            {
-                throw new Exception("Не инициализирована модель" + nameof(Aspect));
-            }
-
-            Restrictions.Remove(property);
-
-            (ETargetSelectionRestrictions Type, string Comment) conditionToDelete = 
-                Aspect.Internal.TargetSelectionRestrictions.Conditions.FirstOrDefault(x => 
-                    x.Type == property.Restriction || x.Comment == property.Text);
-            Aspect.Internal.TargetSelectionRestrictions.Conditions.Remove(conditionToDelete);
-
-            CostMonitor?.UpdateCost();
-            OnPropertyChanged(nameof(ShowNoRestrictionsText));
-        }
-
-        private TargetSelectionRestrictionPropertyVM ToRestrictionsVM((ETargetSelectionRestrictions Type, string Comment) restriction)
-        {
-            TargetSelectionRestrictionPropertyVM restrictionVM = new()
-            {
-                Restriction = restriction.Type,
-                Text = restriction.Type switch
-                {
-                    ETargetSelectionRestrictions.LowRarityProperty
-                    or ETargetSelectionRestrictions.MediumRarityProperty
-                    or ETargetSelectionRestrictions.HighRarityProperty => restriction.Comment,
-                    _ => Localization[restriction.Type.ToString("G")].ToString() ?? string.Empty,
-                }
-            };
-
-            return restrictionVM;
-        }
-
-        private static string GetCustomRestrictionHint(ETargetSelectionRestrictions restriction)
-        {
-            return restriction switch
-            {
-                ETargetSelectionRestrictions.LowRarityProperty => 
-                    Resources.Localizations.Localization.EnterLowRarityRestriction,
-                ETargetSelectionRestrictions.MediumRarityProperty => 
-                    Resources.Localizations.Localization.EnterMediumRarityRestriction,
-                ETargetSelectionRestrictions.HighRarityProperty => 
-                    Resources.Localizations.Localization.EnterHighRarityRestriction,
-                _ => string.Empty,
-            };
-        }
 
         #endregion
 
@@ -386,14 +246,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         public bool IsVoxelArray => Shape == EAreaType.VoxelArray;
 
         #endregion
-    }
-
-    public class TargetSelectionRestrictionPropertyVM
-    {
-        public ETargetSelectionRestrictions Restriction { get; set; }
-        public string Text { get; set; } = string.Empty;
-
-        public override string ToString() => Text;
     }
 
     public class TargetSizeVM

@@ -1,6 +1,4 @@
-﻿using BRIX.Library.Enums;
-using BRIX.Library.Mathematics;
-using System.Reflection.Metadata;
+﻿using BRIX.Library.Mathematics;
 
 namespace BRIX.Library.Aspects.TargetSelection
 {
@@ -9,7 +7,6 @@ namespace BRIX.Library.Aspects.TargetSelection
         public override void Initialize()
         {
             base.Initialize();
-            TargetSelectionRestrictions.Conditions = [(ETargetSelectionRestrictions.SeeTarget, string.Empty)];
         }
 
         public override double GetCoefficient()
@@ -32,7 +29,7 @@ namespace BRIX.Library.Aspects.TargetSelection
 
         public TargetSizeSettings TargetsSizes { get; set; } = new ();
 
-        public TargetSelectionRestrictionsSettings TargetSelectionRestrictions { get; set; } = new ();
+        public bool NeedToSeeTarget { get; set; } = new ();
 
         private double GetNTADCoeficient()
         {
@@ -41,13 +38,13 @@ namespace BRIX.Library.Aspects.TargetSelection
                 .Convert(NTAD.TargetsCount)
                 .ToCoeficient();
             double randomSelectionCoef = NTAD?.IsTargetSelectionIsRandom == true ? 0.8 : 1;
+            double needToSeeTargetCoef = NeedToSeeTarget == true ? 0.8 : 1;
 
             return distanceCoef * countCoef
-                * ObstacleEquivalent.Map[NTAD?.ObstacleBetweenCharacterAndTarget ?? 0].ToCoeficient()
                 * randomSelectionCoef
+                * needToSeeTargetCoef
                 * TargetChain.GetCoefficient()
-                * TargetsSizes.GetCoefficient()
-                * TargetSelectionRestrictions.GetCoefficient();
+                * TargetsSizes.GetCoefficient();
         }
 
         private double GetAreaCoeficient()
@@ -65,15 +62,14 @@ namespace BRIX.Library.Aspects.TargetSelection
             double excludedTargetsCoef = new ThrasholdCostConverter((0, 0), (1, 30), (6, 5))
                 .Convert(AreaSettings?.ExcludedTargetsCount ?? 0)
                 .ToCoeficient();
-            double areaBoundedToCharacterCoef = AreaSettings?.IsAreaBoundedTo == true ? 1.7 : 1;
+            double needToSeeTargetCoef = NeedToSeeTarget == true ? 0.8 : 1;
 
-            return distanceCoef * volumeCoef * excludedTargetsCoef
-                * ObstacleEquivalent.Map[AreaSettings?.ObstacleBetweenCharacterAndArea ?? 0].ToCoeficient()
-                * ObstacleEquivalent.Map[AreaSettings?.ObstacleBetweenEpicenterAndTarget ?? 0].ToCoeficient()
-                * areaBoundedToCharacterCoef
+            return distanceCoef 
+                * volumeCoef 
+                * excludedTargetsCoef
+                * needToSeeTargetCoef
                 * TargetChain.GetCoefficient()
-                * TargetsSizes.GetCoefficient()
-                * TargetSelectionRestrictions.GetCoefficient();
+                * TargetsSizes.GetCoefficient();
         }
 
         public static double GetDistanceCoeficient(int distance)

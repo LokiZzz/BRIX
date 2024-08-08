@@ -18,15 +18,6 @@
     {
         <p>Цели выбирает сам персонаж.</p>
     }
-
-    if(Model.NTAD.ObstacleBetweenCharacterAndTarget == EObstacleEquivalent.None)
-    {
-        <p>Препятствия между целью и персонажем не играют роли.</p>
-    }
-    else
-    {
-        <p>Если между персонажем и его целью находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.NTAD.ObstacleBetweenCharacterAndTarget), то @(Model.IsConcorded ? "эффекты не будут применены" : "эффект не будет применён.")</p>
-    }
 }
 @if (Model.Strategy == ETargetSelectionStrategy.Area)
 {
@@ -36,44 +27,12 @@
     {
         <p>Персонаж может выбрать @Numbers.RUSDeclension(Model.AreaSettings.ExcludedTargetsCount, "цель", "цели", "целей") в области, к которым @(Model.IsConcorded ? "эффекты применяться не будут" : "эффект применяться не будет.")</p>
     }
-
-    if (Model.AreaSettings.ObstacleBetweenCharacterAndArea == EObstacleEquivalent.None)
-    {
-        <p>Препятствия между областью действия @(Model.IsConcorded ? "эффектов" : "эффекта") и персонажем не играют роли.</p>
-    }
-    else
-    {
-        <p>Если между персонажем и областью действия @(Model.IsConcorded ? "способности" : "эффекта") находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.AreaSettings.ObstacleBetweenCharacterAndArea), то @(Model.IsConcorded ? "эффекты не будут применены" : "эффект не будет применён") к этой области.</p>
-    }
-
-    if (Model.AreaSettings.ObstacleBetweenEpicenterAndTarget == EObstacleEquivalent.None)
-    {
-        <p>Препятствия между эпицентром действия @(Model.IsConcorded ? "способности" : "эффекта") и целями не играют роли.</p>
-    }
-    else
-    {
-        <p>Если между целью и эпицентром области действия находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.AreaSettings.ObstacleBetweenEpicenterAndTarget), то @(Model.IsConcorded ? "эффекты не будут применены" : "эффект не будет применён") к этой цели.</p>
-    }
-
-    if(Model.AreaSettings.IsAreaBoundedTo)
-    {
-        <p>Область действия привязывается к персонажу и перемещается вместе с ним.</p>
-    }
 }
 @if(Model.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL || Model.Strategy == ETargetSelectionStrategy.Area)
 {
     @if (Model.TargetChain.IsChainEnabled)
     {
         <p>Эффект применяется по цепочке к @Numbers.RUSDcln(Model.TargetChain.MaxTargetsCount, "цели", "целям", "целям"), максимальное расстояние между целями в цепи: @Numbers.RUSDcln(Model.TargetChain.MaxDistanceBetweenTargets, "метр", "метра", "метров").</p>
-
-        if (Model.TargetChain.ObstacleBetweenTargetsInChain == EObstacleEquivalent.None)
-        {
-            <p>Препятствия между целями в цепи не играют роли.</p>
-        }
-        else
-        {
-            <p>Если между целями в цепи находится препятствие большее или эквивалентное по прочности @GetDurabilityEquivalent(Model.TargetChain.ObstacleBetweenTargetsInChain), то цепь прерывается.</p>
-        }
     }
 
     <p>@(Model.IsConcorded ? "Эффекты" : "Эффект") может быть применён к целям следующих размеров:</p>
@@ -83,45 +42,11 @@
             <li>@GetSize(size);</li>
         }
     </ul>
-
-    @if(Model.TargetSelectionRestrictions.Conditions.Count() > 0)
-    {
-        <p>Чтобы @(Model.IsConcorded ? "эффекты подействовали" : "эффект подействовал") на цель, она должна иметь следующие свойства:</p>
-        <ul>
-            @foreach ((ETargetSelectionRestrictions Type, string Comment) condition in Model.TargetSelectionRestrictions.Conditions)
-            {
-                <li>@GetSelectionConditionString(condition);</li>
-            }
-        </ul>
-    }
 }
 
 @code {
     [Parameter]
     public TargetSelectionAspect Model { get; set; } = new();
-
-    public static MarkupString GetSelectionConditionString((ETargetSelectionRestrictions Type, string Comment) input)
-    {
-        string resultString = input.Type switch
-        {
-            ETargetSelectionRestrictions.SeeTarget => "Цель должна быть видимой",
-            ETargetSelectionRestrictions.TargetSeesCharacter => "Цель должна видеть персонажа",
-            ETargetSelectionRestrictions.HearTarget => "Цель должна быть слышимой",
-            ETargetSelectionRestrictions.TargetHearsCharacter => "Цель должна слышать персонажа",
-
-            ETargetSelectionRestrictions.BeAlive => "Цель должна быть живой",
-            ETargetSelectionRestrictions.BeAnObject => "Цель должна быть предметом",
-            ETargetSelectionRestrictions.BeViable => "Цель должна быть дееспособной",
-
-            ETargetSelectionRestrictions.LowRarityProperty => $"Свойство низкой редкости: {input.Comment}",
-            ETargetSelectionRestrictions.MediumRarityProperty => $"Свойство средней редкости: {input.Comment}",
-            ETargetSelectionRestrictions.HighRarityProperty => $"Свойство высокой редкости: {input.Comment}",
-
-            _ => TemplateHelper.LexisTemplatingError
-        };
-
-        return (MarkupString)resultString;
-    }
 
     public static MarkupString GetSize(ETargetSize input)
     {
@@ -138,24 +63,6 @@
             ETargetSize.Colossal => "Колоссальный",
             ETargetSize.Titanic => "Титанический",
             ETargetSize.Legendary => "Легендарный",
-            _ => TemplateHelper.LexisTemplatingError
-        };
-
-        return (MarkupString)resultString;
-    }
-
-    public static MarkupString GetDurabilityEquivalent(EObstacleEquivalent input)
-    {
-        string resultString = input switch
-        {
-            EObstacleEquivalent.PaperSheet => "листу бумаги",
-            EObstacleEquivalent.DenseVegetation => "плотной растительности",
-            EObstacleEquivalent.LeatherArmor => "кожаному доспеху",
-            EObstacleEquivalent.WoodenPlank => "деревянной доске",
-            EObstacleEquivalent.MetalArmor => "металлическому доспеху",
-            EObstacleEquivalent.BrickWall => "кирпичной стене",
-            EObstacleEquivalent.ThickSteelPlate => "толстому стальному листу",
-            EObstacleEquivalent.MuchMorePowerfullObstacle => "чему-то невообразимо прочному",
             _ => TemplateHelper.LexisTemplatingError
         };
 

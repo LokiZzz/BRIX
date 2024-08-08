@@ -11,7 +11,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
     {
         public TargetSelectionAspectModel(TargetSelectionAspect model) : base(model) 
         {
-            Obstacles = ObstacleOptionHelper.GetOptions(Resolver.Resolve<ILocalizationResourceManager>());
             AreaShape = new VolumeShapeModel(Internal.AreaSettings.Area);
         }
 
@@ -22,20 +21,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             { 
                 SetProperty(Internal.Strategy, value, Internal, 
                     (model, prop) => model.Strategy = prop);
-            }
-        }
-
-        private ObservableCollection<ObstacleOptionVM> _obstacles = new();
-        public ObservableCollection<ObstacleOptionVM> Obstacles
-        {
-            get => _obstacles;
-            set
-            {
-                SetProperty(ref _obstacles, value);
-                OnPropertyChanged(nameof(ObstacleBetweenCharacterAndTarget));
-                OnPropertyChanged(nameof(ObstacleBetweenCharacterAndArea));
-                OnPropertyChanged(nameof(ObstacleBetweenEpicenterAndTarget));
-                OnPropertyChanged(nameof(ObstacleBetweenTargetsInChain));
             }
         }
 
@@ -58,25 +43,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             { 
                 SetProperty(Internal.NTAD.DistanceInMeters, value, Internal, 
                     (model, prop) => model.NTAD.DistanceInMeters = prop); 
-            }
-        }
-
-        public ObstacleOptionVM? ObstacleBetweenCharacterAndTarget
-        {
-            get
-            {
-                EObstacleEquivalent equivalent = Internal.NTAD.ObstacleBetweenCharacterAndTarget;
-
-                return Obstacles.FirstOrDefault(x => x.Equivalent == equivalent);
-            }
-            set
-            {
-                if (value != null)
-                {
-                    EObstacleEquivalent equivalent = value.Equivalent;
-                    SetProperty(Internal.NTAD.ObstacleBetweenCharacterAndTarget, equivalent, Internal,
-                        (model, prop) => model.NTAD.ObstacleBetweenCharacterAndTarget = prop);
-                }
             }
         }
 
@@ -114,55 +80,17 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
         }
 
-        public bool IsAreaBoundedTo
+        public bool SpreadsAroundCorners
         {
-            get => Internal.AreaSettings.IsAreaBoundedTo;
+            get => Internal.AreaSettings.SpreadsAroundCorners;
             set
             {
-                SetProperty(Internal.AreaSettings.IsAreaBoundedTo, value, Internal,
-                    (model, prop) => model.AreaSettings.IsAreaBoundedTo = prop);
+                SetProperty(Internal.AreaSettings.SpreadsAroundCorners, value, Internal,
+                    (model, prop) => model.AreaSettings.SpreadsAroundCorners = prop);
             }
         }
 
         public VolumeShapeModel AreaShape { get; set; }
-
-        public ObstacleOptionVM? ObstacleBetweenCharacterAndArea
-        {
-            get
-            {
-                EObstacleEquivalent equivalent = Internal.AreaSettings.ObstacleBetweenCharacterAndArea;
-
-                return Obstacles.FirstOrDefault(x => x.Equivalent == equivalent);
-            }
-            set
-            {
-                if (value != null)
-                {
-                    EObstacleEquivalent equivalent = value.Equivalent;
-                    SetProperty(Internal.AreaSettings.ObstacleBetweenCharacterAndArea, equivalent, Internal,
-                        (model, prop) => model.AreaSettings.ObstacleBetweenCharacterAndArea = prop);
-                }
-            }
-        }
-
-        public ObstacleOptionVM? ObstacleBetweenEpicenterAndTarget
-        {
-            get
-            {
-                EObstacleEquivalent equivalent = Internal.AreaSettings.ObstacleBetweenEpicenterAndTarget;
-
-                return Obstacles.FirstOrDefault(x => x.Equivalent == equivalent);
-            }
-            set
-            {
-                if (value != null)
-                {
-                    EObstacleEquivalent equivalent = value.Equivalent;
-                    SetProperty(Internal.AreaSettings.ObstacleBetweenEpicenterAndTarget, equivalent, Internal,
-                        (model, prop) => model.AreaSettings.ObstacleBetweenEpicenterAndTarget = prop);
-                }
-            }
-        }
 
         #endregion
 
@@ -195,25 +123,6 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             {
                 SetProperty(Internal.TargetChain.MaxTargetsCount, value, Internal,
                     (model, prop) => model.TargetChain.MaxTargetsCount = prop);
-            }
-        }
-
-        public ObstacleOptionVM? ObstacleBetweenTargetsInChain
-        {
-            get
-            {
-                EObstacleEquivalent equivalent = Internal.TargetChain.ObstacleBetweenTargetsInChain;
-
-                return Obstacles.FirstOrDefault(x => x.Equivalent == equivalent);
-            }
-            set
-            {
-                if (value != null)
-                {
-                    EObstacleEquivalent equivalent = value.Equivalent;
-                    SetProperty(Internal.TargetChain.ObstacleBetweenTargetsInChain, equivalent, Internal,
-                        (model, prop) => model.TargetChain.ObstacleBetweenTargetsInChain = prop);
-                }
             }
         }
 

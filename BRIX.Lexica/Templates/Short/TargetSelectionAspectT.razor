@@ -9,7 +9,7 @@
 }
 @if (Model.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
 {
-    <text>NTAD: @Model.NTAD.TargetsCount at @Model.NTAD.DistanceInMeters m; Obstacle: @Model.NTAD.ObstacleBetweenCharacterAndTarget;</text>
+    <text>NTAD: @Model.NTAD.TargetsCount at @Model.NTAD.DistanceInMeters m;</text>
 
     @if(Model.NTAD.IsTargetSelectionIsRandom)
     {
@@ -18,31 +18,19 @@
 }
 @if (Model.Strategy == ETargetSelectionStrategy.Area)
 {
-    <text>AREA: @Model.AreaSettings.Area.Shape.ToString() at @Model.AreaSettings.DistanceToAreaInMeters m; Exclude: @Model.AreaSettings.ExcludedTargetsCount; AreaObstacle: @Model.AreaSettings.ObstacleBetweenCharacterAndArea; EpicentreObstacle: @Model.AreaSettings.ObstacleBetweenEpicenterAndTarget; Bounded: @Model.AreaSettings.IsAreaBoundedTo;</text>
+    <text>AREA: @Model.AreaSettings.Area.Shape.ToString() at @Model.AreaSettings.DistanceToAreaInMeters m; Exclude: @Model.AreaSettings.ExcludedTargetsCount;</text>
 }
 @if(Model.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL || Model.Strategy == ETargetSelectionStrategy.Area)
 {
     @if (Model.TargetChain.IsChainEnabled)
     {
-        <text> Chain: @Model.TargetChain.MaxTargetsCount with @Model.TargetChain.MaxDistanceBetweenTargets m; ChainObstacle: @Model.TargetChain.ObstacleBetweenTargetsInChain;</text>
+        <text> Chain: @Model.TargetChain.MaxTargetsCount with @Model.TargetChain.MaxDistanceBetweenTargets m;</text>
     }
 
     <text> Sizes: @Model.TargetsSizes.AllowedTargetSizes.ToAggregatedString(x => x.ToString());</text>
-
-    @if (Model.TargetSelectionRestrictions.Conditions.Count > 0)
-    {
-        <text> Restrictions: @Model.TargetSelectionRestrictions.Conditions.ToAggregatedString(ToString);</text>
-    }
 }
 
 @code {
     [Parameter]
     public TargetSelectionAspect Model { get; set; } = new();
-
-    public string ToString((ETargetSelectionRestrictions Type, string Comment) item)
-    {
-        return string.IsNullOrEmpty(item.Comment)
-            ? item.Type.ToString()
-            : $"{item.Type} ({item.Comment})";
-    }
 }

@@ -98,19 +98,6 @@
                 </Border>
                 <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding IsNTAD}">
                     <VerticalStackLayout Spacing="10">
-                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Obstacles}}"/>
-                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionNTADObstacleHint}}"/>
-                        <controls:PickerButton
-                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleEquivalent}}"
-                            Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleEquivalent}}"
-                            ItemSource="{Binding Aspect.Obstacles}"
-                            SelectedItem="{Binding Aspect.ObstacleBetweenCharacterAndTarget}"
-                            DisplayMember="LocalizedName"/>
-
-                    </VerticalStackLayout>
-                </Border>
-                <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding IsNTAD}">
-                    <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionIsRandom}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionIsRandomHint}}"/>
                         <HorizontalStackLayout Spacing="10">
@@ -129,15 +116,6 @@
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyArea}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyAreaHint}}"/>
                         <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyAreaDistance}}" Text="{Binding Aspect.AreaDistance}"/>
-                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AreaBinding}}"/>
-                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AreaBindingHint}}"/>
-                        <HorizontalStackLayout>
-                            <CheckBox IsChecked="{Binding Aspect.IsAreaBoundedTo}"/>
-                            <Label 
-                                VerticalOptions="Center"
-                                VerticalTextAlignment="Center"
-                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.IsAreaCanBound}}"/>
-                        </HorizontalStackLayout>
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Area}}"/>
                         <FlexLayout JustifyContent="SpaceBetween">
                             <Border 
@@ -158,7 +136,7 @@
                             </Border>
                             <Border 
                                 Style="{StaticResource ShapeBorderButton}" 
-                                BackgroundColor="{Binding IsCylinder, Converter={StaticResource SelectedToColorConverter}}">      
+                                BackgroundColor="{Binding IsCylinder, Converter={StaticResource SelectedToColorConverter}}">
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding SetShapeCommand}" CommandParameter="Cylinder"/>
                                 </Border.GestureRecognizers>
@@ -243,24 +221,6 @@
                 </Border>
                 <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding IsAREA}">
                     <VerticalStackLayout Spacing="10">
-                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Obstacles}}"/>
-                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaObstacleHint}}"/>
-                        <controls:PickerButton
-                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaObstacleCharacterAndArea}}"
-                            Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleEquivalent}}"
-                            ItemSource="{Binding Aspect.Obstacles}"
-                            SelectedItem="{Binding Aspect.ObstacleBetweenCharacterAndArea}"
-                            DisplayMember="LocalizedName"/>
-                        <controls:PickerButton
-                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionAreaObstacleTargetAndEpicenter}}"
-                            Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleEquivalent}}"
-                            ItemSource="{Binding Aspect.Obstacles}"
-                            SelectedItem="{Binding Aspect.ObstacleBetweenEpicenterAndTarget}"
-                            DisplayMember="LocalizedName"/>
-                    </VerticalStackLayout>
-                </Border>
-                <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding IsAREA}">
-                    <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionExcludeTargets}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionEcludeTargetsHint}}"/>
                         <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionEcludeTargetsField}}" Text="{Binding Aspect.ExcludedTargetsCount}"/>
@@ -293,93 +253,44 @@
                             Text="{Binding Aspect.MaxTargetsCountInChain}" 
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetChainMaxCount}}"
                             IsVisible="{Binding Aspect.IsChainEnabled}"/>
-                        <Label 
-                            Style="{StaticResource TitleLabel}" 
-                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleBetweenTargetsInChain}}"
-                            IsVisible="{Binding Aspect.IsChainEnabled}"/>
-                        <Label 
-                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetChainObstacleHint}}"
-                            IsVisible="{Binding Aspect.IsChainEnabled}"/>
-                        <controls:PickerButton
-                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleEquivalent}}"
-                            Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ObstacleEquivalent}}"
-                            ItemSource="{Binding Aspect.Obstacles}"
-                            SelectedItem="{Binding Aspect.ObstacleBetweenTargetsInChain}"
-                            DisplayMember="LocalizedName"
-                            IsVisible="{Binding Aspect.IsChainEnabled}"/>
                     </VerticalStackLayout>
                 </Border>
                 <!--Target selection restriction-->
                 <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding ShowNTADAndAREASettings}">
-                    <Grid RowDefinitions="auto,auto,auto" RowSpacing="10">
-                        <VerticalStackLayout Grid.Row="0" Spacing="10">
-                            <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionRestriction}}"/>
-                            <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionRestrictionHint}}"/>
-                        </VerticalStackLayout>
-                        
-                        <CollectionView 
-                            Grid.Row="1" 
-                            x:Name="restrictionsCollectionView" 
-                            ItemsSource="{Binding Restrictions}"
-                            IsVisible="{Binding ShowNoRestrictionsText, Converter={StaticResource NotConverter}}">
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="vm:TargetSelectionRestrictionPropertyVM">
-                                    <controls:BasicCollectionItem
-                                        Text="{Binding Text}"
-                                        DeleteCommand="{Binding Source={x:Reference restrictionsCollectionView}, Path= BindingContext.DeleteRestrictionCommand}"
-                                        CommandParameter="{Binding}"/>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-
-                        <VerticalStackLayout Grid.Row="2" Spacing="10">
-                            <Label 
-                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TheTargetCanBeAnything}}"
-                                Margin="0,0,0,5"
-                                IsVisible="{Binding ShowNoRestrictionsText}"/>
+                    <VerticalStackLayout Grid.Row="0" Spacing="10">
+                        <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionRestriction}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionRestrictionHint}}"/>
+                        <!--Target size restriction-->
+                        <Grid RowDefinitions="auto,*,auto" RowSpacing="10">
+                            <VerticalStackLayout Grid.Row="0" Spacing="10">
+                                <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetsSizes}}"/>
+                                <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetsSizesHint}}"/>
+                            </VerticalStackLayout>
+                            <CollectionView 
+                                Grid.Row="1" 
+                                x:Name="sizesCollectionView" 
+                                ItemsSource="{Binding Sizes}"
+                                IsVisible="{Binding ShowSizesCollection}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical" Span="2" VerticalItemSpacing="5" HorizontalItemSpacing="5"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:TargetSizeVM">
+                                        <controls:BasicCollectionItem
+                                            Text="{Binding Text}"
+                                            DeleteCommand="{Binding Source={x:Reference sizesCollectionView}, Path= BindingContext.DeleteSizeCommand}"
+                                            CommandParameter="{Binding}"/>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
                             <Button 
+                                Grid.Row="2"
                                 Style="{StaticResource LightButton}"
-                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AddRestriction}}"
-                                Command="{Binding AddRestrictionCommand}"
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AddSize}}"
+                                Command="{Binding AddSizeCommand}"
                                 Margin="1"/>
-                        </VerticalStackLayout>
-                    </Grid>
-                </Border>
-                <!--Target size restriction-->
-                <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding ShowNTADAndAREASettings}">
-                    <Grid RowDefinitions="auto,*,auto" RowSpacing="10">
-                        <VerticalStackLayout Grid.Row="0" Spacing="10">
-                            <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetsSizes}}"/>
-                            <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetsSizesHint}}"/>
-                        </VerticalStackLayout>
-
-                        <CollectionView 
-                            Grid.Row="1" 
-                            x:Name="sizesCollectionView" 
-                            ItemsSource="{Binding Sizes}"
-                            IsVisible="{Binding ShowSizesCollection}">
-                            <CollectionView.ItemsLayout>
-                                <GridItemsLayout Orientation="Vertical" Span="2" VerticalItemSpacing="5" HorizontalItemSpacing="5"/>
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="vm:TargetSizeVM">
-                                    <controls:BasicCollectionItem
-                                        Text="{Binding Text}"
-                                        DeleteCommand="{Binding Source={x:Reference sizesCollectionView}, Path= BindingContext.DeleteSizeCommand}"
-                                        CommandParameter="{Binding}"/>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                        <Button 
-                            Grid.Row="2"
-                            Style="{StaticResource LightButton}"
-                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AddSize}}"
-                            Command="{Binding AddSizeCommand}"
-                            Margin="1"/>
-                    </Grid>
+                        </Grid>
+                    </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>
         </ScrollView>
