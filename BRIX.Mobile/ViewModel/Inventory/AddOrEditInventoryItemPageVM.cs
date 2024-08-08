@@ -9,22 +9,16 @@ using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.ViewModel.Inventory
 {
-    public partial class AddOrEditInventoryItemPageVM : ViewModelBase, IQueryAttributable
+    public partial class AddOrEditInventoryItemPageVM(
+        ILocalizationResourceManager localization,
+        ICharacterService characterService) : ViewModelBase, IQueryAttributable
     {
-        private readonly ILocalizationResourceManager _localization;
-        private readonly ICharacterService _characterService;
+        private readonly ILocalizationResourceManager _localization = localization;
+        private readonly ICharacterService _characterService = characterService;
 
         private EEditingMode _mode;
         private Library.Characters.Inventory _inventory = new();
         private InventoryItem? _editingItem;
-
-        public AddOrEditInventoryItemPageVM(
-            ILocalizationResourceManager localization, 
-            ICharacterService characterService)
-        {
-            _localization = localization;
-            _characterService = characterService;
-        }
 
         private string _title = string.Empty;
         public string Title
@@ -33,7 +27,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             set => SetProperty(ref _title, value);
         }
 
-        private InventoryItemVM _item = new InventoryItemVM(new InventoryItem());
+        private InventoryItemVM _item = new(new InventoryItem());
         public InventoryItemVM Item
         {
             get => _item;
@@ -53,7 +47,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
-        private ObservableCollection<InventoryItemTypeVM> _types = new();
+        private ObservableCollection<InventoryItemTypeVM> _types = [];
         public ObservableCollection<InventoryItemTypeVM> Types
         {
             get => _types;
@@ -74,7 +68,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
-        private ObservableCollection<InventoryContainerVM> _containers = new();
+        private ObservableCollection<InventoryContainerVM> _containers = [];
         public ObservableCollection<InventoryContainerVM> Containers
         {
             get => _containers;
@@ -288,7 +282,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
             bool wasContainerAndNowIsNot = SelectedType.Type == EInventoryItemType.Container
                 && itemType.Type != EInventoryItemType.Container
-                && (Item.InternalModel as Container)?.Payload?.Any() == true;
+                && (Item.InternalModel as Container)?.Payload?.Count > 0;
 
             if (wasContainerAndNowIsNot)
             {

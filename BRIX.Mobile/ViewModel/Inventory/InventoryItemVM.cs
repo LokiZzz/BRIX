@@ -13,7 +13,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             InternalModel = model;
         }
 
-        private InventoryItem _internalModel = new InventoryItem();
+        private InventoryItem _internalModel = new();
         public InventoryItem InternalModel
         {
             get => _internalModel;
@@ -69,10 +69,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
                 if (Type == EInventoryItemType.Equipment || Type == EInventoryItemType.Consumable)
                 {
-                    if (OnFullPriceChanged != null)
-                    {
-                        OnFullPriceChanged(this, FullPrice);
-                    }
+                    OnFullPriceChanged?.Invoke(this, FullPrice);
                 }
             }
         }
@@ -94,9 +91,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             {
                 if (Type == EInventoryItemType.Equipment || Type == EInventoryItemType.Consumable)
                 {
-                    MaterialSupport? internalModel = InternalModel as MaterialSupport;
-
-                    if (internalModel != null)
+                    if (InternalModel is MaterialSupport internalModel)
                     {
                         SetProperty(
                             internalModel.CoinsPrice, value, internalModel, (model, prop) => model.CoinsPrice = prop
@@ -109,10 +104,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 OnPropertyChanged(nameof(PriceString));
                 OnPropertyChanged(nameof(FullPrice));
 
-                if (OnFullPriceChanged != null)
-                {
-                    OnFullPriceChanged(this, FullPrice);
-                }
+                OnFullPriceChanged?.Invoke(this, FullPrice);
             }
         }
 
@@ -163,7 +155,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
-        private ObservableCollection<InventoryItemVM> _payload = new();
+        private ObservableCollection<InventoryItemVM> _payload = [];
         public ObservableCollection<InventoryItemVM> Payload
         {
             get => _payload;
@@ -210,10 +202,8 @@ namespace BRIX.Mobile.ViewModel.Inventory
         public override string ToString() => Name;
     }
 
-    public class InventoryItemNodeVM : InventoryItemVM
+    public class InventoryItemNodeVM(InventoryItem model) : InventoryItemVM(model)
     {
-        public InventoryItemNodeVM(InventoryItem model) : base(model) { }
-
         public ImageSource? Icon { get; set; }
         public Color? BackgroundColor { get; set; }
     }

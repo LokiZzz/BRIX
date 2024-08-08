@@ -19,7 +19,7 @@ namespace BRIX.Library.Effects
         public override int BaseExpCost()
         {
             //Лечиться должно быть менее выгодно для улучшения динамики в сражениях.
-            return (Impact.CostLikeDamageEffect() * 1.2).Round();
+            return (Impact.CostLikeDamageEffect() * 1.5).Round();
         }
     }
 }

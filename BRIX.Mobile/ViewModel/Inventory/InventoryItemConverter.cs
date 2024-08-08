@@ -11,8 +11,10 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
         public InventoryItemNodeVM ToVM(InventoryItem item)
         {
-            InventoryItemNodeVM viewModel = new(item);
-            viewModel.BackgroundColor = isDarkBackgroundNow ? _darkItemColor : _lightItemColor;
+            InventoryItemNodeVM viewModel = new(item)
+            {
+                BackgroundColor = isDarkBackgroundNow ? _darkItemColor : _lightItemColor
+            };
 
             switch (item)
             {
@@ -38,7 +40,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
         public static InventoryItem CreateItemByType(EInventoryItemType type, InventoryItem? prototype = null)
         {
-            InventoryItem item = new InventoryItem();
+            InventoryItem item = new();
 
             switch (type)
             {
@@ -71,10 +73,10 @@ namespace BRIX.Mobile.ViewModel.Inventory
             return item;
         }
 
-        private ImageSource _gemIS = ImageSource.FromFile("Inventory/gem.svg");
-        private ImageSource _containerIS = ImageSource.FromFile("Inventory/chest.svg");
-        private ImageSource _equipmentIS = ImageSource.FromFile("Inventory/blade.svg");
-        private ImageSource _consumableIS = ImageSource.FromFile("Inventory/arrow.svg");
+        private readonly ImageSource _gemIS = ImageSource.FromFile("Inventory/gem.svg");
+        private readonly ImageSource _containerIS = ImageSource.FromFile("Inventory/chest.svg");
+        private readonly ImageSource _equipmentIS = ImageSource.FromFile("Inventory/blade.svg");
+        private readonly ImageSource _consumableIS = ImageSource.FromFile("Inventory/arrow.svg");
         private bool isDarkBackgroundNow = true;
         private Color? _darkItemColor;
         private Color? _lightItemColor;

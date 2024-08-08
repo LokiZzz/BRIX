@@ -10,26 +10,22 @@
 
         public override Dictionary<EActivationCondition, int> ConditionToCoeficientMap => new ()
         {
-            { EActivationCondition.AbleToMoveOneArm, -10 },
-            { EActivationCondition.AbleToMoveBothArms, -15 },
-            { EActivationCondition.AbleToTalk, -15 },
+            { EActivationCondition.AbleToTalk, -20 },
             { EActivationCondition.AbleToMove, -20 },
 
-            { EActivationCondition.EasyActivationCondition, -20 },
-            { EActivationCondition.MediumActivationCondition, -40 },
-            { EActivationCondition.HardActivationCondition, -60 }
+            { EActivationCondition.EasyActivationCondition, -25 },
+            { EActivationCondition.MediumActivationCondition, -50 },
+            { EActivationCondition.HardActivationCondition, -75 }
         };
     }
 
     public enum EActivationCondition
     {
         AbleToMove = 1,
-        AbleToMoveOneArm = 2,
-        AbleToMoveBothArms = 3,
-        AbleToTalk = 4,
+        AbleToTalk = 2,
 
-        EasyActivationCondition = 5,
-        MediumActivationCondition = 6,
-        HardActivationCondition = 7
+        EasyActivationCondition = 3,
+        MediumActivationCondition = 4,
+        HardActivationCondition = 5
     }
 }

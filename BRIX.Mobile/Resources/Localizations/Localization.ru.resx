@@ -138,12 +138,6 @@
   <data name="AbleToMove" xml:space="preserve">
     <value>Персонаж может свободно двигаться</value>
   </data>
-  <data name="AbleToMoveBothArms" xml:space="preserve">
-    <value>Персонаж может двигать обеими руками</value>
-  </data>
-  <data name="AbleToMoveOneArm" xml:space="preserve">
-    <value>Персонаж может двигать одной рукой</value>
-  </data>
   <data name="AbleToTalk" xml:space="preserve">
     <value>Персонаж может говорить</value>
   </data>
@@ -529,7 +523,7 @@
     <value>Вы можете указать время, в течение которого будет действовать эффект.</value>
   </data>
   <data name="EasyActivationCondition" xml:space="preserve">
-    <value>Условие малой сложности</value>
+    <value>Условие низкой сложности</value>
   </data>
   <data name="EasyDifficulty" xml:space="preserve">
     <value>Низкая сложность</value>

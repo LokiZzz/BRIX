@@ -24,7 +24,7 @@ namespace BRIX.Library.Aspects.TargetSelection
             return coeficient;
         }
 
-        public Dictionary<ETargetSelectionRestrictions, int> ConditionToCoeficientMap => new ()
+        public static Dictionary<ETargetSelectionRestrictions, int> ConditionToCoeficientMap => new ()
         {
             { ETargetSelectionRestrictions.SeeTarget, -10 },
             { ETargetSelectionRestrictions.TargetSeesCharacter, -5 },

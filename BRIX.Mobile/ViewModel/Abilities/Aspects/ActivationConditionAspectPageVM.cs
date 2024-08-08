@@ -58,7 +58,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
                 if (customConditions.Any(x => x == concreteResult.Condition))
                 {
-                    string message = ActivationConditionsAspectPageVM.GetCustomConditionHint(concreteResult.Condition);
+                    string message = GetCustomConditionHint(concreteResult.Condition);
 
                     EntryPopupResult? entryResult = await ShowPopupAsync<EntryPopup, EntryPopupResult, EntryPopupParameters>(
                         new EntryPopupParameters

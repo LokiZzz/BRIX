@@ -26,14 +26,14 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             ));
         }
 
-        private ObservableCollection<ActivationConditionOptionVM> _conditions = new();
+        private ObservableCollection<ActivationConditionOptionVM> _conditions = [];
         public ObservableCollection<ActivationConditionOptionVM> Conditions
         {
             get => _conditions;
             set => SetProperty(ref _conditions, value);
         }
 
-        private ObservableCollection<ActivationConditionOptionVM> _selectedConditions = new();
+        private ObservableCollection<ActivationConditionOptionVM> _selectedConditions = [];
         public ObservableCollection<ActivationConditionOptionVM> SelectedConditions
         {
             get => _selectedConditions;

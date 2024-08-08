@@ -124,24 +124,6 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Сharacter can move with both hands.
-        /// </summary>
-        public static string AbleToMoveBothArms {
-            get {
-                return ResourceManager.GetString("AbleToMoveBothArms", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Сharacter can move with one hand.
-        /// </summary>
-        public static string AbleToMoveOneArm {
-            get {
-                return ResourceManager.GetString("AbleToMoveOneArm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Character can talk.
         /// </summary>
         public static string AbleToTalk {

@@ -1,7 +1,5 @@
 ﻿using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Aspects;
-using BRIX.Library.Characters;
-using BRIX.Library.Extensions;
 
 namespace BRIX.Library.Effects
 {
@@ -21,7 +19,6 @@ namespace BRIX.Library.Effects
 
         public override int BaseExpCost()
         {
-            // У лечения 1.2
             return Impact.CostLikeDamageEffect() * 2;
         }
     }

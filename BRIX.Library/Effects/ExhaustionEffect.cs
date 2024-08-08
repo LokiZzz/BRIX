@@ -20,7 +20,6 @@ namespace BRIX.Library.Effects
 
         public override int BaseExpCost()
         {
-            // У лечения 1.2
             return (Impact.CostLikeDamageEffect() * 1.75).Round();
         }
     }

@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Aspects;
+using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Characters;
 using BRIX.Library.DiceValue;
 using BRIX.Library.Effects;
@@ -64,7 +65,10 @@ namespace BRIX.Library.Abilities
                     _ => null
                 };
 
-                if (overallEffect != null)
+                bool isSelfDamage = overallEffect is DamageEffect damageEffect
+                    && damageEffect.GetAspect<TargetSelectionAspect>().Strategy == ETargetSelectionStrategy.CharacterHimself;
+
+                if (overallEffect != null && !isSelfDamage)
                 {
                     // Если относится, то вычисляем его стоимость как если бы он был частью большого общего эффекта.
                     // Вычисляем стоимость абстрактного общего эффекта до добавления очередного урона и после добавления.
