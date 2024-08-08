@@ -21,9 +21,8 @@ namespace BRIX.Library.Effects
 
         public override int BaseExpCost()
         {
-            int experienceEquivalent = CharacterCalculator.HealthToExp(Impact.Average());
-
-            return (experienceEquivalent * 0.75).Round();
+            // У лечения 1.2
+            return Impact.CostLikeDamageEffect() * 2;
         }
     }
 }
