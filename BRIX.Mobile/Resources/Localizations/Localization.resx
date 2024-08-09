@@ -660,6 +660,12 @@
   <data name="Effects" xml:space="preserve">
     <value>Effects</value>
   </data>
+  <data name="EffectSelfDamage" xml:space="preserve">
+    <value>Self-damage</value>
+  </data>
+  <data name="EffectSelfDamageHint" xml:space="preserve">
+    <value>Deals damage to the character himself and makes the ability cheaper. The maximum damage that a character's ability deals must not exceed the maximum value of character health. According to the list of effects, the "Self-destruction" is applied last. The amplification does not affect the damage that is dealt to the character in this way.</value>
+  </data>
   <data name="EffectShield" xml:space="preserve">
     <value>Shield</value>
   </data>

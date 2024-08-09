@@ -663,6 +663,12 @@
   <data name="Effects" xml:space="preserve">
     <value>Эффекты</value>
   </data>
+  <data name="EffectSelfDamage" xml:space="preserve">
+    <value>Саморазрушение</value>
+  </data>
+  <data name="EffectSelfDamageHint" xml:space="preserve">
+    <value>Наносит урон самому персонажу и делает способность дешевле. Максимальнвый урон, который наносит персонажу его способность, не должен превышать максимальное значение его здоровья. По списку эффектов «Саморазрушение» применяется последним в очереди. Усиление не влияет на урон, который наносится персонажу таким образом.</value>
+  </data>
   <data name="EffectShield" xml:space="preserve">
     <value>Щит</value>
   </data>

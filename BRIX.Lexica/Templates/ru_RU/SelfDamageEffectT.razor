@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Наносит @Numbers.RUSDcln(Model.Impact, "очко", "очка", "очков") урона самому персонажу.
+
+@code {
+    [Parameter]
+    public SelfDamageEffect Model { get; set; } = new();
+}

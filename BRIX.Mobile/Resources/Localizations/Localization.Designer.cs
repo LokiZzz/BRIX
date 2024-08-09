@@ -1690,6 +1690,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Self-damage.
+        /// </summary>
+        public static string EffectSelfDamage {
+            get {
+                return ResourceManager.GetString("EffectSelfDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deals damage to the character himself and makes the ability cheaper. The maximum damage that a character&apos;s ability deals must not exceed the maximum value of character health. According to the list of effects, the &quot;Self-destruction&quot; is applied last. The amplification does not affect the damage that is dealt to the character in this way..
+        /// </summary>
+        public static string EffectSelfDamageHint {
+            get {
+                return ResourceManager.GetString("EffectSelfDamageHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shield.
         /// </summary>
         public static string EffectShield {

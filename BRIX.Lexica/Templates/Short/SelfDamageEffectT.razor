@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Self-dmg: @((MarkupString)Model.Impact.ToString());
+
+@code {
+    [Parameter]
+    public SelfDamageEffect Model { get; set; } = new();
+}

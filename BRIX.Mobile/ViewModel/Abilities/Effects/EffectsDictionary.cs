@@ -136,6 +136,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 EditPage = typeof(RevengeEffectPage),
                 Effect = new RevengeEffect()
             }},
+            { typeof(EffectGenericModelBase<SelfDamageEffect>), new EffectTypeVM() {
+                Name = Localization.EffectSelfDamage,
+                Icon = AwesomeRPG.PlayerPyromaniac,
+                EditPage = typeof(SelfDamageEffectPage),
+                Effect = new SelfDamageEffect()
+            }},
 
             { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectTypeVM() {
                 Name = Localization.EffectWin,

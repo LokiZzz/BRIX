@@ -1,0 +1,9 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Effects
+
+Deals @Numbers.ENGDcln(Model.Impact, "point") of damage to character himself.
+
+@code {
+    [Parameter]
+    public SelfDamageEffect Model { get; set; } = new();
+}
