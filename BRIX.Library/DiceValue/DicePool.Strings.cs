@@ -121,12 +121,20 @@ namespace BRIX.Library.DiceValue
         /// в случае прока значение умножается на второе число (модификатор), либо, если указан ключ roll,
         /// умножается только константа, а количество бросаемых костей умножается на модификатор.
         /// explode: при выпадении максимальных значений кость.
+        /// Оба края диапазона возможных результатов формулы должны быть положительными.
         /// </summary>
         public static bool TryParse(string input, out DicePool? parsedDicePool)
         {
             try
             {
                 Parse(input, out parsedDicePool);
+
+                if(parsedDicePool?.Min() < 0 || parsedDicePool?.Max() < 0)
+                {
+                    parsedDicePool = null;
+
+                    return false;
+                }
 
                 return true;
             }
@@ -179,6 +187,7 @@ namespace BRIX.Library.DiceValue
         {
             DicePool parsedDicePool = new();
             input = input.Replace('к', 'd');
+            input = input.Replace("-", "+-");
             string[] splittedString = input.Split('+');
 
             foreach (string entry in splittedString)
