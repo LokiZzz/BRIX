@@ -15,7 +15,7 @@ namespace BRIX.Library.Aspects.TargetSelection
             {
                 ETargetSelectionStrategy.Area => GetAreaCoeficient(),
                 ETargetSelectionStrategy.NTargetsAtDistanсeL => GetNTADCoeficient(),
-                _ => 1,
+                _ => 0.75,
             };
         }
 

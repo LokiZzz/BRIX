@@ -1,5 +1,6 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Characters;
+using BRIX.Library.DiceValue;
 using BRIX.Library.Extensions;
 using BRIX.Library.Mathematics;
 
@@ -33,11 +34,19 @@ namespace BRIX.Library.Effects
 
         public override int BaseExpCost()
         {
-            int baseByHealth = (CharacterCalculator.HealthToExp(Durability) * 0.5).Round();
-            double transparentCoef = IsTransparent ? 1.1 : 1;
-            double permeableCoef = CanBePermeable ? 2 : 1;
+            double cost = new DicePool(Durability).CostLikeDamageEffect();
 
-            return (baseByHealth * transparentCoef * permeableCoef).Round();
+            cost *= IsTransparent ? 1.1 : 1;
+            cost *= CanBePermeable ? 2 : 1;
+
+            if (GetAspect<AOEAspect>().CanBeBounded)
+            {
+                // В случае возможности перемещаться со щитом это уже почти как «Укрепление», а значит должно быть
+                // примерно таким же или дороже
+                cost *= 2.1;
+            }
+
+            return cost.Round();
         }
     }
 }
