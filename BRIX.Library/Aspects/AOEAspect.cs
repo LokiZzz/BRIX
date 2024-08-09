@@ -8,7 +8,15 @@ namespace BRIX.Library.Aspects
 
         public int DistanceToArea { get; set; } = 1;
 
+        /// <summary>
+        /// Привязывается ли область действия к персонажу.
+        /// </summary>
         public bool CanBeBounded { get; set; } = false;
+
+        /// <summary>
+        /// Огибает ли область углы.
+        /// </summary>
+        public bool SpreadsAroundCorners { get; set; } = false;
 
         public override double GetCoefficient()
         {
@@ -25,8 +33,9 @@ namespace BRIX.Library.Aspects
             }
 
             double areaCanBeBoundedCoef = CanBeBounded == true ? 1.7 : 1;
+            double spreadsAroundCornersCoef = SpreadsAroundCorners == true ? 1.5 : 1;
 
-            return distanceCoef * volumeCoef * areaCanBeBoundedCoef;
+            return distanceCoef * volumeCoef * areaCanBeBoundedCoef * spreadsAroundCornersCoef;
         }
     }
 }

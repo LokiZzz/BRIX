@@ -32,5 +32,15 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
                 );
             }
         }
+
+        public bool SpreadsAroundCorners
+        {
+            get => Internal.SpreadsAroundCorners;
+            set
+            {
+                SetProperty(Internal.SpreadsAroundCorners, value, Internal,
+                    (model, prop) => model.SpreadsAroundCorners = prop);
+            }
+        }
     }
 }

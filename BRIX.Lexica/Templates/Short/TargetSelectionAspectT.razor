@@ -19,6 +19,11 @@
 @if (Model.Strategy == ETargetSelectionStrategy.Area)
 {
     <text>AREA: @Model.AreaSettings.Area.Shape.ToString() at @Model.AreaSettings.DistanceToAreaInMeters m; Exclude: @Model.AreaSettings.ExcludedTargetsCount;</text>
+
+    @if (Model.AreaSettings.SpreadsAroundCorners)
+    {
+        <text> SpreadsAroundCorners;</text>
+    }
 }
 @if(Model.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL || Model.Strategy == ETargetSelectionStrategy.Area)
 {

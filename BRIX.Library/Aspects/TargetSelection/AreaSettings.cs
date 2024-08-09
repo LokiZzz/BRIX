@@ -8,7 +8,7 @@ namespace BRIX.Library.Aspects.TargetSelection
         public int DistanceToAreaInMeters { get; set; } = 1;
 
         public int ExcludedTargetsCount { get; set; } = 0;
-        
+
         /// <summary>
         /// Огибает ли область углы.
         /// </summary>

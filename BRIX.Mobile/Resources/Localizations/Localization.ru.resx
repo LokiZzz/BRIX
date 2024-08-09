@@ -252,6 +252,9 @@
   <data name="AreasCount" xml:space="preserve">
     <value>Количество областей</value>
   </data>
+  <data name="AreaSpreadsAroundCorners" xml:space="preserve">
+    <value>Область огибает углы.</value>
+  </data>
   <data name="AskAdjust" xml:space="preserve">
     <value>Скорректировать?</value>
   </data>

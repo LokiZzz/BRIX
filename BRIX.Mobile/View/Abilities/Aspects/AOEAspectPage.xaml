@@ -60,6 +60,14 @@
                                 VerticalTextAlignment="Center"
                                 Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.IsAreaCanBound}}"/>
                         </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="10">
+                            <CheckBox 
+                                Color="{StaticResource BRIXWhite}"
+                                IsChecked="{Binding Aspect.SpreadsAroundCorners}"/>
+                            <Label 
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AreaSpreadsAroundCorners}}"
+                                VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
                         <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectAOEDistance}}" Text="{Binding Aspect.AreaDistance}"/>
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Area}}"/>
                         <FlexLayout JustifyContent="SpaceBetween">

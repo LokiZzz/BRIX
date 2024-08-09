@@ -466,6 +466,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Area spreads around corners..
+        /// </summary>
+        public static string AreaSpreadsAroundCorners {
+            get {
+                return ResourceManager.GetString("AreaSpreadsAroundCorners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adjust?.
         /// </summary>
         public static string AskAdjust {

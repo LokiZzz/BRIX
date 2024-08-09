@@ -37,6 +37,11 @@
     {
         <p>Character must see the center of the area.</p>
     }
+
+    @if (Model.AreaSettings.SpreadsAroundCorners)
+    {
+        <p>The area spreads around corners.</p>
+    }
 }
 @if(Model.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL || Model.Strategy == ETargetSelectionStrategy.Area)
 {

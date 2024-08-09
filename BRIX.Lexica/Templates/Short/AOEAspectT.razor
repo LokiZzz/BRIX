@@ -3,7 +3,12 @@
 @using BRIX.Library.Enums
 @using BRIX.Library.Mathematics
 
-AOE: @Model.AreaShape.Shape.ToString();
+<text>AOE: @Model.AreaShape.Shape.ToString();</text>
+
+@if (Model.SpreadsAroundCorners)
+{
+    <text> SpreadsAroundCorners;</text>
+}
 
 @code {
     [Parameter]

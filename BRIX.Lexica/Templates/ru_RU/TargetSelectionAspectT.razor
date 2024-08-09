@@ -35,6 +35,10 @@
     {
         <p>Персонаж должен видеть центр области действия.</p>
     }
+    if (Model.AreaSettings.SpreadsAroundCorners)
+    {
+        <p>Область огибает углы.</p>
+    }
 }
 @if(Model.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL || Model.Strategy == ETargetSelectionStrategy.Area)
 {

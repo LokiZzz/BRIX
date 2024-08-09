@@ -10,6 +10,12 @@
     <p>Область действия привязывается к персонажу и перемещается вместе с ним.</p>
 }
 
+
+@if (Model.SpreadsAroundCorners)
+{
+    <p>Область огибает углы.</p>
+}
+
 @code {
     [Parameter]
     public AOEAspect Model { get; set; } = new();

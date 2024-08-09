@@ -115,6 +115,14 @@
                     <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyArea}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyAreaHint}}"/>
+                        <HorizontalStackLayout Spacing="10">
+                            <CheckBox 
+                                Color="{StaticResource BRIXWhite}"
+                                IsChecked="{Binding Aspect.SpreadsAroundCorners}"/>
+                            <Label 
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AreaSpreadsAroundCorners}}"
+                                VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
                         <controls:FramedEntry Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetSelectionStratedyAreaDistance}}" Text="{Binding Aspect.AreaDistance}"/>
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Area}}"/>
                         <FlexLayout JustifyContent="SpaceBetween">

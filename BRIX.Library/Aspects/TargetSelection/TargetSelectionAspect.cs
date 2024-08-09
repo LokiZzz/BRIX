@@ -63,11 +63,13 @@ namespace BRIX.Library.Aspects.TargetSelection
                 .Convert(AreaSettings?.ExcludedTargetsCount ?? 0)
                 .ToCoeficient();
             double needToSeeTargetCoef = NeedToSeeTarget == true ? 0.8 : 1;
+            double spreadsAroundCornersCoef = AreaSettings?.SpreadsAroundCorners == true ? 1.5 : 1;
 
             return distanceCoef 
                 * volumeCoef 
                 * excludedTargetsCoef
                 * needToSeeTargetCoef
+                * spreadsAroundCornersCoef
                 * TargetChain.GetCoefficient()
                 * TargetsSizes.GetCoefficient();
         }

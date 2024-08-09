@@ -252,6 +252,9 @@
   <data name="AreasCount" xml:space="preserve">
     <value>Areas count</value>
   </data>
+  <data name="AreaSpreadsAroundCorners" xml:space="preserve">
+    <value>Area spreads around corners.</value>
+  </data>
   <data name="AskAdjust" xml:space="preserve">
     <value>Adjust?</value>
   </data>

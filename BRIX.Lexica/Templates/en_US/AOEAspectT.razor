@@ -10,6 +10,11 @@
     <p>The area of @(Model.IsConcorded ? "effects" : "effect") is attached to the character and moves with him.</p>
 }
 
+@if (Model.SpreadsAroundCorners)
+{
+    <p>The area spreads around corners.</p>
+}
+
 @code {
     [Parameter]
     public AOEAspect Model { get; set; } = new();
