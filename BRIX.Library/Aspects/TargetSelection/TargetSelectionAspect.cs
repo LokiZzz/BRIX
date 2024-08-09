@@ -52,7 +52,8 @@ namespace BRIX.Library.Aspects.TargetSelection
             double distanceCoef = GetDistanceCoeficient(AreaSettings.DistanceToAreaInMeters);
 
             int volume = AreaSettings.Area.Shape.GetVolume() <= 1 ? 1 : AreaSettings.Area.Shape.GetVolume();
-            double volumeCoef = ((volume - 1) * 90).ToCoeficient();
+            // +45% за каждый квадратный метр объёма области, так как область менее эффективна, чем NTAD.
+            double volumeCoef = ((volume - 1) * 30).ToCoeficient(); 
 
             if(AreaSettings.Area.Shape is VoxelArray voxelArray && voxelArray.IsArbitrary)
             {

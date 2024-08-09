@@ -1,4 +1,6 @@
-﻿namespace BRIX.Library.Mathematics
+﻿using BRIX.Library.Extensions;
+
+namespace BRIX.Library.Mathematics
 {
     public interface IShape
     {
@@ -23,7 +25,8 @@
     {
         public int R { get; set; } = 1;
 
-        public int GetVolume() => 4 * R * R * R; // 4/3 * 3.14 * R^3
+        // 4/3 * 3.14 * R^3 * коэффициент для повышения эффективности неудобной области
+        public int GetVolume() => (4 * R * R * R * 0.5).Round(); 
         
         public override string ToString()
         {
@@ -36,7 +39,10 @@
         public int R { get; set; } = 1;
         public int H { get; set; } = 1;
 
-        public int GetVolume() => 3 * R * R * H;
+        public int GetVolume()
+        {
+            return 3 * R * R * H;
+        }
 
         public override string ToString()
         {
@@ -48,7 +54,8 @@
         public int R { get; set; } = 1;
         public int H { get; set; } = 1;
 
-        public int GetVolume() => R * R * H;
+        // R^2 * H * коэффициент для повышения эффективности неудобной области
+        public int GetVolume() => (R * R * H * 0.5).Round();
 
         public override string ToString()
         {
