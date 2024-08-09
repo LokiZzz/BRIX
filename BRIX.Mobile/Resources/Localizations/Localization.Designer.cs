@@ -394,6 +394,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Effect with same type already exists in ability. Choose other effect or edit existing effect, please..
+        /// </summary>
+        public static string AlertSameEffectExists {
+            get {
+                return ResourceManager.GetString("AlertSameEffectExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Appearance.
         /// </summary>
         public static string Appearance {

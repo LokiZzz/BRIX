@@ -228,6 +228,9 @@
   <data name="AlertNPCCannotHaveRecharge" xml:space="preserve">
     <value>NPC не может </value>
   </data>
+  <data name="AlertSameEffectExists" xml:space="preserve">
+    <value>Эффект такого типа уже есть в способности. Добавьте другой эффект или измените существующий, чтобы достичь желаемого результата.</value>
+  </data>
   <data name="Appearance" xml:space="preserve">
     <value>Внешность</value>
   </data>

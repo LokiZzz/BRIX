@@ -1,6 +1,7 @@
 ﻿using BRIX.Library.Characters;
 using BRIX.Library.Effects;
 using BRIX.Mobile.Models.NPCs;
+using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.ViewModel.Abilities.Effects;
@@ -22,6 +23,17 @@ namespace BRIX.Mobile.ViewModel.Abilities
         {
             if(effectToChoose.EditPage == null)
             {
+                return;
+            }
+
+            bool? sameEffectExists = _costMonitor?.Ability.Effects.Any(x =>
+                x.InternalModel?.GetType().Equals(effectToChoose?.Effect?.GetType()) == true
+            );
+
+            if (sameEffectExists == true)
+            {
+                await Alert(Localization.AlertSameEffectExists);
+
                 return;
             }
 

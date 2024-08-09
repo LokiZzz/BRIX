@@ -38,57 +38,59 @@ namespace BRIX.Library.Abilities
             {
                 effectsCountPenaltyCoef += (effectiveEffectsCount - 1) * deltaPerEffect;
             }
-            int effectsCost = GetEffectsExpCost();
+            int effectsCost = _effects.Sum(x => x.GetExpCost());
             int expCost = (Activation.Apply(effectsCost) * effectsCountPenaltyCoef).Round();
 
             return expCost <= 1 ? 1 : expCost;
         }
 
-        private int GetEffectsExpCost()
-        {
-            int expCost = 0;
-            DicePool overallDamageImpact = new ();
+        // Версия расчёта стоимости эффектов для случая, когда в способности могут быть эффекты одинакого типа.
+        // Пусть под комментарием отстоится здесь, пока идея не устареет морально.
+        //private int GetEffectsExpCost()
+        //{
+        //    int expCost = 0;
+        //    DicePool overallDamageImpact = new ();
 
-            foreach (EffectBase effect in _effects)
-            {
-                // Хитрый способ, который позволяет рассчитывать стоимость наносящего урон эффекта с учётом других уже
-                // добавленных подобных эффектов. Позволяет рассчитывать разные эффекты так же, как если бы вместо
-                // добавления нового эффекта был просто увеличен урон.
+        //    foreach (EffectBase effect in _effects)
+        //    {
+        //        // Хитрый способ, который позволяет рассчитывать стоимость наносящего урон эффекта с учётом других уже
+        //        // добавленных подобных эффектов. Позволяет рассчитывать разные эффекты так же, как если бы вместо
+        //        // добавления нового эффекта был просто увеличен урон.
 
-                // Проверяем относится ли эффект к наносящим урон.
-                DiceImpactEffectBase? overallEffect = effect switch
-                {
-                    PeriodicDamageEffect pdmg => new PeriodicDamageEffect() { Aspects = pdmg.Aspects, Impact = overallDamageImpact },
-                    DamageEffect dmg => new DamageEffect() { Aspects = dmg.Aspects, Impact = overallDamageImpact },
-                    VulnerabilityEffect vul => new VulnerabilityEffect() { Aspects = vul.Aspects, Impact = overallDamageImpact },
-                    AmplificationEffect amp => new AmplificationEffect() { Aspects = amp.Aspects, Impact = overallDamageImpact },
-                    _ => null
-                };
+        //        // Проверяем относится ли эффект к наносящим урон.
+        //        DiceImpactEffectBase? overallEffect = effect switch
+        //        {
+        //            PeriodicDamageEffect pdmg => new PeriodicDamageEffect() { Aspects = pdmg.Aspects, Impact = overallDamageImpact },
+        //            DamageEffect dmg => new DamageEffect() { Aspects = dmg.Aspects, Impact = overallDamageImpact },
+        //            VulnerabilityEffect vul => new VulnerabilityEffect() { Aspects = vul.Aspects, Impact = overallDamageImpact },
+        //            AmplificationEffect amp => new AmplificationEffect() { Aspects = amp.Aspects, Impact = overallDamageImpact },
+        //            _ => null
+        //        };
 
-                bool isSelfDamage = overallEffect is DamageEffect damageEffect
-                    && damageEffect.GetAspect<TargetSelectionAspect>().Strategy == ETargetSelectionStrategy.CharacterHimself;
+        //        bool isSelfDamage = overallEffect is DamageEffect damageEffect
+        //            && damageEffect.GetAspect<TargetSelectionAspect>().Strategy == ETargetSelectionStrategy.CharacterHimself;
 
-                if (overallEffect != null && !isSelfDamage)
-                {
-                    // Если относится, то вычисляем его стоимость как если бы он был частью большого общего эффекта.
-                    // Вычисляем стоимость абстрактного общего эффекта до добавления очередного урона и после добавления.
-                    // Разница между этими значениями — и есть относительная стоимость текущего эффекта.
-                    int costBefore = overallEffect.GetExpCost();
-                    DiceImpactEffectBase impactEffect = (DiceImpactEffectBase)effect;
-                    overallDamageImpact.Add([impactEffect.Impact]);
-                    int costAfter = overallEffect.GetExpCost();
+        //        if (overallEffect != null && !isSelfDamage)
+        //        {
+        //            // Если относится, то вычисляем его стоимость как если бы он был частью большого общего эффекта.
+        //            // Вычисляем стоимость абстрактного общего эффекта до добавления очередного урона и после добавления.
+        //            // Разница между этими значениями — и есть относительная стоимость текущего эффекта.
+        //            int costBefore = overallEffect.GetExpCost();
+        //            DiceImpactEffectBase impactEffect = (DiceImpactEffectBase)effect;
+        //            overallDamageImpact.Add([impactEffect.Impact]);
+        //            int costAfter = overallEffect.GetExpCost();
 
-                    expCost += costAfter - costBefore;
-                }
-                else
-                {
-                    expCost += effect.GetExpCost();
-                }
+        //            expCost += costAfter - costBefore;
+        //        }
+        //        else
+        //        {
+        //            expCost += effect.GetExpCost();
+        //        }
                 
-            }
+        //    }
 
-            return expCost;
-        }
+        //    return expCost;
+        //}
 
         public int ExpCost(Character? character)
         {
