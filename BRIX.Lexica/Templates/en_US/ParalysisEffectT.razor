@@ -1,0 +1,11 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+@using BRIX.Library.Effects
+
+Paralyze targets for @Numbers.ENGDcln(Model.GetAspect<DurationAspect>
+    ().Duration, "round"), if they have  @Numbers.ENGDcln(Model.HealthThreshold, "health") or less.
+
+@code {
+    [Parameter]
+    public ParalysisEffect Model { get; set; } = new();
+}

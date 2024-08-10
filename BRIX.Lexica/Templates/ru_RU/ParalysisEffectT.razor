@@ -1,0 +1,11 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+@using BRIX.Library.Effects
+
+Парализует цели на @Numbers.RUSDcln(Model.GetAspect<DurationAspect>
+    ().Duration, "раунд", "раунда", "раундов"), если у них @Numbers.RUSDcln(Model.HealthThreshold, "очко", "очка", "очков") здоровья или меньше.
+
+@code {
+    [Parameter]
+    public ParalysisEffect Model { get; set; } = new();
+}
