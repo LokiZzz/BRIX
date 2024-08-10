@@ -1699,6 +1699,42 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Provoke.
+        /// </summary>
+        public static string EffectProvoke {
+            get {
+                return ResourceManager.GetString("EffectProvoke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The target on which the effect is applied, during the duration of the effect, can attack and impose negative effects only on the provocateur and cannot harm other targets.
+        /// </summary>
+        public static string EffectProvokeHint {
+            get {
+                return ResourceManager.GetString("EffectProvokeHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A provoked target can still harm its other opponents if at the same time it harms the provocateur. For example, using area abilities or abilities that apply to targets along the chain..
+        /// </summary>
+        public static string EffectProvokeHint2 {
+            get {
+                return ResourceManager.GetString("EffectProvokeHint2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the target is provoked by several provocateurs, then it can harm any of them at its discretion..
+        /// </summary>
+        public static string EffectProvokeHint3 {
+            get {
+                return ResourceManager.GetString("EffectProvokeHint3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reduction.
         /// </summary>
         public static string EffectReduction {

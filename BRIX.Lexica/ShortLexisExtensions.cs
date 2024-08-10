@@ -33,7 +33,7 @@ namespace BRIX.Lexica
 
             foreach (EffectBase effect in ability.Effects)
             {
-                shortAbilityDescription += "* " + await effect.ToShortLexis() + " :: ";
+                shortAbilityDescription += "* " + await effect.ToShortLexis() + Environment.NewLine;
 
                 foreach (AspectBase aspect in effect.Aspects)
                 {

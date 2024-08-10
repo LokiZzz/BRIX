@@ -197,6 +197,9 @@
 	  <Compile Update="View\Abilities\Effects\DeffenseEffectPage.xaml.cs">
 	    <DependentUpon>DeffenseEffectPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\Abilities\Effects\ProvokeEffectPage.xaml.cs">
+	    <DependentUpon>ProvokeEffectPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\Characters\EditSpeedPage.xaml.cs">
 	    <DependentUpon>EditSpeedPage.xaml</DependentUpon>
 	  </Compile>
@@ -285,6 +288,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\DeffenseEffectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Effects\ProvokeEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Characters\EditSpeedPage.xaml">

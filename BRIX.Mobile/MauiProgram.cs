@@ -139,6 +139,7 @@ public static class MauiProgram
         builder.RegisterView<RevengeEffectPage, EffectPageVMBase<EffectGenericModelBase<RevengeEffect>>>();
         builder.RegisterView<MutenessEffectPage, EffectPageVMBase<MutenessEffectModel>>();
         builder.RegisterView<ParalysisEffectPage, EffectPageVMBase<ParalysisEffectModel>>();
+        builder.RegisterView<ProvokeEffectPage, EffectPageVMBase<EffectGenericModelBase<ProvokeEffect>>>();
 
         builder.RegisterView<WinEffectPage, EffectPageVMBase<EffectGenericModelBase<WinTheGameEffect>>>();
 

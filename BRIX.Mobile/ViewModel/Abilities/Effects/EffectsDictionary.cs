@@ -148,6 +148,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 EditPage = typeof(ParalysisEffectPage),
                 Effect = new ParalysisEffect()
             }},
+            { typeof(EffectGenericModelBase<ProvokeEffect>), new EffectTypeVM() {
+                Name = Localization.EffectProvoke,
+                Icon = AwesomeRPG.Helmet,
+                EditPage = typeof(ProvokeEffectPage),
+                Effect = new ProvokeEffect()
+            }},
 
             { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectTypeVM() {
                 Name = Localization.EffectWin,

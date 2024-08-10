@@ -666,6 +666,18 @@
   <data name="EffectPeriodicHealHint" xml:space="preserve">
     <value>Лечит цель в конце каждого её хода на протяжении некоторой длительности.</value>
   </data>
+  <data name="EffectProvoke" xml:space="preserve">
+    <value>Провокация</value>
+  </data>
+  <data name="EffectProvokeHint" xml:space="preserve">
+    <value>Цель, на которую наложен эффект, на протяжении длительности эффекта может атаковать и накладывать негативные эффекты только на провокатора и не может вредить другим цели.</value>
+  </data>
+  <data name="EffectProvokeHint2" xml:space="preserve">
+    <value>Спровоцированная цель всё ещё может вредить другим своим противникам, если одновременно с этим она вредит провокатору. Например, используя способности с областью действия или способности, применяющиеся к целям по цепоке.</value>
+  </data>
+  <data name="EffectProvokeHint3" xml:space="preserve">
+    <value>Если цель спровоцирована несколькими провокаторами, то она может вредить любому из них на своё усмотрение.</value>
+  </data>
   <data name="EffectReduction" xml:space="preserve">
     <value>Ослабление</value>
   </data>
