@@ -25,6 +25,10 @@ namespace BRIX.Mobile.Models.Abilities.Effects
                     return new SummonCreatureEffectModel(sce);
                 case DangerousTerrainEffect dte:
                     return new DangerousTerrainEffectModel(dte);
+                case MutenessEffect me:
+                    return new MutenessEffectModel(me);
+                case ParalysisEffect pe:
+                    return new ParalysisEffectModel(pe);
                 default:
                 {
                     MethodInfo? method = typeof(EffectModelFactory).GetMethod(

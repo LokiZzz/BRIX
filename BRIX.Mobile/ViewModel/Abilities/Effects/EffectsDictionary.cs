@@ -136,6 +136,18 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 EditPage = typeof(SelfDamageEffectPage),
                 Effect = new SelfDamageEffect()
             }},
+            { typeof(MutenessEffectModel), new EffectTypeVM() {
+                Name = Localization.EffectMuteness,
+                Icon = AwesomeRPG.BoneBite,
+                EditPage = typeof(MutenessEffectPage),
+                Effect = new MutenessEffect()
+            }},
+            { typeof(ParalysisEffectModel), new EffectTypeVM() {
+                Name = Localization.EffectParalysis,
+                Icon = AwesomeRPG.PlayerPain,
+                EditPage = typeof(ParalysisEffectPage),
+                Effect = new ParalysisEffect()
+            }},
 
             { typeof(EffectGenericModelBase<WinTheGameEffect>), new EffectTypeVM() {
                 Name = Localization.EffectWin,

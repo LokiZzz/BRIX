@@ -140,6 +140,12 @@
 	  <Compile Update="View\Abilities\Aspects\VampirismAspectPage.xaml.cs">
 	    <DependentUpon>VampirismAspectPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\Abilities\Effects\ParalysisEffectPage.xaml.cs">
+	    <DependentUpon>ParalysisEffectPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Abilities\Effects\MutenessEffectPage.xaml.cs">
+	    <DependentUpon>MutenessEffectPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\Abilities\Effects\CancelationEffectPage.xaml.cs">
 	    <DependentUpon>CancelationEffectPage.xaml</DependentUpon>
 	  </Compile>
@@ -222,6 +228,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Aspects\VampirismAspectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Effects\ParalysisEffectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Effects\MutenessEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\CancelationEffectPage.xaml">

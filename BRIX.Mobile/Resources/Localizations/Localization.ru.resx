@@ -642,6 +642,18 @@
   <data name="EffectMoveTargetHint" xml:space="preserve">
     <value>Перемещает цель по заданному пути на заданное расстояние.</value>
   </data>
+  <data name="EffectMuteness" xml:space="preserve">
+    <value>Немота</value>
+  </data>
+  <data name="EffectMutenessHint" xml:space="preserve">
+    <value>Не даёт цели использовать способности, в которых указано условие активации при котором персонаж должен мочь говорить. Эффект будет применён к цели, только если её здоровье равно указанному значению или меньше него.</value>
+  </data>
+  <data name="EffectParalysis" xml:space="preserve">
+    <value>Паралич</value>
+  </data>
+  <data name="EffectParalysisHint" xml:space="preserve">
+    <value>Не даёт цели использовать способности, в которых указано условие активации при котором персонаж должен мочь двигаться. Также цель с параличом не может передвигаться никак, кроме как с использованием способностей, у которых нет такого условия активации. Эффект будет применён к цели, только если её здоровье менее или равно указанному значению.</value>
+  </data>
   <data name="EffectPeriodicDamage" xml:space="preserve">
     <value>Периодический урон</value>
   </data>
@@ -812,6 +824,9 @@
   </data>
   <data name="HealthSpentExp" xml:space="preserve">
     <value>Влитые очки опыта</value>
+  </data>
+  <data name="HealthThreshold" xml:space="preserve">
+    <value>Порог здоровья</value>
   </data>
   <data name="HearTarget" xml:space="preserve">
     <value>Должна быть слышимой</value>

@@ -1627,6 +1627,42 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Muteness.
+        /// </summary>
+        public static string EffectMuteness {
+            get {
+                return ResourceManager.GetString("EffectMuteness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prevent targets to use abilities with «Need able to talk» activation condition. Effect can be aplied on target only if target have specified amount of health or less..
+        /// </summary>
+        public static string EffectMutenessHint {
+            get {
+                return ResourceManager.GetString("EffectMutenessHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paralysis.
+        /// </summary>
+        public static string EffectParalysis {
+            get {
+                return ResourceManager.GetString("EffectParalysis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prevent targets to use abilities with «Need able to move» activation condition. Also, a target with paralysis cannot move in any way except using abilities that do not have such an activation condition. Effect can be aplied on target only if target have specified amount of health or less..
+        /// </summary>
+        public static string EffectParalysisHint {
+            get {
+                return ResourceManager.GetString("EffectParalysisHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Periodic damage.
         /// </summary>
         public static string EffectPeriodicDamage {
@@ -2136,6 +2172,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string HealthSpentExp {
             get {
                 return ResourceManager.GetString("HealthSpentExp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Health threshold.
+        /// </summary>
+        public static string HealthThreshold {
+            get {
+                return ResourceManager.GetString("HealthThreshold", resourceCulture);
             }
         }
         
@@ -3288,6 +3333,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Strategy {
             get {
                 return ResourceManager.GetString("Strategy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ы.
+        /// </summary>
+        public static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         

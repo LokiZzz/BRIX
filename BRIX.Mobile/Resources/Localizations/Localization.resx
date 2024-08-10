@@ -639,6 +639,18 @@
   <data name="EffectMoveTargetHint" xml:space="preserve">
     <value>Moves the target along a specified path for a specified distance.</value>
   </data>
+  <data name="EffectMuteness" xml:space="preserve">
+    <value>Muteness</value>
+  </data>
+  <data name="EffectMutenessHint" xml:space="preserve">
+    <value>Prevent targets to use abilities with «Need able to talk» activation condition. Effect can be aplied on target only if target have specified amount of health or less.</value>
+  </data>
+  <data name="EffectParalysis" xml:space="preserve">
+    <value>Paralysis</value>
+  </data>
+  <data name="EffectParalysisHint" xml:space="preserve">
+    <value>Prevent targets to use abilities with «Need able to move» activation condition. Also, a target with paralysis cannot move in any way except using abilities that do not have such an activation condition. Effect can be aplied on target only if target have specified amount of health or less.</value>
+  </data>
   <data name="EffectPeriodicDamage" xml:space="preserve">
     <value>Periodic damage</value>
   </data>
@@ -809,6 +821,9 @@
   </data>
   <data name="HealthSpentExp" xml:space="preserve">
     <value>Spent exp</value>
+  </data>
+  <data name="HealthThreshold" xml:space="preserve">
+    <value>Health threshold</value>
   </data>
   <data name="HearTarget" xml:space="preserve">
     <value>Must be heard</value>
@@ -1193,6 +1208,9 @@
   </data>
   <data name="Strategy" xml:space="preserve">
     <value>Strategy</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>Ы</value>
   </data>
   <data name="Swim" xml:space="preserve">
     <value>Swim</value>

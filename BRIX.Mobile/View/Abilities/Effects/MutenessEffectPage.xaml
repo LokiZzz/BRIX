@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BRIX.Mobile.View.Abilities.Effects.MutenessEffectPage"
+             xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             xmlns:abilitiesvm="clr-namespace:BRIX.Mobile.ViewModel.Abilities"
+             xmlns:effectsvm="clr-namespace:BRIX.Mobile.ViewModel.Abilities.Effects"
+             xmlns:abilitiesview="clr-namespace:BRIX.Mobile.View.Abilities"
+             xmlns:aspectsview="clr-namespace:BRIX.Mobile.View.Abilities.Aspects"
+             xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+             Shell.TabBarIsVisible="False"
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectMuteness}}">
+
+    <Shell.TitleView>
+        <controls:TitleView/>
+    </Shell.TitleView>
+
+    <Grid RowDefinitions="*,auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="10" Margin="0,0,0,10">
+                <Border Style="{StaticResource BlockBorder}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label 
+                            Style="{StaticResource TitleLabel}" 
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectMuteness}}"/>
+                        <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectMutenessHint}}"/>
+                        <controls:FramedEntry 
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.HealthThreshold}}"
+                            Text="{Binding Effect.HealthThreshold}"/>
+                    </VerticalStackLayout>
+                </Border>
+                <aspectsview:AspectsPanelView BindingContext="{Binding Aspects}"/>
+            </VerticalStackLayout>
+        </ScrollView>
+        <abilitiesview:AbilityCostMonitorPanel Grid.Row="1" BindingContext="{Binding CostMonitor}"/>
+    </Grid>
+
+</ContentPage>
