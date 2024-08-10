@@ -15,13 +15,14 @@ namespace BRIX.Library.Effects
 
         public List<AspectBase> Aspects = [];
 
-        public virtual bool HasStatus => false;
+        public bool HasStatus => GetAspect<DurationAspect>(false)?.Duration > 0 
+            && GetAspect<AOEAspect>(false) == null;
 
         /// <summary>
         /// Является ли эффект позитивным.
         /// Позитивным называется эффект, чьим бенефициаром является его цель.
         /// </summary>
-        public virtual bool IsPositive => false;
+        public abstract bool IsPositive { get; }
 
         public abstract int BaseExpCost();
 
@@ -48,6 +49,25 @@ namespace BRIX.Library.Effects
             return resultingCost.Round();
         }
 
+        public T? GetAspect<T>(bool throwIfNotFound) where T : AspectBase
+        {
+            try
+            {
+                return GetAspect(typeof(T)) as T;
+            }
+            catch
+            {
+                if(throwIfNotFound)
+                {
+                    throw;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         public T GetAspect<T>() where T : AspectBase
         {
             return GetAspect(typeof(T)) as T 
@@ -67,6 +87,7 @@ namespace BRIX.Library.Effects
                 if (RequiredAspects.Any(x => x.Equals(aspectType)))
                 {
                     aspect = (AspectBase?)Activator.CreateInstance(aspectType);
+                    InitializeAspect(aspect);
 
                     if (aspect != null)
                     {
@@ -78,6 +99,8 @@ namespace BRIX.Library.Effects
 
             return aspect ?? throw new ArgumentException($"У эффекта {GetType()} нет аспекта {aspectType.Name}");
         }
+
+        protected virtual void InitializeAspect(AspectBase? aspect) { }
 
         /// <summary>
         /// Заменит аспект целиком на переданный в аргументах, но если в эффекте не может быть аспекта с таким типом, 

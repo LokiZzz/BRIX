@@ -229,7 +229,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                 foreach (ETimeUnit timeUnit in Enum.GetValues<ETimeUnit>())
                 {
                     statuses = Character.Statuses
-                        .Where(x => x.Internal.GetHighestTimeUnit() == timeUnit)
+                        .Where(x => Library.Abilities.Status.GetHighestTimeUnit() == timeUnit)
                         .ToList();
 
                     if (statuses.Count > 0)

@@ -1,7 +1,8 @@
 ﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
 @using BRIX.Library.Effects
 
-The character accumulates incoming damage during @Numbers.ENGDcln(Model.Impact, "round") in order to return it to opponents later.
+The character accumulates incoming damage during @Numbers.ENGDcln(Model.GetAspect<DurationAspect>().Duration, "round") in order to return it to opponents later.
 
 @code {
     [Parameter]

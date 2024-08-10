@@ -7,6 +7,8 @@ namespace BRIX.Library.Effects
 {
     public class SummonCreatureEffect : EffectBase
     {
+        public override bool IsPositive => true;
+        
         public override List<Type> RequiredAspects =>
         [
             typeof(AOEAspect), typeof(DurationAspect), typeof(ActivationConditionsAspect)

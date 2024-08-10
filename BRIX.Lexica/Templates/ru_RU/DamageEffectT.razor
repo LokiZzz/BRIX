@@ -1,7 +1,16 @@
 ﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
 @using BRIX.Library.Effects
 
-Наносит @Numbers.RUSDcln(Model.Impact, "очко", "очка", "очков") урона.
+@if (@Model.GetAspect<DurationAspect>().Duration == 0)
+{
+    <Text>Наносит @Numbers.RUSDcln(Model.Impact, "очко", "очка", "очков") урона.</Text>
+}
+else
+{
+    <Text>@Numbers.RUSDcln(Model.GetAspect<DurationAspect>()?.Duration ?? 0, "раунд", "раунда", "раундов") наносит цели @Numbers.RUSDcln(Model.Impact, "очко", "очка", "очков") урона в конце её хода .</Text>
+}
+
 
 @code {
     [Parameter]

@@ -8,20 +8,18 @@ namespace BRIX.Library.Effects
     /// До истечения этого времени персонаж может реакцией нанести весь накопленный урон противникам.
     /// Свойство Impact — это количество раундов.
     /// </summary>
-    public class RevengeEffect : SinglePropEffectBase
+    public class RevengeEffect : EffectBase
     {
-        public RevengeEffect()
-        {
-            Impact = 1;
-        }
-
-        public override bool HasStatus => true;
-
+        public override bool IsPositive => true;
+        
         public override List<Type> RequiredAspects =>
         [
-            typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect), typeof(VampirismAspect)
+            typeof(TargetSelectionAspect), 
+            typeof(ActivationConditionsAspect), 
+            typeof(VampirismAspect), 
+            typeof(DurationAspect)
         ];
 
-        public override int BaseExpCost() => Impact * 750;
+        public override int BaseExpCost() => 500;
     }
 }

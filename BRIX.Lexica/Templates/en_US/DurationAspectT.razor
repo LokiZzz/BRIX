@@ -2,7 +2,7 @@
 @using BRIX.Library.Aspects
 @using BRIX.Library.Enums
 
-<p>The effect lasts @GetDurationDeclension(Model).</p>
+<p>The effect lasts @Numbers.ENGDcln(Model.Duration, "round").</p>
 
 @if (Model.CanDisableStatus) 
 {
@@ -16,19 +16,4 @@ else
 @code {
     [Parameter]
     public DurationAspect Model { get; set; } = new();
-
-    public static MarkupString GetDurationDeclension(DurationAspect model)
-    {
-        string unit = model.Unit switch
-        {
-            ETimeUnit.Round => "round",
-            ETimeUnit.Minute => "minute",
-            ETimeUnit.Hour => "hour",
-            ETimeUnit.Day => "day",
-            ETimeUnit.Year => "year",
-            _ => TemplateHelper.LexisTemplatingError
-        };
-
-        return Numbers.ENGDcln(model.Duration, unit);
-    }
 }

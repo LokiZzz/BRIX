@@ -132,12 +132,11 @@ public static class MauiProgram
         builder.RegisterView<MoveTargetEffectPage, MoveTargetEffectPageVM>();
         builder.RegisterView<MoveAreaEffectPage, EffectPageVMBase<MoveAreaEffectModel>>();
         builder.RegisterView<ShieldEffectPage, EffectPageVMBase<ShieldEffectModel>>();
-        builder.RegisterView<PeriodicDamageEffectPage, DiceImpactEffectPageVMBase<PeriodicDamageEffect>>();
         builder.RegisterView<DifficultTerrainEffectPage, SinglePropEffectPageVMBase<DifficultTerrainEffect>>();
         builder.RegisterView<DangerousTerrainEffectPage, DangerousTerrainEffectPageVM>();
         builder.RegisterView<InvisibilityEffectPage, EffectPageVMBase<EffectGenericModelBase<InvisibiltyEffect>>>();
         builder.RegisterView<SummonCreatureEffectPage, SummonCreatureEffectPageVM>();
-        builder.RegisterView<RevengeEffectPage, SinglePropEffectPageVMBase<RevengeEffect>>();
+        builder.RegisterView<RevengeEffectPage, EffectPageVMBase<EffectGenericModelBase<RevengeEffect>>>();
         
         builder.RegisterView<WinEffectPage, EffectPageVMBase<EffectGenericModelBase<WinTheGameEffect>>>();
 

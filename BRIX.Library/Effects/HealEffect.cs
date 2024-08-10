@@ -7,19 +7,18 @@ namespace BRIX.Library.Effects
     /// <summary>
     /// Лечение.
     /// </summary>
-    public class HealEffect : DiceImpactEffectBase
+    public class HealEffect : DamageEffect
     {
         public override bool IsPositive => true;
 
         public override List<Type> RequiredAspects =>
         [
-            typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect)
+            typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect), typeof(DurationAspect)
         ];
 
-        public override int BaseExpCost()
+        public override int GetExpCost()
         {
-            //Лечиться должно быть менее выгодно для улучшения динамики в сражениях.
-            return (Impact.CostLikeDamageEffect() * 1.5).Round();
+            return (base.GetExpCost() * 1.5).Round();
         }
     }
 }

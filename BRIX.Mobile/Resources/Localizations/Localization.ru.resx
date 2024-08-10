@@ -648,6 +648,12 @@
   <data name="EffectPeriodicDamageHint" xml:space="preserve">
     <value>Наносит цели урон раз в раунд определённое количество раундов.</value>
   </data>
+  <data name="EffectPeriodicHeal" xml:space="preserve">
+    <value>Периодическое лечение</value>
+  </data>
+  <data name="EffectPeriodicHealHint" xml:space="preserve">
+    <value>Лечит цель в конце каждого её хода на протяжении некоторой длительности.</value>
+  </data>
   <data name="EffectReduction" xml:space="preserve">
     <value>Ослабление</value>
   </data>

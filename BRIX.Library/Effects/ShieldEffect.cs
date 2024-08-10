@@ -12,6 +12,8 @@ namespace BRIX.Library.Effects
     /// </summary>
     public class ShieldEffect : EffectBase
     {
+        public override bool IsPositive => true;
+
         public override List<Type> RequiredAspects =>
         [
             typeof(AOEAspect), typeof(ActivationConditionsAspect), typeof(DurationAspect)

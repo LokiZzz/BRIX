@@ -645,6 +645,12 @@
   <data name="EffectPeriodicDamageHint" xml:space="preserve">
     <value>Deals damage to the target once per round for a certain number of rounds.</value>
   </data>
+  <data name="EffectPeriodicHeal" xml:space="preserve">
+    <value>Periodic heal</value>
+  </data>
+  <data name="EffectPeriodicHealHint" xml:space="preserve">
+    <value>Heals target at the end of targets turn for the specified duration.</value>
+  </data>
   <data name="EffectReduction" xml:space="preserve">
     <value>Reduction</value>
   </data>

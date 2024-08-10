@@ -10,6 +10,8 @@ namespace BRIX.Library.Effects
     /// </summary>
     public class DamageEffect : DiceImpactEffectBase
     {
+        public override bool IsPositive => false;
+
         /// <summary>
         /// Важный волшебный коэффициент, от которого напрямую зависит динамика боя.
         /// Чем выше коэффициент, тем дороже персонажу обходится его DPR и тем дольше 
@@ -19,11 +21,41 @@ namespace BRIX.Library.Effects
 
         public override List<Type> RequiredAspects =>
         [
-            typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect), typeof(VampirismAspect)
+            typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect), 
+            typeof(VampirismAspect), typeof(DurationAspect)
         ];
 
-        public override int BaseExpCost() => 
-            (Impact.PreciseAverage() * Impact.PreciseAverage() * _battleTimeCoef).Round();
+        public override int BaseExpCost()
+        {
+            double preciseAverageWithDuration = Impact.PreciseAverage() 
+                * (GetAspect<DurationAspect>().Duration + 1);
+
+            return (preciseAverageWithDuration * preciseAverageWithDuration * _battleTimeCoef).Round();
+        }
+
+        public override int GetExpCost()
+        {
+            // Исключаем влияние аспекта длительности, так как он уже учтён в BaseExpCost
+            DurationAspect durationAspect = GetAspect<DurationAspect>();
+            double durationAspectCoef = durationAspect.GetCoefficient();
+            double cost = base.GetExpCost() / durationAspectCoef;
+
+            // Переопределяем расчёт длительности в эффекте
+            // Чем сильнее растянут урон по времени, тем дешевле
+            cost *= Math.Max(0.2, 1 - durationAspect.Duration * 0.1); 
+
+            return cost.Round();
+        }
+
+        protected override void InitializeAspect(AspectBase? aspect)
+        {
+            base.InitializeAspect(aspect);
+
+            if(aspect is DurationAspect durationAspect)
+            {
+                durationAspect.Duration = 0;
+            }
+        }
     }
 
     public static class LikeDamageEffectExtension

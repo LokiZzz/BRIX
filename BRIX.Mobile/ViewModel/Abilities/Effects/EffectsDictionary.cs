@@ -18,7 +18,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
             }},
             { typeof(EffectGenericModelBase<HealEffect>), new EffectTypeVM() {
                 Name = Localization.EffectHeal,
-                Icon = AwesomeRPG.HealthIncrease,
+                Icon = AwesomeRPG.Health,
                 EditPage = typeof(HealEffectPage),
                 Effect = new HealEffect()
             }},
@@ -99,12 +99,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 Icon = AwesomeRPG.CastleFlag,
                 EditPage = typeof(ShieldEffectPage),
                 Effect = new ShieldEffect()
-            }},
-            { typeof(EffectGenericModelBase<PeriodicDamageEffect>), new EffectTypeVM() {
-                Name = Localization.EffectPeriodicDamage,
-                Icon = AwesomeRPG.BleedingHearts,
-                EditPage = typeof(PeriodicDamageEffectPage),
-                Effect = new PeriodicDamageEffect()
             }},
             { typeof(EffectGenericModelBase<DifficultTerrainEffect>), new EffectTypeVM() {
                 Name = Localization.EffectDifficultTerrain,

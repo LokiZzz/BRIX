@@ -10,8 +10,8 @@ namespace BRIX.Library.Effects
     /// </summary>
     public class ExhaustionEffect : DiceImpactEffectBase
     {
-        public override bool HasStatus => true;
-
+        public override bool IsPositive => false;
+        
         public override List<Type> RequiredAspects =>
         [
             typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect),

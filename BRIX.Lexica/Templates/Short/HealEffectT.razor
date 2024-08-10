@@ -1,7 +1,8 @@
 ﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
 @using BRIX.Library.Effects
 
-Heal: @Model.Impact;
+Heal: @((MarkupString)Model.Impact.ToString()); @(Model.GetAspect<DurationAspect>().Duration == 0 ? "" : $" Periodic;")
 
 @code {
     [Parameter]

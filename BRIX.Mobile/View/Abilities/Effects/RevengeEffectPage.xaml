@@ -25,9 +25,6 @@
                             Style="{StaticResource TitleLabel}" 
                             Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectRevenge}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectRevengeHint}}"/>
-                        <controls:FramedEntry 
-                            Text="{Binding Impact}"
-                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.RevengeDuration}}"/>
                     </VerticalStackLayout>
                 </Border>
                 <aspectsview:AspectsPanelView BindingContext="{Binding Aspects}"/>

@@ -8,6 +8,8 @@ namespace BRIX.Library.Effects
     /// </summary>
     public class CancelationEffect : EffectBase
     {
+        public override bool IsPositive => false;
+
         public override List<Type> RequiredAspects =>
         [
             typeof(TargetSelectionAspect), typeof(ActivationConditionsAspect)

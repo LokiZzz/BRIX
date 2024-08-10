@@ -8,6 +8,8 @@ namespace BRIX.Library.Effects
     /// </summary>
     public class SelfDamageEffect : DiceImpactEffectBase
     {
+        public override bool IsPositive => true;
+
         public override List<Type> RequiredAspects => [];
 
         public override int BaseExpCost() => (-5 * Impact.PreciseAverage()).Round();

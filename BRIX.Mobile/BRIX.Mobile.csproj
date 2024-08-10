@@ -164,9 +164,6 @@
 	  <Compile Update="View\Abilities\Effects\InvisibilityEffectPage.xaml.cs">
 	    <DependentUpon>InvisibilityEffectPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="View\Abilities\Effects\PeriodicDamageEffectPage.xaml.cs">
-	    <DependentUpon>PeriodicDamageEffectPage.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="View\Abilities\Effects\ShieldEffectPage.xaml.cs">
 	    <DependentUpon>ShieldEffectPage.xaml</DependentUpon>
 	  </Compile>
@@ -249,9 +246,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\InvisibilityEffectPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\Abilities\Effects\PeriodicDamageEffectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Effects\ShieldEffectPage.xaml">

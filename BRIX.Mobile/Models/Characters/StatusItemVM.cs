@@ -34,7 +34,7 @@ namespace BRIX.Mobile.Models.Characters
         {
             get
             {
-                return Internal.GetHighestTimeUnit() switch
+                return Status.GetHighestTimeUnit() switch
                 {
                     Library.Enums.ETimeUnit.Round => 
                         string.Format(Localization.RoundsCountFormat, Internal.DurationLeft),

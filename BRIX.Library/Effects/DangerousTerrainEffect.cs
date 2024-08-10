@@ -9,6 +9,8 @@ namespace BRIX.Library.Effects
     /// </summary>
     public class DangerousTerrainEffect : DiceImpactEffectBase
     {
+        public override bool IsPositive => false;
+
         public override List<Type> RequiredAspects => 
         [
             typeof(AOEAspect), typeof(DurationAspect), 

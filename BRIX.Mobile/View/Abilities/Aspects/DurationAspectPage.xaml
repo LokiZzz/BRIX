@@ -21,19 +21,9 @@
                     <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.EffectDuration}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.DurationHint}}"/>
-                        <Grid ColumnDefinitions="*,2*" ColumnSpacing="10">
-                            <controls:FramedEntry
-                                Grid.Column="0"
-                                Text="{Binding Aspect.Duration}"
-                                Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Count}}"/>
-                            <controls:PickerButton
-                                Grid.Column="1"
-                                Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TimeUnit}}"
-                                Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TimeUnit}}"
-                                ItemSource="{Binding Aspect.UnitOptions}"
-                                SelectedItem="{Binding Aspect.SelectedUnit}"
-                                DisplayMember="Name"/>
-                        </Grid>
+                        <controls:FramedEntry
+                            Text="{Binding Aspect.Duration}"
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.RoundsCount}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CharacterCanDisableEffectHint}}"/>
                         <HorizontalStackLayout Spacing="10">
                             <CheckBox 

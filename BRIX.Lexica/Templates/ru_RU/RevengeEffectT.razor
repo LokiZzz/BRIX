@@ -1,7 +1,8 @@
 ﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
 @using BRIX.Library.Effects
 
-Персонаж @Numbers.RUSDcln(Model.Impact, "раунд", "раунда", "раундов") копит входящий урон, чтобы потом вернуть его противникам.
+Персонаж @Numbers.RUSDcln(Model.GetAspect<DurationAspect>().Duration, "раунд", "раунда", "раундов") копит входящий урон, чтобы потом вернуть его противникам.
 
 @code {
     [Parameter]

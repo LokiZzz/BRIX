@@ -8,7 +8,6 @@ namespace BRIX.Library.Effects
     /// </summary>
     public class FortifyEffect : DiceImpactEffectBase
     {
-        public override bool HasStatus => true;
         public override bool IsPositive => true;
 
         public override List<Type> RequiredAspects =>

@@ -1645,6 +1645,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Periodic heal.
+        /// </summary>
+        public static string EffectPeriodicHeal {
+            get {
+                return ResourceManager.GetString("EffectPeriodicHeal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heals target at the end of targets turn for the specified duration..
+        /// </summary>
+        public static string EffectPeriodicHealHint {
+            get {
+                return ResourceManager.GetString("EffectPeriodicHealHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reduction.
         /// </summary>
         public static string EffectReduction {

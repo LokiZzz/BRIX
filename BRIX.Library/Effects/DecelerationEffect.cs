@@ -9,7 +9,7 @@ namespace BRIX.Library.Effects
     /// </summary>
     public class DecelerationEffect : DiceImpactEffectBase
     {
-        public override bool HasStatus => true;
+        public override bool IsPositive => false;
 
         public override List<Type> RequiredAspects =>
         [

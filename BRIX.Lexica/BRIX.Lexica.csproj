@@ -42,9 +42,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Update="Templates\en_US\PeriodicDamageEffectT.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
     <Content Update="Templates\en_US\DamageEffectT.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>

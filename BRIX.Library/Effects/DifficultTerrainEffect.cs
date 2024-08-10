@@ -8,6 +8,8 @@ namespace BRIX.Library.Effects
     /// </summary>
     public class DifficultTerrainEffect : SinglePropEffectBase
     {
+        public override bool IsPositive => false;
+
         public DifficultTerrainEffect()
         {
             Impact = 2;

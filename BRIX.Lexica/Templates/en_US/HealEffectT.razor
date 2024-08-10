@@ -1,7 +1,15 @@
 ﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
 @using BRIX.Library.Effects
 
-Heals the target for @Numbers.ENGDcln(Model.Impact, "point").
+@if (@Model.GetAspect<DurationAspect>().Duration == 0)
+{
+    <Text>Heals @Numbers.ENGDcln(Model.Impact, "point") of helath.</Text>
+}
+else
+{
+    <Text>Heals @Numbers.ENGDcln(Model.Impact, "point") of health at the end of the @((MarkupString)"target's") turn during @Numbers.ENGDcln(Model.GetAspect<DurationAspect>()?.Duration ?? 0, "round").</Text>
+}
 
 @code {
     [Parameter]

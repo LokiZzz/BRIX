@@ -1,7 +1,15 @@
 ﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
 @using BRIX.Library.Effects
 
-Вылечивает цели @Numbers.RUSDcln(Model.Impact, "очко", "очка", "очков").
+@if (@Model.GetAspect<DurationAspect>().Duration == 0)
+{
+    <Text>Вылечивает цели @Numbers.RUSDcln(Model.Impact, "очко", "очка", "очков") здоровья.</Text>
+}
+else
+{
+    <Text>@Numbers.RUSDcln(Model.GetAspect<DurationAspect>()?.Duration ?? 0, "раунд", "раунда", "раундов") вылечивает цели @Numbers.RUSDcln(Model.Impact, "очко", "очка", "очков") здоровья в конце её хода.</Text>
+}
 
 @code {
     [Parameter]

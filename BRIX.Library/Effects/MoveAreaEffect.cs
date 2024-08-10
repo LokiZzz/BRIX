@@ -9,6 +9,8 @@ namespace BRIX.Library.Effects
     /// </summary>
     public class MoveAreaEffect : EffectBase
     {
+        public override bool IsPositive => false;
+
         public override List<Type> RequiredAspects =>
         [
             typeof(ActivationConditionsAspect)

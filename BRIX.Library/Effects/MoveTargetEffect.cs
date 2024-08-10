@@ -10,7 +10,7 @@ namespace BRIX.Library.Effects
     /// </summary>
     public class MoveTargetEffect : EffectBase
     {
-        public override bool IsPositive => true;
+        public override bool IsPositive => false;
         
         public override List<Type> RequiredAspects =>
         [

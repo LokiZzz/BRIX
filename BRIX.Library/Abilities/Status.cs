@@ -17,8 +17,8 @@ namespace BRIX.Library.Abilities
                 if (Effects.Any())
                 {
                     EffectBase effect = Effects.Aggregate((x, y) => 
-                        x.GetAspect<DurationAspect>()?.DurationInSeconds > 
-                            y.GetAspect<DurationAspect>()?.DurationInSeconds
+                        x.GetAspect<DurationAspect>()?.Duration > 
+                            y.GetAspect<DurationAspect>()?.Duration
                         ? x : y
                     );
 
@@ -103,21 +103,10 @@ namespace BRIX.Library.Abilities
         /// <summary>
         /// Получает самую большую единицу измерения среди эффектов.
         /// </summary>
-        public ETimeUnit GetHighestTimeUnit()
+        public static ETimeUnit GetHighestTimeUnit()
         {
-            ETimeUnit highestTimeUnit = ETimeUnit.Round;
-
-            foreach(EffectBase effect in Effects)
-            {
-                ETimeUnit? eTimeUnit = effect.GetAspect<DurationAspect>()?.Unit;
-
-                if(eTimeUnit != null && (int)eTimeUnit > (int)highestTimeUnit)
-                {
-                    highestTimeUnit = eTimeUnit.Value;
-                }
-            }
-
-            return highestTimeUnit;
+            // Временное решение, пока других единиц измерения нет в эффектах.
+            return ETimeUnit.Round;
         }
     }
 }
