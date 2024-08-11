@@ -144,9 +144,9 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 EActivationCondition.EasyActivationCondition => 
                     Resources.Localizations.Localization.EnterLowActivationCondition,
                 EActivationCondition.MediumActivationCondition => 
-                    Resources.Localizations.Localization.EnterMediumActiovationCondition,
+                    Resources.Localizations.Localization.EnterMediumActivationCondition,
                 EActivationCondition.HardActivationCondition => 
-                    Resources.Localizations.Localization.EnterHardActiovationCondition,
+                    Resources.Localizations.Localization.EnterHardActivationCondition,
                 _ => string.Empty,
             };
         }

@@ -1870,11 +1870,11 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Specify a condition that is difficult to reproduce or a condition of high rarity. For example, a shooting star in the field of view, a specific day of the year, a volcanic eruption nearby, etc..
+        ///   Looks up a localized string similar to Specify a condition that is difficult to reproduce or a condition of high rarity..
         /// </summary>
-        public static string EnterHardActiovationCondition {
+        public static string EnterHardActivationCondition {
             get {
-                return ResourceManager.GetString("EnterHardActiovationCondition", resourceCulture);
+                return ResourceManager.GetString("EnterHardActivationCondition", resourceCulture);
             }
         }
         
@@ -1897,7 +1897,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Specify an easily reproducible condition or a condition of low rarity. For example, a specific time of day, the presence of a visible sky, the proximity of vessels with liquids, the presence of smooth vertical surfaces, the obligatory sound of music, activation only in the dark, etc..
+        ///   Looks up a localized string similar to Specify an easily reproducible condition or a condition of low rarity..
         /// </summary>
         public static string EnterLowActivationCondition {
             get {
@@ -1924,11 +1924,11 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Indicate a condition that is difficult to reproduce or a condition of medium rarity. For example, rain, full moon, activation only under water, etc..
+        ///   Looks up a localized string similar to Indicate a condition that is difficult to reproduce or a condition of medium rarity..
         /// </summary>
-        public static string EnterMediumActiovationCondition {
+        public static string EnterMediumActivationCondition {
             get {
-                return ResourceManager.GetString("EnterMediumActiovationCondition", resourceCulture);
+                return ResourceManager.GetString("EnterMediumActivationCondition", resourceCulture);
             }
         }
         

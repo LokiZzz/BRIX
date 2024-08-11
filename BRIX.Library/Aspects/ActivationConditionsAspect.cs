@@ -14,8 +14,8 @@
             { EActivationCondition.AbleToMove, -20 },
 
             { EActivationCondition.EasyActivationCondition, -25 },
-            { EActivationCondition.MediumActivationCondition, -50 },
-            { EActivationCondition.HardActivationCondition, -75 }
+            { EActivationCondition.MediumActivationCondition, -70 },
+            { EActivationCondition.HardActivationCondition, -90 }
         };
     }
 

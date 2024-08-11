@@ -723,8 +723,8 @@
   <data name="Encounter" xml:space="preserve">
     <value>Столкновение</value>
   </data>
-  <data name="EnterHardActiovationCondition" xml:space="preserve">
-    <value>Укажите сложно воспроизводимое условие или условие высокой редкости. Например падающая звезда в области видимости, конкретный день в году, извержение вулкана поблизости и т.п.</value>
+  <data name="EnterHardActivationCondition" xml:space="preserve">
+    <value>Укажите сложно воспроизводимое условие или условие высокой редкости.</value>
   </data>
   <data name="EnterHighProbabilityTrigger" xml:space="preserve">
     <value>Введите триггер с высокой вероятностью, например: «Персонаж получил урон».</value>
@@ -733,7 +733,7 @@
     <value>Введите признак высокой редкости, продолжая предложение: «Цель...». Например: «Должна иметь татуировку», «Должна быть драконом», «Должна быть рождена в июне».</value>
   </data>
   <data name="EnterLowActivationCondition" xml:space="preserve">
-    <value>Укажите легко воспроизводимое условие или условие малой редкости. Например конкретное время суток, наличие видимого неба, близость сосудов с жидкостями, наличие гладких вертикальных поверхностей, обязательное звучание музыки, активация только в темноте и т.п.</value>
+    <value>Укажите легко воспроизводимое условие или условие малой редкости.</value>
   </data>
   <data name="EnterLowProbabilityTrigger" xml:space="preserve">
     <value>Введите триггер с низкой вероятностью, например: «Персонажа атакует нежить».</value>
@@ -741,8 +741,8 @@
   <data name="EnterLowRarityRestriction" xml:space="preserve">
     <value>Введите признак низкой редкости, продолжая предложение: «Цель...». Например: «Должна быть женского пола», «Должна быть эльфом», «Должна иметь душу», «Должна быть предметом из дерева».</value>
   </data>
-  <data name="EnterMediumActiovationCondition" xml:space="preserve">
-    <value>Укажите с трудом воспроизводимое условие или условие средней редкости. Например дождь, полнолуние, активация только под водой и т.п.</value>
+  <data name="EnterMediumActivationCondition" xml:space="preserve">
+    <value>Укажите с трудом воспроизводимое условие или условие средней редкости.</value>
   </data>
   <data name="EnterMediumRarityRestriction" xml:space="preserve">
     <value>Введите признак средней редкости, продолжая предложение: «Цель...». Например: «Должна быть в доспехах», «Должна находится в воде», «Должна дышать».</value>

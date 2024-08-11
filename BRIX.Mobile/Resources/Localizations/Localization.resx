@@ -720,8 +720,8 @@
   <data name="Encounter" xml:space="preserve">
     <value>Encounter</value>
   </data>
-  <data name="EnterHardActiovationCondition" xml:space="preserve">
-    <value>Specify a condition that is difficult to reproduce or a condition of high rarity. For example, a shooting star in the field of view, a specific day of the year, a volcanic eruption nearby, etc.</value>
+  <data name="EnterHardActivationCondition" xml:space="preserve">
+    <value>Specify a condition that is difficult to reproduce or a condition of high rarity.</value>
   </data>
   <data name="EnterHighProbabilityTrigger" xml:space="preserve">
     <value>Enter a high probability trigger, for example: "Character has taken damage."</value>
@@ -730,7 +730,7 @@
     <value>Enter a sign of high rarity, continuing the sentence: "Target...". For example: "Must have a tattoo", "Must be a dragon", "Must be born in June".</value>
   </data>
   <data name="EnterLowActivationCondition" xml:space="preserve">
-    <value>Specify an easily reproducible condition or a condition of low rarity. For example, a specific time of day, the presence of a visible sky, the proximity of vessels with liquids, the presence of smooth vertical surfaces, the obligatory sound of music, activation only in the dark, etc.</value>
+    <value>Specify an easily reproducible condition or a condition of low rarity.</value>
   </data>
   <data name="EnterLowProbabilityTrigger" xml:space="preserve">
     <value>Enter a low probability trigger, for example: "The character is being attacked by an undead."</value>
@@ -738,8 +738,8 @@
   <data name="EnterLowRarityRestriction" xml:space="preserve">
     <value>Enter a low rarity property, continuing the sentence: "Target...". For example: "Must be female", "Must be an elf", "Must have a soul", "Must be made of wood".</value>
   </data>
-  <data name="EnterMediumActiovationCondition" xml:space="preserve">
-    <value>Indicate a condition that is difficult to reproduce or a condition of medium rarity. For example, rain, full moon, activation only under water, etc.</value>
+  <data name="EnterMediumActivationCondition" xml:space="preserve">
+    <value>Indicate a condition that is difficult to reproduce or a condition of medium rarity.</value>
   </data>
   <data name="EnterMediumRarityRestriction" xml:space="preserve">
     <value>Enter a sign of medium rarity, continuing the sentence: Target...". For example: “Must be in armor”, “Must be in water”, “Must breathe”.</value>
