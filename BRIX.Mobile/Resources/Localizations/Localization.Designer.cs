@@ -3400,7 +3400,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable target chain.
+        ///   Looks up a localized string similar to Enable target chain..
         /// </summary>
         public static string TargetChainEnable {
             get {

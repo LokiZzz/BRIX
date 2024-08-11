@@ -41,14 +41,17 @@
                     <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectCooldown}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CooldownAspectHint}}"/>
-                        <HorizontalStackLayout Spacing="10">
+                        <Grid ColumnSpacing="10" ColumnDefinitions="auto, *">
                             <CheckBox 
+                                Grid.Column="0"
                                 Color="{StaticResource BRIXWhite}"
                                 IsChecked="{Binding Activation.HasCooldown}"/>
                             <Label 
+                                Grid.Column="1"
                                 Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AbilityNeedToRecharge}}"
+                                LineBreakMode="WordWrap"
                                 VerticalOptions="Center"/>
-                        </HorizontalStackLayout>
+                        </Grid>
                         <controls:FramedEntry
                             Text="{Binding Activation.UsesCount}"
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.UsesCount}}"
