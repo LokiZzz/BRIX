@@ -51,34 +51,24 @@ namespace BRIX.Library.Effects
 
         public T? GetAspect<T>(bool throwIfNotFound) where T : AspectBase
         {
-            try
-            {
-                return GetAspect(typeof(T)) as T;
-            }
-            catch
-            {
-                if(throwIfNotFound)
-                {
-                    throw;
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            return GetAspect(typeof(T), throwIfNotFound) as T;
         }
 
         public T GetAspect<T>() where T : AspectBase
         {
-            return GetAspect(typeof(T)) as T 
-                ?? throw new Exception($"У данного эффекта отсутствует аспект {typeof(T)}");
+            if (GetAspect(typeof(T)) is not T aspect)
+            {
+                throw new Exception($"Ошибка получения аспекта {typeof(T)} из эффекта {GetType()}. Несовпадение типов.");
+            }
+
+            return aspect;
         }
 
         /// <summary>
         /// Получить аспект указанного типа. Если такого аспекта в эффекте нет, но его тип указан в списке 
         /// обязательных аспектов, то аспект будет инициализирован и возвращён в out-параметре.
         /// </summary>
-        public AspectBase GetAspect(Type aspectType)
+        public AspectBase? GetAspect(Type aspectType, bool throwIfNotFound = true)
         {
             AspectBase? aspect = Aspects.FirstOrDefault(x => x.GetType() == aspectType);
 
@@ -97,7 +87,12 @@ namespace BRIX.Library.Effects
                 }
             }
 
-            return aspect ?? throw new ArgumentException($"У эффекта {GetType()} нет аспекта {aspectType.Name}");
+            if(throwIfNotFound && aspect == null)
+            {
+                throw new ArgumentException($"У эффекта {GetType()} нет аспекта {aspectType.Name}");
+            }
+
+            return aspect;
         }
 
         protected virtual void InitializeAspect(AspectBase? aspect) { }

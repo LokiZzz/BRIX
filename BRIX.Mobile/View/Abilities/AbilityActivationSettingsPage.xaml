@@ -25,7 +25,7 @@
                         <Grid ColumnDefinitions="auto,*,auto" Margin="10">
                             <Label Grid.Column="0" Text="1" VerticalOptions="Center"/>
                             <Slider Grid.Column="1" Minimum="1" Maximum="25" Value="{Binding Activation.ActionPoints, Mode=TwoWay}"/>
-                            <Label Grid.Column="2" Text="50" VerticalOptions="Center"/>
+                            <Label Grid.Column="2" Text="25" VerticalOptions="Center"/>
                         </Grid>
                         <Grid ColumnDefinitions="*,*,*,*,*" ColumnSpacing="5">
                             <Button Grid.Column="0" Style="{StaticResource LightButton}" Text="1" Command="{Binding SetPointsCommand}" CommandParameter="1"/>
