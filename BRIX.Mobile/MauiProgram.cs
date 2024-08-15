@@ -154,8 +154,7 @@ public static class MauiProgram
     private static void RegisterView<TView, TViewModel>(this MauiAppBuilder builder, bool registerRoute = true)
         where TView : Page where TViewModel : ObservableObject
     {
-        builder.Services.AddTransient<TView>();
-        builder.Services.AddTransient<TViewModel>();
+        builder.Services.AddTransient<TView, TViewModel>();
 
         if (registerRoute)
         {
@@ -166,7 +165,6 @@ public static class MauiProgram
     private static void RegisterPopup<TView, TViewModel>(this MauiAppBuilder builder)
         where TView : Popup where TViewModel : ObservableObject
     {
-        builder.Services.AddTransient<TView>();
-        builder.Services.AddTransient<TViewModel>();
+        builder.Services.AddTransientPopup<TView, TViewModel>();
     }
 }

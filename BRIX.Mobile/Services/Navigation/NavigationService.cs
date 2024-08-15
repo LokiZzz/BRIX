@@ -30,6 +30,9 @@ namespace BRIX.Mobile.Services.Navigation
             ENavigationMode mode = ENavigationMode.Push, 
             params (string, object?)[] parameters)
         {
+            // Для отладки:
+            string pathBefore = $"{Shell.Current.CurrentItem} :: {Shell.Current.CurrentPage} :: {Shell.Current.CurrentState}";
+
             switch(mode)
             {
                 case ENavigationMode.None:
@@ -50,13 +53,13 @@ namespace BRIX.Mobile.Services.Navigation
             {
                 await Shell.Current.GoToAsync(route);
             }
+
+            string pathAfter = $"{Shell.Current.CurrentItem} :: {Shell.Current.CurrentPage} :: {Shell.Current.CurrentState}";
         }
 
         public async Task FireOnNavigatedAsync()
         {
-            ViewModelBase? currentPageVM = Shell.Current.CurrentPage?.BindingContext as ViewModelBase;
-
-            if (currentPageVM != null)
+            if (Shell.Current.CurrentPage?.BindingContext is ViewModelBase currentPageVM)
             {
                 await currentPageVM.OnNavigatedAsync();
             }
@@ -79,7 +82,7 @@ namespace BRIX.Mobile.Services.Navigation
     {
         public static Dictionary<string, object> ToParametersDictionary(this (string, object?)[] parameters)
         {
-            Dictionary<string, object> parametersDictionary = new();
+            Dictionary<string, object> parametersDictionary = [];
 
             foreach ((string Key, object? Value) parameter in parameters)
             {

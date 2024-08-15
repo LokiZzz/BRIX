@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Aspects;
+using BRIX.Library.Characters;
 using BRIX.Library.Extensions;
 
 namespace BRIX.Library.Effects
@@ -12,6 +13,6 @@ namespace BRIX.Library.Effects
 
         public override List<Type> RequiredAspects => [];
 
-        public override int BaseExpCost() => (-5 * Impact.PreciseAverage()).Round();
+        public override int BaseExpCost() => (- CharacterCalculator.HealthToExp(Impact.Average()) / 2d).Round();
     }
 }

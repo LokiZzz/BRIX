@@ -38,10 +38,17 @@ namespace BRIX.Library.Abilities
             {
                 effectsCountPenaltyCoef += (effectiveEffectsCount - 1) * deltaPerEffect;
             }
-            int effectsCost = _effects.Sum(x => x.GetExpCost());
-            int expCost = (Activation.Apply(effectsCost) * effectsCountPenaltyCoef).Round();
 
-            return expCost <= 1 ? 1 : expCost;
+            int effectsPositiveCost = _effects.Where(x => x.GetExpCost() > 0).Sum(x => x.GetExpCost());
+            // Эффекты, которые снижают стоимость не снижают больше, если ослаблять настройки активации.
+            // Поэтому они считаются отдельно.
+            int effectsNegativeCost = _effects.Where(x => x.GetExpCost() < 0).Sum(x => x.GetExpCost());
+
+            double expCost = Activation.Apply(effectsPositiveCost) 
+                * effectsCountPenaltyCoef 
+                + effectsNegativeCost;
+
+            return expCost <= 1 ? 1 : expCost.Round();
         }
 
         // Версия расчёта стоимости эффектов для случая, когда в способности могут быть эффекты одинакого типа.

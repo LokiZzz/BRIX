@@ -38,7 +38,7 @@ namespace BRIX.Mobile.ViewModel.Abilities.Effects
                 Name = Localization.EffectAcceleration,
                 Icon = AwesomeRPG.FeatherWing,
                 EditPage = typeof(AccelerationEffectPage),
-                Effect = new DamageEffect()
+                Effect = new AccelerationEffect()
             }},
             { typeof(EffectGenericModelBase<DecelerationEffect>), new EffectTypeVM() {
                 Name = Localization.EffectDeceleration,
