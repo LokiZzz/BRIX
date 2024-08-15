@@ -20,6 +20,6 @@ namespace BRIX.Library.Effects
             typeof(DurationAspect)
         ];
 
-        public override int BaseExpCost() => 500;
+        public override int BaseExpCost() => 200;
     }
 }

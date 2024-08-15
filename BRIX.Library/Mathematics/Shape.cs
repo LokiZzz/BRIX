@@ -4,16 +4,16 @@ namespace BRIX.Library.Mathematics
 {
     public interface IShape
     {
-        int GetVolume();
+        double GetVolume();
     }
 
     public class Brick : IShape
     {
-        public int A { get; set; } = 1;
-        public int B { get; set; } = 1;
-        public int C { get; set; } = 1;
+        public double A { get; set; } = 1;
+        public double B { get; set; } = 1;
+        public double C { get; set; } = 1;
 
-        public int GetVolume() => A * B * C;
+        public double GetVolume() => A * B * C;
 
         public override string ToString()
         {
@@ -23,10 +23,10 @@ namespace BRIX.Library.Mathematics
 
     public class Sphere : IShape
     {
-        public int R { get; set; } = 1;
+        public double R { get; set; } = 1;
 
         // 4/3 * 3.14 * R^3 * коэффициент для повышения эффективности неудобной области
-        public int GetVolume() => (4 * R * R * R * 0.5).Round(); 
+        public double GetVolume() => (4 * R * R * R * 0.5).Round(); 
         
         public override string ToString()
         {
@@ -36,10 +36,10 @@ namespace BRIX.Library.Mathematics
 
     public class Cylinder : IShape
     {
-        public int R { get; set; } = 1;
-        public int H { get; set; } = 1;
+        public double R { get; set; } = 1;
+        public double H { get; set; } = 1;
 
-        public int GetVolume()
+        public double GetVolume()
         {
             return 3 * R * R * H;
         }
@@ -51,11 +51,11 @@ namespace BRIX.Library.Mathematics
     }
     public class Cone : IShape
     {
-        public int R { get; set; } = 1;
-        public int H { get; set; } = 1;
+        public double R { get; set; } = 1;
+        public double H { get; set; } = 1;
 
         // R^2 * H * коэффициент для повышения эффективности неудобной области
-        public int GetVolume() => (R * R * H * 0.5).Round();
+        public double GetVolume() => (R * R * H * 0.5).Round();
 
         public override string ToString()
         {
@@ -72,7 +72,7 @@ namespace BRIX.Library.Mathematics
         /// </summary>
         public bool IsArbitrary { get; set; }
 
-        public int GetVolume() => N;
+        public double GetVolume() => N;
 
         public override string ToString()
         {

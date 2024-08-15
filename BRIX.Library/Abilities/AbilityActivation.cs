@@ -84,9 +84,9 @@ namespace BRIX.Library.Abilities
         {
             return trigger switch
             {
-                ETriggerProbability.Low => 2.5,
-                ETriggerProbability.Medium => 5,
-                ETriggerProbability.High => 10,
+                ETriggerProbability.Low => 2,
+                ETriggerProbability.Medium => 4,
+                ETriggerProbability.High => 8,
                 _ => throw new NotImplementedException($"Неизвестная редкость триггера способности {trigger}")
             };
         }

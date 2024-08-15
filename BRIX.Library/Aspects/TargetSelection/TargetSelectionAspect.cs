@@ -1,4 +1,6 @@
-﻿using BRIX.Library.Mathematics;
+﻿using BRIX.Library.Extensions;
+using BRIX.Library.Mathematics;
+using System.Net.Mime;
 
 namespace BRIX.Library.Aspects.TargetSelection
 {
@@ -51,13 +53,13 @@ namespace BRIX.Library.Aspects.TargetSelection
         {
             double distanceCoef = GetDistanceCoeficient(AreaSettings.DistanceToAreaInMeters);
 
-            int volume = AreaSettings.Area.Shape.GetVolume() <= 1 ? 1 : AreaSettings.Area.Shape.GetVolume();
-            // +45% за каждый квадратный метр объёма области, так как область менее эффективна, чем NTAD.
-            double volumeCoef = ((volume - 1) * 30).ToCoeficient(); 
+            double volume = AreaSettings.Area.Shape.GetVolume() <= 1 ? 1 : AreaSettings.Area.Shape.GetVolume();
+            // +20% за каждый квадратный метр объёма области, так как область менее эффективна, чем NTAD.
+            double volumeCoef = ((volume - 1) * 20).Round().ToCoeficient(); 
 
             if(AreaSettings.Area.Shape is VoxelArray voxelArray && voxelArray.IsArbitrary)
             {
-                volumeCoef *= 4;
+                volumeCoef *= 2;
             }
 
             double excludedTargetsCoef = new ThrasholdCostConverter((0, 0), (1, 30), (6, 5))

@@ -90,11 +90,11 @@
 
         string resultString = shape switch
         {
-            Brick brick => $"области в форме куба со сторонами {brick.A}, {brick.B} и {Numbers.RUSDeclension(brick.C, "метр", "метра", "метров")}",
-            Sphere sphere => $"области в форме сферы с радиусом {Numbers.RUSDeclension(sphere.R, "метр", "метра", "метров")}",
-            Cone cone => $"области в форме конуса с высотой {cone.H} и радиусом {Numbers.RUSDeclension(cone.R, "метр", "метра", "метров")}",
-            Cylinder cylinder => $"области в форме цилиндра с высотой {cylinder.H} и радиусом {Numbers.RUSDeclension(cylinder.R, "метр", "метра", "метров")}",
-            VoxelArray voxels => $"в области сложной формы, состоящей из {Numbers.RUSDeclension(voxels.N, "вокселя", "вокселей", "вокселей")}",
+            Brick brick => $"области в форме куба со сторонами {brick.A}, {brick.B} и {Numbers.RUSDcln(brick.C, "метр", "метра", "метров")}",
+            Sphere sphere => $"области в форме сферы с радиусом {Numbers.RUSDcln(sphere.R, "метр", "метра", "метров")}",
+            Cone cone => $"области в форме конуса с высотой {cone.H} и радиусом {Numbers.RUSDcln(cone.R, "метр", "метра", "метров")}",
+            Cylinder cylinder => $"области в форме цилиндра с высотой {cylinder.H} и радиусом {Numbers.RUSDcln(cylinder.R, "метр", "метра", "метров")}",
+            VoxelArray voxels => $"в области сложной формы, состоящей из {Numbers.RUSDcln(voxels.N, "вокселя", "вокселей", "вокселей")}",
             _ => TemplateHelper.LexisTemplatingError
         };
 

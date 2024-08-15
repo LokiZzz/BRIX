@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Mathematics;
+﻿using BRIX.Library.Extensions;
+using BRIX.Library.Mathematics;
 
 namespace BRIX.Library.Aspects
 {
@@ -24,8 +25,8 @@ namespace BRIX.Library.Aspects
                 .Convert(DistanceToArea)
                 .ToCoeficient();
 
-            int volume = AreaShape.Shape.GetVolume() <= 1 ? 1 : AreaShape.Shape.GetVolume();
-            double volumeCoef = ((volume - 1) * 25).ToCoeficient();
+            double volume = AreaShape.Shape.GetVolume() <= 1 ? 1 : AreaShape.Shape.GetVolume();
+            double volumeCoef = ((volume - 1) * 25).Round().ToCoeficient();
 
             if (AreaShape.Shape is VoxelArray voxelArray && voxelArray.IsArbitrary)
             {

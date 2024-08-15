@@ -25,7 +25,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
         }
 
-        public int R
+        public double R
         {
             get
             {
@@ -66,7 +66,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
         }
 
-        public int H
+        public double H
         {
             get
             {
@@ -99,7 +99,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
         }
 
-        public int A
+        public double A
         {
             get => Internal.Shape is Brick brick ? brick.A : 1;
             set
@@ -112,7 +112,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
         }
 
-        public int B
+        public double B
         {
             get => Internal.Shape is Brick brick ? brick.B : 1;
             set
@@ -125,7 +125,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             }
         }
 
-        public int C
+        public double C
         {
             get => Internal.Shape is Brick brick ? brick.C : 1;
             set
