@@ -66,9 +66,18 @@ namespace BRIX.Mobile.Services
 
         public async Task<List<Character>> GetAllAsync()
         {
-            List<Character> characters = await _storage.ReadJson<List<Character>>(_charactersFileName) ?? [];
+            try
+            {
+                List<Character> characters = await _storage.ReadJson<List<Character>>(_charactersFileName) ?? [];
 
-            return characters;
+                return characters;
+            }
+            catch
+            {
+                await RemoveAllAsync();
+
+                return [];
+            }
         }
 
         public async Task<Character> GetAsync(Guid id)
