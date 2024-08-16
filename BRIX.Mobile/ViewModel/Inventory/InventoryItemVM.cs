@@ -1,5 +1,5 @@
-﻿using BRIX.Library.Characters.Inventory;
-using BRIX.Library.Extensions;
+﻿using BRIX.Library.Extensions;
+using BRIX.Library.Items;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -8,13 +8,13 @@ namespace BRIX.Mobile.ViewModel.Inventory
 {
     public partial class InventoryItemVM : ObservableObject
     {
-        public InventoryItemVM(InventoryItem model)
+        public InventoryItemVM(Item model)
         {
             InternalModel = model;
         }
 
-        private InventoryItem _internalModel = new();
-        public InventoryItem InternalModel
+        private Item _internalModel = new();
+        public Item InternalModel
         {
             get => _internalModel;
             set
@@ -29,7 +29,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
                     case ConsumableItem:
                         Type = EInventoryItemType.Consumable;
                         break;
-                    case InventoryItem:
+                    case Item:
                         Type = EInventoryItemType.Thing;
                         break;
                 }
@@ -164,7 +164,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 return;
             }
 
-            InventoryItem newItem = InventoryItemConverter.CreateItemByType(type.Value, InternalModel);
+            Item newItem = InventoryItemConverter.CreateItemByType(type.Value, InternalModel);
             newItem.Id = InternalModel.Id;
 
             if(newItem is ConsumableItem newMaterial && InternalModel is ConsumableItem oldMaterial)
@@ -184,7 +184,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
         public override string ToString() => Name;
     }
 
-    public class InventoryItemNodeVM(InventoryItem model) : InventoryItemVM(model)
+    public class InventoryItemNodeVM(Item model) : InventoryItemVM(model)
     {
         public ImageSource? Icon { get; set; }
         public Color? BackgroundColor { get; set; }

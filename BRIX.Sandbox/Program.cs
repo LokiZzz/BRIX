@@ -1,27 +1,46 @@
-﻿using BRIX.Lexica;
-using BRIX.Library.Abilities;
-using BRIX.Library.Aspects;
-using BRIX.Library.Characters;
-using BRIX.Library.DiceValue;
-using BRIX.Library.Effects;
-using BRIX.Library.Mathematics;
-using BRIX.Utility.Extensions;
-using Newtonsoft.Json;
-using System.Net.Http.Json;
-using System.Text.Json.Serialization;
+﻿using BRIX.Library.DiceValue;
+using BRIX.Library.Items;
 
-Ability ability1 = new();
+//while(true)
+//{
+//    string[] input = Console.ReadLine().Split(' ');
+//    int price = int.Parse(input[0]);
+//    int distance = int.Parse(input[1]);
+//    WeaponItem sword = new();
+//    sword.TuneToPrice(price, distance);
 
-ability1.AddEffect(new DamageEffect { Impact = new((1, 4)) });
-ability1.AddEffect(new DamageEffect { Impact = new((1, 4)) });
+//    Console.WriteLine($"Damage: {sword.Damage}, Distance: {sword.Distance}, Price: {sword.Price}, Level: {sword.LevelRequired}");
+//}
 
-int cost1 = ability1.ExpCost();
+ArmoryShop shop = new ();
+shop.WeaponNames = [
+    "Посох", "Булава", "Дубинка", "Кинжал", "Копьё", "Молот", 
+    "Палица", "Топор", "Серп", "Алебарда", "Хопеш", "Кирка", "Глефа", 
+    "Меч", "Моргенштерн", "Пика", "Рапира", "Секира", "Скимитар", 
+    "Ятаган", "Трезубец", "Цеп", "Двуручный меч", "Цвайхендер", "Катана",
+    "Коса", "Лопата"
+];
+shop.RangedWeaponNames = [
+    "Лук", "Арбалет", "Мушкетон", "Винтовка", "Пистоль", "Праща", 
+    "Пушка", "Аркебуза", "Ружьё", "Жезл", "Посох", "Волшебная палочка",
+    "Кристалл"
+];
+shop.WeaponGradesNames = ["Хороший", "Качественный", "Отличный", "Редкий", "Легендарный"];
+shop.WeaponNarrativePrefixes = [
+    "Драконий", "Кованый", "Рунический", "Волшебный", "Крепкий", "Сэлоранский", "Аварисский",
+    "Огненный", "Зачарованный", "Усиленный", "Композитный", "Дорогой", "Украшенный", 
+    "Палеомантический", "Морозный", "Каменный", "Кристальный", "Железный", "Электрический",
+    "Раскатный", "Лёгкий", "Тяжёлый", "Ядовитый", "Кровожадный"
+];
 
-Ability ability2 = new();
+List<WeaponItem> weapons = shop.GenerateWeapons(15, 1, 10, 2000);
 
-ability2.AddEffect(new DamageEffect { Impact = new((2, 4)) });
+Console.WriteLine($"\t\t\t\tУрон\tДистанция\tСтоимость");
 
-int cost2 = ability1.ExpCost();
-
+foreach (WeaponItem weapon in weapons)
+{
+    Console.WriteLine(weapon.Name);
+    Console.WriteLine($"\t\t\t\t{weapon.Damage}\t{weapon.Distance}\t{weapon.Price} монет");
+}
 
 Console.ReadLine();

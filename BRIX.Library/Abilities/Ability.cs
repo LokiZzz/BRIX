@@ -1,10 +1,10 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Characters;
-using BRIX.Library.Characters.Inventory;
 using BRIX.Library.DiceValue;
 using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
+using BRIX.Library.Items;
 using System.Net;
 
 namespace BRIX.Library.Abilities

@@ -17,7 +17,7 @@ using BRIX.Mobile.ViewModel.Inventory;
 using BRIX.Library.Abilities;
 using BRIX.Mobile.ViewModel.Abilities.Aspects;
 using BRIX.Mobile.Models.Abilities.Aspects;
-using BRIX.Library.Characters.Inventory;
+using BRIX.Library.Items;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {
@@ -168,7 +168,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 return;
             }
 
-            IEnumerable<InventoryItem> availiableItems = _characterCopy.Inventory.Items.Where(x =>
+            IEnumerable<Item> availiableItems = _characterCopy.Inventory.Items.Where(x =>
                 !MaterialSupport.Any(y => y.Name == x.Name) && x is ConsumableItem
             );
             IEnumerable<InventoryItemNodeVM> availiableItemsNodes = availiableItems.Select(_inventoryConverter.ToVM);

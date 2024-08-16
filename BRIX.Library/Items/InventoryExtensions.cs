@@ -1,4 +1,4 @@
-﻿namespace BRIX.Library.Characters.Inventory
+﻿namespace BRIX.Library.Items
 {
     public static class InventoryExtensions
     {
@@ -8,14 +8,14 @@
         /// то содержимое сначала «вываливается» в контейнер на уровень выше, 
         /// самым последним уровнем является «корень» инвентаря.
         /// </summary>
-        public static void Remove(this CharacterInventory inventory, InventoryItem itemToDelete, bool saveContent = false)
+        public static void Remove(this CharacterInventory inventory, Item itemToDelete, bool saveContent = false)
         {
             if (saveContent && itemToDelete is ContainerItem containerToDelete)
             {
                 inventory.MoveContentUpper(containerToDelete);
             }
 
-            foreach (InventoryItem item in inventory.Items)
+            foreach (Item item in inventory.Items)
             {
                 if (item == itemToDelete)
                 {
@@ -40,7 +40,7 @@
             }
             else
             {
-                foreach (InventoryItem item in inventory.Items)
+                foreach (Item item in inventory.Items)
                 {
                     if (item is ContainerItem container && container.Payload.Contains(containerToDelete))
                     {
@@ -50,9 +50,9 @@
             }
         }
 
-        public static void Swap(this CharacterInventory inventory, InventoryItem oldItem, InventoryItem newItem)
+        public static void Swap(this CharacterInventory inventory, Item oldItem, Item newItem)
         {
-            foreach (InventoryItem item in inventory.Items.ToList())
+            foreach (Item item in inventory.Items.ToList())
             {
                 if (item.Equals(oldItem))
                 {

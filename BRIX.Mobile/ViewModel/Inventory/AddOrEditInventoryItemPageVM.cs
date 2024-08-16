@@ -1,5 +1,5 @@
 ﻿using BRIX.Library.Characters;
-using BRIX.Library.Characters.Inventory;
+using BRIX.Library.Items;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
@@ -19,7 +19,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
         private EEditingMode _mode;
         private CharacterInventory _inventory = new();
-        private InventoryItem? _editingItem;
+        private Item? _editingItem;
 
         private string _title = string.Empty;
         public string Title
@@ -28,7 +28,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             set => SetProperty(ref _title, value);
         }
 
-        private InventoryItemVM _item = new(new InventoryItem());
+        private InventoryItemVM _item = new(new Item());
         public InventoryItemVM Item
         {
             get => _item;
@@ -164,7 +164,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             _mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
             _inventory = query.GetParameterOrDefault<CharacterInventory>(NavigationParameters.Inventory)
                 ?? throw new Exception("В параметры страницы редактирования предмета не передан инвентарь персонажа.");
-            InventoryItem? originalItem = query.GetParameterOrDefault<InventoryItem>(
+            Item? originalItem = query.GetParameterOrDefault<Item>(
                 NavigationParameters.InventoryItem
             );
 
@@ -172,7 +172,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
             if(_editingItem == null)
             {
-                Item = new InventoryItemVM(new InventoryItem());
+                Item = new InventoryItemVM(new Item());
                 _inventory.Content.Add(Item.InternalModel);
             }
             else
@@ -306,7 +306,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
         {
             Item.Type = value.Type;
             SetProperty(ref _selectedType, value, nameof(SelectedType));
-            InventoryItem? existingItem = _inventory.Items.FirstOrDefault(x => x.Equals(Item.InternalModel));
+            Item? existingItem = _inventory.Items.FirstOrDefault(x => x.Equals(Item.InternalModel));
 
             if (existingItem != null)
             {

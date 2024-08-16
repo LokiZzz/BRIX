@@ -1,6 +1,6 @@
 ﻿using BRIX.Library.Abilities;
-using BRIX.Library.Characters.Inventory;
 using BRIX.Library.Extensions;
+using BRIX.Library.Items;
 using BRIX.Utility.Extensions;
 
 namespace BRIX.Library.Characters

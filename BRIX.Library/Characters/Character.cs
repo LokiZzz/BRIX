@@ -1,4 +1,4 @@
-﻿using BRIX.Library.Characters.Inventory;
+﻿using BRIX.Library.Items;
 
 namespace BRIX.Library.Characters
 {

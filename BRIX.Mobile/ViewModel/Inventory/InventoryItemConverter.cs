@@ -1,4 +1,4 @@
-﻿using BRIX.Library.Characters.Inventory;
+﻿using BRIX.Library.Items;
 
 namespace BRIX.Mobile.ViewModel.Inventory
 {
@@ -9,7 +9,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             InitializeVisual();
         }
 
-        public InventoryItemNodeVM ToVM(InventoryItem item)
+        public InventoryItemNodeVM ToVM(Item item)
         {
             InventoryItemNodeVM viewModel = new(item)
             {
@@ -27,7 +27,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 case ConsumableItem consumable:
                     viewModel.Icon = _consumableIS;
                     break;
-                case InventoryItem:
+                case Item:
                     viewModel.Icon = _gemIS;
                     break;
             }
@@ -35,14 +35,14 @@ namespace BRIX.Mobile.ViewModel.Inventory
             return viewModel;
         }
 
-        public static InventoryItem CreateItemByType(EInventoryItemType type, InventoryItem? prototype = null)
+        public static Item CreateItemByType(EInventoryItemType type, Item? prototype = null)
         {
-            InventoryItem item = new();
+            Item item = new();
 
             switch (type)
             {
                 case EInventoryItemType.Thing:
-                    item = new InventoryItem();
+                    item = new Item();
                     break;
                 case EInventoryItemType.Container:
                     item = new ContainerItem();

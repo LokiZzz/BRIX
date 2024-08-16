@@ -1,5 +1,5 @@
 ﻿using BRIX.Library.Characters;
-using BRIX.Library.Characters.Inventory;
+using BRIX.Library.Items;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;

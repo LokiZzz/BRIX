@@ -1,6 +1,6 @@
-﻿namespace BRIX.Library.Characters.Inventory
+﻿namespace BRIX.Library.Items
 {
-    public class InventoryItem
+    public class Item
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
@@ -14,7 +14,7 @@
 
         public override bool Equals(object? otherObject)
         {
-            if (otherObject is not InventoryItem other)
+            if (otherObject is not Item other)
             {
                 return false;
             }
