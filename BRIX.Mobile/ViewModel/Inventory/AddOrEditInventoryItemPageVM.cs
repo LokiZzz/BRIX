@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Characters;
+using BRIX.Library.Characters.Inventory;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
@@ -17,7 +18,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
         private readonly ICharacterService _characterService = characterService;
 
         private EEditingMode _mode;
-        private Library.Characters.Inventory _inventory = new();
+        private CharacterInventory _inventory = new();
         private InventoryItem? _editingItem;
 
         private string _title = string.Empty;
@@ -136,14 +137,14 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
             Character currentCharacter = await _characterService.GetCurrentCharacterGuaranteed();
             bool affectsAbility = _mode == EEditingMode.Edit 
-                && Item.InternalModel is MaterialSupport material
-                && currentCharacter.HaveMaterialDependedAbilities(material) == true;
+                && Item.InternalModel is ConsumableItem material
+                && currentCharacter.ConsumableDependedAbilitiesCount(material) > 0;
 
             if (affectsAbility)
             {
-                if (Item.InternalModel is MaterialSupport materialSupport)
+                if (Item.InternalModel is ConsumableItem materialSupport)
                 {
-                    if (currentCharacter.UpdateMaterialSupport(materialSupport) == false)
+                    if (currentCharacter.UpdateConsumable(materialSupport) == false)
                     {
                         await Alert(Localization.InventoryNotEnoughEXPForChanges);
 
@@ -161,7 +162,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             _mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
-            _inventory = query.GetParameterOrDefault<Library.Characters.Inventory>(NavigationParameters.Inventory)
+            _inventory = query.GetParameterOrDefault<CharacterInventory>(NavigationParameters.Inventory)
                 ?? throw new Exception("В параметры страницы редактирования предмета не передан инвентарь персонажа.");
             InventoryItem? originalItem = query.GetParameterOrDefault<InventoryItem>(
                 NavigationParameters.InventoryItem
@@ -200,8 +201,8 @@ namespace BRIX.Mobile.ViewModel.Inventory
         private void InitializeContainers()
         {
             List<InventoryContainerVM> containers = _inventory.Items
-                .Where(x => x is Container && x != Item.InternalModel)
-                .Select(x => new InventoryContainerVM { Name = x.Name, OriginalModelRefernece = (Container)x })
+                .Where(x => x is ContainerItem && x != Item.InternalModel)
+                .Select(x => new InventoryContainerVM { Name = x.Name, OriginalModelRefernece = (ContainerItem)x })
                 .ToList();
             containers.Add(new InventoryContainerVM { Name = Localization.Inventory });
             Containers = new(containers);
@@ -266,9 +267,9 @@ namespace BRIX.Mobile.ViewModel.Inventory
             { 
                 Character character = await _characterService.GetCurrentCharacterGuaranteed();
 
-                if (Item.InternalModel is MaterialSupport materialSupport)
+                if (Item.InternalModel is ConsumableItem materialSupport)
                 {
-                    bool canRemove = character.CanRemoveMaterialSupport(materialSupport);
+                    bool canRemove = character.CanRemoveConsumable(materialSupport);
 
                     if (!canRemove)
                     {
@@ -282,7 +283,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
             bool wasContainerAndNowIsNot = SelectedType.Type == EInventoryItemType.Container
                 && itemType.Type != EInventoryItemType.Container
-                && (Item.InternalModel as Container)?.Payload?.Count > 0;
+                && (Item.InternalModel as ContainerItem)?.Payload?.Count > 0;
 
             if (wasContainerAndNowIsNot)
             {
@@ -290,7 +291,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
                 if (result?.Answer == EAlertPopupResult.No)
                 {
-                    if (Item.InternalModel is Container container)
+                    if (Item.InternalModel is ContainerItem container)
                     {
                         _inventory.MoveContentUpper(container);
                     }
@@ -320,10 +321,10 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 return;
             }
 
-            Container? oldContainer = _inventory.Items.FirstOrDefault(x =>
-                x is Container container && container.Payload.Contains(Item.InternalModel)
-            ) as Container;
-            Container? newContainer = value.OriginalModelRefernece;
+            ContainerItem? oldContainer = _inventory.Items.FirstOrDefault(x =>
+                x is ContainerItem container && container.Payload.Contains(Item.InternalModel)
+            ) as ContainerItem;
+            ContainerItem? newContainer = value.OriginalModelRefernece;
 
             if(oldContainer == newContainer)
             {
@@ -362,7 +363,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
     public class InventoryContainerVM
     {
-        public Container? OriginalModelRefernece { get; set; }
+        public ContainerItem? OriginalModelRefernece { get; set; }
         public string Name { get; set; } = string.Empty;
 
         public override string ToString() => Name;

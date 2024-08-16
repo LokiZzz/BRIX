@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Abilities;
+using BRIX.Library.Characters.Inventory;
 using BRIX.Library.Extensions;
 using BRIX.Utility.Extensions;
 
@@ -6,29 +7,16 @@ namespace BRIX.Library.Characters
 {
     public partial class Character
     {
-        public List<MaterialSupport> GetMaterialSupportForAbility(Ability ability)
+        public List<ConsumableItem> GetConsumablesForAbility(Ability ability)
         {
-            List<Guid> itemsGuids = MaterialSupport
+            List<Guid> itemsGuids = AbilityConsumables
                 .Where(x => x.AbilityId == ability.Id)
-                .Select(x => x.MaterialSupportId)
+                .Select(x => x.ConsumableId)
                 .ToList();
 
             return Inventory.Items
-                .Where(x => itemsGuids.Any(y => y == x.Id))
-                .Cast<MaterialSupport>()
-                .ToList();
-        }
-
-        public List<Consumable> GetConsumablesForAbility(Ability ability)
-        {
-            List<Guid> itemsGuids = MaterialSupport
-                .Where(x => x.AbilityId == ability.Id)
-                .Select(x => x.MaterialSupportId)
-                .ToList();
-
-            return Inventory.Items
-                .Where(x => itemsGuids.Any(y => y == x.Id) && x is Consumable)
-                .Cast<Consumable>()
+                .Where(x => itemsGuids.Any(y => y == x.Id) && x is ConsumableItem)
+                .Cast<ConsumableItem>()
                 .ToList();
         }
 
@@ -43,14 +31,14 @@ namespace BRIX.Library.Characters
                 return false;
             }
 
-            List<MaterialSupport> materialSupport = GetMaterialSupportForAbility(ability);
+            List<ConsumableItem> materialSupport = GetConsumablesForAbility(ability);
 
-            foreach (MaterialSupport abilityMaterial in materialSupport)
+            foreach (ConsumableItem abilityMaterial in materialSupport)
             {
                 bool matirealExistsAndAvailiable = Inventory.Items.Any(x =>
-                    x is MaterialSupport existingMaterial
+                    x is ConsumableItem existingMaterial
                     && existingMaterial.Equals(abilityMaterial)
-                    && existingMaterial.IsAvailable
+                    && existingMaterial.IsAvailiable
                 );
 
                 if (!matirealExistsAndAvailiable)
@@ -70,7 +58,6 @@ namespace BRIX.Library.Characters
         /// <summary>
         /// Активация способности персонажем — трата расходников и очков действий.
         /// </summary>
-        /// <param name="ability"></param>
         public void ActivateAbility(Ability ability)
         {
             if (!Abilities.Contains(ability) || !GetAbilityAvailability(ability))
@@ -78,7 +65,7 @@ namespace BRIX.Library.Characters
                 return;
             }
 
-            foreach (Consumable consumable in GetConsumablesForAbility(ability))
+            foreach (ConsumableItem consumable in GetConsumablesForAbility(ability))
             {
                 consumable.Count--;
             }
@@ -90,25 +77,23 @@ namespace BRIX.Library.Characters
         }
 
         /// <summary>
-        /// Заменяет материальное обеспечение в инвентаре.
+        /// Заменяет расходник способности на переданный, с обновлёнными свойствами.
         /// При изменении стоимости обеспечения произойдёт пересчёт опыта.
         /// Если персонажу не хватает опыта на такое изменение, то изменение не произойдёт, а метод вернёт False.
         /// </summary>
-        public bool UpdateMaterialSupport(MaterialSupport itemToUpdate)
+        public bool UpdateConsumable(ConsumableItem itemToUpdate)
         {
             if (!Inventory.Items.Any(x => x.Equals(itemToUpdate)))
             {
-                throw new Exception("У персонажа не найдено соответствующее материальное обеспечение.");
+                throw new Exception("Такого предмета нет в инвентаре.");
             }
 
-            Character? copyOfThis = this.Copy();
+            ConsumableItem existingItem = (ConsumableItem)Inventory.Items.Single(x => x.Equals(itemToUpdate));
+            int dependentAbilitiesCount = ConsumableDependedAbilitiesCount(existingItem);
+            int expDiff = itemToUpdate.ToExpEquivalent() * dependentAbilitiesCount
+                - existingItem.ToExpEquivalent() * dependentAbilitiesCount;
 
-            if (Inventory.Items.Single(x => x.Equals(itemToUpdate)) is MaterialSupport existingItem)
-            {
-                copyOfThis?.Inventory.Swap(existingItem, itemToUpdate);
-            }
-
-            if (copyOfThis?.AvailableExp < 0)
+            if (expDiff < 0)
             {
                 return false;
             }
@@ -119,43 +104,49 @@ namespace BRIX.Library.Characters
         }
 
         /// <summary>
-        /// Удаляет материальное обеспечение в инвентаре и способностях, зависимые способности станут дороже.
+        /// Удаляет материальное обеспечение из инвентаря и способностей, зависимые способности станут дороже.
         /// Если персонажу не хватает опыта на такое изменение, то изменение не произойдёт, а метод вернёт False.
         /// </summary>
-        public bool RemoveMaterialSupport(MaterialSupport itemToRemove, bool saveContent = false)
+        public bool RemoveConsumable(ConsumableItem itemToRemove, bool saveContent = false)
         {
-            if (!Inventory.Items.Any(x => x.Equals(itemToRemove)))
+            if (!Inventory.Items.Contains(itemToRemove))
             {
-                throw new Exception("У персонажа не найдено соответствующее материальное обеспечение.");
+                throw new Exception("Такого предмета нет в инвентаре.");
             }
 
-            if (!CanRemoveMaterialSupport(itemToRemove))
+            if (!CanRemoveConsumable(itemToRemove))
             {
                 return false;
             }
 
             Inventory.Remove(itemToRemove, saveContent);
-            MaterialSupport.RemoveAll(x => x.MaterialSupportId == itemToRemove.Id);
+            AbilityConsumables.RemoveAll(x => x.ConsumableId == itemToRemove.Id);
 
             return true;
         }
 
-        public bool CanRemoveMaterialSupport(MaterialSupport itemToRemove)
+        public bool CanRemoveConsumable(ConsumableItem itemToRemove)
         {
-            if (!HaveMaterialDependedAbilities(itemToRemove))
+            if(!Inventory.Items.Contains(itemToRemove))
+            {
+                throw new Exception("Такого предмета нет в инвентаре.");
+            }
+
+            int dependentAbilitiesCount = ConsumableDependedAbilitiesCount(itemToRemove);
+
+            if (dependentAbilitiesCount == 0)
             {
                 return true;
             }
 
-            MaterialSupport existingItem = (MaterialSupport)Inventory.Items.Single(x => x.Equals(itemToRemove));
-            int expDiff = itemToRemove.ToExpEquivalent().Round();
+            int expDiff = itemToRemove.ToExpEquivalent() * dependentAbilitiesCount;
 
             return AvailableExp > expDiff;
         }
 
-        public bool HaveMaterialDependedAbilities(MaterialSupport item)
+        public int ConsumableDependedAbilitiesCount(ConsumableItem item)
         {
-            return MaterialSupport.Any(x => x.MaterialSupportId == item.Id);
+            return AbilityConsumables.Count(x => x.ConsumableId == item.Id);
         }
     }
 }

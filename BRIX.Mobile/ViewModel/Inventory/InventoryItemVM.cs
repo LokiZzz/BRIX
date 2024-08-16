@@ -1,4 +1,4 @@
-﻿using BRIX.Library.Characters;
+﻿using BRIX.Library.Characters.Inventory;
 using BRIX.Library.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -23,13 +23,10 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
                 switch(value)
                 {
-                    case Container:
+                    case ContainerItem:
                         Type = EInventoryItemType.Container;
                         break;
-                    case Equipment:
-                        Type = EInventoryItemType.Equipment;
-                        break;
-                    case Consumable:
+                    case ConsumableItem:
                         Type = EInventoryItemType.Consumable;
                         break;
                     case InventoryItem:
@@ -67,7 +64,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 OnPropertyChanged(nameof(PriceString));
                 OnPropertyChanged(nameof(FullPrice));
 
-                if (Type == EInventoryItemType.Equipment || Type == EInventoryItemType.Consumable)
+                if (Type == EInventoryItemType.Consumable)
                 {
                     OnFullPriceChanged?.Invoke(this, FullPrice);
                 }
@@ -80,21 +77,21 @@ namespace BRIX.Mobile.ViewModel.Inventory
         {
             get
             {
-                if(Type == EInventoryItemType.Equipment || Type == EInventoryItemType.Consumable)
+                if(Type == EInventoryItemType.Consumable)
                 {
-                    return (InternalModel as MaterialSupport)?.CoinsPrice ?? 0;
+                    return (InternalModel as ConsumableItem)?.Price ?? 0;
                 }
 
                 return 0;
             }
             set
             {
-                if (Type == EInventoryItemType.Equipment || Type == EInventoryItemType.Consumable)
+                if (Type == EInventoryItemType.Consumable)
                 {
-                    if (InternalModel is MaterialSupport internalModel)
+                    if (InternalModel is ConsumableItem internalModel)
                     {
                         SetProperty(
-                            internalModel.CoinsPrice, value, internalModel, (model, prop) => model.CoinsPrice = prop
+                            internalModel.Price, value, internalModel, (model, prop) => model.Price = prop
                         );
                     }
                 }
@@ -116,9 +113,9 @@ namespace BRIX.Mobile.ViewModel.Inventory
         {
             get
             {
-                if(InternalModel is MaterialSupport materialSupport)
+                if(InternalModel is ConsumableItem materialSupport)
                 {
-                    return $"– {materialSupport.ToExpEquivalent().Round()} EXP";
+                    return $"– {materialSupport.ToExpEquivalent()} EXP";
                 }
                 else
                 {
@@ -142,19 +139,6 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
-        public bool IsAvailiable
-        {
-            get => (InternalModel as MaterialSupport)?.IsAvailable ?? true;
-            set
-            {
-                if(InternalModel is Equipment equipment)
-                {
-                    equipment.SetIsAvailable(value);
-                    OnPropertyChanged(nameof(IsAvailiable));
-                }
-            }
-        }
-
         private ObservableCollection<InventoryItemVM> _payload = [];
         public ObservableCollection<InventoryItemVM> Payload
         {
@@ -164,8 +148,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
         public bool ShowPayload => Type == EInventoryItemType.Container;     
         public bool ShowCount => Count != 1 || Type == EInventoryItemType.Consumable;
-        public bool ShowPrice => Type == EInventoryItemType.Equipment || Type == EInventoryItemType.Consumable;
-        public bool ShowIsAvailiable => Type == EInventoryItemType.Equipment;
+        public bool ShowPrice => Type == EInventoryItemType.Consumable;
 
         private RelayCommand? _descriptionCommand;
         public RelayCommand? DescriptionCommand
@@ -184,9 +167,9 @@ namespace BRIX.Mobile.ViewModel.Inventory
             InventoryItem newItem = InventoryItemConverter.CreateItemByType(type.Value, InternalModel);
             newItem.Id = InternalModel.Id;
 
-            if(newItem is MaterialSupport newMaterial && InternalModel is MaterialSupport oldMaterial)
+            if(newItem is ConsumableItem newMaterial && InternalModel is ConsumableItem oldMaterial)
             {
-                newMaterial.CoinsPrice = oldMaterial.CoinsPrice;
+                newMaterial.Price = oldMaterial.Price;
             }
 
             InternalModel = newItem;
@@ -196,7 +179,6 @@ namespace BRIX.Mobile.ViewModel.Inventory
             OnPropertyChanged(nameof(ShowCount));
             OnPropertyChanged(nameof(ShowPrice));
             OnPropertyChanged(nameof(ShowPayload));
-            OnPropertyChanged(nameof(ShowIsAvailiable));
         }
 
         public override string ToString() => Name;
@@ -212,13 +194,11 @@ namespace BRIX.Mobile.ViewModel.Inventory
     {
         Thing,
         Container,
-        Equipment,
         Consumable
     }
 
     public static class InventoryItemVMExtensions
     {
-        public static bool IsMaterial(this EInventoryItemType type) =>
-            type == EInventoryItemType.Equipment || type == EInventoryItemType.Consumable;
+        public static bool IsMaterial(this EInventoryItemType type) => type == EInventoryItemType.Consumable;
     }
 }

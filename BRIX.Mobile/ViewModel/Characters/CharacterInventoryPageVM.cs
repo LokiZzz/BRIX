@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Characters;
+using BRIX.Library.Characters.Inventory;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
@@ -81,7 +82,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         }
 
         [RelayCommand]
-        public async Task ShowDescription(InventoryItemNodeVM item)
+        public static async Task ShowDescription(InventoryItemNodeVM item)
         {
             await ShowPopupAsync<AlertPopup, AlertPopupResult, AlertPopupParameters>(
                 new AlertPopupParameters 
@@ -100,7 +101,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                 return;
             }
 
-            if (item.InternalModel is MaterialSupport material && !_currentCharacter.CanRemoveMaterialSupport(material))
+            if (item.InternalModel is ConsumableItem consumable && !_currentCharacter.CanRemoveConsumable(consumable))
             {
                 await Alert(Localization.InventoryNotEnoughEXPForDelete);
 
@@ -125,8 +126,8 @@ namespace BRIX.Mobile.ViewModel.Characters
                 saveContent = resultDeleteContent?.Answer == EAlertPopupResult.No;
             }
 
-            bool changesAffectsAbilities = item.InternalModel is MaterialSupport materialToRemove
-                && _currentCharacter.HaveMaterialDependedAbilities(materialToRemove);
+            bool changesAffectsAbilities = item.InternalModel is ConsumableItem materialToRemove
+                && _currentCharacter.ConsumableDependedAbilitiesCount(materialToRemove) > 0;
 
             if (changesAffectsAbilities)
             {
@@ -137,9 +138,9 @@ namespace BRIX.Mobile.ViewModel.Characters
                     return;
                 }
 
-                if(item.InternalModel is MaterialSupport materialSupport)
+                if(item.InternalModel is ConsumableItem materialSupport)
                 {
-                    _currentCharacter.RemoveMaterialSupport(materialSupport, saveContent);
+                    _currentCharacter.RemoveConsumable(materialSupport, saveContent);
                 }
             }
             else

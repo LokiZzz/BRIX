@@ -17,6 +17,7 @@ using BRIX.Mobile.ViewModel.Inventory;
 using BRIX.Library.Abilities;
 using BRIX.Mobile.ViewModel.Abilities.Aspects;
 using BRIX.Mobile.Models.Abilities.Aspects;
+using BRIX.Library.Characters.Inventory;
 
 namespace BRIX.Mobile.ViewModel.Abilities
 {
@@ -121,7 +122,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                     stepsBack: 1,
                     (NavigationParameters.EditMode, Mode),
                     (NavigationParameters.Ability, Ability),
-                    (NavigationParameters.MaterialSupport, _characterCopy.MaterialSupport)
+                    (NavigationParameters.MaterialSupport, _characterCopy.AbilityConsumables)
                 );
             }
         }
@@ -168,7 +169,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
             }
 
             IEnumerable<InventoryItem> availiableItems = _characterCopy.Inventory.Items.Where(x =>
-                !MaterialSupport.Any(y => y.Name == x.Name) && (x is Equipment || x is Consumable)
+                !MaterialSupport.Any(y => y.Name == x.Name) && x is ConsumableItem
             );
             IEnumerable<InventoryItemNodeVM> availiableItemsNodes = availiableItems.Select(_inventoryConverter.ToVM);
 
@@ -189,9 +190,9 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 foreach (InventoryItemNodeVM item in itemNodes)
                 {
                     MaterialSupport.Add(item);
-                    _characterCopy.MaterialSupport.Add(new AbilityMaterialSupport { 
+                    _characterCopy.AbilityConsumables.Add(new AbilityConsumable { 
                         AbilityId = Ability.Internal.Id,
-                        MaterialSupportId = item.InternalModel.Id
+                        ConsumableId = item.InternalModel.Id
                     });
                 }
 
@@ -217,9 +218,9 @@ namespace BRIX.Mobile.ViewModel.Abilities
             }
 
             MaterialSupport.Remove(itemToRemove);
-            _characterCopy.MaterialSupport.RemoveAll(x => 
+            _characterCopy.AbilityConsumables.RemoveAll(x => 
                 x.AbilityId == Ability.Internal.Id
-                && x.MaterialSupportId == itemToRemove.InternalModel.Id
+                && x.ConsumableId == itemToRemove.InternalModel.Id
             );
 
             CostMonitor.UpdateCost();
@@ -332,7 +333,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 return;
             }
 
-            List<InventoryItemNodeVM> materials = _characterCopy.GetMaterialSupportForAbility(Ability.Internal)
+            List<InventoryItemNodeVM> materials = _characterCopy.GetConsumablesForAbility(Ability.Internal)
                 .Select(_inventoryConverter.ToVM)
                 .ToList();
 

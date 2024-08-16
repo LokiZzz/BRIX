@@ -31,7 +31,7 @@ namespace BRIX.Utility.Extensions
             Type typeToReflect = originalObject.GetType();
 
             if (IsPrimitive(typeToReflect)) return originalObject;
-            if (visited.ContainsKey(originalObject)) return visited[originalObject];
+            if (visited.TryGetValue(originalObject, out object? value)) return value;
             if (typeof(Delegate).IsAssignableFrom(typeToReflect)) return null;
 
             object? cloneObject = CloneMethod?.Invoke(originalObject, null);
@@ -135,7 +135,7 @@ namespace BRIX.Utility.Extensions
     internal class ArrayWalker
     {
         public int[] Position;
-        private int[] maxLengths;
+        private readonly int[] maxLengths;
 
         public ArrayWalker(Array array)
         {

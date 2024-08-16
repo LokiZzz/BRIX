@@ -1,6 +1,7 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Characters;
+using BRIX.Library.Characters.Inventory;
 using BRIX.Library.DiceValue;
 using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
@@ -105,18 +106,14 @@ namespace BRIX.Library.Abilities
 
             if (character != null)
             {
-                IEnumerable<AbilityMaterialSupport> abilityMaterialSupport = character.MaterialSupport
+                IEnumerable<AbilityConsumable> abilityConsumables = character.AbilityConsumables
                     .Where(x => x.AbilityId == Id);
 
-                foreach (AbilityMaterialSupport item in abilityMaterialSupport)
+                foreach (AbilityConsumable abilityConsumable in abilityConsumables)
                 {
-                    InventoryItem matirealSupport = character.Inventory.Items
-                        .Single(x => x.Id == item.MaterialSupportId);
-
-                    if (matirealSupport is MaterialSupport concreteItem)
-                    {
-                        expCost -= concreteItem.ToExpEquivalent().Round();
-                    }
+                    ConsumableItem consumable = (ConsumableItem)character.Inventory.Items
+                        .Single(x => x.Id == abilityConsumable.ConsumableId);
+                    expCost -= consumable.ToExpEquivalent();
                 }
             }
 

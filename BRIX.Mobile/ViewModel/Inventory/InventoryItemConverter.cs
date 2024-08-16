@@ -1,4 +1,4 @@
-﻿using BRIX.Library.Characters;
+﻿using BRIX.Library.Characters.Inventory;
 
 namespace BRIX.Mobile.ViewModel.Inventory
 {
@@ -18,16 +18,13 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
             switch (item)
             {
-                case Container container:
+                case ContainerItem container:
                     isDarkBackgroundNow = !isDarkBackgroundNow;
                     viewModel.Payload = new(container.Payload.Select(ToVM));
                     isDarkBackgroundNow = !isDarkBackgroundNow;
                     viewModel.Icon = _containerIS;
                     break;
-                case Equipment equipment:
-                    viewModel.Icon = _equipmentIS;
-                    break;
-                case Consumable consumable:
+                case ConsumableItem consumable:
                     viewModel.Icon = _consumableIS;
                     break;
                 case InventoryItem:
@@ -48,13 +45,10 @@ namespace BRIX.Mobile.ViewModel.Inventory
                     item = new InventoryItem();
                     break;
                 case EInventoryItemType.Container:
-                    item = new Container();
-                    break;
-                case EInventoryItemType.Equipment:
-                    item = new Equipment();
+                    item = new ContainerItem();
                     break;
                 case EInventoryItemType.Consumable:
-                    item = new Consumable();
+                    item = new ConsumableItem();
                     break;
             }
 
@@ -64,9 +58,9 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 item.Description = prototype.Description;
                 item.Count = prototype.Count;
 
-                if(item is MaterialSupport matirealSupport && prototype is MaterialSupport matirealSupportPrototype)
+                if(item is ConsumableItem matirealSupport && prototype is ConsumableItem matirealSupportPrototype)
                 {
-                    matirealSupport.CoinsPrice = matirealSupportPrototype.Count;
+                    matirealSupport.Price = matirealSupportPrototype.Price;
                 }
             }
 
@@ -75,9 +69,10 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
         private readonly ImageSource _gemIS = ImageSource.FromFile("Inventory/gem.svg");
         private readonly ImageSource _containerIS = ImageSource.FromFile("Inventory/chest.svg");
-        private readonly ImageSource _equipmentIS = ImageSource.FromFile("Inventory/blade.svg");
         private readonly ImageSource _consumableIS = ImageSource.FromFile("Inventory/arrow.svg");
+
         private bool isDarkBackgroundNow = true;
+
         private Color? _darkItemColor;
         private Color? _lightItemColor;
 

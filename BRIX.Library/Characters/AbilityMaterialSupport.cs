@@ -1,8 +1,8 @@
 ﻿namespace BRIX.Library.Characters
 {
-    public class AbilityMaterialSupport
+    public class AbilityConsumable
     {
         public Guid AbilityId { get; set; }
-        public Guid MaterialSupportId { get; set; }
+        public Guid ConsumableId { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace BRIX.Library.Characters
+﻿using BRIX.Library.Characters.Inventory;
+
+namespace BRIX.Library.Characters
 {
     public partial class Character : CharacterBase
     {
@@ -11,8 +13,8 @@
         public string Backstory { get; set; } = string.Empty;
         public string Appearance { get; set; } = string.Empty;
         public List<CharacterProject> Projects { get; set; } = [];
-        public List<AbilityMaterialSupport> MaterialSupport { get; set; } = [];
-        public Inventory Inventory { get; set; } = new();
+        public List<AbilityConsumable> AbilityConsumables { get; set; } = [];
+        public CharacterInventory Inventory { get; set; } = new();
 
         private int _experience;
         public int Experience
