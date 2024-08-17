@@ -40,14 +40,36 @@ namespace BRIX.Library.Items
         /// <summary>
         /// Настраивает предмет под заданный уровень. 
         /// </summary>
-        public void TuneToPrice(int price, int distance = 0)
+        /// <summary>
+        /// Примерно подстраивает предмет под заданный уровень. 
+        /// Если не указать дистанцию, то она будет сгенерирована случайным образом от 3 до 20.
+        /// </summary>
+        public void TuneToPrice(int price)
         {
-            double budget = price / 10d;
-            double averageForDefense = Math.Sqrt(budget / (5 * 1.25));
+            Defense = new DicePool(1);
 
-            Defense = averageForDefense > 0 && averageForDefense <= 3
-                ? new DicePool(averageForDefense.Round())
-                : DicePool.FromValue(averageForDefense.Round(), 0.5);
+            // Прибавляем по 1 урона к среднему, пока не достигнем желаемой стоимости.
+            while (Price < price)
+            {
+                Defense.Modifier++;
+            }
+
+            if (Defense.Modifier >= 2)
+            {
+                int upperPrice = Price;
+                Defense.Modifier--;
+                int lowerPrice = Price;
+
+                if (upperPrice - price <= price - lowerPrice)
+                {
+                    Defense.Modifier++;
+                }
+            }
+
+            if (Defense.Average() > 3)
+            {
+                Defense = DicePool.FromValue(Defense.Average(), 0.5);
+            }
         }
     }
 }

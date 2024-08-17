@@ -33,12 +33,13 @@ namespace BRIX.Library.Items
                 DamageEffect effectEquivalent = new() { Impact = Damage };
                 TargetSelectionAspect tsa = effectEquivalent.GetAspect<TargetSelectionAspect>();
                 tsa.NTAD.DistanceInMeters = Distance;
-
-                return effectEquivalent.GetExpCost() * 50;
+                int effectCost = effectEquivalent.GetExpCost() ;
+                
+                return (effectCost + Distance) * 50;
             }
         }
 
-        public int LevelRequired => CharacterCalculator.GetLevelFromExp(Price / 2);
+        public int LevelRequired => CharacterCalculator.GetLevelFromExp(Price / 4);
 
         /// <summary>
         /// Примерно подстраивает предмет под заданный уровень. 

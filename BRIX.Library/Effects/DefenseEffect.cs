@@ -21,7 +21,7 @@ namespace BRIX.Library.Effects
         {
             // Защищаться должно быть менее выгодно, чем наносить урон, иначе будет возможен эффект непробиваемого
             // танка, который на сдачу купил себе немного урона и динамика боёв сильно снизится из-за этой меты.
-            return (Impact.CostLikeDamageEffect() * 1.25).Round();
+            return (Impact.CostLikeDamageEffect() * 1.8).Round();
         }
     }
 }
