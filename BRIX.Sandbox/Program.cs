@@ -55,16 +55,16 @@ shop.ArmorNarrativePrefixes = [
     "Латный", "Чешуйчатый", "Пластинчатый", "Костяной"
 ];
 
-List<ArmorItem> items = shop.GenerateArmor(10, 1, 2000);
+//List<ArmorItem> items = shop.GenerateArmor(10, 1, 2000);
 
-Console.WriteLine($"\t\t\t\tУрон\tСтоимость\t");
+//Console.WriteLine($"\t\t\t\tУрон\tСтоимость\t");
 
-foreach (ArmorItem item in items)
-{
-    Console.WriteLine("________________________________________________________________________________");
-    Console.WriteLine(item.Name);
-    Console.WriteLine($"\t\t\t\t{item.Defense}\t{item.Price} монет\t{item.LevelRequired}");
-    Console.WriteLine();
-}
+//foreach (ArmorItem item in items)
+//{
+//    Console.WriteLine("________________________________________________________________________________");
+//    Console.WriteLine(item.Name);
+//    Console.WriteLine($"\t\t\t\t{item.Defense}\t{item.Price} монет\t{item.LevelRequired}");
+//    Console.WriteLine();
+//}
 
-Console.ReadLine();
+//Console.ReadLine();

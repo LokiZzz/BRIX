@@ -215,6 +215,9 @@
 	  <Compile Update="View\Settings\LogPage.xaml.cs">
 	    <DependentUpon>LogPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\ArmoryShop\ArmoryShopPage.xaml.cs">
+	    <DependentUpon>ArmoryShopPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -306,6 +309,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Settings\LogPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\ArmoryShop\ArmoryShopPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

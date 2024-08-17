@@ -1,5 +1,6 @@
 ﻿using BRIX.Library.Aspects;
 using BRIX.Library.Effects;
+using BRIX.Library.Items;
 using BRIX.Mobile.Models.Abilities.Effects;
 using BRIX.Mobile.Resources.Handlers;
 using BRIX.Mobile.Services;
@@ -8,6 +9,7 @@ using BRIX.Mobile.View.Abilities;
 using BRIX.Mobile.View.Abilities.Aspects;
 using BRIX.Mobile.View.Abilities.Effects;
 using BRIX.Mobile.View.Account;
+using BRIX.Mobile.View.ArmoryShop;
 using BRIX.Mobile.View.Characters;
 using BRIX.Mobile.View.Details;
 using BRIX.Mobile.View.Inventory;
@@ -19,6 +21,7 @@ using BRIX.Mobile.ViewModel.Abilities;
 using BRIX.Mobile.ViewModel.Abilities.Aspects;
 using BRIX.Mobile.ViewModel.Abilities.Effects;
 using BRIX.Mobile.ViewModel.Account;
+using BRIX.Mobile.ViewModel.ArmoryShop;
 using BRIX.Mobile.ViewModel.Characters;
 using BRIX.Mobile.ViewModel.Details;
 using BRIX.Mobile.ViewModel.Inventory;
@@ -98,6 +101,7 @@ public static class MauiProgram
         builder.RegisterView<EncounterCalculatorPage, EncounterCalculatorPageVM>(false);
 
         builder.RegisterView<SettingsPage, SettingsPageVM>(false);
+        builder.RegisterView<ArmoryShopPage, ArmoryShopPageVM>(false);
         builder.RegisterView<LogPage, LogPageVM>();
 
         AddPopups(builder);

@@ -1,8 +1,5 @@
 ﻿using BRIX.Library.Characters;
-using BRIX.Library.Extensions;
 using BRIX.Utility.Extensions;
-using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace BRIX.Library.Items
 {
@@ -50,17 +47,17 @@ namespace BRIX.Library.Items
         /// Сгенерировать ассортимент оружия с небольшим разбросом уровня относительно заданного.
         /// </summary>
         /// <returns></returns>
-        public List<WeaponItem> GenerateWeapons(int count, int level, int gradeStep)
+        public List<WeaponItem> GenerateWeapons(int meleeCount, int rangedCount, int level, int gradeStep)
         {
             List<WeaponItem> weapons = [];
 
-            foreach (int itemNumber in Enumerable.Range(0, count))
+            foreach (int itemNumber in Enumerable.Range(0, meleeCount + rangedCount))
             {
                 WeaponItem weapon = new();
                 int lowPrice = CharacterCalculator.GetExpForLevel(level - 1) * 4;
                 int highPrice = CharacterCalculator.GetExpForLevel(level + 1) * 4;
                 int price = new Random().Next(lowPrice, highPrice);
-                int distance = itemNumber % 2 == 0 ? 1 : new Random().Next(2, 15);
+                int distance = itemNumber > meleeCount - 1 ? new Random().Next(2, 15) : 1;
                 weapon.TuneToPrice(price, distance);
                 weapon.Name = GetWeaponName(gradeStep, price, distance);
 
