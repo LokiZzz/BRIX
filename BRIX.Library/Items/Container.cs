@@ -1,6 +1,6 @@
 ﻿namespace BRIX.Library.Items
 {
-    public class ContainerItem : Item
+    public class Container : Item
     {
         /// <summary>
         /// Содержимое контейнера.

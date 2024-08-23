@@ -58,7 +58,7 @@
                     BindingContext="{Binding ConcordedAspects}" 
                     Margin="10,0"/>
 
-                <Border Style="{StaticResource BlockBorder}" Margin="10,0" IsVisible="{Binding ForCharacter}">
+                <!--<Border Style="{StaticResource BlockBorder}" Margin="10,0" IsVisible="{Binding ForCharacter}">
                     <VerticalStackLayout Spacing="10">
                         <Label 
                             Style="{StaticResource TitleLabel}"
@@ -98,7 +98,7 @@
                             Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Add}}"
                             Command="{Binding AddMaterialCommand}"/>
                     </VerticalStackLayout>
-                </Border>
+                </Border>-->
 
                 <Grid RowDefinitions="auto,auto,*" Margin="0,0,0,-10">
                     <Label Grid.Row="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Effects}}" Margin="10,5,10,15"/>

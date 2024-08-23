@@ -13,8 +13,7 @@ namespace BRIX.Library.Characters
         public string Backstory { get; set; } = string.Empty;
         public string Appearance { get; set; } = string.Empty;
         public List<CharacterProject> Projects { get; set; } = [];
-        public List<AbilityConsumable> AbilityConsumables { get; set; } = [];
-        public CharacterInventory Inventory { get; set; } = new();
+        public Inventory Inventory { get; set; } = new();
 
         private int _experience;
         public int Experience
@@ -56,13 +55,13 @@ namespace BRIX.Library.Characters
         public int ExpToLevelUp => CharacterCalculator.GetExpToLevelUp(Experience);
         public int AvailableExp => Experience - SpentExp;
         public int SpentExp => GetSpentExp();
-        public int ExpSpentOnAbilities => Abilities.Sum(x => x.ExpCost(this));
+        public int ExpSpentOnAbilities => Abilities.Sum(x => x.ExpCost());
 
         public int GetSpentExp(Guid? excludeAbilityId = null)
         {
             return Abilities
                 .Where(x => excludeAbilityId == null || x.Id != excludeAbilityId)
-                .Sum(x => x.ExpCost(this))
+                .Sum(x => x.ExpCost())
                 + ExpInHealth
                 + Speed.GetExpCost();
         }

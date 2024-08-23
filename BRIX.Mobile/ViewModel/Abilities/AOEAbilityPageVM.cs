@@ -25,12 +25,10 @@ namespace BRIX.Mobile.ViewModel.Abilities
     {
         private readonly ILocalizationResourceManager _localization;
         private readonly ICharacterService _characterService;
-        private readonly InventoryItemConverter _inventoryConverter;
         public AOEAbilityPageVM(ILocalizationResourceManager localization, ICharacterService characterService)
         {
             _localization = localization;
             _characterService = characterService;
-            _inventoryConverter = new InventoryItemConverter();
             SaveCommand = new AsyncRelayCommand(Save);
         }
 
@@ -121,8 +119,8 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 await Navigation.Back(
                     stepsBack: 1,
                     (NavigationParameters.EditMode, Mode),
-                    (NavigationParameters.Ability, Ability),
-                    (NavigationParameters.MaterialSupport, _characterCopy.AbilityConsumables)
+                    (NavigationParameters.Ability, Ability)
+                    //(NavigationParameters.MaterialSupport, _characterCopy.AbilityConsumables)
                 );
             }
         }
@@ -160,71 +158,71 @@ namespace BRIX.Mobile.ViewModel.Abilities
             CostMonitor.UpdateCost();
         }
 
-        [RelayCommand]
-        public async Task AddMaterial()
-        {
-            if (_characterCopy == null)
-            {
-                return;
-            }
+        //[RelayCommand]
+        //public async Task AddMaterial()
+        //{
+        //    if (_characterCopy == null)
+        //    {
+        //        return;
+        //    }
 
-            IEnumerable<Item> availiableItems = _characterCopy.Inventory.Items.Where(x =>
-                !MaterialSupport.Any(y => y.Name == x.Name) && x is ConsumableItem
-            );
-            IEnumerable<InventoryItemNodeVM> availiableItemsNodes = availiableItems.Select(_inventoryConverter.ToVM);
+        //    IEnumerable<Item> availiableItems = _characterCopy.Inventory.Items.Where(x =>
+        //        !MaterialSupport.Any(y => y.Name == x.Name) && x is ConsumableItem
+        //    );
+        //    IEnumerable<InventoryItemNodeVM> availiableItemsNodes = availiableItems.Select(_inventoryConverter.ToVM);
 
-            PickerPopupResult? result = 
-                await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
-                new PickerPopupParameters
-                {
-                    Title = Localization.MaterialSupport,
-                    SelectMultiple = true,
-                    Items = availiableItemsNodes.Cast<object>().ToList(),
-                }
-            );
+        //    PickerPopupResult? result = 
+        //        await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
+        //        new PickerPopupParameters
+        //        {
+        //            Title = Localization.MaterialSupport,
+        //            SelectMultiple = true,
+        //            Items = availiableItemsNodes.Cast<object>().ToList(),
+        //        }
+        //    );
 
-            if (result != null && result.SelectedItems.Count != 0)
-            {
-                IEnumerable<InventoryItemNodeVM> itemNodes = result.SelectedItems.Cast<InventoryItemNodeVM>();
+        //    if (result != null && result.SelectedItems.Count != 0)
+        //    {
+        //        IEnumerable<InventoryItemNodeVM> itemNodes = result.SelectedItems.Cast<InventoryItemNodeVM>();
 
-                foreach (InventoryItemNodeVM item in itemNodes)
-                {
-                    MaterialSupport.Add(item);
-                    _characterCopy.AbilityConsumables.Add(new AbilityConsumable { 
-                        AbilityId = Ability.Internal.Id,
-                        ConsumableId = item.InternalModel.Id
-                    });
-                }
+        //        foreach (InventoryItemNodeVM item in itemNodes)
+        //        {
+        //            MaterialSupport.Add(item);
+        //            _characterCopy.AbilityConsumables.Add(new AbilityConsumable { 
+        //                AbilityId = Ability.Internal.Id,
+        //                ConsumableId = item.InternalModel.Id
+        //            });
+        //        }
 
-                CostMonitor.UpdateCost();
-            }
-        }
+        //        CostMonitor.UpdateCost();
+        //    }
+        //}
 
-        [RelayCommand]
-        public async Task DeleteMaterial(InventoryItemNodeVM itemToRemove)
-        {
-            if (_characterCopy == null)
-            {
-                return;
-            }
+        //[RelayCommand]
+        //public async Task DeleteMaterial(InventoryItemNodeVM itemToRemove)
+        //{
+        //    if (_characterCopy == null)
+        //    {
+        //        return;
+        //    }
 
-            AlertPopupResult? result = await Ask(
-                string.Format(Localization.AskDeleteMaterialSupport, itemToRemove.Name)
-            );
+        //    AlertPopupResult? result = await Ask(
+        //        string.Format(Localization.AskDeleteMaterialSupport, itemToRemove.Name)
+        //    );
 
-            if(result?.Answer != EAlertPopupResult.Yes)
-            {
-                return;
-            }
+        //    if(result?.Answer != EAlertPopupResult.Yes)
+        //    {
+        //        return;
+        //    }
 
-            MaterialSupport.Remove(itemToRemove);
-            _characterCopy.AbilityConsumables.RemoveAll(x => 
-                x.AbilityId == Ability.Internal.Id
-                && x.ConsumableId == itemToRemove.InternalModel.Id
-            );
+        //    MaterialSupport.Remove(itemToRemove);
+        //    _characterCopy.AbilityConsumables.RemoveAll(x => 
+        //        x.AbilityId == Ability.Internal.Id
+        //        && x.ConsumableId == itemToRemove.InternalModel.Id
+        //    );
 
-            CostMonitor.UpdateCost();
-        }
+        //    CostMonitor.UpdateCost();
+        //}
 
         [RelayCommand]
         public async Task EditActivation()
@@ -263,7 +261,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 {
                     _characterCopy = (await _characterService.GetCurrentCharacter()).Copy();
                     Ability.Character = _characterCopy;
-                    IntitializeMaterialSupport();
+                    //IntitializeMaterialSupport();
                 }
 
                 IntitializeCostMonitor();
@@ -326,19 +324,19 @@ namespace BRIX.Mobile.ViewModel.Abilities
             return Task.CompletedTask;
         }
 
-        private void IntitializeMaterialSupport()
-        {
-            if (_characterCopy == null)
-            {
-                return;
-            }
+        //private void IntitializeMaterialSupport()
+        //{
+        //    if (_characterCopy == null)
+        //    {
+        //        return;
+        //    }
 
-            List<InventoryItemNodeVM> materials = _characterCopy.GetConsumablesForAbility(Ability.Internal)
-                .Select(_inventoryConverter.ToVM)
-                .ToList();
+        //    List<InventoryItemNodeVM> materials = _characterCopy.GetConsumablesForAbility(Ability.Internal)
+        //        .Select(_inventoryConverter.ToVM)
+        //        .ToList();
 
-            MaterialSupport = new(materials);
-        }
+        //    MaterialSupport = new(materials);
+        //}
 
         private void IntitializeCostMonitor()
         {

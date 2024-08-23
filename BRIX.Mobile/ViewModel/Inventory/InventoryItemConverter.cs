@@ -18,14 +18,11 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
             switch (item)
             {
-                case ContainerItem container:
+                case Container container:
                     isDarkBackgroundNow = !isDarkBackgroundNow;
                     viewModel.Payload = new(container.Payload.Select(ToVM));
                     isDarkBackgroundNow = !isDarkBackgroundNow;
                     viewModel.Icon = _containerIS;
-                    break;
-                case ConsumableItem consumable:
-                    viewModel.Icon = _consumableIS;
                     break;
                 case Item:
                     viewModel.Icon = _gemIS;
@@ -45,10 +42,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
                     item = new Item();
                     break;
                 case EInventoryItemType.Container:
-                    item = new ContainerItem();
-                    break;
-                case EInventoryItemType.Consumable:
-                    item = new ConsumableItem();
+                    item = new Container();
                     break;
             }
 
@@ -57,11 +51,6 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 item.Name = prototype.Name;
                 item.Description = prototype.Description;
                 item.Count = prototype.Count;
-
-                if(item is ConsumableItem matirealSupport && prototype is ConsumableItem matirealSupportPrototype)
-                {
-                    matirealSupport.Price = matirealSupportPrototype.Price;
-                }
             }
 
             return item;
@@ -69,7 +58,6 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
         private readonly ImageSource _gemIS = ImageSource.FromFile("Inventory/gem.svg");
         private readonly ImageSource _containerIS = ImageSource.FromFile("Inventory/chest.svg");
-        private readonly ImageSource _consumableIS = ImageSource.FromFile("Inventory/arrow.svg");
 
         private bool isDarkBackgroundNow = true;
 

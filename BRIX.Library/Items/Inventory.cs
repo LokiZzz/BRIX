@@ -3,7 +3,7 @@
     /// <summary>
     /// Инвентарь персонажа
     /// </summary>
-    public class CharacterInventory
+    public class Inventory
     {
         public int Coins { get; set; } = 100;
 
@@ -24,7 +24,7 @@
                 {
                     yield return item;
 
-                    if (item is ContainerItem container)
+                    if (item is Container container)
                     {
                         foreach (Item containerItem in GoThroughRecursive(container))
                         {
@@ -38,13 +38,13 @@
         /// <summary>
         /// Рекурсивное перечисление содержимого контейнера.
         /// </summary>
-        private static IEnumerable<Item> GoThroughRecursive(ContainerItem item)
+        private static IEnumerable<Item> GoThroughRecursive(Container item)
         {
             foreach (Item containerItem in item.Payload)
             {
                 yield return containerItem;
 
-                if (containerItem is ContainerItem container)
+                if (containerItem is Container container)
                 {
                     foreach (Item internalContainerItem in GoThroughRecursive(container))
                     {

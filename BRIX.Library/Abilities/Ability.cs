@@ -1,11 +1,6 @@
 ﻿using BRIX.Library.Aspects;
-using BRIX.Library.Aspects.TargetSelection;
-using BRIX.Library.Characters;
-using BRIX.Library.DiceValue;
 using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
-using BRIX.Library.Items;
-using System.Net;
 
 namespace BRIX.Library.Abilities
 {
@@ -26,7 +21,7 @@ namespace BRIX.Library.Abilities
 
         public bool HasStatus => Effects?.Any(x => x.HasStatus) == true;
 
-        public int ExpCost()
+        public virtual int ExpCost()
         {
             double effectsCountPenaltyCoef = 1;
             double deltaPerEffect = 0.2;
@@ -50,74 +45,6 @@ namespace BRIX.Library.Abilities
                 + effectsNegativeCost;
 
             return expCost <= 1 ? 1 : expCost.Round();
-        }
-
-        // Версия расчёта стоимости эффектов для случая, когда в способности могут быть эффекты одинакого типа.
-        // Пусть под комментарием отстоится здесь, пока идея не устареет морально.
-        //private int GetEffectsExpCost()
-        //{
-        //    int expCost = 0;
-        //    DicePool overallDamageImpact = new ();
-
-        //    foreach (EffectBase effect in _effects)
-        //    {
-        //        // Хитрый способ, который позволяет рассчитывать стоимость наносящего урон эффекта с учётом других уже
-        //        // добавленных подобных эффектов. Позволяет рассчитывать разные эффекты так же, как если бы вместо
-        //        // добавления нового эффекта был просто увеличен урон.
-
-        //        // Проверяем относится ли эффект к наносящим урон.
-        //        DiceImpactEffectBase? overallEffect = effect switch
-        //        {
-        //            PeriodicDamageEffect pdmg => new PeriodicDamageEffect() { Aspects = pdmg.Aspects, Impact = overallDamageImpact },
-        //            DamageEffect dmg => new DamageEffect() { Aspects = dmg.Aspects, Impact = overallDamageImpact },
-        //            VulnerabilityEffect vul => new VulnerabilityEffect() { Aspects = vul.Aspects, Impact = overallDamageImpact },
-        //            AmplificationEffect amp => new AmplificationEffect() { Aspects = amp.Aspects, Impact = overallDamageImpact },
-        //            _ => null
-        //        };
-
-        //        bool isSelfDamage = overallEffect is DamageEffect damageEffect
-        //            && damageEffect.GetAspect<TargetSelectionAspect>().Strategy == ETargetSelectionStrategy.CharacterHimself;
-
-        //        if (overallEffect != null && !isSelfDamage)
-        //        {
-        //            // Если относится, то вычисляем его стоимость как если бы он был частью большого общего эффекта.
-        //            // Вычисляем стоимость абстрактного общего эффекта до добавления очередного урона и после добавления.
-        //            // Разница между этими значениями — и есть относительная стоимость текущего эффекта.
-        //            int costBefore = overallEffect.GetExpCost();
-        //            DiceImpactEffectBase impactEffect = (DiceImpactEffectBase)effect;
-        //            overallDamageImpact.Add([impactEffect.Impact]);
-        //            int costAfter = overallEffect.GetExpCost();
-
-        //            expCost += costAfter - costBefore;
-        //        }
-        //        else
-        //        {
-        //            expCost += effect.GetExpCost();
-        //        }
-                
-        //    }
-
-        //    return expCost;
-        //}
-
-        public int ExpCost(Character? character)
-        {
-            int expCost = ExpCost();
-
-            if (character != null)
-            {
-                IEnumerable<AbilityConsumable> abilityConsumables = character.AbilityConsumables
-                    .Where(x => x.AbilityId == Id);
-
-                foreach (AbilityConsumable abilityConsumable in abilityConsumables)
-                {
-                    ConsumableItem consumable = (ConsumableItem)character.Inventory.Items
-                        .Single(x => x.Id == abilityConsumable.ConsumableId);
-                    expCost -= consumable.ToExpEquivalent();
-                }
-            }
-
-            return expCost <= 1 ? 1 : expCost;
         }
 
         public void AddEffect(EffectBase effect)
@@ -231,7 +158,5 @@ namespace BRIX.Library.Abilities
 
             return status;
         }
-
-        public override string ToString() => Name;
     }
 }

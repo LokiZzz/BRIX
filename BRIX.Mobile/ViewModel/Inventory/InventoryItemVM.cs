@@ -23,11 +23,11 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
                 switch(value)
                 {
-                    case ContainerItem:
+                    case Container:
                         Type = EInventoryItemType.Container;
                         break;
-                    case ConsumableItem:
-                        Type = EInventoryItemType.Consumable;
+                    case Artifact:
+                        Type = EInventoryItemType.Artifact;
                         break;
                     case Item:
                         Type = EInventoryItemType.Thing;
@@ -64,7 +64,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 OnPropertyChanged(nameof(PriceString));
                 OnPropertyChanged(nameof(FullPrice));
 
-                if (Type == EInventoryItemType.Consumable)
+                if (Type == EInventoryItemType.Artifact)
                 {
                     OnFullPriceChanged?.Invoke(this, FullPrice);
                 }
@@ -77,52 +77,18 @@ namespace BRIX.Mobile.ViewModel.Inventory
         {
             get
             {
-                if(Type == EInventoryItemType.Consumable)
+                if(Type == EInventoryItemType.Artifact)
                 {
-                    return (InternalModel as ConsumableItem)?.Price ?? 0;
+                    return (InternalModel as Artifact)?.Price ?? 0;
                 }
 
                 return 0;
-            }
-            set
-            {
-                if (Type == EInventoryItemType.Consumable)
-                {
-                    if (InternalModel is ConsumableItem internalModel)
-                    {
-                        SetProperty(
-                            internalModel.Price, value, internalModel, (model, prop) => model.Price = prop
-                        );
-                    }
-                }
-
-                OnPropertyChanged(nameof(ShowPrice));
-                OnPropertyChanged(nameof(EXPBonus));
-                OnPropertyChanged(nameof(PriceString));
-                OnPropertyChanged(nameof(FullPrice));
-
-                OnFullPriceChanged?.Invoke(this, FullPrice);
             }
         }
 
         public int FullPrice => Price * Count;
 
         public string PriceString => Count > 1 ? $"{Price * Count} ({Price}x{Count})" : Price.ToString();
-
-        public string EXPBonus
-        {
-            get
-            {
-                if(InternalModel is ConsumableItem materialSupport)
-                {
-                    return $"– {materialSupport.ToExpEquivalent()} EXP";
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
-        }
 
         private EInventoryItemType? _type;
         public EInventoryItemType? Type
@@ -147,8 +113,8 @@ namespace BRIX.Mobile.ViewModel.Inventory
         }
 
         public bool ShowPayload => Type == EInventoryItemType.Container;     
-        public bool ShowCount => Count != 1 || Type == EInventoryItemType.Consumable;
-        public bool ShowPrice => Type == EInventoryItemType.Consumable;
+        public bool ShowCount => Count != 1 || Type == EInventoryItemType.Artifact;
+        public bool ShowPrice => Type == EInventoryItemType.Artifact;
 
         private RelayCommand? _descriptionCommand;
         public RelayCommand? DescriptionCommand
@@ -166,11 +132,6 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
             Item newItem = InventoryItemConverter.CreateItemByType(type.Value, InternalModel);
             newItem.Id = InternalModel.Id;
-
-            if(newItem is ConsumableItem newMaterial && InternalModel is ConsumableItem oldMaterial)
-            {
-                newMaterial.Price = oldMaterial.Price;
-            }
 
             InternalModel = newItem;
 
@@ -194,11 +155,6 @@ namespace BRIX.Mobile.ViewModel.Inventory
     {
         Thing,
         Container,
-        Consumable
-    }
-
-    public static class InventoryItemVMExtensions
-    {
-        public static bool IsMaterial(this EInventoryItemType type) => type == EInventoryItemType.Consumable;
+        Artifact
     }
 }

@@ -149,15 +149,6 @@ namespace BRIX.Mobile.ViewModel.Characters
                         break;
                 }
 
-                List<AbilityConsumable>? materials = query.GetParameterOrDefault<List<AbilityConsumable>>(
-                    NavigationParameters.MaterialSupport
-                );
-
-                if (materials != null)
-                {
-                    Character.InternalModel.AbilityConsumables = materials;
-                }
-
                 await _characterService.UpdateAsync(Character.InternalModel);
             }
         }

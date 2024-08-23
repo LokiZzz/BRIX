@@ -19,16 +19,14 @@
             <Border Style="{StaticResource BlockBorder}">
                 <VerticalStackLayout Spacing="10">
                     <Label Style="{StaticResource TitleLabel}" Text="Расчёт стоимости"/>
-                    <Grid ColumnDefinitions="*,*,*,*"  ColumnSpacing="10">
+                    <Grid ColumnDefinitions="2*,*,2*"  ColumnSpacing="10">
                         <controls:FramedEntry Grid.Column="0" Placeholder="DMG" Text="{Binding WeaponDice}"/>
                         <controls:FramedEntry Grid.Column="1" Placeholder="Метры" Text="{Binding WeaponDistance}"/>
-                        <controls:FramedEntry Grid.Column="2" Placeholder="Монеты" Text="{Binding WeaponPrice}" IsReadOnly="True"/>
-                        <controls:FramedEntry Grid.Column="3" Placeholder="Lvl" Text="{Binding WeaponLevel}" IsReadOnly="True"/>
+                        <controls:FramedEntry Grid.Column="2" Placeholder="DFS" Text="{Binding ArmorDice}"/>
                     </Grid>
-                    <Grid ColumnDefinitions="*,*,*"  ColumnSpacing="10">
-                        <controls:FramedEntry Grid.Column="0" Placeholder="DFS" Text="{Binding ArmorDice}"/>
-                        <controls:FramedEntry Grid.Column="1" Placeholder="Монеты" Text="{Binding ArmorPrice}" IsReadOnly="True"/>
-                        <controls:FramedEntry Grid.Column="2" Placeholder="Lvl" Text="{Binding ArmorLevel}" IsReadOnly="True"/>
+                    <Grid ColumnDefinitions="*,*"  ColumnSpacing="10">
+                        <controls:FramedEntry Grid.Column="0" Placeholder="Монеты" Text="{Binding ArtifactPrice}" IsReadOnly="True"/>
+                        <controls:FramedEntry Grid.Column="1" Placeholder="Lvl" Text="{Binding ArtifactLevel}" IsReadOnly="True"/>
                     </Grid>
                 </VerticalStackLayout>
             </Border>
@@ -36,8 +34,8 @@
                 <VerticalStackLayout>
                     <Label Style="{StaticResource TitleLabel}" Text="Оружейная"/>
                     <Grid RowDefinitions="*,*" ColumnDefinitions="*,*,*"  ColumnSpacing="10">
-                        <controls:FramedEntry Grid.Row="0" Grid.Column="0" Placeholder="Ближний бой" Text="{Binding Melee}"/>
-                        <controls:FramedEntry Grid.Row="0" Grid.Column="1" Placeholder="Дальний бой" Text="{Binding Ranged}"/>
+                        <controls:FramedEntry Grid.Row="0" Grid.Column="0" Placeholder="Бить" Text="{Binding Melee}"/>
+                        <controls:FramedEntry Grid.Row="0" Grid.Column="1" Placeholder="Стрелять" Text="{Binding Ranged}"/>
                         <controls:FramedEntry Grid.Row="0" Grid.Column="2" Placeholder="Броня" Text="{Binding Armor}"/>
                         <controls:FramedEntry Grid.Row="1" Grid.Column="0" Placeholder="Уровень" Text="{Binding Level}"/>
                         <controls:FramedEntry 

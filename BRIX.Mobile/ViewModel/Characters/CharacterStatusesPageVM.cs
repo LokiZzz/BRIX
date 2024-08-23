@@ -15,7 +15,7 @@ namespace BRIX.Mobile.ViewModel.Characters
     public partial class CharacterStatusesPageVM(ICharacterService characterService, IAssetsService assetsService) 
         : ViewModelBase, IQueryAttributable
     {
-        private CharacterModel? _currentCharacter;
+        private readonly CharacterModel? _currentCharacter;
 
         public ICharacterService CharacterService { get; } = characterService;
         public IAssetsService AssetsService { get; } = assetsService;
@@ -50,46 +50,6 @@ namespace BRIX.Mobile.ViewModel.Characters
             }
         }
 
-        [RelayCommand]
-        public async Task ChangeStatusState(StatusItemVM status)
-        {
-            if(status == null || _currentCharacter == null)
-            {
-                return;
-            }
-
-            if(!_currentCharacter.Statuses.Any(x => x.Name == status.Name) && status.IsActive)
-            {
-                _currentCharacter.AddStatus(status);
-                await CharacterService.UpdateAsync(_currentCharacter.InternalModel);
-            }
-
-            if (_currentCharacter.Statuses.Any(x => x.Name == status.Name) && !status.IsActive)
-            {
-                _currentCharacter.InternalModel.Statuses.Remove(
-                    _currentCharacter.InternalModel.Statuses.Single(x => x.Equals(status.Internal))
-                );
-
-                await CharacterService.UpdateAsync(_currentCharacter.InternalModel);
-            }
-        }
-
-        public override async Task OnNavigatedAsync()
-        {
-            _currentCharacter = new(await CharacterService.GetCurrentCharacterGuaranteed());
-            List<Status> statuses = await AssetsService.GetStatuses();
-
-            Statuses = new(statuses.Select(x => new StatusItemVM(x)));
-
-            foreach (StatusItemVM status in Statuses)
-            {
-                if(_currentCharacter.Statuses.Any(x => x.Name == status.Name))
-                {
-                    status.IsActive = true;
-                }
-            }
-        }
-
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             StatusItemVM? status = query.GetParameterOrDefault<StatusItemVM>(NavigationParameters.Status);
@@ -113,7 +73,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                             throw new Exception("Текущий персонаж не инициализирован.");
                         }
 
-                        _currentCharacter.ReplaceStatus(status);
+                        //_currentCharacter.ReplaceStatus(status);
                         await CharacterService.UpdateAsync(_currentCharacter.InternalModel);
                         break;
                 }

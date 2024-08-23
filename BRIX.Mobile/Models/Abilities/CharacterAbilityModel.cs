@@ -74,23 +74,7 @@ namespace BRIX.Mobile.Models.Abilities
             );
         }
 
-        private int _cost;
-        public int Cost
-        {
-            get
-            {
-                if (Character is Character playerCharacter)
-                {
-                    _cost = Internal.ExpCost(playerCharacter);
-                }
-                else
-                {
-                    _cost = Internal.ExpCost();
-                }
-
-                return _cost;
-            }
-        }
+        public int Cost => Internal.ExpCost();
 
         public bool ShowStatusName => Internal.HasStatus;
 
@@ -199,12 +183,7 @@ namespace BRIX.Mobile.Models.Abilities
             }
         }
 
-        public int UpdateCost()
-        {
-            OnPropertyChanged(nameof(Cost));
-
-            return _cost;
-        }
+        public void UpdateCost() => OnPropertyChanged(nameof(Cost));
 
         private void InitializeEffects()
         {

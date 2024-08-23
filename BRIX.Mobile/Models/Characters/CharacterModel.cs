@@ -18,9 +18,9 @@ namespace BRIX.Mobile.Models.Characters
             );
             Tags = new (character.Tags.Select(x => new CharacterTagVM { Text = x }));
             Projects = new(character.Projects.Select(x => new CharacterProjectVM(x)));
-            Statuses = new(character.Statuses.Select(x => new StatusItemVM(x)));
+            //Statuses = new(character.Statuses.Select(x => new StatusItemVM(x)));
             Speed = new CharacterSpeedModel(character.Speed, UpdateExp);
-            OnPropertyChanged(nameof(ShowStatuses));
+            //OnPropertyChanged(nameof(ShowStatuses));
         }
 
         public Character InternalModel { get; }
@@ -255,32 +255,32 @@ namespace BRIX.Mobile.Models.Characters
             InternalModel.Projects.Remove(InternalModel.Projects.Single(x => x.Name == project.Name));
         }
 
-        public ObservableCollection<StatusItemVM> Statuses { get; set; }
+        //public ObservableCollection<StatusItemVM> Statuses { get; set; }
 
-        public bool ShowStatuses => Statuses?.Any() == true;
+        //public bool ShowStatuses => Statuses?.Any() == true;
 
-        public void RemoveStatus(StatusItemVM status)
-        {
-            Statuses.Remove(status);
-            InternalModel.Statuses.Remove(status.Internal);
-            OnPropertyChanged(nameof(ShowStatuses));
-        }
+        //public void RemoveStatus(StatusItemVM status)
+        //{
+        //    Statuses.Remove(status);
+        //    //InternalModel.Statuses.Remove(status.Internal);
+        //    OnPropertyChanged(nameof(ShowStatuses));
+        //}
 
-        public void AddStatus(StatusItemVM status)
-        {
-            Statuses.Add(status);
-            InternalModel.Statuses.Add(status.Internal);
-            OnPropertyChanged(nameof(ShowStatuses));
-        }
+        //public void AddStatus(StatusItemVM status)
+        //{
+        //    Statuses.Add(status);
+        //    //InternalModel.Statuses.Add(status.Internal);
+        //    OnPropertyChanged(nameof(ShowStatuses));
+        //}
 
-        public void ReplaceStatus(StatusItemVM status)
-        {
-            if (Statuses.Any(x => x.Internal.Equals(status.Internal)))
-            {
-                StatusItemVM existingStatus = Statuses.Single(x => x.Internal.Equals(status.Internal));
-                Statuses[Statuses.IndexOf(existingStatus)] = status;
-                InternalModel.Statuses[InternalModel.Statuses.IndexOf(existingStatus.Internal)] = status.Internal;
-            }
-        }
+        //public void ReplaceStatus(StatusItemVM status)
+        //{
+        //    if (Statuses.Any(x => x.Internal.Equals(status.Internal)))
+        //    {
+        //        StatusItemVM existingStatus = Statuses.Single(x => x.Internal.Equals(status.Internal));
+        //        Statuses[Statuses.IndexOf(existingStatus)] = status;
+        //        InternalModel.Statuses[InternalModel.Statuses.IndexOf(existingStatus.Internal)] = status.Internal;
+        //    }
+        //}
     }
 }

@@ -42,7 +42,7 @@ namespace BRIX.Library.Characters
 
         protected virtual bool ValidateAbility(Ability ability) => true;
 
-        public List<Status> Statuses { get; set; } = [];
+        public Queue<Status> Statuses { get; set; } = [];
 
         /// <summary>
         /// Способности, создающие статус.

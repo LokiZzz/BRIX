@@ -1,5 +1,8 @@
 ﻿using BRIX.Library.Characters;
+using BRIX.Library.DiceValue;
+using BRIX.Library.Items;
 using BRIX.Utility.Extensions;
+using static BRIX.Library.Items.ArtifactExtensions;
 
 namespace BRIX.Library.Items
 {
@@ -47,49 +50,54 @@ namespace BRIX.Library.Items
         /// Сгенерировать ассортимент оружия с небольшим разбросом уровня относительно заданного.
         /// </summary>
         /// <returns></returns>
-        public List<WeaponItem> GenerateWeapons(int meleeCount, int rangedCount, int level, int gradeStep)
+        public List<Artifact> GenerateWeapons(int meleeCount, int rangedCount, int level, int gradeStep)
         {
-            List<WeaponItem> weapons = [];
+            List<Artifact> weapons = [];
 
             foreach (int itemNumber in Enumerable.Range(0, meleeCount + rangedCount))
             {
-                WeaponItem weapon = new();
+                Artifact weapon = new();
                 int lowPrice = CharacterCalculator.GetExpForLevel(level - 1) * 4;
                 int highPrice = CharacterCalculator.GetExpForLevel(level + 1) * 4;
                 int price = new Random().Next(lowPrice, highPrice);
                 int distance = itemNumber > meleeCount - 1 ? new Random().Next(2, 15) : 1;
-                weapon.TuneToPrice(price, distance);
+                weapon.Distance = distance;
+                weapon.TuneToPrice(price, EArtifactTuneStrategy.ByDamage);
                 weapon.Name = GetWeaponName(gradeStep, price, distance);
 
                 weapons.Add(weapon);
             }
 
-            return weapons.OrderBy(x => x.Distance).ToList();
+            return [.. weapons.OrderBy(x => x.Distance)];
         }
 
         /// <summary>
         /// Сгенерировать ассортимент оружия с небольшим разбросом уровня относительно заданного.
         /// </summary>
         /// <returns></returns>
-        public List<ArmorItem> GenerateArmor(int count, int level, int gradeStep)
+        public List<Artifact> GenerateArmor(int count, int level, int gradeStep)
         {
-            List<ArmorItem> armor = [];
+            List<Artifact> armor = [];
 
             foreach (int itemNumber in Enumerable.Range(0, count))
             {
-                ArmorItem armorItem = new();
+                Artifact armorItem = new();
                 int lowPrice = CharacterCalculator.GetExpForLevel(level - 1) * 4;
                 int highPrice = CharacterCalculator.GetExpForLevel(level + 1) * 4;
                 int price = new Random().Next(lowPrice, highPrice);
-                armorItem.TuneToPrice(price);
+                armorItem.TuneToPrice(price, EArtifactTuneStrategy.ByDefense);
                 armorItem.Name = GetArmorName(gradeStep, price);
 
                 armor.Add(armorItem);
             }
 
-            return armor.OrderBy(x => x.Defense.Average()).ToList();
+            return [.. armor.OrderBy(x => x.Defense.Average())];
         }
 
+        /// <summary>
+        /// Сгенерировать ассортимент оружия с небольшим разбросом уровня относительно заданного.
+        /// </summary>
+        /// <returns></returns>
         private string GetWeaponName(int gradeStep, int price, int distance)
         {
             string weaponName = distance == 1 ? WeaponNames.Random() : RangedWeaponNames.Random();
@@ -109,10 +117,10 @@ namespace BRIX.Library.Items
 
             if(!string.IsNullOrEmpty(grade))
             {
-                weaponName = weaponName = grade + " " + weaponName;
+                weaponName = grade + " " + weaponName;
             }
 
-            weaponName = weaponName.Substring(0, 1).ToUpper() + weaponName.ToLower().Substring(1);
+            weaponName = string.Concat(weaponName[..1].ToUpper(), weaponName.ToLower().AsSpan(1));
 
             return weaponName;
         }
@@ -136,10 +144,10 @@ namespace BRIX.Library.Items
 
             if (!string.IsNullOrEmpty(grade))
             {
-                name = name = grade + " " + name;
+                name = grade + " " + name;
             }
 
-            name = name.Substring(0, 1).ToUpper() + name.ToLower().Substring(1);
+            name = string.Concat(name[..1].ToUpper(), name.ToLower().AsSpan(1));
 
             return name;
         }
@@ -171,4 +179,50 @@ namespace BRIX.Library.Items
         }
     }
 
+    public static class ArtifactExtensions
+    {
+        public enum EArtifactTuneStrategy
+        {
+            ByDamage = 0,
+            ByDefense = 1
+        }
+
+        public static void TuneToPrice(this Artifact artifact, int price, EArtifactTuneStrategy strategy)
+        {
+            DicePool dicePoolToTune = strategy switch
+            {
+                EArtifactTuneStrategy.ByDamage => artifact.Damage,
+                EArtifactTuneStrategy.ByDefense => artifact.Defense,
+                _ => throw new Exception("Неизвестная стратегия подстройки")
+            };
+
+            dicePoolToTune.Dice.Clear();
+            dicePoolToTune.Modifier = 1;
+
+            // Прибавляем по 1 к среднему, пока не достигнем желаемой стоимости.
+            while (artifact.Price < price)
+            {
+                dicePoolToTune.Modifier++;
+            }
+
+            if (dicePoolToTune.Modifier >= 2)
+            {
+                int upperPrice = artifact.Price;
+                dicePoolToTune.Modifier--;
+                int lowerPrice = artifact.Price;
+
+                if (upperPrice - price <= price - lowerPrice)
+                {
+                    dicePoolToTune.Modifier++;
+                }
+            }
+
+            if (dicePoolToTune.Average() > 3)
+            {
+                DicePool spread = DicePool.FromValue(dicePoolToTune.Average(), 0.5);
+                dicePoolToTune.Dice = spread.Dice;
+                dicePoolToTune.Modifier = spread.Modifier;
+            }
+        }
+    }
 }

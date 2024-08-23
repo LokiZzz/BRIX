@@ -8,9 +8,9 @@
         /// то содержимое сначала «вываливается» в контейнер на уровень выше, 
         /// самым последним уровнем является «корень» инвентаря.
         /// </summary>
-        public static void Remove(this CharacterInventory inventory, Item itemToDelete, bool saveContent = false)
+        public static void Remove(this Inventory inventory, Item itemToDelete, bool saveContent = false)
         {
-            if (saveContent && itemToDelete is ContainerItem containerToDelete)
+            if (saveContent && itemToDelete is Container containerToDelete)
             {
                 inventory.MoveContentUpper(containerToDelete);
             }
@@ -23,7 +23,7 @@
 
                     break;
                 }
-                else if (item is ContainerItem container && container.Payload.Contains(itemToDelete))
+                else if (item is Container container && container.Payload.Contains(itemToDelete))
                 {
                     container.Payload.Remove(itemToDelete);
 
@@ -32,7 +32,7 @@
             }
         }
 
-        public static void MoveContentUpper(this CharacterInventory inventory, ContainerItem containerToDelete)
+        public static void MoveContentUpper(this Inventory inventory, Container containerToDelete)
         {
             if (inventory.Content.Contains(containerToDelete))
             {
@@ -42,7 +42,7 @@
             {
                 foreach (Item item in inventory.Items)
                 {
-                    if (item is ContainerItem container && container.Payload.Contains(containerToDelete))
+                    if (item is Container container && container.Payload.Contains(containerToDelete))
                     {
                         container.Payload.AddRange(containerToDelete.Payload);
                     }
@@ -50,7 +50,7 @@
             }
         }
 
-        public static void Swap(this CharacterInventory inventory, Item oldItem, Item newItem)
+        public static void Swap(this Inventory inventory, Item oldItem, Item newItem)
         {
             foreach (Item item in inventory.Items.ToList())
             {
@@ -62,7 +62,7 @@
                     return;
                 }
 
-                if (item is ContainerItem container && container.Payload.Any(x => x.Equals(oldItem)))
+                if (item is Container container && container.Payload.Any(x => x.Equals(oldItem)))
                 {
                     int index = container.Payload.IndexOf(item);
                     container.Payload[index] = newItem;

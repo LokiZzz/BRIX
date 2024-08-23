@@ -153,61 +153,61 @@ namespace BRIX.Mobile.ViewModel.Characters
             await Navigation.NavigateAsync<CharacterAbilitiesPage>(mode: ENavigationMode.Absolute);
         }
 
-        [RelayCommand]
-        public async Task GoToStatuses()
-        {
-            await Navigation.NavigateAsync<CharacterStatusesPage>();
-        }
+        //[RelayCommand]
+        //public async Task GoToStatuses()
+        //{
+        //    await Navigation.NavigateAsync<CharacterStatusesPage>();
+        //}
 
-        [RelayCommand]
-        public async Task RemoveStatus(StatusItemVM status)
-        {
-            if (Character == null)
-            {
-                return;
-            }
+        //[RelayCommand]
+        //public async Task RemoveStatus(StatusItemVM status)
+        //{
+        //    if (Character == null)
+        //    {
+        //        return;
+        //    }
 
-            Character.RemoveStatus(status);
-            await _characterService.UpdateAsync(Character.InternalModel);
-            Character.UpdateHealth();
-        }
+        //    Character.RemoveStatus(status);
+        //    await _characterService.UpdateAsync(Character.InternalModel);
+        //    Character.UpdateHealth();
+        //}
 
-        [RelayCommand]
-        public async Task IncreaseStatusTime()
-        {
-            if (Character == null)
-            {
-                return;
-            }
+        //[RelayCommand]
+        //public async Task IncreaseStatusTime()
+        //{
+        //    if (Character == null)
+        //    {
+        //        return;
+        //    }
 
-            List<StatusItemVM> statuses = GetStatusesWithLowestUnit();
+        //    List<StatusItemVM> statuses = GetStatusesWithLowestUnit();
 
-            statuses.ForEach(x => x.IncreaseRoundsPassed());
+        //    statuses.ForEach(x => x.IncreaseRoundsPassed());
 
-            foreach (StatusItemVM status in statuses.ToList())
-            {
-                if (status.Internal.DurationLeft == 0)
-                {
-                    Character.RemoveStatus(status);
-                }
-            }
+        //    foreach (StatusItemVM status in statuses.ToList())
+        //    {
+        //        if (status.Internal.DurationLeft == 0)
+        //        {
+        //            Character.RemoveStatus(status);
+        //        }
+        //    }
 
-            Character.UpdateHealth();
-            await _characterService.UpdateAsync(Character.InternalModel);
-        }
+        //    Character.UpdateHealth();
+        //    await _characterService.UpdateAsync(Character.InternalModel);
+        //}
 
-        [RelayCommand]
-        public async Task DecreaseStatusTime()
-        {
-            if (Character == null)
-            {
-                return;
-            }
+        //[RelayCommand]
+        //public async Task DecreaseStatusTime()
+        //{
+        //    if (Character == null)
+        //    {
+        //        return;
+        //    }
 
-            List<StatusItemVM> statuses = GetStatusesWithLowestUnit();
-            statuses.ForEach(x => x.DecreaseRoundsPassed());
-            await _characterService.UpdateAsync(Character.InternalModel);
-        }
+        //    List<StatusItemVM> statuses = GetStatusesWithLowestUnit();
+        //    statuses.ForEach(x => x.DecreaseRoundsPassed());
+        //    await _characterService.UpdateAsync(Character.InternalModel);
+        //}
 
         [RelayCommand]
         public async Task EditSpeed()
@@ -217,30 +217,30 @@ namespace BRIX.Mobile.ViewModel.Characters
             );
         }
 
-        /// <summary>
-        /// Добывает статусы с наименьшей единицей времени (Раунды, Минуты, Часы, Дни, Года).
-        /// </summary>
-        private List<StatusItemVM> GetStatusesWithLowestUnit()
-        {
-            List<StatusItemVM> statuses = [];
+        ///// <summary>
+        ///// Добывает статусы с наименьшей единицей времени (Раунды, Минуты, Часы, Дни, Года).
+        ///// </summary>
+        //private List<StatusItemVM> GetStatusesWithLowestUnit()
+        //{
+        //    List<StatusItemVM> statuses = [];
 
-            if (Character != null)
-            {
-                foreach (ETimeUnit timeUnit in Enum.GetValues<ETimeUnit>())
-                {
-                    statuses = Character.Statuses
-                        .Where(x => Library.Abilities.Status.GetHighestTimeUnit() == timeUnit)
-                        .ToList();
+        //    if (Character != null)
+        //    {
+        //        foreach (ETimeUnit timeUnit in Enum.GetValues<ETimeUnit>())
+        //        {
+        //            statuses = Character.Statuses
+        //                .Where(x => Library.Abilities.Status.GetHighestTimeUnit() == timeUnit)
+        //                .ToList();
 
-                    if (statuses.Count > 0)
-                    {
-                        break;
-                    }
-                }
-            }
+        //            if (statuses.Count > 0)
+        //            {
+        //                break;
+        //            }
+        //        }
+        //    }
 
-            return statuses;
-        }
+        //    return statuses;
+        //}
 
         public override async Task OnNavigatedAsync()
         {

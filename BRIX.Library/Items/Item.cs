@@ -1,5 +1,8 @@
 ﻿namespace BRIX.Library.Items
 {
+    /// <summary>
+    /// Предмет из инвентаря типа «Вещь»
+    /// </summary>
     public class Item
     {
         public Guid Id { get; set; } = Guid.NewGuid();

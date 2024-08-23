@@ -101,13 +101,6 @@ namespace BRIX.Mobile.ViewModel.Characters
                 return;
             }
 
-            if (item.InternalModel is ConsumableItem consumable && !_currentCharacter.CanRemoveConsumable(consumable))
-            {
-                await Alert(Localization.InventoryNotEnoughEXPForDelete);
-
-                return;
-            }
-
             AlertPopupResult? result = await Ask(string.Format(Localization.AskToDeleteInventoryItem, item.Name));
 
             if(result?.Answer == EAlertPopupResult.No)
@@ -126,27 +119,7 @@ namespace BRIX.Mobile.ViewModel.Characters
                 saveContent = resultDeleteContent?.Answer == EAlertPopupResult.No;
             }
 
-            bool changesAffectsAbilities = item.InternalModel is ConsumableItem materialToRemove
-                && _currentCharacter.ConsumableDependedAbilitiesCount(materialToRemove) > 0;
-
-            if (changesAffectsAbilities)
-            {
-                AlertPopupResult? willRisePriceResult = await Ask(Localization.InventoryAbilitiesWillRisePrice);
-
-                if(willRisePriceResult?.Answer == EAlertPopupResult.No)
-                {
-                    return;
-                }
-
-                if(item.InternalModel is ConsumableItem materialSupport)
-                {
-                    _currentCharacter.RemoveConsumable(materialSupport, saveContent);
-                }
-            }
-            else
-            {
-                _currentCharacter.Inventory.Remove(item.InternalModel, saveContent);
-            }
+            _currentCharacter.Inventory.Remove(item.InternalModel, saveContent);
 
             await _characterService.UpdateAsync(_currentCharacter);
             await Initialize(force: true);
@@ -227,7 +200,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
                 itemToEdit.Count = newValue;
 
-                if(itemToEdit.Type == EInventoryItemType.Consumable)
+                if(itemToEdit.Type == EInventoryItemType.Artifact)
                 {
                     AlertPopupResult? askAdjustCoinsReuslt = await Ask(Localization.InventoryAskAdjustCoinsAlert);
 
