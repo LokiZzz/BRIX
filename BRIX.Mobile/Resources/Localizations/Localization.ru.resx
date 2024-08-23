@@ -483,9 +483,6 @@
   <data name="DaysCountFormat" xml:space="preserve">
     <value>{0} дней</value>
   </data>
-  <data name="DaysLeft" xml:space="preserve">
-    <value>Days left</value>
-  </data>
   <data name="DeleteAbilityQuestion" xml:space="preserve">
     <value>Вы уверены, что хотите удалить способность?</value>
   </data>
@@ -858,9 +855,6 @@
   <data name="HoursCountFormat" xml:space="preserve">
     <value>{0} часов</value>
   </data>
-  <data name="HoursLeft" xml:space="preserve">
-    <value>Часов осталось</value>
-  </data>
   <data name="Huge" xml:space="preserve">
     <value>Огромный</value>
   </data>
@@ -996,9 +990,6 @@
   <data name="MinutesCountFormat" xml:space="preserve">
     <value>{0} минут</value>
   </data>
-  <data name="MinutesLeft" xml:space="preserve">
-    <value>Minutes left</value>
-  </data>
   <data name="Monstrous" xml:space="preserve">
     <value>Монструозный</value>
   </data>
@@ -1070,6 +1061,9 @@
   </data>
   <data name="NPCPowerField" xml:space="preserve">
     <value>Мощность</value>
+  </data>
+  <data name="NPCSpeed" xml:space="preserve">
+    <value>Скорость (мод)</value>
   </data>
   <data name="ObstacleBetweenTargetsInChain" xml:space="preserve">
     <value>Препятствия между целями</value>
@@ -1431,10 +1425,28 @@
   <data name="YearsCountFormat" xml:space="preserve">
     <value>{0} лет</value>
   </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="DaysLeft" xml:space="preserve">
+    <value>Осталось дней</value>
+  </data>
+  <data name="HoursLeft" xml:space="preserve">
+    <value>Часов осталось</value>
+  </data>
+  <data name="MinutesLeft" xml:space="preserve">
+    <value>Минут осталось</value>
+  </data>
   <data name="YearsLeft" xml:space="preserve">
     <value>Лет осталось</value>
   </data>
-  <data name="Yes" xml:space="preserve">
-    <value>Да</value>
+  <data name="Artifact" xml:space="preserve">
+    <value>Артефакт</value>
+  </data>
+  <data name="Defense" xml:space="preserve">
+    <value>Защита</value>
+  </data>
+  <data name="Distance" xml:space="preserve">
+    <value>Дистанция</value>
   </data>
 </root>

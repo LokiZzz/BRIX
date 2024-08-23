@@ -27,13 +27,13 @@
                         <Label Grid.Column="1" Text="{Binding Name}" LineBreakMode="TailTruncation"/>
                         <Label Grid.Column="2" Text="{Binding Count}" IsVisible="{Binding ShowCount}"/>
                         <Label Grid.Column="3" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CountPostfix}}" IsVisible="{Binding ShowCount}"/>
-                        <Label Grid.Column="4" TextColor="{StaticResource BRIXOrange}" Text="{Binding PriceString}" IsVisible="{Binding ShowPrice}"/>
+                        <Label Grid.Column="4" TextColor="{StaticResource BRIXOrange}" Text="{Binding PriceString}" IsVisible="{Binding IsArtifact}"/>
                         <Label 
                             Grid.Column="5"
                             TextColor="{StaticResource BRIXOrange}" 
                             FontFamily="Awesome" 
                             Text="{x:Static icons:Awesome.Coins}" 
-                            IsVisible="{Binding ShowPrice}"
+                            IsVisible="{Binding IsArtifact}"
                             VerticalOptions="Center"
                             VerticalTextAlignment="Center"
                             Margin="0,0,0,1"/>

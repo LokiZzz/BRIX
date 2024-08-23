@@ -36,23 +36,50 @@
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Description}}"
                             Text="{Binding Item.Description}"
                             MaxLength="400"/>
-                        <controls:FramedEntry
-                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.InventoryItemCost}}"
-                            Text="{Binding Item.Price}"
-                            IsVisible="{Binding Item.ShowPrice}"
-                            Keyboard="Numeric"/>
-                        <controls:FramedEntry
-                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Count}}"
-                            Text="{Binding Item.Count}"
-                            Keyboard="Numeric"/>
                         <controls:PickerButton
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Container}}"
                             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Container}}"
                             ItemSource="{Binding Containers}"
                             SelectedItem="{Binding SelectedContainer}"
                             DisplayMember="Name"/>
+                        <controls:FramedEntry
+                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Count}}"
+                            Text="{Binding Item.Count}"
+                            Keyboard="Numeric"/>
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" IsVisible="{Binding Item.IsArtifact}">
+                            <controls:FramedEntry
+                                Grid.Column="0"
+                                Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Damage}}"
+                                Text="{Binding Item.WeaponDice}"/>
+                            <controls:FramedEntry
+                                Grid.Column="1"
+                                Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Distance}}"
+                                Text="{Binding Item.Distance}"/>
+                            <controls:FramedEntry
+                                Grid.Column="2"
+                                Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Defense}}"
+                                Text="{Binding Item.ArmorDice}"/>
+                        </Grid>
                     </VerticalStackLayout>
-                    
+                </Border>
+                <Border Style="{StaticResource BlockBorder}" IsVisible="{Binding Item.IsArtifact}">
+                    <Grid ColumnDefinitions="*,auto,auto">
+                        <Label 
+                            Grid.Column="0"
+                            Style="{StaticResource TitleLabel}"
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.InventoryItemCost}}"/>
+                        <Label
+                            Grid.Column="1"
+                            Style="{StaticResource TitleLabel}"
+                            Text="{Binding Item.Price}"
+                            Margin="0,0,10,0"/>
+                        <Label 
+                            Grid.Column="2"
+                            Style="{StaticResource TitleLabel}" 
+                            FontFamily="Awesome" Text="{x:Static icons:Awesome.Coins}" 
+                            TextColor="{StaticResource BRIXOrange}" 
+                            FontSize="18"/>
+                    </Grid>
                 </Border>
             </VerticalStackLayout>
         </ScrollView>
@@ -82,10 +109,10 @@
                     </HorizontalStackLayout>
                 </Grid>
 
-                <Label 
+                <!--<Label 
                     Grid.Row="1" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.InventoryAdjustCoinsHint}}"
                     IsVisible="{Binding ShowCoins}"
-                     Margin="0,0,0,10"/>
+                     Margin="0,0,0,10"/>-->
 
                 <HorizontalStackLayout 
                     Grid.Row="2" Spacing="10" 

@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Extensions;
+﻿using BRIX.Library.DiceValue;
+using BRIX.Library.Extensions;
 using BRIX.Library.Items;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -71,6 +72,53 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
+        private string _weaponDice = "0";
+        public string WeaponDice
+        {
+            get => _weaponDice;
+            set
+            {
+                _weaponDice = value;
+
+                if (DicePool.TryParse(value, out DicePool? dice) && dice != null && InternalModel is Artifact artifact)
+                {
+                    artifact.Damage = dice;
+                    UpdatePrice();
+                }
+            }
+        }
+
+        public int Distance
+        {
+            get => InternalModel is Artifact artifact ? artifact.Distance : 0;
+            set
+            {
+                if(InternalModel is Artifact artifact)
+                {
+                    SetProperty(
+                        artifact.Distance, value, artifact, (model, prop) => model.Distance = prop
+                    );
+                    UpdatePrice();
+                }
+            }
+        }
+
+        private string _armorDice = "0";
+        public string ArmorDice
+        {
+            get => _armorDice;
+            set
+            {
+                _armorDice = value;
+
+                if (DicePool.TryParse(value, out DicePool? dice) && dice != null && InternalModel is Artifact artifact)
+                {
+                    artifact.Defense = dice;
+                    UpdatePrice();
+                }
+            }
+        }
+
         public event EventHandler<int>? OnFullPriceChanged;
 
         public int Price
@@ -96,9 +144,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             get => _type;
             set
             {
-                bool initialize = _type == null;
-
-                if (SetProperty(ref _type, value) && !initialize)
+                if (SetProperty(ref _type, value))
                 {
                     UpdateInternalByType(value);
                 }
@@ -114,7 +160,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
         public bool ShowPayload => Type == EInventoryItemType.Container;     
         public bool ShowCount => Count != 1 || Type == EInventoryItemType.Artifact;
-        public bool ShowPrice => Type == EInventoryItemType.Artifact;
+        public bool IsArtifact => Type == EInventoryItemType.Artifact;
 
         private RelayCommand? _descriptionCommand;
         public RelayCommand? DescriptionCommand
@@ -136,10 +182,18 @@ namespace BRIX.Mobile.ViewModel.Inventory
             InternalModel = newItem;
 
             OnPropertyChanged(nameof(Count));
-            OnPropertyChanged(nameof(Price));
             OnPropertyChanged(nameof(ShowCount));
-            OnPropertyChanged(nameof(ShowPrice));
             OnPropertyChanged(nameof(ShowPayload));
+            OnPropertyChanged(nameof(IsArtifact));
+            UpdatePrice();
+        }
+
+        private void UpdatePrice()
+        {
+            OnPropertyChanged(nameof(Price));
+            OnPropertyChanged(nameof(PriceString));
+            OnPropertyChanged(nameof(FullPrice));
+            OnFullPriceChanged?.Invoke(this, FullPrice);
         }
 
         public override string ToString() => Name;

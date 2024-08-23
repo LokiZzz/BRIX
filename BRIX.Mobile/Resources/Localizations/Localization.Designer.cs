@@ -484,6 +484,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Artifact.
+        /// </summary>
+        public static string Artifact {
+            get {
+                return ResourceManager.GetString("Artifact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adjust?.
         /// </summary>
         public static string AskAdjust {
@@ -1159,6 +1168,24 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Days left.
+        /// </summary>
+        public static string DaysLeft {
+            get {
+                return ResourceManager.GetString("DaysLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Defense.
+        /// </summary>
+        public static string Defense {
+            get {
+                return ResourceManager.GetString("Defense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the ability?.
         /// </summary>
         public static string DeleteAbilityQuestion {
@@ -1272,6 +1299,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string Disposable {
             get {
                 return ResourceManager.GetString("Disposable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distance.
+        /// </summary>
+        public static string Distance {
+            get {
+                return ResourceManager.GetString("Distance", resourceCulture);
             }
         }
         
@@ -2275,6 +2311,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hours left.
+        /// </summary>
+        public static string HoursLeft {
+            get {
+                return ResourceManager.GetString("HoursLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Huge.
         /// </summary>
         public static string Huge {
@@ -2676,6 +2721,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string MinutesCountFormat {
             get {
                 return ResourceManager.GetString("MinutesCountFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minutes left.
+        /// </summary>
+        public static string MinutesLeft {
+            get {
+                return ResourceManager.GetString("MinutesLeft", resourceCulture);
             }
         }
         
@@ -3373,15 +3427,6 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ы.
-        /// </summary>
-        public static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Swim.
         /// </summary>
         public static string Swim {
@@ -3990,6 +4035,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         public static string YearsCountFormat {
             get {
                 return ResourceManager.GetString("YearsCountFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Years left.
+        /// </summary>
+        public static string YearsLeft {
+            get {
+                return ResourceManager.GetString("YearsLeft", resourceCulture);
             }
         }
         

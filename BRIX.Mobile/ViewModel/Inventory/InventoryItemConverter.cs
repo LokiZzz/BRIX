@@ -44,6 +44,9 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 case EInventoryItemType.Container:
                     item = new Container();
                     break;
+                case EInventoryItemType.Artifact:
+                    item = new Artifact();
+                    break;
             }
 
             if(prototype != null)

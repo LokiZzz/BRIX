@@ -1221,9 +1221,6 @@
   <data name="Strategy" xml:space="preserve">
     <value>Strategy</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value>Ы</value>
-  </data>
   <data name="Swim" xml:space="preserve">
     <value>Swim</value>
   </data>
@@ -1430,5 +1427,26 @@
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
+  </data>
+  <data name="DaysLeft" xml:space="preserve">
+    <value>Days left</value>
+  </data>
+  <data name="HoursLeft" xml:space="preserve">
+    <value>Hours left</value>
+  </data>
+  <data name="MinutesLeft" xml:space="preserve">
+    <value>Minutes left</value>
+  </data>
+  <data name="YearsLeft" xml:space="preserve">
+    <value>Years left</value>
+  </data>
+  <data name="Artifact" xml:space="preserve">
+    <value>Artifact</value>
+  </data>
+  <data name="Defense" xml:space="preserve">
+    <value>Defense</value>
+  </data>
+  <data name="Distance" xml:space="preserve">
+    <value>Distance</value>
   </data>
 </root>
