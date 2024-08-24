@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.DiceValue;
+using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
 using BRIX.Library.Items;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -72,14 +73,11 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
-        private string _weaponDice = "0";
         public string WeaponDice
         {
-            get => _weaponDice;
+            get => InternalModel is Artifact artifact ? artifact.Damage.ToString() : "0";
             set
             {
-                _weaponDice = value;
-
                 if (DicePool.TryParse(value, out DicePool? dice) && dice != null && InternalModel is Artifact artifact)
                 {
                     artifact.Damage = dice;
@@ -90,7 +88,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
         public int Distance
         {
-            get => InternalModel is Artifact artifact ? artifact.Distance : 0;
+            get => InternalModel is Artifact artifact ? artifact.Distance : 1;
             set
             {
                 if(InternalModel is Artifact artifact)
@@ -103,14 +101,11 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
-        private string _armorDice = "0";
         public string ArmorDice
         {
-            get => _armorDice;
+            get => InternalModel is Artifact artifact ? artifact.Defense.ToString() : "0";
             set
             {
-                _armorDice = value;
-
                 if (DicePool.TryParse(value, out DicePool? dice) && dice != null && InternalModel is Artifact artifact)
                 {
                     artifact.Defense = dice;
@@ -144,7 +139,10 @@ namespace BRIX.Mobile.ViewModel.Inventory
             get => _type;
             set
             {
-                if (SetProperty(ref _type, value))
+                bool initialized = _type != null;
+
+                // Если установлен новый тип для инициализированного предмета.
+                if (SetProperty(ref _type, value) && initialized)
                 {
                     UpdateInternalByType(value);
                 }
@@ -186,6 +184,14 @@ namespace BRIX.Mobile.ViewModel.Inventory
             OnPropertyChanged(nameof(ShowPayload));
             OnPropertyChanged(nameof(IsArtifact));
             UpdatePrice();
+            UpdateArtifactProperties();
+        }
+
+        private void UpdateArtifactProperties()
+        {
+            OnPropertyChanged(nameof(WeaponDice));
+            OnPropertyChanged(nameof(Distance));
+            OnPropertyChanged(nameof(ArmorDice));
         }
 
         private void UpdatePrice()

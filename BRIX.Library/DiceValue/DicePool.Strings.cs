@@ -127,6 +127,13 @@ namespace BRIX.Library.DiceValue
         {
             try
             {
+                if(string.IsNullOrEmpty(input) || input == "0")
+                {
+                    parsedDicePool = new DicePool();
+
+                    return true;
+                }
+
                 Parse(input, out parsedDicePool);
 
                 if(parsedDicePool?.Min() < 0 || parsedDicePool?.Max() < 0)

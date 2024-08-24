@@ -123,7 +123,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 }
             }
 
-            if(_inventory.Items.Where(x => x.Name == Item.Name).Count() > 1)
+            if(_inventory.Items.Where(x => x.Name == Item.Name).Count() > 1 || string.IsNullOrEmpty(Item.Name))
             {
                 await Alert(Localization.InventorySameNameAlert);
 
@@ -164,7 +164,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 Item = new InventoryItemVM(_editingItem);
             }
 
-            CoinsNow = _inventory.Coins; ;
+            CoinsNow = _inventory.Coins;
             CoinsWillBe = _inventory.Coins;
             _oldItemPrice = Item.FullPrice;
             Item.OnFullPriceChanged += OnPriceChanged;

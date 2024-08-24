@@ -493,6 +493,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Artifact cost.
+        /// </summary>
+        public static string ArtifactCost {
+            get {
+                return ResourceManager.GetString("ArtifactCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adjust?.
         /// </summary>
         public static string AskAdjust {
@@ -2455,7 +2464,7 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is already an item with the same name in the inventory..
+        ///   Looks up a localized string similar to Name is empty or there are already an item with the same name in the inventory..
         /// </summary>
         public static string InventorySameNameAlert {
             get {

@@ -898,7 +898,7 @@
     <value>You will run out of experience points for your current abilities if you remove this item. First, edit the abilities dependent on this item or remove them.</value>
   </data>
   <data name="InventorySameNameAlert" xml:space="preserve">
-    <value>There is already an item with the same name in the inventory.</value>
+    <value>Name is empty or there are already an item with the same name in the inventory.</value>
   </data>
   <data name="Inventory_Help" xml:space="preserve">
     <value>Tap an item in your inventory to edit it, double tap to delete it, or swipe on the item name from left to right to open the description. By swiping an element from right to left, you can change its quantity.</value>
@@ -1448,5 +1448,8 @@
   </data>
   <data name="Distance" xml:space="preserve">
     <value>Distance</value>
+  </data>
+  <data name="ArtifactCost" xml:space="preserve">
+    <value>Artifact cost</value>
   </data>
 </root>
