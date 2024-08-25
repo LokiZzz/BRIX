@@ -219,18 +219,18 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
         public void AddFeature(ArtifactFeatureModel feature)
         {
-            if (InternalModel is Artifact artifact)
+            if (InternalModel is Artifact artifact && feature.Internal is ArtifactFeature featureInternal)
             {
-                artifact.AddFeature(feature.Internal);
+                artifact.AddFeature(featureInternal);
                 Features.Add(feature);
             }
         }
 
         public void RemoveFeature(ArtifactFeatureModel feature)
         {
-            if (InternalModel is Artifact artifact)
+            if (InternalModel is Artifact artifact && feature.Internal is ArtifactFeature featureInternal)
             {
-                artifact.RemoveFeature(feature.Internal);
+                artifact.RemoveFeature(featureInternal);
                 Features.Remove(Features.First(x => x.Internal.Id == feature.Internal.Id));
             }
         }
@@ -240,13 +240,13 @@ namespace BRIX.Mobile.ViewModel.Inventory
         /// </summary>
         public void UpdateFeature(ArtifactFeatureModel feature)
         {
-            if (InternalModel is Artifact artifact)
+            if (InternalModel is Artifact artifact && feature.Internal is ArtifactFeature featureInternal)
             {
                 int indexOfOldAbility = Features.IndexOf(
                     Features.First(x => x.Internal.Id == feature.Internal.Id)
                 );
                 Features[indexOfOldAbility] = feature;
-                artifact.UpdateFeature(feature.Internal);
+                artifact.UpdateFeature(featureInternal);
             }
         }
 

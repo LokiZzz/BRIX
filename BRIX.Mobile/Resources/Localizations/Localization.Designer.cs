@@ -79,6 +79,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ability consumes artifact..
+        /// </summary>
+        public static string AbilityConsumesArtifact {
+            get {
+                return ResourceManager.GetString("AbilityConsumesArtifact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ability cost:.
         /// </summary>
         public static string AbilityCost {

@@ -6,6 +6,7 @@ using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Abilities;
+using BRIX.Mobile.ViewModel.Abilities;
 using BRIX.Mobile.ViewModel.Base;
 using BRIX.Mobile.ViewModel.Popups;
 using BRIX.Utility.Extensions;
@@ -155,7 +156,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
         {
             await Navigation.NavigateAsync<AOEAbilityPage>(
                 (NavigationParameters.EditMode, EEditingMode.Add),
-                (NavigationParameters.EditAbilityForCharacter, true)
+                (NavigationParameters.EditAbilityFor, EAbilityFor.Artifact)
             );
         }
 
@@ -165,7 +166,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             await Navigation.NavigateAsync<AOEAbilityPage>(
                 (NavigationParameters.Ability, feature.Copy()),
                 (NavigationParameters.EditMode, EEditingMode.Edit),
-                (NavigationParameters.EditAbilityForCharacter, true)
+                (NavigationParameters.EditAbilityFor, EAbilityFor.Artifact)
             );
         }
 
@@ -176,10 +177,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
 
             if (result?.Answer == EAlertPopupResult.Yes)
             {
-                if (Item != null)
-                {
-                    Item.RemoveFeature(feature);
-                }
+                Item?.RemoveFeature(feature);
             }
         }
 
@@ -199,7 +197,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
         private void HandleBackFromEditing(IDictionary<string, object> query)
         {
             ArtifactFeatureModel? editedFeature = 
-                query.GetParameterOrNull<ArtifactFeatureModel>(NavigationParameters.Ability);
+                query.GetParameterOrDefault<ArtifactFeatureModel>(NavigationParameters.Ability);
 
             if (editedFeature != null && Item != null)
             {

@@ -14,6 +14,7 @@ using BRIX.Library.Effects;
 using BRIX.Library.Abilities;
 using BRIX.Lexica;
 using BRIX.Library.Aspects;
+using BRIX.Mobile.ViewModel.Abilities;
 
 namespace BRIX.Mobile.ViewModel.Characters
 {
@@ -58,7 +59,7 @@ namespace BRIX.Mobile.ViewModel.Characters
         {
             await Navigation.NavigateAsync<AOEAbilityPage>(
                 (NavigationParameters.EditMode, EEditingMode.Add),
-                (NavigationParameters.EditAbilityForCharacter, true)
+                (NavigationParameters.EditAbilityFor, EAbilityFor.Character)
             );
         }
 
@@ -68,7 +69,7 @@ namespace BRIX.Mobile.ViewModel.Characters
             await Navigation.NavigateAsync<AOEAbilityPage>(
                 (NavigationParameters.Ability, ability.Copy()),
                 (NavigationParameters.EditMode, EEditingMode.Edit),
-                (NavigationParameters.EditAbilityForCharacter, true)
+                (NavigationParameters.EditAbilityFor, EAbilityFor.Character)
             );
         }
 

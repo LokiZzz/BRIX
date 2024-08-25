@@ -62,18 +62,30 @@ namespace BRIX.Mobile.ViewModel.Abilities
             set => SetProperty(ref _mode, value);
         }
 
-        private bool _forCharacter;
-        public bool ForCharacter
-        {
-            get => _forCharacter;
-            set => SetProperty(ref _forCharacter, value);
-        }
-
         private string _title = string.Empty;
         public string Title
         {
             get => _title;
             set => SetProperty(ref _title, value);
+        }
+
+        private bool _showConsumesArtifact = false;
+        public bool ShowConsumesArtifact
+        {
+            get => _showConsumesArtifact;
+            set => SetProperty(ref _showConsumesArtifact, value);
+        }
+
+        public bool ConsumesArtifact
+        {
+            get => Ability is ArtifactFeatureModel feature && feature.ConsumesArtifact;
+            set
+            {
+                if(Ability is ArtifactFeatureModel feature)
+                {
+                    feature.ConsumesArtifact = value;
+                }
+            }
         }
 
         private ObservableCollection<InventoryItemNodeVM> _availiableMaterialSupport = [];
@@ -120,7 +132,6 @@ namespace BRIX.Mobile.ViewModel.Abilities
                     stepsBack: 1,
                     (NavigationParameters.EditMode, Mode),
                     (NavigationParameters.Ability, Ability)
-                    //(NavigationParameters.MaterialSupport, _characterCopy.AbilityConsumables)
                 );
             }
         }
@@ -158,72 +169,6 @@ namespace BRIX.Mobile.ViewModel.Abilities
             CostMonitor.UpdateCost();
         }
 
-        //[RelayCommand]
-        //public async Task AddMaterial()
-        //{
-        //    if (_characterCopy == null)
-        //    {
-        //        return;
-        //    }
-
-        //    IEnumerable<Item> availiableItems = _characterCopy.Inventory.Items.Where(x =>
-        //        !MaterialSupport.Any(y => y.Name == x.Name) && x is ConsumableItem
-        //    );
-        //    IEnumerable<InventoryItemNodeVM> availiableItemsNodes = availiableItems.Select(_inventoryConverter.ToVM);
-
-        //    PickerPopupResult? result = 
-        //        await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
-        //        new PickerPopupParameters
-        //        {
-        //            Title = Localization.MaterialSupport,
-        //            SelectMultiple = true,
-        //            Items = availiableItemsNodes.Cast<object>().ToList(),
-        //        }
-        //    );
-
-        //    if (result != null && result.SelectedItems.Count != 0)
-        //    {
-        //        IEnumerable<InventoryItemNodeVM> itemNodes = result.SelectedItems.Cast<InventoryItemNodeVM>();
-
-        //        foreach (InventoryItemNodeVM item in itemNodes)
-        //        {
-        //            MaterialSupport.Add(item);
-        //            _characterCopy.AbilityConsumables.Add(new AbilityConsumable { 
-        //                AbilityId = Ability.Internal.Id,
-        //                ConsumableId = item.InternalModel.Id
-        //            });
-        //        }
-
-        //        CostMonitor.UpdateCost();
-        //    }
-        //}
-
-        //[RelayCommand]
-        //public async Task DeleteMaterial(InventoryItemNodeVM itemToRemove)
-        //{
-        //    if (_characterCopy == null)
-        //    {
-        //        return;
-        //    }
-
-        //    AlertPopupResult? result = await Ask(
-        //        string.Format(Localization.AskDeleteMaterialSupport, itemToRemove.Name)
-        //    );
-
-        //    if(result?.Answer != EAlertPopupResult.Yes)
-        //    {
-        //        return;
-        //    }
-
-        //    MaterialSupport.Remove(itemToRemove);
-        //    _characterCopy.AbilityConsumables.RemoveAll(x => 
-        //        x.AbilityId == Ability.Internal.Id
-        //        && x.ConsumableId == itemToRemove.InternalModel.Id
-        //    );
-
-        //    CostMonitor.UpdateCost();
-        //}
-
         [RelayCommand]
         public async Task EditActivation()
         {
@@ -248,20 +193,31 @@ namespace BRIX.Mobile.ViewModel.Abilities
             return Task.CompletedTask;
         }
 
+        public EAbilityFor _abilityFor = EAbilityFor.Character;
+
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (Mode == EEditingMode.None)
             {
-                ForCharacter = query.GetParameterOrDefault<bool>(NavigationParameters.EditAbilityForCharacter);
+                _abilityFor = query.GetParameterOrDefault<EAbilityFor>(NavigationParameters.EditAbilityFor);
                 Mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
-                Ability = query.GetParameterOrDefault<CharacterAbilityModel>(NavigationParameters.Ability)
-                    ?? new CharacterAbilityModel(new Ability());
 
-                if (ForCharacter)
+                if (_abilityFor == EAbilityFor.Character || _abilityFor == EAbilityFor.NPC)
+                {
+                    Ability = query.GetParameterOrDefault<CharacterAbilityModel>(NavigationParameters.Ability)
+                        ?? new CharacterAbilityModel(new Ability());
+                }
+                else if(_abilityFor == EAbilityFor.Artifact)
+                {
+                    Ability = query.GetParameterOrDefault<ArtifactFeatureModel>(NavigationParameters.Ability)
+                        ?? new ArtifactFeatureModel(new ArtifactFeature());
+                    ShowConsumesArtifact = true;
+                }
+
+                if (_abilityFor == EAbilityFor.Character)
                 {
                     _characterCopy = (await _characterService.GetCurrentCharacter()).Copy();
                     Ability.Character = _characterCopy;
-                    //IntitializeMaterialSupport();
                 }
 
                 IntitializeCostMonitor();
@@ -324,20 +280,6 @@ namespace BRIX.Mobile.ViewModel.Abilities
             return Task.CompletedTask;
         }
 
-        //private void IntitializeMaterialSupport()
-        //{
-        //    if (_characterCopy == null)
-        //    {
-        //        return;
-        //    }
-
-        //    List<InventoryItemNodeVM> materials = _characterCopy.GetConsumablesForAbility(Ability.Internal)
-        //        .Select(_inventoryConverter.ToVM)
-        //        .ToList();
-
-        //    MaterialSupport = new(materials);
-        //}
-
         private void IntitializeCostMonitor()
         {
             CostMonitor = new AbilityCostMonitorPanelVM(
@@ -345,5 +287,12 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 SaveCommand ?? throw new Exception("Команда сохранения для CostMonitor не инициализирована.")
             );
         }
+    }
+
+    public enum EAbilityFor
+    {
+        Character = 0,
+        NPC = 1,
+        Artifact = 2
     }
 }

@@ -8,7 +8,8 @@
              x:Class="BRIX.Mobile.View.Abilities.AbilityActivationSettingsPage"
              x:DataType="vm:AbilityActivationSettingsPageVM"
              Shell.TabBarIsVisible="False"
-             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ActivationSettings}}">
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ActivationSettings}}"
+             Padding="0">
 
     <Shell.TitleView>
         <controls:TitleView/>
@@ -17,7 +18,7 @@
     <Grid RowDefinitions="*,auto">
         <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never" >
             <VerticalStackLayout Spacing="10" Margin="0,0,0,10">
-                <Border Style="{StaticResource BlockBorder}">
+                <Border Style="{StaticResource BlockBorder}" Margin="10,0">
                     <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectActionPoints}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ActionPointAspectHint}}"/>
@@ -36,8 +37,8 @@
                         </Grid>
                     </VerticalStackLayout>
                 </Border>
-                
-                <Border Style="{StaticResource BlockBorder}">
+
+                <Border Style="{StaticResource BlockBorder}" Margin="10,0">
                     <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectCooldown}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CooldownAspectHint}}"/>
@@ -61,7 +62,7 @@
 
                 <Border Style="{StaticResource BlockBorder}" VerticalOptions="Start">
                     <Grid RowDefinitions="auto,auto,auto" RowSpacing="10">
-                        <VerticalStackLayout Grid.Row="0" Spacing="10">
+                        <VerticalStackLayout Grid.Row="0" Spacing="10" Margin="10,0">
                             <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ActivationTriggers}}"/>
                             <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ActivationTriggersHint}}"/>
                         </VerticalStackLayout>

@@ -25,7 +25,7 @@ namespace BRIX.Mobile.Models.Abilities
 
         public CharacterBase? Character;
 
-        public Ability Internal { get; }
+        public Ability Internal { get; set; }
 
         private AbilityActivationModel _activation = new();
         public AbilityActivationModel Activation 

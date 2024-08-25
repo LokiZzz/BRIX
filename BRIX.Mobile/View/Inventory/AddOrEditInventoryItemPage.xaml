@@ -10,7 +10,8 @@
              xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
              x:DataType="vm:AddOrEditInventoryItemPageVM"
              Shell.TabBarIsVisible="False"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             Padding="0">
 
     <Shell.TitleView>
         <controls:TitleView/>
@@ -19,7 +20,7 @@
     <Grid RowDefinitions="*,auto">
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Spacing="10" Margin="0,0,0,10">
-                <Border Style="{StaticResource BlockBorder}">
+                <Border Style="{StaticResource BlockBorder}" Margin="10,0">
                     <VerticalStackLayout Spacing="10">
                         <Label 
                             Style="{StaticResource TitleLabel}" 
@@ -65,7 +66,7 @@
                 </Border>
                 <!--Features-->
                 <Grid RowDefinitions="auto,auto,*" RowSpacing="10" Margin="0,10" IsVisible="{Binding Item.ShowFeatures}">
-                    <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Features}}"/>
+                    <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Features}}"  Margin="10,0"/>
                     <Button Grid.Row="1" Style="{StaticResource LightPlusButton}"  Margin="10,0" Command="{Binding AddFeatureCommand}"/>
                     <Grid Grid.Row="2">
                         <CollectionView x:Name="listView" ItemsSource="{Binding Item.Features}">
@@ -113,7 +114,7 @@
         </ScrollView>
 
         <Border Grid.Row="1" Style="{StaticResource LowBlockWithShadowBorder}">
-            <VerticalStackLayout Spacing="10">
+            <VerticalStackLayout Spacing="10" Margin="10,0">
                 
                 <Grid Grid.Row="0" ColumnDefinitions="*,auto,auto" IsVisible="{Binding Item.IsArtifact}">
                     <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ArtifactCost}}"/>

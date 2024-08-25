@@ -34,10 +34,17 @@
                             MaxLength="400"
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Description}}"
                             Text="{Binding Ability.Description}"/>
-                        <controls:FramedEntry
-                            Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.StatusName}}"
-                            Text="{Binding Ability.StatusName}"
-                            IsVisible="{Binding Ability.ShowStatusName}"/>
+                        <Grid ColumnSpacing="10" ColumnDefinitions="auto, *">
+                            <CheckBox 
+                                Grid.Column="0"
+                                Color="{StaticResource BRIXWhite}"
+                                IsChecked="{Binding ConsumesArtifact}"/>
+                            <Label 
+                                Grid.Column="1"
+                                Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AbilityConsumesArtifact}}"
+                                LineBreakMode="WordWrap"
+                                VerticalOptions="Center"/>
+                        </Grid>
                     </VerticalStackLayout>
                 </Border>
 
@@ -57,48 +64,6 @@
                 <aspectsview:AspectsPanelView 
                     BindingContext="{Binding ConcordedAspects}" 
                     Margin="10,0"/>
-
-                <!--<Border Style="{StaticResource BlockBorder}" Margin="10,0" IsVisible="{Binding ForCharacter}">
-                    <VerticalStackLayout Spacing="10">
-                        <Label 
-                            Style="{StaticResource TitleLabel}"
-                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.MaterialSupport}}"/>
-                        <CollectionView ItemsSource="{Binding MaterialSupport}">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="inv:InventoryItemNodeVM">
-                                    <Border StrokeShape="RoundRectangle 5" BackgroundColor="{StaticResource BRIXDim}" Padding="5" Margin="0,0,0,2">
-                                        <Grid ColumnDefinitions="auto,*,auto,auto,auto,auto" ColumnSpacing="5">
-                                            <Image Grid.Column="0" Source="{Binding Icon}" HeightRequest="16"/>
-                                            <Label Grid.Column="1" Text="{Binding Name}" LineBreakMode="TailTruncation"/>
-                                            <Label Grid.Column="2" Text="{Binding Count}" IsVisible="{Binding ShowCount}"/>
-                                            <Label Grid.Column="3" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CountPostfix}}" IsVisible="{Binding ShowCount}"/>
-                                            <Label Grid.Column="4" TextColor="{StaticResource BRIXOrange}" Text="{Binding PriceString}" IsVisible="{Binding ShowPrice}"/>
-                                            <Label 
-                                                Grid.Column="5"
-                                                TextColor="{StaticResource BRIXOrange}" 
-                                                FontFamily="Awesome" 
-                                                Text="{x:Static icons:Awesome.Coins}" 
-                                                IsVisible="{Binding ShowPrice}"
-                                                VerticalOptions="Center"
-                                                VerticalTextAlignment="Center"
-                                                Margin="0,0,0,1"/>
-                                            </Grid>
-                                        <Border.GestureRecognizers>
-                                            <TapGestureRecognizer 
-                                                NumberOfTapsRequired="2" 
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AOEAbilityPageVM}}, Path=DeleteMaterialCommand}"
-                                                CommandParameter="{Binding}"/>
-                                        </Border.GestureRecognizers>
-                                    </Border>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                        <Button 
-                            Style="{StaticResource LightButton}" 
-                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Add}}"
-                            Command="{Binding AddMaterialCommand}"/>
-                    </VerticalStackLayout>
-                </Border>-->
 
                 <Grid RowDefinitions="auto,auto,*" Margin="0,0,0,-10">
                     <Label Grid.Row="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Effects}}" Margin="10,5,10,15"/>

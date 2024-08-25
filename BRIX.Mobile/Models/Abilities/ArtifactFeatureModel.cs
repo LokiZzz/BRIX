@@ -25,14 +25,18 @@ namespace BRIX.Mobile.Models.Abilities
             OnPropertyChanged(nameof(ShowStatusName));
         }
 
-        public new ArtifactFeature Internal { get; }
-
         public bool ConsumesArtifact
         {
-            get => Internal.ConsumesArtifact;
-            set => SetProperty(
-                Internal.ConsumesArtifact, value, Internal, (model, prop) => model.ConsumesArtifact = prop
-            );
+            get => Internal is ArtifactFeature artifact && artifact.ConsumesArtifact;
+            set
+            {
+                if(Internal is ArtifactFeature artifact)
+                {
+                    SetProperty(
+                        artifact.ConsumesArtifact, value, artifact, (model, prop) => model.ConsumesArtifact = prop
+                    );
+                }
+            }
         }
     }
 }

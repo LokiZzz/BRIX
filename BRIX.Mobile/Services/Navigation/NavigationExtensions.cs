@@ -4,25 +4,13 @@
     {
         public static T? GetParameterOrDefault<T>(this IDictionary<string, object> query, string key)
         {
-            if (query.ContainsKey(key))
+            if (query.TryGetValue(key, out object? value) && value != null)
             {
-                return (T)query[key];
+                return (T)value;
             }
             else
             {
                 return default;
-            }
-        }
-
-        public static T? GetParameterOrNull<T>(this IDictionary<string, object> query, string key) where T : class
-        {
-            if (query.ContainsKey(key))
-            {
-                return query[key] as T;
-            }
-            else
-            {
-                return null;
             }
         }
     }
