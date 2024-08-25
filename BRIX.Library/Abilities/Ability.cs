@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Aspects;
+using BRIX.Library.DiceValue;
 using BRIX.Library.Effects;
 using BRIX.Library.Extensions;
 
@@ -34,17 +35,63 @@ namespace BRIX.Library.Abilities
             {
                 effectsCountPenaltyCoef += (effectiveEffectsCount - 1) * deltaPerEffect;
             }
-
-            int effectsPositiveCost = _effects.Where(x => x.GetExpCost() > 0).Sum(x => x.GetExpCost());
-            // Эффекты, которые снижают стоимость не снижают больше, если ослаблять настройки активации.
+            int effectsPositiveCost = GetEffectsCost();
+            // На эффекты с отрицательной стоимостью (саморазрушение) не влияют настройки активации.
             // Поэтому они считаются отдельно.
             int effectsNegativeCost = _effects.Where(x => x.GetExpCost() < 0).Sum(x => x.GetExpCost());
 
-            double expCost = Activation.Apply(effectsPositiveCost) 
-                * effectsCountPenaltyCoef 
+            double expCost = Activation.Apply(effectsPositiveCost)
+                * effectsCountPenaltyCoef
                 + effectsNegativeCost;
 
             return expCost <= 1 ? 1 : expCost.Round();
+        }
+
+        /// <summary>
+        /// Расчитывает сумму стоимости эффектов с положительной стоимостью. Учитывает итоговый урон от эффектов урона,
+        /// усиления и уязвимости в одной способности прогрессивно. Таким образом диверсификация урона на несколько 
+        /// эффектов не становится более выгодной, чем прокачка одного эффекта.
+        /// </summary>
+        private int GetEffectsCost()
+        {
+            int cost = 0;
+            DicePool overallDamageImpact = new();
+
+            foreach (EffectBase effect in _effects.Where(x => x.GetExpCost() > 0))
+            {
+                //Хитрый способ, который позволяет рассчитывать стоимость наносящего урон эффекта с учётом других уже
+                // добавленных подобных эффектов. Позволяет рассчитывать разные эффекты так же, как если бы вместо
+               // добавления нового эффекта был просто увеличен урон.
+
+                // Проверяем относится ли эффект к наносящим урон.
+                DiceImpactEffectBase? damageImpactEffect = effect switch
+                {
+                    DamageEffect dmg => new DamageEffect() { Aspects = dmg.Aspects, Impact = overallDamageImpact },
+                    VulnerabilityEffect vul => new VulnerabilityEffect() { Aspects = vul.Aspects, Impact = overallDamageImpact },
+                    AmplificationEffect amp => new AmplificationEffect() { Aspects = amp.Aspects, Impact = overallDamageImpact },
+                    ExhaustionEffect exh => new ExhaustionEffect() { Aspects = exh.Aspects, Impact = overallDamageImpact },
+                    _ => null
+                };
+
+                if (damageImpactEffect != null)
+                {
+                    // Если относится, то вычисляем его стоимость как если бы он был частью большого общего эффекта.
+                    // Вычисляем стоимость абстрактного общего эффекта до добавления очередного урона и после добавления.
+                    // Разница между этими значениями — и есть относительная стоимость текущего эффекта.
+                    int costBefore = damageImpactEffect.GetExpCost();
+                    DiceImpactEffectBase impactEffect = (DiceImpactEffectBase)effect;
+                    overallDamageImpact.Add([impactEffect.Impact]);
+                    int costAfter = damageImpactEffect.GetExpCost();
+
+                    cost += costAfter - costBefore;
+                }
+                else
+                {
+                    cost += effect.GetExpCost();
+                }
+            }
+
+            return cost;
         }
 
         public void AddEffect(EffectBase effect)
