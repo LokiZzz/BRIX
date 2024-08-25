@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Aspects;
+﻿using BRIX.Library.Abilities;
+using BRIX.Library.Aspects;
 using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Characters;
 using BRIX.Library.DiceValue;
@@ -60,5 +61,25 @@ namespace BRIX.Library.Items
 
             return (damagePrice + defensePrice + featurePrice) * _costExpMultiplier;
         }
+
+        public void AddFeature(ArtifactFeature feature)
+        {
+            Features.Add(feature);
+        }
+
+        public bool UpdateFeature(ArtifactFeature feature)
+        {
+            if (Features.Any(x => x.Id == feature.Id))
+            {
+                int index = Features.IndexOf(Features.First(x => x.Id == feature.Id));
+                Features[index] = feature;
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public void RemoveFeature(ArtifactFeature feature) => Features.RemoveAll(x => x.Id == feature.Id);
     }
 }

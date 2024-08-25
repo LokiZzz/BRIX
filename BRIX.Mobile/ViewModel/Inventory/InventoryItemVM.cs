@@ -1,7 +1,7 @@
-﻿using BRIX.Library.DiceValue;
-using BRIX.Library.Effects;
-using BRIX.Library.Extensions;
+﻿using BRIX.Library.Characters;
+using BRIX.Library.DiceValue;
 using BRIX.Library.Items;
+using BRIX.Mobile.Models.Abilities;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -13,6 +13,11 @@ namespace BRIX.Mobile.ViewModel.Inventory
         public InventoryItemVM(Item model)
         {
             InternalModel = model;
+
+            if (model is Artifact artifact)
+            {
+                Features = new(artifact.Features.Select(x => new ArtifactFeatureModel(x)));
+            }
         }
 
         private Item _internalModel = new();
@@ -37,6 +42,15 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 }
             }
         }
+
+        private ObservableCollection<ArtifactFeatureModel> _features = [];
+        public ObservableCollection<ArtifactFeatureModel> Features
+        {
+            get => _features;
+            set => SetProperty(ref _features, value);
+        }
+
+        public bool ShowFeatures => InternalModel is Artifact && Type == EInventoryItemType.Artifact;
 
         public string Name
         {
@@ -182,6 +196,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             OnPropertyChanged(nameof(Count));
             OnPropertyChanged(nameof(ShowCount));
             OnPropertyChanged(nameof(ShowPayload));
+            OnPropertyChanged(nameof(ShowFeatures));
             OnPropertyChanged(nameof(IsArtifact));
             UpdatePrice();
             UpdateArtifactProperties();
@@ -200,6 +215,39 @@ namespace BRIX.Mobile.ViewModel.Inventory
             OnPropertyChanged(nameof(PriceString));
             OnPropertyChanged(nameof(FullPrice));
             OnFullPriceChanged?.Invoke(this, FullPrice);
+        }
+
+        public void AddFeature(ArtifactFeatureModel feature)
+        {
+            if (InternalModel is Artifact artifact)
+            {
+                artifact.AddFeature(feature.Internal);
+                Features.Add(feature);
+            }
+        }
+
+        public void RemoveFeature(ArtifactFeatureModel feature)
+        {
+            if (InternalModel is Artifact artifact)
+            {
+                artifact.RemoveFeature(feature.Internal);
+                Features.Remove(Features.First(x => x.Internal.Id == feature.Internal.Id));
+            }
+        }
+
+        /// <summary>
+        /// Заменяет переданной способностью другую, с таким же Guid-ом
+        /// </summary>
+        public void UpdateFeature(ArtifactFeatureModel feature)
+        {
+            if (InternalModel is Artifact artifact)
+            {
+                int indexOfOldAbility = Features.IndexOf(
+                    Features.First(x => x.Internal.Id == feature.Internal.Id)
+                );
+                Features[indexOfOldAbility] = feature;
+                artifact.UpdateFeature(feature.Internal);
+            }
         }
 
         public override string ToString() => Name;

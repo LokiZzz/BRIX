@@ -1452,4 +1452,7 @@
   <data name="ArtifactCost" xml:space="preserve">
     <value>Artifact cost</value>
   </data>
+  <data name="Features" xml:space="preserve">
+    <value>Features</value>
+  </data>
 </root>

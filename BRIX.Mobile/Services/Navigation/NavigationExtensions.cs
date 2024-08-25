@@ -13,5 +13,17 @@
                 return default;
             }
         }
+
+        public static T? GetParameterOrNull<T>(this IDictionary<string, object> query, string key) where T : class
+        {
+            if (query.ContainsKey(key))
+            {
+                return query[key] as T;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

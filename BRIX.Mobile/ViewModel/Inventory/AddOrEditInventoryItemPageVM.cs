@@ -1,11 +1,16 @@
-﻿using BRIX.Library.Characters;
+﻿using BRIX.Lexica;
+using BRIX.Library.Characters;
 using BRIX.Library.Items;
+using BRIX.Mobile.Models.Abilities;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.Services.Navigation;
+using BRIX.Mobile.View.Abilities;
 using BRIX.Mobile.ViewModel.Base;
 using BRIX.Mobile.ViewModel.Popups;
+using BRIX.Utility.Extensions;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Controls.Compatibility;
 using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.ViewModel.Inventory
@@ -143,35 +148,109 @@ namespace BRIX.Mobile.ViewModel.Inventory
             await Navigation.Back(stepsBack: 1, (NavigationParameters.ForceUpdate, true));
         }
 
+
+
+        [RelayCommand]
+        private async Task AddFeature()
+        {
+            await Navigation.NavigateAsync<AOEAbilityPage>(
+                (NavigationParameters.EditMode, EEditingMode.Add),
+                (NavigationParameters.EditAbilityForCharacter, true)
+            );
+        }
+
+        [RelayCommand]
+        private async Task EditFeature(ArtifactFeatureModel feature)
+        {
+            await Navigation.NavigateAsync<AOEAbilityPage>(
+                (NavigationParameters.Ability, feature.Copy()),
+                (NavigationParameters.EditMode, EEditingMode.Edit),
+                (NavigationParameters.EditAbilityForCharacter, true)
+            );
+        }
+
+        [RelayCommand]
+        private async Task RemoveFeature(ArtifactFeatureModel feature)
+        {
+            AlertPopupResult? result = await Ask(Localization.DeleteAbilityQuestion);
+
+            if (result?.Answer == EAlertPopupResult.Yes)
+            {
+                if (Item != null)
+                {
+                    Item.RemoveFeature(feature);
+                }
+            }
+        }
+
+        [RelayCommand]
+        private static async Task ShowDescription(ArtifactFeatureModel feature)
+        {
+            await Alert(
+                new AlertPopupParameters
+                {
+                    Mode = EAlertMode.ShowMessage,
+                    Title = feature.Name,
+                    Message = await feature.Internal.ToFullShortLexis()
+                }
+            );
+        }
+
+        private void HandleBackFromEditing(IDictionary<string, object> query)
+        {
+            ArtifactFeatureModel? editedFeature = 
+                query.GetParameterOrNull<ArtifactFeatureModel>(NavigationParameters.Ability);
+
+            if (editedFeature != null && Item != null)
+            {
+                EEditingMode mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
+
+                switch (mode)
+                {
+                    case EEditingMode.Add:
+                        Item.AddFeature(editedFeature);
+                        break;
+                    case EEditingMode.Edit:
+                        Item.UpdateFeature(editedFeature);
+                        break;
+                }
+            }
+        }
+
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            _mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
-            _inventory = query.GetParameterOrDefault<Library.Items.Inventory>(NavigationParameters.Inventory)
-                ?? throw new Exception("В параметры страницы редактирования предмета не передан инвентарь персонажа.");
-            Item? originalItem = query.GetParameterOrDefault<Item>(
-                NavigationParameters.InventoryItem
-            );
+            HandleBackFromEditing(query);
 
-            _editingItem = _inventory.Items.FirstOrDefault(x => x.Name == originalItem?.Name);
-
-            if(_editingItem == null)
+            if (_mode == EEditingMode.None)
             {
-                Item = new InventoryItemVM(new Item());
-                _inventory.Content.Add(Item.InternalModel);
-            }
-            else
-            {
-                Item = new InventoryItemVM(_editingItem);
-            }
+                _mode = query.GetParameterOrDefault<EEditingMode>(NavigationParameters.EditMode);
+                _inventory = query.GetParameterOrDefault<Library.Items.Inventory>(NavigationParameters.Inventory)
+                    ?? throw new Exception("В параметры страницы редактирования предмета не передан инвентарь персонажа.");
+                Item? originalItem = query.GetParameterOrDefault<Item>(
+                    NavigationParameters.InventoryItem
+                );
 
-            CoinsNow = _inventory.Coins;
-            CoinsWillBe = _inventory.Coins;
-            _oldItemPrice = Item.FullPrice;
-            Item.OnFullPriceChanged += OnPriceChanged;
+                _editingItem = _inventory.Items.FirstOrDefault(x => x.Name == originalItem?.Name);
 
-            InitializeItemTypes();
-            InitializeContainers();
-            InitializeTitle();
+                if (_editingItem == null)
+                {
+                    Item = new InventoryItemVM(new Item());
+                    _inventory.Content.Add(Item.InternalModel);
+                }
+                else
+                {
+                    Item = new InventoryItemVM(_editingItem);
+                }
+
+                CoinsNow = _inventory.Coins;
+                CoinsWillBe = _inventory.Coins;
+                _oldItemPrice = Item.FullPrice;
+                Item.OnFullPriceChanged += OnPriceChanged;
+
+                InitializeItemTypes();
+                InitializeContainers();
+                InitializeTitle();
+            }
 
             query.Clear();
         }
@@ -317,21 +396,5 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 }
             }
         }
-    }
-
-    public class InventoryItemTypeVM
-    {
-        public EInventoryItemType Type { get; set; }
-        public string Text { get; set; } = string.Empty;
-
-        public override string ToString() => Text;
-    }
-
-    public class InventoryContainerVM
-    {
-        public Container? OriginalModelRefernece { get; set; }
-        public string Name { get; set; } = string.Empty;
-
-        public override string ToString() => Name;
     }
 }

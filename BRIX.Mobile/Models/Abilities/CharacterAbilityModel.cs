@@ -185,7 +185,7 @@ namespace BRIX.Mobile.Models.Abilities
 
         public void UpdateCost() => OnPropertyChanged(nameof(Cost));
 
-        private void InitializeEffects()
+        protected void InitializeEffects()
         {
             Effects = new ObservableCollection<EffectModelBase>(
                 Internal.Effects.Select(EffectModelFactory.GetModel)

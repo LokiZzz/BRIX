@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BRIX.Mobile.View.Inventory.AddOrEditInventoryItemPage"
              xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+             xmlns:models="clr-namespace:BRIX.Mobile.Models.Abilities"
              xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
              xmlns:v="clr-namespace:BRIX.Mobile.View.Inventory"
              xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Inventory"
@@ -62,8 +63,53 @@
                         </Grid>
                     </VerticalStackLayout>
                 </Border>
+                <!--Features-->
+                <Grid RowDefinitions="auto,auto,*" RowSpacing="10" Margin="0,10" IsVisible="{Binding Item.ShowFeatures}">
+                    <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Features}}"/>
+                    <Button Grid.Row="1" Style="{StaticResource LightPlusButton}"  Margin="10,0" Command="{Binding AddFeatureCommand}"/>
+                    <Grid Grid.Row="2">
+                        <CollectionView x:Name="listView" ItemsSource="{Binding Item.Features}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:ArtifactFeatureModel">
+                                    <SwipeView Threshold="100">
+                                        <SwipeView.LeftItems>
+                                            <SwipeItems Mode="Execute">
+                                                <SwipeItemView Command="{Binding Source={x:Reference listView}, Path= BindingContext.EditFeatureCommand}" CommandParameter="{Binding}">
+                                                    <Border Style="{StaticResource MediumSwipeViewBorder}">
+                                                        <Label Style="{StaticResource MediumSwipeViewEditLabel}" />
+                                                    </Border>
+                                                </SwipeItemView>
+                                            </SwipeItems>
+                                        </SwipeView.LeftItems>
+                                        <SwipeView.RightItems>
+                                            <SwipeItems Mode="Execute">
+                                                <SwipeItemView Command="{Binding Source={x:Reference listView}, Path= BindingContext.RemoveFeatureCommand}" CommandParameter="{Binding}">
+                                                    <Border Style="{StaticResource MediumSwipeViewBorder}">
+                                                        <Label Style="{StaticResource MediumSwipeViewDeleteLabel}"/>
+                                                    </Border>
+                                                </SwipeItemView>
+                                            </SwipeItems>
+                                        </SwipeView.RightItems>
+                                        <Grid Margin="10,0">
+                                            <Border Style="{StaticResource BlockBorder}" HeightRequest="75">
+                                                <Grid ColumnDefinitions="*,auto">
+                                                    <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{Binding Name}" />
+                                                </Grid>
+                                            </Border>
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference listView}, Path= BindingContext.ShowDescriptionCommand}" CommandParameter="{Binding .}"/>
+                                            </Grid.GestureRecognizers>
+                                        </Grid>
+                                    </SwipeView>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </Grid>
             </VerticalStackLayout>
-            
         </ScrollView>
 
         <Border Grid.Row="1" Style="{StaticResource LowBlockWithShadowBorder}">

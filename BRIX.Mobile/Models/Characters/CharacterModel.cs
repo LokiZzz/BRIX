@@ -18,9 +18,7 @@ namespace BRIX.Mobile.Models.Characters
             );
             Tags = new (character.Tags.Select(x => new CharacterTagVM { Text = x }));
             Projects = new(character.Projects.Select(x => new CharacterProjectVM(x)));
-            //Statuses = new(character.Statuses.Select(x => new StatusItemVM(x)));
             Speed = new CharacterSpeedModel(character.Speed, UpdateExp);
-            //OnPropertyChanged(nameof(ShowStatuses));
         }
 
         public Character InternalModel { get; }
