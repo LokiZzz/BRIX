@@ -84,6 +84,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                 if(Ability is ArtifactFeatureModel feature)
                 {
                     feature.ConsumesArtifact = value;
+                    CostMonitor?.UpdateCost();
                 }
             }
         }
@@ -212,6 +213,7 @@ namespace BRIX.Mobile.ViewModel.Abilities
                     Ability = query.GetParameterOrDefault<ArtifactFeatureModel>(NavigationParameters.Ability)
                         ?? new ArtifactFeatureModel(new ArtifactFeature());
                     ShowConsumesArtifact = true;
+                    OnPropertyChanged(nameof(ConsumesArtifact));
                 }
 
                 if (_abilityFor == EAbilityFor.Character)

@@ -34,7 +34,7 @@
                             MaxLength="400"
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Description}}"
                             Text="{Binding Ability.Description}"/>
-                        <Grid ColumnSpacing="10" ColumnDefinitions="auto, *">
+                        <Grid ColumnSpacing="10" ColumnDefinitions="auto, *" IsVisible="{Binding ShowConsumesArtifact}">
                             <CheckBox 
                                 Grid.Column="0"
                                 Color="{StaticResource BRIXWhite}"

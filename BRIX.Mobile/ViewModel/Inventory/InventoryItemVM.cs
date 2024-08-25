@@ -223,6 +223,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             {
                 artifact.AddFeature(featureInternal);
                 Features.Add(feature);
+                UpdatePrice();
             }
         }
 
@@ -232,6 +233,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             {
                 artifact.RemoveFeature(featureInternal);
                 Features.Remove(Features.First(x => x.Internal.Id == feature.Internal.Id));
+                UpdatePrice();
             }
         }
 
@@ -247,6 +249,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
                 );
                 Features[indexOfOldAbility] = feature;
                 artifact.UpdateFeature(featureInternal);
+                UpdatePrice();
             }
         }
 
