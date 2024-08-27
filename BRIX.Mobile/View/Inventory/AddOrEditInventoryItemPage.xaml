@@ -114,15 +114,21 @@
         </ScrollView>
 
         <Border Grid.Row="1" Style="{StaticResource LowBlockWithShadowBorder}">
-            <VerticalStackLayout Spacing="10" Margin="10,0">
-                
-                <Grid Grid.Row="0" ColumnDefinitions="*,auto,auto" IsVisible="{Binding Item.IsArtifact}">
+            <VerticalStackLayout Spacing="0" Margin="10,0">
+
+                <Grid Grid.Row="0" ColumnDefinitions="*,auto,auto" IsVisible="{Binding Item.IsArtifact}" Margin="0,0,0,5">
                     <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ArtifactCost}}"/>
                     <Label Grid.Column="1" Style="{StaticResource TitleLabel}" Text="{Binding Item.Price}" Margin="0,0,10,0"/>
                     <Label Grid.Column="2" Style="{StaticResource TitleLabel}" FontFamily="Awesome" Text="{x:Static icons:Awesome.Coins}" TextColor="{StaticResource BRIXOrange}" FontSize="18"/>
                 </Grid>
 
-                <Grid Grid.Row="1" ColumnDefinitions="*,*,auto" IsVisible="{Binding ShowCoins}" >
+                <Grid ColumnDefinitions="*,auto,auto"  IsVisible="{Binding Item.IsArtifact}" Margin="0,0,0,10">
+                    <Label Grid.Column="0" Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ArtifactLevel}}"/>
+                    <Label Grid.Column="1" Style="{StaticResource TitleLabel}" Text="{Binding Item.ArtifactLevel}"  Margin="0,0,10,0"/>
+                    <Label Grid.Column="2" Style="{StaticResource TitleLabel}" FontFamily="AwesomeRPG" Text="{x:Static icons:AwesomeRPG.Anvil}" TextColor="{StaticResource BRIXWhite}" FontSize="18"/>
+                </Grid>
+
+                <Grid Grid.Row="1" ColumnDefinitions="*,*,auto" IsVisible="{Binding ShowCoins}" Margin="0,0,0,15">
                     <Grid.Resources>
                         <Style TargetType="Label">
                             <Setter Property="VerticalOptions" Value="Center"/>

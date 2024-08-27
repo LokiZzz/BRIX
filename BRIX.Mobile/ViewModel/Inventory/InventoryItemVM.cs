@@ -128,6 +128,8 @@ namespace BRIX.Mobile.ViewModel.Inventory
             }
         }
 
+        public string ArtifactLevel => InternalModel is Artifact artifact ? artifact.Level.ToString() : "none";
+
         public event EventHandler<int>? OnFullPriceChanged;
 
         public int Price
@@ -214,6 +216,7 @@ namespace BRIX.Mobile.ViewModel.Inventory
             OnPropertyChanged(nameof(Price));
             OnPropertyChanged(nameof(PriceString));
             OnPropertyChanged(nameof(FullPrice));
+            OnPropertyChanged(nameof(ArtifactLevel));
             OnFullPriceChanged?.Invoke(this, FullPrice);
         }
 

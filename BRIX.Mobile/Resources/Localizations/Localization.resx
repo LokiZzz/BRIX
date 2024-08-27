@@ -1458,4 +1458,7 @@
   <data name="AbilityConsumesArtifact" xml:space="preserve">
     <value>Ability consumes artifact.</value>
   </data>
+  <data name="ArtifactLevel" xml:space="preserve">
+    <value>Artifact level</value>
+  </data>
 </root>

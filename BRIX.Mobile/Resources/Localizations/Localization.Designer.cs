@@ -511,6 +511,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Artifact level.
+        /// </summary>
+        public static string ArtifactLevel {
+            get {
+                return ResourceManager.GetString("ArtifactLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adjust?.
         /// </summary>
         public static string AskAdjust {

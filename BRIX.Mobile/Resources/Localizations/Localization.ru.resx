@@ -1458,4 +1458,7 @@
   <data name="AbilityConsumesArtifact" xml:space="preserve">
     <value>Способность расходует артефакт.</value>
   </data>
+  <data name="ArtifactLevel" xml:space="preserve">
+    <value>Уровень артефакта</value>
+  </data>
 </root>
