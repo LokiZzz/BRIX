@@ -8,8 +8,7 @@
              x:Class="BRIX.Mobile.View.Abilities.AbilityActivationSettingsPage"
              x:DataType="vm:AbilityActivationSettingsPageVM"
              Shell.TabBarIsVisible="False"
-             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ActivationSettings}}"
-             Padding="0">
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ActivationSettings}}">
 
     <Shell.TitleView>
         <controls:TitleView/>
@@ -18,7 +17,7 @@
     <Grid RowDefinitions="*,auto">
         <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never" >
             <VerticalStackLayout Spacing="10" Margin="0,0,0,10">
-                <Border Style="{StaticResource BlockBorder}" Margin="10,0">
+                <Border Style="{StaticResource BlockBorder}">
                     <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectActionPoints}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.ActionPointAspectHint}}"/>
@@ -38,7 +37,7 @@
                     </VerticalStackLayout>
                 </Border>
 
-                <Border Style="{StaticResource BlockBorder}" Margin="10,0">
+                <Border Style="{StaticResource BlockBorder}">
                     <VerticalStackLayout Spacing="10">
                         <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectCooldown}}"/>
                         <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.CooldownAspectHint}}"/>
