@@ -3,21 +3,16 @@ using BRIX.Library.Aspects.TargetSelection;
 using BRIX.Library.Characters;
 using BRIX.Library.DiceValue;
 using BRIX.Library.Effects;
-using BRIX.Library.Extensions;
 using BRIX.Mobile.Models.NPCs;
 using BRIX.Mobile.Resources.Localizations;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BRIX.Mobile.ViewModel.NPCs
 {
     public partial class FastNPCCreationVM : ObservableObject
     {
-        public FastNPCCreationVM()
-        {
-            UpdatePotentialNPC();
-        }
-
         public NPCModel PotentialNPC = new ();
 
         private int _fastHealth = 10;
@@ -26,23 +21,8 @@ namespace BRIX.Mobile.ViewModel.NPCs
             get => _fastHealth;
             set
             {
-                if (SetProperty(ref _fastHealth, value))
-                {
-                    UpdatePotentialNPC();
-                }
-            }
-        }
-
-        private int _fastSpeed = 1;
-        public int FastSpeed
-        {
-            get => _fastSpeed;
-            set
-            {
-                if (SetProperty(ref _fastSpeed, value))
-                {
-                    UpdatePotentialNPC();
-                }
+                SetProperty(ref _fastHealth, value);
+                UpdatePower();
             }
         }
 
@@ -52,10 +32,8 @@ namespace BRIX.Mobile.ViewModel.NPCs
             get => _fastAttackDistance;
             set
             {
-                if (SetProperty(ref _fastAttackDistance, value))
-                {
-                    UpdatePotentialNPC();
-                }
+                SetProperty(ref _fastAttackDistance, value);
+                UpdatePower();
             }
         }
 
@@ -65,10 +43,8 @@ namespace BRIX.Mobile.ViewModel.NPCs
             get => _fastDamage;
             set
             {
-                if (SetProperty(ref _fastDamage, value))
-                {
-                    UpdatePotentialNPC();
-                }
+                SetProperty(ref _fastDamage, value);
+                UpdatePower();
             }
         }
 
@@ -82,71 +58,69 @@ namespace BRIX.Mobile.ViewModel.NPCs
         [RelayCommand]
         public void UpdateByDesiredPower()
         {
-            int fastPower = FastPower;
-            int healthPower = (fastPower * 1.5).Round();
-            int attackPower = (fastPower * 0.5).Round();
-
-            _fastHealth = CharacterCalculator.ExpToHealth(healthPower);
-
-            if (_fastSpeed > 1)
+            NPC npc = new()
             {
-                int speedCost = new CharacterSpeed() { Walk = _fastSpeed }.GetExpCost();
+                Health = 5,
+                Speed = new CharacterSpeed()
+            };
 
-                if (attackPower - speedCost >= 0)
-                {
-                    attackPower -= speedCost;
-                }
-                else
-                {
-                    _fastSpeed = 1;
-                }
+            Ability damageAbility = new();
+            DamageEffect damageEffect = new() { Impact = new DicePool(2) };
+            damageEffect.GetAspect<TargetSelectionAspect>().NTAD.DistanceInMeters = _fastAttackDistance;
+            damageAbility.AddEffect(damageEffect);
+            npc.Abilities.Clear();
+            npc.Abilities.Add(damageAbility);
+
+            // Грубая подстройка
+            while(npc.Power < _fastPower / 1.2)
+            {
+                npc.Health += 1;
             }
 
-            double distanceCoef = TargetSelectionAspect.GetDistanceCoeficient(_fastAttackDistance);
-            int averageDamage = Math.Sqrt(attackPower / distanceCoef).Round();
-            _fastDamage = DicePool.FromValue(averageDamage, 0.5).ToString();
+            while (npc.Power < _fastPower)
+            {
+                damageEffect.Impact.Modifier += 1;
+            }
 
-            OnPropertyChanged(nameof(FastHealth));
-            OnPropertyChanged(nameof(FastDamage));
-            OnPropertyChanged(nameof(FastAttackDistance));
-            OnPropertyChanged(nameof(FastSpeed));
+            // Более тонкая подстройка
+            while (npc.Power > _fastPower && npc.Health >= 4)
+            {
+                npc.Health -= 1;
+            }
 
-            UpdatePotentialNPC();
+            if (damageEffect.Impact.Modifier > 2)
+            {
+                damageEffect.Impact = DicePool.FromValue(damageEffect.Impact.Modifier, 0.5);
+            }
+
+            FastHealth = npc.Health;
+            FastDamage = damageEffect.Impact.ToString();
+
+            UpdatePower();
         }
 
-        private void UpdatePotentialNPC()
+        private void UpdatePower()
         {
-            PotentialNPC.Abilities.Clear();
-            PotentialNPC.Internal.ClearAbilities();
-
-            PotentialNPC.Health = FastHealth == 0 ? 10 : FastHealth;
-
-            if (FastSpeed > 1)
+            NPC npc = new()
             {
-                PotentialNPC.Internal.Speed.Walk = FastSpeed;
-            }
+                Health = _fastHealth,
+                Speed = new CharacterSpeed()
+            };
 
-            if (!string.IsNullOrEmpty(FastDamage))
+            Ability damageAbility = new()
             {
-                if (!DicePool.TryParse(FastDamage, out DicePool? damage))
-                {
-                    damage = new DicePool((1, 4));
-                }
+                Name = $"{Localization.Attack} {_fastDamage}, {_fastAttackDistance} m"
+            };
 
-                int attackDistance = FastAttackDistance > 1 ? FastAttackDistance : 1;
+            _ = DicePool.TryParse(_fastDamage, out DicePool? damage);
+            DamageEffect damageEffect = new() { Impact = damage ?? new DicePool(0) };
+            damageEffect.GetAspect<TargetSelectionAspect>().NTAD.DistanceInMeters = _fastAttackDistance;
+            damageAbility.AddEffect(damageEffect);
+            npc.Abilities.Clear();
+            npc.Abilities.Add(damageAbility);
 
-                Ability attackAbility = new()
-                {
-                    Name = $"{Localization.Attack} {damage?.ToString()}, {attackDistance} m"
-                };
-                DamageEffect dmgEffect = new() { Impact = damage ?? new DicePool((1, 4)) };
-                dmgEffect.GetAspect<TargetSelectionAspect>().Strategy = ETargetSelectionStrategy.NTargetsAtDistanсeL;
-                dmgEffect.GetAspect<TargetSelectionAspect>().NTAD.DistanceInMeters = FastAttackDistance;
-                attackAbility.AddEffect(dmgEffect);
-                PotentialNPC.AddAbility(new(attackAbility));
-            }
-
-            FastPower = PotentialNPC.Power;
+            FastPower = npc.Power;
+            PotentialNPC = new(npc);
         }
     }
 }

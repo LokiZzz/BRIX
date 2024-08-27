@@ -47,7 +47,6 @@ namespace BRIX.Mobile.ViewModel.NPCs
 
                 NPC = FastNPC.PotentialNPC.Copy() ?? throw new Exception("Ошибка копирования NPC.");
             }
-
         }
 
         [RelayCommand]
