@@ -1461,4 +1461,7 @@
   <data name="ArtifactLevel" xml:space="preserve">
     <value>Уровень артефакта</value>
   </data>
+  <data name="AspectTargetSize" xml:space="preserve">
+    <value>Размеры целей</value>
+  </data>
 </root>

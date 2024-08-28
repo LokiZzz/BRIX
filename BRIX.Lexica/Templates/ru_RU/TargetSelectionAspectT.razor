@@ -46,14 +46,6 @@
     {
         <p>Эффект применяется по цепочке к @Numbers.RUSDcln(Model.TargetChain.MaxTargetsCount, "цели", "целям", "целям"), максимальное расстояние между целями в цепи: @Numbers.RUSDcln(Model.TargetChain.MaxDistanceBetweenTargets, "метр", "метра", "метров").</p>
     }
-
-    <p>@(Model.IsConcorded ? "Эффекты" : "Эффект") может быть применён к целям следующих размеров:</p>
-    <ul>
-        @foreach (ETargetSize size in Model.TargetsSizes.AllowedTargetSizes)
-        {
-            <li>@GetSize(size);</li>
-        }
-    </ul>
 }
 
 @code {

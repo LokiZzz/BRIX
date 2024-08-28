@@ -29,8 +29,6 @@ namespace BRIX.Library.Aspects.TargetSelection
 
         public TargetChainSettings TargetChain { get; set; } = new ();
 
-        public TargetSizeSettings TargetsSizes { get; set; } = new ();
-
         public bool NeedToSeeTarget { get; set; } = true;
 
         private double GetNTADCoeficient()
@@ -45,8 +43,7 @@ namespace BRIX.Library.Aspects.TargetSelection
             return distanceCoef * countCoef
                 * randomSelectionCoef
                 * needToSeeTargetCoef
-                * TargetChain.GetCoefficient()
-                * TargetsSizes.GetCoefficient();
+                * TargetChain.GetCoefficient();
         }
 
         private double GetAreaCoeficient()
@@ -73,8 +70,7 @@ namespace BRIX.Library.Aspects.TargetSelection
                 * excludedTargetsCoef
                 * needToSeeTargetCoef
                 * spreadsAroundCornersCoef
-                * TargetChain.GetCoefficient()
-                * TargetsSizes.GetCoefficient();
+                * TargetChain.GetCoefficient();
         }
 
         public static double GetDistanceCoeficient(int distance)

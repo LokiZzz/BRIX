@@ -1,0 +1,24 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+@using BRIX.Library.Aspects.TargetSelection
+@using BRIX.Library.Enums
+@using BRIX.Library.Mathematics
+
+<p>The @(Model.IsConcorded ? "effects" : "effect") can be applied to targets of the following sizes:</p>
+<ul>
+    @foreach (ETargetSize size in Model.AllowedTargetSizes)
+    {
+        <li>@GetSize(size);</li>
+    }
+</ul>
+}
+
+@code {
+    [Parameter]
+    public TargetSizeAspect Model { get; set; } = new();
+
+    public static MarkupString GetSize(ETargetSize input)
+    {
+        return (MarkupString)input.ToString();
+    }
+}

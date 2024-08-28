@@ -148,6 +148,7 @@ public static class MauiProgram
         builder.RegisterView<WinEffectPage, EffectPageVMBase<EffectGenericModelBase<WinTheGameEffect>>>();
 
         builder.RegisterView<TargetSelectionAspectPage, TargetSelectionAspectPageVM>();
+        builder.RegisterView<TargetSizeAspectPage, TargetSizeAspectPageVM>();
         builder.RegisterView<ActivationConditionsAspectPage, ActivationConditionsAspectPageVM>();
         builder.RegisterView<DurationAspectPage, DurationAspectPageVM>();
         builder.RegisterView<AOEAspectPage, AOEAspectPageVM>();

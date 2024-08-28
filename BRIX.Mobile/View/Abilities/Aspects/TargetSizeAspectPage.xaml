@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:v="clr-namespace:BRIX.Mobile.View.Abilities"
+             xmlns:vm="clr-namespace:BRIX.Mobile.ViewModel.Abilities.Aspects"
+             xmlns:lcz="clr-namespace:BRIX.Mobile.Resources.Localizations"
+             xmlns:icons="clr-namespace:BRIX.Mobile.View.IconFonts"
+             xmlns:controls="clr-namespace:BRIX.Mobile.Resources.Controls"
+             x:Class="BRIX.Mobile.View.Abilities.Aspects.TargetSizeAspectPage"
+             x:DataType="vm:TargetSizeAspectPageVM"
+             Shell.TabBarIsVisible="False"
+             Title="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AspectTargetSize}}">
+
+    <Shell.TitleView>
+        <controls:TitleView/>
+    </Shell.TitleView>
+
+    
+    <Grid RowDefinitions="*,auto">
+        <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never">
+            <VerticalStackLayout Spacing="10" Margin="0,0,0,10">
+                <Border Style="{StaticResource BlockBorder}">
+                    <Grid RowDefinitions="auto,*,auto" RowSpacing="10">
+                        <VerticalStackLayout Grid.Row="0" Spacing="10">
+                            <Label Style="{StaticResource TitleLabel}" Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetsSizes}}"/>
+                            <Label Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.TargetsSizesHint}}"/>
+                        </VerticalStackLayout>
+                        <CollectionView 
+                            Grid.Row="1" 
+                            x:Name="sizesCollectionView" 
+                            ItemsSource="{Binding Aspect.Sizes}"
+                            IsVisible="{Binding ShowSizesCollection}">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical" Span="2" VerticalItemSpacing="5" HorizontalItemSpacing="5"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="vm:TargetSizeVM">
+                                    <controls:BasicCollectionItem
+                                        Text="{Binding Text}"
+                                        DeleteCommand="{Binding Source={x:Reference sizesCollectionView}, Path= BindingContext.DeleteSizeCommand}"
+                                        CommandParameter="{Binding}"/>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <Button 
+                            Grid.Row="2"
+                            Style="{StaticResource LightButton}"
+                            Text="{lcz:Translate Name={x:Static lcz:LocalizationKeys.AddSize}}"
+                            Command="{Binding AddSizeCommand}"
+                            Margin="1"/>
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+        <v:AbilityCostMonitorPanel
+            Grid.Row="1"
+            BindingContext="{Binding CostMonitor}"/>
+    </Grid>
+</ContentPage>

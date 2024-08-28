@@ -49,24 +49,11 @@
     {
         <p>After applying an @(Model.IsConcorded ? "effects" : "effect") to a target, it is applied along the chain up to @Numbers.ENGDcln(Model.TargetChain.MaxTargetsCount, "target"), the maximum distance between targets in the chain: @Numbers.ENGDcln(Model.TargetChain.MaxDistanceBetweenTargets, "meter").</p>
     }
-
-    <p>The @(Model.IsConcorded ? "effects" : "effect") can be applied to targets of the following sizes:</p>
-    <ul>
-        @foreach (ETargetSize size in Model.TargetsSizes.AllowedTargetSizes)
-        {
-            <li>@GetSize(size);</li>
-        }
-    </ul>
 }
 
 @code {
     [Parameter]
     public TargetSelectionAspect Model { get; set; } = new();
-
-    public static MarkupString GetSize(ETargetSize input)
-    {
-        return (MarkupString)input.ToString();
-    }
 
     public static MarkupString GetShape(IShape? shape)
     {

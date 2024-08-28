@@ -14,7 +14,8 @@ namespace BRIX.Library.Effects
         public override List<Type> RequiredAspects => 
         [
             typeof(AOEAspect), typeof(DurationAspect), 
-            typeof(ActivationConditionsAspect), typeof(VampirismAspect)
+            typeof(ActivationConditionsAspect), typeof(VampirismAspect),
+            typeof(TargetSizeAspect)
         ];
 
         public bool IsAreaDisposable { get; set; }

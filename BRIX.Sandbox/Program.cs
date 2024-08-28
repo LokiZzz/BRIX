@@ -1,25 +1,31 @@
-﻿using BRIX.Library.DiceValue;
+﻿using BRIX.Library.Abilities;
+using BRIX.Library.Aspects;
+using BRIX.Library.DiceValue;
+using BRIX.Library.Effects;
 using BRIX.Library.Items;
+using Newtonsoft.Json;
 
-while (true)
+JsonSerializerSettings settings = new()
 {
-    //Price test
-    //string[] input = Console.ReadLine().Split(' ');
-    //DicePool.TryParse(input[0], out DicePool dices);
-    //int distance = int.Parse(input[1]);
-    //Artifact artifact = new();
-    //artifact.Damage = dices;
-    //artifact.Distance = distance;
+    Formatting = Formatting.Indented,
+    TypeNameHandling = TypeNameHandling.All,
+};
 
-    //Console.WriteLine($"Damage: {artifact.Damage}, Distance: {artifact.Distance}, Price: {artifact.Price}, Level: {artifact.Level}");
+Ability ability = new();
+ability.AddEffect(new DamageEffect());
+ability.AddEffect(new AccelerationEffect());
 
-    ////Tune test
-    //string[] input = Console.ReadLine().Split(' ');
-    //int price = int.Parse(input[0]);
-    //int distance = int.Parse(input[1]);
-    //Artifact sword = new();
-    //sword.Distance = distance;
-    //sword.TuneToPrice(price, ArtifactExtensions.EArtifactTuneStrategy.ByDamage);
+string abilityJSON = JsonConvert.SerializeObject(ability, settings);
 
-    //Console.WriteLine($"Damage: {sword.Damage}, Distance: {sword.Distance}, Price: {sword.Price}, Level: {sword.Level}");
-}
+Ability? abilityRessurected = JsonConvert.DeserializeObject<Ability>(abilityJSON, settings);
+
+TargetSizeAspect tsa = new ();
+tsa.AddSize(BRIX.Library.Enums.ETargetSize.Gigantic);
+tsa.AddSize(BRIX.Library.Enums.ETargetSize.Monstrous);
+tsa.AddSize(BRIX.Library.Enums.ETargetSize.Colossal);
+
+string aspectJSON = JsonConvert.SerializeObject(tsa, settings);
+
+TargetSizeAspect? aspectRessurected = JsonConvert.DeserializeObject<TargetSizeAspect>(aspectJSON, settings);
+
+string stop = "";

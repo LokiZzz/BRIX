@@ -1,16 +1,19 @@
-﻿using BRIX.Library.Enums;
+﻿using BRIX.Library.Effects;
+using BRIX.Library.Enums;
 using BRIX.Library.Mathematics;
 
-namespace BRIX.Library.Aspects.TargetSelection
+namespace BRIX.Library.Aspects
 {
-    public class TargetSizeSettings
+    public class TargetSizeAspect : AspectBase
     {
-        private readonly List<ETargetSize> _allowedTargetSizes =
-        [
-            ETargetSize.Small, ETargetSize.Medium, ETargetSize.Big 
-        ];
+        public override void Initialize()
+        {
+            base.Initialize();
+            _allowedTargetSizes = [ ETargetSize.Small, ETargetSize.Medium, ETargetSize.Big ];
+        }
 
-        public IReadOnlyList<ETargetSize> AllowedTargetSizes => _allowedTargetSizes.AsReadOnly();
+        protected List<ETargetSize> _allowedTargetSizes = [];
+        public IReadOnlyCollection<ETargetSize> AllowedTargetSizes => _allowedTargetSizes;
 
         public void AddSize(ETargetSize size)
         {
@@ -30,9 +33,10 @@ namespace BRIX.Library.Aspects.TargetSelection
             }
         }
 
-        public double GetCoefficient() =>
-            SizeCategoriesCountToPercentMap[AllowedTargetSizes.Count]
-            .ToCoeficient();
+        public override double GetCoefficient()
+        {
+            return SizeCategoriesCountToPercentMap[AllowedTargetSizes.Count].ToCoeficient();
+        }
 
         private static Dictionary<int, int> SizeCategoriesCountToPercentMap => new()
         {

@@ -10,6 +10,7 @@ namespace BRIX.Mobile.Models.Abilities.Aspects
             return aspect switch
             {
                 TargetSelectionAspect tsa => new TargetSelectionAspectModel(tsa),
+                TargetSizeAspect tsize => new TargetSizeAspectModel(tsize),
                 ActivationConditionsAspect aca => new ActivationConditionsAspectModel(aca),
                 DurationAspect da => new DurationAspectModel(da),
                 AOEAspect aoea => new AOEAspectModel(aoea),

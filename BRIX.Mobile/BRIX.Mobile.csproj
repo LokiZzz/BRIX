@@ -137,6 +137,9 @@
 	  <Compile Update="View\Abilities\Aspects\AOEAspectPage.xaml.cs">
 	    <DependentUpon>AOEAspectPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\Abilities\Aspects\TargetSizeAspectPage.xaml.cs">
+	    <DependentUpon>TargetSizeAspectPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\Abilities\Aspects\VampirismAspectPage.xaml.cs">
 	    <DependentUpon>VampirismAspectPage.xaml</DependentUpon>
 	  </Compile>
@@ -231,6 +234,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Aspects\AOEAspectPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Abilities\Aspects\TargetSizeAspectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Abilities\Aspects\VampirismAspectPage.xaml">

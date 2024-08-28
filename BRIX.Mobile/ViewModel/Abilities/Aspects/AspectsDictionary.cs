@@ -20,6 +20,12 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
                 EditPage = typeof(TargetSelectionAspectPage),
                 LibraryAspectType = typeof(TargetSelectionAspect),
             }},
+            { typeof(TargetSizeAspectModel), new AspectUtilityModel() {
+                Name = Localization.AspectTargetSize,
+                Icon = AwesomeRPG.DoubleTeam,
+                EditPage = typeof(TargetSizeAspectPage),
+                LibraryAspectType = typeof(TargetSizeAspect),
+            }},
             { typeof(ActivationConditionsAspectModel), new AspectUtilityModel() {
                 Name = Localization.AspectActivationConditions,
                 Icon = AwesomeRPG.KeyBasic,

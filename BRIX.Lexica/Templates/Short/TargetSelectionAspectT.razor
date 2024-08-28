@@ -31,13 +31,6 @@
     {
         <text> Chain: @Model.TargetChain.MaxTargetsCount with @Model.TargetChain.MaxDistanceBetweenTargets m;</text>
     }
-
-    <text> Sizes: @Model.TargetsSizes.AllowedTargetSizes.ToAggregatedString(x => x.ToString());</text>
-
-    @if (Model.NeedToSeeTarget)
-    {
-        <text> NeedToSee;</text>
-    }
 }
 
 @code {

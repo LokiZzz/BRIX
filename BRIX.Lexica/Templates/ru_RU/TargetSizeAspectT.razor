@@ -1,0 +1,39 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+@using BRIX.Library.Aspects.TargetSelection
+@using BRIX.Library.Enums
+@using BRIX.Library.Mathematics
+
+<p>@(Model.IsConcorded ? "Эффекты" : "Эффект") может быть применён к целям следующих размеров:</p>
+<ul>
+    @foreach (ETargetSize size in Model.AllowedTargetSizes)
+    {
+        <li>@GetSize(size);</li>
+    }
+</ul>
+
+@code {
+    [Parameter]
+    public TargetSizeAspect Model { get; set; } = new();
+
+    public static MarkupString GetSize(ETargetSize input)
+    {
+        string resultString = input switch
+        {
+            ETargetSize.Tiny => "Крохотный",
+            ETargetSize.Miniature => "Миниатюрный",
+            ETargetSize.Small => "Маленький",
+            ETargetSize.Medium => "Средний",
+            ETargetSize.Big => "Большой",
+            ETargetSize.Huge => "Огромный",
+            ETargetSize.Gigantic => "Гигантский",
+            ETargetSize.Monstrous => "Монструозный",
+            ETargetSize.Colossal => "Колоссальный",
+            ETargetSize.Titanic => "Титанический",
+            ETargetSize.Legendary => "Легендарный",
+            _ => TemplateHelper.LexisTemplatingError
+        };
+
+        return (MarkupString)resultString;
+    }
+}

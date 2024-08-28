@@ -1,11 +1,7 @@
 ﻿using BRIX.Library.Aspects.TargetSelection;
-using BRIX.Library.Enums;
 using BRIX.Mobile.Models.Abilities.Aspects;
 using BRIX.Mobile.Services;
-using BRIX.Mobile.View.Popups;
-using BRIX.Mobile.ViewModel.Popups;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 {
@@ -34,13 +30,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
             }
 
             SetShape(Aspect.AreaShape.AreaType.ToString("G"));
-
-            Sizes = new(Aspect.Internal.TargetsSizes.AllowedTargetSizes.Select(x => new TargetSizeVM
-            {
-                Size = x,
-                Text = Localization[x.ToString("G")].ToString() ?? string.Empty
-            }));
-            OnPropertyChanged(nameof(ShowSizesCollection));
 
             Aspect.AreaShape.CostMonitor = Aspect.CostMonitor;
         }
@@ -127,86 +116,6 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
 
         #endregion
 
-        #region Target size
-
-        public bool ShowSizesCollection => Sizes?.Any() == true;
-
-        private ObservableCollection<TargetSizeVM> _sizes = [];
-        public ObservableCollection<TargetSizeVM> Sizes
-        {
-            get => _sizes;
-            set => SetProperty(ref _sizes, value);
-        }
-
-        [RelayCommand]
-        public async Task AddSize()
-        {
-            if (Aspect == null)
-            {
-                throw new ArgumentNullException(nameof(Aspect));
-            }
-
-            List<object> allSizes = Enum.GetValues<ETargetSize>()
-                .Select(x => new TargetSizeVM
-                {
-                    Size = x,
-                    Text = Localization[x.ToString("G")].ToString() ?? string.Empty
-                })
-                .Where(x => !Sizes.Any(y => y.Size == x.Size))
-                .Select(x => x as object)
-                .ToList();
-
-            PickerPopupResult? result = await ShowPopupAsync<PickerPopup, PickerPopupResult, PickerPopupParameters>(
-                new()
-                {
-                    Title = Resources.Localizations.Localization.TargetsSizes,
-                    Items = allSizes,
-                    SelectedItems = [allSizes.First()],
-                    SelectMultiple = true
-                }
-            );
-
-            if (result != null)
-            {
-                List<TargetSizeVM> concreteResult = result.SelectedItems.Select(x => (TargetSizeVM)x).ToList();
-
-                if (Sizes.Any(x => concreteResult.Any(y => y.Size == x.Size)))
-                {
-                    return;
-                }
-
-                foreach(TargetSizeVM sizeVM in concreteResult)
-                {
-                    Sizes.Add(sizeVM); 
-                    Aspect.Internal.TargetsSizes.AddSize(sizeVM.Size);
-                }
-
-                Sizes = new(Sizes.OrderBy(x => x.Size));
-            }
-
-            CostMonitor?.UpdateCost();
-
-            OnPropertyChanged(nameof(ShowSizesCollection));
-        }
-
-        [RelayCommand]
-        public void DeleteSize(TargetSizeVM property)
-        {
-            if (Aspect == null)
-            {
-                throw new Exception("Не инициализирована модель" + nameof(Aspect));
-            }
-
-            Sizes.Remove(property);
-            Aspect.Internal.TargetsSizes.RemoveSize(property.Size);
-
-            CostMonitor?.UpdateCost();
-
-            OnPropertyChanged(nameof(ShowSizesCollection));
-        }
-
-        #endregion
-
         #region Area shape
 
         [RelayCommand]
@@ -246,13 +155,5 @@ namespace BRIX.Mobile.ViewModel.Abilities.Aspects
         public bool IsVoxelArray => Shape == EAreaType.VoxelArray;
 
         #endregion
-    }
-
-    public class TargetSizeVM
-    {
-        public ETargetSize Size { get; set; }
-        public string Text { get; set; } = string.Empty;
-
-        public override string ToString() => Text;
     }
 }

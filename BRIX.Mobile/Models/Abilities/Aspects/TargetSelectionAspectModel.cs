@@ -1,9 +1,4 @@
 ﻿using BRIX.Library.Aspects.TargetSelection;
-using BRIX.Library.Enums;
-using BRIX.Library.Mathematics;
-using BRIX.Mobile.Services;
-using BRIX.Mobile.ViewModel.Abilities.Aspects;
-using System.Collections.ObjectModel;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects
 {

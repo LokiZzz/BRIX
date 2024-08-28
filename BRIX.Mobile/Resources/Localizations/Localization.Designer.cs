@@ -691,6 +691,15 @@ namespace BRIX.Mobile.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Targets sizes.
+        /// </summary>
+        public static string AspectTargetSize {
+            get {
+                return ResourceManager.GetString("AspectTargetSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vampirism.
         /// </summary>
         public static string AspectVampirism {

@@ -1,0 +1,12 @@
+﻿@using BRIX.Lexica
+@using BRIX.Library.Aspects
+@using BRIX.Library.Aspects.TargetSelection
+@using BRIX.Library.Enums
+@using BRIX.Library.Mathematics
+
+<text> Sizes: @Model.AllowedTargetSizes.ToAggregatedString(x => x.ToString());</text>
+
+@code {
+    [Parameter]
+    public TargetSizeAspect Model { get; set; } = new();
+}

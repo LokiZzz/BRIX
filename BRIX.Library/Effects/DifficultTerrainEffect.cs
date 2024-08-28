@@ -17,7 +17,7 @@ namespace BRIX.Library.Effects
 
         public override List<Type> RequiredAspects =>
         [
-            typeof(AOEAspect), typeof(ActivationConditionsAspect), typeof(DurationAspect),
+            typeof(AOEAspect), typeof(ActivationConditionsAspect), typeof(DurationAspect), typeof(TargetSizeAspect)
         ];
 
         public override int BaseExpCost()
