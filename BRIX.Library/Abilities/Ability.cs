@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Aspects;
+using BRIX.Library.Aspects.Base;
 using BRIX.Library.DiceValue;
 using BRIX.Library.Effects;
 using BRIX.Library.Extensions;

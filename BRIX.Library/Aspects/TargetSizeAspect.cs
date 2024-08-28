@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Effects;
+﻿using BRIX.Library.Aspects.Base;
+using BRIX.Library.Effects;
 using BRIX.Library.Enums;
 using BRIX.Library.Mathematics;
 

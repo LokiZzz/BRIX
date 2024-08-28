@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Aspects;
+using BRIX.Library.Aspects.Base;
 using BRIX.Library.Aspects.TargetSelection;
 
 namespace BRIX.Mobile.Models.Abilities.Aspects

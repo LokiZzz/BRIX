@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Extensions;
+﻿using BRIX.Library.Aspects.Base;
+using BRIX.Library.Extensions;
 using BRIX.Library.Mathematics;
 using System.Net.Mime;
 

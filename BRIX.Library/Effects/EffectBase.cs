@@ -1,4 +1,5 @@
 ﻿using BRIX.Library.Aspects;
+using BRIX.Library.Aspects.Base;
 using BRIX.Library.Extensions;
 using BRIX.Utility.Extensions;
 

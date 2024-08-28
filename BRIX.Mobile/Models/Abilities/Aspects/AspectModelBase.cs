@@ -1,4 +1,4 @@
-﻿using BRIX.Library.Aspects;
+﻿using BRIX.Library.Aspects.Base;
 using BRIX.Mobile.Services;
 using BRIX.Mobile.ViewModel.Abilities;
 using BRIX.Mobile.ViewModel.Abilities.Aspects;

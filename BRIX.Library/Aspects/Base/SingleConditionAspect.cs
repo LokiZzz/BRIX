@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Mathematics;
+﻿using BRIX.Library.Aspects.Base;
+using BRIX.Library.Mathematics;
 
 namespace BRIX.Library.Aspects
 {

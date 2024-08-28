@@ -1,4 +1,4 @@
-﻿namespace BRIX.Library.Aspects
+﻿namespace BRIX.Library.Aspects.Base
 {
     public abstract class AspectBase
     {

@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Enums;
+﻿using BRIX.Library.Aspects.Base;
+using BRIX.Library.Enums;
 using BRIX.Library.Mathematics;
 
 namespace BRIX.Library.Aspects
