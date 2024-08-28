@@ -48,7 +48,7 @@
                             Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Count}}"
                             Text="{Binding Item.Count}"
                             Keyboard="Numeric"/>
-                        <Grid ColumnDefinitions="1.8*,*,*" ColumnSpacing="10" IsVisible="{Binding Item.IsArtifact}">
+                        <Grid ColumnDefinitions="1.5*,*,*" ColumnSpacing="10" IsVisible="{Binding Item.IsArtifact}">
                             <controls:FramedEntry
                                 Grid.Column="0"
                                 Placeholder="{lcz:Translate Name={x:Static lcz:LocalizationKeys.Damage}}"
