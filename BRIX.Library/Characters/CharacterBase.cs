@@ -42,7 +42,8 @@ namespace BRIX.Library.Characters
 
         protected virtual bool ValidateAbility(Ability ability) => true;
 
-        public Queue<Status> Statuses { get; set; } = [];
+        // Лист Вообще то должен быть очередью, но тогда проблемы с сериализацией.
+        public List<Status> Statuses { get; set; } = []; 
 
         /// <summary>
         /// Способности, создающие статус.

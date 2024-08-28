@@ -121,7 +121,7 @@ namespace BRIX.Mobile.ViewModel.Characters
 
             if (status.Effects.Count > 0)
             {
-                currentCharacter.Statuses.Enqueue(status);
+                currentCharacter.Statuses.Add(status);
             }
         }
 
