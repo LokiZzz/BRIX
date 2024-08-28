@@ -33,7 +33,7 @@ namespace BRIX.Library.Effects
         public override int BaseExpCost()
         {
             ThrasholdCostConverter thrasholdConverter = new(
-                (1, 20), (2, 30), (3, 50), (4, 500), (7, 300), (21, 150), (101, 50)
+                (1, 20), (2, 30), (3, 50), (10, 100), (20, 200)
             );
 
             int distanceExpCost = thrasholdConverter.Convert(DistanceInMeters);

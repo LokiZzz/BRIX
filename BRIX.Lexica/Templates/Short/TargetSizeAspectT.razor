@@ -4,7 +4,7 @@
 @using BRIX.Library.Enums
 @using BRIX.Library.Mathematics
 
-<text> Sizes: @Model.AllowedTargetSizes.ToAggregatedString(x => x.ToString());</text>
+Sizes: @Model.AllowedTargetSizes.ToAggregatedString(x => x.ToString());
 
 @code {
     [Parameter]
