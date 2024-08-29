@@ -4,6 +4,7 @@ using BRIX.Mobile.Models.NPCs;
 using BRIX.Mobile.Resources.Localizations;
 using BRIX.Mobile.Services.Navigation;
 using BRIX.Mobile.View.Abilities;
+using BRIX.Mobile.ViewModel.Abilities;
 using BRIX.Mobile.ViewModel.Base;
 using BRIX.Mobile.ViewModel.Popups;
 using BRIX.Utility.Extensions;
@@ -53,7 +54,8 @@ namespace BRIX.Mobile.ViewModel.NPCs
         private async Task AddAbility()
         {
             await Navigation.NavigateAsync<AOEAbilityPage>(
-                (NavigationParameters.EditMode, EEditingMode.Add)
+                (NavigationParameters.EditMode, EEditingMode.Add),
+                (NavigationParameters.EditAbilityFor, EAbilityFor.NPC)
             );
         }
 
@@ -62,7 +64,8 @@ namespace BRIX.Mobile.ViewModel.NPCs
         {
             await Navigation.NavigateAsync<AOEAbilityPage>(
                 (NavigationParameters.Ability, ability.Copy()),
-                (NavigationParameters.EditMode, EEditingMode.Edit)
+                (NavigationParameters.EditMode, EEditingMode.Edit),
+                (NavigationParameters.EditAbilityFor, EAbilityFor.NPC)
             );
         }
 
