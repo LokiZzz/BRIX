@@ -82,6 +82,8 @@ namespace BRIX.Library.Abilities
                     int costBefore = damageImpactEffect.GetExpCost();
                     DiceImpactEffectBase impactEffect = (DiceImpactEffectBase)effect;
                     overallDamageImpact.Add([impactEffect.Impact]);
+                    // Необходимо учесть опции броска
+                    overallDamageImpact.RollOptions.CopyPropertiesFrom(impactEffect.Impact.RollOptions);
                     int costAfter = damageImpactEffect.GetExpCost();
 
                     cost += costAfter - costBefore;

@@ -23,5 +23,13 @@
         /// Если взрыва нет, то глубина равна 0.
         /// </summary>
         public int ExplodingDepth { get; set; }
+
+        public void CopyPropertiesFrom(DiceRollOptions diceRollOptions)
+        {
+            CriticalPercent = diceRollOptions.CriticalPercent;
+            CriticalModifier = diceRollOptions.CriticalModifier;
+            RerollValues = diceRollOptions.RerollValues;
+            ExplodingDepth = diceRollOptions.ExplodingDepth;
+        }
     }
 }

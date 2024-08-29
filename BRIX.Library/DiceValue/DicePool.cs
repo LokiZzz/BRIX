@@ -75,7 +75,7 @@ namespace BRIX.Library.DiceValue
         }
 
         /// <summary>
-        /// Добавляет к пулу другой пул.
+        /// Добавляет к пулу другой пул. Не учитывает опции броска.
         /// </summary>
         public void Add(List<DicePool> pool)
         {
