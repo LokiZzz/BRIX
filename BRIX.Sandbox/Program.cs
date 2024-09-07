@@ -3,6 +3,9 @@ using BRIX.Library.Aspects;
 using BRIX.Library.Effects;
 using Newtonsoft.Json;
 
+List<string> list = new();
+list.Order();
+
 JsonSerializerSettings settings = new()
 {
     Formatting = Formatting.Indented,
