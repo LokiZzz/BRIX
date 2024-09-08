@@ -10,16 +10,10 @@ using System.Xml.Linq;
 
 namespace BRIX.SourceGenerator
 {
-    public class FileGroup
+    public class FileGroup(AdditionalText mainFile, IReadOnlyList<AdditionalText> subFiles)
     {
-        public FileGroup(AdditionalText mainFile, IReadOnlyList<AdditionalText> subFiles)
-        {
-            MainFile = mainFile;
-            SubFiles = subFiles.OrderBy(x => x.Path).ToArray();
-        }
-
-        public AdditionalText MainFile { get; }
-        public IReadOnlyList<AdditionalText> SubFiles { get; }
+        public AdditionalText MainFile { get; } = mainFile;
+        public IReadOnlyList<AdditionalText> SubFiles { get; } = [.. subFiles.OrderBy(x => x.Path)];
 
         public (string Name, string SourceCode) GenerateFile(GlobalOptions options, CancellationToken cancellationToken = default)
         {
@@ -36,10 +30,7 @@ namespace BRIX.SourceGenerator
                 keys.AddRange(subKeys);
             }
 
-            keys = keys
-                .Distinct()
-                .OrderBy(str => str)
-                .ToList();
+            keys = [.. keys.Distinct().OrderBy(str => str)];
             string sourceCode = GetSourceCode(name, @namespace, keys);
 
             return ($"{@namespace}.{name}.g.cs", sourceCode);
@@ -83,15 +74,14 @@ namespace BRIX.SourceGenerator
 
         private List<string> ReadResxKeys(SourceText content)
         {
-            using (StringReader reader = new(content.ToString()))
-            {
-                return XDocument.Load(reader, LoadOptions.SetLineInfo)
-                    .Root
-                    .Descendants()
-                    .Where(data => data.Name == "data")
-                    .Select(data => data.Attribute("name")!.Value)
-                    .ToList();
-            }
+            using StringReader reader = new(content.ToString());
+
+            return XDocument.Load(reader, LoadOptions.SetLineInfo)
+                .Root
+                .Descendants()
+                .Where(data => data.Name == "data")
+                .Select(data => data.Attribute("name")!.Value)
+                .ToList();
         }
     }
 }
