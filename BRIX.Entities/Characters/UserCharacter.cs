@@ -1,12 +1,11 @@
-﻿using BRIX.Web.Data.Entities.Users;
+﻿using BRIX.Entity.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BRIX.Web.Data.Entities.Characters
+namespace BRIX.Entity.Characters
 {
-    public class UserCharacter : EntityBase<Guid>
+    public class PlayerCharacter : EntityBase<Guid>
     {
         /// <summary>
         /// Персонаж, сериализованный в JSON.
@@ -26,12 +25,12 @@ namespace BRIX.Web.Data.Entities.Characters
         public required User User { get; set; }
     }
 
-    public class UserCharacterConfiguration : IEntityTypeConfiguration<UserCharacter>
+    public class UserCharacterConfiguration : IEntityTypeConfiguration<PlayerCharacter>
     {
-        public void Configure(EntityTypeBuilder<UserCharacter> builder)
+        public void Configure(EntityTypeBuilder<PlayerCharacter> builder)
         {
             builder.HasOne(x => x.User).WithMany(x => x.Characters).HasForeignKey(x => x.UserId);
-            builder.ToTable(nameof(UserCharacter), DbSchemes.Characters);
+            builder.ToTable(nameof(PlayerCharacter), DbSchemes.Characters);
         }
     }
 }

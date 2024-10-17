@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BRIX.Web.Data.Migrations
+namespace BRIX.Entity.Migrations
 {
     /// <inheritdoc />
     public partial class _0 : Migration
@@ -12,10 +12,10 @@ namespace BRIX.Web.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "acc");
+                name: "chr");
 
             migrationBuilder.EnsureSchema(
-                name: "chr");
+                name: "acc");
 
             migrationBuilder.CreateTable(
                 name: "Role",
@@ -82,7 +82,7 @@ namespace BRIX.Web.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserCharacter",
+                name: "PlayerCharacter",
                 schema: "chr",
                 columns: table => new
                 {
@@ -93,9 +93,9 @@ namespace BRIX.Web.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserCharacter", x => x.Id);
+                    table.PrimaryKey("PK_PlayerCharacter", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserCharacter_User_UserId",
+                        name: "FK_PlayerCharacter_User_UserId",
                         column: x => x.UserId,
                         principalSchema: "acc",
                         principalTable: "User",
@@ -198,6 +198,12 @@ namespace BRIX.Web.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_PlayerCharacter_UserId",
+                schema: "chr",
+                table: "PlayerCharacter",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 schema: "acc",
                 table: "Role",
@@ -226,12 +232,6 @@ namespace BRIX.Web.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserCharacter_UserId",
-                schema: "chr",
-                table: "UserCharacter",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_UserClaim_UserId",
                 schema: "acc",
                 table: "UserClaim",
@@ -254,12 +254,12 @@ namespace BRIX.Web.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RoleClaim",
-                schema: "acc");
+                name: "PlayerCharacter",
+                schema: "chr");
 
             migrationBuilder.DropTable(
-                name: "UserCharacter",
-                schema: "chr");
+                name: "RoleClaim",
+                schema: "acc");
 
             migrationBuilder.DropTable(
                 name: "UserClaim",

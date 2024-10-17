@@ -1,5 +1,5 @@
 using BRIX.Web.Client;
-using BRIX.Web.Data.Entities.Users;
+using BRIX.Entity.Users;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server;

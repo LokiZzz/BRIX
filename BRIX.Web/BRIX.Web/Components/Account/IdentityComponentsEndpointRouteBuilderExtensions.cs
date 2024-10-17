@@ -1,6 +1,6 @@
 using BRIX.Web.Components.Account.Pages;
 using BRIX.Web.Components.Account.Pages.Manage;
-using BRIX.Web.Data.Entities.Users;
+using BRIX.Entity.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;

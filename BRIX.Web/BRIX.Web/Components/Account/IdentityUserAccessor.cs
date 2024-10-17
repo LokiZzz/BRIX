@@ -1,4 +1,4 @@
-using BRIX.Web.Data.Entities.Users;
+using BRIX.Entity.Users;
 using Microsoft.AspNetCore.Identity;
 
 namespace BRIX.Web.Components.Account

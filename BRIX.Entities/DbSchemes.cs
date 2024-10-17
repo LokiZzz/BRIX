@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace BRIX.Web.Data
+﻿namespace BRIX.Entity
 {
     public static class DbSchemes
     {

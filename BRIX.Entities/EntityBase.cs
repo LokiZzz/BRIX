@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BRIX.Web.Data.Entities
+namespace BRIX.Entity
 {
     public abstract class EntityBase<TKey> where TKey : struct
     {

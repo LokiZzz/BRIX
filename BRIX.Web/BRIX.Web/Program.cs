@@ -1,11 +1,10 @@
-using BRIX.Web.Client.Pages;
 using BRIX.Web.Components;
 using BRIX.Web.Components.Account;
-using BRIX.Web.Data;
-using BRIX.Web.Data.Entities.Users;
+using BRIX.Entity.Users;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using BRIX.Entity;
 
 var builder = WebApplication.CreateBuilder(args);
 

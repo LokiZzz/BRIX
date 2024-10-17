@@ -1,23 +1,23 @@
-using BRIX.Web.Data.Entities.Characters;
-using BRIX.Web.Data.Entities.Users;
+using BRIX.Entity.Characters;
+using BRIX.Entity.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace BRIX.Web.Data
+namespace BRIX.Entity
 {
-    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
-        : IdentityDbContext<User, Role, Guid, 
-            IdentityUserClaim<Guid>, 
-            IdentityUserRole<Guid>, 
-            IdentityUserLogin<Guid>, 
-            IdentityRoleClaim<Guid>, 
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : IdentityDbContext<User, Role, Guid,
+            IdentityUserClaim<Guid>,
+            IdentityUserRole<Guid>,
+            IdentityUserLogin<Guid>,
+            IdentityRoleClaim<Guid>,
             IdentityUserToken<Guid>>(options)
     {
         /// <summary>
         /// Персонажи пользователя.
         /// </summary>
-        public DbSet<UserCharacter> UserCharacters { get; set; }
+        public DbSet<PlayerCharacter> UserCharacters { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

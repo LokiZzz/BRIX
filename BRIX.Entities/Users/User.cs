@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using BRIX.Web.Data.Entities.Characters;
+using BRIX.Entity.Characters;
 
-namespace BRIX.Web.Data.Entities.Users
+namespace BRIX.Entity.Users
 {
     /// <summary>
     /// Пользователь.
@@ -13,7 +13,7 @@ namespace BRIX.Web.Data.Entities.Users
         /// <summary>
         /// Персонажи пользователя.
         /// </summary>
-        public HashSet<UserCharacter> Characters { get; set; } = [];
+        public HashSet<PlayerCharacter> Characters { get; set; } = [];
     }
 
     public class UserTypeConfiguration : IEntityTypeConfiguration<User>
