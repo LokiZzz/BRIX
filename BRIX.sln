@@ -23,6 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile", "Mobile", "{F33A6E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BRIX.Entity", "BRIX.Entities\BRIX.Entity.csproj", "{14F7180C-31D6-43DA-84AE-FDC2F841E851}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BRIX.GameService", "BRIX.GameService\BRIX.GameService.csproj", "{26F04D36-2DCA-4601-B75F-9606070E796D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BRIX.GameService.Contracts", "BRIX.GameService.Contracts\BRIX.GameService.Contracts.csproj", "{B3BBFB19-90FD-4726-8502-243B0CC3679C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +71,14 @@ Global
 		{14F7180C-31D6-43DA-84AE-FDC2F841E851}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14F7180C-31D6-43DA-84AE-FDC2F841E851}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14F7180C-31D6-43DA-84AE-FDC2F841E851}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26F04D36-2DCA-4601-B75F-9606070E796D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26F04D36-2DCA-4601-B75F-9606070E796D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26F04D36-2DCA-4601-B75F-9606070E796D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26F04D36-2DCA-4601-B75F-9606070E796D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3BBFB19-90FD-4726-8502-243B0CC3679C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3BBFB19-90FD-4726-8502-243B0CC3679C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3BBFB19-90FD-4726-8502-243B0CC3679C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3BBFB19-90FD-4726-8502-243B0CC3679C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
