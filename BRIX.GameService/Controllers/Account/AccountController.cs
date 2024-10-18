@@ -1,4 +1,5 @@
-﻿using BRIX.GameService.Contracts.Account;
+﻿using BRIX.Entity.Users;
+using BRIX.GameService.Contracts.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,14 +17,14 @@ namespace BRIX.GameService.Controllers.Account
     {
         private static readonly UserModel LoggedOutUser = new () { IsAuthenticated = false };
 
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<User> _signInManager;
 
         public AccountController(
-            UserManager<IdentityUser> userManager,
+            UserManager<User> userManager,
             IConfiguration configuration,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _configuration = configuration;
@@ -33,7 +34,7 @@ namespace BRIX.GameService.Controllers.Account
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] SignUpRequest model)
         {
-            IdentityUser newUser = new() { UserName = model.Email, Email = model.Email };
+            User newUser = new() { UserName = model.Email, Email = model.Email };
             IdentityResult result = await _userManager.CreateAsync(newUser, model.Password);
 
             if (!result.Succeeded)
@@ -52,7 +53,12 @@ namespace BRIX.GameService.Controllers.Account
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] SignInRequest signIn)
         {
-            SignInResult result = await _signInManager.PasswordSignInAsync(signIn.Email, signIn.Password, false, false);
+            SignInResult result = await _signInManager.PasswordSignInAsync(
+                signIn.Email, 
+                signIn.Password, 
+                signIn.RememberMe, 
+                lockoutOnFailure: false
+            );
 
             if (!result.Succeeded)
             {
@@ -80,7 +86,7 @@ namespace BRIX.GameService.Controllers.Account
         [HttpGet]
         public async Task<IActionResult> ConfirmEmail([FromQuery] string email, [FromQuery] string confirmationCode)
         {
-            IdentityUser? user = await _signInManager.UserManager.FindByEmailAsync(email!);
+            User? user = await _signInManager.UserManager.FindByEmailAsync(email!);
 
             if (user is null)
             {
@@ -102,7 +108,7 @@ namespace BRIX.GameService.Controllers.Account
         [HttpGet]
         public async Task<IActionResult> GetConfirmationCode([FromQuery] string email)
         {
-            IdentityUser? user = await _signInManager.UserManager.FindByEmailAsync(email!);
+            User? user = await _signInManager.UserManager.FindByEmailAsync(email!);
 
             if (user is null)
             {
