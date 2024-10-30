@@ -1,0 +1,13 @@
+﻿@page "/sign-out"
+@inject IAuthService AuthService
+@inject NavigationManager NavigationManager
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        await AuthService.SignOut();
+        NavigationManager.NavigateTo("/");
+    }
+
+}

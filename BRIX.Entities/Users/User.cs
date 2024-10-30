@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using BRIX.Entity.Characters;
+using BRIX.GameService.Entities.Characters;
 
-namespace BRIX.Entity.Users
+namespace BRIX.GameService.Entities.Users
 {
     /// <summary>
     /// Пользователь.

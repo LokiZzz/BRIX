@@ -1,0 +1,10 @@
+﻿<AuthorizeView>
+    <Authorized>
+        Hello, @(context?.User?.Identity?.Name! ?? "undefined user...")
+        <a href="LogOut">Log out</a>
+    </Authorized>
+    <NotAuthorized>
+        <a href="sign-up">Sign-up</a>
+        <a href="sign-in">Sign-in</a>
+    </NotAuthorized>
+</AuthorizeView>

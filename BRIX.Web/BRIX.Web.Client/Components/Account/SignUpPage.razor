@@ -1,0 +1,68 @@
+﻿@page "/sign-up"
+
+@inject IAuthService AuthService
+@inject NavigationManager NavigationManager
+
+<h1>Sign-up</h1>
+
+@if (ShowErrors)
+{
+    <div class="alert alert-danger" role="alert">
+        @foreach (string error in Errors)
+        {
+            <p>@error</p>
+        }
+    </div>
+}
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Please enter your details</h5>
+        <EditForm Model="@RegisterModel" OnValidSubmit="@HandleRegistration">
+            @* <DataAnnotationsValidator />
+            <ValidationSummary /> *@
+
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <InputText Id="email" class="form-control" @bind-Value="RegisterModel.Email" />
+                @* <ValidationMessage For="@(() => RegisterModel.Email)" /> *@
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <InputText Id="password" type="password" class="form-control" @bind-Value="RegisterModel.Password" />
+                @* <ValidationMessage For="@(() => RegisterModel.Password)" /> *@
+            </div>
+            <div class="form-group">
+                <label for="password">Confirm Password</label>
+                <InputText Id="password" type="password" class="form-control" @bind-Value="RegisterModel.ConfirmPassword" />
+                @* <ValidationMessage For="@(() => RegisterModel.ConfirmPassword)" /> *@
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+
+    private SignUpRequest RegisterModel = new ();
+    private bool ShowErrors;
+    private IEnumerable<string> Errors = [];
+
+    private async Task HandleRegistration()
+    {
+        ShowErrors = false;
+
+        SignUpResponse result = await AuthService.SignUp(RegisterModel);
+
+        if (result.Successful)
+        {
+            NavigationManager.NavigateTo("/sign-in");
+        }
+        else
+        {
+            Errors = result.Errors;
+            ShowErrors = true;
+        }
+    }
+
+}

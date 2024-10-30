@@ -1,4 +1,4 @@
-﻿using BRIX.Entity.Users;
+﻿using BRIX.GameService.Entities.Users;
 using BRIX.GameService.Contracts.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,26 +13,17 @@ namespace BRIX.GameService.Controllers.Account
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class AccountController : Controller
+    public class AccountController(
+        UserManager<User> userManager,
+        IConfiguration configuration,
+        SignInManager<User> signInManager) : Controller
     {
-        private static readonly UserModel LoggedOutUser = new () { IsAuthenticated = false };
-
-        private readonly UserManager<User> _userManager;
-        private readonly IConfiguration _configuration;
-        private readonly SignInManager<User> _signInManager;
-
-        public AccountController(
-            UserManager<User> userManager,
-            IConfiguration configuration,
-            SignInManager<User> signInManager)
-        {
-            _userManager = userManager;
-            _configuration = configuration;
-            _signInManager = signInManager;
-        }
+        private readonly UserManager<User> _userManager = userManager;
+        private readonly IConfiguration _configuration = configuration;
+        private readonly SignInManager<User> _signInManager = signInManager;
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] SignUpRequest model)
+        public async Task<IActionResult> SignUp([FromBody] SignUpRequest model)
         {
             User newUser = new() { UserName = model.Email, Email = model.Email };
             IdentityResult result = await _userManager.CreateAsync(newUser, model.Password);
@@ -51,7 +42,7 @@ namespace BRIX.GameService.Controllers.Account
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] SignInRequest signIn)
+        public async Task<IActionResult> SignIn([FromBody] SignInRequest signIn)
         {
             SignInResult result = await _signInManager.PasswordSignInAsync(
                 signIn.Email, 
@@ -68,8 +59,8 @@ namespace BRIX.GameService.Controllers.Account
             Claim[] claims = [new Claim(ClaimTypes.Name, signIn.Email)];
 
             string secret = _configuration["JwtSecurityKey"] ?? throw new Exception("Не указан секрет.");
-            SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(secret));
-            SigningCredentials creds = new(key, SecurityAlgorithms.HmacSha256);
+            SymmetricSecurityKey key = new (Encoding.UTF8.GetBytes(secret));
+            SigningCredentials creds = new (key, SecurityAlgorithms.HmacSha256);
             DateTime expiry = DateTime.Now.AddDays(Convert.ToInt32(_configuration["JwtExpiryInDays"]));
 
             JwtSecurityToken token = new(
@@ -115,7 +106,6 @@ namespace BRIX.GameService.Controllers.Account
                 return BadRequest();
             }
 
-            string userId = await _signInManager.UserManager.GetUserIdAsync(user);
             string code = await _signInManager.UserManager.GenerateEmailConfirmationTokenAsync(user);
 
             return Ok(code);

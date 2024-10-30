@@ -1,4 +1,4 @@
-﻿namespace BRIX.Entity
+﻿namespace BRIX.GameService.Entities
 {
     public static class DbSchemes
     {

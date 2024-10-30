@@ -1,10 +1,10 @@
-using BRIX.Entity.Characters;
-using BRIX.Entity.Users;
+using BRIX.GameService.Entities.Characters;
+using BRIX.GameService.Entities.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace BRIX.Entity
+namespace BRIX.GameService.Entities
 {
     public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : IdentityDbContext<User, Role, Guid,

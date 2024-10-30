@@ -1,9 +1,9 @@
-﻿using BRIX.Entity.Users;
+﻿using BRIX.GameService.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.ComponentModel.DataAnnotations;
 
-namespace BRIX.Entity.Characters
+namespace BRIX.GameService.Entities.Characters
 {
     public class PlayerCharacter : EntityBase<Guid>
     {

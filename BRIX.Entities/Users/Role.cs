@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace BRIX.Entity.Users
+namespace BRIX.GameService.Entities.Users
 {
     /// <summary>
     /// Роль пользователя.

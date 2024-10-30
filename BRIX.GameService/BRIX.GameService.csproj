@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BRIX.Entities\BRIX.Entity.csproj" />
+    <ProjectReference Include="..\BRIX.Entities\BRIX.GameService.Entities.csproj" />
     <ProjectReference Include="..\BRIX.GameService.Contracts\BRIX.GameService.Contracts.csproj" />
   </ItemGroup>
 

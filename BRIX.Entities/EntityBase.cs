@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BRIX.Entity
+namespace BRIX.GameService.Entities
 {
     public abstract class EntityBase<TKey> where TKey : struct
     {

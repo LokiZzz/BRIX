@@ -1,5 +1,5 @@
-using BRIX.Entity;
-using BRIX.Entity.Users;
+using BRIX.GameService.Entities;
+using BRIX.GameService.Entities.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
