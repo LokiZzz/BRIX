@@ -14,20 +14,29 @@ namespace BRIX.Web.Client.Services
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            string? savedToken = await _localStorage.GetItemAsync<string>("authToken");
-
-            if (string.IsNullOrWhiteSpace(savedToken))
+            try
             {
+
+                string? savedToken = await _localStorage.GetItemAsync<string>("authToken");
+
+                if (string.IsNullOrWhiteSpace(savedToken))
+                {
+                    return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
+                }
+
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", savedToken);
+
+                return new AuthenticationState(
+                    new ClaimsPrincipal(
+                        new ClaimsIdentity(ParseClaimsFromJwt(savedToken), "jwt")
+                    )
+                );
+            }
+            catch(InvalidOperationException)
+            {
+                // Попытка получить данные во время пререндеринга.
                 return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
             }
-
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", savedToken);
-
-            return new AuthenticationState(
-                new ClaimsPrincipal(
-                    new ClaimsIdentity(ParseClaimsFromJwt(savedToken), "jwt")
-                )
-            );
         }
 
         public void MarkUserAsAuthenticated(string email)

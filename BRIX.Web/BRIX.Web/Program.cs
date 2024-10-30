@@ -1,12 +1,22 @@
+using Blazored.LocalStorage;
+using BRIX.Web.Client.Services;
 using BRIX.Web.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
-var app = builder.Build();
+builder.Services.AddHttpClient();
+builder.Services.AddAuthorization();
+
+builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddScoped<AuthenticationStateProvider, JWTAuthenticationStateProvider>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

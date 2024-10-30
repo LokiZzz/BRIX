@@ -1,6 +1,4 @@
 ﻿@page "/sign-out"
-@inject IAuthService AuthService
-@inject NavigationManager NavigationManager
 
 @code {
 
@@ -9,5 +7,4 @@
         await AuthService.SignOut();
         NavigationManager.NavigateTo("/");
     }
-
 }
