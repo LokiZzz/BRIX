@@ -8,6 +8,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
+using Microsoft.Extensions.Options;
+using BRIX.GameService.Options;
 
 namespace BRIX.GameService.Controllers.Account
 {
@@ -15,12 +17,12 @@ namespace BRIX.GameService.Controllers.Account
     [Route("api/[controller]/[action]")]
     public class AccountController(
         UserManager<User> userManager,
-        IConfiguration configuration,
-        SignInManager<User> signInManager) : Controller
+        SignInManager<User> signInManager,
+        IOptions<JWTOptions> jwtOptions) : Controller
     {
         private readonly UserManager<User> _userManager = userManager;
-        private readonly IConfiguration _configuration = configuration;
         private readonly SignInManager<User> _signInManager = signInManager;
+        private readonly JWTOptions _jwtOptions = jwtOptions?.Value ?? throw new ArgumentNullException(nameof(jwtOptions));
 
         [HttpPost]
         public async Task<IActionResult> SignUp([FromBody] SignUpRequest model)
@@ -64,13 +66,13 @@ namespace BRIX.GameService.Controllers.Account
             }
 
             Claim[] claims = [new Claim(ClaimTypes.Name, signIn.Email)];
-            string secret = _configuration["JwtSecurityKey"] ?? throw new Exception("Не указан секрет.");
+            string secret = _jwtOptions.SecurityKey ?? throw new Exception("Не указан секрет.");
             SymmetricSecurityKey key = new (Encoding.UTF8.GetBytes(secret));
             SigningCredentials creds = new (key, SecurityAlgorithms.HmacSha256);
-            DateTime expiry = DateTime.Now.AddDays(Convert.ToInt32(_configuration["JwtExpiryInDays"]));
+            DateTime expiry = DateTime.Now.AddDays(_jwtOptions.ExpiryInDays);
             JwtSecurityToken token = new(
-                _configuration["JwtIssuer"],
-                _configuration["JwtAudience"],
+                _jwtOptions.Issuer,
+                _jwtOptions.Audience,
                 claims,
                 expires: expiry,
                 signingCredentials: creds
