@@ -1,5 +1,6 @@
 using BRIX.GameService.Entities;
 using BRIX.GameService.Entities.Users;
+using BRIX.GameService.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,8 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<JWTOptions>(builder.Configuration.GetSection(JWTOptions.JWT));
 
 builder.Services.AddControllers();
 
@@ -28,6 +31,8 @@ builder.Services.AddIdentityCore<User>(options => options.SignIn.RequireConfirme
     .AddSignInManager()
     .AddDefaultTokenProviders();
 
+JWTOptions jwt = new();
+builder.Configuration.GetSection(JWTOptions.JWT).Bind(jwt);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -35,11 +40,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["JwtIssuer"],
-        ValidAudience = builder.Configuration["JwtAudience"],
-        IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(builder.Configuration["JwtSecurityKey"] 
-                ?? throw new Exception("Не указан секретный ключ"))
+        ValidIssuer = jwt.Issuer,
+        ValidAudience = jwt.Audience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.SecurityKey 
+            ?? throw new Exception("Не указан секретный ключ"))
         )
     };
 }).AddIdentityCookies();

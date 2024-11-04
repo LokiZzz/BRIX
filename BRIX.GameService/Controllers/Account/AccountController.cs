@@ -53,16 +53,21 @@ namespace BRIX.GameService.Controllers.Account
 
             if (!result.Succeeded)
             {
-                return BadRequest(new SignInResponse { Successful = false, Error = "Username and password are invalid." });
+                User? user = await _userManager.FindByEmailAsync(signIn.Email);
+                
+                if(user?.EmailConfirmed == false)
+                {
+                    return BadRequest(new SignInResponse { Error = "Need to confirm email." });
+                }
+
+                return BadRequest(new SignInResponse { Error = "Username and password are invalid." });
             }
 
             Claim[] claims = [new Claim(ClaimTypes.Name, signIn.Email)];
-
             string secret = _configuration["JwtSecurityKey"] ?? throw new Exception("Не указан секрет.");
             SymmetricSecurityKey key = new (Encoding.UTF8.GetBytes(secret));
             SigningCredentials creds = new (key, SecurityAlgorithms.HmacSha256);
             DateTime expiry = DateTime.Now.AddDays(Convert.ToInt32(_configuration["JwtExpiryInDays"]));
-
             JwtSecurityToken token = new(
                 _configuration["JwtIssuer"],
                 _configuration["JwtAudience"],
@@ -71,7 +76,9 @@ namespace BRIX.GameService.Controllers.Account
                 signingCredentials: creds
             );
 
-            return Ok(new SignInResponse { Successful = true, Token = new JwtSecurityTokenHandler().WriteToken(token) });
+            return Ok(new SignInResponse { 
+                Successful = true, Token = new JwtSecurityTokenHandler().WriteToken(token) 
+            });
         }
 
         [HttpGet]
