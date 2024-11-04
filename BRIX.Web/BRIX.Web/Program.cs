@@ -8,7 +8,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
-
+builder.Services.AddCors();
 builder.Services.AddHttpClient();
 builder.Services.AddAuthorization();
 
@@ -29,6 +29,12 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseCors(config => config.WithOrigins("https://localhost:7048")
+    .AllowCredentials()
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+);
 
 app.UseHttpsRedirection();
 

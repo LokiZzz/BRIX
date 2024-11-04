@@ -111,11 +111,21 @@ namespace BRIX.GameService.Controllers.Account
             return Ok(code);
         }
 
+        [HttpGet]
+        public IActionResult GetHello()
+        {
+            return Ok($"Hello!");
+        }
+
         [Authorize]
         [HttpGet]
         public IActionResult GetSecuredHello()
         {
-            return Ok("Hello!");
+            string claims = HttpContext.Request.Headers
+                .Select(x => $"{x.Key}: {x.Value},\n")
+                .Aggregate((x, y) => x + y);
+
+            return Ok($"Secured Hello!\n{claims}");
         }
     }
 }
