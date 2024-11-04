@@ -21,29 +21,15 @@ namespace BRIX.Web.Client.Services
 
         public async Task<SignUpResponse> SignUp(SignUpRequest model)
         {
-            try
-            {
-                HttpResponseMessage result = await _httpClient.PostAsJsonAsync("api/account/signup", model);
+            HttpResponseMessage result = await _httpClient.PostAsJsonAsync("api/account/signup", model);
 
-                return await result.Content.ReadFromJsonAsync<SignUpResponse>() ?? new();
-            }
-            catch (Exception ex)
-            {
-                return new SignUpResponse();
-            }
+            return await result.Content.ReadFromJsonAsync<SignUpResponse>() ?? new();
         }
 
         public async Task<SignInResponse> SignIn(SignInRequest model)
         {
-            string signInAsJson = JsonSerializer.Serialize(model);
-            HttpResponseMessage response = await _httpClient.PostAsync(
-                "api/account/signup",
-                new StringContent(signInAsJson, Encoding.UTF8, "application/json")
-            );
-            SignInResponse? signInResult = JsonSerializer.Deserialize<SignInResponse>(
-                await response.Content.ReadAsStringAsync(),
-                _jsonOptions
-            );
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync("api/account/signin", model);
+            SignInResponse? signInResult = await response.Content.ReadFromJsonAsync<SignInResponse>();
 
             if (signInResult == null || response?.IsSuccessStatusCode != true)
             {
