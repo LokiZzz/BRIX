@@ -11,6 +11,8 @@ using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 using Microsoft.Extensions.Options;
 using BRIX.GameService.Options;
 using BRIX.GameService.Services.Mail;
+using System.Collections.Specialized;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace BRIX.GameService.Controllers.Account
 {
@@ -40,8 +42,18 @@ namespace BRIX.GameService.Controllers.Account
                     Successful = false,
                     Errors = result.Errors.Select(x => x.Description)
                 });
-
             }
+
+            string code = await _signInManager.UserManager.GenerateEmailConfirmationTokenAsync(newUser);
+            string hostUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/api/account/confirm";
+            Dictionary<string, string?> queryParams = new() { { "id", newUser.Id.ToString() }, { "code", code } };
+            Uri uri = new(QueryHelpers.AddQueryString(hostUrl, queryParams));
+
+            await _mail.SendAsync(
+                [newUser.Email],
+                "Confirmation email",
+                $"Confirmation link:\n{uri}"
+            );
 
             return Ok(new SignUpResponse { Successful = true });
         }
@@ -87,16 +99,16 @@ namespace BRIX.GameService.Controllers.Account
         }
 
         [HttpGet]
-        public async Task<IActionResult> ConfirmEmail([FromQuery] string email, [FromQuery] string confirmationCode)
+        public async Task<IActionResult> Confirm([FromQuery] string id, [FromQuery] string code)
         {
-            User? user = await _signInManager.UserManager.FindByEmailAsync(email!);
+            User? user = await _signInManager.UserManager.FindByIdAsync(id!);
 
             if (user is null)
             {
                 return BadRequest("Undefined user.");
             }
 
-            IdentityResult confirmationResult = await _signInManager.UserManager.ConfirmEmailAsync(user, confirmationCode);
+            IdentityResult confirmationResult = await _signInManager.UserManager.ConfirmEmailAsync(user, code);
 
             if (confirmationResult.Succeeded)
             {
@@ -106,21 +118,6 @@ namespace BRIX.GameService.Controllers.Account
             {
                 return BadRequest("Wrong confirmation code.");
             }
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetConfirmationCode([FromQuery] string email)
-        {
-            User? user = await _signInManager.UserManager.FindByEmailAsync(email!);
-
-            if (user is null)
-            {
-                return BadRequest();
-            }
-
-            string code = await _signInManager.UserManager.GenerateEmailConfirmationTokenAsync(user);
-
-            return Ok(code);
         }
 
         [HttpGet]
@@ -138,18 +135,6 @@ namespace BRIX.GameService.Controllers.Account
                 .Aggregate((x, y) => x + y);
 
             return Ok($"Secured Hello!\n{claims}");
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> SendEmail()
-        {
-            await _mail.SendAsync(
-                ["lokizzzzzzzz@gmail.com"],
-                "Test message",
-                "Text of test message! Hello!"
-            );
-
-            return Ok($"Email was sent!");
         }
     }
 }
