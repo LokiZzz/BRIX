@@ -10,6 +10,7 @@ using System.Text;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 using Microsoft.Extensions.Options;
 using BRIX.GameService.Options;
+using BRIX.GameService.Services.Mail;
 
 namespace BRIX.GameService.Controllers.Account
 {
@@ -18,11 +19,13 @@ namespace BRIX.GameService.Controllers.Account
     public class AccountController(
         UserManager<User> userManager,
         SignInManager<User> signInManager,
-        IOptions<JWTOptions> jwtOptions) : Controller
+        IOptions<JWTOptions> jwtOptions,
+        IMailService mail) : Controller
     {
         private readonly UserManager<User> _userManager = userManager;
         private readonly SignInManager<User> _signInManager = signInManager;
         private readonly JWTOptions _jwtOptions = jwtOptions?.Value ?? throw new ArgumentNullException(nameof(jwtOptions));
+        private readonly IMailService _mail = mail ?? throw new ArgumentNullException(nameof(mail));
 
         [HttpPost]
         public async Task<IActionResult> SignUp([FromBody] SignUpRequest model)
@@ -135,6 +138,18 @@ namespace BRIX.GameService.Controllers.Account
                 .Aggregate((x, y) => x + y);
 
             return Ok($"Secured Hello!\n{claims}");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SendEmail()
+        {
+            await _mail.SendAsync(
+                ["lokizzzzzzzz@gmail.com"],
+                "Test message",
+                "Text of test message! Hello!"
+            );
+
+            return Ok($"Email was sent!");
         }
     }
 }

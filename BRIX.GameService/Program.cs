@@ -1,6 +1,7 @@
 using BRIX.GameService.Entities;
 using BRIX.GameService.Entities.Users;
 using BRIX.GameService.Options;
+using BRIX.GameService.Services.Mail;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using System.Text;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<JWTOptions>(builder.Configuration.GetSection(JWTOptions.JWT));
+builder.Services.Configure<SMTPOptions>(builder.Configuration.GetSection(SMTPOptions.SMTP));
 
 builder.Services.AddControllers();
 
@@ -77,6 +79,8 @@ builder.Services.AddSwaggerGen(options => {
         }
     });
 });
+
+builder.Services.AddSingleton<IMailService, MailService>();
 
 WebApplication app = builder.Build();
 
