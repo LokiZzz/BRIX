@@ -1,0 +1,10 @@
+﻿namespace BRIX.GameService.Options
+{
+    public class ClientOptions
+    {
+        public const string Client = nameof(Client);
+
+        public string ConfirmOkRedirectAddress { get; set; } = string.Empty;
+        public string ConfirmFailedRedirectAddress { get; set; } = string.Empty;
+    }
+}

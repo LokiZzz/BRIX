@@ -1,6 +1,7 @@
 using BRIX.GameService.Entities;
 using BRIX.GameService.Entities.Users;
 using BRIX.GameService.Options;
+using BRIX.GameService.Services.Account;
 using BRIX.GameService.Services.Mail;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -11,8 +12,12 @@ using System.Text;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IAccountService, AccountService>();
+
 builder.Services.Configure<JWTOptions>(builder.Configuration.GetSection(JWTOptions.JWT));
 builder.Services.Configure<SMTPOptions>(builder.Configuration.GetSection(SMTPOptions.SMTP));
+builder.Services.Configure<ClientOptions>(builder.Configuration.GetSection(ClientOptions.Client));
 
 builder.Services.AddControllers();
 

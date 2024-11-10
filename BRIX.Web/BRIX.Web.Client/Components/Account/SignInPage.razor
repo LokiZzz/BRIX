@@ -11,6 +11,16 @@
 }
 
 <div>
+    @if(Confirmed == true)
+    {
+        <h5>Account confirmed successfully</h5>
+    }
+    else if(Confirmed == false)
+    {
+        <h5>Something goes wrong when trying to confirm account</h5>
+        <button>Resend confirmation email</button>
+    }
+
     <h5>Please enter your details</h5>
     <EditForm Model="loginModel" OnValidSubmit="HandleLogin">
         <DataAnnotationsValidator />
@@ -30,6 +40,9 @@
 </div>
 
 @code {
+
+    [SupplyParameterFromQuery]
+    private bool? Confirmed { get; set; }
 
     private SignInRequest loginModel = new SignInRequest();
     private bool ShowErrors;

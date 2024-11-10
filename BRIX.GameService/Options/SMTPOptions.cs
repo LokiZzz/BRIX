@@ -1,4 +1,4 @@
-﻿namespace BRIX.GameService.Services.Mail
+﻿namespace BRIX.GameService.Options
 {
     public class SMTPOptions
     {

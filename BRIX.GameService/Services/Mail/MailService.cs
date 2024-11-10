@@ -1,4 +1,5 @@
-﻿using MailKit.Net.Smtp;
+﻿using BRIX.GameService.Options;
+using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using MimeKit.Text;
