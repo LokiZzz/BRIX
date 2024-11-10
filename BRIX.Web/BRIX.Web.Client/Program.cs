@@ -1,15 +1,13 @@
 using Blazored.LocalStorage;
-using BRIX.Web.Client.Services;
-using Microsoft.AspNetCore.Components.Authorization;
+using BRIX.Web.Client.Extensions;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
+WebAssemblyHostConfiguration config = builder.Configuration;
 
-builder.Services.AddScoped(x => new HttpClient { BaseAddress = new Uri("https://localhost:7048/") });
-builder.Services.AddAuthorizationCore();
-
+builder.Services.AddOptions(config);
+builder.Services.AddHttpClient(config);
 builder.Services.AddBlazoredLocalStorage();
-builder.Services.AddScoped<AuthenticationStateProvider, JWTAuthenticationStateProvider>();
-builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddAuth();
 
 await builder.Build().RunAsync();
