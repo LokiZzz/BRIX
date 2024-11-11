@@ -16,13 +16,14 @@ namespace BRIX.GameService.Entities.Characters
         /// <summary>
         /// Идентификатор пользователя.
         /// </summary>
+        [Required]
         public Guid UserId { get; set; }
 
         /// <summary>
         /// Владелец персонажа.
         /// </summary>
         [Required]
-        public required User User { get; set; }
+        public User User { get; set; } = default!;
     }
 
     public class UserCharacterConfiguration : IEntityTypeConfiguration<PlayerCharacter>

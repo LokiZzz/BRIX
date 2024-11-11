@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BRIX.GameService.Entities.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241030180338_0")]
-    partial class _0
+    [Migration("20241111102254_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

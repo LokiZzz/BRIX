@@ -15,9 +15,9 @@ namespace BRIX.GameService.Entities
             IdentityUserToken<Guid>>(options)
     {
         /// <summary>
-        /// Персонажи пользователя.
+        /// Персонажи игрока.
         /// </summary>
-        public DbSet<PlayerCharacter> UserCharacters { get; set; }
+        public DbSet<PlayerCharacter> PlayerCharacters { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

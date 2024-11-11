@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using System.Text;
 
 namespace BRIX.GameService.Extensions
@@ -18,6 +19,10 @@ namespace BRIX.GameService.Extensions
         {
             services.AddSingleton<IMailService, MailService>();
             services.AddScoped<IAccountService, AccountService>();
+
+            services.AddSingleton(services => new JsonSerializerSettings { 
+                TypeNameHandling = TypeNameHandling.Auto,
+            });
         }
 
         public static void AddOptions(this IServiceCollection services, ConfigurationManager config)
@@ -31,7 +36,7 @@ namespace BRIX.GameService.Extensions
         {
             string connectionString = config.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContextFactory<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
             services.AddDatabaseDeveloperPageExceptionFilter();
         }
 
