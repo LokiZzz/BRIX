@@ -8,7 +8,7 @@ namespace BRIX.GameService.Services.Characters
 {
     public class CharacterRepository(
         IDbContextFactory<ApplicationDbContext> contextFactory,
-        JsonSerializerSettings jsonSerializerSettings)
+        JsonSerializerSettings jsonSerializerSettings) : ICharacterRepository
     {
         private readonly IDbContextFactory<ApplicationDbContext> _contextFactory = contextFactory;
         private readonly JsonSerializerSettings _jsonSettings = jsonSerializerSettings;
@@ -47,9 +47,10 @@ namespace BRIX.GameService.Services.Characters
             }
             else
             {
-                context.PlayerCharacters.Add(new PlayerCharacter { 
-                    UserId = userId, 
-                    CharacterJsonData = characterJson 
+                context.PlayerCharacters.Add(new PlayerCharacter
+                {
+                    UserId = userId,
+                    CharacterJsonData = characterJson
                 });
             }
 

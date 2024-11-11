@@ -79,7 +79,11 @@ namespace BRIX.GameService.Services.Account
                 return new SignInResponse { Error = "Username and password are invalid." };
             }
 
-            Claim[] claims = [new Claim(ClaimTypes.Name, model.Email)];
+            Claim[] claims = [
+                new Claim(ClaimTypes.Name, model.Email),
+                new Claim(ClaimTypes.Email, model.Email),
+            ];
+
             string secret = _jwtOptions.SecurityKey ?? throw new Exception("Не указан секрет.");
             SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(secret));
             SigningCredentials creds = new(key, SecurityAlgorithms.HmacSha256);
@@ -123,9 +127,15 @@ namespace BRIX.GameService.Services.Account
             }
 
             List<Claim> claims = JWTHelper.ParseClaimsFromJwt(token);
-            string email = claims?.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value ?? string.Empty;
+            string email = claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value ?? string.Empty;
+            User? user = string.IsNullOrEmpty(email) ? null : await _userManager.FindByEmailAsync(email);
 
-            return await _userManager.FindByEmailAsync(email);
+            return user;
+        }
+
+        public async Task<User> GetCurrentUserGuaranteed()
+        {
+            return await GetCurrentUser() ?? throw new InvalidOperationException("User is not found.");
         }
     }
 }

@@ -2,6 +2,7 @@
 using BRIX.GameService.Entities.Users;
 using BRIX.GameService.Options;
 using BRIX.GameService.Services.Account;
+using BRIX.GameService.Services.Characters;
 using BRIX.GameService.Services.Mail;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -19,6 +20,7 @@ namespace BRIX.GameService.Extensions
         {
             services.AddSingleton<IMailService, MailService>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<ICharacterRepository, CharacterRepository>();
 
             services.AddSingleton(services => new JsonSerializerSettings { 
                 TypeNameHandling = TypeNameHandling.Auto,

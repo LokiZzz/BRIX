@@ -10,5 +10,6 @@ namespace BRIX.GameService.Services.Account
         Task<SignInResponse> SignIn(SignInRequest model);
         Task<bool> Confirm(string userId, string code);
         Task<User?> GetCurrentUser();
+        Task<User> GetCurrentUserGuaranteed();
     }
 }

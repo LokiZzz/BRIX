@@ -1,5 +1,6 @@
 ﻿using BRIX.GameService.Entities.Users;
 using BRIX.GameService.Services.Account;
+using BRIX.GameService.Services.Characters;
 using BRIX.Library.Characters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,16 +10,20 @@ namespace BRIX.GameService.Controllers.Characters
     [ApiController]
     [Authorize]
     [Route("api/[controller]/[action]")]
-    public class CharacterController(IAccountService accountService) : Controller
+    public class CharacterController(
+        IAccountService accountService,
+        ICharacterRepository characterRepository) : Controller
     {
         private readonly IAccountService _accountService = accountService;
+        private readonly ICharacterRepository _characterRepository = characterRepository;
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] Guid? id)
+        public async Task<IActionResult> Get([FromQuery] List<Guid>? id)
         {
-            User? user = await _accountService.GetCurrentUser();
+            User user = await _accountService.GetCurrentUserGuaranteed();
+            List<Character> characters = await _characterRepository.Get(user.Id, id);
 
-            return Ok(new List<Character>());
+            return Ok(characters);
         }
 
         [HttpPost]
