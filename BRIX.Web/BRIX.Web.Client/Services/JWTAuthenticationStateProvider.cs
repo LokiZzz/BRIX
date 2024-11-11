@@ -1,4 +1,5 @@
 ﻿using Blazored.LocalStorage;
+using BRIX.Web.Shared;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
 using System.Security.Claims;
@@ -16,7 +17,6 @@ namespace BRIX.Web.Client.Services
         {
             try
             {
-
                 string? savedToken = await _localStorage.GetItemAsync<string>("authToken");
 
                 if (string.IsNullOrWhiteSpace(savedToken))
@@ -28,7 +28,7 @@ namespace BRIX.Web.Client.Services
 
                 return new AuthenticationState(
                     new ClaimsPrincipal(
-                        new ClaimsIdentity(ParseClaimsFromJwt(savedToken), "jwt")
+                        new ClaimsIdentity(JWTHelper.ParseClaimsFromJwt(savedToken), "jwt")
                     )
                 );
             }
@@ -51,57 +51,6 @@ namespace BRIX.Web.Client.Services
             ClaimsPrincipal anonymousUser = new(new ClaimsIdentity());
             Task<AuthenticationState> authState = Task.FromResult(new AuthenticationState(anonymousUser));
             NotifyAuthenticationStateChanged(authState);
-        }
-
-        private static List<Claim> ParseClaimsFromJwt(string jwt)
-        {
-            List<Claim> claims = [];
-            string payload = jwt.Split('.')[1];
-            byte[] jsonBytes = ParseBase64WithoutPadding(payload);
-            Dictionary<string, object>? keyValuePairs = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonBytes);
-
-            if (keyValuePairs == null)
-            {
-                return [];
-            }
-
-            keyValuePairs.TryGetValue(ClaimTypes.Role, out object? roles);
-
-            if (roles != null)
-            {
-                string rolesString = roles.ToString() ?? string.Empty;
-
-                if (rolesString.Trim().StartsWith('['))
-                {
-                    string[] parsedRoles = JsonSerializer.Deserialize<string[]>(rolesString) ?? [];
-
-                    foreach (var parsedRole in parsedRoles)
-                    {
-                        claims.Add(new Claim(ClaimTypes.Role, parsedRole));
-                    }
-                }
-                else
-                {
-                    claims.Add(new Claim(ClaimTypes.Role, rolesString));
-                }
-
-                keyValuePairs.Remove(ClaimTypes.Role);
-            }
-
-            claims.AddRange(keyValuePairs.Select(kvp => new Claim(kvp.Key, kvp.Value?.ToString() ?? "")));
-
-            return claims;
-        }
-
-        private static byte[] ParseBase64WithoutPadding(string base64)
-        {
-            switch (base64.Length % 4)
-            {
-                case 2: base64 += "=="; break;
-                case 3: base64 += "="; break;
-            }
-
-            return Convert.FromBase64String(base64);
         }
     }
 }

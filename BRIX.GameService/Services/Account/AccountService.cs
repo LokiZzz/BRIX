@@ -2,6 +2,7 @@
 using BRIX.GameService.Entities.Users;
 using BRIX.GameService.Options;
 using BRIX.GameService.Services.Mail;
+using BRIX.Web.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
@@ -110,6 +111,21 @@ namespace BRIX.GameService.Services.Account
             }
 
             return false;
+        }
+
+        public async Task<User?> GetCurrentUser()
+        {
+            string? token = _httpContext.Request.Headers["Authorization"];
+
+            if(string.IsNullOrEmpty(token))
+            {
+                return null;
+            }
+
+            List<Claim> claims = JWTHelper.ParseClaimsFromJwt(token);
+            string email = claims?.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value ?? string.Empty;
+
+            return await _userManager.FindByEmailAsync(email);
         }
     }
 }

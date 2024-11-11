@@ -30,6 +30,7 @@
     <ProjectReference Include="..\BRIX.Entities\BRIX.GameService.Entities.csproj" />
     <ProjectReference Include="..\BRIX.GameService.Contracts\BRIX.GameService.Contracts.csproj" />
     <ProjectReference Include="..\BRIX.Library\BRIX.Library.csproj" />
+    <ProjectReference Include="..\BRIX.Web.Shared\BRIX.Web.Shared.csproj" />
   </ItemGroup>
 
 </Project>

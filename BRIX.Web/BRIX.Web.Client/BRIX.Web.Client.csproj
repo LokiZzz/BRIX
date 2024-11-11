@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BRIX.GameService.Contracts\BRIX.GameService.Contracts.csproj" />
+    <ProjectReference Include="..\..\BRIX.Web.Shared\BRIX.Web.Shared.csproj" />
   </ItemGroup>
 
 </Project>
