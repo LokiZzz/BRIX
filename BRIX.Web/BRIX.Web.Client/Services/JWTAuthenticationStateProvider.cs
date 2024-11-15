@@ -1,5 +1,5 @@
 ﻿using Blazored.LocalStorage;
-using BRIX.Web.Shared;
+using BRIX.Web.Shared.JWT;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
 using System.Security.Claims;

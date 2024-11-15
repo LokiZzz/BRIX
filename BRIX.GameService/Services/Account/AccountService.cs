@@ -2,7 +2,7 @@
 using BRIX.GameService.Entities.Users;
 using BRIX.GameService.Options;
 using BRIX.GameService.Services.Mail;
-using BRIX.Web.Shared;
+using BRIX.Web.Shared.JWT;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;

@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using System.Text.Json;
 
-namespace BRIX.Web.Shared
+namespace BRIX.Web.Shared.JWT
 {
     public class JWTHelper
     {
