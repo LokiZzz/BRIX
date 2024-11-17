@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.0" />
+    <PackageReference Include="System.Private.Uri" Version="4.3.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BRIX.GameService.Contracts\BRIX.GameService.Contracts.csproj" />
+    <ProjectReference Include="..\..\BRIX.Library\BRIX.Library.csproj" />
     <ProjectReference Include="..\..\BRIX.Web.Shared\BRIX.Web.Shared.csproj" />
   </ItemGroup>
 

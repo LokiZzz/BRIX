@@ -34,6 +34,13 @@ namespace BRIX.GameService.Extensions
             services.Configure<ClientOptions>(config.GetSection(ClientOptions.Client));
         }
 
+        public static void AddControllersWithNewtonsoft(this IServiceCollection services)
+        {
+            services.AddControllers().AddNewtonsoftJson(options => 
+                options.SerializerSettings.TypeNameHandling = TypeNameHandling.Auto
+            );
+        }
+
         public static void AddDatabase(this IServiceCollection services, ConfigurationManager config)
         {
             string connectionString = config.GetConnectionString("DefaultConnection")

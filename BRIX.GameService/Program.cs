@@ -6,8 +6,7 @@ ConfigurationManager config = builder.Configuration;
 
 builder.Services.AddOptions(config);
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddControllers();
-// .AddNewtonsoftJson(options => options.SerializerSettings.TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto);
+builder.Services.AddControllersWithNewtonsoft();
 builder.Services.AddCors();
 builder.Services.AddDatabase(config);
 builder.Services.AddAuth(config);

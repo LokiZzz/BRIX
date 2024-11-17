@@ -1,32 +1,29 @@
-﻿using BRIX.Library.Abilities;
-using BRIX.Library.Aspects;
-using BRIX.Library.Effects;
-using Newtonsoft.Json;
+﻿// See https://aka.ms/new-console-template for more information
+using BRIX.Web.Shared.Json;
+using System.Text.Json;
 
-List<string> list = new();
-list.Order();
+Console.WriteLine("Hello, World!");
 
-JsonSerializerSettings settings = new()
+JsonSerializerOptions deserializeOptions = new ();
+deserializeOptions.Converters.Add(new PolymorphicJsonConverterFactory());
+
+List<A> polymorphicList = [new B(), new C()];
+string json = JsonSerializer.Serialize(polymorphicList, deserializeOptions);
+polymorphicList = JsonSerializer.Deserialize<List<A>>(json) ?? throw new Exception();
+
+Console.WriteLine(json);
+
+public abstract class A
 {
-    Formatting = Formatting.Indented,
-    TypeNameHandling = TypeNameHandling.All,
-};
+    public string PropA { get; set; } = "A";
+}
 
-Ability ability = new();
-ability.AddEffect(new DamageEffect());
-ability.AddEffect(new AccelerationEffect());
+public class B : A
+{
+    public string PropB { get; set; } = "B";
+}
 
-string abilityJSON = JsonConvert.SerializeObject(ability, settings);
-
-Ability? abilityRessurected = JsonConvert.DeserializeObject<Ability>(abilityJSON, settings);
-
-TargetSizeAspect tsa = new();
-tsa.AddSize(BRIX.Library.Enums.ETargetSize.Gigantic);
-tsa.AddSize(BRIX.Library.Enums.ETargetSize.Monstrous);
-tsa.AddSize(BRIX.Library.Enums.ETargetSize.Colossal);
-
-string aspectJSON = JsonConvert.SerializeObject(tsa, settings);
-
-TargetSizeAspect? aspectRessurected = JsonConvert.DeserializeObject<TargetSizeAspect>(aspectJSON, settings);
-
-//string stop = "";
+public class C : A
+{
+    public string PropC { get; set; } = "C";
+}
