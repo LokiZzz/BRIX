@@ -17,7 +17,7 @@ namespace BRIX.GameService.Entities
         /// <summary>
         /// Персонажи игрока.
         /// </summary>
-        public DbSet<PlayerCharacter> PlayerCharacters { get; set; }
+        public DbSet<PlayerCharacter> PlayerCharacters { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text.Json;
 
-namespace BRIX.Web.Client.Services
+namespace BRIX.Web.Client.Services.Auth
 {
     public class JWTAuthenticationStateProvider(HttpClient httpClient, ILocalStorageService localStorage)
         : AuthenticationStateProvider
@@ -32,7 +32,7 @@ namespace BRIX.Web.Client.Services
                     )
                 );
             }
-            catch(InvalidOperationException)
+            catch (InvalidOperationException)
             {
                 // Попытка получить данные во время пререндеринга.
                 return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));

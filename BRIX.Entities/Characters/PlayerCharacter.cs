@@ -32,6 +32,7 @@ namespace BRIX.GameService.Entities.Characters
         {
             builder.HasOne(x => x.User).WithMany(x => x.Characters).HasForeignKey(x => x.UserId);
             builder.ToTable(nameof(PlayerCharacter), DbSchemes.Characters);
+            builder.Property(x => x.Created).HasDefaultValueSql("getutcdate()");
         }
     }
 }

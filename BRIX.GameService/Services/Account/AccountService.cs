@@ -54,7 +54,7 @@ namespace BRIX.GameService.Services.Account
             return new SignUpResponse 
             { 
                 Successful = result.Succeeded, 
-                Errors = result.Errors.Select(x => x.Description) 
+                Errors = result.Errors.Select(x => x.Description).ToList()
             };
         }
 

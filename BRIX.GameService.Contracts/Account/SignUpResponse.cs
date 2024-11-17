@@ -4,6 +4,6 @@
     {
         public bool Successful { get; set; }
 
-        public IEnumerable<string> Errors { get; set; } = [];
+        public List<string> Errors { get; set; } = [];
     }
 }

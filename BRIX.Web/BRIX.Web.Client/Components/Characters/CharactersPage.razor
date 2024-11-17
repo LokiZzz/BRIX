@@ -2,13 +2,23 @@
 
 <h3>Characters Page</h3>
 
+<button>Add new character</button>
 
+@foreach (Character character in _characters)
+{
+    <div>
+        <p>@character.Name</p>
+        <p>@character.Level Level</p>
+        <button>Edit</button>
+        <button>Delete</button>
+    </div>
+}
 
 @code {
     private List<Character> _characters = [];
 
     protected override async Task OnInitializedAsync()
     {
-        await base.OnInitializedAsync();
+        _characters = await CharacterService.GetAll();
     }
 }

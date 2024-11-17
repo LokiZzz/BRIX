@@ -7,9 +7,6 @@ namespace BRIX.GameService.Entities
         [Key]
         public TKey Id { get; set; }
 
-        [Timestamp]
-        public DateTime Timestamp { get; set; }
-
-        public virtual void Configure() { }
+        public DateTime Created { get; set; }
     }
 }

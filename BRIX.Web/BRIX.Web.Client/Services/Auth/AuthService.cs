@@ -5,8 +5,9 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text;
 using BRIX.GameService.Contracts.Account;
+using BRIX.Web.Client.Services.Http;
 
-namespace BRIX.Web.Client.Services
+namespace BRIX.Web.Client.Services.Auth
 {
     public class AuthService(
         HttpClient httpClient,
@@ -21,9 +22,12 @@ namespace BRIX.Web.Client.Services
 
         public async Task<SignUpResponse> SignUp(SignUpRequest model)
         {
-            HttpResponseMessage result = await _httpClient.PostAsJsonAsync("api/account/signup", model);
+            SignUpResponse result = await _httpClient.PostAsJsonAsync<SignUpRequest, SignUpResponse>(
+                "api/account/signup",
+                model
+            );
 
-            return await result.Content.ReadFromJsonAsync<SignUpResponse>(_jsonOptions) ?? new();
+            return result;
         }
 
         public async Task<SignInResponse> SignIn(SignInRequest model)

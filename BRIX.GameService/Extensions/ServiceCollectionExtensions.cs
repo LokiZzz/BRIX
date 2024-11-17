@@ -24,6 +24,9 @@ namespace BRIX.GameService.Extensions
 
             services.AddSingleton(services => new JsonSerializerSettings { 
                 TypeNameHandling = TypeNameHandling.Auto,
+                Formatting = Formatting.Indented,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                DateParseHandling = DateParseHandling.None
             });
         }
 
@@ -39,6 +42,11 @@ namespace BRIX.GameService.Extensions
             services.AddControllers().AddNewtonsoftJson(options => 
                 options.SerializerSettings.TypeNameHandling = TypeNameHandling.Auto
             );
+        }
+
+        public static void AddLogging(this IServiceCollection services, ConfigurationManager config)
+        {
+            services.AddLogging();
         }
 
         public static void AddDatabase(this IServiceCollection services, ConfigurationManager config)

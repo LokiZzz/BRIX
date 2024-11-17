@@ -1,6 +1,6 @@
 ﻿using BRIX.GameService.Contracts.Account;
 
-namespace BRIX.Web.Client.Services
+namespace BRIX.Web.Client.Services.Auth
 {
     public interface IAuthService
     {

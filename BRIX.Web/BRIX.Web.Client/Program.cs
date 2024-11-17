@@ -9,5 +9,6 @@ builder.Services.AddOptions(config);
 builder.Services.AddHttpClient(config);
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuth();
+builder.Services.AddServices();
 
 await builder.Build().RunAsync();

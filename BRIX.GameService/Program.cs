@@ -1,7 +1,11 @@
 using BRIX.GameService.Extensions;
-using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+using BRIX.GameService.Services.Utility;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
 ConfigurationManager config = builder.Configuration;
 
 builder.Services.AddOptions(config);
@@ -12,6 +16,8 @@ builder.Services.AddDatabase(config);
 builder.Services.AddAuth(config);
 builder.Services.AddServices();
 builder.Services.AddSwaggerWithJWT();
+builder.Services.AddLogging(config);
+builder.Services.AddExceptionHandler<ExceptionHandler>();
 
 WebApplication app = builder.Build();
 
@@ -21,5 +27,6 @@ app.UseAuthorization();
 app.UseDevSwagger();
 app.UseHttpsRedirection();
 app.MapControllers();
+app.UseExceptionHandler(_ => { });
 
 app.Run();
