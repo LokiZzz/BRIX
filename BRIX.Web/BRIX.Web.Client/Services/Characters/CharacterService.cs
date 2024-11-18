@@ -3,9 +3,11 @@ using BRIX.Web.Client.Services.Http;
 
 namespace BRIX.Web.Client.Services.Characters
 {
-    public class CharacterService(HttpClient http)
+    public class CharacterManager(HttpClient http)
     {
         private readonly HttpClient _http = http;
+
+        public Character EditingCharacter { get; set; } = default!;
 
         public async Task<List<Character>> GetAll()
         {

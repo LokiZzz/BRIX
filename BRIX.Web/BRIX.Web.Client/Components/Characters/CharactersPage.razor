@@ -2,15 +2,15 @@
 
 <h3>Characters Page</h3>
 
-<button>Add new character</button>
+<button @onclick="@(async () => Add())">Add new character</button>
 
 @foreach (Character character in _characters)
 {
     <div>
         <p>@character.Name</p>
         <p>@character.Level Level</p>
-        <button>Edit</button>
-        <button>Delete</button>
+        <button @onclick="@(() => Edit(character))">Edit</button>
+        <button @onclick="@(() => Delete(character))">Delete</button>
     </div>
 }
 
@@ -19,6 +19,23 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _characters = await CharacterService.GetAll();
+        _characters = await CharacterManager.GetAll();
+    }
+
+    private async Task Add()
+    {
+        string stop = "";
+    }
+
+    private async Task Edit(Character character)
+    {
+        CharacterManager.EditingCharacter = character;
+        Navigation.NavigateTo("/characters/edit");
+
+    }
+
+    private async Task Delete(Character character)
+    {
+        string stop = "";
     }
 }

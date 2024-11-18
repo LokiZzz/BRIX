@@ -18,7 +18,7 @@ namespace BRIX.Web.Client.Extensions
 
         public static void AddServices(this IServiceCollection services)
         {
-            services.AddScoped<CharacterService>();
+            services.AddScoped<CharacterManager>();
         }
 
         public static void AddOptions(this IServiceCollection services, WebAssemblyHostConfiguration config)

@@ -1,0 +1,23 @@
+﻿@page "/characters/edit"
+
+<h3>Edit Character Page</h3>
+
+<EditForm OnSubmit="Save" Model="_character">
+    <InputText DisplayName="Name" @bind-Value="_character.Name"></InputText>
+    <InputTextArea DisplayName="Backstory" @bind-Value="_character.Backstory"></InputTextArea>
+    <button type="submit">Save</button>
+</EditForm>
+
+@code {
+    private Character _character { get; set; } = default!;
+
+    protected override void OnInitialized()
+    {
+        _character = CharacterManager.EditingCharacter;
+    }
+
+    public void Save()
+    {
+        Navigation.NavigateTo("/characters");
+    }
+}
