@@ -18,7 +18,7 @@ namespace BRIX.GameService.Services.Characters
             using ApplicationDbContext context = _contextFactory.CreateDbContext();
             List<PlayerCharacter> playerCharacters = [];
 
-            if(characterIds != null && characterIds.Count != 0)
+            if (characterIds != null && characterIds.Count != 0)
             {
                 playerCharacters = await context.PlayerCharacters
                     .Where(x => x.UserId == userId && characterIds.Contains(x.Id))
@@ -32,12 +32,26 @@ namespace BRIX.GameService.Services.Characters
             }
 
             List<Character> characters = playerCharacters
-                .Select(x => JsonConvert.DeserializeObject<Character>(x.CharacterJsonData, _jsonSettings))
+                .Select(DeserializeCharacter)
                 .Where(x => x != null)
                 .Cast<Character>()
                 .ToList();
 
             return characters;
+        }
+
+        private Character? DeserializeCharacter(PlayerCharacter playerCharacter)
+        {
+            Character? character = JsonConvert.DeserializeObject<Character>(
+                playerCharacter.CharacterJsonData, _jsonSettings
+            );
+
+            if (character != null)
+            {
+                character.Id = playerCharacter.Id;
+            }
+
+            return character;
         }
 
         public async Task Push(Guid userId, Character character)

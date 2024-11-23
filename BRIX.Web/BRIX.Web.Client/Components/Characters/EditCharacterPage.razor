@@ -8,16 +8,26 @@
     <button type="submit">Save</button>
 </EditForm>
 
+<button @onclick="Back">Cancel</button>
+
+
 @code {
     private Character _character { get; set; } = default!;
 
     protected override void OnInitialized()
     {
-        _character = CharacterManager.EditingCharacter;
+        _character = CharacterManager.EditingCharacter ?? new Character();
     }
 
-    public void Save()
+    public async Task Save()
     {
-        Navigation.NavigateTo("/characters");
+        CharacterOperationResponse result = await CharacterManager.Save(_character);
+
+        if (result.Success)
+        {
+            Navigation.NavigateTo("/characters");
+        }
     }
+
+    public void Back() => Navigation.NavigateTo("/characters");
 }

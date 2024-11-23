@@ -2,15 +2,24 @@
 
 <h3>Characters Page</h3>
 
-<button @onclick="@(async () => Add())">Add new character</button>
+@if(_characters.Count > 0)
+{
+    <button @onclick="@(async () => Add())">Add new character</button>
 
-@foreach (Character character in _characters)
+    @foreach (Character character in _characters)
+    {
+        <div style="display:inline;background-color:aquamarine;">
+            <p>@character.Name</p>
+            <p>@character.Level Level</p>
+            <button @onclick="@(() => Edit(character))">Edit</button>
+            <button @onclick="@(() => Delete(character))">Delete</button>
+        </div>
+    }
+}
+else
 {
     <div>
-        <p>@character.Name</p>
-        <p>@character.Level Level</p>
-        <button @onclick="@(() => Edit(character))">Edit</button>
-        <button @onclick="@(() => Delete(character))">Delete</button>
+        <p>Characters is loading.</p>
     </div>
 }
 
@@ -19,23 +28,30 @@
 
     protected override async Task OnInitializedAsync()
     {
+        await Task.Delay(1000);
         _characters = await CharacterManager.GetAll();
     }
 
-    private async Task Add()
+    private void Add()
     {
-        string stop = "";
+        CharacterManager.EditingCharacter = null;
+        Navigation.NavigateTo("/characters/edit");
     }
 
-    private async Task Edit(Character character)
+    private void Edit(Character character)
     {
-        CharacterManager.EditingCharacter = character;
+        CharacterManager.EditingCharacter = character.Copy() 
+            ?? throw new Exception("Не удалось скопировать персонажа.");
         Navigation.NavigateTo("/characters/edit");
-
     }
 
     private async Task Delete(Character character)
     {
-        string stop = "";
+        CharacterOperationResponse result = await CharacterManager.Delete(character);
+
+        if(result.Success)
+        {
+            _characters.Remove(character);
+        }
     }
 }

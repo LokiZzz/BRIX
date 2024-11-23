@@ -1,4 +1,5 @@
-﻿using BRIX.GameService.Entities.Users;
+﻿using BRIX.GameService.Contracts.Characters;
+using BRIX.GameService.Entities.Users;
 using BRIX.GameService.Services.Account;
 using BRIX.GameService.Services.Characters;
 using BRIX.Library.Characters;
@@ -40,13 +41,18 @@ namespace BRIX.GameService.Controllers.Characters
         [HttpPost]
         public async Task<IActionResult> Push([FromBody] Character character)
         {
-            return Ok();
+            User user = await _accountService.GetCurrentUserGuaranteed();
+            await _characterRepository.Push(user.Id, character);
+
+            return Ok(new CharacterOperationResponse { Success = true });
         }
 
         [HttpGet]
         public async Task<IActionResult> Delete([FromQuery] Guid id)
         {
-            return Ok();
+            await _characterRepository.Delete(id);
+            
+            return Ok(new CharacterOperationResponse { Success = true });
         }
     }
 }
