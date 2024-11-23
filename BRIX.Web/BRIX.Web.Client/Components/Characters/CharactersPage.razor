@@ -1,14 +1,14 @@
 ﻿@page "/characters"
 
-<h3>Characters Page</h3>
+<h3>@Localization[nameof(Resource.Common_Characters)]</h3>
 
-@if(_characters.Count > 0)
+@if(_characters is not null)
 {
     <button @onclick="@(async () => Add())">Add new character</button>
 
     @foreach (Character character in _characters)
     {
-        <div style="display:inline;background-color:aquamarine;">
+        <div style="display:inline-flex;background-color:aquamarine;">
             <p>@character.Name</p>
             <p>@character.Level Level</p>
             <button @onclick="@(() => Edit(character))">Edit</button>
@@ -18,17 +18,14 @@
 }
 else
 {
-    <div>
-        <p>Characters is loading.</p>
-    </div>
+    <p>Characters is loading.</p>
 }
 
 @code {
-    private List<Character> _characters = [];
+    private List<Character>? _characters = null;
 
     protected override async Task OnInitializedAsync()
     {
-        await Task.Delay(1000);
         _characters = await CharacterManager.GetAll();
     }
 
@@ -51,7 +48,7 @@ else
 
         if(result.Success)
         {
-            _characters.Remove(character);
+            _characters?.Remove(character);
         }
     }
 }

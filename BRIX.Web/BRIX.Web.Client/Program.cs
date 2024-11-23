@@ -10,5 +10,10 @@ builder.Services.AddHttpClient(config);
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuth();
 builder.Services.AddServices();
+builder.Services.AddLocalization();
 
-await builder.Build().RunAsync();
+WebAssemblyHost host = builder.Build();
+
+await host.SetDefaultCulture();
+
+await host.RunAsync();
