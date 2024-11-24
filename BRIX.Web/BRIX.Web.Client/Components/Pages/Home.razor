@@ -4,13 +4,20 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1 class="title">Test API</h1>
 
-<button onclick="@(async () => await TestWebApi())">Test web api!</button>
-
+<button class="button is-primary" onclick="@(async () => await TestWebApi())">Sen request</button>
 <p>@_responseString</p>
 
-Welcome to your new app.
+<h1 class="title">Samples of buttons</h1>
+<button class="button is-primary">Button</button>
+<button class="button is-link">Button</button>
+<button class="button is-info">Button</button>
+<button class="button is-success">Button</button>
+<button class="button is-warning">Button</button>
+<button class="button is-danger">Button</button>
+
+
 
 @code
 {
