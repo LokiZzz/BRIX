@@ -1,0 +1,11 @@
+﻿:root {
+    --bulma-primary-h: 255deg;
+    --bulma-primary-s: 83%;
+    --bulma-primary-l: 70%;
+    --bulma-success-h: 130deg;
+    --bulma-scheme-h: 260;
+}
+
+.title {
+    font-family: Garamond;
+}

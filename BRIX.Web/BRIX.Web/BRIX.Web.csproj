@@ -7,29 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\assets\**" />
+    <Compile Remove="wwwroot\awesome\**" />
+    <Compile Remove="wwwroot\bulma\**" />
+    <Content Remove="wwwroot\assets\**" />
+    <Content Remove="wwwroot\awesome\**" />
+    <Content Remove="wwwroot\bulma\**" />
+    <EmbeddedResource Remove="wwwroot\assets\**" />
+    <EmbeddedResource Remove="wwwroot\awesome\**" />
+    <EmbeddedResource Remove="wwwroot\bulma\**" />
+    <None Remove="wwwroot\assets\**" />
+    <None Remove="wwwroot\awesome\**" />
+    <None Remove="wwwroot\bulma\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BRIX.Web.Client\BRIX.Web.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.0" />
     <PackageReference Include="System.Private.Uri" Version="4.3.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="wwwroot\bulma\bulma.css">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\bulma\bulma.css.map">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\bulma\bulma.min.css">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\assets\" />
-    <Folder Include="wwwroot\awesome\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>
