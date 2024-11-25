@@ -1,60 +1,18 @@
 ﻿@using System.Globalization
 @inject IJSRuntime JSRuntime
 
-<strong>@Localization["Common_Language"]</strong>
-<div class="dropdown">
-    <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-            <span>@Culture.NativeName</span>
-            <span class="icon is-small">
-                <i class="fas fa-solid fa-chevron-down" aria-hidden="true"></i>
-            </span>
-        </button>
-    </div>
-    <div class="dropdown-menu" id="dropdown-menu" role="menu">
-        <div class="dropdown-content">
-            @foreach (CultureInfo culture in cultures)
-            {
-                <a class="dropdown-item">@Culture.NativeName</a>
-            }
-
-            <a href="#" class="dropdown-item"> Dropdown item </a>
-            <a href="#" class="dropdown-item"> Active dropdown item </a>
-            <a href="#" class="dropdown-item"> Other dropdown item </a>
-        </div>
-    </div>
-</div>
-
-<div class="dropdown is-active">
-    <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-            <span>Dropdown button</span>
-            <span class="icon is-small">
-                <i class="fa cross" aria-hidden="true"></i>
-            </span>
-        </button>
-    </div>
-    <div class="dropdown-menu" id="dropdown-menu" role="menu">
-        <div class="dropdown-content">
-            <a href="#" class="dropdown-item"> Dropdown item </a>
-            <a class="dropdown-item"> Other dropdown item </a>
-            <a href="#" class="dropdown-item is-active"> Active dropdown item </a>
-            <a href="#" class="dropdown-item"> Other dropdown item </a>
-            <hr class="dropdown-divider" />
-            <a href="#" class="dropdown-item"> With a divider </a>
-        </div>
-    </div>
-</div>
+<p>@Localization["Common_Language"]</p>
+<Dropdown Items="cultures" @bind-Selected="Culture" DisplayPropertyDelegate="x => x.NativeName"/>
 
 @code {
-    CultureInfo[] cultures = new[] { new CultureInfo("en-US"), new CultureInfo("ru-RU") };
+    List<CultureInfo> cultures = [new CultureInfo("en-US"), new CultureInfo("ru-RU")];
 
     CultureInfo Culture
     {
         get => CultureInfo.CurrentCulture;
         set
         {
-            if (CultureInfo.CurrentCulture != value)
+            if (CultureInfo.CurrentCulture != value && CultureInfo.CurrentCulture.Name != value.Name)
             {
                 IJSInProcessRuntime js = (IJSInProcessRuntime)JSRuntime;
                 js.InvokeVoid("blazorCulture.set", value.Name);

@@ -1,7 +1,18 @@
 ﻿@page "/"
+@using BRIX.Web.Client.Components.Shared
 @inject HttpClient Http
 
 <PageTitle>Home</PageTitle>
+
+<div class="block">
+    <h1 class="title">Nice dropdown</h1>
+    <p>Now dropdown value is: «@SelectedDropdownItem?.SomeProperty»</p>
+    <Dropdown 
+        Items="DropdownItems" 
+        @bind-Selected="SelectedDropdownItem" 
+        DisplayPropertyDelegate="x => x?.SomeProperty"
+        Placeholder="Please, select Guid..."/>
+</div>
 
 <div class="block">
     <h1 class="title">Title</h1>
@@ -47,5 +58,15 @@
         {
             _responseString = ex.Message;
         }
+    }
+
+    private DropdownItem SelectedDropdownItem { get; set; } = default!;
+
+    private List<DropdownItem?> DropdownItems { get; set; }
+        = [new DropdownItem(), new DropdownItem(), new DropdownItem()];
+
+    public class DropdownItem
+    {
+        public string SomeProperty { get; set; } = Guid.NewGuid().ToString();
     }
 }

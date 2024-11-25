@@ -1,0 +1,66 @@
+﻿@using System.Reflection
+@typeparam TItem where TItem : class
+
+<div class="dropdown @_isActiveClass">
+    <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu" @onclick="ToggleIsActive">
+            <span>@GetDisplayText(Selected)</span>
+            <span class="icon is-small ml-2">
+                <i class="fas fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </span>
+        </button>
+    </div>
+    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+        <div class="dropdown-content">
+            @foreach (TItem item in Items)
+            {
+                <a class="dropdown-item" @onclick="@(() => SelectItem(item))">@GetDisplayText(item)</a>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public List<TItem> Items { get; set; } = [];
+
+    [Parameter, EditorRequired]
+    public TItem? Selected { get; set; }
+
+    [Parameter]
+    public EventCallback<TItem?> SelectedChanged { get; set; }
+
+    [Parameter, EditorRequired]
+    public Func<TItem, string> DisplayPropertyDelegate { get; set; } = default!;
+
+    [Parameter]
+    public string Placeholder { get; set; } = "None";
+
+    private bool _isActive = false;
+
+    private string _isActiveClass => _isActive ? "is-active" : string.Empty;
+
+    private void ToggleIsActive()
+    {
+        _isActive = !_isActive;
+    }
+
+    private string GetDisplayText(TItem? item)
+    {
+        if (DisplayPropertyDelegate is not null && item != null)
+        {
+            return DisplayPropertyDelegate.Invoke(item);
+        }
+        else
+        {
+            return Placeholder;
+        }
+    }
+
+    private async Task SelectItem(TItem item)
+    {
+        Selected = item;
+        await SelectedChanged.InvokeAsync(item);
+        ToggleIsActive();
+    }
+}
