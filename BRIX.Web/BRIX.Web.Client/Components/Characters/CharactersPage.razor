@@ -1,18 +1,18 @@
 ﻿@page "/characters"
 
-<h3>@Localization[nameof(Resource.Common_Characters)]</h3>
+<h1 class="title">@Localization[nameof(Resource.Common_Characters)]</h1>
 
 @if(_characters is not null)
 {
-    <button @onclick="@(async () => Add())">Add new character</button>
+    <button class="button is-large" @onclick="@(async () => Add())">Add new character</button>
 
     @foreach (Character character in _characters)
     {
-        <div style="display:inline-flex;background-color:aquamarine;">
-            <p>@character.Name</p>
+        <div class="box">
+            <p class="title is-small">@character.Name</p>
             <p>@character.Level Level</p>
-            <button @onclick="@(() => Edit(character))">Edit</button>
-            <button @onclick="@(() => Delete(character))">Delete</button>
+            <button class="button" @onclick="@(() => Edit(character))">Edit</button>
+            <button class="button is-danger" @onclick="@(() => Delete(character))">Delete</button>
         </div>
     }
 }

@@ -13,13 +13,13 @@ namespace BRIX.Web.Client.Services.Characters
 
         public async Task<List<Character>> GetAll()
         {
-            return await _http.GetAsJsonAsync<List<Character>>("api/character/get");
+            return await _http.GetAsJsonAsync<List<Character>>("api/character");
         }
 
         public async Task<CharacterOperationResponse> Save(Character character)
         {
-            CharacterOperationResponse response = await _http.PostAsJsonAsync<Character, CharacterOperationResponse>(
-                "api/character/push", 
+            CharacterOperationResponse response = await _http.PutJsonAsync<Character, CharacterOperationResponse>(
+                "api/character", 
                 character
             );
 
@@ -28,8 +28,8 @@ namespace BRIX.Web.Client.Services.Characters
 
         public async Task<CharacterOperationResponse> Delete(Character character)
         {
-            CharacterOperationResponse response = await _http.GetAsJsonAsync<CharacterOperationResponse>(
-                $"api/character/delete?id={character.Id}"
+            CharacterOperationResponse response = await _http.DeleteJsonAsync<CharacterOperationResponse>(
+                $"api/character?id={character.Id}"
             );
 
             return response;

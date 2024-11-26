@@ -10,7 +10,7 @@ namespace BRIX.GameService.Controllers.Characters
 {
     [ApiController]
     [Authorize]
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     public class CharacterController(
         ILogger<CharacterController> logger,
         IAccountService accountService,
@@ -38,8 +38,8 @@ namespace BRIX.GameService.Controllers.Characters
             return Ok(characters);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Push([FromBody] Character character)
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] Character character)
         {
             User user = await _accountService.GetCurrentUserGuaranteed();
             await _characterRepository.Push(user.Id, character);
@@ -47,7 +47,7 @@ namespace BRIX.GameService.Controllers.Characters
             return Ok(new CharacterOperationResponse { Success = true });
         }
 
-        [HttpGet]
+        [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery] Guid id)
         {
             await _characterRepository.Delete(id);
