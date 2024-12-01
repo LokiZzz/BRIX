@@ -24,41 +24,36 @@ namespace BRIX.GameService.Services.Utility
             try
             {
                 _logger.LogError(exception.Message);
+                ProblemDetails problem;
 
-                if(exception is ProblemException problemException)
+                if (exception is ProblemException problemException)
                 {
-                    ProblemDetails problem = new()
+                    problem = new()
                     {
                         Status = StatusCodes.Status400BadRequest,
                         Title = problemException.Message,
                         Detail = problemException.Detail,
                         Type = "Bad Request"
                     };
-
-                    await _problemDetailsService.TryWriteAsync(
-                        new ProblemDetailsContext
-                        {
-                            HttpContext = httpContext,
-                            ProblemDetails = problem
-                        }
-                    );
                 }
                 else
                 {
-                    await _problemDetailsService.TryWriteAsync(
-                        new ProblemDetailsContext
-                        {
-                            HttpContext = httpContext,
-                            ProblemDetails = new()
-                            {
-                                Status = StatusCodes.Status500InternalServerError,
-                                Title = "Internal Server Error",
-                                Detail = "No details",
-                                Type = "Internal Server Error"
-                            }
-                        }
-                    );
+                    problem = new()
+                    {
+                        Status = StatusCodes.Status500InternalServerError,
+                        Title = "Internal Server Error",
+                        Detail = "No details",
+                        Type = "Internal Server Error"
+                    };
                 }
+
+                await _problemDetailsService.TryWriteAsync(
+                    new ProblemDetailsContext
+                    {
+                        HttpContext = httpContext,
+                        ProblemDetails = problem
+                    }
+                );
 
                 return true;
             }

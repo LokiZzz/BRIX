@@ -5,13 +5,20 @@
 <PageTitle>Home</PageTitle>
 
 <div class="block">
+    <h1 class="title">Text exception</h1>
+    <button class="button" @onclick="ThrowException">
+        <span class="fas fa-warning"></span>Выбросить исключение!
+    </button>
+</div>
+
+<div class="block">
     <h1 class="title">Nice dropdown</h1>
     <p>Now dropdown value is: «@SelectedDropdownItem?.SomeProperty»</p>
     <Dropdown 
-        Items="DropdownItems" 
-        @bind-Selected="SelectedDropdownItem" 
-        DisplayPropertyDelegate="x => x?.SomeProperty"
-        Placeholder="Please, select Guid..."/>
+    Items="DropdownItems" 
+    @bind-Selected="SelectedDropdownItem" 
+    DisplayPropertyDelegate="x => x?.SomeProperty"
+    Placeholder="Please, select Guid..."/>
 </div>
 
 <div class="block">
@@ -68,5 +75,10 @@
     public class DropdownItem
     {
         public string SomeProperty { get; set; } = Guid.NewGuid().ToString();
+    }
+
+    private void ThrowException(MouseEventArgs e)
+    {
+        throw new Exception("Исключение!");
     }
 }

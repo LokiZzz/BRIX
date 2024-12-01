@@ -5,8 +5,14 @@
 
 <div>
     <NavMenu />
-
     <main class="container">
-        @Body
+        <ErrorBoundary>
+            <ChildContent>
+                @Body
+            </ChildContent>
+            <ErrorContent>
+                <ErrorPage/>
+            </ErrorContent>
+        </ErrorBoundary>
     </main>
 </div>

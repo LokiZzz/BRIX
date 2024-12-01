@@ -49,7 +49,7 @@ namespace BRIX.GameService.Controllers.Account
         [HttpGet]
         public IActionResult GetProblem()
         {
-            throw new ProblemException("Just error!");
+            throw new Exception("Just error!");
         }
 
         [Authorize]
