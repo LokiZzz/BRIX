@@ -17,7 +17,7 @@ builder.Services.AddAuth(config);
 builder.Services.AddServices();
 builder.Services.AddSwaggerWithJWT();
 builder.Services.AddLogging(config);
-builder.Services.AddExceptionHandler<ExceptionHandler>();
+builder.Services.AddExceptionHandling();
 
 WebApplication app = builder.Build();
 
@@ -27,6 +27,6 @@ app.UseAuthorization();
 app.UseDevSwagger();
 app.UseHttpsRedirection();
 app.MapControllers();
-app.UseExceptionHandler(_ => { });
+app.UseExceptionHandler(); // _ => { }
 
 app.Run();

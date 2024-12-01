@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using BRIX.GameService.Services.Account;
 using Microsoft.Extensions.Options;
 using BRIX.GameService.Options;
+using BRIX.GameService.Services.Utility;
 
 namespace BRIX.GameService.Controllers.Account
 {
@@ -43,6 +44,12 @@ namespace BRIX.GameService.Controllers.Account
         public IActionResult GetHello()
         {
             return Ok($"Hello!");
+        }
+
+        [HttpGet]
+        public IActionResult GetProblem()
+        {
+            throw new ProblemException("Just error!");
         }
 
         [Authorize]

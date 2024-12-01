@@ -4,12 +4,15 @@ using BRIX.GameService.Options;
 using BRIX.GameService.Services.Account;
 using BRIX.GameService.Services.Characters;
 using BRIX.GameService.Services.Mail;
+using BRIX.GameService.Services.Utility;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using System.Diagnostics;
 using System.Text;
 
 namespace BRIX.GameService.Extensions
@@ -108,6 +111,25 @@ namespace BRIX.GameService.Extensions
                     Array.Empty<string>()
                 }});
             });
+        }
+
+        public static void AddExceptionHandling(this IServiceCollection services)
+        {
+            services.AddProblemDetails(options => 
+            {
+                options.CustomizeProblemDetails = context =>
+                {
+                    context.ProblemDetails.Instance =
+                        $"{context.HttpContext.Request.Method} {context.HttpContext.Request.Path}";
+                    context.ProblemDetails.Extensions.TryAdd("requestId", context.HttpContext.TraceIdentifier);
+
+                    Activity? activity = context.HttpContext.Features
+                        .GetRequiredFeature<IHttpActivityFeature>()?.Activity;
+                    context.ProblemDetails.Extensions.TryAdd("traceId", activity?.Id);
+                };
+            });
+
+            services.AddExceptionHandler<ProblemExceptionHandler>();
         }
     }
 }
