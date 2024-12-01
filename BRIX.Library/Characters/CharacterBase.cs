@@ -6,8 +6,8 @@ namespace BRIX.Library.Characters
     public abstract class CharacterBase
     {
         public Guid Id { get; set; }
+
         public string Name { get; set; } = string.Empty;
-        public List<string> Tags { get; set; } = [];
 
         public List<Ability> Abilities { get; set; } = [];
 
@@ -40,7 +40,19 @@ namespace BRIX.Library.Characters
         
         public void ClearAbilities() => Abilities.Clear();
 
-        protected virtual bool ValidateAbility(Ability ability) => true;
+        public virtual bool ValidateAbility(Ability ability) => true;
+
+        public void ActivateAbility(Ability ability)
+        {
+            bool notEnoughActionPoints = ability.Activation.ActionPoints > CurrentActionPoints;
+
+            if (!Abilities.Contains(ability) || notEnoughActionPoints)
+            {
+                return;
+            }
+
+            CurrentActionPoints -= ability.Activation.ActionPoints;
+        }
 
         // Лист Вообще то должен быть очередью, но тогда проблемы с сериализацией.
         public List<Status> Statuses { get; set; } = []; 
@@ -61,19 +73,34 @@ namespace BRIX.Library.Characters
             }
         }
 
-        public abstract int RawMaxHealth { get; }
-        public int MaxHealthBonuses => GetMaxHealthBonuses();
-        public int MaxHealthPenalties => GetMaxHealthPenalties(); 
-        public int MaxHealth => GetMaxHealth();
-        public int CurrentHealth { get; set; }
-
         /// <summary>
         /// Здесь зависимость от способностей, но временно считается по простому.
         /// </summary>
-        public static int MaxActionPoints => 5;
+        public int MaxActionPoints => 5;
+
         public int CurrentActionPoints { get; set; } = 5;
 
         public CharacterSpeed Speed { get; set; } = new();
+
+        public abstract int RawMaxHealth { get; }
+
+        public int MaxHealthBonuses => GetMaxHealthBonuses();
+
+        public int MaxHealthPenalties => GetMaxHealthPenalties(); 
+
+        public int MaxHealth => GetMaxHealth();
+
+        private int _currentHealth = 0;
+        public int CurrentHealth
+        {
+            get
+            {
+                _currentHealth = _currentHealth > MaxHealth ? MaxHealth : _currentHealth;
+
+                return _currentHealth;
+            }
+            set => _currentHealth = value;
+        }
 
         protected virtual int GetMaxHealth()
         {

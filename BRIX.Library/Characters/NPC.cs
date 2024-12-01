@@ -1,39 +1,37 @@
 ﻿using BRIX.Library.Abilities;
+using BRIX.Library.Effects;
 
 namespace BRIX.Library.Characters
 {
     public class NPC : CharacterBase
     {
-        public NPC() 
+        public int SetHealth { get; set; } = 10;
+
+        public override int RawMaxHealth => SetHealth;
+
+        public bool Summoned { get; set; }
+
+        public int Power
         {
-            Id = Id == Guid.Empty ? Guid.NewGuid() : Id;
+            get
+            {
+                int powerByAbilities = Abilities.Sum(x => x.ExpCost());
+                int powerBySpeed = Speed.GetExpCost();
+                int powerByHealth = CharacterCalculator.HealthToExp(SetHealth);
+
+                return (powerByAbilities + powerBySpeed + powerByHealth) / 2;
+            }
         }
 
-        public int Health { get; set; } = 10;
-
-        public override int RawMaxHealth => Health;
-
-        public string Description { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Мощность NPC, выражается в очках опыта.
-        /// </summary>
-        public int Power => GetNPCPower();
-
-        private int GetNPCPower()
+        public override bool ValidateAbility(Ability ability)
         {
-            int powerByAbilities = Abilities.Sum(x => x.ExpCost());
-            int powerBySpeed = Speed.GetExpCost();
-            int powerByHealth = CharacterCalculator.HealthToExp(Health);
+            // У NPC не должно быть способностей с призывом.
+            bool noSummonEffect = !ability.Effects.Any(x => x is SummonCreatureEffect);
 
-            return (powerByAbilities + powerBySpeed + powerByHealth) / 2;
-        }
+            // У призванных существ не должно быть способностей с перезарядкой.
+            bool noCooldownIfNPCWasSummoned = !Summoned || ability.Activation.HasCooldown;
 
-        protected override bool ValidateAbility(Ability ability)
-        {
-            // Проверить нет ли призыва и перезарядок
-
-            return true;
+            return noSummonEffect && noCooldownIfNPCWasSummoned;
         }
     }
 }

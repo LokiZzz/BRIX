@@ -1,10 +1,5 @@
 ﻿using BRIX.Library.Extensions;
 using BRIX.Library.Mathematics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BRIX.Library.Characters
 {
@@ -17,12 +12,13 @@ namespace BRIX.Library.Characters
     public class CharacterSpeed
     {
         private static readonly double _walkDefault = 5;
+        private static readonly double _swimDefault = 2.5;
+        private static readonly double _climbDefault = 2.5;
+
         public double Walk { get; set; } = _walkDefault;
 
-        private static readonly double _swimDefault = 2.5;
         public double Swim { get; set; } = _swimDefault;
 
-        private static readonly double _climbDefault = 2.5;
         public double Climb { get; set; } = _climbDefault;
 
         public double Fly { get; set; } = 0;

@@ -11,71 +11,47 @@ namespace BRIX.Library.Characters
         }
 
         public string Backstory { get; set; } = string.Empty;
+
         public string Appearance { get; set; } = string.Empty;
+
+        public List<string> MarksOfFate { get; set; } = [];
+
+        public int LuckPoints { get; set; }
+
         public List<CharacterProject> Projects { get; set; } = [];
+
         public Inventory Inventory { get; set; } = new();
-
-        private int _experience;
-        public int Experience
-        {
-            get => _experience;
-            set
-            {
-                int oldLevel = Level;
-                _experience = value;
-
-                if(Level != oldLevel)
-                {
-                    CurrentHealth = MaxHealth;
-                }
-            }
-        }
-
-        private int _expInHealth;
-        /// <summary>
-        /// Очки опыта, влитые в здоровье
-        /// </summary>
-        public int ExpInHealth
-        {
-            get => _expInHealth;
-            set
-            {
-                int oldMaxHP = MaxHealth;
-                _expInHealth = value;
-
-                if(MaxHealth != oldMaxHP)
-                {
-                    CurrentHealth = MaxHealth;
-                }
-            }
-        }
 
         public int Level => CharacterCalculator.GetLevelFromExp(Experience);
 
-        public int ExpToLevelUp => CharacterCalculator.GetExpToLevelUp(Experience);
-        public int AvailableExp => Experience - SpentExp;
-        public int SpentExp => GetSpentExp();
-        public int ExpSpentOnAbilities => Abilities.Sum(x => x.ExpCost());
+        public int Experience { get; set; }
 
-        public int GetSpentExp(Guid? excludeAbilityId = null)
+        public int ExpInHealth { get; set; }
+
+        public int ExpInAbilities => Abilities.Sum(x => x.ExpCost());
+
+        public int SpentExp => GetSpentExp();
+
+        public int AvailableExp => Experience - SpentExp;
+
+        public int ExpToLevelUp => CharacterCalculator.GetExpToLevelUp(Experience);
+
+        public override int RawMaxHealth => Level * CharacterCalculator.HealthPerLevel;
+
+        public int HealthFromExp => CharacterCalculator.ExpToHealth(ExpInHealth);
+
+        protected override int GetMaxHealth()
+        {
+            return base.GetMaxHealth() + HealthFromExp;
+        }
+
+        private int GetSpentExp(Guid? excludeAbilityId = null)
         {
             return Abilities
                 .Where(x => excludeAbilityId == null || x.Id != excludeAbilityId)
                 .Sum(x => x.ExpCost())
                 + ExpInHealth
                 + Speed.GetExpCost();
-        }
-
-        public override int RawMaxHealth => Level * CharacterCalculator.HealthPerLevel;
-        public int HealthFromExp => CharacterCalculator.ExpToHealth(ExpInHealth);
-
-        public CharacterPortrait Portrait { get; set; } = new();
-
-        public int LuckPoints { get; set; }
-
-        protected override int GetMaxHealth()
-        {
-            return base.GetMaxHealth() + HealthFromExp;
         }
     }
 }
