@@ -41,15 +41,15 @@ namespace BRIX.GameService.Controllers.Account
         }
 
         [HttpGet]
-        public IActionResult GetHello()
+        public async Task<IActionResult> ForgotPassword([FromQuery] string email)
         {
-            return Ok($"Hello!");
+            return Ok();
         }
 
-        [HttpGet]
-        public IActionResult GetProblem()
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
         {
-            throw new Exception("Just error!");
+            return Ok();
         }
 
         [Authorize]

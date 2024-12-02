@@ -17,6 +17,7 @@ namespace BRIX.GameService.Services.Account
     public class AccountService(
         SignInManager<User> signInManager,
         IOptions<JWTOptions> jwtOptions,
+        IOptions<ClientOptions> clientOptions,
         IMailService mail,
         IHttpContextAccessor httpContext) : IAccountService
     {
@@ -25,6 +26,8 @@ namespace BRIX.GameService.Services.Account
 
         private readonly JWTOptions _jwtOptions = jwtOptions?.Value
             ?? throw new ArgumentNullException(nameof(jwtOptions));
+        private readonly ClientOptions _clientOptions = clientOptions?.Value
+            ?? throw new ArgumentNullException(nameof(clientOptions));
 
         private readonly IMailService _mail = mail 
             ?? throw new ArgumentNullException(nameof(mail));
@@ -136,6 +139,34 @@ namespace BRIX.GameService.Services.Account
         public async Task<User> GetCurrentUserGuaranteed()
         {
             return await GetCurrentUser() ?? throw new InvalidOperationException("User is not found.");
+        }
+
+        public async Task ForgotPassword(string email)
+        {
+            User? user = await _userManager.FindByEmailAsync(email);
+
+            if (user is not null)
+            {
+                string token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                Dictionary<string, string?> queryParams = new() { { "id", user.Id.ToString() }, { "code", token } };
+                Uri uri = new(QueryHelpers.AddQueryString(_clientOptions.ResetPasswordAddress, queryParams));
+
+                await _mail.SendAsync(
+                    [email],
+                    "Reset password",
+                    $"Reset password link:\n{uri}"
+                );
+            }
+        }
+
+        public async Task ResetPassword(string userId, string password, string token)
+        {
+            User? user = await _userManager.FindByIdAsync(userId);
+
+            if (user is not null)
+            {
+                await _userManager.ResetPasswordAsync(user, token, password);
+            }
         }
     }
 }
