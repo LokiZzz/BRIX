@@ -6,6 +6,8 @@ using System.Text.Json;
 using System.Text;
 using BRIX.GameService.Contracts.Account;
 using BRIX.Web.Client.Services.Http;
+using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace BRIX.Web.Client.Services.Auth
 {
@@ -52,6 +54,31 @@ namespace BRIX.Web.Client.Services.Auth
             await _localStorage.RemoveItemAsync("authToken");
             ((JWTAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
             _httpClient.DefaultRequestHeaders.Authorization = null;
+        }
+
+        public async Task<bool> ForgotPassword(string email)
+        {
+            Dictionary<string, string?> queryParams = new() { { "email", email } };
+            Uri uri = new(QueryHelpers.AddQueryString("api/account/forgotpassword", queryParams));
+
+            HttpResponseMessage response = await _httpClient.GetAsync(uri);
+
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> ResetPassword(string userId, string newPassword, string token)
+        {
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync(
+                "api/account/resetpassword", 
+                new ResetPasswordRequest 
+                { 
+                    UserId = userId,
+                    Password = newPassword,
+                    Token = token
+                }
+            );
+
+            return response.IsSuccessStatusCode;
         }
     }
 }

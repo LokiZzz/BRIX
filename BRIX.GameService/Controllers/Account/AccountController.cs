@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using BRIX.GameService.Services.Account;
 using Microsoft.Extensions.Options;
 using BRIX.GameService.Options;
-using BRIX.GameService.Services.Utility;
 
 namespace BRIX.GameService.Controllers.Account
 {
@@ -43,12 +42,16 @@ namespace BRIX.GameService.Controllers.Account
         [HttpGet]
         public async Task<IActionResult> ForgotPassword([FromQuery] string email)
         {
+            await _accountService.ForgotPassword(email);
+
             return Ok();
         }
 
         [HttpPost]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
         {
+            await _accountService.ResetPassword(request.UserId, request.Password, request.Token);
+
             return Ok();
         }
 
