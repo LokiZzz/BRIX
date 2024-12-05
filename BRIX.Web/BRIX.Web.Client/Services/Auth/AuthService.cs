@@ -8,19 +8,33 @@ using BRIX.GameService.Contracts.Account;
 using BRIX.Web.Client.Services.Http;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Options;
+using BRIX.Web.Client.Options;
+using System.Net.Http;
 
 namespace BRIX.Web.Client.Services.Auth
 {
-    public class AuthService(
-        HttpClient httpClient,
-        AuthenticationStateProvider authenticationStateProvider,
-        ILocalStorageService localStorage) : IAuthService
+    public class AuthService : IAuthService
     {
-        private readonly HttpClient _httpClient = httpClient;
-        private readonly AuthenticationStateProvider _authenticationStateProvider = authenticationStateProvider;
-        private readonly ILocalStorageService _localStorage = localStorage;
+        private readonly HttpClient _httpClient;
+        private readonly AuthenticationStateProvider _authenticationStateProvider;
+        private readonly ILocalStorageService _localStorage;
+        private readonly GameServiceOptions _gameServiceOptions;
 
         private static readonly JsonSerializerOptions _jsonOptions = new() { PropertyNameCaseInsensitive = true };
+
+        public AuthService(
+            HttpClient httpClient,
+            AuthenticationStateProvider authenticationStateProvider,
+            ILocalStorageService localStorage,
+            IOptions<GameServiceOptions> gameServiceOptions)
+        {
+            _authenticationStateProvider = authenticationStateProvider;
+            _localStorage = localStorage;
+            _gameServiceOptions = gameServiceOptions.Value;
+            _httpClient = httpClient;
+            _httpClient.BaseAddress = new Uri(_gameServiceOptions.ServiceAddress);
+        }
 
         public async Task<SignUpResponse> SignUp(SignUpRequest model)
         {
@@ -59,7 +73,7 @@ namespace BRIX.Web.Client.Services.Auth
         public async Task<bool> ForgotPassword(string email)
         {
             Dictionary<string, string?> queryParams = new() { { "email", email } };
-            Uri uri = new(QueryHelpers.AddQueryString("api/account/forgotpassword", queryParams));
+            string uri = new(QueryHelpers.AddQueryString("api/account/forgotpassword", queryParams));
 
             HttpResponseMessage response = await _httpClient.GetAsync(uri);
 

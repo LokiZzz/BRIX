@@ -28,10 +28,7 @@ namespace BRIX.Web.Client.Extensions
 
         public static void AddHttpClient(this IServiceCollection services, WebAssemblyHostConfiguration config)
         {
-            GameServiceOptions gameServiceOptions = new();
-            config.GetSection(GameServiceOptions.GameService).Bind(gameServiceOptions);
-            
-            services.AddScoped(x => new HttpClient { BaseAddress = new Uri(gameServiceOptions.ServiceAddress) });
+            services.AddScoped(x => new HttpClient());
         }
     }
 }

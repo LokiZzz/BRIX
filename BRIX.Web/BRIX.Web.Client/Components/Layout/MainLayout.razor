@@ -1,4 +1,5 @@
 ﻿@using BRIX.Web.Client.Components.Account
+@using BRIX.Web.Client.Components.Pages
 @using BRIX.Web.Client.Components.Shared
 
 @inherits LayoutComponentBase
@@ -10,8 +11,8 @@
             <ChildContent>
                 @Body
             </ChildContent>
-            <ErrorContent>
-                <ErrorPage/>
+            <ErrorContent Context="exception">
+                <ErrorPage Exception="exception"/>
             </ErrorContent>
         </ErrorBoundary>
     </main>

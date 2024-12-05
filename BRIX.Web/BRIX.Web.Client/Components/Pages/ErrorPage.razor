@@ -1,7 +1,17 @@
 ﻿@page "/error"
 
-<h3>Error Page~</h3>
+<section class="hero is-danger is-medium">
+    <div class="hero-body">
+        <div class="">
+            <p class="title">Error</p>
+            <p class="subtitle">@Exception.Message</p>
+            <p>@Exception.StackTrace</p>
+        </div>
+    </div>
+</section>
+
 
 @code {
-
+    [Parameter, EditorRequired]
+    public Exception Exception { get; set; } = default!;
 }

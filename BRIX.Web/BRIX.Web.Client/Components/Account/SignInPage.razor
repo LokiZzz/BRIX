@@ -37,6 +37,7 @@
         </div>
         <button type="submit" >Submit</button>
     </EditForm>
+    <button @onclick="ForgotPassword">Forgot password?</button>
 </div>
 
 @code {
@@ -64,5 +65,8 @@
             ShowErrors = true;
         }
     }
-
+    private void ForgotPassword(MouseEventArgs e)
+    {
+        Navigation.NavigateTo("/forgot-password");
+    }
 }
