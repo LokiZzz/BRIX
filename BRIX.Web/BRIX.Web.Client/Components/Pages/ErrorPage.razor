@@ -1,11 +1,12 @@
 ﻿@page "/error"
 
-<section class="hero is-danger is-medium">
+<section class="hero is-danger is-fullheight">
     <div class="hero-body">
         <div class="">
             <p class="title">Error</p>
             <p class="subtitle">@Exception.Message</p>
             <p>@Exception.StackTrace</p>
+            <button class="button is-large mt-4" @onclick="Clear">Clear</button>
         </div>
     </div>
 </section>
@@ -14,4 +15,12 @@
 @code {
     [Parameter, EditorRequired]
     public Exception Exception { get; set; } = default!;
+
+    [Parameter, EditorRequired]
+    public ErrorBoundary? ErrorBoundary { get; set; } = default!;
+
+    private void Clear(MouseEventArgs e)
+    {
+        ErrorBoundary?.Recover();
+    }
 }

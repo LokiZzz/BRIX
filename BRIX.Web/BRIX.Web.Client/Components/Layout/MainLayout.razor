@@ -5,15 +5,20 @@
 @inherits LayoutComponentBase
 
 <div>
-    <NavMenu />
-    <main class="container">
-        <ErrorBoundary>
-            <ChildContent>
+    <ErrorBoundary @ref="_errorBoundary">
+        <ChildContent>
+            <NavMenu />
+            <main class="container">
                 @Body
-            </ChildContent>
-            <ErrorContent Context="exception">
-                <ErrorPage Exception="exception"/>
-            </ErrorContent>
-        </ErrorBoundary>
-    </main>
+            </main>
+        </ChildContent>
+        <ErrorContent Context="exception">
+            <ErrorPage Exception="exception" ErrorBoundary="_errorBoundary"/>
+        </ErrorContent>
+    </ErrorBoundary>
 </div>
+
+@code
+{
+    private ErrorBoundary? _errorBoundary;
+}
