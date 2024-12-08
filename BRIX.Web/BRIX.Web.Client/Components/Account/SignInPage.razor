@@ -1,43 +1,46 @@
 ﻿@page "/sign-in"
 
-<h1>Sign-in</h1>
+<div class="section">
+    <div class="container is-max-tablet">
+        <EditForm Model="loginModel" OnValidSubmit="HandleLogin" class="box block">
+            <DataAnnotationsValidator />
 
-@if (ShowErrors)
-{
-    <div role="alert">
-        <p>Errors:</p>
-        <p>@Error</p>
+            <h1 class="title">@Localization[nameof(Resource.Account_SignIn)]</h1>
+
+            <ValidationSummary class="notification block is-danger"/>
+
+            @if (Confirmed == true)
+            {
+                <div class="notification is-success">@Localization[nameof(Resource.Account_ConfirmedSuccessfully)]</div>
+            }
+            else if (Confirmed == false)
+            {
+                <div class="notification is-danger">@Localization[nameof(Resource.Account_ConfirmFailed)]</div>
+            }
+
+            @if (ShowFailedLoginMessage)
+            {
+                <div class="notification is-danger">@Localization[nameof(Resource.Account_SignInFailed)]</div>
+            }
+
+            <div class="field">
+                <label class="label">@Localization[nameof(Resource.Account_Email)]</label>
+                <div class="control">
+                    <InputText class="input" type="email" placeholder="address@example.com" @bind-Value="loginModel.Email" />
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">@Localization[nameof(Resource.Account_Password)]</label>
+                <div class="control">
+                    <InputText class="input" type="password" placeholder="********" @bind-Value="loginModel.Password" />
+                </div>
+            </div>
+
+            <button type="submit" class="button is-primary">@Localization[nameof(Resource.Account_SignInAction)]</button>
+            <button class="button" @onclick="ForgotPassword">@Localization[nameof(Resource.Account_ForgotPassword)]</button>
+        </EditForm>
     </div>
-}
-
-<div>
-    @if(Confirmed == true)
-    {
-        <h5>Account confirmed successfully</h5>
-    }
-    else if(Confirmed == false)
-    {
-        <h5>Something goes wrong when trying to confirm account</h5>
-        <button>Resend confirmation email</button>
-    }
-
-    <h5>Please enter your details</h5>
-    <EditForm Model="loginModel" OnValidSubmit="HandleLogin">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-        <div>
-            <label for="email">Email address</label>
-            <InputText Id="email" @bind-Value="loginModel.Email" />
-            <ValidationMessage For="@(() => loginModel.Email)" />
-        </div>
-        <div>
-            <label for="password">Password</label>
-            <InputText Id="password" type="password" @bind-Value="loginModel.Password" />
-            <ValidationMessage For="@(() => loginModel.Password)"/>
-        </div>
-        <button type="submit" >Submit</button>
-    </EditForm>
-    <button @onclick="ForgotPassword">Forgot password?</button>
 </div>
 
 @code {
@@ -45,15 +48,14 @@
     [SupplyParameterFromQuery]
     private bool? Confirmed { get; set; }
 
-    private SignInRequest loginModel = new SignInRequest();
-    private bool ShowErrors;
-    private string Error = "";
+    private SignInModel loginModel = new SignInModel();
+    private bool ShowFailedLoginMessage;
 
     private async Task HandleLogin()
     {
-        ShowErrors = false;
+        ShowFailedLoginMessage = false;
 
-        SignInResponse result = await AuthService.SignIn(loginModel);
+        SignInResponse result = await AuthService.SignIn(loginModel.ToDto());
 
         if (result.Successful)
         {
@@ -61,8 +63,7 @@
         }
         else
         {
-            Error = result.Error;
-            ShowErrors = true;
+            ShowFailedLoginMessage = true;
         }
     }
     private void ForgotPassword(MouseEventArgs e)

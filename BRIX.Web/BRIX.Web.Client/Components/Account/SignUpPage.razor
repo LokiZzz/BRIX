@@ -40,7 +40,7 @@
 
 @code {
 
-    private SignUpRequest RegisterModel = new ();
+    private SignUpModel RegisterModel = new ();
     private bool ShowErrors;
     private IEnumerable<string> Errors = [];
 
@@ -48,7 +48,7 @@
     {
         ShowErrors = false;
 
-        SignUpResponse result = await AuthService.SignUp(RegisterModel);
+        SignUpResponse result = await AuthService.SignUp(RegisterModel.ToDto());
 
         if (result.Successful)
         {
