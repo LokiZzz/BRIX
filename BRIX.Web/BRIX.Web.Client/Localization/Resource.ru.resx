@@ -162,4 +162,13 @@
   <data name="Account_SignInFailed" xml:space="preserve">
     <value>Электронная почта не найдена или был введен неверный пароль.</value>
   </data>
+  <data name="Account_ConfirmPassword" xml:space="preserve">
+    <value>Повторите пароль</value>
+  </data>
+  <data name="Account_SignUp" xml:space="preserve">
+    <value>Создать аккаунт</value>
+  </data>
+  <data name="Account_SignUpAction" xml:space="preserve">
+    <value>Создать</value>
+  </data>
 </root>

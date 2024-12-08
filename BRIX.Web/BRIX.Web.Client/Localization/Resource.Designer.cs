@@ -79,6 +79,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm password.
+        /// </summary>
+        public static string Account_ConfirmPassword {
+            get {
+                return ResourceManager.GetString("Account_ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Account_Email {
@@ -129,6 +138,24 @@ namespace BRIX.Web.Client.Localization {
         public static string Account_SignInFailed {
             get {
                 return ResourceManager.GetString("Account_SignInFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign-up.
+        /// </summary>
+        public static string Account_SignUp {
+            get {
+                return ResourceManager.GetString("Account_SignUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign-up.
+        /// </summary>
+        public static string Account_SignUpAction {
+            get {
+                return ResourceManager.GetString("Account_SignUpAction", resourceCulture);
             }
         }
         

@@ -1,39 +1,47 @@
 ﻿@page "/sign-up"
 
-<h1>Sign-up</h1>
-
-@if (ShowErrors)
-{
-    <div class="alert alert-danger" role="alert">
-        @foreach (string error in Errors)
-        {
-            <p>@error</p>
-        }
-    </div>
-}
-
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Please enter your details</h5>
-        <EditForm Model="@RegisterModel" OnValidSubmit="@HandleRegistration">
+<div class="section">
+    <div class="container is-max-tablet">
+        <EditForm Model="RegisterModel" OnValidSubmit="HandleRegistration" class="box block">
             <DataAnnotationsValidator />
-            <ValidationSummary />
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <InputText Id="email" class="form-control" @bind-Value="RegisterModel.Email" />
-                <ValidationMessage For="@(() => RegisterModel.Email)" />
+
+            <h1 class="title">@Localization[nameof(Resource.Account_SignUp)]</h1>
+
+            <ValidationSummary class="notification block is-danger" />
+
+            @if (Errors?.Count() > 0)
+            {
+                foreach(string error in Errors)
+                {
+                    <div class="notification is-danger">@error</div>
+                }
+            }
+
+            <div class="field">
+                <label class="label">@Localization[nameof(Resource.Account_Email)]</label>
+                <div class="control">
+                    <InputText class="input" type="email" placeholder="address@example.com"
+                        @bind-Value="RegisterModel.Email" />
+                </div>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <InputText Id="password" type="password" class="form-control" @bind-Value="RegisterModel.Password" />
-                <ValidationMessage For="@(() => RegisterModel.Password)" />
+
+            <div class="field">
+                <label class="label">@Localization[nameof(Resource.Account_Password)]</label>
+                <div class="control">
+                    <InputText class="input" type="password" placeholder="********" 
+                        @bind-Value="RegisterModel.Password" />
+                </div>
             </div>
-            <div class="form-group">
-                <label for="password">Confirm Password</label>
-                <InputText Id="password" type="password" class="form-control" @bind-Value="RegisterModel.ConfirmPassword" />
-                <ValidationMessage For="@(() => RegisterModel.ConfirmPassword)" />
+
+            <div class="field">
+                <label class="label">@Localization[nameof(Resource.Account_ConfirmPassword)]</label>
+                <div class="control">
+                    <InputText class="input" type="password" placeholder="********" 
+                        @bind-Value="RegisterModel.ConfirmPassword" />
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+
+            <button type="submit" class="button is-primary">@Localization[nameof(Resource.Account_SignUpAction)]</button>
         </EditForm>
     </div>
 </div>
