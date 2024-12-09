@@ -13,5 +13,6 @@ namespace BRIX.GameService.Services.Account
         Task<User> GetCurrentUserGuaranteed();
         Task ForgotPassword(string email);
         Task ResetPassword(string userId, string password, string token);
+        Task<ResendConfirmationEmailResponse> ResendConfirmationEmail(string email);
     }
 }

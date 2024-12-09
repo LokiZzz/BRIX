@@ -19,6 +19,11 @@ namespace BRIX.GameService.Entities
         /// </summary>
         public DbSet<PlayerCharacter> PlayerCharacters { get; set; } = default!;
 
+        /// <summary>
+        /// Попытки подтверждения аккаунта через эмейл.
+        /// </summary>
+        public DbSet<EmailConfirmationTries> EmailConfirmationTries { get; set; } = default!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -9,18 +9,17 @@
 
             <ValidationSummary class="notification block is-danger"/>
 
-            @if (Confirmed == true)
+            @if(_info is not null)
             {
-                <div class="notification is-success">@Localization[nameof(Resource.Account_ConfirmedSuccessfully)]</div>
-            }
-            else if (Confirmed == false)
-            {
-                <div class="notification is-danger">@Localization[nameof(Resource.Account_ConfirmFailed)]</div>
+                <div class="notification @_info.Value.Type">@_info.Value.Message</div>
             }
 
-            @if (ShowFailedLoginMessage)
+            @if(NeedConfirm == true)
             {
-                <div class="notification is-danger">@Localization[nameof(Resource.Account_SignInFailed)]</div>
+                <div class="notification is-warning">
+                    <p class="block">@Localization[nameof(Resource.Account_ConfirmationEmailWasSent)]</p>
+                    <button class="button is-outlined block">@Localization[nameof(Resource.Account_ResendConfirmationEmail)]</button>
+                </div>
             }
 
             <div class="field">
@@ -45,16 +44,28 @@
 
 @code {
 
+    /// <summary>
+    /// Результат подтверждения аккаунта после прохождения по ссылке в письме. 
+    /// Параметр формируется на сервере.
+    /// </summary>
     [SupplyParameterFromQuery]
     private bool? Confirmed { get; set; }
 
+    /// <summary>
+    /// Отобразить сообщение о том, что пользователю направлено письмо со ссылкой для подтверждения аккаунта.
+    /// Параметр формируется на клиенте на странице регистрации.
+    /// </summary>
+    [SupplyParameterFromQuery]
+    private bool? NeedConfirm { get; set; }
+
+    private (string Message, string Type)? _info;
+
     private SignInModel loginModel = new SignInModel();
-    private bool ShowFailedLoginMessage;
 
     private async Task HandleLogin()
     {
-        ShowFailedLoginMessage = false;
-
+        _info = null;
+        NeedConfirm = null;
         SignInResponse result = await AuthService.SignIn(loginModel.ToDto());
 
         if (result.Successful)
@@ -63,11 +74,35 @@
         }
         else
         {
-            ShowFailedLoginMessage = true;
+            if(result.NeedToConfirmAccount)
+            {
+                NeedConfirm = true;
+            }
+            else
+            {
+                _info = (@Localization[nameof(Resource.Account_SignInFailed)], "is-danger");
+            }
         }
     }
+
     private void ForgotPassword(MouseEventArgs e)
     {
         Navigation.NavigateTo("/forgot-password");
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _info = null;
+
+        if(Confirmed == true)
+        {
+            _info = (@Localization[nameof(Resource.Account_ConfirmedSuccessfully)], "is-success");
+        }
+
+        if(Confirmed == false)
+        {
+            _info = (@Localization[nameof(Resource.Account_ConfirmFailed)], "is-danger");
+        }
     }
 }

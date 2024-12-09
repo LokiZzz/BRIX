@@ -56,9 +56,12 @@ namespace BRIX.Web.Client.Services.Auth
                 return signInResult ?? new() { Error = "Неожиданный формат ответа от api/account/signin." };
             }
 
-            await _localStorage.SetItemAsync("authToken", signInResult?.Token);
-            ((JWTAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(model.Email);
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", signInResult?.Token);
+            if (signInResult?.Successful == true)
+            {
+                await _localStorage.SetItemAsync("authToken", signInResult?.Token);
+                ((JWTAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(model.Email);
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", signInResult?.Token);
+            }
 
             return signInResult!;
         }

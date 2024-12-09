@@ -14,6 +14,8 @@ namespace BRIX.GameService.Entities.Users
         /// Персонажи пользователя.
         /// </summary>
         public HashSet<PlayerCharacter> Characters { get; set; } = [];
+   
+        public HashSet<EmailConfirmationTries> EmailConfirmationTries { get; set; } = [];
     }
 
     public class UserTypeConfiguration : IEntityTypeConfiguration<User>
@@ -21,6 +23,7 @@ namespace BRIX.GameService.Entities.Users
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasMany(x => x.Characters).WithOne(x => x.User).HasForeignKey(x => x.UserId);
+            builder.HasMany(x => x.EmailConfirmationTries).WithOne(x => x.User).HasForeignKey(x => x.UserId);
         }
     }
 }

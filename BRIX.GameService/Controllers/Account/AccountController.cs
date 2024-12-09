@@ -55,6 +55,14 @@ namespace BRIX.GameService.Controllers.Account
             return Ok();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ResendConfirmationEmail([FromQuery] string email)
+        {
+            ResendConfirmationEmailResponse result = await _accountService.ResendConfirmationEmail(email);
+
+            return Ok(result);
+        }
+
         [Authorize]
         [HttpGet]
         public IActionResult GetSecuredHello()

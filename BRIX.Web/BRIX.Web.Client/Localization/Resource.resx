@@ -171,4 +171,10 @@
   <data name="Account_SignUpAction" xml:space="preserve">
     <value>Sign-up</value>
   </data>
+  <data name="Account_ConfirmationEmailWasSent" xml:space="preserve">
+    <value>An email has been sent to your email with a link to activate your account.</value>
+  </data>
+  <data name="Account_ResendConfirmationEmail" xml:space="preserve">
+    <value>Resend confirmation email</value>
+  </data>
 </root>

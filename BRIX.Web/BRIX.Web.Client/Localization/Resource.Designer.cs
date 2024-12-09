@@ -61,6 +61,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An email has been sent to your email with a link to activate your account..
+        /// </summary>
+        public static string Account_ConfirmationEmailWasSent {
+            get {
+                return ResourceManager.GetString("Account_ConfirmationEmailWasSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account confirmed successfully..
         /// </summary>
         public static string Account_ConfirmedSuccessfully {
@@ -111,6 +120,15 @@ namespace BRIX.Web.Client.Localization {
         public static string Account_Password {
             get {
                 return ResourceManager.GetString("Account_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resend confirmation email.
+        /// </summary>
+        public static string Account_ResendConfirmationEmail {
+            get {
+                return ResourceManager.GetString("Account_ResendConfirmationEmail", resourceCulture);
             }
         }
         

@@ -1,10 +1,13 @@
 ﻿using BRIX.GameService.Contracts.Account;
+using BRIX.GameService.Entities;
 using BRIX.GameService.Entities.Users;
 using BRIX.GameService.Options;
 using BRIX.GameService.Services.Mail;
 using BRIX.Web.Shared.JWT;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -19,7 +22,8 @@ namespace BRIX.GameService.Services.Account
         IOptions<JWTOptions> jwtOptions,
         IOptions<ClientOptions> clientOptions,
         IMailService mail,
-        IHttpContextAccessor httpContext) : IAccountService
+        IHttpContextAccessor httpContext,
+        IDbContextFactory<ApplicationDbContext> contextFactory) : IAccountService
     {
         private readonly SignInManager<User> _signInManager = signInManager;
         private readonly UserManager<User> _userManager = signInManager.UserManager;
@@ -34,6 +38,8 @@ namespace BRIX.GameService.Services.Account
         private readonly HttpContext _httpContext = httpContext?.HttpContext
             ?? throw new ArgumentNullException(nameof(mail));
 
+        private readonly IDbContextFactory<ApplicationDbContext> _contextFactory = contextFactory;
+
         public async Task<SignUpResponse> SignUp(SignUpRequest model)
         {
             User newUser = new() { UserName = model.Email, Email = model.Email };
@@ -41,17 +47,7 @@ namespace BRIX.GameService.Services.Account
 
             if (result.Succeeded)
             {
-                string code = await _signInManager.UserManager.GenerateEmailConfirmationTokenAsync(newUser);
-                string hostUrl = $"{_httpContext.Request.Scheme}://" +
-                    $"{_httpContext.Request.Host}/api/account/confirm";
-                Dictionary<string, string?> queryParams = new() { { "id", newUser.Id.ToString() }, { "code", code } };
-                Uri uri = new(QueryHelpers.AddQueryString(hostUrl, queryParams));
-
-                await _mail.SendAsync(
-                    [newUser.Email],
-                    "Confirmation email",
-                    $"Confirmation link:\n{uri}"
-                );
+                await SendConfirmationEmail(newUser);
             }
 
             return new SignUpResponse 
@@ -76,7 +72,7 @@ namespace BRIX.GameService.Services.Account
 
                 if (user?.EmailConfirmed == false)
                 {
-                    return new SignInResponse { Error = "Need to confirm email." };
+                    return new SignInResponse { Error = "Need to confirm email.", NeedToConfirmAccount = true };
                 }
 
                 return new SignInResponse { Error = "Username and password are invalid." };
@@ -167,6 +163,71 @@ namespace BRIX.GameService.Services.Account
             {
                 await _userManager.ResetPasswordAsync(user, token, password);
             }
+        }
+
+        public async Task<ResendConfirmationEmailResponse> ResendConfirmationEmail(string email)
+        {
+            User? user = await _userManager.FindByEmailAsync(email);
+
+            if(user is null)
+            {
+                return new ResendConfirmationEmailResponse();
+            }
+
+            using ApplicationDbContext context = _contextFactory.CreateDbContext();
+            EmailConfirmationTries? tries = context.EmailConfirmationTries.FirstOrDefault(x => x.UserId == user.Id);
+
+            if (tries is null)
+            {
+                tries = new EmailConfirmationTries() { UserId = user.Id, LastTryDateTimeUtc = DateTime.UtcNow };
+                context.EmailConfirmationTries.Add(tries);
+            }
+
+            int timeoutInSeconds = tries.Count switch
+            {
+                0 => 0,
+                1 => 30,
+                2 => 60,
+                3 => 300,
+                >= 4 => 1800,
+                _ => throw new Exception("Невалидное значение кол-ва попыток подтверждения аккаунтов.")
+            };
+
+            bool timeoutExpires = DateTime.UtcNow - tries.LastTryDateTimeUtc > new TimeSpan(0, 0, timeoutInSeconds);
+
+            if (timeoutExpires)
+            {
+                await SendConfirmationEmail(user);
+                tries.Count++;
+                tries.LastTryDateTimeUtc = DateTime.UtcNow;
+                await context.SaveChangesAsync();
+
+                return new ResendConfirmationEmailResponse { Success = true };
+            }
+                    
+            int retryAfterInSeconds = (new TimeSpan(0, 0, timeoutInSeconds) - (DateTime.UtcNow - tries.LastTryDateTimeUtc)).Seconds;
+
+            return new ResendConfirmationEmailResponse { RetryAfterInSeconds = retryAfterInSeconds };
+        }
+
+        private async Task SendConfirmationEmail(User user)
+        {
+            if (string.IsNullOrEmpty(user.Email))
+            {
+                throw new ArgumentNullException(nameof(user.Email));
+            }
+
+            string code = await _signInManager.UserManager.GenerateEmailConfirmationTokenAsync(user);
+            string hostUrl = $"{_httpContext.Request.Scheme}://" +
+                $"{_httpContext.Request.Host}/api/account/confirm";
+            Dictionary<string, string?> queryParams = new() { { "id", user.Id.ToString() }, { "code", code } };
+            Uri uri = new(QueryHelpers.AddQueryString(hostUrl, queryParams));
+
+            await _mail.SendAsync(
+                [user.Email],
+                "Confirmation email",
+                $"Confirmation link:\n{uri}"
+            );
         }
     }
 }
