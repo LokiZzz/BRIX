@@ -212,22 +212,20 @@ namespace BRIX.GameService.Services.Account
 
         private async Task SendConfirmationEmail(User user)
         {
-            if (string.IsNullOrEmpty(user.Email))
+            if (!string.IsNullOrEmpty(user.Email))
             {
-                throw new ArgumentNullException(nameof(user.Email));
+                string code = await _signInManager.UserManager.GenerateEmailConfirmationTokenAsync(user);
+                string hostUrl = $"{_httpContext.Request.Scheme}://" +
+                    $"{_httpContext.Request.Host}/api/account/confirm";
+                Dictionary<string, string?> queryParams = new() { { "id", user.Id.ToString() }, { "code", code } };
+                Uri uri = new(QueryHelpers.AddQueryString(hostUrl, queryParams));
+
+                await _mail.SendAsync(
+                    [user.Email],
+                    "Confirmation email",
+                    $"Confirmation link:\n{uri}"
+                );
             }
-
-            string code = await _signInManager.UserManager.GenerateEmailConfirmationTokenAsync(user);
-            string hostUrl = $"{_httpContext.Request.Scheme}://" +
-                $"{_httpContext.Request.Host}/api/account/confirm";
-            Dictionary<string, string?> queryParams = new() { { "id", user.Id.ToString() }, { "code", code } };
-            Uri uri = new(QueryHelpers.AddQueryString(hostUrl, queryParams));
-
-            await _mail.SendAsync(
-                [user.Email],
-                "Confirmation email",
-                $"Confirmation link:\n{uri}"
-            );
         }
     }
 }

@@ -177,4 +177,10 @@
   <data name="Account_ResendConfirmationEmail" xml:space="preserve">
     <value>Resend confirmation email</value>
   </data>
+  <data name="Account_IDidntRecieveEmail" xml:space="preserve">
+    <value>I didn't receive email</value>
+  </data>
+  <data name="Account_ResendConfirmationEmailHint" xml:space="preserve">
+    <value>Check the spam folder. Perhaps the email with the link to activate the account is there. If you still can't find the email, you can request a resend.</value>
+  </data>
 </root>

@@ -177,4 +177,10 @@
   <data name="Account_ResendConfirmationEmail" xml:space="preserve">
     <value>Отправить повторное письмо</value>
   </data>
+  <data name="Account_IDidntRecieveEmail" xml:space="preserve">
+    <value>Я не получил письмо</value>
+  </data>
+  <data name="Account_ResendConfirmationEmailHint" xml:space="preserve">
+    <value>Проверьте папку «спам». Возможно,письмо со ссылкой для активации аккаунта находится там. Если вы всё равно не можете найти письмо, то можете запросить повторную отправку.</value>
+  </data>
 </root>

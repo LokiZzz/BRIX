@@ -12,10 +12,10 @@ namespace BRIX.GameService.Entities.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "chr");
+                name: "acc");
 
             migrationBuilder.EnsureSchema(
-                name: "acc");
+                name: "chr");
 
             migrationBuilder.CreateTable(
                 name: "Role",
@@ -77,6 +77,28 @@ namespace BRIX.GameService.Entities.Migrations
                         column: x => x.RoleId,
                         principalSchema: "acc",
                         principalTable: "Role",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PlayerCharacter",
+                schema: "acc",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Count = table.Column<int>(type: "int", nullable: false),
+                    LastTryDateTimeUtc = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PlayerCharacter", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PlayerCharacter_User_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "acc",
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -199,6 +221,12 @@ namespace BRIX.GameService.Entities.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlayerCharacter_UserId",
+                schema: "acc",
+                table: "PlayerCharacter",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PlayerCharacter_UserId",
                 schema: "chr",
                 table: "PlayerCharacter",
                 column: "UserId");
@@ -253,6 +281,10 @@ namespace BRIX.GameService.Entities.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "PlayerCharacter",
+                schema: "acc");
+
             migrationBuilder.DropTable(
                 name: "PlayerCharacter",
                 schema: "chr");

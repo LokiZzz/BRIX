@@ -47,6 +47,28 @@ namespace BRIX.GameService.Entities.Migrations
                     b.ToTable("PlayerCharacter", "chr");
                 });
 
+            modelBuilder.Entity("BRIX.GameService.Entities.Users.EmailConfirmationTries", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastTryDateTimeUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PlayerCharacter", "acc");
+                });
+
             modelBuilder.Entity("BRIX.GameService.Entities.Users.Role", b =>
                 {
                     b.Property<Guid>("Id")
@@ -255,6 +277,17 @@ namespace BRIX.GameService.Entities.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("BRIX.GameService.Entities.Users.EmailConfirmationTries", b =>
+                {
+                    b.HasOne("BRIX.GameService.Entities.Users.User", "User")
+                        .WithMany("EmailConfirmationTries")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("BRIX.GameService.Entities.Users.Role", null)
@@ -309,6 +342,8 @@ namespace BRIX.GameService.Entities.Migrations
             modelBuilder.Entity("BRIX.GameService.Entities.Users.User", b =>
                 {
                     b.Navigation("Characters");
+
+                    b.Navigation("EmailConfirmationTries");
                 });
 #pragma warning restore 612, 618
         }

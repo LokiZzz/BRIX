@@ -115,6 +115,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I didn&apos;t receive email.
+        /// </summary>
+        public static string Account_IDidntRecieveEmail {
+            get {
+                return ResourceManager.GetString("Account_IDidntRecieveEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Account_Password {
@@ -129,6 +138,15 @@ namespace BRIX.Web.Client.Localization {
         public static string Account_ResendConfirmationEmail {
             get {
                 return ResourceManager.GetString("Account_ResendConfirmationEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check the spam folder. Perhaps the email with the link to activate the account is there. If you still can&apos;t find the email, you can request a resend..
+        /// </summary>
+        public static string Account_ResendConfirmationEmailHint {
+            get {
+                return ResourceManager.GetString("Account_ResendConfirmationEmailHint", resourceCulture);
             }
         }
         

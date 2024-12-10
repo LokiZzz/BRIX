@@ -11,14 +11,16 @@
 
             @if(_info is not null)
             {
-                <div class="notification @_info.Value.Type">@_info.Value.Message</div>
+                <div class="notification block @_info.Value.Type">@_info.Value.Message</div>
             }
 
             @if(NeedConfirm == true)
             {
-                <div class="notification is-warning">
+                <div class="notification block is-warning">
                     <p class="block">@Localization[nameof(Resource.Account_ConfirmationEmailWasSent)]</p>
-                    <button class="button is-outlined block">@Localization[nameof(Resource.Account_ResendConfirmationEmail)]</button>
+                    <button class="button is-outlined block" @onclick="GoToResend">
+                        @Localization[nameof(Resource.Account_IDidntRecieveEmail)]
+                    </button>
                 </div>
             }
 
@@ -85,10 +87,9 @@
         }
     }
 
-    private void ForgotPassword(MouseEventArgs e)
-    {
-        Navigation.NavigateTo("/forgot-password");
-    }
+    private void GoToResend(MouseEventArgs e) => NavigationManager.NavigateTo("/resend-confirmation-email");
+
+    private void ForgotPassword(MouseEventArgs e) => Navigation.NavigateTo("/forgot-password");
 
     protected override void OnInitialized()
     {
@@ -105,4 +106,6 @@
             _info = (@Localization[nameof(Resource.Account_ConfirmFailed)], "is-danger");
         }
     }
+
+    
 }

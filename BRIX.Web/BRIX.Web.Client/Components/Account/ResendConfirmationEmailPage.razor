@@ -1,0 +1,72 @@
+﻿@page "/resend-confirmation-email"
+
+@using System.ComponentModel.DataAnnotations
+
+<div class="section">
+    <div class="container is-max-tablet">
+        <EditForm Model="_model" OnValidSubmit="ResendEmail" class="box block">
+            <DataAnnotationsValidator />
+
+            <h1 class="title">@Localization[nameof(Resource.Account_ResendConfirmationEmail)]</h1>
+
+            <ValidationSummary class="notification block is-danger" />
+
+            <div class="notification is-info block">
+                @Localization[Resource.Account_ResendConfirmationEmailHint]
+            </div>
+
+            <div class="field">
+                <label class="label">@Localization[nameof(Resource.Account_Email)]</label>
+                <div class="control">
+                    <InputText class="input" type="email" placeholder="address@example.com" @bind-Value="_model.Email" />
+                </div>
+            </div>
+
+            <button type="submit" class="button is-primary @_buttonBusyClass">
+                @Localization[nameof(Resource.Account_ResendConfirmationEmail)]
+            </button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private ResendEmailModel _model = new();
+
+    private Timer? _timer;
+
+    private bool _buttonIsBusy = false;
+
+    private string _buttonBusyClass => _buttonIsBusy ? "is-loading" : "";
+
+    private async Task ResendEmail()
+    {
+        ResendConfirmationEmailResponse response = await AuthService.ResendConfirmationEmail(_model.Email);
+
+        if(response.RetryAfterInSeconds > 0)
+        {
+            if(_timer is not null)
+            {
+                _timer.Dispose();
+            }
+
+            _buttonIsBusy = true;
+            _timer = new Timer(
+                new TimerCallback(ResetButton), 
+                state: 0, 
+                dueTime: 1000 * response.RetryAfterInSeconds,
+                period: Timeout.Infinite
+            );
+        }
+    }
+
+    private void ResetButton(object? obj)
+    {
+
+    }
+
+    private class ResendEmailModel
+    {
+        [EmailAddress]
+        public string Email { get; set; } = string.Empty;
+    }
+}
