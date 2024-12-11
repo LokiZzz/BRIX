@@ -1,0 +1,87 @@
+﻿@using System.Timers
+
+@if (_showTime)
+{
+    <p class="@Class">@String.Format(FormatString, _secondsLeft)</p>
+}
+
+@code {
+    [Parameter]
+    public Action? OnElapsedDelegate { get; set; }
+
+    [Parameter]
+    public int Seconds { get; set; }
+
+    [Parameter]
+    public bool HideAfterElapsed { get; set; }
+
+    [Parameter]
+    public bool ShowBeforeStart { get; set; }
+
+    [Parameter]
+    public string FormatString { get; set; } = "{0} sec.";
+
+    [Parameter]
+    public string Class { get; set; } = string.Empty;
+
+    private System.Timers.Timer? _timer;
+    private object _timerLock = new();
+    private int _secondsPassed = 0;
+    private int _secondsLeft = 0;
+    private bool _showTime = false;
+
+    public void Start()
+    {
+        lock (_timerLock)
+        {
+            if (_timer?.Enabled != true)
+            {
+                _secondsPassed = 0;
+                _secondsLeft = Seconds;
+                _showTime = true;
+                _timer = new(1000);
+                _timer.Elapsed += OnElapsed;
+                _timer.AutoReset = true;
+                _timer.Enabled = true;
+                StateHasChanged();
+            }
+        }
+    }
+
+    private void OnElapsed(object? sender, ElapsedEventArgs e)
+    {
+        if (_secondsPassed < Seconds)
+        {
+            _secondsPassed++;
+            _secondsLeft = Seconds - _secondsPassed;
+        }
+        else
+        {
+            try
+            {
+                OnElapsedDelegate?.Invoke();
+            }
+            finally
+            {
+                if(HideAfterElapsed)
+                {
+                    _showTime = false;
+                }
+
+                _timer?.Dispose();
+            }
+        }
+
+        StateHasChanged();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if(firstRender)
+        {
+            _showTime = ShowBeforeStart;
+        }
+    }
+}

@@ -25,6 +25,18 @@
             <button type="submit" class="button is-primary @_buttonBusyClass">
                 @Localization[nameof(Resource.Account_ResendConfirmationEmail)]
             </button>
+
+            <BRIX.Web.Client.Components.Shared.Timer 
+                Seconds="10" 
+                OnElapsedDelegate="HandleTimer"
+                FormatString="{0} секундсов"
+                HideAfterElapsed="true"
+                ShowBeforeStart="false"
+                @ref="_timer"/>
+            <button class="button is-info" @onclick="@(() => _timer.Start())">
+                TEST TIMER
+            </button>
+
         </EditForm>
     </div>
 </div>
@@ -32,7 +44,7 @@
 @code {
     private ResendEmailModel _model = new();
 
-    private Timer? _timer;
+    private BRIX.Web.Client.Components.Shared.Timer _timer;
 
     private bool _buttonIsBusy = false;
 
@@ -44,29 +56,20 @@
 
         if(response.RetryAfterInSeconds > 0)
         {
-            if(_timer is not null)
-            {
-                _timer.Dispose();
-            }
-
+            //SetTimer(response.RetryAfterInSeconds);
             _buttonIsBusy = true;
-            _timer = new Timer(
-                new TimerCallback(ResetButton), 
-                state: 0, 
-                dueTime: 1000 * response.RetryAfterInSeconds,
-                period: Timeout.Infinite
-            );
         }
-    }
-
-    private void ResetButton(object? obj)
-    {
-
     }
 
     private class ResendEmailModel
     {
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
+    }
+
+    private void HandleTimer()
+    {
+        _buttonIsBusy = true;
+        StateHasChanged();
     }
 }
