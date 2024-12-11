@@ -10,7 +10,7 @@
     public Action? OnElapsedDelegate { get; set; }
 
     [Parameter]
-    public int Seconds { get; set; }
+    public int TimeoutInSeconds { get; set; }
 
     [Parameter]
     public bool HideAfterElapsed { get; set; }
@@ -30,14 +30,16 @@
     private int _secondsLeft = 0;
     private bool _showTime = false;
 
-    public void Start()
+    public void Start(int? overrideTimeoutInSeconds = null)
     {
         lock (_timerLock)
         {
             if (_timer?.Enabled != true)
             {
+                TimeoutInSeconds = overrideTimeoutInSeconds ?? TimeoutInSeconds;
+
                 _secondsPassed = 0;
-                _secondsLeft = Seconds;
+                _secondsLeft = TimeoutInSeconds;
                 _showTime = true;
                 _timer = new(1000);
                 _timer.Elapsed += OnElapsed;
@@ -50,10 +52,10 @@
 
     private void OnElapsed(object? sender, ElapsedEventArgs e)
     {
-        if (_secondsPassed < Seconds)
+        if (_secondsPassed < TimeoutInSeconds)
         {
             _secondsPassed++;
-            _secondsLeft = Seconds - _secondsPassed;
+            _secondsLeft = TimeoutInSeconds - _secondsPassed;
         }
         else
         {

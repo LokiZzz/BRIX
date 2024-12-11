@@ -183,4 +183,7 @@
   <data name="Account_ResendConfirmationEmailHint" xml:space="preserve">
     <value>Проверьте папку «спам». Возможно,письмо со ссылкой для активации аккаунта находится там. Если вы всё равно не можете найти письмо, то можете запросить повторную отправку.</value>
   </data>
+  <data name="Account_YouCanResendAfter" xml:space="preserve">
+    <value>Вы можете повторить отправку через {0} сек.</value>
+  </data>
 </root>

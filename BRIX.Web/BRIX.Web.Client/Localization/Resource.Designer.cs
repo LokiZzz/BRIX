@@ -196,6 +196,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can repeat the sending after {0} sec..
+        /// </summary>
+        public static string Account_YouCanResendAfter {
+            get {
+                return ResourceManager.GetString("Account_YouCanResendAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Characters.
         /// </summary>
         public static string Common_Characters {

@@ -183,4 +183,7 @@
   <data name="Account_ResendConfirmationEmailHint" xml:space="preserve">
     <value>Check the spam folder. Perhaps the email with the link to activate the account is there. If you still can't find the email, you can request a resend.</value>
   </data>
+  <data name="Account_YouCanResendAfter" xml:space="preserve">
+    <value>You can repeat the sending after {0} sec.</value>
+  </data>
 </root>
