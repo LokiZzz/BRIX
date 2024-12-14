@@ -186,4 +186,13 @@
   <data name="Account_YouCanResendAfter" xml:space="preserve">
     <value>Вы можете повторить отправку через {0} сек.</value>
   </data>
+  <data name="Account_TooOftenResendRequest" xml:space="preserve">
+    <value>Вы слишком часто отправляете запросы на подтвержедние аккаунта, подождите немного, прежде чем сделать новый запрос.</value>
+  </data>
+  <data name="Account_ResendError" xml:space="preserve">
+    <value>Во время отправки повторного письма произошла ошибка, попробуйте повторить запрос позже.</value>
+  </data>
+  <data name="Account_ResendConfirmationSucceeded" xml:space="preserve">
+    <value>Письмо со ссылкой для активации аккаунта успешно отправлено.</value>
+  </data>
 </root>

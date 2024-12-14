@@ -66,7 +66,7 @@ namespace BRIX.GameService.Entities.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PlayerCharacter", "acc");
+                    b.ToTable("EmailConfirmationTries", "acc");
                 });
 
             modelBuilder.Entity("BRIX.GameService.Entities.Users.Role", b =>

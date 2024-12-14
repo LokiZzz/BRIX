@@ -186,4 +186,13 @@
   <data name="Account_YouCanResendAfter" xml:space="preserve">
     <value>You can repeat the sending after {0} sec.</value>
   </data>
+  <data name="Account_TooOftenResendRequest" xml:space="preserve">
+    <value>You send account verification requests too often, wait a bit before making a new request.</value>
+  </data>
+  <data name="Account_ResendError" xml:space="preserve">
+    <value>Error occured while tryind to resend activation email.</value>
+  </data>
+  <data name="Account_ResendConfirmationSucceeded" xml:space="preserve">
+    <value>The email with the account activation link has been successfully sent.</value>
+  </data>
 </root>

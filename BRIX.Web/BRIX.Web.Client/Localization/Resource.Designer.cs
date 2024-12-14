@@ -151,6 +151,24 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The email with the account activation link has been successfully sent..
+        /// </summary>
+        public static string Account_ResendConfirmationSucceeded {
+            get {
+                return ResourceManager.GetString("Account_ResendConfirmationSucceeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occured while tryind to resend activation email..
+        /// </summary>
+        public static string Account_ResendError {
+            get {
+                return ResourceManager.GetString("Account_ResendError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sign-in.
         /// </summary>
         public static string Account_SignIn {
@@ -192,6 +210,15 @@ namespace BRIX.Web.Client.Localization {
         public static string Account_SignUpAction {
             get {
                 return ResourceManager.GetString("Account_SignUpAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You send account verification requests too often, wait a bit before making a new request..
+        /// </summary>
+        public static string Account_TooOftenResendRequest {
+            get {
+                return ResourceManager.GetString("Account_TooOftenResendRequest", resourceCulture);
             }
         }
         

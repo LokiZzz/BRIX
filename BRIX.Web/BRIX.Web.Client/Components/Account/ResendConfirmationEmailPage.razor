@@ -10,29 +10,52 @@
 
             <h1 class="title">@Localization[nameof(Resource.Account_ResendConfirmationEmail)]</h1>
 
-            <ValidationSummary class="notification block is-danger" />
-
-            <div class="notification is-info block">
-                @Localization[Resource.Account_ResendConfirmationEmailHint]
-            </div>
-
-            <div class="field">
-                <label class="label">@Localization[nameof(Resource.Account_Email)]</label>
-                <div class="control">
-                    <InputText class="input" type="email" placeholder="address@example.com" @bind-Value="_model.Email" />
+            @if (_showSuccess)
+            {
+                <div class="notification is-success block">
+                    @Localization[Resource.Account_ResendConfirmationSucceeded]
                 </div>
-            </div>
+            }
+            else
+            {
+                <ValidationSummary class="notification block is-danger" />
 
-            <button type="submit" class="button is-primary @_buttonBusyClass">
-                @Localization[nameof(Resource.Account_ResendConfirmationEmail)]
-            </button>
+                <div class="notification block">
+                    @Localization[Resource.Account_ResendConfirmationEmailHint]
+                </div>
 
-            <Timer 
+                @if(_showTooOften)
+                {
+                    <div class="notification is-warning block">
+                        @Localization[Resource.Account_TooOftenResendRequest]
+                    </div>
+                }
+
+                @if (_showError)
+                {
+                    <div class="notification is-danger block">
+                        @Localization[Resource.Account_ResendError]
+                    </div>
+                }
+
+                <div class="field">
+                    <label class="label">@Localization[nameof(Resource.Account_Email)]</label>
+                    <div class="control">
+                        <InputText class="input" type="email" placeholder="address@example.com" @bind-Value="_model.Email" />
+                    </div>
+                </div>
+
+                <button type="submit" class="button is-primary @_buttonBusyClass">
+                    @Localization[nameof(Resource.Account_ResendConfirmationEmail)]
+                </button>
+
+                <Timer 
                 OnElapsedDelegate="HandleTimer" 
                 FormatString="@Localization[nameof(Resource.Account_YouCanResendAfter)]"
                 HideAfterElapsed="true"
                 ShowBeforeStart="false"
                 @ref="_timer" />
+            }
         </EditForm>
     </div>
 </div>
@@ -43,13 +66,19 @@
     private BRIX.Web.Client.Components.Shared.Timer? _timer;
 
     private bool _buttonIsBusy = false;
+    private bool _showTooOften = false;
+    private bool _showError = false;
+    private bool _showSuccess = false;
 
     private string _buttonBusyClass => _buttonIsBusy ? "is-loading" : "";
 
     private async Task ResendEmail()
     {
-        ResendConfirmationEmailResponse response = new() { RetryAfterInSeconds = 10 };
-        //await AuthService.ResendConfirmationEmail(_model.Email);
+        ResendConfirmationEmailResponse response = await AuthService.ResendConfirmationEmail(_model.Email);
+        _buttonIsBusy = response.RetryAfterInSeconds > 0;
+        _showTooOften = response.RetryAfterInSeconds > 0;
+        _showError = response.Success == false && response.RetryAfterInSeconds == 0;
+        _showSuccess = response.Success == true;
 
         if(response.RetryAfterInSeconds > 0)
         {
@@ -57,8 +86,6 @@
             {
                 _timer.Start(response.RetryAfterInSeconds);
             }
-
-            _buttonIsBusy = true;
         }
     }
 

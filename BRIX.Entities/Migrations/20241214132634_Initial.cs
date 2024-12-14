@@ -82,7 +82,7 @@ namespace BRIX.GameService.Entities.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PlayerCharacter",
+                name: "EmailConfirmationTries",
                 schema: "acc",
                 columns: table => new
                 {
@@ -93,9 +93,9 @@ namespace BRIX.GameService.Entities.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PlayerCharacter", x => x.Id);
+                    table.PrimaryKey("PK_EmailConfirmationTries", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PlayerCharacter_User_UserId",
+                        name: "FK_EmailConfirmationTries_User_UserId",
                         column: x => x.UserId,
                         principalSchema: "acc",
                         principalTable: "User",
@@ -220,9 +220,9 @@ namespace BRIX.GameService.Entities.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PlayerCharacter_UserId",
+                name: "IX_EmailConfirmationTries_UserId",
                 schema: "acc",
-                table: "PlayerCharacter",
+                table: "EmailConfirmationTries",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -282,7 +282,7 @@ namespace BRIX.GameService.Entities.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PlayerCharacter",
+                name: "EmailConfirmationTries",
                 schema: "acc");
 
             migrationBuilder.DropTable(

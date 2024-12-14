@@ -58,7 +58,6 @@ namespace BRIX.GameService.Controllers.Account
         [HttpGet]
         public async Task<IActionResult> ResendConfirmationEmail([FromQuery] string email)
         {
-            throw new Exception("server exception");
             ResendConfirmationEmailResponse result = await _accountService.ResendConfirmationEmail(email);
 
             return Ok(result);

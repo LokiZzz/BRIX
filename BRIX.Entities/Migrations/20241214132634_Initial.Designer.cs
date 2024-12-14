@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BRIX.GameService.Entities.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241210151730_Initial")]
+    [Migration("20241214132634_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -69,7 +69,7 @@ namespace BRIX.GameService.Entities.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PlayerCharacter", "acc");
+                    b.ToTable("EmailConfirmationTries", "acc");
                 });
 
             modelBuilder.Entity("BRIX.GameService.Entities.Users.Role", b =>

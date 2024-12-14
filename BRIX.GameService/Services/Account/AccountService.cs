@@ -14,6 +14,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
+using BRIX.Library.Extensions;
 
 namespace BRIX.GameService.Services.Account
 {
@@ -188,24 +189,25 @@ namespace BRIX.GameService.Services.Account
                 0 => 0,
                 1 => 30,
                 2 => 60,
-                3 => 300,
-                >= 4 => 1800,
+                >= 3 => 300,
                 _ => throw new Exception("Невалидное значение кол-ва попыток подтверждения аккаунтов.")
             };
 
             bool timeoutExpires = DateTime.UtcNow - tries.LastTryDateTimeUtc > new TimeSpan(0, 0, timeoutInSeconds);
+            tries.Count++;
+            tries.LastTryDateTimeUtc = DateTime.UtcNow;
+            await context.SaveChangesAsync();
 
             if (timeoutExpires)
             {
                 await SendConfirmationEmail(user);
-                tries.Count++;
-                tries.LastTryDateTimeUtc = DateTime.UtcNow;
-                await context.SaveChangesAsync();
 
                 return new ResendConfirmationEmailResponse { Success = true };
             }
-                    
-            int retryAfterInSeconds = (new TimeSpan(0, 0, timeoutInSeconds) - (DateTime.UtcNow - tries.LastTryDateTimeUtc)).Seconds;
+            
+            TimeSpan retryAfter = new TimeSpan(0, 0, timeoutInSeconds);
+            TimeSpan hasPassed = DateTime.UtcNow - tries.LastTryDateTimeUtc;
+            int retryAfterInSeconds = (retryAfter - hasPassed).TotalSeconds.Round();
 
             return new ResendConfirmationEmailResponse { RetryAfterInSeconds = retryAfterInSeconds };
         }

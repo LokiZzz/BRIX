@@ -22,7 +22,7 @@ namespace BRIX.GameService.Entities.Users
         public void Configure(EntityTypeBuilder<EmailConfirmationTries> builder)
         {
             builder.HasOne(x => x.User).WithMany(x => x.EmailConfirmationTries).HasForeignKey(x => x.UserId);
-            builder.ToTable(nameof(PlayerCharacter), DbSchemes.Accounts);
+            builder.ToTable(nameof(EmailConfirmationTries), DbSchemes.Accounts);
         }
     }
 }
