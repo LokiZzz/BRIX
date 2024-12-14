@@ -195,4 +195,28 @@
   <data name="Account_ResendConfirmationSucceeded" xml:space="preserve">
     <value>The email with the account activation link has been successfully sent.</value>
   </data>
+  <data name="Account_ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="Account_ResetPasswordError" xml:space="preserve">
+    <value>Reset password error occured.</value>
+  </data>
+  <data name="Account_ResetPassword" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="Account_ForgotPasswordRequestSuccseeded" xml:space="preserve">
+    <value>The link for password recovery has been successfully sent to your email.</value>
+  </data>
+  <data name="Account_ForgotPasswordFailed" xml:space="preserve">
+    <value>The password recovery link could not be sent to the email.</value>
+  </data>
+  <data name="Account_ForgotPasswordHint" xml:space="preserve">
+    <value>To restore the password, specify the email address to which an email will be sent with a link to set a new password.</value>
+  </data>
+  <data name="Common_Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="Account_PasswordWasSuccessfullyChanged" xml:space="preserve">
+    <value>The password has been successfully changed, you can log in using the new password.</value>
+  </data>
 </root>

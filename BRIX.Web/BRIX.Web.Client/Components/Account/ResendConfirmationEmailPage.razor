@@ -91,7 +91,10 @@
 
     private class ResendEmailModel
     {
-        [EmailAddress]
+        [Required(ErrorMessageResourceName = nameof(Resource.Validation_EmailRequired), 
+            ErrorMessageResourceType = typeof(Resource))]
+        [EmailAddress(ErrorMessageResourceName = nameof(Resource.Validation_EmailFormat), 
+            ErrorMessageResourceType = typeof(Resource))]
         public string Email { get; set; } = string.Empty;
     }
 

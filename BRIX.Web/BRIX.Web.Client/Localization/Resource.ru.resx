@@ -195,4 +195,28 @@
   <data name="Account_ResendConfirmationSucceeded" xml:space="preserve">
     <value>Письмо со ссылкой для активации аккаунта успешно отправлено.</value>
   </data>
+  <data name="Account_ChangePassword" xml:space="preserve">
+    <value>Изменить пароль</value>
+  </data>
+  <data name="Account_ResetPasswordError" xml:space="preserve">
+    <value>При попытке смены пароля произошла ошибка.</value>
+  </data>
+  <data name="Account_ResetPassword" xml:space="preserve">
+    <value>Сбросить пароль</value>
+  </data>
+  <data name="Account_ForgotPasswordRequestSuccseeded" xml:space="preserve">
+    <value>Ссылка для восстановления пароля успешно отправлена на электронную почту.</value>
+  </data>
+  <data name="Account_ForgotPasswordFailed" xml:space="preserve">
+    <value>Не удалось отправить ссылку для восстановления пароля на электронную почту.</value>
+  </data>
+  <data name="Account_ForgotPasswordHint" xml:space="preserve">
+    <value>Чтобы восстановить пароль, укажите адрес электронной почты, на который будет отправлено электронное письмо со ссылкой для установки нового пароля.</value>
+  </data>
+  <data name="Common_Send" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
+  <data name="Account_PasswordWasSuccessfullyChanged" xml:space="preserve">
+    <value>Пароль был успешно изменён. Теперь вы можете авторизоваться, используя новый пароль.</value>
+  </data>
 </root>

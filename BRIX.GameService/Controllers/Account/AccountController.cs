@@ -42,17 +42,21 @@ namespace BRIX.GameService.Controllers.Account
         [HttpGet]
         public async Task<IActionResult> ForgotPassword([FromQuery] string email)
         {
-            await _accountService.ForgotPassword(email);
+            ForgotPasswordResponse response = await _accountService.ForgotPassword(email);
 
-            return Ok();
+            return Ok(response);
         }
 
         [HttpPost]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
         {
-            await _accountService.ResetPassword(request.UserId, request.Password, request.Token);
+            ResetPasswordResponse response = await _accountService.ResetPassword(
+                request.UserId, 
+                request.Password, 
+                request.Token
+            );
 
-            return Ok();
+            return Ok(response);
         }
 
         [HttpGet]

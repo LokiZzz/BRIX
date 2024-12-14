@@ -61,6 +61,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change password.
+        /// </summary>
+        public static string Account_ChangePassword {
+            get {
+                return ResourceManager.GetString("Account_ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An email has been sent to your email with a link to activate your account..
         /// </summary>
         public static string Account_ConfirmationEmailWasSent {
@@ -115,6 +124,33 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The password recovery link could not be sent to the email..
+        /// </summary>
+        public static string Account_ForgotPasswordFailed {
+            get {
+                return ResourceManager.GetString("Account_ForgotPasswordFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To restore the password, specify the email address to which an email will be sent with a link to set a new password..
+        /// </summary>
+        public static string Account_ForgotPasswordHint {
+            get {
+                return ResourceManager.GetString("Account_ForgotPasswordHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The link for password recovery has been successfully sent to your email..
+        /// </summary>
+        public static string Account_ForgotPasswordRequestSuccseeded {
+            get {
+                return ResourceManager.GetString("Account_ForgotPasswordRequestSuccseeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I didn&apos;t receive email.
         /// </summary>
         public static string Account_IDidntRecieveEmail {
@@ -129,6 +165,15 @@ namespace BRIX.Web.Client.Localization {
         public static string Account_Password {
             get {
                 return ResourceManager.GetString("Account_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password has been successfully changed, you can log in using the new password..
+        /// </summary>
+        public static string Account_PasswordWasSuccessfullyChanged {
+            get {
+                return ResourceManager.GetString("Account_PasswordWasSuccessfullyChanged", resourceCulture);
             }
         }
         
@@ -165,6 +210,24 @@ namespace BRIX.Web.Client.Localization {
         public static string Account_ResendError {
             get {
                 return ResourceManager.GetString("Account_ResendError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset password.
+        /// </summary>
+        public static string Account_ResetPassword {
+            get {
+                return ResourceManager.GetString("Account_ResetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset password error occured..
+        /// </summary>
+        public static string Account_ResetPasswordError {
+            get {
+                return ResourceManager.GetString("Account_ResetPasswordError", resourceCulture);
             }
         }
         
@@ -246,6 +309,15 @@ namespace BRIX.Web.Client.Localization {
         public static string Common_Language {
             get {
                 return ResourceManager.GetString("Common_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        public static string Common_Send {
+            get {
+                return ResourceManager.GetString("Common_Send", resourceCulture);
             }
         }
         

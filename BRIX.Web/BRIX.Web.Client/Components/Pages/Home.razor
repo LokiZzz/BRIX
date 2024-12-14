@@ -4,69 +4,50 @@
 
 <PageTitle>Home</PageTitle>
 
-<div class="block">
-    <h1 class="title">Text exception</h1>
-    <button class="button" @onclick="ThrowException">
-        <span class="fas fa-warning"></span>Выбросить исключение!
-    </button>
-</div>
+<div class="section">
+    <div class="block">
+        <h1 class="title">Text exception</h1>
+        <button class="button" @onclick="ThrowException">
+            <span class="fas fa-warning"></span>Выбросить исключение!
+        </button>
+    </div>
 
-<div class="block">
-    <h1 class="title">Nice dropdown</h1>
-    <p>Now dropdown value is: «@SelectedDropdownItem?.SomeProperty»</p>
-    <Dropdown 
-    Items="DropdownItems" 
-    @bind-Selected="SelectedDropdownItem" 
-    DisplayPropertyDelegate="x => x?.SomeProperty"
-    Placeholder="Please, select Guid..."/>
-</div>
+    <div class="block">
+        <h1 class="title">Nice dropdown</h1>
+        <p class="block">Now dropdown value is: «@SelectedDropdownItem?.SomeProperty»</p>
+        <Dropdown 
+        Items="DropdownItems" 
+        @bind-Selected="SelectedDropdownItem" 
+        DisplayPropertyDelegate="x => x?.SomeProperty"
+        Placeholder="Please, select Guid..."/>
+    </div>
 
-<div class="block">
-    <h1 class="title">Title</h1>
-    <p class="subtitle">Subtitle...</p>
-    <p>Some text! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-</div>
+    <div class="block">
+        <h1 class="title">Title</h1>
+        <p class="subtitle">Subtitle...</p>
+        <p>Some text! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
 
-<div class="block">
-    <h1 class="title">Here is awesome-font</h1>
-    <button class="button is-primary">
-        <span class="fas fa-save mr-3"></span>Сохранить
-    </button>
-</div>
+    <div class="block">
+        <h1 class="title">Here is awesome-font-button</h1>
+        <button class="button is-primary">
+            <span class="fas fa-save mr-3"></span>Сохранить
+        </button>
+    </div>
 
-<div class="block">
-    <h1 class="title">Test API</h1>
-    <button class="button is-primary" onclick="@(async () => await TestWebApi())">Send request</button>
-    <p>@_responseString</p>
-</div>
-
-<div class="block">
-    <h1 class="title">Samples of buttons</h1>
-    <button class="button is-primary">Button</button>
-    <button class="button is-link">Button</button>
-    <button class="button is-info">Button</button>
-    <button class="button is-success">Button</button>
-    <button class="button is-warning">Button</button>
-    <button class="button is-danger">Button</button>
+    <div class="block">
+        <h1 class="title">Samples of buttons</h1>
+        <button class="button is-primary">Button</button>
+        <button class="button is-link">Button</button>
+        <button class="button is-info">Button</button>
+        <button class="button is-success">Button</button>
+        <button class="button is-warning">Button</button>
+        <button class="button is-danger">Button</button>
+    </div>
 </div>
 
 @code
 {
-    private string _responseString = string.Empty;
-
-    private async Task TestWebApi()
-    {
-        try
-        {
-            HttpResponseMessage response = await Http.GetAsync("api/Account/GetHello");
-            _responseString = await response.Content.ReadAsStringAsync();
-        }
-        catch(Exception ex)
-        {
-            _responseString = ex.Message;
-        }
-    }
-
     private DropdownItem SelectedDropdownItem { get; set; } = default!;
 
     private List<DropdownItem?> DropdownItems { get; set; }

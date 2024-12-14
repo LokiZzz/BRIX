@@ -78,14 +78,14 @@ namespace BRIX.Web.Client.Services.Auth
             Dictionary<string, string?> queryParams = new() { { "email", email } };
             string uri = new(QueryHelpers.AddQueryString("api/account/forgotpassword", queryParams));
 
-            HttpResponseMessage response = await _httpClient.GetAsync(uri);
+            ForgotPasswordResponse response = await _httpClient.GetAsJsonAsync<ForgotPasswordResponse>(uri);
 
-            return response.IsSuccessStatusCode;
+            return response.Success;
         }
 
         public async Task<bool> ResetPassword(string userId, string newPassword, string token)
         {
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync(
+            ResetPasswordResponse response = await _httpClient.PostAsJsonAsync<ResetPasswordRequest, ResetPasswordResponse>(
                 "api/account/resetpassword", 
                 new ResetPasswordRequest 
                 { 
@@ -95,7 +95,7 @@ namespace BRIX.Web.Client.Services.Auth
                 }
             );
 
-            return response.IsSuccessStatusCode;
+            return response.Success;
         }
 
         public async Task<ResendConfirmationEmailResponse> ResendConfirmationEmail(string email)

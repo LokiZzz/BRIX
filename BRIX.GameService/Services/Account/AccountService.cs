@@ -138,7 +138,7 @@ namespace BRIX.GameService.Services.Account
             return await GetCurrentUser() ?? throw new InvalidOperationException("User is not found.");
         }
 
-        public async Task ForgotPassword(string email)
+        public async Task<ForgotPasswordResponse> ForgotPassword(string email)
         {
             User? user = await _userManager.FindByEmailAsync(email);
 
@@ -153,17 +153,28 @@ namespace BRIX.GameService.Services.Account
                     "Reset password",
                     $"Reset password link:\n{uri}"
                 );
+
+                return new() { Success = true };
             }
+
+            return new();
         }
 
-        public async Task ResetPassword(string userId, string password, string token)
+        public async Task<ResetPasswordResponse> ResetPassword(string userId, string password, string token)
         {
             User? user = await _userManager.FindByIdAsync(userId);
 
             if (user is not null)
             {
-                await _userManager.ResetPasswordAsync(user, token, password);
+                IdentityResult result = await _userManager.ResetPasswordAsync(user, token, password);
+
+                if(result.Succeeded)
+                {
+                    return new() { Success = true };
+                }
             }
+
+            return new();
         }
 
         public async Task<ResendConfirmationEmailResponse> ResendConfirmationEmail(string email)
