@@ -1,25 +1,39 @@
 ﻿@page "/characters"
 
-<h1 class="title">@Localization[nameof(Resource.Common_Characters)]</h1>
+<div class="section">
+    <div class="container is-max-tablet">
+        <h1 class="title">@Localization[nameof(Resource.Common_Characters)]</h1>
 
-@if(_characters is not null)
-{
-    <button class="button is-large" @onclick="@(async () => Add())">Add new character</button>
+        @if (_characters is not null)
+        {
+            <button class="button is-large is-fullwidth block" @onclick="@(async () => Add())">
+                <i class="fa fa-plus-circle"></i>
+            </button>
 
-    @foreach (Character character in _characters)
-    {
-        <div class="box">
-            <p class="title is-small">@character.Name</p>
-            <p>@character.Level Level</p>
-            <button class="button" @onclick="@(() => Edit(character))">Edit</button>
-            <button class="button is-danger" @onclick="@(() => Delete(character))">Delete</button>
-        </div>
-    }
-}
-else
-{
-    <p>Characters is loading.</p>
-}
+            @foreach (Character character in _characters)
+            {
+                <div class="box block">
+                    <p class="title">@character.Name</p>
+                    <p class="subtitle">@character.Level Level</p>
+                    <div class="buttons">
+                        <button class="button" @onclick="@(() => Edit(character))">
+                            @Localization[nameof(Resource.Common_Edit)]
+                        </button>
+                        <button class="button is-danger" @onclick="@(() => Delete(character))">
+                            @Localization[nameof(Resource.Common_Remove)]
+                        </button>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Characters is loading.</p>
+        }
+    </div>
+</div>
+
+
 
 @code {
     private List<Character>? _characters = null;

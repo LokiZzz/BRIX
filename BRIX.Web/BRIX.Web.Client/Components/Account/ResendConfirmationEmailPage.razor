@@ -45,16 +45,18 @@
                     </div>
                 </div>
 
-                <button type="submit" class="button is-primary @_buttonBusyClass">
-                    @Localization[nameof(Resource.Account_ResendConfirmationEmail)]
-                </button>
+                <div class="buttons is-justify-content-right">
+                    <button type="submit" class="button is-primary @_buttonBusyClass">
+                        @Localization[nameof(Resource.Account_ResendConfirmationEmail)]
+                    </button>
+                </div>
 
                 <Timer 
-                OnElapsedDelegate="HandleTimer" 
-                FormatString="@Localization[nameof(Resource.Account_YouCanResendAfter)]"
-                HideAfterElapsed="true"
-                ShowBeforeStart="false"
-                @ref="_timer" />
+                    OnElapsedDelegate="HandleTimer" 
+                    FormatString="@Localization[nameof(Resource.Account_YouCanResendAfter)]"
+                    HideAfterElapsed="true"
+                    ShowBeforeStart="false"
+                    @ref="_timer" />
             }
         </EditForm>
     </div>

@@ -1,15 +1,41 @@
 ﻿@page "/characters/edit"
 
-<h3>Edit Character Page</h3>
+<div class="section">
+    <div class="container is-max-tablet">
+        <h1 class="title">@Localization[nameof(Resource.Characters_EditCharacter)]</h1>
 
-<EditForm OnSubmit="Save" Model="_character">
-    <InputText DisplayName="Name" @bind-Value="_character.Name"></InputText>
-    <InputTextArea DisplayName="Backstory" @bind-Value="_character.Backstory"></InputTextArea>
-    <button type="submit">Save</button>
-</EditForm>
+        <EditForm OnSubmit="Save" Model="_character" class="box">
+            <div class="field">
+                <label class="label">@Localization[nameof(Resource.Characters_Name)]</label>
+                <div class="control">
+                    <InputText 
+                        class="input" 
+                        DisplayName="Name" 
+                        @bind-Value="_character.Name"/>
+                </div>
+            </div>
 
-<button @onclick="Back">Cancel</button>
-
+            <div class="field">
+                <label class="label">@Localization[nameof(Resource.Character_Backstory)]</label>
+                <div class="control">
+                    <InputTextArea 
+                        class="textarea" 
+                        DisplayName="Backstory" 
+                        @bind-Value="_character.Backstory"/>
+                </div>
+            </div>
+            
+            <div class="buttons is-justify-content-right">
+                <button class="button" @onclick="Back">
+                    @Localization[nameof(Resource.Common_Cancel)]
+                </button>
+                <button class="button is-primary" type="submit">
+                    @Localization[nameof(Resource.Common_Save)]
+                </button>
+            </div>
+        </EditForm>
+    </div>
+</div>
 
 @code {
     private Character _character { get; set; } = default!;

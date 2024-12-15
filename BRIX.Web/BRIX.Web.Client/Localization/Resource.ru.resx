@@ -219,4 +219,25 @@
   <data name="Account_PasswordWasSuccessfullyChanged" xml:space="preserve">
     <value>Пароль был успешно изменён. Теперь вы можете авторизоваться, используя новый пароль.</value>
   </data>
+  <data name="Common_Edit" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
+  <data name="Common_Remove" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Characters_EditCharacter" xml:space="preserve">
+    <value>Изменить персонажа</value>
+  </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Отменить</value>
+  </data>
+  <data name="Characters_Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="Character_Backstory" xml:space="preserve">
+    <value>Предыстория</value>
+  </data>
 </root>

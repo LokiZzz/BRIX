@@ -219,4 +219,25 @@
   <data name="Account_PasswordWasSuccessfullyChanged" xml:space="preserve">
     <value>The password has been successfully changed, you can log in using the new password.</value>
   </data>
+  <data name="Common_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Common_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Characters_EditCharacter" xml:space="preserve">
+    <value>Edit character</value>
+  </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Characters_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Character_Backstory" xml:space="preserve">
+    <value>Backstory</value>
+  </data>
 </root>
