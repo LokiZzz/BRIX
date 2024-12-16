@@ -39,8 +39,12 @@
             </div>
 
             <div class="buttons is-justify-content-right">
-                <button class="button" @onclick="ForgotPassword">@Localization[nameof(Resource.Account_ForgotPassword)]</button>
-                <button type="submit" class="button is-primary">@Localization[nameof(Resource.Account_SignInAction)]</button>
+                <button type="submit" class="button is-primary">
+                    @Localization[nameof(Resource.Account_SignInAction)]
+                </button>
+                <button class="button" @onclick="ForgotPassword">
+                    @Localization[nameof(Resource.Account_ForgotPassword)]
+                </button>
             </div>
         </EditForm>
     </div>
