@@ -28,13 +28,11 @@ namespace BRIX.Web.Client.Services.Http
             DateParseHandling = DateParseHandling.None
         };
 
-        public static async Task<T> ReadJsonAsync<T>(
-            this HttpContent content,
-            JsonSerializerSettings? jsonSerializerSettings = null)
+        public static async Task<T> ReadJsonAsync<T>(this HttpResponseMessage response)
         {
-            jsonSerializerSettings ??= _defaultJsonSettings;
-            string json = await content.ReadAsStringAsync();
-            T value = JsonConvert.DeserializeObject<T>(json, jsonSerializerSettings) ?? default!;
+            response.EnsureSuccessStatusCode();
+            string json = await response.Content.ReadAsStringAsync();
+            T value = JsonConvert.DeserializeObject<T>(json, _defaultJsonSettings) ?? default!;
 
             return value;
         }
@@ -43,7 +41,7 @@ namespace BRIX.Web.Client.Services.Http
         {
             HttpResponseMessage response = await httpClient.GetAsync(uri);
 
-            return await response.Content.ReadJsonAsync<TResponse>();
+            return await response.ReadJsonAsync<TResponse>();
         }
 
         public static async Task<TResponse> PostAsJsonAsync<TRequest, TResponse>(
@@ -53,7 +51,7 @@ namespace BRIX.Web.Client.Services.Http
         {
             HttpResponseMessage response = await httpClient.PostAsync(uri, request, _jsonFormatter);
 
-            return await response.Content.ReadJsonAsync<TResponse>();
+            return await response.ReadJsonAsync<TResponse>();
         }
 
         public static async Task<TResponse> PutJsonAsync<TRequest, TResponse>(
@@ -63,14 +61,14 @@ namespace BRIX.Web.Client.Services.Http
         {
             HttpResponseMessage response = await httpClient.PutAsync(uri, request, _jsonFormatter);
 
-            return await response.Content.ReadJsonAsync<TResponse>();
+            return await response.ReadJsonAsync<TResponse>();
         }
 
         public static async Task<TResponse> DeleteJsonAsync<TResponse>(this HttpClient httpClient, string uri)
         {
             HttpResponseMessage response = await httpClient.DeleteAsync(uri);
 
-            return await response.Content.ReadJsonAsync<TResponse>();
+            return await response.ReadJsonAsync<TResponse>();
         }
     }
 }

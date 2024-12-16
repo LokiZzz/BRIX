@@ -20,6 +20,8 @@ namespace BRIX.GameService.Controllers.Account
         [HttpPost]
         public async Task<IActionResult> SignUp([FromBody] SignUpRequest model)
         {
+            throw new Exception("Server exception.");
+
             return Ok(await _accountService.SignUp(model));
         }
 
