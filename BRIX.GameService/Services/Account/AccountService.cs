@@ -51,10 +51,10 @@ namespace BRIX.GameService.Services.Account
                 await SendConfirmationEmail(newUser);
             }
 
-            return new SignUpResponse 
-            { 
-                Successful = result.Succeeded, 
-                Errors = result.Errors.Select(x => x.Description).ToList()
+            return new SignUpResponse
+            {
+                Successful = result.Succeeded,
+                Errors = result.Errors.Select(x => $"{x.Code}: {x.Description}").ToList()
             };
         }
 
