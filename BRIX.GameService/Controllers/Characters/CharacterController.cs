@@ -12,13 +12,11 @@ namespace BRIX.GameService.Controllers.Characters
     [Authorize]
     [Route("api/[controller]")]
     public class CharacterController(
-        ILogger<CharacterController> logger,
         IAccountService accountService,
         ICharacterRepository characterRepository) : Controller
     {
         private readonly IAccountService _accountService = accountService;
         private readonly ICharacterRepository _characterRepository = characterRepository;
-        private readonly ILogger<CharacterController> _logger = logger;
 
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] List<Guid>? id)

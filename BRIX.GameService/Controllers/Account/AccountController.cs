@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using BRIX.GameService.Services.Account;
 using Microsoft.Extensions.Options;
 using BRIX.GameService.Options;
+using BRIX.GameService.Services.Utility;
 
 namespace BRIX.GameService.Controllers.Account
 {
@@ -20,8 +21,6 @@ namespace BRIX.GameService.Controllers.Account
         [HttpPost]
         public async Task<IActionResult> SignUp([FromBody] SignUpRequest model)
         {
-            throw new Exception("Server exception.");
-
             return Ok(await _accountService.SignUp(model));
         }
 
@@ -78,6 +77,12 @@ namespace BRIX.GameService.Controllers.Account
                 .Aggregate((x, y) => x + y);
 
             return Ok($"Secured Hello!\n{claims}");
+        }
+
+        [HttpGet]
+        public IActionResult GetProblem()
+        {
+            throw new ProblemException(("123", "Error in action-method."));
         }
     }
 }

@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
+﻿using BRIX.GameService.Contracts.Common;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BRIX.GameService.Services.Utility
 {
-    public class ProblemException(string detail) : Exception
+    public class ProblemException(params (string Code, string Message)[] messages) : Exception
     {
-        public string Detail { get; set; } = detail;
+        public (string Code, string Message)[] Messages = messages;
     }
 
     public class ProblemExceptionHandler(
@@ -28,17 +29,21 @@ namespace BRIX.GameService.Services.Utility
 
                 if (exception is ProblemException problemException)
                 {
-                    problem = new()
+                    httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+                    problem = new ProblemDetails()
                     {
                         Status = StatusCodes.Status400BadRequest,
                         Title = problemException.Message,
-                        Detail = problemException.Detail,
-                        Type = "Bad Request"
+                        Type = "Bad Request",
                     };
+                    problem.Extensions.TryAdd(
+                        "problemDetalization", 
+                        new ProblemDetalization(problemException.Messages)
+                    );
                 }
                 else
                 {
-                    problem = new()
+                    problem = new ProblemDetails()
                     {
                         Status = StatusCodes.Status500InternalServerError,
                         Title = "Internal Server Error",

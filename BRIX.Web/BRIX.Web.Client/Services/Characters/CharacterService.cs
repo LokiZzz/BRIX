@@ -13,26 +13,31 @@ namespace BRIX.Web.Client.Services.Characters
 
         public async Task<List<Character>> GetAll()
         {
-            return await _http.GetAsJsonAsync<List<Character>>("api/character");
+            JsonResponse<List<Character>> response = await _http.GetAsJsonAsync<List<Character>>("api/character");
+
+            // Временно просто кидаю эксепшн, пока нет обвеса для красивой обработки ошибок,
+            // которое предназначены для пользователя.
+            return response.Payload ?? throw new Exception("Ошибка при получении списка персонажей.");
         }
 
         public async Task<CharacterOperationResponse> Save(Character character)
         {
-            CharacterOperationResponse response = await _http.PutJsonAsync<Character, CharacterOperationResponse>(
-                "api/character", 
-                character
-            );
+            JsonResponse<CharacterOperationResponse> response = 
+                await _http.PutJsonAsync<Character, CharacterOperationResponse>("api/character", character);
 
-            return response;
+            // Временно просто кидаю эксепшн, пока нет обвеса для красивой обработки ошибок,
+            // которое предназначены для пользователя.
+            return response.Payload ?? throw new Exception("Ошибка при сохранении персонажа.");
         }
 
         public async Task<CharacterOperationResponse> Delete(Character character)
         {
-            CharacterOperationResponse response = await _http.DeleteJsonAsync<CharacterOperationResponse>(
-                $"api/character?id={character.Id}"
-            );
+            JsonResponse<CharacterOperationResponse> response = 
+                await _http.DeleteJsonAsync<CharacterOperationResponse>($"api/character?id={character.Id}");
 
-            return response;
+            // Временно просто кидаю эксепшн, пока нет обвеса для красивой обработки ошибок,
+            // которое предназначены для пользователя.
+            return response.Payload ?? throw new Exception("Ошибка при удалении персонажа."); ;
         }
     }
 }

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
 using BRIX.Web.Client.Options;
 using System.Net.Http;
+using System.Net;
 
 namespace BRIX.Web.Client.Services.Auth
 {
@@ -38,12 +39,12 @@ namespace BRIX.Web.Client.Services.Auth
 
         public async Task<SignUpResponse> SignUp(SignUpRequest model)
         {
-            SignUpResponse result = await _httpClient.PostAsJsonAsync<SignUpRequest, SignUpResponse>(
+            JsonResponse<SignUpResponse> response = await _httpClient.PostAsJsonAsync<SignUpRequest, SignUpResponse>(
                 "api/account/signup",
                 model
             );
 
-            return result;
+            return response.Payload ?? throw new Exception("response.Payload is null");
         }
 
         public async Task<SignInResponse> SignIn(SignInRequest model)
@@ -78,14 +79,15 @@ namespace BRIX.Web.Client.Services.Auth
             Dictionary<string, string?> queryParams = new() { { "email", email } };
             string uri = new(QueryHelpers.AddQueryString("api/account/forgotpassword", queryParams));
 
-            ForgotPasswordResponse response = await _httpClient.GetAsJsonAsync<ForgotPasswordResponse>(uri);
+            var response = await _httpClient.GetAsJsonAsync<ForgotPasswordResponse>(uri);
 
-            return response.Success;
+            return response.HttpStatusCode == HttpStatusCode.OK;
         }
 
         public async Task<bool> ResetPassword(string userId, string newPassword, string token)
         {
-            ResetPasswordResponse response = await _httpClient.PostAsJsonAsync<ResetPasswordRequest, ResetPasswordResponse>(
+            JsonResponse<ResetPasswordResponse> response = 
+                await _httpClient.PostAsJsonAsync<ResetPasswordRequest, ResetPasswordResponse>(
                 "api/account/resetpassword", 
                 new ResetPasswordRequest 
                 { 
@@ -95,7 +97,7 @@ namespace BRIX.Web.Client.Services.Auth
                 }
             );
 
-            return response.Success;
+            return response.HttpStatusCode == HttpStatusCode.OK;
         }
 
         public async Task<ResendConfirmationEmailResponse> ResendConfirmationEmail(string email)
@@ -103,10 +105,10 @@ namespace BRIX.Web.Client.Services.Auth
             Dictionary<string, string?> queryParams = new() { { "email", email } };
             string uri = new(QueryHelpers.AddQueryString("api/account/resendconfirmationemail", queryParams));
 
-            ResendConfirmationEmailResponse response = await _httpClient
+            JsonResponse<ResendConfirmationEmailResponse> response = await _httpClient
                 .GetAsJsonAsync<ResendConfirmationEmailResponse>(uri);
 
-            return response;
+            return response.Payload ?? throw new Exception("response.Payload is null");
         }
     }
 }

@@ -27,6 +27,6 @@ app.UseAuthorization();
 app.UseDevSwagger();
 app.UseHttpsRedirection();
 app.MapControllers();
-app.UseExceptionHandler(); // _ => { }
+app.UseExceptionHandler();
 
 app.Run();
