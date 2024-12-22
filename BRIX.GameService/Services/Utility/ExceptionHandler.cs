@@ -4,9 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BRIX.GameService.Services.Utility
 {
-    public class ProblemException(params (string Code, string Message)[] messages) : Exception
+    /// <summary>
+    /// Исключение-проблема, которое будет перехвачено глобальной обработкой исключений.
+    /// Из него будет собран насыщенный унифицированный ответ с ошибками.
+    /// </summary>
+    public class ProblemException((string Code, string Message)[] problems) : Exception
     {
-        public (string Code, string Message)[] Messages = messages;
+        public ProblemException(string code, string message) : this([(code, message)]) { }
+
+        public (string Code, string Message)[] Problems { get; init; } = problems;
     }
 
     public class ProblemExceptionHandler(
@@ -37,8 +43,8 @@ namespace BRIX.GameService.Services.Utility
                         Type = "Bad Request",
                     };
                     problem.Extensions.TryAdd(
-                        "problemDetalization", 
-                        new ProblemDetalization(problemException.Messages)
+                        "detalization", 
+                        new ProblemDetalization(problemException.Problems)
                     );
                 }
                 else

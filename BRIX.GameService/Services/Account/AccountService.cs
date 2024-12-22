@@ -15,6 +15,7 @@ using System.Security.Claims;
 using System.Text;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 using BRIX.Library.Extensions;
+using BRIX.GameService.Services.Utility;
 
 namespace BRIX.GameService.Services.Account
 {
@@ -41,7 +42,7 @@ namespace BRIX.GameService.Services.Account
 
         private readonly IDbContextFactory<ApplicationDbContext> _contextFactory = contextFactory;
 
-        public async Task<SignUpResponse> SignUp(SignUpRequest model)
+        public async Task SignUpAsync(SignUpRequest model)
         {
             User newUser = new() { UserName = model.Email, Email = model.Email };
             IdentityResult result = await _userManager.CreateAsync(newUser, model.Password);
@@ -49,13 +50,13 @@ namespace BRIX.GameService.Services.Account
             if (result.Succeeded)
             {
                 await SendConfirmationEmail(newUser);
+
+                return;
             }
 
-            return new SignUpResponse
-            {
-                Successful = result.Succeeded,
-                Errors = result.Errors.Select(x => $"{x.Code}: {x.Description}").ToList()
-            };
+            throw new ProblemException(
+                result.Errors.Select(x => (x.Code, x.Description)).ToArray()
+            );
         }
 
         public async Task<SignInResponse> SignIn(SignInRequest model)

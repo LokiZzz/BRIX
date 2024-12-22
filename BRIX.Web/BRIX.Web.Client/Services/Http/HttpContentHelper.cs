@@ -1,16 +1,14 @@
 ﻿using Newtonsoft.Json;
-using System.Net.Http.Json;
-using System.Text.Json.Nodes;
-using System.Text;
-using System.Net.Mime;
 using System.Net.Http.Formatting;
 using BRIX.GameService.Contracts.Common;
-using System.Runtime.CompilerServices;
-using Azure;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BRIX.Web.Client.Services.Http
 {
+    /// <summary>
+    /// Хелпер для работы с JsonResponse и ProblemResponse.
+    /// Имеются перегрузки для работы с запросами, для которых не нужен контракт ответа, когда
+    /// достаточно только статус-кода и 
+    /// </summary>
     public static class HttpContentExtensions
     {
         private static readonly JsonSerializerSettings _defaultJsonSettings = new()
@@ -46,7 +44,12 @@ namespace BRIX.Web.Client.Services.Http
             }
         }
 
-        public static async Task<JsonResponse<TResponse>> GetAsJsonAsync<TResponse>(
+        public static async Task<JsonResponse> ReadJsonAsync(this HttpResponseMessage response)
+        {
+            return await response.ReadJsonAsync<object>();
+        }
+
+        public static async Task<JsonResponse<TResponse>> GetJsonAsync<TResponse>(
             this HttpClient httpClient,
             string uri)
             where TResponse : class
@@ -56,7 +59,14 @@ namespace BRIX.Web.Client.Services.Http
             return await response.ReadJsonAsync<TResponse>();
         }
 
-        public static async Task<JsonResponse<TResponse>> PostAsJsonAsync<TRequest, TResponse>(
+        public static async Task<JsonResponse> GetJsonAsync(this HttpClient httpClient, string uri)
+        {
+            HttpResponseMessage response = await httpClient.GetAsync(uri);
+
+            return await response.ReadJsonAsync();
+        }
+
+        public static async Task<JsonResponse<TResponse>> PostJsonAsync<TRequest, TResponse>(
             this HttpClient httpClient,
             string uri,
             TRequest request)
@@ -65,6 +75,16 @@ namespace BRIX.Web.Client.Services.Http
             HttpResponseMessage response = await httpClient.PostAsync(uri, request, _jsonFormatter);
 
             return await response.ReadJsonAsync<TResponse>();
+        }
+
+        public static async Task<JsonResponse> PostJsonAsync<TRequest>(
+            this HttpClient httpClient,
+            string uri,
+            TRequest request)
+        {
+            HttpResponseMessage response = await httpClient.PostAsync(uri, request, _jsonFormatter);
+
+            return await response.ReadJsonAsync();
         }
 
         public static async Task<JsonResponse<TResponse>> PutJsonAsync<TRequest, TResponse>(
@@ -78,6 +98,16 @@ namespace BRIX.Web.Client.Services.Http
             return await response.ReadJsonAsync<TResponse>();
         }
 
+        public static async Task<JsonResponse> PutJsonAsync<TRequest>(
+            this HttpClient httpClient,
+            string uri,
+            TRequest request)
+        {
+            HttpResponseMessage response = await httpClient.PutAsync(uri, request, _jsonFormatter);
+
+            return await response.ReadJsonAsync();
+        }
+
         public static async Task<JsonResponse<TResponse>> DeleteJsonAsync<TResponse>(
             this HttpClient httpClient,
             string uri)
@@ -86,6 +116,15 @@ namespace BRIX.Web.Client.Services.Http
             HttpResponseMessage response = await httpClient.DeleteAsync(uri);
 
             return await response.ReadJsonAsync<TResponse>();
+        }
+
+        public static async Task<JsonResponse> DeleteJsonAsync(
+            this HttpClient httpClient,
+            string uri)
+        {
+            HttpResponseMessage response = await httpClient.DeleteAsync(uri);
+
+            return await response.ReadJsonAsync();
         }
 
         private static async Task<JsonResponse<TResponse>> BuildJsonResponseAsync<TResponse>(
@@ -116,6 +155,5 @@ namespace BRIX.Web.Client.Services.Http
 
             return jsonResponse;
         }
-
     }
 }

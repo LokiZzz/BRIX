@@ -39,12 +39,9 @@ namespace BRIX.Web.Client.Services.Auth
 
         public async Task<SignUpResponse> SignUp(SignUpRequest model)
         {
-            JsonResponse<SignUpResponse> response = await _httpClient.PostAsJsonAsync<SignUpRequest, SignUpResponse>(
-                "api/account/signup",
-                model
-            );
+            JsonResponse response = await _httpClient.PostJsonAsync("api/account/signup", model);
 
-            return response.Payload ?? throw new Exception("response.Payload is null");
+            return new();
         }
 
         public async Task<SignInResponse> SignIn(SignInRequest model)
@@ -79,7 +76,7 @@ namespace BRIX.Web.Client.Services.Auth
             Dictionary<string, string?> queryParams = new() { { "email", email } };
             string uri = new(QueryHelpers.AddQueryString("api/account/forgotpassword", queryParams));
 
-            var response = await _httpClient.GetAsJsonAsync<ForgotPasswordResponse>(uri);
+            var response = await _httpClient.GetJsonAsync<ForgotPasswordResponse>(uri);
 
             return response.HttpStatusCode == HttpStatusCode.OK;
         }
@@ -87,7 +84,7 @@ namespace BRIX.Web.Client.Services.Auth
         public async Task<bool> ResetPassword(string userId, string newPassword, string token)
         {
             JsonResponse<ResetPasswordResponse> response = 
-                await _httpClient.PostAsJsonAsync<ResetPasswordRequest, ResetPasswordResponse>(
+                await _httpClient.PostJsonAsync<ResetPasswordRequest, ResetPasswordResponse>(
                 "api/account/resetpassword", 
                 new ResetPasswordRequest 
                 { 
@@ -106,7 +103,7 @@ namespace BRIX.Web.Client.Services.Auth
             string uri = new(QueryHelpers.AddQueryString("api/account/resendconfirmationemail", queryParams));
 
             JsonResponse<ResendConfirmationEmailResponse> response = await _httpClient
-                .GetAsJsonAsync<ResendConfirmationEmailResponse>(uri);
+                .GetJsonAsync<ResendConfirmationEmailResponse>(uri);
 
             return response.Payload ?? throw new Exception("response.Payload is null");
         }

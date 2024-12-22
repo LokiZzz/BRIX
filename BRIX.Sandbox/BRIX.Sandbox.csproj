@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BRIX.Library\BRIX.Library.csproj" />
     <ProjectReference Include="..\BRIX.Web.Shared\BRIX.Web.Shared.csproj" />
+    <ProjectReference Include="..\BRIX.Web\BRIX.Web.Client\BRIX.Web.Client.csproj" />
   </ItemGroup>
 
 </Project>

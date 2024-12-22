@@ -21,7 +21,9 @@ namespace BRIX.GameService.Controllers.Account
         [HttpPost]
         public async Task<IActionResult> SignUp([FromBody] SignUpRequest model)
         {
-            return Ok(await _accountService.SignUp(model));
+            await _accountService.SignUpAsync(model);
+
+            return Ok();
         }
 
         [HttpPost]
@@ -82,7 +84,7 @@ namespace BRIX.GameService.Controllers.Account
         [HttpGet]
         public IActionResult GetProblem()
         {
-            throw new ProblemException(("123", "Error in action-method."));
+            throw new ProblemException("123", "Error in action-method.");
         }
     }
 }

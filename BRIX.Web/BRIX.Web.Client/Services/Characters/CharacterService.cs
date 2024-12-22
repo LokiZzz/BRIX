@@ -13,7 +13,7 @@ namespace BRIX.Web.Client.Services.Characters
 
         public async Task<List<Character>> GetAll()
         {
-            JsonResponse<List<Character>> response = await _http.GetAsJsonAsync<List<Character>>("api/character");
+            JsonResponse<List<Character>> response = await _http.GetJsonAsync<List<Character>>("api/character");
 
             // Временно просто кидаю эксепшн, пока нет обвеса для красивой обработки ошибок,
             // которое предназначены для пользователя.
