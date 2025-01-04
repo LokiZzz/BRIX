@@ -394,6 +394,42 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Passwords must have at least one digit (&apos;0&apos;-&apos;9&apos;)..
+        /// </summary>
+        public static string Problem_PasswordRequiresDigit {
+            get {
+                return ResourceManager.GetString("Problem_PasswordRequiresDigit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passwords must have at least one lowercase (&apos;a&apos;-&apos;z&apos;)..
+        /// </summary>
+        public static string Problem_PasswordRequiresLower {
+            get {
+                return ResourceManager.GetString("Problem_PasswordRequiresLower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passwords must have at least one non alphanumeric character..
+        /// </summary>
+        public static string Problem_PasswordRequiresNonAlphanumeric {
+            get {
+                return ResourceManager.GetString("Problem_PasswordRequiresNonAlphanumeric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passwords must have at least one uppercase (&apos;A&apos;-&apos;Z&apos;)..
+        /// </summary>
+        public static string Problem_PasswordRequiresUpper {
+            get {
+                return ResourceManager.GetString("Problem_PasswordRequiresUpper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown error occured..
         /// </summary>
         public static string Problem_UnknownError {

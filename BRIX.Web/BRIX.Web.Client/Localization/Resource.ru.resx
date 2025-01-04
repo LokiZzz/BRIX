@@ -246,4 +246,16 @@
   <data name="Problem_DuplicateUserName" xml:space="preserve">
     <value>Такой адрес почты уже занят.</value>
   </data>
+  <data name="Problem_PasswordRequiresNonAlphanumeric" xml:space="preserve">
+    <value>Пароль должен содержать хотя бы один спецсимвол.</value>
+  </data>
+  <data name="Problem_PasswordRequiresDigit" xml:space="preserve">
+    <value>Пароль должен содержать хотя бы одну цифру ('0'-'9').</value>
+  </data>
+  <data name="Problem_PasswordRequiresLower" xml:space="preserve">
+    <value>Пароль должен содержать хотя бы одну латинскую букву в нижнем регистре ('a'-'z')..</value>
+  </data>
+  <data name="Problem_PasswordRequiresUpper" xml:space="preserve">
+    <value>Пароль должен содержать хотя бы одну латинскую букву в верхнем регистре ('A'-'Z').</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
-﻿using BRIX.Web.Client.Localization;
+﻿using BRIX.GameService.Contracts.Common;
+using BRIX.Web.Client.Localization;
 using BRIX.Web.Client.Models.Common;
 using BRIX.Web.Client.Services.Http;
 
@@ -20,16 +21,29 @@ namespace BRIX.Web.Client.Extensions
 
             if (jsonResponse.ProblemDetalization is not null)
             {
-                IEnumerable<string> errorCodes = jsonResponse.ProblemDetalization.Problems.Select(x => x.Code);
-                string[] errors = errorCodes.Select(x => 
-                        Resource.ResourceManager.GetString(x.ToResourceKey()) ?? Resource.Problem_UnknownError)
-                    .Cast<string>()
-                    .ToArray();
-
-                result.Errors = errors;
+                result.Errors = jsonResponse.ProblemDetalization.Problems
+                    .Select(GetLocalizedErrorMessage)
+                    .ToArray(); ;
             }
 
             return result;
+        }
+
+        private static string GetLocalizedErrorMessage(Problem problem)
+        {
+            string? message = Resource.ResourceManager.GetString(problem.Code.ToResourceKey());
+
+            if(message is not null)
+            {
+                return message;
+            }
+
+            if(!string.IsNullOrEmpty(problem.Message))
+            {
+                return problem.Message;
+            }
+
+            return Resource.Problem_UnknownError;
         }
     }
 }
