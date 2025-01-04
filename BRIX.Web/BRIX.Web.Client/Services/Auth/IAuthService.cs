@@ -1,4 +1,5 @@
 ﻿using BRIX.GameService.Contracts.Account;
+using BRIX.Web.Client.Models.Common;
 
 namespace BRIX.Web.Client.Services.Auth
 {
@@ -6,7 +7,7 @@ namespace BRIX.Web.Client.Services.Auth
     {
         Task<SignInResponse> SignIn(SignInRequest model);
         Task SignOut();
-        Task<SignUpResponse> SignUp(SignUpRequest model);
+        Task<OperationResult> SignUp(SignUpRequest model);
         Task<bool> ForgotPassword(string email);
         Task<bool> ResetPassword(string userId, string newPassword, string token);
         Task<ResendConfirmationEmailResponse> ResendConfirmationEmail(string email);

@@ -240,4 +240,10 @@
   <data name="Character_Backstory" xml:space="preserve">
     <value>Backstory</value>
   </data>
+  <data name="Problem_UnknownError" xml:space="preserve">
+    <value>Unknown error occured.</value>
+  </data>
+  <data name="Problem_DuplicateUserName" xml:space="preserve">
+    <value>Such email already taken.</value>
+  </data>
 </root>

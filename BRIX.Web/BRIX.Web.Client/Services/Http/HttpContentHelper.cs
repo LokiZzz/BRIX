@@ -145,7 +145,7 @@ namespace BRIX.Web.Client.Services.Http
                 ProblemResponse problemResponse = 
                     JsonConvert.DeserializeObject<ProblemResponse>(rawContent, _defaultJsonSettings)
                     ?? throw new Exception("Ошибка десериализации ответа от сервера.");
-                jsonResponse.Errors = problemResponse.Detalization;
+                jsonResponse.ProblemDetalization = problemResponse.Detalization;
             }
             else
             {

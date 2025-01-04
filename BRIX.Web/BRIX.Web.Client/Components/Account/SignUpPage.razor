@@ -58,9 +58,9 @@
     {
         ShowErrors = false;
 
-        SignUpResponse result = await AuthService.SignUp(RegisterModel.ToDto());
+        OperationResult result = await AuthService.SignUp(RegisterModel.ToDto());
 
-        if (result.Successful)
+        if (result.Successfull)
         {
             NavigationManager.NavigateTo("/sign-in?needconfirm=true");
         }

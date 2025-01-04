@@ -385,6 +385,24 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Such email already taken..
+        /// </summary>
+        public static string Problem_DuplicateUserName {
+            get {
+                return ResourceManager.GetString("Problem_DuplicateUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown error occured..
+        /// </summary>
+        public static string Problem_UnknownError {
+            get {
+                return ResourceManager.GetString("Problem_UnknownError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email format is invalid..
         /// </summary>
         public static string Validation_EmailFormat {

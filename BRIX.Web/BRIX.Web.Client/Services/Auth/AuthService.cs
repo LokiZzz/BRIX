@@ -12,6 +12,8 @@ using Microsoft.Extensions.Options;
 using BRIX.Web.Client.Options;
 using System.Net.Http;
 using System.Net;
+using BRIX.Web.Client.Models.Common;
+using BRIX.Web.Client.Extensions;
 
 namespace BRIX.Web.Client.Services.Auth
 {
@@ -37,11 +39,11 @@ namespace BRIX.Web.Client.Services.Auth
             _httpClient.BaseAddress = new Uri(_gameServiceOptions.ServiceAddress);
         }
 
-        public async Task<SignUpResponse> SignUp(SignUpRequest model)
+        public async Task<OperationResult> SignUp(SignUpRequest model)
         {
             JsonResponse response = await _httpClient.PostJsonAsync("api/account/signup", model);
 
-            return new();
+            return response.ToOperationResult();
         }
 
         public async Task<SignInResponse> SignIn(SignInRequest model)

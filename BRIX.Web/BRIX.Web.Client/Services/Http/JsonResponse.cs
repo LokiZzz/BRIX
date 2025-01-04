@@ -10,7 +10,7 @@ namespace BRIX.Web.Client.Services.Http
 
     public class JsonResponse
     {
-        public ProblemDetalization? Errors { get; set; }
+        public ProblemDetalization? ProblemDetalization { get; set; }
 
         public string RawContent { get; set; } = string.Empty;
 
