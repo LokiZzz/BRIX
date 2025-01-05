@@ -56,8 +56,7 @@ namespace BRIX.Web.Client.Services.Auth
             }
 
             SignInResult result = response.ToOperationResult<SignInResult>();
-            result.NeedToConfirmAccount = response.ProblemDetalization?.Problems
-                .Any(x => x.Code == ProblemCodes.Account.NeedToConfirmAccount) == true;
+            result.NeedToConfirmAccount = response.HasProblem(ProblemCodes.Account.NeedToConfirmAccount);
 
             return result;
         }
