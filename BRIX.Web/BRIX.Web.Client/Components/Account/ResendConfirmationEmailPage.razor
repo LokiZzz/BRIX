@@ -76,11 +76,11 @@
 
     private async Task ResendEmail()
     {
-        ResendConfirmationEmailResponse response = await AuthService.ResendConfirmationEmail(_model.Email);
+        ResendEmailConfirmationResult response = await AuthService.ResendConfirmationEmail(_model.Email);
         _buttonIsBusy = response.RetryAfterInSeconds > 0;
         _showTooOften = response.RetryAfterInSeconds > 0;
-        _showError = response.Success == false && response.RetryAfterInSeconds == 0;
-        _showSuccess = response.Success == true;
+        _showError = response.Successfull == false && response.RetryAfterInSeconds == 0;
+        _showSuccess = response.Successfull == true && response.RetryAfterInSeconds == 0;
 
         if(response.RetryAfterInSeconds > 0)
         {

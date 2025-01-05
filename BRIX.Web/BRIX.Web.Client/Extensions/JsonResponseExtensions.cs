@@ -17,7 +17,7 @@ namespace BRIX.Web.Client.Extensions
         {
             T result = new()
             {
-                Successfull = jsonResponse.HttpStatusCode == System.Net.HttpStatusCode.OK,
+                Successfull = jsonResponse.HttpStatusCode == System.Net.HttpStatusCode.OK
             };
 
             if (jsonResponse.ProblemDetalization is not null)

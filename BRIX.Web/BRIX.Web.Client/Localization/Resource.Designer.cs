@@ -70,7 +70,7 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An email has been sent to your email with a link to activate your account..
+        ///   Looks up a localized string similar to An email has been sent to your email with a link to activate your account. Activate your account by clicking on the link in the email..
         /// </summary>
         public static string Account_ConfirmationEmailWasSent {
             get {

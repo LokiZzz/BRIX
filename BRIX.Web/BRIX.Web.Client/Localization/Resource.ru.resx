@@ -172,7 +172,7 @@
     <value>Создать</value>
   </data>
   <data name="Account_ConfirmationEmailWasSent" xml:space="preserve">
-    <value>На ваш эмейл было отправлено письмо со ссылкой для активации аккаунта.</value>
+    <value>На ваш эмейл было отправлено письмо со ссылкой для активации аккаунта. Активируйте аккаунт, пройдя по ссылке в письме.</value>
   </data>
   <data name="Account_ResendConfirmationEmail" xml:space="preserve">
     <value>Отправить повторное письмо</value>

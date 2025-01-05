@@ -45,21 +45,17 @@ namespace BRIX.GameService.Controllers.Account
         [HttpGet]
         public async Task<IActionResult> ForgotPassword([FromQuery] string email)
         {
-            ForgotPasswordResponse response = await _accountService.ForgotPassword(email);
+            await _accountService.ForgotPassword(email);
 
-            return Ok(response);
+            return Ok();
         }
 
         [HttpPost]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
         {
-            ResetPasswordResponse response = await _accountService.ResetPassword(
-                request.UserId, 
-                request.Password, 
-                request.Token
-            );
+            await _accountService.ResetPassword(request.UserId, request.Password, request.Token);
 
-            return Ok(response);
+            return Ok();
         }
 
         [HttpGet]
@@ -84,7 +80,7 @@ namespace BRIX.GameService.Controllers.Account
         [HttpGet]
         public IActionResult GetProblem()
         {
-            throw new ProblemException("123", "Error in action-method.");
+            throw new ProblemException("ProblemCode", "Error in action-method.");
         }
     }
 }

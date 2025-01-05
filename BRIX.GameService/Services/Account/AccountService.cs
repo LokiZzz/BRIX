@@ -6,7 +6,6 @@ using BRIX.GameService.Services.Mail;
 using BRIX.Web.Shared.JWT;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -69,15 +68,16 @@ namespace BRIX.GameService.Services.Account
                 lockoutOnFailure: false
             );
 
+            if (result.IsNotAllowed)
+            {
+                throw new ProblemException(
+                    ProblemCodes.Account.NeedToConfirmAccount,
+                    "Need to confirm account via email."
+                );
+            }
+
             if (!result.Succeeded)
             {
-                User? user = await _userManager.FindByEmailAsync(model.Email);
-
-                if (user?.EmailConfirmed == false)
-                {
-                    return new SignInResponse { NeedToConfirmAccount = true };
-                }
-
                 throw new ProblemException(
                     ProblemCodes.Account.InvalidCredentials, 
                     "Username or password is invalid."
@@ -139,7 +139,7 @@ namespace BRIX.GameService.Services.Account
             return await GetCurrentUser() ?? throw new InvalidOperationException("User is not found.");
         }
 
-        public async Task<ForgotPasswordResponse> ForgotPassword(string email)
+        public async Task ForgotPassword(string email)
         {
             User? user = await _userManager.FindByEmailAsync(email);
 
@@ -155,13 +155,13 @@ namespace BRIX.GameService.Services.Account
                     $"Reset password link:\n{uri}"
                 );
 
-                return new() { Success = true };
+                return;
             }
 
-            return new();
+            throw new ProblemException(ProblemCodes.Account.UserNotFound, "User is not found.");
         }
 
-        public async Task<ResetPasswordResponse> ResetPassword(string userId, string password, string token)
+        public async Task ResetPassword(string userId, string password, string token)
         {
             User? user = await _userManager.FindByIdAsync(userId);
 
@@ -171,21 +171,19 @@ namespace BRIX.GameService.Services.Account
 
                 if(result.Succeeded)
                 {
-                    return new() { Success = true };
+                    return;
                 }
+
+                throw new ProblemException(ProblemCodes.Account.WrongResetToken, "Wrong reset passwortd token.");
             }
 
-            return new();
+            throw new ProblemException(ProblemCodes.Account.UserNotFound, "User is not found.");
         }
 
         public async Task<ResendConfirmationEmailResponse> ResendConfirmationEmail(string email)
         {
-            User? user = await _userManager.FindByEmailAsync(email);
-
-            if(user is null)
-            {
-                return new ResendConfirmationEmailResponse();
-            }
+            User? user = await _userManager.FindByEmailAsync(email) 
+                ?? throw new ProblemException(ProblemCodes.Account.UserNotFound, "User is not found.");
 
             using ApplicationDbContext context = _contextFactory.CreateDbContext();
             EmailConfirmationTries? tries = context.EmailConfirmationTries.FirstOrDefault(x => x.UserId == user.Id);
@@ -214,7 +212,7 @@ namespace BRIX.GameService.Services.Account
             {
                 await SendConfirmationEmail(user);
 
-                return new ResendConfirmationEmailResponse { Success = true };
+                return new ResendConfirmationEmailResponse();
             }
             
             TimeSpan retryAfter = new TimeSpan(0, 0, timeoutInSeconds);

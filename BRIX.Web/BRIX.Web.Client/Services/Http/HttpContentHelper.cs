@@ -38,7 +38,7 @@ namespace BRIX.Web.Client.Services.Http
             {
                 return await response.BuildJsonResponseAsync<TResponse>(isError: true);
             }
-            catch
+            catch(Exception ex)
             {
                 throw;
             }
@@ -149,8 +149,7 @@ namespace BRIX.Web.Client.Services.Http
             }
             else
             {
-                jsonResponse.Payload = JsonConvert.DeserializeObject<TResponse>(rawContent, _defaultJsonSettings)
-                    ?? throw new Exception("Ошибка десериализации ответа от сервера.");
+                jsonResponse.Payload = JsonConvert.DeserializeObject<TResponse>(rawContent, _defaultJsonSettings);
             }
 
             return jsonResponse;
