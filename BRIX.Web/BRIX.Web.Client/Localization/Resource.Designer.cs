@@ -394,6 +394,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wrong email or password..
+        /// </summary>
+        public static string Problem_InvalidCredentials {
+            get {
+                return ResourceManager.GetString("Problem_InvalidCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Passwords must have at least one digit (&apos;0&apos;-&apos;9&apos;)..
         /// </summary>
         public static string Problem_PasswordRequiresDigit {

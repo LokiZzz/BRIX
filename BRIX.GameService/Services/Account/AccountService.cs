@@ -16,6 +16,7 @@ using System.Text;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 using BRIX.Library.Extensions;
 using BRIX.GameService.Services.Utility;
+using BRIX.Web.Problems;
 
 namespace BRIX.GameService.Services.Account
 {
@@ -74,10 +75,13 @@ namespace BRIX.GameService.Services.Account
 
                 if (user?.EmailConfirmed == false)
                 {
-                    return new SignInResponse { Error = "Need to confirm email.", NeedToConfirmAccount = true };
+                    return new SignInResponse { NeedToConfirmAccount = true };
                 }
 
-                return new SignInResponse { Error = "Username and password are invalid." };
+                throw new ProblemException(
+                    ProblemCodes.Account.InvalidCredentials, 
+                    "Username or password is invalid."
+                );
             }
 
             Claim[] claims = [
@@ -97,11 +101,7 @@ namespace BRIX.GameService.Services.Account
                 signingCredentials: creds
             );
 
-            return new SignInResponse
-            {
-                Successful = true,
-                Token = new JwtSecurityTokenHandler().WriteToken(token)
-            };
+            return new SignInResponse { Token = new JwtSecurityTokenHandler().WriteToken(token) };
         }
 
         public async Task<bool> Confirm(string userId, string code)

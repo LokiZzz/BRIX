@@ -12,9 +12,10 @@ namespace BRIX.Web.Client.Extensions
             return $"Problem_{problemCode}";
         }
 
-        public static OperationResult ToOperationResult(this JsonResponse jsonResponse)
+        public static T ToOperationResult<T>(this JsonResponse jsonResponse)
+            where T : OperationResult, new()
         {
-            OperationResult result = new()
+            T result = new()
             {
                 Successfull = jsonResponse.HttpStatusCode == System.Net.HttpStatusCode.OK,
             };
@@ -28,6 +29,9 @@ namespace BRIX.Web.Client.Extensions
 
             return result;
         }
+
+        public static OperationResult ToOperationResult(this JsonResponse jsonResponse) =>
+            jsonResponse.ToOperationResult<OperationResult>();
 
         private static string GetLocalizedErrorMessage(Problem problem)
         {

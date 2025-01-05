@@ -1,11 +1,12 @@
 ﻿using BRIX.GameService.Contracts.Account;
+using BRIX.Web.Client.Models.Account;
 using BRIX.Web.Client.Models.Common;
 
 namespace BRIX.Web.Client.Services.Auth
 {
     public interface IAuthService
     {
-        Task<SignInResponse> SignIn(SignInRequest model);
+        Task<SignInResult> SignIn(SignInRequest model);
         Task SignOut();
         Task<OperationResult> SignUp(SignUpRequest model);
         Task<bool> ForgotPassword(string email);

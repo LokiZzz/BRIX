@@ -74,9 +74,9 @@
     {
         _info = null;
         NeedConfirm = null;
-        SignInResponse result = await AuthService.SignIn(loginModel.ToDto());
+        SignInResult result = await AuthService.SignIn(loginModel.ToDto());
 
-        if (result.Successful)
+        if (result.Successfull)
         {
             NavigationManager.NavigateTo("/");
         }
@@ -112,6 +112,4 @@
             _info = (@Localization[nameof(Resource.Account_ConfirmFailed)], "is-danger");
         }
     }
-
-    
 }

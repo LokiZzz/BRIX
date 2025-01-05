@@ -258,4 +258,7 @@
   <data name="Problem_PasswordRequiresUpper" xml:space="preserve">
     <value>Passwords must have at least one uppercase ('A'-'Z').</value>
   </data>
+  <data name="Problem_InvalidCredentials" xml:space="preserve">
+    <value>Wrong email or password.</value>
+  </data>
 </root>

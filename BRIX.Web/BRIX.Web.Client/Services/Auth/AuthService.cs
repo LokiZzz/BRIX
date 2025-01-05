@@ -1,42 +1,35 @@
 ﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System.Text.Json;
-using System.Text;
 using BRIX.GameService.Contracts.Account;
 using BRIX.Web.Client.Services.Http;
-using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Options;
-using BRIX.Web.Client.Options;
-using System.Net.Http;
 using System.Net;
 using BRIX.Web.Client.Models.Common;
 using BRIX.Web.Client.Extensions;
+using BRIX.Web.Client.Models.Account;
+using System.Net.Http;
+using BRIX.Web.Client.Options;
+using Microsoft.Extensions.Options;
 
 namespace BRIX.Web.Client.Services.Auth
 {
     public class AuthService : IAuthService
     {
-        private readonly HttpClient _httpClient;
-        private readonly AuthenticationStateProvider _authenticationStateProvider;
+        private readonly AuthenticationStateProvider _authStateProvider;
         private readonly ILocalStorageService _localStorage;
-        private readonly GameServiceOptions _gameServiceOptions;
-
-        private static readonly JsonSerializerOptions _jsonOptions = new() { PropertyNameCaseInsensitive = true };
+        private readonly HttpClient _httpClient;
 
         public AuthService(
-            HttpClient httpClient,
-            AuthenticationStateProvider authenticationStateProvider,
+            AuthenticationStateProvider authStateProvider,
             ILocalStorageService localStorage,
+            HttpClient httpClient,
             IOptions<GameServiceOptions> gameServiceOptions)
         {
-            _authenticationStateProvider = authenticationStateProvider;
+            _authStateProvider = authStateProvider;
             _localStorage = localStorage;
-            _gameServiceOptions = gameServiceOptions.Value;
             _httpClient = httpClient;
-            _httpClient.BaseAddress = new Uri(_gameServiceOptions.ServiceAddress);
+            _httpClient.BaseAddress = new Uri(gameServiceOptions.Value.ServiceAddress);
         }
 
         public async Task<OperationResult> SignUp(SignUpRequest model)
@@ -46,30 +39,31 @@ namespace BRIX.Web.Client.Services.Auth
             return response.ToOperationResult();
         }
 
-        public async Task<SignInResponse> SignIn(SignInRequest model)
+        public async Task<SignInResult> SignIn(SignInRequest model)
         {
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync("api/account/signin", model);
-            SignInResponse? signInResult = await response.Content.ReadFromJsonAsync<SignInResponse>(_jsonOptions);
+            JsonResponse<SignInResponse> response = await _httpClient.PostJsonAsync<SignInRequest, SignInResponse>(
+                "api/account/signin", 
+                model
+            );
 
-            if (signInResult == null || response?.IsSuccessStatusCode != true)
+            if (!string.IsNullOrEmpty(response.Payload?.Token))
             {
-                return signInResult ?? new() { Error = "Неожиданный формат ответа от api/account/signin." };
+                await _localStorage.SetItemAsync("authToken", response.Payload.Token);
+                ((JWTAuthenticationStateProvider)_authStateProvider).MarkUserAsAuthenticated(model.Email);
+                _httpClient.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("bearer", response.Payload.Token);
             }
 
-            if (signInResult?.Successful == true)
-            {
-                await _localStorage.SetItemAsync("authToken", signInResult?.Token);
-                ((JWTAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(model.Email);
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", signInResult?.Token);
-            }
+            SignInResult result = response.ToOperationResult<SignInResult>();
+            result.NeedToConfirmAccount = response.Payload?.NeedToConfirmAccount == true;
 
-            return signInResult!;
+            return result;
         }
 
         public async Task SignOut()
         {
             await _localStorage.RemoveItemAsync("authToken");
-            ((JWTAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
+            ((JWTAuthenticationStateProvider)_authStateProvider).MarkUserAsLoggedOut();
             _httpClient.DefaultRequestHeaders.Authorization = null;
         }
 

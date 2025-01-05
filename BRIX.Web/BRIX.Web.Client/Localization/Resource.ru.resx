@@ -258,4 +258,7 @@
   <data name="Problem_PasswordRequiresUpper" xml:space="preserve">
     <value>Пароль должен содержать хотя бы одну латинскую букву в верхнем регистре ('A'-'Z').</value>
   </data>
+  <data name="Problem_InvalidCredentials" xml:space="preserve">
+    <value>Неверный адрес почты или пароль.</value>
+  </data>
 </root>
