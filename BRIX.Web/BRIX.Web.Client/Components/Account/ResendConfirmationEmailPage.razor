@@ -45,18 +45,22 @@
                     </div>
                 </div>
 
-                <div class="buttons is-justify-content-right">
-                    <button type="submit" class="button is-primary @_buttonBusyClass">
-                        @Localization[nameof(Resource.Account_ResendConfirmationEmail)]
-                    </button>
+                <div class="columns is-vcentered">
+                    <div class="column">
+                        <Timer OnElapsedDelegate="HandleTimer"
+                               FormatString="@Localization[nameof(Resource.Account_YouCanResendAfter)]"
+                               HideAfterElapsed="true"
+                               ShowBeforeStart="false"
+                               @ref="_timer" />
+                    </div>
+                    <div class="column is-narrow">
+                        <div class="buttons is-right">
+                            <button type="submit" class="button is-primary @_buttonBusyClass">
+                                @Localization[nameof(Resource.Account_ResendConfirmationEmail)]
+                            </button>
+                        </div>
+                    </div>
                 </div>
-
-                <Timer 
-                    OnElapsedDelegate="HandleTimer" 
-                    FormatString="@Localization[nameof(Resource.Account_YouCanResendAfter)]"
-                    HideAfterElapsed="true"
-                    ShowBeforeStart="false"
-                    @ref="_timer" />
             }
         </EditForm>
     </div>
@@ -76,17 +80,18 @@
 
     private async Task ResendEmail()
     {
-        ResendEmailConfirmationResult response = await AuthService.ResendConfirmationEmail(_model.Email);
-        _buttonIsBusy = response.RetryAfterInSeconds > 0;
-        _showTooOften = response.RetryAfterInSeconds > 0;
-        _showError = response.Successfull == false && response.RetryAfterInSeconds == 0;
-        _showSuccess = response.Successfull == true && response.RetryAfterInSeconds == 0;
+        ResendEmailConfirmationResult result = await AuthService.ResendConfirmationEmail(_model.Email);
 
-        if(response.RetryAfterInSeconds > 0)
+        _buttonIsBusy = result.RetryAfterInSeconds > 0;
+        _showTooOften = result.RetryAfterInSeconds > 0;
+        _showError = !result.Successfull && result.RetryAfterInSeconds == 0;
+        _showSuccess = result.Successfull;
+
+        if (result.RetryAfterInSeconds > 0)
         {
             if (_timer is not null)
             {
-                _timer.Start(response.RetryAfterInSeconds);
+                _timer.Start(result.RetryAfterInSeconds);
             }
         }
     }

@@ -1,6 +1,6 @@
 using Blazored.LocalStorage;
-using BRIX.Web.Components;
-using BRIX.Web.Extensions;
+using BRIX.Web.Host.Components;
+using BRIX.Web.Host.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 

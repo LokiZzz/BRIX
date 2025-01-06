@@ -212,7 +212,7 @@ namespace BRIX.GameService.Services.Account
             {
                 await SendConfirmationEmail(user);
 
-                return new ResendConfirmationEmailResponse();
+                return new ResendConfirmationEmailResponse() { EmailWasSent = true };
             }
             
             TimeSpan retryAfter = new TimeSpan(0, 0, timeoutInSeconds);

@@ -94,14 +94,16 @@ namespace BRIX.Web.Client.Services.Auth
         public async Task<ResendEmailConfirmationResult> ResendConfirmationEmail(string email)
         {
             string uri = QueryHelpers.AddQueryString("api/account/resendconfirmationemail", "email", email);
-
             JsonResponse<ResendConfirmationEmailResponse> response = await _httpClient
                 .GetJsonAsync<ResendConfirmationEmailResponse>(uri);
 
-            ResendEmailConfirmationResult result = response.ToOperationResult<ResendEmailConfirmationResult>();
-            result.RetryAfterInSeconds = response.Payload?.RetryAfterInSeconds ?? 0;
-            
-            return result;
+            return new ResendEmailConfirmationResult()
+            {
+                Successfull = response.HttpStatusCode == HttpStatusCode.OK
+                    && response.Payload?.EmailWasSent == true,
+                Errors = response.ExtractErrors(),
+                RetryAfterInSeconds = response.Payload?.RetryAfterInSeconds ?? 0
+            };
         }
     }
 }

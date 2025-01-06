@@ -1,7 +1,7 @@
 ﻿using BRIX.Web.Client.Services.Auth;
 using Microsoft.AspNetCore.Components.Authorization;
 
-namespace BRIX.Web.Extensions
+namespace BRIX.Web.Host.Extensions
 {
     public static class ServiceCollectionExtensions
     {
