@@ -23,4 +23,11 @@
     {
         ErrorBoundary?.Recover();
     }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Modal.IsBusy = false;
+    }
 }

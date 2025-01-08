@@ -5,6 +5,14 @@
 <PageTitle>Home</PageTitle>
 
 <div class="section">
+
+    <div class="block">
+        <h1 class="title">Тест крутилки</h1>
+        <button class="button" @onclick="WaitAMoment">
+            Проверить ждалку
+        </button>
+    </div>
+
     <div class="block">
         <h1 class="title">Text exception</h1>
         <button class="button" @onclick="ThrowException">
@@ -61,5 +69,14 @@
     private void ThrowException(MouseEventArgs e)
     {
         throw new Exception("Исключение!");
+    }
+
+    private async Task WaitAMoment(MouseEventArgs e)
+    {
+        Modal.IsBusy = true;
+
+        await Task.Delay(3500);
+
+        Modal.IsBusy = false;
     }
 }

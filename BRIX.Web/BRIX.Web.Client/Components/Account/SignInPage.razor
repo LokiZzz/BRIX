@@ -72,6 +72,8 @@
 
     private async Task HandleLogin()
     {
+        Modal.IsBusy = true;
+
         _info = null;
         NeedConfirm = null;
         SignInResult result = await AuthService.SignIn(loginModel.ToDto());
@@ -91,6 +93,8 @@
                 _info = (@Localization[nameof(Resource.Account_SignInFailed)], "is-danger");
             }
         }
+
+        Modal.IsBusy = false;
     }
 
     private void GoToResend(MouseEventArgs e) => NavigationManager.NavigateTo("/resend-confirmation-email");

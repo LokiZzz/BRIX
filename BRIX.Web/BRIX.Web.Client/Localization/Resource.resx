@@ -261,4 +261,7 @@
   <data name="Problem_InvalidCredentials" xml:space="preserve">
     <value>Wrong email or password.</value>
   </data>
+  <data name="Common_LoadingThreeDot" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
 </root>

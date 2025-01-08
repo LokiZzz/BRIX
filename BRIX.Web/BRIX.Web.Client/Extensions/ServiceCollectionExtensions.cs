@@ -2,6 +2,7 @@
 using BRIX.Web.Client.Options;
 using BRIX.Web.Client.Services.Auth;
 using BRIX.Web.Client.Services.Characters;
+using BRIX.Web.Client.Services.UI;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -19,6 +20,7 @@ namespace BRIX.Web.Client.Extensions
         public static void AddServices(this IServiceCollection services)
         {
             services.AddScoped<CharacterManager>();
+            services.AddSingleton<ModalService>();
         }
 
         public static void AddOptions(this IServiceCollection services, WebAssemblyHostConfiguration config)

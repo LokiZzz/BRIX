@@ -358,6 +358,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        public static string Common_LoadingThreeDot {
+            get {
+                return ResourceManager.GetString("Common_LoadingThreeDot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove.
         /// </summary>
         public static string Common_Remove {
