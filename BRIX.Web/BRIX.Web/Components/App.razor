@@ -13,35 +13,9 @@
     <link rel="stylesheet" href="awesome/css/regular.css" />
     <link rel="stylesheet" href="awesome/css/brands.css" />
     <link rel="stylesheet" href="awesome/css/solid.css" />
+    <link rel="stylesheet" href="splash.css" />
     <link rel="icon" href="favicon.png" />
-
     <HeadOutlet @rendermode="new InteractiveWebAssemblyRenderMode(prerender: true)" />
-
-    <style>
-        .splash-progress {
-            background: silver;
-            width: 50vw;
-            margin: 1rem auto;
-            height: 0.7rem;
-            border-radius: 10rem;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .splash-progress:after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--bulma-primary, red);
-            scale: var(--blazor-load-percentage, 0%) 100%;
-            transform-origin: left top;
-            transition: scale ease-out 0.5s;
-        }
-
-        .splash-progress-text:after {
-            content: var(--blazor-load-percentage-text, '0%');
-        }
-    </style>
 </head>
 
 <body>
@@ -58,18 +32,7 @@
     <Routes @rendermode="new InteractiveWebAssemblyRenderMode(prerender: false)" />
 
     <script src="_framework/blazor.web.js"></script>
-    <script>
-        window.hideSplash = () => {
-            var btn = document.getElementById('splash');
-            btn.style.display = 'none';
-        };
-    </script>
-    <script >
-        window.blazorCulture = {
-            get: () => localStorage['BlazorCulture'],
-            set: (value) => localStorage['BlazorCulture'] = value
-        };
-    </script>
+    <script src="initial.js"></script>
 </body>
 
 </html>

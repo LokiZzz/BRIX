@@ -1,0 +1,23 @@
+﻿.splash-progress {
+    background: silver;
+    width: 50vw;
+    margin: 1rem auto;
+    height: 0.7rem;
+    border-radius: 10rem;
+    overflow: hidden;
+    position: relative;
+}
+
+    .splash-progress:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: var(--bulma-primary, red);
+        scale: var(--blazor-load-percentage, 0%) 100%;
+        transform-origin: left top;
+        transition: scale ease-out 0.5s;
+    }
+
+.splash-progress-text:after {
+    content: var(--blazor-load-percentage-text, '0%');
+}
