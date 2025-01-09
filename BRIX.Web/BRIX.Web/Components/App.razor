@@ -14,57 +14,36 @@
     <link rel="stylesheet" href="awesome/css/brands.css" />
     <link rel="stylesheet" href="awesome/css/solid.css" />
     <link rel="icon" href="favicon.png" />
+
     <HeadOutlet @rendermode="new InteractiveWebAssemblyRenderMode(prerender: true)" />
+
     <style>
-        .loading-progress {
-            position: relative;
-            display: block;
-            width: 8rem;
-            height: 8rem;
-            margin: 20vh auto 1rem auto;
-        }
-
-            .loading-progress circle {
-                fill: none;
-                stroke: #e0e0e0;
-                stroke-width: 0.6rem;
-                transform-origin: 50% 50%;
-                transform: rotate(-90deg);
-            }
-
-                .loading-progress circle:last-child {
-                    stroke: #1b6ec2;
-                    stroke-dasharray: calc(3.142 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
-                    transition: stroke-dasharray 0.05s ease-in-out;
-                }
-
-        .loading-progress-text {
-            position: relative;
-            text-align: center;
-            font-weight: bold;
-            top: -90px;
-        }
-
-            .loading-progress-text:after {
-                content: var(--blazor-load-percentage-text, "Loading");
-            }
-
-        code {
-            color: #c02d76;
+        .splash-percents-text:after {
+            content: var(--blazor-load-percentage-text, 0%);
         }
     </style>
 </head>
 
 <body>
-    <div id="app">
-        <svg class="loading-progress">
-            <circle r="40%" cx="50%" cy="50%" />
-            <circle r="40%" cx="50%" cy="50%" />
-        </svg>
-        <div class="loading-progress-text"></div>
+    <div id="splash" class="hero is-fullheight">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <p class="title">BRIX</p>
+                <progress class="progress is-primary is-small" max="100" />
+                <p class="splash-percents-text subtitle"></p>
+            </div>
+        </div>
     </div>
+
     <Routes @rendermode="new InteractiveWebAssemblyRenderMode(prerender: false)" />
+
     <script src="_framework/blazor.web.js"></script>
+    <script>
+        window.hideSplash = () => {
+            var btn = document.getElementById('splash');
+            btn.style.display = 'none';
+        };
+    </script>
     <script >
         window.blazorCulture = {
             get: () => localStorage['BlazorCulture'],

@@ -1,6 +1,8 @@
 ﻿@using BRIX.Web.Client.Components.Layout
 @using Microsoft.AspNetCore.Components.Authorization
 
+@inject IJSRuntime JS
+
 <Router AppAssembly="typeof(Program).Assembly">
     <Found Context="routeData">
         <BRIX.Web.Client.Components.Shared.ModalComponent>
@@ -15,3 +17,12 @@
         </CascadingAuthenticationState>
     </NotFound>
 </Router>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        await JS.InvokeVoidAsync("hideSplash");
+    }
+}
