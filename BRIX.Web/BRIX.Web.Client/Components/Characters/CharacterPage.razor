@@ -1,0 +1,40 @@
+﻿@page "/characters/{CharacterId:guid?}"
+
+<div class="section">
+    <div class="container is-max-tablet">
+        <p class="title">@Character?.Name</p>
+        <p class="subtitle">@CharacterId</p>
+        <p class="subtitle">@Localization[nameof(Resource.Characters_Level)] @Character?.Level</p>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Guid? CharacterId { get; set; }
+
+    public Character? Character { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+
+        if (CharacterManager.EditingCharacter is not null)
+        {
+            Character = CharacterManager.EditingCharacter;
+            CharacterId = Character.Id;
+        }
+        else if(CharacterId is not null)
+        {
+            Modal.IsBusy = true;
+            Character = await CharacterManager.GetAsync(CharacterId.Value);
+            Modal.IsBusy = false;
+
+            if(Character is null)
+            {
+                Navigation.NavigateTo("/404");
+            }
+
+            CharacterManager.EditingCharacter = Character;
+        }
+    }
+}

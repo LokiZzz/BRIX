@@ -1,7 +1,7 @@
-﻿using Azure;
-using BRIX.GameService.Contracts.Characters;
+﻿using BRIX.GameService.Contracts.Characters;
 using BRIX.Library.Characters;
 using BRIX.Web.Client.Services.Http;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace BRIX.Web.Client.Services.Characters
 {
@@ -11,7 +11,7 @@ namespace BRIX.Web.Client.Services.Characters
 
         public Character? EditingCharacter { get; set; }
 
-        public async Task<List<Character>> GetAll()
+        public async Task<List<Character>> GetAllAsync()
         {
             JsonResponse<List<Character>> response = await _http.GetJsonAsync<List<Character>>("api/character");
 
@@ -20,7 +20,15 @@ namespace BRIX.Web.Client.Services.Characters
             return response.Payload ?? throw new Exception("Ошибка при получении списка персонажей.");
         }
 
-        public async Task<CharacterOperationResponse> Save(Character character)
+        public async Task<Character?> GetAsync(Guid id)
+        {
+            string uri = QueryHelpers.AddQueryString("api/character", "id", id.ToString());
+            JsonResponse<List<Character>> response = await _http.GetJsonAsync<List<Character>>(uri);
+
+            return response.Payload?.FirstOrDefault(x => x.Id == id);
+        }
+
+        public async Task<CharacterOperationResponse> SaveAsync(Character character)
         {
             JsonResponse<CharacterOperationResponse> response = 
                 await _http.PutJsonAsync<Character, CharacterOperationResponse>("api/character", character);
@@ -30,7 +38,7 @@ namespace BRIX.Web.Client.Services.Characters
             return response.Payload ?? throw new Exception("Ошибка при сохранении персонажа.");
         }
 
-        public async Task<CharacterOperationResponse> Delete(Character character)
+        public async Task<CharacterOperationResponse> DeleteAsync(Character character)
         {
             JsonResponse<CharacterOperationResponse> response = 
                 await _http.DeleteJsonAsync<CharacterOperationResponse>($"api/character?id={character.Id}");

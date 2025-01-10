@@ -25,7 +25,7 @@ namespace BRIX.GameService.Controllers.Characters
             List<Character> characters = await _characterRepository.Get(user.Id, id);
 
             // TODO: УДАЛИТЬ ЭТО
-            if(characters.Count == 0)
+            if((await _characterRepository.Get(user.Id)).Count == 0)
             {
                 await _characterRepository.Push(user.Id, new Character { Name = "Siliel", Experience = 900 });
                 await _characterRepository.Push(user.Id, new Character { Name = "Loki", Experience = 1500 });

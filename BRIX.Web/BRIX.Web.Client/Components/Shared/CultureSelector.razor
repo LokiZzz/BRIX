@@ -1,7 +1,6 @@
 ﻿@using System.Globalization
 @inject IJSRuntime JSRuntime
 
-<p>@Localization["Common_Language"]</p>
 <Dropdown Items="cultures" @bind-Selected="Culture" DisplayPropertyDelegate="x => x.NativeName"/>
 
 @code {

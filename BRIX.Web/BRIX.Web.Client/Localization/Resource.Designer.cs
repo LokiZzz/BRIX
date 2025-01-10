@@ -313,6 +313,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Level.
+        /// </summary>
+        public static string Characters_Level {
+            get {
+                return ResourceManager.GetString("Characters_Level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Characters_Name {
@@ -453,6 +462,15 @@ namespace BRIX.Web.Client.Localization {
         public static string Problem_UnknownError {
             get {
                 return ResourceManager.GetString("Problem_UnknownError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string Tab_Home {
+            get {
+                return ResourceManager.GetString("Tab_Home", resourceCulture);
             }
         }
         

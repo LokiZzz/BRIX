@@ -12,7 +12,7 @@
 
             @foreach (Character character in _characters)
             {
-                <div class="box block">
+                <div class="box block" @onclick="@(() => Open(character))">
                     <p class="title">@character.Name</p>
                     <p class="subtitle">@character.Level Level</p>
                     <div class="buttons">
@@ -33,14 +33,12 @@
     </div>
 </div>
 
-
-
 @code {
     private List<Character>? _characters = null;
 
     protected override async Task OnInitializedAsync()
     {
-        _characters = await CharacterManager.GetAll();
+        _characters = await CharacterManager.GetAllAsync();
     }
 
     private void Add()
@@ -58,11 +56,18 @@
 
     private async Task Delete(Character character)
     {
-        CharacterOperationResponse result = await CharacterManager.Delete(character);
+        CharacterOperationResponse result = await CharacterManager.DeleteAsync(character);
 
         if(result.Success)
         {
             _characters?.Remove(character);
         }
+    }
+
+    private void Open(Character character)
+    {
+        CharacterManager.EditingCharacter = character.Copy()
+            ?? throw new Exception("Не удалось скопировать персонажа.");
+        Navigation.NavigateTo($"/characters/{character.Id}");
     }
 }

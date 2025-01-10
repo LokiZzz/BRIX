@@ -47,7 +47,7 @@
 
     public async Task Save()
     {
-        CharacterOperationResponse result = await CharacterManager.Save(_character);
+        CharacterOperationResponse result = await CharacterManager.SaveAsync(_character);
 
         if (result.Success)
         {

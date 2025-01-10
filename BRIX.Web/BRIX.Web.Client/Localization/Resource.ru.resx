@@ -264,4 +264,10 @@
   <data name="Common_LoadingThreeDot" xml:space="preserve">
     <value>Загрузка...</value>
   </data>
+  <data name="Tab_Home" xml:space="preserve">
+    <value>Главная</value>
+  </data>
+  <data name="Characters_Level" xml:space="preserve">
+    <value>Уровень</value>
+  </data>
 </root>
