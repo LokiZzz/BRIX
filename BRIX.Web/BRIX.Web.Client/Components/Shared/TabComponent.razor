@@ -1,0 +1,42 @@
+﻿<div class="tabs @Class">
+    <ul>
+        @foreach (TabItem item in Items)
+        {
+            <li class="@GetIsActiveClass(item)" @onclick=@(() => ActivateItem(item))>
+                <a>@item.Title</a>
+            </li>
+        }
+    </ul>
+</div>
+
+<CascadingValue Value="this">
+    @ChildContent
+</CascadingValue>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string Class { get; set; } = string.Empty;
+
+    public TabItem ActiveItem { get; set; } = default!;
+
+    List<TabItem> Items = new List<TabItem>();
+
+    internal void AddPage(TabItem item)
+    {
+        Items.Add(item);
+
+        if (Items.Count == 1)
+        {
+            ActiveItem = item;
+        }
+
+        StateHasChanged();
+    }
+
+    string GetIsActiveClass(TabItem item) => item == ActiveItem ? "is-active" : string.Empty;
+
+    void ActivateItem(TabItem item) => ActiveItem = item;
+}

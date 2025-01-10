@@ -270,4 +270,16 @@
   <data name="Characters_Level" xml:space="preserve">
     <value>Level</value>
   </data>
+  <data name="Character" xml:space="preserve">
+    <value>Character</value>
+  </data>
+  <data name="Character_Inventory" xml:space="preserve">
+    <value>Inventory</value>
+  </data>
+  <data name="Character_Abilities" xml:space="preserve">
+    <value>Abilities</value>
+  </data>
+  <data name="Character_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
 </root>

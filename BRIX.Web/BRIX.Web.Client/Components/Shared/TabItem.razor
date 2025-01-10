@@ -1,0 +1,27 @@
+﻿@if (Parent.ActiveItem == this)
+{
+    @ChildContent
+}
+
+@code {
+    [CascadingParameter]
+    private TabComponent Parent { get; set; } = default!;
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        if (Parent == null)
+        {
+            throw new ArgumentNullException(nameof(Parent), "TabItem должен быть расположен в TabControl.");
+        }
+
+        base.OnInitialized();
+
+        Parent.AddPage(this);
+    }
+}

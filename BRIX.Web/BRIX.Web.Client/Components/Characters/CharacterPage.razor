@@ -1,11 +1,33 @@
 ﻿@page "/characters/{CharacterId:guid?}"
 
 <div class="section">
-    <div class="container is-max-tablet">
+    <div class="container block">
         <p class="title">@Character?.Name</p>
         <p class="subtitle">@CharacterId</p>
         <p class="subtitle">@Localization[nameof(Resource.Characters_Level)] @Character?.Level</p>
     </div>
+    <TabComponent Class="is-centered is-boxed">
+        <TabItem Title="@Localization[nameof(Resource.Character)]">
+            <div class="notification">
+                <p>Основная информация о персонаже.</p>
+            </div>
+        </TabItem>
+        <TabItem Title="@Localization[nameof(Resource.Character_Abilities)]">
+            <div class="notification">
+                <p>Способности персонажа.</p>
+            </div>
+        </TabItem>
+        <TabItem Title="@Localization[nameof(Resource.Character_Inventory)]">
+            <div class="notification">
+                <p>Основная информация о персонаже.</p>
+            </div>
+        </TabItem>
+        <TabItem Title="@Localization[nameof(Resource.Character_Details)]">
+            <div class="notification">
+                <p>Детальная информация о персонаже.</p>
+            </div>
+        </TabItem>
+    </TabComponent>
 </div>
 
 @code {

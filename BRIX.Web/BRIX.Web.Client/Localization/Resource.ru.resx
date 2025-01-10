@@ -270,4 +270,16 @@
   <data name="Characters_Level" xml:space="preserve">
     <value>Уровень</value>
   </data>
+  <data name="Character" xml:space="preserve">
+    <value>Персонаж</value>
+  </data>
+  <data name="Character_Inventory" xml:space="preserve">
+    <value>Инвентарь</value>
+  </data>
+  <data name="Character_Abilities" xml:space="preserve">
+    <value>Способности</value>
+  </data>
+  <data name="Character_Details" xml:space="preserve">
+    <value>Детали</value>
+  </data>
 </root>

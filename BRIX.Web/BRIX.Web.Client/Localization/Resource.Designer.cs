@@ -295,11 +295,47 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Character.
+        /// </summary>
+        public static string Character {
+            get {
+                return ResourceManager.GetString("Character", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abilities.
+        /// </summary>
+        public static string Character_Abilities {
+            get {
+                return ResourceManager.GetString("Character_Abilities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Backstory.
         /// </summary>
         public static string Character_Backstory {
             get {
                 return ResourceManager.GetString("Character_Backstory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string Character_Details {
+            get {
+                return ResourceManager.GetString("Character_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inventory.
+        /// </summary>
+        public static string Character_Inventory {
+            get {
+                return ResourceManager.GetString("Character_Inventory", resourceCulture);
             }
         }
         
