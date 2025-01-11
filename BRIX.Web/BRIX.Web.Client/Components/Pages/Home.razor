@@ -6,9 +6,16 @@
 
 <div class="section">
     <div class="block">
-        <h1 class="title">Text exception</h1>
+        <h1 class="title">Вызов алерта</h1>
+        <p class="block">Результат алерта: «@_alertResult»</p>
+        <button class="button" @onclick="AlertYesNo">Да / Нет</button>
+        <button class="button" @onclick="AlertOk">Ok</button>
+    </div>
+
+    <div class="block">
+        <h1 class="title">Тест тупилки и исключений</h1>
         <button class="button" @onclick="ThrowException">
-            <span class="fas fa-warning"></span>Выбросить исключение!
+            <span class="fas fa-warning mr-2"></span>Затупить!
         </button>
     </div>
 
@@ -16,10 +23,10 @@
         <h1 class="title">Выпадающий список</h1>
         <p class="block">Выбранное значение: «@SelectedDropdownItem?.SomeProperty»</p>
         <Dropdown 
-            Items="DropdownItems" 
-            @bind-Selected="SelectedDropdownItem" 
-            DisplayPropertyDelegate="x => x?.SomeProperty"
-            Placeholder="Please, select Guid..."/>
+        Items="DropdownItems" 
+        @bind-Selected="SelectedDropdownItem" 
+        DisplayPropertyDelegate="x => x?.SomeProperty"
+        Placeholder="Please, select Guid..."/>
     </div>
 
     <div class="block">
@@ -31,6 +38,8 @@
 
 @code
 {
+    private string _alertResult = string.Empty;
+
     private DropdownItem SelectedDropdownItem { get; set; } = default!;
 
     private List<DropdownItem?> DropdownItems { get; set; }
@@ -41,8 +50,37 @@
         public string SomeProperty { get; set; } = Guid.NewGuid().ToString();
     }
 
-    private void ThrowException(MouseEventArgs e)
+    private async Task ThrowException(MouseEventArgs e)
     {
+        Modal.IsBusy = true;
+        await Task.Delay(2000);
+
         throw new Exception("Исключение!");
+    }
+
+    private void AlertYesNo(MouseEventArgs e)
+    {
+        Modal.Alert(new AlertParameters {  
+            Title = "Заголовок",
+            Message = "Сообщение алерта, в котором написана какая-то важная информация или вопрос, на который должен ответить пользователь. После нажатия на кнопку или после закрытия алерта будет вызван колбек с результатом алерта.",
+            Mode = EAlertMode.YesNo,
+            EventCallback = AlertCallbackHandler
+        });
+    }
+
+    private void AlertOk(MouseEventArgs e)
+    {
+        Modal.Alert(new AlertParameters{
+            Title = "Заголовок",
+            Message = "Сообщение алерта, в котором написана какая-то важная информация или вопрос, на который должен ответить пользователь. После нажатия на кнопку или после закрытия алерта будет вызван колбек с результатом алерта.",
+            Mode = EAlertMode.Ok,
+            EventCallback = AlertCallbackHandler
+        });
+    }
+
+    private void AlertCallbackHandler(AlertResult result)
+    {
+        _alertResult = $"IsPositive: {result.IsPositive}; Mouse: btn{result.MouseEventArgs.Button}, x:{result.MouseEventArgs.ClientX}, y:{result.MouseEventArgs.ClientX};";
+        StateHasChanged();
     }
 }

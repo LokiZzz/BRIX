@@ -13,8 +13,12 @@
             }
         }
 
+        public void Alert(AlertParameters parameters) => OnAlert?.Invoke(parameters);
+
         public event Action<bool>? OnIsBusyChanged;
 
+        public event Action<AlertParameters>? OnAlert;
+        
         private void NotifyIsBusyChanged(bool isBusy) => OnIsBusyChanged?.Invoke(isBusy);
     }
 }

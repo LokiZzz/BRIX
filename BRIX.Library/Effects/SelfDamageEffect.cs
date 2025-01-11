@@ -13,6 +13,6 @@ namespace BRIX.Library.Effects
 
         public override List<Type> RequiredAspects => [];
 
-        public override int BaseExpCost() => (- CharacterCalculator.HealthToExp(Impact.Average()) / 2d).Round();
+        public override int BaseExpCost() => (- ExperienceCalculator.HealthToExp(Impact.Average()) / 2d).Round();
     }
 }

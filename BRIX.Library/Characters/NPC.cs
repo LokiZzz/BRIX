@@ -17,7 +17,7 @@ namespace BRIX.Library.Characters
             {
                 int powerByAbilities = Abilities.Sum(x => x.ExpCost());
                 int powerBySpeed = Speed.GetExpCost();
-                int powerByHealth = CharacterCalculator.HealthToExp(SetHealth);
+                int powerByHealth = ExperienceCalculator.HealthToExp(SetHealth);
 
                 return (powerByAbilities + powerBySpeed + powerByHealth) / 2;
             }

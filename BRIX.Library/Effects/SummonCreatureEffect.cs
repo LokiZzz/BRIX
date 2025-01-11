@@ -28,7 +28,7 @@ namespace BRIX.Library.Effects
         private static int GetPowerForSummon(NPC creature)
         {
             int abilityPower = creature.Abilities.Sum(x => x.ExpCost());
-            int healthPower = CharacterCalculator.HealthToExp(creature.SetHealth);
+            int healthPower = ExperienceCalculator.HealthToExp(creature.SetHealth);
             int speedPower = creature.Speed.GetExpCost();
             // Защита от призыва стеклянной пушки. Снижается важность здоровья и скорости в расчёте.
             // Вместо просто среднего арифметического используется среднее с коэффициентами влияния.

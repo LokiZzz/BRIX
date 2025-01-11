@@ -3,13 +3,33 @@
 <div class="section">
     <div class="container block">
         <p class="title">@Character?.Name</p>
-        <p class="subtitle">@CharacterId</p>
         <p class="subtitle">@Localization[nameof(Resource.Characters_Level)] @Character?.Level</p>
     </div>
-    <TabComponent Class="is-centered is-boxed">
+    <Tab Class="is-centered is-boxed">
         <TabItem Title="@Localization[nameof(Resource.Character)]">
-            <div class="notification">
-                <p>Основная информация о персонаже.</p>
+            <div class="card block">
+                <div class="card-content">
+                    <div class="is-flex is-justify-content-space-between">
+                        <div>
+                            <p class="title is-size-4">@Localization[nameof(Resource.Characters_Experience)]</p>
+                            <p class="subtitle is-size-6">
+                                <span>@Character?.Experience</span>
+                                <span> / </span>
+                                <span>@NextLevelOn</span>
+                            </p>
+                        </div>
+                        <div>
+                            <button class="button is-medium">
+                                <span class="icon">
+                                    <i class="fas fa-calculator"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <progress class="progress is-success is-small m-3" value="@Character?.Experience" max="@NextLevelOn" />
+                </div>
             </div>
         </TabItem>
         <TabItem Title="@Localization[nameof(Resource.Character_Abilities)]">
@@ -27,7 +47,7 @@
                 <p>Детальная информация о персонаже.</p>
             </div>
         </TabItem>
-    </TabComponent>
+    </Tab>
 </div>
 
 @code {
@@ -35,6 +55,8 @@
     public Guid? CharacterId { get; set; }
 
     public Character? Character { get; set; }
+
+    public int NextLevelOn => ExperienceCalculator.GetExpForLevel(Character?.Level + 1 ?? 0);
 
     protected override async Task OnInitializedAsync()
     {

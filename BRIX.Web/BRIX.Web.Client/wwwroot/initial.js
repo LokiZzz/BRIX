@@ -1,6 +1,9 @@
-﻿window.hideSplash = () => {
-    var btn = document.getElementById('splash');
-    btn.style.display = 'none';
+﻿var splash = document.getElementById('splash');
+splash.style.display = 'flex';
+
+window.hideSplash = () => {
+    var splash = document.getElementById('splash');
+    splash.style.display = 'none';
 };
 
 window.blazorCulture = {

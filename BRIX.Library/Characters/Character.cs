@@ -22,7 +22,7 @@ namespace BRIX.Library.Characters
 
         public Inventory Inventory { get; set; } = new();
 
-        public int Level => CharacterCalculator.GetLevelFromExp(Experience);
+        public int Level => ExperienceCalculator.GetLevelFromExp(Experience);
 
         public int Experience { get; set; }
 
@@ -34,11 +34,11 @@ namespace BRIX.Library.Characters
 
         public int AvailableExp => Experience - SpentExp;
 
-        public int ExpToLevelUp => CharacterCalculator.GetExpToLevelUp(Experience);
+        public int ExpToLevelUp => ExperienceCalculator.GetExpToLevelUp(Experience);
 
-        public override int RawMaxHealth => Level * CharacterCalculator.HealthPerLevel;
+        public override int RawMaxHealth => Level * ExperienceCalculator.HealthPerLevel;
 
-        public int HealthFromExp => CharacterCalculator.ExpToHealth(ExpInHealth);
+        public int HealthFromExp => ExperienceCalculator.ExpToHealth(ExpInHealth);
 
         protected override int GetMaxHealth()
         {

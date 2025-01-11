@@ -42,7 +42,7 @@ namespace BRIX.Library.Items
         /// <summary>
         /// Уровень артефакта. Если уровень персонажа ниже, то он не может пользоваться этим артефактом.
         /// </summary>
-        public int Level => CharacterCalculator.GetLevelFromExp(Price / _costExpMultiplier);
+        public int Level => ExperienceCalculator.GetLevelFromExp(Price / _costExpMultiplier);
 
         private readonly int _costExpMultiplier = 5;
 

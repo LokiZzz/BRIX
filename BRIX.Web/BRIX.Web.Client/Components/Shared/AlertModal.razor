@@ -1,0 +1,97 @@
+﻿<div class="modal @_isActiveClass">
+    <div class="modal-background" @onclick="BackgroundClicked"></div>
+    <div class="modal-content">
+        <div class="card">
+            <header class="card-header">
+                <p class="card-header-title">@_title</p>
+            </header>
+            <div class="card-content">
+                <div class="content">
+                    <p>@_message</p>
+                </div>
+            </div>
+            <footer class="card-footer">
+                @switch (_mode)
+                {
+                    case EAlertMode.Ok:
+                        <a class="card-footer-item" @onclick="Ok">
+                            @Localization[nameof(Resource.Common_Ok)]
+                        </a>
+                        break;
+                    case EAlertMode.YesNo:
+                        <a class="card-footer-item" @onclick="No">
+                            @Localization[nameof(Resource.Common_No)]
+                        </a>
+                        <a class="card-footer-item" @onclick="Yes">
+                            @Localization[nameof(Resource.Common_Yes)]
+                        </a>
+                        break;
+                }
+            </footer>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string _isActiveClass = string.Empty;
+    private string _title = string.Empty;
+    private string _message = string.Empty;
+    private EAlertMode _mode = EAlertMode.Ok;
+    Action<AlertResult>? _callback;
+
+    public void Show(AlertParameters parameters)
+    {
+        _title = parameters.Title;
+        _message = parameters.Message;
+        _mode = parameters.Mode;
+        _callback = parameters.EventCallback;
+
+        _isActiveClass = "is-active";
+
+        StateHasChanged();
+    }
+
+    public void Close()
+    {
+        _isActiveClass = string.Empty;
+
+        StateHasChanged();
+    }
+
+    private void BackgroundClicked(MouseEventArgs e)
+    {
+        if (_mode == EAlertMode.Ok)
+        {
+            Close();
+            _callback?.Invoke(new AlertResult(e, false));
+        }
+    }
+
+    private void Ok(MouseEventArgs e)
+    {
+        Close();
+        _callback?.Invoke(new AlertResult(e, true));
+    }
+
+    private void No(MouseEventArgs e)
+    {
+        Close();
+        _callback?.Invoke(new AlertResult(e, false));
+    }
+
+    private void Yes(MouseEventArgs e)
+    {
+        Close();
+        _callback?.Invoke(new AlertResult(e, true));
+    }
+
+    protected override void OnInitialized()
+    {
+        Modal.OnAlert += Show;
+    }
+
+    public void Dispose()
+    {
+        Modal.OnAlert -= Show;
+    }
+}

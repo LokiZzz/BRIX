@@ -24,6 +24,6 @@ namespace BRIX.Library.Effects
         /// </summary>
         public int HealthThreshold { get; set; } = 10;
 
-        public override int BaseExpCost() => (CharacterCalculator.HealthToExp(HealthThreshold) * 3.5).Round();
+        public override int BaseExpCost() => (ExperienceCalculator.HealthToExp(HealthThreshold) * 3.5).Round();
     }
 }

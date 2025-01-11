@@ -7,7 +7,7 @@
     /// 1       2       3       4       5       ...     N
     /// 100     300     600     1000    1500    ...     50 * N * (N + 1)     
     /// </summary>
-    public static class CharacterCalculator
+    public static class ExperienceCalculator
     {
         private static readonly int _expPerLevel = 100;
         private static readonly int _experienceModifier = _expPerLevel / 2;

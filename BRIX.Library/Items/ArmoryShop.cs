@@ -57,8 +57,8 @@ namespace BRIX.Library.Items
             foreach (int itemNumber in Enumerable.Range(0, meleeCount + rangedCount))
             {
                 Artifact weapon = new();
-                int lowPrice = CharacterCalculator.GetExpForLevel(level - 1) * 4;
-                int highPrice = CharacterCalculator.GetExpForLevel(level + 1) * 4;
+                int lowPrice = ExperienceCalculator.GetExpForLevel(level - 1) * 4;
+                int highPrice = ExperienceCalculator.GetExpForLevel(level + 1) * 4;
                 int price = new Random().Next(lowPrice, highPrice);
                 int distance = itemNumber > meleeCount - 1 ? new Random().Next(2, 15) : 1;
                 weapon.Distance = distance;
@@ -82,8 +82,8 @@ namespace BRIX.Library.Items
             foreach (int itemNumber in Enumerable.Range(0, count))
             {
                 Artifact armorItem = new();
-                int lowPrice = CharacterCalculator.GetExpForLevel(level - 1) * 4;
-                int highPrice = CharacterCalculator.GetExpForLevel(level + 1) * 4;
+                int lowPrice = ExperienceCalculator.GetExpForLevel(level - 1) * 4;
+                int highPrice = ExperienceCalculator.GetExpForLevel(level + 1) * 4;
                 int price = new Random().Next(lowPrice, highPrice);
                 armorItem.TuneToPrice(price, EArtifactTuneStrategy.ByDefense);
                 armorItem.Name = GetArmorName(gradeStep, price);
