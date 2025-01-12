@@ -5,11 +5,24 @@
 <PageTitle>@Localization[nameof(Resource.Tab_Home)]</PageTitle>
 
 <div class="section">
+    <h1 class="test-css-class">Вызов алерта!</h1>
+    <div class="modal is-active">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="notification">
+                <p>Modal window!</p>
+            </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+
     <div class="block">
-        <h1 class="title">Вызов алерта</h1>
+        <h1 class="title">Вызов алерта!</h1>
         <p class="block">Результат алерта: «@_alertResult»</p>
+        <p class="block">Результат нумерика: «@_valueChangedByNumeric.ToString()»</p>
         <button class="button" @onclick="AlertYesNo">Да / Нет</button>
         <button class="button" @onclick="AlertOk">Ok</button>
+        <button class="button" @onclick="Numeric">Нумерик</button>
     </div>
 
     <div class="block">
@@ -39,6 +52,7 @@
 @code
 {
     private string _alertResult = string.Empty;
+    private int _valueChangedByNumeric = 55;
 
     private DropdownItem SelectedDropdownItem { get; set; } = default!;
 
@@ -64,7 +78,7 @@
             Title = "Заголовок",
             Message = "Сообщение алерта, в котором написана какая-то важная информация или вопрос, на который должен ответить пользователь. После нажатия на кнопку или после закрытия алерта будет вызван колбек с результатом алерта.",
             Mode = EAlertMode.YesNo,
-            EventCallback = AlertCallbackHandler
+            Callback = AlertCallbackHandler
         });
     }
 
@@ -74,13 +88,30 @@
             Title = "Заголовок",
             Message = "Сообщение алерта, в котором написана какая-то важная информация или вопрос, на который должен ответить пользователь. После нажатия на кнопку или после закрытия алерта будет вызван колбек с результатом алерта.",
             Mode = EAlertMode.Ok,
-            EventCallback = AlertCallbackHandler
+            Callback = AlertCallbackHandler
         });
     }
 
     private void AlertCallbackHandler(AlertResult result)
     {
         _alertResult = $"IsPositive: {result.IsPositive}; Mouse: btn{result.MouseEventArgs.Button}, x:{result.MouseEventArgs.ClientX}, y:{result.MouseEventArgs.ClientX};";
+        StateHasChanged();
+    }
+
+    private void Numeric(MouseEventArgs e)
+    {
+        Modal.Numeric(
+            new NumericParameters
+            {
+                Title = "Заголовок нумерика",
+                Callback = NumericCallbackHandler
+            }
+        );
+    }
+
+    private void NumericCallbackHandler(NumericResult result)
+    {
+        result.ApplyAction(ref _valueChangedByNumeric);
         StateHasChanged();
     }
 }

@@ -2,6 +2,10 @@
 {
     public class ModalService
     {
+        public event Action<bool>? OnIsBusyChanged;
+        public event Action<AlertParameters>? OnAlert;
+        public event Action<NumericParameters>? OnNumeric;
+
         private bool _isBusy = false;
         public bool IsBusy
         {
@@ -13,12 +17,10 @@
             }
         }
 
+        private void NotifyIsBusyChanged(bool isBusy) => OnIsBusyChanged?.Invoke(isBusy);
+
         public void Alert(AlertParameters parameters) => OnAlert?.Invoke(parameters);
 
-        public event Action<bool>? OnIsBusyChanged;
-
-        public event Action<AlertParameters>? OnAlert;
-        
-        private void NotifyIsBusyChanged(bool isBusy) => OnIsBusyChanged?.Invoke(isBusy);
+        public void Numeric(NumericParameters parameters) => OnNumeric?.Invoke(parameters);
     }
 }

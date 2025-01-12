@@ -1,0 +1,152 @@
+﻿@implements IDisposable
+
+<div class="modal @_isActiveClass">
+    <div class="modal-background" @onclick="BackgroundClicked"></div>
+    <div class="modal-content">
+        <div class="card">
+            <header class="card-header">
+                <p class="title card-header-title">@_title</p>
+            </header>
+            <div class="card-content">
+                <div class="fixed-grid">
+                    <div class="grid has-3-cols">
+                        <div class="cell is-col-span-3">
+                            <InputNumber 
+                            class="input is-medium has-text-centered" 
+                            readonly 
+                            @bind-Value="_value"/>
+                        </div>
+
+                        <div class="cell">
+                            <button class="button is-large" @onclick="@(() => AddNumber(7))">
+                                <span class="icon">7</span>
+                            </button>
+                        </div>
+                        <div class="cell">
+                            <button class="button is-large" @onclick="@(() => AddNumber(8))">
+                                <span class="icon">8</span>
+                            </button>
+                        </div>
+                        <div class="cell">
+                            <button class="button is-large" @onclick="@(() => AddNumber(9))">
+                                <span class="icon">9</span>
+                            </button>
+                        </div>
+
+                        <div class="cell">
+                            <button class="button is-large" @onclick="@(() => AddNumber(4))">
+                                <span class="icon">4</span>
+                            </button>
+                        </div>
+                        <div class="cell">
+                            <button class="button is-large" @onclick="@(() => AddNumber(5))">
+                                <span class="icon">5</span>
+                            </button>
+                        </div>
+                        <div class="cell">
+                            <button class="button is-large" @onclick="@(() => AddNumber(6))">
+                                <span class="icon">6</span>
+                            </button>
+                        </div>
+
+                        <div class="cell">
+                            <button class="button is-large" @onclick="@(() => AddNumber(1))">
+                                <span class="icon">1</span>
+                            </button>
+                        </div>
+                        <div class="cell">
+                            <button class="button is-large" @onclick="@(() => AddNumber(2))">
+                                <span class="icon">2</span>
+                            </button>
+                        </div>
+                        <div class="cell">
+                            <button class="button is-large" @onclick="@(() => AddNumber(3))">
+                                <span class="icon">3</span>
+                            </button>
+                        </div>
+
+                        <div class="cell">
+                            <button class="button is-large" @onclick="Clear">
+                                <span class="icon"><i class="fas fa-xmark-circle" /></span>
+                            </button>
+                        </div>
+                        <div class="cell">
+                            <button class="button is-large" @onclick="@(() => AddNumber(0))">
+                                <span class="icon">0</span>
+                            </button>
+                        </div>
+                        <div class="cell">
+                            <button class="button is-large" @onclick="Backspace">
+                                <span class="icon"><i class="fas fa-backspace" /></span>
+                            </button>
+                        </div>
+
+                        <div class="cell">
+                            <button class="button is-large is-success is-outlined" @onclick="Plus">
+                                <span class="icon"><i class="fas fa-plus-circle" /></span>
+                            </button>
+                        </div>
+                        <div class="cell">
+                            <button class="button is-large is-primary is-outlined" @onclick="Set">
+                                <span class="icon"><i class="fas fa-check-circle" /></span>
+                            </button>
+                        </div>
+                        <div class="cell">
+                            <button class="button is-large is-danger is-outlined" @onclick="Minus">
+                                <span class="icon"><i class="fas fa-minus-circle" /></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string _isActiveClass = string.Empty;
+    private string _title = string.Empty;
+    Action<NumericResult>? _callback;
+    private int _value = 0;
+
+    public void Show(NumericParameters parameters)
+    {
+        _title = parameters.Title;
+        _callback = parameters.Callback;
+
+        _isActiveClass = "is-active";
+
+        StateHasChanged();
+    }
+
+    public void Close(NumericResult result)
+    {
+        _isActiveClass = string.Empty;
+        _value = 0;
+        StateHasChanged();
+        _callback?.Invoke(result);
+    }
+
+    private void BackgroundClicked(MouseEventArgs e) => Close(new NumericResult(e));
+
+    private void AddNumber(int number)
+    {
+        int newValue = _value * 10 + number;
+
+        if (newValue > _value)
+        {
+            _value = newValue;
+        }
+    }
+
+    private void Backspace() => _value = _value / 10;
+    private void Clear() => _value = 0;
+
+    private void Plus(MouseEventArgs e) => Close(new NumericResult(e, _value, ENumericAction.Add));
+    private void Minus(MouseEventArgs e) => Close(new NumericResult(e, _value, ENumericAction.Substract));
+    private void Set(MouseEventArgs e) => Close(new NumericResult(e, _value, ENumericAction.Set));
+
+    protected override void OnInitialized() => Modal.OnNumeric += Show;
+
+    public void Dispose() => Modal.OnNumeric -= Show;
+}

@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components;
-
-namespace BRIX.Web.Client.Services.UI
+﻿namespace BRIX.Web.Client.Services.UI
 {
     public class AlertParameters
     {
@@ -11,6 +8,6 @@ namespace BRIX.Web.Client.Services.UI
 
         public EAlertMode Mode { get; set; }
 
-        public Action<AlertResult>? EventCallback { get; set; }
+        public Action<AlertResult>? Callback { get; set; }
     }
 }

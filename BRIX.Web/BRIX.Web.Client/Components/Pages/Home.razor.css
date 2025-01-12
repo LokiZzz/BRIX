@@ -1,0 +1,7 @@
+﻿.modal {
+    --bulma-modal-content-width: auto;
+}
+
+.test-css-class {
+    color: orangered;
+}
