@@ -4,96 +4,51 @@
     <div class="modal-background" @onclick="BackgroundClicked"></div>
     <div class="modal-content">
         <div class="card">
-            <header class="card-header has-text-right">
+            <header class="card-header">
                 <p class="card-header-title">@_title</p>
             </header>
             <div class="card-content">
-                <div class="container">
-                    <div class="fixed-grid">
-                        <div class="grid has-3-cols">
-                            <div class="cell is-col-span-3">
-                                <InputNumber class="input is-medium has-text-right" readonly @bind-Value="_value"/>
-                            </div>
+                <div class="fixed-grid has-3-cols">
+                    <div class="grid">
+                        <div class ="cell is-col-span-3">
+                            <InputNumber class="input is-medium has-text-right block" readonly @bind-Value="_value" />
+                        </div>
 
-                            <div class="cell">
-                                <button class="button is-large" @onclick="@(() => AddNumber(7))">
-                                    <span class="icon">7</span>
-                                </button>
-                            </div>
-                            <div class="cell">
-                                <button class="button is-large" @onclick="@(() => AddNumber(8))">
-                                    <span class="icon">8</span>
-                                </button>
-                            </div>
-                            <div class="cell">
-                                <button class="button is-large" @onclick="@(() => AddNumber(9))">
-                                    <span class="icon">9</span>
-                                </button>
-                            </div>
+                        <div class="cell"><button class="button is-large" @onclick="@(() => AddNumber(7))">7</button></div>
+                        <div class="cell"><button class="button is-large" @onclick="@(() => AddNumber(8))">8</button></div>
+                        <div class="cell"><button class="button is-large" @onclick="@(() => AddNumber(9))">9</button></div>
 
-                            <div class="cell">
-                                <button class="button is-large" @onclick="@(() => AddNumber(4))">
-                                    <span class="icon">4</span>
-                                </button>
-                            </div>
-                            <div class="cell">
-                                <button class="button is-large" @onclick="@(() => AddNumber(5))">
-                                    <span class="icon">5</span>
-                                </button>
-                            </div>
-                            <div class="cell">
-                                <button class="button is-large" @onclick="@(() => AddNumber(6))">
-                                    <span class="icon">6</span>
-                                </button>
-                            </div>
+                        <div class="cell"><button class="button is-large" @onclick="@(() => AddNumber(4))">4</button></div>
+                        <div class="cell"><button class="button is-large" @onclick="@(() => AddNumber(5))">5</button></div>
+                        <div class="cell"><button class="button is-large" @onclick="@(() => AddNumber(6))">6</button></div>
 
-                            <div class="cell">
-                                <button class="button is-large" @onclick="@(() => AddNumber(1))">
-                                    <span class="icon">1</span>
-                                </button>
-                            </div>
-                            <div class="cell">
-                                <button class="button is-large" @onclick="@(() => AddNumber(2))">
-                                    <span class="icon">2</span>
-                                </button>
-                            </div>
-                            <div class="cell">
-                                <button class="button is-large" @onclick="@(() => AddNumber(3))">
-                                    <span class="icon">3</span>
-                                </button>
-                            </div>
-
-                            <div class="cell">
-                                <button class="button is-large" @onclick="Clear">
-                                    <span class="icon"><i class="fas fa-xmark-circle" /></span>
-                                </button>
-                            </div>
-                            <div class="cell">
-                                <button class="button is-large" @onclick="@(() => AddNumber(0))">
-                                    <span class="icon">0</span>
-                                </button>
-                            </div>
-                            <div class="cell">
-                                <button class="button is-large" @onclick="Backspace">
-                                    <span class="icon"><i class="fas fa-backspace" /></span>
-                                </button>
-                            </div>
-
-                            <div class="cell">
-                                <button class="button is-large is-success is-outlined" @onclick="Plus">
-                                    <span class="icon"><i class="fas fa-plus-circle" /></span>
-                                </button>
-                            </div>
-                            <div class="cell">
-                                <button class="button is-large is-primary is-outlined" @onclick="Set">
-                                    <span class="icon"><i class="fas fa-check-circle" /></span>
-                                </button>
-                            </div>
-                            <div class="cell">
-                                <button class="button is-large is-danger is-outlined" @onclick="Minus">
-                                    <span class="icon"><i class="fas fa-minus-circle" /></span>
-                                </button>
-                            </div>
+                        <div class="cell"><button class="button is-large" @onclick="@(() => AddNumber(1))">1</button></div>
+                        <div class="cell"><button class="button is-large" @onclick="@(() => AddNumber(2))">2</button></div>
+                        <div class="cell"><button class="button is-large" @onclick="@(() => AddNumber(3))">3</button></div>
+                        
+                        <div class="cell">
+                            <button class="button is-large" @onclick="Clear"><i class="fas fa-xmark-circle" /></button>
+                        </div>
+                        <div class="cell">
+                            <button class="button is-large" @onclick="@(() => AddNumber(0))">0</button>
+                        </div>
+                        <div class="cell">
+                            <button class="button is-large" @onclick="Backspace"><i class="fas fa-backspace" /></button>
+                        </div>
+                        <div class="cell">
+                            <button class="button is-large has-text-success" @onclick="Plus">
+                                <i class="fas fa-plus-circle" />
+                            </button>
+                        </div>
+                        <div class="cell">
+                            <button class="button is-large has-text-primary" @onclick="Set">
+                                <i class="fas fa-check-circle" />
+                            </button>
+                        </div>
+                        <div class="cell">
+                            <button class="button is-large has-text-danger" @onclick="Minus">
+                                <i class="fas fa-minus-circle" />
+                            </button>
                         </div>
                     </div>
                 </div>
