@@ -1,10 +1,9 @@
 ﻿.modal {
-    --bulma-modal-content-width: 20rem;
-    --bulma-modal-content-margin-mobile: 2rem;
+    --bulma-modal-content-width: 25rem;
 }
 
 .modal-content {
-    max-width: 20rem;
+    max-width: 25rem;
 }
 
 .button {

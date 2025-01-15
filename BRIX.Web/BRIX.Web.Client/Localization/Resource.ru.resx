@@ -294,4 +294,7 @@
   <data name="Common_Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
+  <data name="Common_Clear" xml:space="preserve">
+    <value>Очистить</value>
+  </data>
 </root>

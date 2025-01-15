@@ -1,0 +1,23 @@
+﻿.modal {
+    --bulma-modal-background-background-color: transparent;
+    pointer-events: none;
+    justify-content: flex-end;
+}
+
+.modal-background {
+    pointer-events: none;
+}
+
+.modal-content {
+    pointer-events: auto;
+}
+
+.button {
+    width: 100%;
+    box-shadow: 0rem 0.8rem 0.8rem 0rem rgba(0, 0, 0, 0.75);
+}
+
+.notification {
+    --bulma-block-spacing: 1rem;
+    box-shadow: 0rem 0.8rem 0.8rem 0rem rgba(0, 0, 0, 0.75);
+}
