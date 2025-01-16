@@ -2,6 +2,8 @@
 {
     public static class ProblemCodes
     {
+        public const string UnknownError = nameof(UnknownError);
+
         public static class Account
         {
             public const string InvalidCredentials = nameof(InvalidCredentials);

@@ -156,7 +156,7 @@
   <data name="Account_ConfirmedSuccessfully" xml:space="preserve">
     <value>Account confirmed successfully.</value>
   </data>
-	<data name="Account_ConfirmFailed" xml:space="preserve">
+  <data name="Account_ConfirmFailed" xml:space="preserve">
     <value>Something goes wrong when trying to confirm account.</value>
   </data>
   <data name="Account_ConfirmPassword" xml:space="preserve">
@@ -284,5 +284,12 @@
   </data>
   <data name="Common_Clear" xml:space="preserve">
     <value>Clear</value>
+  </data>
+  <data name="Problem_UserNotFound" xml:space="preserve">
+    <value>User not found.</value>
+  </data>
+  <data name="Problem_InvalidToken" xml:space="preserve">
+    <value>Invalid token.</value>
+    <comment>IdentityResult</comment>
   </data>
 </root>

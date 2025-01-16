@@ -466,6 +466,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid token..
+        /// </summary>
+        public static string Problem_InvalidToken {
+            get {
+                return ResourceManager.GetString("Problem_InvalidToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Passwords must have at least one digit (&apos;0&apos;-&apos;9&apos;)..
         /// </summary>
         public static string Problem_PasswordRequiresDigit {
@@ -507,6 +516,15 @@ namespace BRIX.Web.Client.Localization {
         public static string Problem_UnknownError {
             get {
                 return ResourceManager.GetString("Problem_UnknownError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User not found..
+        /// </summary>
+        public static string Problem_UserNotFound {
+            get {
+                return ResourceManager.GetString("Problem_UserNotFound", resourceCulture);
             }
         }
         

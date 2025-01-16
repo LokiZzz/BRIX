@@ -69,7 +69,11 @@ namespace BRIX.Web.Client.Services.Auth
             SignInResult result = response.ToOperationResult<SignInResult>();
             result.NeedToConfirmAccount = response.HasProblem(ProblemCodes.Account.NeedToConfirmAccount);
 
-            _modalService.PushErrors(result.Errors);
+            if (!result.NeedToConfirmAccount)
+            {
+                _modalService.PushErrors(result.Errors);
+            }
+
             _modalService.IsBusy = false;
 
             return result;

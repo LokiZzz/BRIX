@@ -173,8 +173,14 @@ namespace BRIX.GameService.Services.Account
                 {
                     return;
                 }
+                else if(result.Errors.Any())
+                {
+                    throw new ProblemException(
+                        result.Errors.Select(x => (x.Code, x.Description)).ToArray()
+                    );
+                }
 
-                throw new ProblemException(ProblemCodes.Account.WrongResetToken, "Wrong reset passwortd token.");
+                throw new ProblemException(ProblemCodes.UnknownError, "Wrong reset password token.");
             }
 
             throw new ProblemException(ProblemCodes.Account.UserNotFound, "User is not found.");
