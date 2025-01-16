@@ -37,5 +37,14 @@
 
             OnNotifications?.Invoke(notifications);
         }
+
+        public void PushNotification(ENotificationType type, string message)
+        {
+            OnNotification?.Invoke(new Notification { 
+                Type = type,
+                Message = message
+            });
+        }
+
     }
 }

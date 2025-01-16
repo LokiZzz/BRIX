@@ -156,12 +156,6 @@
   <data name="Account_ConfirmedSuccessfully" xml:space="preserve">
     <value>Аккаунт успешно подтверждён.</value>
   </data>
-  <data name="Account_ConfirmFailed" xml:space="preserve">
-    <value>При подтверждении аккаунта что-то пошло не так.</value>
-  </data>
-  <data name="Account_SignInFailed" xml:space="preserve">
-    <value>Электронная почта не найдена или был введен неверный пароль.</value>
-  </data>
   <data name="Account_ConfirmPassword" xml:space="preserve">
     <value>Повторите пароль</value>
   </data>
@@ -189,26 +183,17 @@
   <data name="Account_TooOftenResendRequest" xml:space="preserve">
     <value>Вы слишком часто отправляете запросы на подтвержедние аккаунта, подождите немного, прежде чем сделать новый запрос.</value>
   </data>
-  <data name="Account_ResendError" xml:space="preserve">
-    <value>Во время отправки повторного письма произошла ошибка, попробуйте повторить запрос позже.</value>
-  </data>
   <data name="Account_ResendConfirmationSucceeded" xml:space="preserve">
     <value>Письмо со ссылкой для активации аккаунта успешно отправлено.</value>
   </data>
   <data name="Account_ChangePassword" xml:space="preserve">
     <value>Изменить пароль</value>
   </data>
-  <data name="Account_ResetPasswordError" xml:space="preserve">
-    <value>При попытке смены пароля произошла ошибка.</value>
-  </data>
   <data name="Account_ResetPassword" xml:space="preserve">
     <value>Сбросить пароль</value>
   </data>
   <data name="Account_ForgotPasswordRequestSuccseeded" xml:space="preserve">
     <value>Ссылка для восстановления пароля успешно отправлена на электронную почту.</value>
-  </data>
-  <data name="Account_ForgotPasswordFailed" xml:space="preserve">
-    <value>Не удалось отправить ссылку для восстановления пароля на электронную почту.</value>
   </data>
   <data name="Account_ForgotPasswordHint" xml:space="preserve">
     <value>Чтобы восстановить пароль, укажите адрес электронной почты, на который будет отправлено электронное письмо со ссылкой для установки нового пароля.</value>

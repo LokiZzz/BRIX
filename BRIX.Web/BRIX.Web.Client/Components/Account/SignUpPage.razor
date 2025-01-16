@@ -46,15 +46,11 @@
 
     private async Task HandleRegistration()
     {
-        Modal.IsBusy = true;
-
         OperationResult result = await AuthService.SignUp(RegisterModel.ToDto());
 
         if (result.Successfull)
         {
             NavigationManager.NavigateTo("/sign-in?needconfirm=true");
         }
-
-        Modal.IsBusy = false;
     }
 }

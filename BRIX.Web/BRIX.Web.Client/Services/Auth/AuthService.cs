@@ -8,12 +8,10 @@ using System.Net;
 using BRIX.Web.Client.Models.Common;
 using BRIX.Web.Client.Extensions;
 using BRIX.Web.Client.Models.Account;
-using System.Net.Http;
 using BRIX.Web.Client.Options;
 using Microsoft.Extensions.Options;
 using BRIX.Web.Problems;
 using BRIX.Web.Client.Services.UI;
-using BRIX.Utility.Extensions;
 
 namespace BRIX.Web.Client.Services.Auth
 {
@@ -40,16 +38,21 @@ namespace BRIX.Web.Client.Services.Auth
 
         public async Task<OperationResult> SignUp(SignUpRequest model)
         {
+            _modalService.IsBusy = true;
+
             JsonResponse response = await _httpClient.PostJsonAsync("api/account/signup", model);
             OperationResult result = response.ToOperationResult();
 
             _modalService.PushErrors(result.Errors);
+            _modalService.IsBusy = false;
 
             return result;
         }
 
         public async Task<SignInResult> SignIn(SignInRequest model)
         {
+            _modalService.IsBusy = true;
+
             JsonResponse<SignInResponse> response = await _httpClient.PostJsonAsync<SignInRequest, SignInResponse>(
                 "api/account/signin", 
                 model
@@ -66,6 +69,9 @@ namespace BRIX.Web.Client.Services.Auth
             SignInResult result = response.ToOperationResult<SignInResult>();
             result.NeedToConfirmAccount = response.HasProblem(ProblemCodes.Account.NeedToConfirmAccount);
 
+            _modalService.PushErrors(result.Errors);
+            _modalService.IsBusy = false;
+
             return result;
         }
 
@@ -78,14 +84,22 @@ namespace BRIX.Web.Client.Services.Auth
 
         public async Task<OperationResult> ForgotPassword(string email)
         {
+            _modalService.IsBusy = true;
+
             string uri = QueryHelpers.AddQueryString("api/account/forgotpassword", "email", email);
             JsonResponse response = await _httpClient.GetJsonAsync(uri);
+            OperationResult result = response.ToOperationResult();
 
-            return response.ToOperationResult();
+            _modalService.PushErrors(result.Errors);
+            _modalService.IsBusy = false;
+
+            return result;
         }
 
         public async Task<OperationResult> ResetPassword(string userId, string newPassword, string token)
         {
+            _modalService.IsBusy = true;
+
             JsonResponse response = await _httpClient.PostJsonAsync(
                 "api/account/resetpassword", 
                 new ResetPasswordRequest 
@@ -96,14 +110,25 @@ namespace BRIX.Web.Client.Services.Auth
                 }
             );
 
-            return response.ToOperationResult();
+            OperationResult result = response.ToOperationResult();
+
+            _modalService.PushErrors(result.Errors);
+            _modalService.IsBusy = false;
+
+            return result;
         }
 
         public async Task<ResendEmailConfirmationResult> ResendConfirmationEmail(string email)
         {
+            _modalService.IsBusy = true;
+
             string uri = QueryHelpers.AddQueryString("api/account/resendconfirmationemail", "email", email);
             JsonResponse<ResendConfirmationEmailResponse> response = await _httpClient
                 .GetJsonAsync<ResendConfirmationEmailResponse>(uri);
+            OperationResult result = response.ToOperationResult();
+
+            _modalService.PushErrors(result.Errors);
+            _modalService.IsBusy = false;
 
             return new ResendEmailConfirmationResult()
             {

@@ -124,15 +124,6 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The password recovery link could not be sent to the email..
-        /// </summary>
-        public static string Account_ForgotPasswordFailed {
-            get {
-                return ResourceManager.GetString("Account_ForgotPasswordFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to To restore the password, specify the email address to which an email will be sent with a link to set a new password..
         /// </summary>
         public static string Account_ForgotPasswordHint {
@@ -205,29 +196,11 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error occured while tryind to resend activation email..
-        /// </summary>
-        public static string Account_ResendError {
-            get {
-                return ResourceManager.GetString("Account_ResendError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Reset password.
         /// </summary>
         public static string Account_ResetPassword {
             get {
                 return ResourceManager.GetString("Account_ResetPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reset password error occured..
-        /// </summary>
-        public static string Account_ResetPasswordError {
-            get {
-                return ResourceManager.GetString("Account_ResetPasswordError", resourceCulture);
             }
         }
         
@@ -246,15 +219,6 @@ namespace BRIX.Web.Client.Localization {
         public static string Account_SignInAction {
             get {
                 return ResourceManager.GetString("Account_SignInAction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Email or password is not correct..
-        /// </summary>
-        public static string Account_SignInFailed {
-            get {
-                return ResourceManager.GetString("Account_SignInFailed", resourceCulture);
             }
         }
         

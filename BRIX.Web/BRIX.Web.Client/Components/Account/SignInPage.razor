@@ -9,11 +9,6 @@
 
             <ValidationSummary class="notification block is-danger"/>
 
-            @if(_info is not null)
-            {
-                <div class="notification block @_info.Value.Type">@_info.Value.Message</div>
-            }
-
             @if(NeedConfirm == true)
             {
                 <div class="notification block is-warning">
@@ -66,15 +61,10 @@
     [SupplyParameterFromQuery]
     private bool? NeedConfirm { get; set; }
 
-    private (string Message, string Type)? _info;
-
     private SignInModel loginModel = new SignInModel();
 
     private async Task HandleLogin()
     {
-        Modal.IsBusy = true;
-
-        _info = null;
         NeedConfirm = null;
         SignInResult result = await AuthService.SignIn(loginModel.ToDto());
 
@@ -82,19 +72,10 @@
         {
             NavigationManager.NavigateTo("/");
         }
-        else
+        else if(result.NeedToConfirmAccount)
         {
-            if(result.NeedToConfirmAccount)
-            {
-                NeedConfirm = true;
-            }
-            else
-            {
-                _info = (@Localization[nameof(Resource.Account_SignInFailed)], "is-danger");
-            }
+            NeedConfirm = true;
         }
-
-        Modal.IsBusy = false;
     }
 
     private void GoToResend(MouseEventArgs e) => NavigationManager.NavigateTo("/resend-confirmation-email");
@@ -104,16 +85,21 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        _info = null;
 
         if(Confirmed == true)
         {
-            _info = (@Localization[nameof(Resource.Account_ConfirmedSuccessfully)], "is-success");
+           Modal.PushNotification(
+               ENotificationType.Success,
+               Localization[nameof(Resource.Account_ConfirmedSuccessfully)]
+           );
         }
 
         if(Confirmed == false)
         {
-            _info = (@Localization[nameof(Resource.Account_ConfirmFailed)], "is-danger");
+           Modal.PushNotification(
+               ENotificationType.Error,
+               Localization[nameof(Resource.Account_ConfirmFailed)]
+           );
         }
     }
 }

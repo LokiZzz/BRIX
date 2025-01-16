@@ -156,11 +156,8 @@
   <data name="Account_ConfirmedSuccessfully" xml:space="preserve">
     <value>Account confirmed successfully.</value>
   </data>
-  <data name="Account_ConfirmFailed" xml:space="preserve">
+	<data name="Account_ConfirmFailed" xml:space="preserve">
     <value>Something goes wrong when trying to confirm account.</value>
-  </data>
-  <data name="Account_SignInFailed" xml:space="preserve">
-    <value>Email or password is not correct.</value>
   </data>
   <data name="Account_ConfirmPassword" xml:space="preserve">
     <value>Confirm password</value>
@@ -189,26 +186,17 @@
   <data name="Account_TooOftenResendRequest" xml:space="preserve">
     <value>You send account verification requests too often, wait a bit before making a new request.</value>
   </data>
-  <data name="Account_ResendError" xml:space="preserve">
-    <value>Error occured while tryind to resend activation email.</value>
-  </data>
   <data name="Account_ResendConfirmationSucceeded" xml:space="preserve">
     <value>The email with the account activation link has been successfully sent.</value>
   </data>
   <data name="Account_ChangePassword" xml:space="preserve">
     <value>Change password</value>
   </data>
-  <data name="Account_ResetPasswordError" xml:space="preserve">
-    <value>Reset password error occured.</value>
-  </data>
   <data name="Account_ResetPassword" xml:space="preserve">
     <value>Reset password</value>
   </data>
   <data name="Account_ForgotPasswordRequestSuccseeded" xml:space="preserve">
     <value>The link for password recovery has been successfully sent to your email.</value>
-  </data>
-  <data name="Account_ForgotPasswordFailed" xml:space="preserve">
-    <value>The password recovery link could not be sent to the email.</value>
   </data>
   <data name="Account_ForgotPasswordHint" xml:space="preserve">
     <value>To restore the password, specify the email address to which an email will be sent with a link to set a new password.</value>

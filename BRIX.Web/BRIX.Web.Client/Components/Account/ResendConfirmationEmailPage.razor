@@ -10,58 +10,42 @@
 
             <h1 class="title">@Localization[nameof(Resource.Account_ResendConfirmationEmail)]</h1>
 
-            @if (_showSuccess)
+            <ValidationSummary class="notification block is-danger" />
+
+            <div class="notification block">
+                @Localization[Resource.Account_ResendConfirmationEmailHint]
+            </div>
+
+            @if(_showTooOften)
             {
-                <div class="notification is-success block">
-                    @Localization[Resource.Account_ResendConfirmationSucceeded]
+                <div class="notification is-warning block">
+                    @Localization[Resource.Account_TooOftenResendRequest]
                 </div>
             }
-            else
-            {
-                <ValidationSummary class="notification block is-danger" />
 
-                <div class="notification block">
-                    @Localization[Resource.Account_ResendConfirmationEmailHint]
+            <div class="field">
+                <label class="label">@Localization[nameof(Resource.Account_Email)]</label>
+                <div class="control">
+                    <InputText class="input" type="email" placeholder="address@example.com" @bind-Value="_model.Email" />
                 </div>
+            </div>
 
-                @if(_showTooOften)
-                {
-                    <div class="notification is-warning block">
-                        @Localization[Resource.Account_TooOftenResendRequest]
-                    </div>
-                }
-
-                @if (_showError)
-                {
-                    <div class="notification is-danger block">
-                        @Localization[Resource.Account_ResendError]
-                    </div>
-                }
-
-                <div class="field">
-                    <label class="label">@Localization[nameof(Resource.Account_Email)]</label>
-                    <div class="control">
-                        <InputText class="input" type="email" placeholder="address@example.com" @bind-Value="_model.Email" />
+            <div class="columns is-vcentered">
+                <div class="column">
+                    <Timer OnElapsedDelegate="HandleTimer"
+                    FormatString="@Localization[nameof(Resource.Account_YouCanResendAfter)]"
+                    HideAfterElapsed="true"
+                    ShowBeforeStart="false"
+                    @ref="_timer" />
+                </div>
+                <div class="column is-narrow">
+                    <div class="buttons is-right">
+                        <button type="submit" class="button is-primary @_buttonBusyClass">
+                            @Localization[nameof(Resource.Account_ResendConfirmationEmail)]
+                        </button>
                     </div>
                 </div>
-
-                <div class="columns is-vcentered">
-                    <div class="column">
-                        <Timer OnElapsedDelegate="HandleTimer"
-                               FormatString="@Localization[nameof(Resource.Account_YouCanResendAfter)]"
-                               HideAfterElapsed="true"
-                               ShowBeforeStart="false"
-                               @ref="_timer" />
-                    </div>
-                    <div class="column is-narrow">
-                        <div class="buttons is-right">
-                            <button type="submit" class="button is-primary @_buttonBusyClass">
-                                @Localization[nameof(Resource.Account_ResendConfirmationEmail)]
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            }
+            </div>
         </EditForm>
     </div>
 </div>
@@ -73,8 +57,6 @@
 
     private bool _buttonIsBusy = false;
     private bool _showTooOften = false;
-    private bool _showError = false;
-    private bool _showSuccess = false;
 
     private string _buttonBusyClass => _buttonIsBusy ? "is-loading" : "";
 
@@ -82,10 +64,15 @@
     {
         ResendEmailConfirmationResult result = await AuthService.ResendConfirmationEmail(_model.Email);
 
+        if(result.Successfull)
+        {
+            Modal.PushNotification(
+                ENotificationType.Success,
+                Localization[Resource.Account_ResendConfirmationSucceeded]);
+        }
+
         _buttonIsBusy = result.RetryAfterInSeconds > 0;
         _showTooOften = result.RetryAfterInSeconds > 0;
-        _showError = !result.Successfull && result.RetryAfterInSeconds == 0;
-        _showSuccess = result.Successfull;
 
         if (result.RetryAfterInSeconds > 0)
         {
