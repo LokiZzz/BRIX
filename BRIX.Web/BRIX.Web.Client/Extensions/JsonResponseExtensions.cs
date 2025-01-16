@@ -25,13 +25,13 @@ namespace BRIX.Web.Client.Extensions
         public static OperationResult ToOperationResult(this JsonResponse jsonResponse) =>
             jsonResponse.ToOperationResult<OperationResult>();
 
-        public static string[] ExtractErrors(this JsonResponse jsonResponse)
+        public static List<string> ExtractErrors(this JsonResponse jsonResponse)
         {
             if (jsonResponse.ProblemDetalization is not null)
             {
                 return jsonResponse.ProblemDetalization.Problems
                     .Select(GetLocalizedErrorMessage)
-                    .ToArray();
+                    .ToList();
             }
             else
             {

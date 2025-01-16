@@ -2,8 +2,14 @@
     --bulma-primary-h: 255deg;
     --bulma-primary-s: 83%;
     --bulma-primary-l: 70%;
-    --bulma-success-h: 130deg;
     --bulma-scheme-h: 260;
+    --bulma-success-h: 87deg;
+    --bulma-success-s: 100%;
+    --bulma-success-l: 66%;
+    --bulma-warning-h: 43deg;
+    --bulma-warning-s: 74%;
+    --bulma-warning-l: 62%;
+    --bulma-danger-l: 65%;
 }
 
 .title {

@@ -12,7 +12,10 @@
         <button class="button" @onclick="AlertYesNo">Да / Нет</button>
         <button class="button" @onclick="AlertOk">Ok</button>
         <button class="button" @onclick="Numeric">Нумерик</button>
-        <button class="button" @onclick="PushError">Запушить ошибку</button>
+        <button class="button" @onclick="@(() => PushNotic(ENotificationType.Info))">Запушить Инфо</button>
+        <button class="button" @onclick="@(() => PushNotic(ENotificationType.Success))">Запушить Успех</button>
+        <button class="button" @onclick="@(() => PushNotic(ENotificationType.Warning))">Запушить Предупреждение</button>
+        <button class="button" @onclick="@(() => PushNotic(ENotificationType.Error))">Запушить Ошибку</button>
     </div>
 
     <div class="block">
@@ -26,10 +29,10 @@
         <h1 class="title">Выпадающий список</h1>
         <p class="block">Выбранное значение: «@SelectedDropdownItem?.SomeProperty»</p>
         <Dropdown 
-        Items="DropdownItems" 
-        @bind-Selected="SelectedDropdownItem" 
-        DisplayPropertyDelegate="x => x?.SomeProperty"
-        Placeholder="Please, select Guid..."/>
+            Items="DropdownItems" 
+            @bind-Selected="SelectedDropdownItem" 
+            DisplayPropertyDelegate="x => x?.SomeProperty"
+            Placeholder="Please, select Guid..."/>
     </div>
 
     <div class="block">
@@ -105,8 +108,8 @@
         StateHasChanged();
     }
 
-    private void PushError()
+    private void PushNotic(ENotificationType type)
     {
-        Modal.PushError($"Ошибка! Id: {Guid.NewGuid()}");
+        Modal.PushNotification(new() { Type = type, Message = $"[{type:G}] Сообщение!!! С текстом!!!" });
     }
 }

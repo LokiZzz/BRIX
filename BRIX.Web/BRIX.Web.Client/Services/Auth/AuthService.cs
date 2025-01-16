@@ -12,6 +12,8 @@ using System.Net.Http;
 using BRIX.Web.Client.Options;
 using Microsoft.Extensions.Options;
 using BRIX.Web.Problems;
+using BRIX.Web.Client.Services.UI;
+using BRIX.Utility.Extensions;
 
 namespace BRIX.Web.Client.Services.Auth
 {
@@ -20,24 +22,30 @@ namespace BRIX.Web.Client.Services.Auth
         private readonly AuthenticationStateProvider _authStateProvider;
         private readonly ILocalStorageService _localStorage;
         private readonly HttpClient _httpClient;
+        private readonly ModalService _modalService;
 
         public AuthService(
             AuthenticationStateProvider authStateProvider,
             ILocalStorageService localStorage,
             HttpClient httpClient,
-            IOptions<GameServiceOptions> gameServiceOptions)
+            IOptions<GameServiceOptions> gameServiceOptions,
+            ModalService modalService)
         {
             _authStateProvider = authStateProvider;
             _localStorage = localStorage;
             _httpClient = httpClient;
+            _modalService = modalService;
             _httpClient.BaseAddress = new Uri(gameServiceOptions.Value.ServiceAddress);
         }
 
         public async Task<OperationResult> SignUp(SignUpRequest model)
         {
             JsonResponse response = await _httpClient.PostJsonAsync("api/account/signup", model);
+            OperationResult result = response.ToOperationResult();
 
-            return response.ToOperationResult();
+            _modalService.PushErrors(result.Errors);
+
+            return result;
         }
 
         public async Task<SignInResult> SignIn(SignInRequest model)

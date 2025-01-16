@@ -1,4 +1,5 @@
 ﻿using BRIX.Web.Client.Services.Auth;
+using BRIX.Web.Client.Services.UI;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace BRIX.Web.Host.Extensions
@@ -14,7 +15,7 @@ namespace BRIX.Web.Host.Extensions
 
         public static void AddServices(this IServiceCollection services)
         {
-
+            services.AddSingleton<ModalService>();
         }
     }
 }

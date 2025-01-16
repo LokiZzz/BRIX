@@ -5,7 +5,8 @@
         public event Action<bool>? OnIsBusyChanged;
         public event Action<AlertParameters>? OnAlert;
         public event Action<NumericParameters>? OnNumeric;
-        public event Action<string>? OnError;
+        public event Action<Notification>? OnNotification;
+        public event Action<List<Notification>>? OnNotifications;
 
         private bool _isBusy = false;
         public bool IsBusy
@@ -24,6 +25,17 @@
 
         public void Numeric(NumericParameters parameters) => OnNumeric?.Invoke(parameters);
 
-        public void PushError(string errorMessage) => OnError?.Invoke(errorMessage);
+        public void PushNotification(Notification notification) => OnNotification?.Invoke(notification);
+
+        public void PushNotifications(List<Notification> notifications) => OnNotifications?.Invoke(notifications);
+
+        public void PushErrors(IEnumerable<string> errors)
+        {
+            List<Notification> notifications = errors.Select(x =>
+                new Notification { Type = ENotificationType.Error, Message = x }
+            ).ToList();
+
+            OnNotifications?.Invoke(notifications);
+        }
     }
 }

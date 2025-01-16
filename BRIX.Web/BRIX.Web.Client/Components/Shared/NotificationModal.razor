@@ -1,0 +1,58 @@
+﻿@implements IDisposable
+
+<div class="modal is-active">
+    <div class="modal-background"></div>
+    <div class="modal-content ml-auto mr-0">
+        <div class="container">
+            @foreach (Notification notification in Notifications)
+            {
+                string notificationTypeClass = notification.Type switch
+                {
+                    ENotificationType.Success => "is-success",
+                    ENotificationType.Warning => "is-warning",
+                    ENotificationType.Error => "is-danger",
+                    _ => string.Empty
+                };
+
+                <div class="notification @notificationTypeClass">@notification.Message</div>
+            }
+
+            @if (Notifications?.Count > 0)
+            {
+                <button class="button" @onclick="Clear">
+                    @Localization[nameof(Resource.Common_Clear)]
+                </button>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    public LimitedQueue<Notification> Notifications { get; set; } = new(4);
+
+    public void PushNotification(Notification errorMessage)
+    {
+        Notifications.Enqueue(errorMessage);
+        StateHasChanged();
+    }
+
+    public void PushNotifications(List<Notification> errorMessages)
+    {
+        errorMessages.ForEach(Notifications.Enqueue);
+        StateHasChanged();
+    }
+
+    public void Clear() => Notifications.Clear();
+
+    protected override void OnInitialized()
+    {
+        Modal.OnNotification += PushNotification;
+        Modal.OnNotifications += PushNotifications;
+    }
+
+    public void Dispose()
+    {
+        Modal.OnNotification -= PushNotification;
+        Modal.OnNotifications -= PushNotifications;
+    }
+}

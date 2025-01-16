@@ -9,19 +9,11 @@
 
             <ValidationSummary class="notification block is-danger" />
 
-            @if (Errors?.Count() > 0)
-            {
-                foreach(string error in Errors)
-                {
-                    <div class="notification is-danger">@error</div>
-                }
-            }
-
             <div class="field">
                 <label class="label">@Localization[nameof(Resource.Account_Email)]</label>
                 <div class="control">
                     <InputText class="input" type="email" placeholder="address@example.com"
-                        @bind-Value="RegisterModel.Email" />
+                    @bind-Value="RegisterModel.Email" />
                 </div>
             </div>
 
@@ -29,7 +21,7 @@
                 <label class="label">@Localization[nameof(Resource.Account_Password)]</label>
                 <div class="control">
                     <InputText class="input" type="password" placeholder="********" 
-                        @bind-Value="RegisterModel.Password" />
+                    @bind-Value="RegisterModel.Password" />
                 </div>
             </div>
 
@@ -37,7 +29,7 @@
                 <label class="label">@Localization[nameof(Resource.Account_ConfirmPassword)]</label>
                 <div class="control">
                     <InputText class="input" type="password" placeholder="********" 
-                        @bind-Value="RegisterModel.ConfirmPassword" />
+                    @bind-Value="RegisterModel.ConfirmPassword" />
                 </div>
             </div>
 
@@ -51,12 +43,10 @@
 @code {
 
     private SignUpModel RegisterModel = new ();
-    private bool ShowErrors;
-    private IEnumerable<string> Errors = [];
 
     private async Task HandleRegistration()
     {
-        ShowErrors = false;
+        Modal.IsBusy = true;
 
         OperationResult result = await AuthService.SignUp(RegisterModel.ToDto());
 
@@ -64,10 +54,7 @@
         {
             NavigationManager.NavigateTo("/sign-in?needconfirm=true");
         }
-        else
-        {
-            Errors = result.Errors;
-            ShowErrors = true;
-        }
+
+        Modal.IsBusy = false;
     }
 }
