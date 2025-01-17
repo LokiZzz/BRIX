@@ -1,13 +1,38 @@
-﻿<div class="tabs @Class">
+﻿@* Mobile *@
+<div class="tabs @Class is-hidden-mobile">
     <ul>
         @foreach (TabItem item in Items)
         {
-            <li class="@GetIsActiveClass(item)" @onclick=@(() => ActivateItem(item))>
+            <li class="@GetIsActiveTabClass(item)" @onclick=@(() => ActivateItem(item))>
                 <a>@item.Title</a>
             </li>
         }
     </ul>
 </div>
+
+@* Tablet и шире *@
+<div class="modal @_modalIsActiveClass">
+    <div class="modal-background" @onclick="CloseMenu"></div>
+    <div class="modal-content">
+        <div class="box">
+            @foreach (TabItem item in Items)
+            {
+                <button class="button @GetIsActiveMenuButtonClass(item)" @onclick="@(() => ChooseTabFromMenu(item))">
+                    @item?.Title
+                </button>
+            }
+        </div>
+    </div>
+</div>
+
+@if(ActiveItem != null)
+{
+    <div class="tabs @Class is-hidden-tablet">
+        <button class="button is-fullwidth" @onclick="OpenMenu">
+            @ActiveItem.Title 
+        </button>
+    </div>
+}
 
 <CascadingValue Value="this">
     @ChildContent
@@ -24,6 +49,8 @@
 
     List<TabItem> Items = new List<TabItem>();
 
+    public string _modalIsActiveClass = string.Empty;
+
     internal void AddPage(TabItem item)
     {
         Items.Add(item);
@@ -36,7 +63,25 @@
         StateHasChanged();
     }
 
-    string GetIsActiveClass(TabItem item) => item == ActiveItem ? "is-active" : string.Empty;
+    string GetIsActiveTabClass(TabItem item) => item == ActiveItem ? "is-active" : string.Empty;
+
+    string GetIsActiveMenuButtonClass(TabItem item) => item == ActiveItem ? "is-primary" : string.Empty;
 
     void ActivateItem(TabItem item) => ActiveItem = item;
+
+    private void OpenMenu()
+    {
+        _modalIsActiveClass = "is-active";
+    }
+
+    private void CloseMenu()
+    {
+        _modalIsActiveClass = string.Empty;
+    }
+
+    private void ChooseTabFromMenu(TabItem tab)
+    {
+        ActiveItem = tab;
+        CloseMenu();
+    }
 }
