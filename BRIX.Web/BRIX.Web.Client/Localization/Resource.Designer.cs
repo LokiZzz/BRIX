@@ -322,6 +322,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Health.
+        /// </summary>
+        public static string Characters_Health {
+            get {
+                return ResourceManager.GetString("Characters_Health", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Level.
         /// </summary>
         public static string Characters_Level {

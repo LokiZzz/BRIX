@@ -292,4 +292,7 @@
     <value>Invalid token.</value>
     <comment>IdentityResult</comment>
   </data>
+  <data name="Characters_Health" xml:space="preserve">
+    <value>Health</value>
+  </data>
 </root>

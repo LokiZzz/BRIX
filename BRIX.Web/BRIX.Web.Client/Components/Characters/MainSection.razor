@@ -1,0 +1,126 @@
+﻿<div class="card block">
+    <div class="card-content">
+        <div class="is-flex is-justify-content-space-between">
+            <div>
+                <p class="title is-size-4">@Localization[nameof(Resource.Characters_Experience)]</p>
+                <p class="subtitle is-size-6">
+                    <span>@Character?.Experience</span>
+                    <span> / </span>
+                    <span>@NextLevelOn</span>
+                </p>
+            </div>
+            <div>
+                <button class="button is-medium" @onclick="EditEXP">
+                    <span class="icon">
+                        <i class="fas fa-calculator"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <progress class="progress is-success is-small m-3" value="@Character?.Experience" max="@NextLevelOn" />
+    </div>
+</div>
+
+<div class="card block">
+    <div class="card-content">
+        <div class="is-flex is-justify-content-space-between">
+            <div>
+                <p class="title is-size-4">@Localization[nameof(Resource.Characters_Health)]</p>
+                <p class="subtitle is-size-6">
+                    <span>@Character?.CurrentHealth</span>
+                    <span> / </span>
+                    <span>@Character?.MaxHealth</span>
+                </p>
+            </div>
+            <div class="buttons">
+                <button class="button is-medium" @onclick="EditHealth">
+                    <span class="icon">
+                        <i class="fas fa-calculator"></i>
+                    </span>
+                </button>
+                <button class="button is-medium" @onclick="RestoreHealth">
+                    <span class="icon">
+                        <i class="fas fa-heart"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <progress 
+            class="progress @GetHealthBarColor() is-small m-3" 
+            value="@Character?.CurrentHealth" 
+            max="@Character?.MaxHealth" />
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Character? Character { get; set; } = default!;
+
+    public int NextLevelOn => ExperienceCalculator.GetExpForLevel(Character?.Level + 1 ?? 0);
+
+    private void EditEXP(MouseEventArgs e)
+    {
+        Modal.Numeric(new() { Title = "EXP", Callback = async x => await ApplyEXP(x) });
+    }
+
+    private async Task ApplyEXP(NumericResult result)
+    {
+        int value = result.ApplyAction(Character?.Experience ?? 0);
+
+        if (Character is not null && value >= 0)
+        {
+            Character.Experience = value;
+            await CharacterManager.SaveAsync(Character);
+            StateHasChanged();
+        }
+    }
+
+    private async Task RestoreHealth()
+    {
+        if(Character is not null)
+        {
+            Character.CurrentHealth = Character.MaxHealth;
+            await CharacterManager.SaveAsync(Character);
+            StateHasChanged();
+        }
+    }
+
+    private void EditHealth(MouseEventArgs e)
+    {
+        Modal.Numeric(new() { Title = Resource.Characters_Health, Callback = async x => await ApplyHealth(x) });
+    }
+
+    private async Task ApplyHealth(NumericResult result)
+    {
+        int value = result.ApplyAction(Character?.CurrentHealth ?? 0);
+
+        if (Character is not null && value >= 0)
+        {
+            Character.CurrentHealth = value;
+            await CharacterManager.SaveAsync(Character);
+            StateHasChanged();
+        }
+    }
+
+    private string GetHealthBarColor()
+    {
+        if(Character is null)
+        {
+            return string.Empty;
+        }
+
+        double healthPercent = (double)Character.CurrentHealth / Character.MaxHealth;
+
+        return healthPercent switch
+        {
+            > .5 => "is-success",
+            <= .5 and > .25 => "is-warning",
+            <= .25 => "is-danger",
+            _ => string.Empty
+        };
+    }
+}

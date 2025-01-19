@@ -291,4 +291,7 @@
   <data name="Problem_InvalidToken" xml:space="preserve">
     <value>Невалидный токен.</value>
   </data>
+  <data name="Characters_Health" xml:space="preserve">
+    <value>Здоровье</value>
+  </data>
 </root>
