@@ -1,4 +1,4 @@
-﻿@* Mobile *@
+﻿@* Табы для ширины планшета и шире *@
 <div class="tabs @Class is-hidden-mobile">
     <ul>
         @foreach (TabItem item in Items)
@@ -10,14 +10,16 @@
     </ul>
 </div>
 
-@* Tablet и шире *@
+@* Модалка с меню для мобилки *@
 <div class="modal @_modalIsActiveClass">
     <div class="modal-background" @onclick="CloseMenu"></div>
     <div class="modal-content">
         <div class="box">
             @foreach (TabItem item in Items)
             {
-                <button class="button @GetIsActiveMenuButtonClass(item)" @onclick="@(() => ChooseTabFromMenu(item))">
+                <button 
+                    class="button is-fullwidth block @GetIsActiveMenuButtonClass(item)" 
+                    @onclick="@(() => ChooseTabFromMenu(item))">
                     @item?.Title
                 </button>
             }
@@ -25,11 +27,13 @@
     </div>
 </div>
 
+@* Кнопка меню для мобилки *@
 @if(ActiveItem != null)
 {
     <div class="tabs @Class is-hidden-tablet">
         <button class="button is-fullwidth" @onclick="OpenMenu">
             @ActiveItem.Title 
+            <span class="fas fa-list ml-2"></span>
         </button>
     </div>
 }
@@ -39,11 +43,11 @@
 </CascadingValue>
 
 @code {
-    [Parameter]
-    public RenderFragment? ChildContent { get; set; }
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
 
-    [Parameter]
-    public string Class { get; set; } = string.Empty;
+        [Parameter]
+        public string Class { get; set; } = string.Empty;
 
     public TabItem ActiveItem { get; set; } = default!;
 
@@ -65,7 +69,7 @@
 
     string GetIsActiveTabClass(TabItem item) => item == ActiveItem ? "is-active" : string.Empty;
 
-    string GetIsActiveMenuButtonClass(TabItem item) => item == ActiveItem ? "is-primary" : string.Empty;
+    string GetIsActiveMenuButtonClass(TabItem? item) => item == ActiveItem ? "is-primary" : string.Empty;
 
     void ActivateItem(TabItem item) => ActiveItem = item;
 
@@ -79,9 +83,12 @@
         _modalIsActiveClass = string.Empty;
     }
 
-    private void ChooseTabFromMenu(TabItem tab)
+    private void ChooseTabFromMenu(TabItem? tab)
     {
-        ActiveItem = tab;
-        CloseMenu();
+        if(tab is not null)
+        {
+            ActiveItem = tab;
+            CloseMenu();
+        }
     }
 }

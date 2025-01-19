@@ -19,7 +19,7 @@
                             </p>
                         </div>
                         <div>
-                            <button class="button is-medium">
+                            <button class="button is-medium" @onclick="EditEXP">
                                 <span class="icon">
                                     <i class="fas fa-calculator"></i>
                                 </span>
@@ -54,7 +54,7 @@
     [Parameter]
     public Guid? CharacterId { get; set; }
 
-    public Character? Character { get; set; }
+    public Character? Character { get; set; } = default!;
 
     public int NextLevelOn => ExperienceCalculator.GetExpForLevel(Character?.Level + 1 ?? 0);
 
@@ -69,9 +69,7 @@
         }
         else if(CharacterId is not null)
         {
-            Modal.IsBusy = true;
             Character = await CharacterManager.GetAsync(CharacterId.Value);
-            Modal.IsBusy = false;
 
             if(Character is null)
             {
@@ -79,6 +77,22 @@
             }
 
             CharacterManager.EditingCharacter = Character;
+        }
+    }
+    private void EditEXP(MouseEventArgs e)
+    {
+        Modal.Numeric(new() { Title = "EXP", Callback = async x => await ApplyEXP(x) });
+    }
+
+    private async Task ApplyEXP(NumericResult result)
+    {
+        int value = result.ApplyAction(Character?.Experience ?? 0);
+
+        if (Character is not null && value >= 0)
+        {
+            Character.Experience = value;
+            await CharacterManager.SaveAsync(Character);
+            StateHasChanged();
         }
     }
 }

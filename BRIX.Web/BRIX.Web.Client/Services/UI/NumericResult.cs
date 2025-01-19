@@ -12,7 +12,12 @@ namespace BRIX.Web.Client.Services.UI
 
         public void ApplyAction(ref int initialValue)
         {
-            initialValue = Action switch
+            initialValue = ApplyAction(initialValue);
+        }
+
+        public int ApplyAction(int initialValue)
+        {
+            return Action switch
             {
                 ENumericAction.Add => initialValue + Value,
                 ENumericAction.Substract => initialValue - Value,

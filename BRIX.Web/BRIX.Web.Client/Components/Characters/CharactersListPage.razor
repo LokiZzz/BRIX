@@ -56,9 +56,9 @@
 
     private async Task Delete(Character character)
     {
-        CharacterOperationResponse result = await CharacterManager.DeleteAsync(character);
+        OperationResult result = await CharacterManager.DeleteAsync(character);
 
-        if(result.Success)
+        if(result.Successfull)
         {
             _characters?.Remove(character);
         }

@@ -1,5 +1,4 @@
-﻿using BRIX.GameService.Contracts.Characters;
-using BRIX.GameService.Entities.Users;
+﻿using BRIX.GameService.Entities.Users;
 using BRIX.GameService.Services.Account;
 using BRIX.GameService.Services.Characters;
 using BRIX.Library.Characters;
@@ -42,7 +41,7 @@ namespace BRIX.GameService.Controllers.Characters
             User user = await _accountService.GetCurrentUserGuaranteed();
             await _characterRepository.Push(user.Id, character);
 
-            return Ok(new CharacterOperationResponse { Success = true });
+            return Ok();
         }
 
         [HttpDelete]
@@ -50,7 +49,7 @@ namespace BRIX.GameService.Controllers.Characters
         {
             await _characterRepository.Delete(id);
             
-            return Ok(new CharacterOperationResponse { Success = true });
+            return Ok();
         }
     }
 }
