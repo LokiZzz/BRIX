@@ -1,4 +1,6 @@
-﻿using BRIX.Library.Characters;
+﻿using BRIX.Library.Abilities;
+using BRIX.Library.Characters;
+using BRIX.Utility.Extensions;
 using BRIX.Web.Client.Extensions;
 using BRIX.Web.Client.Models.Common;
 using BRIX.Web.Client.Options;
@@ -24,7 +26,9 @@ namespace BRIX.Web.Client.Services.Characters
             _http.BaseAddress = new Uri(gameServiceOptions.Value.ServiceAddress);
         }
 
-        public Character? EditingCharacter { get; set; }
+        public Character? EditingCharacter { get; private set; }
+
+        public Ability? EditingAbility { get; private set; }
 
         public async Task<List<Character>> GetAllAsync()
         {
@@ -77,6 +81,9 @@ namespace BRIX.Web.Client.Services.Characters
             return result;
         }
 
+        public async Task<OperationResult> SaveAsync() => 
+            await SaveAsync(EditingCharacter ?? throw new Exception("No editing character."));
+
         public async Task<OperationResult> DeleteAsync(Character character)
         {
             _modalService.IsBusy = true;
@@ -89,6 +96,37 @@ namespace BRIX.Web.Client.Services.Characters
             _modalService.IsBusy = false;
 
             return result;
+        }
+
+        public void EditCharacter(Character characterToEdit)
+        {
+            EditingCharacter = characterToEdit.Copy();
+        }
+
+        public void EditAbility(Ability ability, Character? editingCharacter = null)
+        {
+            if (editingCharacter is not null)
+            {
+                EditCharacter(editingCharacter);
+                EditingAbility = EditingCharacter?.Abilities.Single(x => x.Id == ability.Id);
+            }
+            else
+            {
+                if (EditingCharacter?.Abilities.Contains(ability) == true)
+                {
+                    EditingAbility = ability;
+                }
+                else
+                {
+                    throw new Exception("Editing ability is not belongs editing Ccharacter");
+                }
+            }
+        }
+
+        public void Reset()
+        {
+            EditingAbility = null;
+            EditingCharacter = null;
         }
     }
 }

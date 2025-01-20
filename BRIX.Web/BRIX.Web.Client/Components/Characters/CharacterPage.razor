@@ -1,4 +1,4 @@
-﻿@page "/characters/{CharacterId:guid?}"
+﻿@page "/characters/{CharacterId:guid}"
 
 <div class="section">
     <div class="container block">
@@ -7,12 +7,10 @@
     </div>
     <Tab Class="is-centered is-boxed">
         <TabItem Title="@Localization[nameof(Resource.Character)]">
-            <MainSection Character="Character"/>
+            <MainSection Character="Character" />
         </TabItem>
         <TabItem Title="@Localization[nameof(Resource.Character_Abilities)]">
-            <div class="notification">
-                <p>Способности персонажа.</p>
-            </div>
+            <AbilitiesSection Character="Character" />
         </TabItem>
         <TabItem Title="@Localization[nameof(Resource.Character_Inventory)]">
             <div class="notification">
@@ -29,7 +27,7 @@
 
 @code {
     [Parameter]
-    public Guid? CharacterId { get; set; }
+    public Guid CharacterId { get; set; }
 
     public Character? Character { get; set; } = default!;
 
@@ -37,21 +35,11 @@
     {
         base.OnInitialized();
 
-        if (CharacterManager.EditingCharacter is not null)
-        {
-            Character = CharacterManager.EditingCharacter;
-            CharacterId = Character.Id;
-        }
-        else if(CharacterId is not null)
-        {
-            Character = await CharacterManager.GetAsync(CharacterId.Value);
+        Character = await CharacterManager.GetAsync(CharacterId);
 
-            if(Character is null)
-            {
-                Navigation.NavigateTo("/404");
-            }
-
-            CharacterManager.EditingCharacter = Character;
+        if(Character is null)
+        {
+            Navigation.NavigateTo("/404");
         }
     }
 }

@@ -43,14 +43,13 @@
 
     private void Add()
     {
-        CharacterManager.EditingCharacter = null;
+        CharacterManager.Reset();
         Navigation.NavigateTo("/characters/edit");
     }
 
     private void Edit(Character character)
     {
-        CharacterManager.EditingCharacter = character.Copy() 
-            ?? throw new Exception("Не удалось скопировать персонажа.");
+        CharacterManager.EditCharacter(character);
         Navigation.NavigateTo("/characters/edit");
     }
 
@@ -66,8 +65,6 @@
 
     private void Open(Character character)
     {
-        CharacterManager.EditingCharacter = character.Copy()
-            ?? throw new Exception("Не удалось скопировать персонажа.");
         Navigation.NavigateTo($"/characters/{character.Id}");
     }
 }

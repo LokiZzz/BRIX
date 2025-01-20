@@ -1,0 +1,36 @@
+﻿<div class="container">
+    <button class="button is-large is-fullwidth block" @onclick="AddAbility">
+        <i class="fa fa-plus-circle"></i>
+    </button>
+
+    @foreach (Ability ability in Character.Abilities)
+    {
+        <div class="box block" @onclick="@(() => EditAbility(ability))">
+            <p class="title">@ability.Name</p>
+            <p class="subtitle">@ability.ExpCost() EXP</p>
+            <div class="buttons">
+                <button class="button">
+                    @Localization[nameof(Resource.Common_Edit)]
+                </button>
+                <button class="button is-danger">
+                    @Localization[nameof(Resource.Common_Remove)]
+                </button>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public Character Character { get; set; } = default!;
+
+    private void AddAbility(MouseEventArgs e)
+    {
+        Navigation.NavigateTo($"/characters/{Character.Id}/abilities/new");
+    }
+
+    private void EditAbility(Ability ability)
+    {
+        Navigation.NavigateTo($"/characters/{Character.Id}/abilities/{ability.Id}");
+    }
+}

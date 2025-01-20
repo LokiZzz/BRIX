@@ -1,0 +1,52 @@
+﻿@page "/characters/{CharacterId:guid}/abilities/{AbilityId:guid}"
+@page "/characters/{CharacterId:guid}/abilities/new"
+
+<InputText class="input" @bind-Value="Ability.Name"></InputText>
+<button @onclick="SaveAsync">@Localization[nameof(Resource.Common_Save)]</button>
+<button @onclick="Cancel">@Localization[nameof(Resource.Common_Cancel)]</button>
+
+@code {
+    [Parameter]
+    public Guid CharacterId { get; set; }
+
+    [Parameter]
+    public Guid? AbilityId { get; set; }
+
+    public Ability Ability { get; set; } = new ();
+
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+
+        Character? character = await CharacterManager.GetAsync(CharacterId);
+
+        if (character is not null)
+        {
+            if(AbilityId is null)
+            {
+                AbilityId = Ability.Id;
+                CharacterManager.EditAbility(Ability, character);
+            }
+            else
+            {
+                CharacterManager.EditAbility(
+                    character.Abilities.Single(x => x.Id == AbilityId),
+                    character
+                );
+            }
+        }
+
+        Ability = CharacterManager.EditingAbility ?? throw new Exception("No editing ability.");
+    }
+
+    private async Task SaveAsync(MouseEventArgs e)
+    {
+        await CharacterManager.SaveAsync();
+        Navigation.NavigateTo($"/characters/{CharacterId}");
+    }
+
+    private void Cancel(MouseEventArgs e)
+    {
+        Navigation.NavigateTo($"/characters/{CharacterId}");
+    }
+}
