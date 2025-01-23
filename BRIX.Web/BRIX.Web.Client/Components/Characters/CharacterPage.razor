@@ -1,23 +1,24 @@
 ﻿@page "/characters/{CharacterId:guid}"
+@page "/characters/{CharacterId:guid}/{ActiveTab}"
 
 <div class="section">
     <div class="container block">
         <p class="title">@Character?.Name</p>
         <p class="subtitle">@Localization[nameof(Resource.Characters_Level)] @Character?.Level</p>
     </div>
-    <Tab Class="is-centered is-boxed">
-        <TabItem Title="@Localization[nameof(Resource.Character)]">
+    <Tab Class="is-centered is-boxed" @ref="Tab">
+        <TabItem Title="@Localization[nameof(Resource.Character)]" @ref="CharacterTab">
             <MainSection Character="Character" />
         </TabItem>
-        <TabItem Title="@Localization[nameof(Resource.Character_Abilities)]">
+        <TabItem Title="@Localization[nameof(Resource.Character_Abilities)]" @ref="AbilitiesTab">
             <AbilitiesSection Character="Character" />
         </TabItem>
-        <TabItem Title="@Localization[nameof(Resource.Character_Inventory)]">
+        <TabItem Title="@Localization[nameof(Resource.Character_Inventory)]" @ref="InventoryTab">
             <div class="notification">
                 <p>Основная информация о персонаже.</p>
             </div>
         </TabItem>
-        <TabItem Title="@Localization[nameof(Resource.Character_Details)]">
+        <TabItem Title="@Localization[nameof(Resource.Character_Details)]" @ref="DetailsTab">
             <div class="notification">
                 <p>Детальная информация о персонаже.</p>
             </div>
@@ -29,7 +30,16 @@
     [Parameter]
     public Guid CharacterId { get; set; }
 
+    [Parameter]
+    public string? ActiveTab { get; set; }
+
     public Character? Character { get; set; } = default!;
+
+    public Tab Tab { get; set; } = default!;
+    public TabItem CharacterTab { get; set; } = default!;
+    public TabItem AbilitiesTab { get; set; } = default!;
+    public TabItem InventoryTab { get; set; } = default!;
+    public TabItem DetailsTab { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
@@ -40,6 +50,24 @@
         if(Character is null)
         {
             Navigation.NavigateTo("/404");
+        }
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if(ActiveTab is not null)
+        {
+            TabItem tabToActivate = ActiveTab switch
+            {
+                "abilities" => AbilitiesTab,
+                "inventory" => InventoryTab,
+                "details" => DetailsTab,
+                _ => CharacterTab
+            };
+
+            Tab.ActivateItem(tabToActivate);
         }
     }
 }

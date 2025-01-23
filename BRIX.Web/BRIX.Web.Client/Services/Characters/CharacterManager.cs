@@ -26,9 +26,10 @@ namespace BRIX.Web.Client.Services.Characters
             _http.BaseAddress = new Uri(gameServiceOptions.Value.ServiceAddress);
         }
 
+        /// <summary>
+        /// Временное хранилище для изменяемого персонажа.
+        /// </summary>
         public Character? EditingCharacter { get; private set; }
-
-        public Ability? EditingAbility { get; private set; }
 
         public async Task<List<Character>> GetAllAsync()
         {
@@ -72,8 +73,12 @@ namespace BRIX.Web.Client.Services.Characters
             _modalService.IsBusy = true;
 
             JsonResponse response = await _http.PutJsonAsync("api/character", character);
-
             OperationResult result = response.ToOperationResult();
+
+            if (result.Successfull)
+            {
+                Reset();
+            }    
 
             _modalService.PushErrors(result.Errors);
             _modalService.IsBusy = false;
@@ -98,34 +103,33 @@ namespace BRIX.Web.Client.Services.Characters
             return result;
         }
 
+        /// <summary>
+        /// Войти в режим редактирования. Персонаж копируется в свойство EditingCharacter и в любой момент
+        /// изменения можно будет сбросить, обнулив свойство и забрав персонажа с сервера.
+        /// </summary>
+        /// <param name="characterToEdit"></param>
         public void EditCharacter(Character characterToEdit)
         {
             EditingCharacter = characterToEdit.Copy();
         }
 
-        public void EditAbility(Ability ability, Character? editingCharacter = null)
+        /// <summary>
+        /// Забрать персонажа с сервера и войти в режим редактирования.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task EditCharacterAsync(Guid id)
         {
-            if (editingCharacter is not null)
+            Character? character = await GetAsync(id);
+
+            if (character is not null)
             {
-                EditCharacter(editingCharacter);
-                EditingAbility = EditingCharacter?.Abilities.Single(x => x.Id == ability.Id);
-            }
-            else
-            {
-                if (EditingCharacter?.Abilities.Contains(ability) == true)
-                {
-                    EditingAbility = ability;
-                }
-                else
-                {
-                    throw new Exception("Editing ability is not belongs editing Ccharacter");
-                }
+                EditCharacter(character);
             }
         }
 
         public void Reset()
         {
-            EditingAbility = null;
             EditingCharacter = null;
         }
     }

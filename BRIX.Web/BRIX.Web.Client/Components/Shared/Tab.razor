@@ -18,8 +18,8 @@
             @foreach (TabItem item in Items)
             {
                 <button 
-                    class="button is-fullwidth block @GetIsActiveMenuButtonClass(item)" 
-                    @onclick="@(() => ChooseTabFromMenu(item))">
+                class="button is-fullwidth block @GetIsActiveMenuButtonClass(item)" 
+                @onclick="@(() => ChooseTabFromMenu(item))">
                     @item?.Title
                 </button>
             }
@@ -43,11 +43,11 @@
 </CascadingValue>
 
 @code {
-        [Parameter]
-        public RenderFragment? ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
 
-        [Parameter]
-        public string Class { get; set; } = string.Empty;
+    [Parameter]
+    public string Class { get; set; } = string.Empty;
 
     public TabItem ActiveItem { get; set; } = default!;
 
@@ -55,7 +55,7 @@
 
     public string _modalIsActiveClass = string.Empty;
 
-    internal void AddPage(TabItem item)
+    public void AddPage(TabItem item)
     {
         Items.Add(item);
 
@@ -67,11 +67,18 @@
         StateHasChanged();
     }
 
-    string GetIsActiveTabClass(TabItem item) => item == ActiveItem ? "is-active" : string.Empty;
+    public void ActivateItem(TabItem item)
+    {
+        if (Items.Contains(item))
+        {
+            ActiveItem = item;
+            StateHasChanged();
+        }
+    }
 
-    string GetIsActiveMenuButtonClass(TabItem? item) => item == ActiveItem ? "is-primary" : string.Empty;
+    private string GetIsActiveTabClass(TabItem item) => item == ActiveItem ? "is-active" : string.Empty;
 
-    void ActivateItem(TabItem item) => ActiveItem = item;
+    private string GetIsActiveMenuButtonClass(TabItem? item) => item == ActiveItem ? "is-primary" : string.Empty;
 
     private void OpenMenu()
     {

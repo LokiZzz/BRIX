@@ -5,14 +5,14 @@
 
     @foreach (Ability ability in Character.Abilities)
     {
-        <div class="box block" @onclick="@(() => EditAbility(ability))">
+        <div class="box block">
             <p class="title">@ability.Name</p>
             <p class="subtitle">@ability.ExpCost() EXP</p>
             <div class="buttons">
-                <button class="button">
+                <button class="button" @onclick="@(() => EditAbility(ability))">
                     @Localization[nameof(Resource.Common_Edit)]
                 </button>
-                <button class="button is-danger">
+                <button class="button is-danger" @onclick="@(() => RemoveAbility(ability))">
                     @Localization[nameof(Resource.Common_Remove)]
                 </button>
             </div>
@@ -32,5 +32,11 @@
     private void EditAbility(Ability ability)
     {
         Navigation.NavigateTo($"/characters/{Character.Id}/abilities/{ability.Id}");
+    }
+
+    private async void RemoveAbility(Ability ability)
+    {
+        Character.RemoveAbility(ability);
+        await CharacterManager.SaveAsync(Character);
     }
 }

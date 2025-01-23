@@ -294,4 +294,10 @@
   <data name="Characters_Health" xml:space="preserve">
     <value>Здоровье</value>
   </data>
+  <data name="Abilities_Effects" xml:space="preserve">
+    <value>Эффекты</value>
+  </data>
+  <data name="Abilities_Activation" xml:space="preserve">
+    <value>Активация</value>
+  </data>
 </root>

@@ -61,6 +61,24 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activation.
+        /// </summary>
+        public static string Abilities_Activation {
+            get {
+                return ResourceManager.GetString("Abilities_Activation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Effects.
+        /// </summary>
+        public static string Abilities_Effects {
+            get {
+                return ResourceManager.GetString("Abilities_Effects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change password.
         /// </summary>
         public static string Account_ChangePassword {
