@@ -66,14 +66,7 @@ namespace BRIX.GameService.Controllers.Account
 
         [Authorize]
         [HttpGet]
-        public IActionResult GetSecuredHello()
-        {
-            string claims = HttpContext.Request.Headers
-                .Select(x => $"{x.Key}: {x.Value},\n")
-                .Aggregate((x, y) => x + y);
-
-            return Ok($"Secured Hello!\n{claims}");
-        }
+        public IActionResult Check() => Ok();
 
         [HttpGet]
         public IActionResult GetProblem()

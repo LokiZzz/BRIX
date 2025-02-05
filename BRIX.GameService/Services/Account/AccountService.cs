@@ -92,7 +92,7 @@ namespace BRIX.GameService.Services.Account
             string secret = _jwtOptions.SecurityKey ?? throw new Exception("Не указан секрет.");
             SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(secret));
             SigningCredentials creds = new(key, SecurityAlgorithms.HmacSha256);
-            DateTime expiry = DateTime.Now.AddDays(_jwtOptions.ExpiryInDays);
+            DateTime expiry = DateTime.UtcNow.AddDays(_jwtOptions.ExpiryInDays);
             JwtSecurityToken token = new(
                 _jwtOptions.Issuer,
                 _jwtOptions.Audience,

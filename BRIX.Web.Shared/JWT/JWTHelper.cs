@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text.Json;
 
 namespace BRIX.Web.Shared.JWT
@@ -43,6 +44,22 @@ namespace BRIX.Web.Shared.JWT
             claims.AddRange(keyValuePairs.Select(kvp => new Claim(kvp.Key, kvp.Value?.ToString() ?? "")));
 
             return claims;
+        }
+
+        public static DateTime GetExpirationDateFromJwt(string token)
+        {
+            JwtSecurityTokenHandler jwtHandler = new JwtSecurityTokenHandler();
+            JwtSecurityToken jwtToken = jwtHandler.ReadJwtToken(token);
+            Claim? expirationClaim = jwtToken.Claims.FirstOrDefault(c => c.Type == "exp");
+
+            if (expirationClaim != null && long.TryParse(expirationClaim.Value, out long expirationUnix))
+            {
+                DateTime expirationDateTime = DateTimeOffset.FromUnixTimeSeconds(expirationUnix).DateTime;
+
+                return expirationDateTime;
+            }
+
+            return DateTime.MinValue;
         }
 
         private static byte[] ParseBase64WithoutPadding(string base64)

@@ -17,11 +17,23 @@ namespace BRIX.Web.Client.Services.Auth
         {
             try
             {
+                AuthenticationState notAuthenticatedState = new (new ClaimsPrincipal(new ClaimsIdentity()));
                 string? savedToken = await _localStorage.GetItemAsync<string>("authToken");
 
                 if (string.IsNullOrWhiteSpace(savedToken))
                 {
-                    return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
+                    return notAuthenticatedState;
+                }
+
+                DateTime tokenExpirationDate = JWTHelper.GetExpirationDateFromJwt(savedToken);
+
+                if(tokenExpirationDate <= DateTime.UtcNow)
+                {
+                    // TODO: Место для работы с Refresh-токеном.
+                    await _localStorage.SetItemAsStringAsync("authToken", string.Empty);
+                    MarkUserAsLoggedOut();
+
+                    return notAuthenticatedState;
                 }
 
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", savedToken);
