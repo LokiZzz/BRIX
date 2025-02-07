@@ -21,9 +21,6 @@
     </div>
 </CascadingValue>
 
-@* TODO: Сделать базовую страничку для способности, чтобы в ней лейауту проставлялись свойства CharacterId и AbilityId, 
-которые приходят с роутинга *@
-
 @code {
     public Guid CharacterId { get; set; }
 
@@ -31,17 +28,10 @@
 
     public Ability Ability { get; set; } = new();
 
-    protected override async Task OnInitializedAsync()
+    // TODO: Рассмотреть возможность вынести этот метод в AbilityPageBase
+
+    public void Initialize()
     {
-        base.OnInitialized();
-
-        await CharacterManager.EditCharacterAsync(CharacterId);
-    }
-
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
         Ability? ability;
 
         if (AbilityId is null)

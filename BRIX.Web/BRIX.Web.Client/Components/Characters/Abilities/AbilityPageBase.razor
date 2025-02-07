@@ -3,23 +3,29 @@
     public AbilityLayout Layout { get; set; } = default!;
 
     [Parameter]
-    public Guid? CharacterId { get; set; }
+    public Guid CharacterId { get; set; }
 
     [Parameter]
     public Guid? AbilityId { get; set; }
 
-    protected override void OnParametersSet()
+    // TODO: провести ревью на идемпотентность и производительность, этот метод может вызываться многократно.
+
+    protected override async Task OnParametersSetAsync()
     {
         base.OnParametersSet();
 
-        if(CharacterId is not null)
+        if (CharacterManager.EditingCharacter is null || CharacterManager.EditingCharacter.Id != CharacterId)
         {
-            Layout.CharacterId = CharacterId.Value;
+            await CharacterManager.EditCharacterAsync(CharacterId);
         }
+
+        Layout.CharacterId = CharacterId;
 
         if (AbilityId is not null)
         {
             Layout.AbilityId = AbilityId;
         }
+
+        Layout.Initialize();
     }
 }
