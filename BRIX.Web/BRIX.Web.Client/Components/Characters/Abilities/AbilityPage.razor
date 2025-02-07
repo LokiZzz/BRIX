@@ -1,4 +1,6 @@
-﻿@page "/characters/{CharacterId:guid}/abilities/{AbilityId:guid}"
+﻿@inherits AbilityPageBase
+
+@page "/characters/{CharacterId:guid}/abilities/{AbilityId:guid}"
 @page "/characters/{CharacterId:guid}/abilities/new"
 
 <div class="section">
@@ -12,7 +14,7 @@
     @* Активация *@
     <div class="container box block">
         <p class="title">@Localization[nameof(Resource.Abilities_Activation)]</p>
-        <p class="title">
+        <p>
             Плейсхолдер настроек активации. Этой способности нужно Х очков активации и не требуется перезарядка.
         </p>
         <button class="button is-fullwidth" @onclick="EditActivation">@Localization[nameof(Resource.Common_Edit)]</button>
@@ -22,6 +24,9 @@
     <p class="title block">@Localization[nameof(Resource.Abilities_Effects)]</p>
     <button class="button is-large is-fullwidth block" @onclick="@(async () => AddEffect())">
         <i class="fa fa-plus-circle"></i>
+    </button>
+    <button class="button is-large is-fullwidth block" @onclick="@(async () => Navigation.NavigateTo($"/characters/{CharacterId}/abilitytestpage"))">
+        <i class="fa fa-skull"></i>
     </button>
     @foreach(EffectBase effect in Ability.Effects)
     {
@@ -35,50 +40,7 @@
 
 
 @code {
-    [Parameter]
-    public Guid CharacterId { get; set; }
-
-    [Parameter]
-    public Guid? AbilityId { get; set; }
-
-    public Ability Ability { get; set; } = new ();
-
-    protected override async Task OnInitializedAsync()
-    {
-        base.OnInitialized();
-
-        if(CharacterManager.EditingCharacter is null)
-        {
-            await CharacterManager.EditCharacterAsync(CharacterId);
-        }
-    }
-
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        Ability? ability;
-
-        if (AbilityId is null)
-        {
-            ability = new();
-            CharacterManager.EditingCharacter?.AddAbility(ability);
-        }
-        else
-        {
-            ability = CharacterManager.EditingCharacter?.Abilities.FirstOrDefault(x => x.Id == AbilityId);
-        }
-
-        if (ability is null)
-        {
-            Navigation.NavigateTo("/404");
-        }
-        else
-        {
-            Ability = ability;
-            AbilityId = ability.Id;
-        }
-    }
+    public Ability Ability => Layout.Ability;
 
     private async Task SaveAsync(MouseEventArgs e)
     {
@@ -93,7 +55,7 @@
 
     private void AddEffect()
     {
-
+        Navigation.NavigateTo($"/characters/{CharacterId}/abilities/{AbilityId}/effects");
     }
 
     private void EditEffect(MouseEventArgs e)

@@ -60,7 +60,7 @@ namespace BRIX.Web.Client.Services.Characters
 
             if (result.Successfull)
             {
-                return response.Payload?.Single();
+                return response.Payload?.FirstOrDefault();
             }
 
             _modalService.PushErrors(result.Errors);
@@ -86,6 +86,10 @@ namespace BRIX.Web.Client.Services.Characters
             return result;
         }
 
+        /// <summary>
+        /// Сохранить изменения, сделанные в EditingCharacter.
+        /// </summary>
+        /// <returns></returns>
         public async Task<OperationResult> SaveAsync() => 
             await SaveAsync(EditingCharacter ?? throw new Exception("No editing character."));
 

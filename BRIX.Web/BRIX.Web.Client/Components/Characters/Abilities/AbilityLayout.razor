@@ -1,0 +1,67 @@
+﻿@using BRIX.Web.Client.Components.Layout
+
+@layout MainLayout
+@inherits LayoutComponentBase
+
+<CascadingValue Value="this">
+    <div class="section">
+        <div class="box">
+            <p>Хлебные крошки</p>
+        </div>
+    </div>
+
+    <div class="section">
+        @Body
+    </div>
+
+    <div class="section">
+        <div class="box">
+            <p>Монитор опыта и кнопка сохранить.</p>
+        </div>
+    </div>
+</CascadingValue>
+
+@* TODO: Сделать базовую страничку для способности, чтобы в ней лейауту проставлялись свойства CharacterId и AbilityId, 
+которые приходят с роутинга *@
+
+@code {
+    public Guid CharacterId { get; set; }
+
+    public Guid? AbilityId { get; set; }
+
+    public Ability Ability { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+
+        await CharacterManager.EditCharacterAsync(CharacterId);
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        Ability? ability;
+
+        if (AbilityId is null)
+        {
+            ability = new();
+            CharacterManager.EditingCharacter?.AddAbility(ability);
+        }
+        else
+        {
+            ability = CharacterManager.EditingCharacter?.Abilities.FirstOrDefault(x => x.Id == AbilityId);
+        }
+
+        if (ability is null)
+        {
+            Navigation.NavigateTo("/404");
+        }
+        else
+        {
+            Ability = ability;
+            AbilityId = ability.Id;
+        }
+    }
+}

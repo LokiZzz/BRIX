@@ -1,0 +1,25 @@
+﻿@code {
+    [CascadingParameter]
+    public AbilityLayout Layout { get; set; } = default!;
+
+    [Parameter]
+    public Guid? CharacterId { get; set; }
+
+    [Parameter]
+    public Guid? AbilityId { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if(CharacterId is not null)
+        {
+            Layout.CharacterId = CharacterId.Value;
+        }
+
+        if (AbilityId is not null)
+        {
+            Layout.AbilityId = AbilityId;
+        }
+    }
+}
