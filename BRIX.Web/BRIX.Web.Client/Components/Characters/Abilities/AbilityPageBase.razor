@@ -8,8 +8,6 @@
     [Parameter]
     public Guid? AbilityId { get; set; }
 
-    // TODO: провести ревью на идемпотентность и производительность, этот метод может вызываться многократно.
-
     protected override async Task OnParametersSetAsync()
     {
         base.OnParametersSet();
@@ -19,13 +17,36 @@
             await CharacterManager.EditCharacterAsync(CharacterId);
         }
 
+        if (Layout.Ability is null || Layout.Ability.Id != AbilityId)
+        {
+            Ability? editingAbility;
+
+            if (AbilityId is null)
+            {
+                editingAbility = new();
+                CharacterManager.EditingCharacter?.AddAbility(editingAbility);
+            }
+            else
+            {
+                editingAbility = CharacterManager.EditingCharacter?.Abilities.FirstOrDefault(x => x.Id == AbilityId);
+            }
+
+            if (editingAbility is not null)
+            {
+                Layout.Ability = editingAbility;
+                AbilityId = editingAbility.Id;
+            }
+            else
+            {
+                Navigation.NavigateTo("/404");
+            }
+        }
+
         Layout.CharacterId = CharacterId;
 
         if (AbilityId is not null)
         {
             Layout.AbilityId = AbilityId;
         }
-
-        Layout.Initialize();
     }
 }

@@ -300,4 +300,7 @@
   <data name="Abilities_Activation" xml:space="preserve">
     <value>Активация</value>
   </data>
+  <data name="Common_Open" xml:space="preserve">
+    <value>Открыть</value>
+  </data>
 </root>

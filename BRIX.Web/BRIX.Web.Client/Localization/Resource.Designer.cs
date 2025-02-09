@@ -439,6 +439,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string Common_Open {
+            get {
+                return ResourceManager.GetString("Common_Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove.
         /// </summary>
         public static string Common_Remove {

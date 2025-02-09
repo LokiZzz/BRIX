@@ -1,0 +1,28 @@
+﻿.input-container {
+    position: relative;
+    margin-top: 1rem;
+}
+
+input {
+    padding: 1.5rem 1rem;
+}
+
+.placeholder {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+    .placeholder.floating {
+        top: -0.15rem;
+        left: 0.5rem;
+        font-size: 14px;
+        background: white;
+        padding: 0 5px;
+        margin-bottom: 10px;
+        background-color: var(--bulma-scheme-main);
+    }

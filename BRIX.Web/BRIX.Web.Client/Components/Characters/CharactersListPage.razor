@@ -12,10 +12,13 @@
 
             @foreach (Character character in _characters)
             {
-                <div class="box block" @onclick="@(() => Open(character))">
+                <div class="box block">
                     <p class="title">@character.Name</p>
                     <p class="subtitle">@character.Level Level</p>
                     <div class="buttons">
+                        <button class="button" @onclick="@(() => Open(character))">
+                            @Localization[nameof(Resource.Common_Open)]
+                        </button>
                         <button class="button" @onclick="@(() => Edit(character))">
                             @Localization[nameof(Resource.Common_Edit)]
                         </button>

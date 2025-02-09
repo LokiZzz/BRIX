@@ -5,18 +5,15 @@
 
 <CascadingValue Value="this">
     <div class="section">
-        <div class="box">
-            <p>Хлебные крошки</p>
+        <div class="box block">
+            <p>Хлебные крошки редатирования способности. Они здесь нужны из за большой глубины вложенности в сценариях редактирования способности.</p>
         </div>
-    </div>
 
-    <div class="section">
         @Body
-    </div>
 
-    <div class="section">
-        <div class="box">
+        <div class="box block">
             <p>Монитор опыта и кнопка сохранить.</p>
+            <button class="button" @onclick="SaveAsync">@Localization[nameof(Resource.Common_Save)]</button>
         </div>
     </div>
 </CascadingValue>
@@ -28,30 +25,9 @@
 
     public Ability Ability { get; set; } = new();
 
-    // TODO: Рассмотреть возможность вынести этот метод в AbilityPageBase
-
-    public void Initialize()
+    private async Task SaveAsync(MouseEventArgs e)
     {
-        Ability? ability;
-
-        if (AbilityId is null)
-        {
-            ability = new();
-            CharacterManager.EditingCharacter?.AddAbility(ability);
-        }
-        else
-        {
-            ability = CharacterManager.EditingCharacter?.Abilities.FirstOrDefault(x => x.Id == AbilityId);
-        }
-
-        if (ability is null)
-        {
-            Navigation.NavigateTo("/404");
-        }
-        else
-        {
-            Ability = ability;
-            AbilityId = ability.Id;
-        }
+        await CharacterManager.SaveAsync();
+        Navigation.NavigateTo($"/characters/{CharacterId}/abilities");
     }
 }

@@ -6,6 +6,12 @@
 
 <div class="section">
     <div class="block">
+        <h1 class="title">Текстовое поле</h1>
+        <p class="block">Значение в поле: @textFieldValue</p>
+        <TextField Placeholder="Название" @bind-Value="textFieldValue"/>
+    </div>
+
+    <div class="block">
         <h1 class="title">Вызов алерта!</h1>
         <p class="block">Результат алерта: «@_alertResult»</p>
         <p class="block">Результат нумерика: «@_valueChangedByNumeric.ToString()»</p>
@@ -29,10 +35,10 @@
         <h1 class="title">Выпадающий список</h1>
         <p class="block">Выбранное значение: «@SelectedDropdownItem?.SomeProperty»</p>
         <Dropdown 
-            Items="DropdownItems" 
-            @bind-Selected="SelectedDropdownItem" 
-            DisplayPropertyDelegate="x => x?.SomeProperty"
-            Placeholder="Please, select Guid..."/>
+        Items="DropdownItems" 
+        @bind-Selected="SelectedDropdownItem" 
+        DisplayPropertyDelegate="x => x?.SomeProperty"
+        Placeholder="Please, select Guid..."/>
     </div>
 
     <div class="block">
@@ -44,6 +50,7 @@
 
 @code
 {
+    private string textFieldValue = "Text field value that was set by @code";
     private string _alertResult = string.Empty;
     private int _valueChangedByNumeric = 55;
 

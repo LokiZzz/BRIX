@@ -3,40 +3,36 @@
 @page "/characters/{CharacterId:guid}/abilities/{AbilityId:guid}"
 @page "/characters/{CharacterId:guid}/abilities/new"
 
-<div class="section">
-    @* Название и описание *@
-    <div class="container box block">
-        <InputText class="input" @bind-Value="Ability.Name"></InputText>
-        <button @onclick="SaveAsync">@Localization[nameof(Resource.Common_Save)]</button>
-        <button @onclick="Cancel">@Localization[nameof(Resource.Common_Cancel)]</button>
-    </div>
-
-    @* Активация *@
-    <div class="container box block">
-        <p class="title">@Localization[nameof(Resource.Abilities_Activation)]</p>
-        <p>
-            Плейсхолдер настроек активации. Этой способности нужно Х очков активации и не требуется перезарядка.
-        </p>
-        <button class="button is-fullwidth" @onclick="EditActivation">@Localization[nameof(Resource.Common_Edit)]</button>
-    </div>
-
-    @* Эффекты *@
-    <p class="title block">@Localization[nameof(Resource.Abilities_Effects)]</p>
-    <button class="button is-large is-fullwidth block" @onclick="@(async () => AddEffect())">
-        <i class="fa fa-plus-circle"></i>
-    </button>
-    <button class="button is-large is-fullwidth block" @onclick="@(async () => Navigation.NavigateTo($"/characters/{CharacterId}/abilitytestpage"))">
-        <i class="fa fa-skull"></i>
-    </button>
-    @foreach(EffectBase effect in Ability.Effects)
-    {
-        <div class="container box block">
-            <p class="title">GET EFFECT NAME</p>
-            <button @onclick="EditEffect">@Localization[nameof(Resource.Common_Edit)]</button>
-            <button @onclick="RemoveEffect">@Localization[nameof(Resource.Common_Remove)]</button>
-        </div>
-    }
+@* Название и описание *@
+<div class="box block">
+    <InputText class="input" @bind-Value="Ability.Name"></InputText>
 </div>
+
+@* Активация *@
+<div class="box block">
+    <p class="title">@Localization[nameof(Resource.Abilities_Activation)]</p>
+    <p>
+        Плейсхолдер настроек активации. Этой способности нужно Х очков активации и не требуется перезарядка.
+    </p>
+    <button class="button is-fullwidth" @onclick="EditActivation">@Localization[nameof(Resource.Common_Edit)]</button>
+</div>
+
+@* Эффекты *@
+<p class="title block">@Localization[nameof(Resource.Abilities_Effects)]</p>
+<button class="button is-large is-fullwidth block" @onclick="@(async () => AddEffect())">
+    <i class="fa fa-plus-circle"></i>
+</button>
+<button class="button is-large is-fullwidth block" @onclick="@(async () => Navigation.NavigateTo($"/characters/{CharacterId}/abilitytestpage"))">
+    <i class="fa fa-skull"></i>
+</button>
+@foreach(EffectBase effect in Ability.Effects)
+{
+    <div class="box block">
+        <p class="title">GET EFFECT NAME</p>
+        <button @onclick="EditEffect">@Localization[nameof(Resource.Common_Edit)]</button>
+        <button @onclick="RemoveEffect">@Localization[nameof(Resource.Common_Remove)]</button>
+    </div>
+}
 
 
 @code {

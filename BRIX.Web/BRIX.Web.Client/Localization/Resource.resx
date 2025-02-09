@@ -301,4 +301,7 @@
   <data name="Abilities_Activation" xml:space="preserve">
     <value>Activation</value>
   </data>
+  <data name="Common_Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
 </root>
