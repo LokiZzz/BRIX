@@ -5,10 +5,10 @@ using BRIX.Web.Host.Extensions;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorComponents().AddInteractiveWebAssemblyComponents();
-builder.Services.AddHttpClient();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddAuth();
 builder.Services.AddServices();
+builder.Services.AddHttpClientBuilder();
 
 WebApplication app = builder.Build();
 

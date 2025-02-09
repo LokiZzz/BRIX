@@ -8,22 +8,25 @@ using BRIX.Web.Client.Services.Http;
 using BRIX.Web.Client.Services.UI;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
+using static System.Net.WebRequestMethods;
 
 namespace BRIX.Web.Client.Services.Characters
 {
     public class CharacterManager
     {
-        private readonly HttpClient _http;
         private readonly ModalService _modalService;
+        private readonly HttpClientBuilder _httpClientBuilder;
+
+        private readonly string _baseAddress;
 
         public CharacterManager(
-            HttpClient httpClient,
+            HttpClientBuilder httpClientBuilder,
             IOptions<GameServiceOptions> gameServiceOptions,
             ModalService modalService)
         {
-            _http = httpClient;
+            _httpClientBuilder = httpClientBuilder;
             _modalService = modalService;
-            _http.BaseAddress = new Uri(gameServiceOptions.Value.ServiceAddress);
+            _baseAddress = gameServiceOptions.Value.ServiceAddress;
         }
 
         /// <summary>
@@ -34,7 +37,8 @@ namespace BRIX.Web.Client.Services.Characters
         public async Task<List<Character>> GetAllAsync()
         {
             _modalService.IsBusy = true;
-            JsonResponse<List<Character>> response = await _http.GetJsonAsync<List<Character>>("api/character");
+            using HttpClient http = await _httpClientBuilder.CreateAsync(_baseAddress);
+            JsonResponse<List<Character>> response = await http.GetJsonAsync<List<Character>>("api/character");
             _modalService.IsBusy = false;
 
             OperationResult result = response.ToOperationResult();
@@ -53,7 +57,8 @@ namespace BRIX.Web.Client.Services.Characters
         {
             _modalService.IsBusy = true;
             string uri = QueryHelpers.AddQueryString("api/character", "id", id.ToString());
-            JsonResponse<List<Character>> response = await _http.GetJsonAsync<List<Character>>(uri);
+            using HttpClient http = await _httpClientBuilder.CreateAsync(_baseAddress);
+            JsonResponse<List<Character>> response = await http.GetJsonAsync<List<Character>>(uri);
             _modalService.IsBusy = false;
 
             OperationResult result = response.ToOperationResult();
@@ -71,8 +76,8 @@ namespace BRIX.Web.Client.Services.Characters
         public async Task<OperationResult> SaveAsync(Character character)
         {
             _modalService.IsBusy = true;
-
-            JsonResponse response = await _http.PutJsonAsync("api/character", character);
+            using HttpClient http = await _httpClientBuilder.CreateAsync(_baseAddress);
+            JsonResponse response = await http.PutJsonAsync("api/character", character);
             OperationResult result = response.ToOperationResult();
 
             if (result.Successfull)
@@ -97,7 +102,8 @@ namespace BRIX.Web.Client.Services.Characters
         {
             _modalService.IsBusy = true;
 
-            JsonResponse response = await _http.DeleteJsonAsync($"api/character?id={character.Id}");
+            using HttpClient http = await _httpClientBuilder.CreateAsync(_baseAddress);
+            JsonResponse response = await http.DeleteJsonAsync($"api/character?id={character.Id}");
 
             OperationResult result = response.ToOperationResult();
 
