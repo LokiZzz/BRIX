@@ -19,19 +19,15 @@
                 </div>
             }
 
-            <div class="field">
-                <label class="label">@Localization[nameof(Resource.Account_Email)]</label>
-                <div class="control">
-                    <InputText class="input" type="email" placeholder="address@example.com" @bind-Value="loginModel.Email" />
-                </div>
-            </div>
+            <TextField 
+                InputType="email"
+                Placeholder="@Localization[nameof(Resource.Account_Email)]"
+                @bind-Value="loginModel.Email" />
 
-            <div class="field">
-                <label class="label">@Localization[nameof(Resource.Account_Password)]</label>
-                <div class="control">
-                    <InputText class="input" type="password" placeholder="********" @bind-Value="loginModel.Password" />
-                </div>
-            </div>
+            <TextField 
+                InputType="password"
+                Placeholder="@Localization[nameof(Resource.Account_Password)]"
+                @bind-Value="loginModel.Password" />
 
             <div class="buttons is-justify-content-right">
                 <button type="submit" class="button is-primary">

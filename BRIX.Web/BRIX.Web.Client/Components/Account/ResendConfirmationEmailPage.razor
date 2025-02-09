@@ -23,20 +23,19 @@
                 </div>
             }
 
-            <div class="field">
-                <label class="label">@Localization[nameof(Resource.Account_Email)]</label>
-                <div class="control">
-                    <InputText class="input" type="email" placeholder="address@example.com" @bind-Value="_model.Email" />
-                </div>
-            </div>
+            <TextField 
+                InputType="email"
+                Placeholder="@Localization[nameof(Resource.Account_Email)]"
+                @bind-Value="_model.Email" />
 
             <div class="columns is-vcentered">
                 <div class="column">
-                    <Timer OnElapsedDelegate="HandleTimer"
-                    FormatString="@Localization[nameof(Resource.Account_YouCanResendAfter)]"
-                    HideAfterElapsed="true"
-                    ShowBeforeStart="false"
-                    @ref="_timer" />
+                    <Timer 
+                        OnElapsedDelegate="HandleTimer"
+                        FormatString="@Localization[nameof(Resource.Account_YouCanResendAfter)]"
+                        HideAfterElapsed="true"
+                        ShowBeforeStart="false"
+                        @ref="_timer" />
                 </div>
                 <div class="column is-narrow">
                     <div class="buttons is-right">

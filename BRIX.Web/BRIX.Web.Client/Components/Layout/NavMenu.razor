@@ -20,7 +20,9 @@
             <NavLink class="navbar-item" ActiveClass="is-active" href="" Match="NavLinkMatch.All">Home</NavLink>
             <AuthorizeView>
                 <Authorized>
-                    <NavLink class="navbar-item" ActiveClass="is-active" href="characters">Characters</NavLink>
+                    <NavLink class="navbar-item" ActiveClass="is-active" href="/characters" Match="NavLinkMatch.Prefix">
+                        Characters
+                    </NavLink>
                 </Authorized>
             </AuthorizeView>
         </div>

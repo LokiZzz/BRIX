@@ -9,29 +9,17 @@
 
             <ValidationSummary class="notification block is-danger" />
 
-            <div class="field">
-                <label class="label">@Localization[nameof(Resource.Account_Email)]</label>
-                <div class="control">
-                    <InputText class="input" type="email" placeholder="address@example.com"
-                    @bind-Value="RegisterModel.Email" />
-                </div>
-            </div>
+            <TextField InputType="email"
+                       Placeholder="@Localization[nameof(Resource.Account_Email)]"
+                       @bind-Value="RegisterModel.Email" />
 
-            <div class="field">
-                <label class="label">@Localization[nameof(Resource.Account_Password)]</label>
-                <div class="control">
-                    <InputText class="input" type="password" placeholder="********" 
-                    @bind-Value="RegisterModel.Password" />
-                </div>
-            </div>
+            <TextField InputType="password"
+                        Placeholder="@Localization[nameof(Resource.Account_Password)]"
+                        @bind-Value="RegisterModel.Password" />
 
-            <div class="field">
-                <label class="label">@Localization[nameof(Resource.Account_ConfirmPassword)]</label>
-                <div class="control">
-                    <InputText class="input" type="password" placeholder="********" 
-                    @bind-Value="RegisterModel.ConfirmPassword" />
-                </div>
-            </div>
+            <TextField InputType="password"
+                        Placeholder="@Localization[nameof(Resource.Account_ConfirmPassword)]"
+                        @bind-Value="RegisterModel.ConfirmPassword" />
 
             <div class="buttons is-justify-content-right">
                 <button type="submit" class="button is-primary">@Localization[nameof(Resource.Account_SignUpAction)]</button>
