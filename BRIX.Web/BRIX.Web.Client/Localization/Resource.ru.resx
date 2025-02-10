@@ -303,4 +303,7 @@
   <data name="Common_Open" xml:space="preserve">
     <value>Открыть</value>
   </data>
+  <data name="Common_Name" xml:space="preserve">
+    <value>Название</value>
+  </data>
 </root>

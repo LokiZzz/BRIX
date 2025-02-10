@@ -208,5 +208,10 @@ namespace BRIX.Library.Abilities
 
             return status;
         }
+
+        public int GetEffectIndex(EffectBase effect)
+        {
+            return _effects.IndexOf(effect);
+        }
     }
 }

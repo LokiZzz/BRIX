@@ -2,7 +2,7 @@
 
 namespace BRIX.Web.Client.Models.Characters
 {
-    public static class EffectsDictionary
+    public static class Effects
     {
         //public static Dictionary<Type, EffectTypeVM> Collection => new()
         //{
@@ -173,5 +173,23 @@ namespace BRIX.Web.Client.Models.Characters
         //    return Collection[effect.GetType()].EditPage?.Name.ToString()
         //        ?? throw new Exception("Страница редактирования эффекта не надена в EffectsDictionary.");
         //}
+
+        public static List<Type> Collection => 
+        [
+            typeof(DamageEffect)
+        ];
+
+        public static EffectBase Create(this Type effectType)
+        {
+            if (effectType.IsAssignableTo(typeof(EffectBase)))
+            {
+                throw new Exception($"Type {effectType.GetType()} is not an ability effect.");
+            }
+
+            return Activator.CreateInstance(effectType) as EffectBase
+                ?? throw new Exception("Create effect from item failed.");
+        }
+
+        public static string GetLocalizedName(this Type type) => $"Effect_{type.Name}";
     }
 }

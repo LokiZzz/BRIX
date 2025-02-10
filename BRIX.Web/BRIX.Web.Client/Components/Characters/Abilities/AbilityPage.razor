@@ -5,7 +5,8 @@
 
 @* Название и описание *@
 <div class="box block">
-    <InputText class="input" @bind-Value="Ability.Name"></InputText>
+    <TextField Placeholder="@Localization[nameof(Resource.Common_Name)]" @bind-Value="Ability.Name"/>
+    <TextField Placeholder="@Localization[nameof(Resource.Common_Name)]" @bind-Value="Ability.Description" />
 </div>
 
 @* Активация *@
@@ -22,9 +23,7 @@
 <button class="button is-large is-fullwidth block" @onclick="@(async () => AddEffect())">
     <i class="fa fa-plus-circle"></i>
 </button>
-<button class="button is-large is-fullwidth block" @onclick="@(async () => Navigation.NavigateTo($"/characters/{CharacterId}/abilitytestpage"))">
-    <i class="fa fa-skull"></i>
-</button>
+
 @foreach(EffectBase effect in Ability.Effects)
 {
     <div class="box block">

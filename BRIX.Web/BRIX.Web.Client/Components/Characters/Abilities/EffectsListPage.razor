@@ -1,11 +1,23 @@
-﻿@inherits AbilityPageBase
+﻿@using BRIX.Web.Client.Models.Characters;
+
+@inherits AbilityPageBase
 
 @page "/characters/{CharacterId:guid}/abilities/{AbilityId:guid}/effects"
 
-<div class="box">
-    <p>Список эффектов</p>
-</div>
+@foreach (Type effectType in Effects.Collection)
+{
+    <div class="box" @onclick="@(() => AddEffect(effectType))">
+        <p class="title">@effectType.GetLocalizedName()</p>
+    </div>
+}
 
 @code {
-    
+    private void AddEffect(Type effectType)
+    {
+        EffectBase newEffect = effectType.Create();
+        Layout.Ability.AddEffect(newEffect);
+        int effectIndex = Layout.Ability.GetEffectIndex(newEffect);
+
+        Navigation.NavigateTo($"/characters/{CharacterId}/abilities/{AbilityId}/effects/{effectIndex}");
+    }
 }
