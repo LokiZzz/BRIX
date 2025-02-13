@@ -4,20 +4,20 @@
 
 @page "/characters/{CharacterId:guid}/abilities/{AbilityId:guid}/effects"
 
-@foreach (Type effectType in Effects.Collection)
+@foreach (EffectVM effect in EffectsDictionary.Collection)
 {
-    <div class="box" @onclick="@(() => AddEffect(effectType))">
-        <p class="title">@effectType.GetLocalizedName()</p>
+    <div class="box" @onclick="@(() => AddEffect(effect))">
+        <p class="title">@effect.Type.GetLocalizedName()</p>
     </div>
 }
 
 @code {
-    private void AddEffect(Type effectType)
+    private void AddEffect(EffectVM effect)
     {
-        EffectBase newEffect = effectType.Create();
+        EffectBase newEffect = effect.Type.Create();
         Layout.Ability.AddEffect(newEffect);
         int effectIndex = Layout.Ability.GetEffectIndex(newEffect);
 
-        Navigation.NavigateTo($"/characters/{CharacterId}/abilities/{AbilityId}/effects/{effectIndex}");
+        Navigation.NavigateTo($"/characters/{CharacterId}/abilities/{AbilityId}/effects/dmg?n={effectIndex}");
     }
 }

@@ -30,9 +30,12 @@
 
     private string labelClass = placeholderClass;
 
+    private bool isFocused = false;
+
     private void OnFocus()
     {
         labelClass = floatingClass;
+        isFocused = true;
     }
 
     private void OnBlur()
@@ -41,6 +44,8 @@
         {
             labelClass = placeholderClass;
         }
+
+        isFocused = false;
     }
 
     private async Task OnInput(ChangeEventArgs e)
@@ -53,10 +58,6 @@
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-
-        if(!string.IsNullOrEmpty(Value))
-        {
-            labelClass = floatingClass;
-        }
+        labelClass = string.IsNullOrEmpty(Value) && !isFocused ? placeholderClass : floatingClass;
     }
 }

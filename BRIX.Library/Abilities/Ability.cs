@@ -213,5 +213,10 @@ namespace BRIX.Library.Abilities
         {
             return _effects.IndexOf(effect);
         }
+
+        public T? GetEffectByIndex<T>(int index) where T : EffectBase
+        {
+            return _effects.FirstOrDefault(x => x.GetType().Equals(typeof(T)) && GetEffectIndex(x) == index) as T;
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace BRIX.Web.Client.Models.Characters
 {
-    public static class Effects
+    public static class EffectsDictionary
     {
         //public static Dictionary<Type, EffectTypeVM> Collection => new()
         //{
@@ -174,9 +174,10 @@ namespace BRIX.Web.Client.Models.Characters
         //        ?? throw new Exception("Страница редактирования эффекта не надена в EffectsDictionary.");
         //}
 
-        public static List<Type> Collection => 
+        public static List<EffectVM> Collection => 
         [
-            typeof(DamageEffect)
+            new (typeof(DamageEffect), "dmg"),
+
         ];
 
         public static EffectBase Create(this Type effectType)
@@ -191,5 +192,12 @@ namespace BRIX.Web.Client.Models.Characters
         }
 
         public static string GetLocalizedName(this Type type) => $"Effect_{type.Name}";
+    }
+
+    public class EffectVM(Type type, string route)
+    {
+        public Type Type { get; set; } = type;
+
+        public string Route { get; set; } = route;
     }
 }

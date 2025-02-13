@@ -1,20 +1,25 @@
 ﻿@page "/"
+@using BRIX.Library.DiceValue
 @using BRIX.Web.Client.Components.Shared
 
 <PageTitle>@Localization[nameof(Resource.Tab_Home)]</PageTitle>
 
 <div class="section">
-    <div class="block">
-        <h1 class="title">Текстовое поле</h1>
-        <p class="block">Значение в поле: @textFieldValue</p>
-        <TextField Placeholder="Название" @bind-Value="textFieldValue"/>
-        <input class="input" placeholder="Название" />
+    <div class="block columns">
+        <div class="column is-one-third">
+            <h1 class="title">Разные виды полей</h1>
+            <p>Значение в поле с текстом: @textFieldValue</p>
+            <TextField Placeholder="Название" @bind-Value="textFieldValue"/>
+            <TextField Placeholder="Второе более длинное название" @bind-Value="textFieldValue" />
+            <p>Значение в поле c дайсами: @(dicePool?.ToString())</p>
+            <DiceField Placeholder="Урон" @bind-Dice="dicePool" />
+        </div>
     </div>
 
     <div class="block">
         <h1 class="title">Вызов алерта!</h1>
-        <p class="block">Результат алерта: «@_alertResult»</p>
-        <p class="block">Результат нумерика: «@_valueChangedByNumeric.ToString()»</p>
+        <p class="block">Результат алерта: «@alertResult»</p>
+        <p class="block">Результат нумерика: «@valueChangedByNumeric.ToString()»</p>
         <button class="button" @onclick="AlertYesNo">Да / Нет</button>
         <button class="button" @onclick="AlertOk">Ok</button>
         <button class="button" @onclick="Numeric">Нумерик</button>
@@ -51,8 +56,9 @@
 @code
 {
     private string textFieldValue = "Text field value that was set by @code";
-    private string _alertResult = string.Empty;
-    private int _valueChangedByNumeric = 55;
+    private string alertResult = string.Empty;
+    private int valueChangedByNumeric = 55;
+    private DicePool dicePool = new((1, 4));
 
     private DropdownItem SelectedDropdownItem { get; set; } = default!;
 
@@ -94,7 +100,7 @@
 
     private void AlertCallbackHandler(AlertResult result)
     {
-        _alertResult = $"IsPositive: {result.IsPositive}; Mouse: btn{result.MouseEventArgs.Button}, x:{result.MouseEventArgs.ClientX}, y:{result.MouseEventArgs.ClientX};";
+        alertResult = $"IsPositive: {result.IsPositive}; Mouse: btn{result.MouseEventArgs.Button}, x:{result.MouseEventArgs.ClientX}, y:{result.MouseEventArgs.ClientX};";
         StateHasChanged();
     }
 
@@ -111,7 +117,7 @@
 
     private void NumericCallbackHandler(NumericResult result)
     {
-        result.ApplyAction(ref _valueChangedByNumeric);
+        result.ApplyAction(ref valueChangedByNumeric);
         StateHasChanged();
     }
 

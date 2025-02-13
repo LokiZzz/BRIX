@@ -1,0 +1,101 @@
+﻿@using BRIX.Library.DiceValue
+
+<div class="field block input-container" > 
+    <div class="control has-icons-right">
+        <input class="input @ClassPostfix @inputIconClass"
+        type="@InputType"
+        value="@StringValue"
+        @onfocus="OnFocus"
+        @onblur="OnBlur"
+        @oninput="OnInput" />
+        <span class="icon is-right is-medium">
+            <i class="fas fa-dice-d20 fa-lg"></i>
+        </span>
+        <label class="@labelClass">@Placeholder</label>
+    </div>
+</div>
+
+@code {
+    private const string placeholderClass = "placeholder";
+    private const string floatingClass = "placeholder floating";
+    private const string invalidClass = "is-warning";
+
+    [Parameter]
+    public string ClassPostfix { get; set; } = string.Empty;
+
+    [Parameter]
+    public string InputType { get; set; } = "text";
+
+    [Parameter]
+    public string Placeholder { get; set; } = string.Empty;
+
+    [Parameter]
+    public string? StringValue { get; set; } = string.Empty;
+
+    [Parameter]
+    public EventCallback<string> StringValueChanged { get; set; }
+
+    [Parameter]
+    public DicePool? Dice { get; set; } = new ();
+
+    [Parameter]
+    public EventCallback<DicePool> DiceChanged { get; set; }
+
+    private string labelClass = placeholderClass;
+    private string inputIconClass = string.Empty;
+
+    private bool isFocused = false;
+
+    private void OnFocus()
+    {
+        labelClass = floatingClass;
+        isFocused = true;
+    }
+
+    private void OnBlur()
+    {
+        if (string.IsNullOrEmpty(StringValue))
+        {
+            labelClass = placeholderClass;
+        }
+
+        isFocused = false;
+    }
+
+    private async Task OnInput(ChangeEventArgs e)
+    {
+        StringValue = e?.Value?.ToString();
+
+        if (!string.IsNullOrEmpty(StringValue))
+        {
+            if (DicePool.TryParse(StringValue, out DicePool? parsed) && parsed is not null)
+            {
+                Dice = parsed;
+                await DiceChanged.InvokeAsync(Dice);
+                SetValidState();
+            }
+            else
+            {
+                SetInvalidState();
+            }
+        }
+
+        await StringValueChanged.InvokeAsync(StringValue);
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        labelClass = string.IsNullOrEmpty(StringValue) && !isFocused ? placeholderClass : floatingClass;
+    }
+
+    private void SetValidState()
+    {
+        inputIconClass = string.Empty;
+    }
+
+    private void SetInvalidState()
+    {
+        inputIconClass = invalidClass;
+    }
+}

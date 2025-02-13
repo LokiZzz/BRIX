@@ -1,0 +1,29 @@
+﻿@inherits AbilityPageBase
+
+@page "/characters/{CharacterId:guid}/abilities/{AbilityId:guid}/effects/dmg"
+
+<h3>DamageEffectPage</h3>
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "n")]
+    public int? EffectOrderNumber { get; set; }
+
+    public DamageEffect Effect { get; set; } = default!;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (EffectOrderNumber is not null)
+        {
+            Effect = Layout.Ability.GetEffectByIndex<DamageEffect>(EffectOrderNumber.Value)
+                ?? throw new Exception("Effect not found");
+        }
+
+        if(Effect is null)
+        {
+            Navigation.NavigateTo("/404");
+        }
+    }
+}
