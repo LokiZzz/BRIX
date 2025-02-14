@@ -306,4 +306,7 @@
   <data name="Common_Name" xml:space="preserve">
     <value>Название</value>
   </data>
+  <data name="Common_Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
 </root>

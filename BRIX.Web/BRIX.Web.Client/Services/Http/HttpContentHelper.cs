@@ -38,7 +38,7 @@ namespace BRIX.Web.Client.Services.Http
             {
                 return await response.BuildJsonResponseAsync<TResponse>(isError: true);
             }
-            catch(Exception ex)
+            catch
             {
                 throw;
             }

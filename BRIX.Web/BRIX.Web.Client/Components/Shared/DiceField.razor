@@ -1,13 +1,14 @@
 ﻿@using BRIX.Library.DiceValue
 
-<div class="field block input-container" > 
+<div class="field input-container" > 
     <div class="control has-icons-right">
-        <input class="input @ClassPostfix @inputIconClass"
-        type="@InputType"
-        value="@StringValue"
-        @onfocus="OnFocus"
-        @onblur="OnBlur"
-        @oninput="OnInput" />
+        <input 
+            class="input @ClassPostfix @inputIconClass"
+            type="@InputType"
+            value="@StringValue"
+            @onfocus="OnFocus"
+            @onblur="OnBlur"
+            @oninput="OnInput" />
         <span class="icon is-right is-medium">
             <i class="fas fa-dice-d20 fa-lg"></i>
         </span>

@@ -1,0 +1,30 @@
+﻿<div class="field">
+    <div class="control">
+        <textarea 
+            class="textarea" 
+            placeholder="@Placeholder"
+            value="@Value"/>
+        <span class="textarea-label">@Label</span>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Label { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Placeholder { get; set; } = string.Empty;
+
+    [Parameter]
+    public string? Value { get; set; } = string.Empty;
+
+    [Parameter]
+    public EventCallback<string> ValueChanged { get; set; }
+
+    private async Task OnInput(ChangeEventArgs e)
+    {
+        Value = e?.Value?.ToString();
+
+        await ValueChanged.InvokeAsync(Value);
+    }
+}
