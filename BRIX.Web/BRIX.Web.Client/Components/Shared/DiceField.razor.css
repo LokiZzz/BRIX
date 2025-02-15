@@ -1,9 +1,11 @@
-﻿.input-container {
+﻿.field {
     position: relative;
 }
 
 .input {
-    padding: 2.25rem 3.5rem 1.25rem 1rem;
+    height: 3.5rem;
+    padding: 1rem 1rem 0rem 1rem;
+    font-size: 1rem;
 }
 
 .placeholder {
@@ -11,7 +13,7 @@
     left: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 16px;
+    font-size: 1rem;
     transition: all 0.3s ease;
     pointer-events: none;
 }

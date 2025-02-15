@@ -6,18 +6,27 @@
 
 <div class="section">
     <div class="block columns">
-        <div class="column is-one-third">
+        <div class="column">
             <h1 class="title">Разные виды полей</h1>
             <TextField Placeholder="Название" @bind-Value="textFieldValue"/>
-            <TextField Placeholder="Название" @bind-Value="textFieldValue" />
-            <TextField Placeholder="Название" @bind-Value="textFieldValue" />
-            <TextAreaField Label="Описание" Placeholder="Какой-то текст..." @bind-Value="textAreaFieldValue" />
+            <TextField Placeholder="Второе название" />
+            <TextField Placeholder="Третье название" />
+            <div class="field">
+                <label class="label">Название</label>
+                <div class="control">
+                    <input class="input" type="text" value="Обычное булмовское поле" placeholder="С плейсхолдером">
+                </div>
+            </div>
+            <TextAreaField Label="Описание" Placeholder="Какой-то текст c ограничением в 200 символов..." @bind-Value="textAreaFieldValue" MaxLength="200" />
+            <TextAreaField Label="Второе описание" Placeholder="Какой-то текст без ограничений..."/>
             <DiceField Placeholder="Урон" @bind-Dice="dicePool" />
             <div class="box block">
                 <p>Значение в поле с текстом: @textFieldValue</p>
                 <p>Значение в поле c дайсами: @(dicePool?.ToString())</p>
             </div>
         </div>
+        <div class="column"></div>
+        <div class="column"></div>
     </div>
 
     <div class="block">

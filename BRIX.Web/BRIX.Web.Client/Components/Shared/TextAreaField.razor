@@ -1,11 +1,20 @@
-﻿<div class="field">
+﻿@inject IJSRuntime JSRuntime
+
+<div class="field">
+    <label class="label">@Label</label>
     <div class="control">
         <textarea 
-            class="textarea" 
-            placeholder="@Placeholder"
-            value="@Value"/>
-        <span class="textarea-label">@Label</span>
+        class="textarea"
+        id="@textareaId"
+        placeholder="@Placeholder"
+        value="@Value" 
+        @oninput="OnInput"
+        @attributes=@attributes/>
     </div>
+    @if (MaxLength is not null)
+    {
+        <progress class="progress mt-3 " value="@currentLength" max="@MaxLength"/>
+    }
 </div>
 
 @code {
@@ -21,10 +30,38 @@
     [Parameter]
     public EventCallback<string> ValueChanged { get; set; }
 
+    [Parameter]
+    public int? MaxLength { get; set; }
+
+    private int currentLength => Value?.Length ?? 0;
+
+    private Dictionary<string, object> attributes => MaxLength is null ? [] : new() { { "maxlength", MaxLength } };
+
     private async Task OnInput(ChangeEventArgs e)
     {
-        Value = e?.Value?.ToString();
+        string? newValue = e?.Value?.ToString();
+
+        if (MaxLength is not null && newValue?.Length > MaxLength)
+        {
+            Value = newValue.Substring(0, MaxLength.Value);
+        }
+        else
+        {
+            Value = newValue;
+        }
 
         await ValueChanged.InvokeAsync(Value);
+    }
+
+    private ElementReference textareaRef;
+
+    private string textareaId = "textarea-" + Guid.NewGuid().ToString("N");
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("initializeAutoExpand", textareaId);
+        }
     }
 }
