@@ -10,16 +10,16 @@
             <ValidationSummary class="notification block is-danger" />
 
             <TextField InputType="email"
-                       Placeholder="@Localization[nameof(Resource.Account_Email)]"
+                       Label="@Localization[nameof(Resource.Account_Email)]"
                        @bind-Value="RegisterModel.Email" />
 
             <TextField InputType="password"
-                        Placeholder="@Localization[nameof(Resource.Account_Password)]"
-                        @bind-Value="RegisterModel.Password" />
+                       Label="@Localization[nameof(Resource.Account_Password)]"
+                       @bind-Value="RegisterModel.Password" />
 
             <TextField InputType="password"
-                        Placeholder="@Localization[nameof(Resource.Account_ConfirmPassword)]"
-                        @bind-Value="RegisterModel.ConfirmPassword" />
+                       Label="@Localization[nameof(Resource.Account_ConfirmPassword)]"
+                       @bind-Value="RegisterModel.ConfirmPassword" />
 
             <div class="buttons is-justify-content-right">
                 <button type="submit" class="button is-primary">@Localization[nameof(Resource.Account_SignUpAction)]</button>

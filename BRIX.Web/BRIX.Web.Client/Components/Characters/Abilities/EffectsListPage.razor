@@ -7,7 +7,7 @@
 @foreach (EffectVM effect in EffectsDictionary.Collection)
 {
     <div class="box" @onclick="@(() => AddEffect(effect))">
-        <p class="title">@effect.Type.GetLocalizedName()</p>
+        <p class="title">@Localization[effect.Type.GetLocalizedName()]</p>
     </div>
 }
 
@@ -18,6 +18,6 @@
         Layout.Ability.AddEffect(newEffect);
         int effectIndex = Layout.Ability.GetEffectIndex(newEffect);
 
-        Navigation.NavigateTo($"/characters/{CharacterId}/abilities/{AbilityId}/effects/dmg?n={effectIndex}");
+        Navigation.NavigateToRelative($"{effect.Route}?n={effectIndex}");
     }
 }

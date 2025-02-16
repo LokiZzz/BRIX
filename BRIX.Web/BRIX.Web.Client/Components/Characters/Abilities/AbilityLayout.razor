@@ -5,14 +5,15 @@
 
 <CascadingValue Value="this">
     <div class="section">
-        <div class="box block">
-            <p>Хлебные крошки редатирования способности. Они здесь нужны из за большой глубины вложенности в сценариях редактирования способности.</p>
+        <div class="box">
+            <p>Здесь будут хлебные крошки, типа:</p>
+            <p>Гоблин боблин -> Способности -> Выстрел из бумпалки -> Урон -> Выбор целей</p>
         </div>
 
         @Body
 
-        <div class="box block">
-            <p>Монитор опыта и кнопка сохранить.</p>
+        <div class="box">
+            <AbilityCostMonitor/>
             <button class="button" @onclick="SaveAsync">@Localization[nameof(Resource.Common_Save)]</button>
         </div>
     </div>
@@ -27,7 +28,20 @@
 
     private async Task SaveAsync(MouseEventArgs e)
     {
-        await CharacterManager.SaveAsync();
-        Navigation.NavigateTo($"/characters/{CharacterId}/abilities");
+        if (CharacterManager.EditingCharacter?.AvailableExp > 0)
+        {
+            await CharacterManager.SaveAsync();
+            Navigation.NavigateTo($"/characters/{CharacterId}/abilities");
+        }
+        else
+        {
+            Modal.Alert(new AlertParameters {
+                Mode = EAlertMode.Ok,
+                Message = Localization[nameof(Resource.Abilities_NotEnoughExpForAbility)],
+                Title = Localization[nameof(Resource.Common_Warning)],
+            });
+        }
     }
+
+    public void Refresh() => StateHasChanged();
 }

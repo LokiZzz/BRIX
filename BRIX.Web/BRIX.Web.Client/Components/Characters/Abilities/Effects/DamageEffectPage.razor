@@ -2,7 +2,13 @@
 
 @page "/characters/{CharacterId:guid}/abilities/{AbilityId:guid}/effects/dmg"
 
-<h3>DamageEffectPage</h3>
+<div class="box">
+    <p class="title">@Localization[nameof(Resource.Effect_DamageEffect)]</p>
+    <p class="block">@Localization[nameof(Resource.Effect_DamageHint)]</p>
+    <DiceField 
+        Placeholder="@Localization[nameof(Resource.Effect_DamageEffect)]" 
+        @bind-Dice="Effect.Impact" @bind-Dice:after="Layout.Refresh"/>
+</div>
 
 @code {
     [Parameter]

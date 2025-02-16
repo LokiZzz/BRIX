@@ -2,34 +2,39 @@
 
 @page "/characters/{CharacterId:guid}/abilities/{AbilityId:guid}"
 @page "/characters/{CharacterId:guid}/abilities/new"
+@using BRIX.Web.Client.Models.Characters
 
 @* Название и описание *@
-<div class="box block">
-    <TextField Placeholder="@Localization[nameof(Resource.Common_Name)]" @bind-Value="Ability.Name"/>
-    <TextField Placeholder="@Localization[nameof(Resource.Common_Description)]" @bind-Value="Ability.Description" />
+<div class="box">
+    <TextField Label="@Localization[nameof(Resource.Common_Name)]" @bind-Value="Ability.Name" />
+    <TextAreaField Label="@Localization[nameof(Resource.Common_Description)]" @bind-Value="Ability.Description" MaxLength="150"/>
 </div>
 
 @* Активация *@
-<div class="box block">
+<div class="box">
     <p class="title">@Localization[nameof(Resource.Abilities_Activation)]</p>
-    <p>
+    <p class="block">
         Плейсхолдер настроек активации. Этой способности нужно Х очков активации и не требуется перезарядка.
     </p>
     <button class="button is-fullwidth" @onclick="EditActivation">@Localization[nameof(Resource.Common_Edit)]</button>
 </div>
 
 @* Эффекты *@
-<p class="title block">@Localization[nameof(Resource.Abilities_Effects)]</p>
+<p class="title">@Localization[nameof(Resource.Abilities_Effects)]</p>
 <button class="button is-large is-fullwidth block" @onclick="@(async () => AddEffect())">
     <i class="fa fa-plus-circle"></i>
 </button>
 
 @foreach(EffectBase effect in Ability.Effects)
 {
-    <div class="box block">
-        <p class="title">GET EFFECT NAME</p>
-        <button @onclick="EditEffect">@Localization[nameof(Resource.Common_Edit)]</button>
-        <button @onclick="RemoveEffect">@Localization[nameof(Resource.Common_Remove)]</button>
+    <div class="box">
+        <p class="title">@Localization[effect.GetType().GetLocalizedName()]</p>
+        <button class="button" @onclick="@(() => EditEffect(effect))">
+            @Localization[nameof(Resource.Common_Edit)]
+        </button>
+        <button class="button is-danger" @onclick="@(() => RemoveEffect(effect))">
+            @Localization[nameof(Resource.Common_Remove)]
+        </button>
     </div>
 }
 
@@ -37,30 +42,22 @@
 @code {
     public Ability Ability => Layout.Ability;
 
-    private async Task SaveAsync(MouseEventArgs e)
-    {
-        await CharacterManager.SaveAsync();
-        Navigation.NavigateTo($"/characters/{CharacterId}/abilities");
-    }
-
-    private void Cancel(MouseEventArgs e)
-    {
-        Navigation.NavigateTo($"/characters/{CharacterId}/abilities");
-    }
-
     private void AddEffect()
     {
         Navigation.NavigateTo($"/characters/{CharacterId}/abilities/{AbilityId}/effects");
     }
 
-    private void EditEffect(MouseEventArgs e)
+    private void EditEffect(EffectBase effect)
     {
-        throw new NotImplementedException();
+        int effectIndex = Layout.Ability.GetEffectIndex(effect);
+        string route = EffectsDictionary.GetRoute(effect);
+        Navigation.NavigateToRelative($"effects/{route}?n={effectIndex}");
     }
 
-    private void RemoveEffect(MouseEventArgs e)
+    private void RemoveEffect(EffectBase effect)
     {
-        throw new NotImplementedException();
+        Ability.RemoveEffect(effect);
+        Layout.Refresh();
     }
 
     private void EditActivation(MouseEventArgs e)

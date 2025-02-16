@@ -8,15 +8,9 @@
     <div class="block columns">
         <div class="column">
             <h1 class="title">Разные виды полей</h1>
-            <TextField Placeholder="Название" @bind-Value="textFieldValue"/>
-            <TextField Placeholder="Второе название" />
-            <TextField Placeholder="Третье название" />
-            <div class="field">
-                <label class="label">Название</label>
-                <div class="control">
-                    <input class="input" type="text" value="Обычное булмовское поле" placeholder="С плейсхолдером">
-                </div>
-            </div>
+            <TextField Label="Название" Placeholder="Способность 1" @bind-Value="textFieldValue"/>
+            <TextField Label="Второе название" Placeholder="Способность 2" />
+            <TextField Label="Третье название" Placeholder="Способность 3" />
             <TextAreaField Label="Описание" Placeholder="Какой-то текст c ограничением в 200 символов..." @bind-Value="textAreaFieldValue" MaxLength="200" />
             <TextAreaField Label="Второе описание" Placeholder="Какой-то текст без ограничений..."/>
             <DiceField Placeholder="Урон" @bind-Dice="dicePool" />
@@ -53,8 +47,8 @@
         <h1 class="title">Выпадающий список</h1>
         <p class="block">Выбранное значение: «@SelectedDropdownItem?.SomeProperty»</p>
         <Dropdown 
-        Items="DropdownItems" 
-        @bind-Selected="SelectedDropdownItem" 
+        Items="DropdownItems"
+        @bind-Selected="SelectedDropdownItem"
         DisplayPropertyDelegate="x => x?.SomeProperty"
         Placeholder="Please, select Guid..."/>
     </div>

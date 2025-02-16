@@ -182,7 +182,7 @@ namespace BRIX.Web.Client.Models.Characters
 
         public static EffectBase Create(this Type effectType)
         {
-            if (effectType.IsAssignableTo(typeof(EffectBase)))
+            if (effectType.IsAssignableFrom(typeof(EffectBase)))
             {
                 throw new Exception($"Type {effectType.GetType()} is not an ability effect.");
             }
@@ -192,6 +192,13 @@ namespace BRIX.Web.Client.Models.Characters
         }
 
         public static string GetLocalizedName(this Type type) => $"Effect_{type.Name}";
+
+        public static string GetRoute(EffectBase effect)
+        {
+            EffectVM effectVM = Collection.Single(x => x.Type.Equals(effect.GetType()));
+
+            return effectVM.Route;
+        }
     }
 
     public class EffectVM(Type type, string route)

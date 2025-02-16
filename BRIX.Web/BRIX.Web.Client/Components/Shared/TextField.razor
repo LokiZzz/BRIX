@@ -1,23 +1,24 @@
 ﻿<div class="field">
-    <input 
-        class="input @ClassPostfix" 
-        type="@InputType" 
-        value="@Value" 
-        @onfocus="OnFocus" 
-        @onblur="OnBlur" 
-        @oninput="OnInput"/>
-    <label class="@labelClass">@Placeholder</label>
+    <label class="label">@Label</label>
+    <div class="control">
+        <input 
+            class="input @ClassPostfix"
+            type="@InputType"
+            value="@Value"
+            placeholder="@Placeholder" 
+            @oninput="OnInput" />
+    </div>
 </div>
 
 @code {
-    private const string placeholderClass = "placeholder";
-    private const string floatingClass = "placeholder floating";
-
     [Parameter]
     public string ClassPostfix { get; set; } = string.Empty;
 
     [Parameter]
     public string InputType { get; set; } = "text";
+
+    [Parameter]
+    public string Label { get; set; } = string.Empty;
 
     [Parameter]
     public string Placeholder { get; set; } = string.Empty;
@@ -28,36 +29,9 @@
     [Parameter]
     public EventCallback<string> ValueChanged { get; set; }
 
-    private string labelClass = placeholderClass;
-
-    private bool isFocused = false;
-
-    private void OnFocus()
-    {
-        labelClass = floatingClass;
-        isFocused = true;
-    }
-
-    private void OnBlur()
-    {
-        if (string.IsNullOrEmpty(Value))
-        {
-            labelClass = placeholderClass;
-        }
-
-        isFocused = false;
-    }
-
     private async Task OnInput(ChangeEventArgs e)
     {
         Value = e?.Value?.ToString();
-
         await ValueChanged.InvokeAsync(Value);
-    }
-
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-        labelClass = string.IsNullOrEmpty(Value) && !isFocused ? placeholderClass : floatingClass;
     }
 }

@@ -310,4 +310,19 @@
   <data name="Common_Description" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="Effect_DamageEffect" xml:space="preserve">
+    <value>Damage</value>
+  </data>
+  <data name="Effect_DamageHint" xml:space="preserve">
+    <value>Each time you use your ability, roll a set of dice, which you specify below, to determine how much damage the ability has done.</value>
+  </data>
+  <data name="Abilities_AbilityCost" xml:space="preserve">
+    <value>Ability cost</value>
+  </data>
+  <data name="Abilities_NotEnoughExpForAbility" xml:space="preserve">
+    <value>Not enough EXP for ability.</value>
+  </data>
+  <data name="Common_Warning" xml:space="preserve">
+    <value>Warning!</value>
+  </data>
 </root>

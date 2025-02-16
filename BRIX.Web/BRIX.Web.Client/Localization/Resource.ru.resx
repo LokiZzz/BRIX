@@ -309,4 +309,19 @@
   <data name="Common_Description" xml:space="preserve">
     <value>Описание</value>
   </data>
+  <data name="Effect_DamageEffect" xml:space="preserve">
+    <value>Урон</value>
+  </data>
+  <data name="Effect_DamageHint" xml:space="preserve">
+    <value>Каждый раз, когда вы используете свою способность, бросайте набор костей, который укажите ниже, чтобы определить сколько урона нанесла способность.</value>
+  </data>
+  <data name="Abilities_AbilityCost" xml:space="preserve">
+    <value>Стоимость способности</value>
+  </data>
+  <data name="Abilities_NotEnoughExpForAbility" xml:space="preserve">
+    <value>Для способности не хватает очков опыта.</value>
+  </data>
+  <data name="Common_Warning" xml:space="preserve">
+    <value>Внимание!</value>
+  </data>
 </root>

@@ -61,6 +61,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ability cost.
+        /// </summary>
+        public static string Abilities_AbilityCost {
+            get {
+                return ResourceManager.GetString("Abilities_AbilityCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Activation.
         /// </summary>
         public static string Abilities_Activation {
@@ -75,6 +84,15 @@ namespace BRIX.Web.Client.Localization {
         public static string Abilities_Effects {
             get {
                 return ResourceManager.GetString("Abilities_Effects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not enough EXP for ability..
+        /// </summary>
+        public static string Abilities_NotEnoughExpForAbility {
+            get {
+                return ResourceManager.GetString("Abilities_NotEnoughExpForAbility", resourceCulture);
             }
         }
         
@@ -493,11 +511,38 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Warning!.
+        /// </summary>
+        public static string Common_Warning {
+            get {
+                return ResourceManager.GetString("Common_Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
         public static string Common_Yes {
             get {
                 return ResourceManager.GetString("Common_Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Damage.
+        /// </summary>
+        public static string Effect_DamageEffect {
+            get {
+                return ResourceManager.GetString("Effect_DamageEffect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Each time you use your ability, roll a set of dice, which you specify below, to determine how much damage the ability has done..
+        /// </summary>
+        public static string Effect_DamageHint {
+            get {
+                return ResourceManager.GetString("Effect_DamageHint", resourceCulture);
             }
         }
         
