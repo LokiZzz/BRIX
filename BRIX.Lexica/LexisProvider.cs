@@ -10,11 +10,11 @@ namespace BRIX.Lexica
 {
     public static class LexisProvider
     {
-        public static async Task<string> ToShortLexis(this object model)
+        public static async Task<string> ToShortLexisAsync(this object model)
         {
             try
             {
-                return await ToLexisInternal(model, "Short");
+                return await ToLexisInternalAsync(model, "Short");
             }
             catch (Exception ex)
             {
@@ -22,13 +22,13 @@ namespace BRIX.Lexica
             }
         }
 
-        public static async Task<string> ToLexis(this object model, CultureInfo? cultureInfo = null)
+        public static async Task<string> ToLexisAsync(this object model, CultureInfo? cultureInfo = null)
         {
             try
             {
                 cultureInfo ??= Thread.CurrentThread.CurrentUICulture;
 
-                return await ToLexisInternal(model, cultureInfo.Name);
+                return await ToLexisInternalAsync(model, cultureInfo.Name);
             }
             catch(Exception ex)
             {
@@ -36,7 +36,7 @@ namespace BRIX.Lexica
             }
         }
 
-        private static async Task<string> ToLexisInternal(object model, string cultureFolderName)
+        private static async Task<string> ToLexisInternalAsync(object model, string cultureFolderName)
         {
             IServiceCollection services = new ServiceCollection();
             services.AddLogging();

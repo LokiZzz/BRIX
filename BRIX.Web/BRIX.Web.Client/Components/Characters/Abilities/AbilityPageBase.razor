@@ -1,4 +1,5 @@
 ﻿@layout AbilityLayout
+
 @code {
     [CascadingParameter]
     public AbilityLayout Layout { get; set; } = default!;
@@ -9,45 +10,41 @@
     [Parameter]
     public Guid? AbilityId { get; set; }
 
+    public Ability Ability => CharacterManager.EditingCharacter?.Abilities.FirstOrDefault(x => x.Id == AbilityId) ?? new();
+
+    public Character Character => CharacterManager.EditingCharacter ?? new();
+
     protected override async Task OnParametersSetAsync()
     {
         base.OnParametersSet();
 
+        // Если персонаж для редактирования не выбран или не совпадает, то выбрать.
         if (CharacterManager.EditingCharacter is null || CharacterManager.EditingCharacter.Id != CharacterId)
         {
             await CharacterManager.EditCharacterAsync(CharacterId);
         }
 
-        if (Layout.Ability is null || Layout.Ability.Id != AbilityId)
+        // Если айди способности не указан, значит её нужно создать и добавить.
+        if (AbilityId is null)
         {
-            Ability? editingAbility;
-
-            if (AbilityId is null)
-            {
-                editingAbility = new();
-                CharacterManager.EditingCharacter?.AddAbility(editingAbility);
-            }
-            else
-            {
-                editingAbility = CharacterManager.EditingCharacter?.Abilities.FirstOrDefault(x => x.Id == AbilityId);
-            }
-
-            if (editingAbility is not null)
-            {
-                Layout.Ability = editingAbility;
-                AbilityId = editingAbility.Id;
-            }
-            else
-            {
-                Navigation.NavigateTo("/404");
-            }
+            Ability newAbility = new();
+            CharacterManager.EditingCharacter?.AddAbility(newAbility);
+            AbilityId = newAbility.Id;
         }
 
-        Layout.CharacterId = CharacterId;
+        // Если не удалось нормально инициализироваться, то уходим в 404.
+        Character? character = CharacterManager.EditingCharacter;
+        Ability? ability = CharacterManager.EditingCharacter?.Abilities.FirstOrDefault(x => x.Id == AbilityId);
 
-        if (AbilityId is not null)
+        if (character is null || ability is null)
         {
+            Navigation.NavigateTo("/404");
+        }
+        else
+        {
+            // Проставляем данные в лейауте
             Layout.AbilityId = AbilityId;
+            Layout.CharacterId = CharacterId;
         }
     }
 }

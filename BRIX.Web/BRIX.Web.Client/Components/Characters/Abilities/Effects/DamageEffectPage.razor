@@ -1,19 +1,20 @@
 ﻿@inherits AbilityPageBase
 
 @page "/characters/{CharacterId:guid}/abilities/{AbilityId:guid}/effects/dmg"
+@using BRIX.Library.DiceValue
 
 <div class="box">
     <p class="title">@Localization[nameof(Resource.Effect_DamageEffect)]</p>
     <p class="block">@Localization[nameof(Resource.Effect_DamageHint)]</p>
     <DiceField 
-        Placeholder="@Localization[nameof(Resource.Effect_DamageEffect)]" 
-        @bind-Dice="Effect.Impact" @bind-Dice:after="Layout.Refresh"/>
+        Placeholder="@Localization[nameof(Resource.Effect_DamageEffect)]"
+        @bind-Dice="Effect.Impact" @bind-Dice:after="Layout.Refresh" />
 </div>
 
 @code {
     [Parameter]
     [SupplyParameterFromQuery(Name = "n")]
-    public int? EffectOrderNumber { get; set; }
+    public int EffectOrderNumber { get; set; }
 
     public DamageEffect Effect { get; set; } = default!;
 
@@ -21,11 +22,7 @@
     {
         base.OnInitialized();
 
-        if (EffectOrderNumber is not null)
-        {
-            Effect = Layout.Ability.GetEffectByIndex<DamageEffect>(EffectOrderNumber.Value)
-                ?? throw new Exception("Effect not found");
-        }
+        Effect = Ability.GetEffectByIndex<DamageEffect>(EffectOrderNumber) ?? throw new Exception("Effect not found");
 
         if(Effect is null)
         {

@@ -8,6 +8,8 @@
     [CascadingParameter]
     public AbilityLayout Layout { get; set; } = default!;
 
+    public void Refresh() => StateHasChanged();
+
     /// <summary>
     /// Стоимость.
     /// </summary>

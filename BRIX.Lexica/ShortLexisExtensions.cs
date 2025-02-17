@@ -29,11 +29,11 @@ namespace BRIX.Lexica
         {
             string shortAbilityDescription = string.Empty;
 
-            shortAbilityDescription += await ability.Activation.ToShortLexis() + Environment.NewLine;
+            shortAbilityDescription += await ability.Activation.ToShortLexisAsync() + Environment.NewLine;
 
             foreach (EffectBase effect in ability.Effects)
             {
-                shortAbilityDescription += "* " + await effect.ToShortLexis() + Environment.NewLine;
+                shortAbilityDescription += "* " + await effect.ToShortLexisAsync() + Environment.NewLine;
 
                 foreach (AspectBase aspect in effect.Aspects)
                 {
@@ -42,7 +42,7 @@ namespace BRIX.Lexica
                         shortAbilityDescription += ' ';
                     }
 
-                    shortAbilityDescription += await aspect.ToShortLexis();
+                    shortAbilityDescription += await aspect.ToShortLexisAsync();
                 }
 
                 shortAbilityDescription += Environment.NewLine;

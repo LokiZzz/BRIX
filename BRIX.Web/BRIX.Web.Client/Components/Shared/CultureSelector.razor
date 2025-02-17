@@ -15,6 +15,7 @@
             {
                 IJSInProcessRuntime js = (IJSInProcessRuntime)JSRuntime;
                 js.InvokeVoid("blazorCulture.set", value.Name);
+                CultureInfo.CurrentCulture = value;
                 Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
             }
         }

@@ -174,7 +174,7 @@ namespace BRIX.Web.Client.Models.Characters
         //        ?? throw new Exception("Страница редактирования эффекта не надена в EffectsDictionary.");
         //}
 
-        public static List<EffectVM> Collection => 
+        public static List<EffectDictionaryVM> Collection => 
         [
             new (typeof(DamageEffect), "dmg"),
 
@@ -195,13 +195,13 @@ namespace BRIX.Web.Client.Models.Characters
 
         public static string GetRoute(EffectBase effect)
         {
-            EffectVM effectVM = Collection.Single(x => x.Type.Equals(effect.GetType()));
+            EffectDictionaryVM effectVM = Collection.Single(x => x.Type.Equals(effect.GetType()));
 
             return effectVM.Route;
         }
     }
 
-    public class EffectVM(Type type, string route)
+    public class EffectDictionaryVM(Type type, string route)
     {
         public Type Type { get; set; } = type;
 

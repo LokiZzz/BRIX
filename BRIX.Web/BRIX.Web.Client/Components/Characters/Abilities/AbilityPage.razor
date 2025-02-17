@@ -2,6 +2,7 @@
 
 @page "/characters/{CharacterId:guid}/abilities/{AbilityId:guid}"
 @page "/characters/{CharacterId:guid}/abilities/new"
+
 @using BRIX.Web.Client.Models.Characters
 
 @* Название и описание *@
@@ -29,6 +30,8 @@
 {
     <div class="box">
         <p class="title">@Localization[effect.GetType().GetLocalizedName()]</p>
+        @* Если начнёт тормозить или дедлокать, то заменить на инициализацию в методе жизненного цикла компонента *@
+        <p class="block">@effect.ToLexisAsync().GetAwaiter().GetResult()</p>
         <button class="button" @onclick="@(() => EditEffect(effect))">
             @Localization[nameof(Resource.Common_Edit)]
         </button>
@@ -40,8 +43,6 @@
 
 
 @code {
-    public Ability Ability => Layout.Ability;
-
     private void AddEffect()
     {
         Navigation.NavigateTo($"/characters/{CharacterId}/abilities/{AbilityId}/effects");
@@ -49,7 +50,7 @@
 
     private void EditEffect(EffectBase effect)
     {
-        int effectIndex = Layout.Ability.GetEffectIndex(effect);
+        int effectIndex = Ability.GetEffectIndex(effect);
         string route = EffectsDictionary.GetRoute(effect);
         Navigation.NavigateToRelative($"effects/{route}?n={effectIndex}");
     }
@@ -64,4 +65,12 @@
     {
         throw new NotImplementedException();
     }
+
+    public class EffectVM(EffectBase effect, string lexis)
+    {
+        public EffectBase Effect { get; set; } = effect;
+
+        public string Lexis { get; set; } = lexis;
+    }
 }
+
