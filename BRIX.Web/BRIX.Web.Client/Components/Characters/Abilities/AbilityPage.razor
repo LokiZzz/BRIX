@@ -66,6 +66,16 @@
         throw new NotImplementedException();
     }
 
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
     public class EffectVM(EffectBase effect, string lexis)
     {
         public EffectBase Effect { get; set; } = effect;

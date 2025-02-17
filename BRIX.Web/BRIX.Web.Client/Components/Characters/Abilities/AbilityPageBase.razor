@@ -16,8 +16,6 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        base.OnParametersSet();
-
         // Если персонаж для редактирования не выбран или не совпадает, то выбрать.
         if (CharacterManager.EditingCharacter is null || CharacterManager.EditingCharacter.Id != CharacterId)
         {
@@ -45,6 +43,14 @@
             // Проставляем данные в лейауте
             Layout.AbilityId = AbilityId;
             Layout.CharacterId = CharacterId;
+            
+            // Вызывает OnParametersSetAsync дочернего элемента, что в итоге выливается в стековерфлоу.
+            // Layout.Refresh();
         }
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
     }
 }
