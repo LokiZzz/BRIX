@@ -36,6 +36,10 @@
 
     public Ability? Ability => CharacterManager.EditingCharacter?.Abilities.FirstOrDefault(x => x.Id == AbilityId);
 
+    /// <summary>
+    /// Обновить состояние лейаута.
+    /// Не вызывать из OnParametersSet или OnParametersSetAsync, иначе будет stack overflow.
+    /// </summary>
     public void Refresh()
     {
         StateHasChanged();
@@ -56,15 +60,5 @@
                 Title = Localization[nameof(Resource.Common_Warning)],
             });
         }
-    }
-
-    protected override async Task OnParametersSetAsync()
-    {
-        await base.OnParametersSetAsync();
-    }
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
     }
 }
