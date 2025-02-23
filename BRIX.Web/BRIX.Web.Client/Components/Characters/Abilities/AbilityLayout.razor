@@ -19,7 +19,6 @@
             <p>Осталось: EXP</p> *@
             <progress class="progress" value="@cost" max="@overall" />
             <button class="button" @onclick="SaveAsync">@Localization[nameof(Resource.Common_Save)]</button>
-            <button class="button" @onclick="@(() => StateHasChanged())">StateHasChanged()</button>
         </div>
     </div>
 </CascadingValue>

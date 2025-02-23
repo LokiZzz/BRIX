@@ -22,7 +22,8 @@
             await CharacterManager.EditCharacterAsync(CharacterId);
         }
 
-        // Если айди способности не указан, значит её нужно создать и добавить.
+        // Если айди способности в параметрах не указан, значит её нужно создать и добавить персонажу, 
+        // а потом установить её айди.
         if (AbilityId is null)
         {
             Ability newAbility = new();
@@ -44,12 +45,7 @@
             Layout.AbilityId = AbilityId;
             Layout.CharacterId = CharacterId;
             
-            //Layout.Refresh();
+            Layout.Refresh();
         }
     }
-
-    // protected override void OnInitialized()
-    // {
-    //     base.OnInitialized();
-    // }
 }
