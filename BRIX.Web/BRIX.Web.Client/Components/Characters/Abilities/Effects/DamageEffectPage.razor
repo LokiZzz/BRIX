@@ -1,6 +1,6 @@
 ﻿@inherits AbilityPageBase
 
-@page "/characters/{CharacterId:guid}/abilities/{AbilityId:guid}/effects/dmg"
+@page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects/dmg"
 @using BRIX.Library.DiceValue
 
 <div class="box">
@@ -18,11 +18,14 @@
 
     public DamageEffect Effect { get; set; } = default!;
 
+    // TODO: Можно вынести инициализацию эффекта в базовый класс страницы эффекта (EffectPageBase)
+    // Но нужно сделать это через дженерик (так вроде можно)
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        Effect = Ability.GetEffectByIndex<DamageEffect>(EffectOrderNumber) ?? throw new Exception("Effect not found");
+        Effect = Ability.GetEffectByIndex<DamageEffect>(EffectOrderNumber);
 
         if(Effect is null)
         {

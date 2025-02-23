@@ -13,6 +13,9 @@
     [Parameter]
     public string Title { get; set; } = string.Empty;
 
+    [Parameter]
+    public string Tag { get; set; } = string.Empty;
+
     protected override void OnInitialized()
     {
         if (Parent == null)

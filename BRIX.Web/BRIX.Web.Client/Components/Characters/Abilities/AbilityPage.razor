@@ -1,6 +1,6 @@
 ﻿@inherits AbilityPageBase
 
-@page "/characters/{CharacterId:guid}/abilities/{AbilityId:guid}"
+@page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}"
 @page "/characters/{CharacterId:guid}/abilities/new"
 
 @using BRIX.Web.Client.Models.Characters
@@ -45,7 +45,7 @@
 @code {
     private void AddEffect()
     {
-        Navigation.NavigateTo($"/characters/{CharacterId}/abilities/{AbilityId}/effects");
+        Navigation.NavigateTo($"/characters/{CharacterId}/abilities/{AbilityNumber}/effects");
     }
 
     private void EditEffect(EffectBase effect)
@@ -63,7 +63,7 @@
 
     private void EditActivation(MouseEventArgs e)
     {
-        throw new NotImplementedException();
+        string stop = "";
     }
 
     public class EffectVM(EffectBase effect, string lexis)

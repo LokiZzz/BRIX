@@ -2,7 +2,7 @@
 
 @inherits AbilityPageBase
 
-@page "/characters/{CharacterId:guid}/abilities/{AbilityId:guid}/effects"
+@page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects"
 
 @foreach (EffectDictionaryVM effect in EffectsDictionary.Collection)
 {

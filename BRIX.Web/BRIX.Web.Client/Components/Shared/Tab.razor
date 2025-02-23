@@ -49,6 +49,9 @@
     [Parameter]
     public string Class { get; set; } = string.Empty;
 
+    [Parameter]
+    public Action<TabItem>? OnActiveTabChanged { get; set; }
+
     public TabItem ActiveItem { get; set; } = default!;
 
     List<TabItem> Items = new List<TabItem>();
@@ -73,6 +76,7 @@
         {
             ActiveItem = item;
             StateHasChanged();
+            OnActiveTabChanged?.Invoke(item);
         }
     }
 

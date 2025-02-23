@@ -31,9 +31,10 @@
 
     public Character? Character => CharacterManager.EditingCharacter;
 
-    public Guid? AbilityId { get; set; }
+    public int? AbilityNumber { get; set; }
 
-    public Ability? Ability => CharacterManager.EditingCharacter?.Abilities.FirstOrDefault(x => x.Id == AbilityId);
+    public Ability Ability => AbilityNumber is null ? new()
+        : CharacterManager.EditingCharacter?.Abilities.ElementAtOrDefault(AbilityNumber.Value) ?? new();
 
     /// <summary>
     /// Обновить состояние лейаута.

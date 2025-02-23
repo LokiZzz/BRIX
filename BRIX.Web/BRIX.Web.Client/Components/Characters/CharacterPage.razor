@@ -6,19 +6,19 @@
         <p class="title">@Character?.Name</p>
         <p class="subtitle">@Localization[nameof(Resource.Characters_Level)] @Character?.Level</p>
     </div>
-    <Tab Class="is-centered is-boxed" @ref="Tab">
+    <Tab Class="is-centered is-boxed" @ref="Tab" OnActiveTabChanged="UpdateUriBySelectedTab">
         <TabItem Title="@Localization[nameof(Resource.Character)]" @ref="CharacterTab">
             <MainSection Character="Character" />
         </TabItem>
-        <TabItem Title="@Localization[nameof(Resource.Character_Abilities)]" @ref="AbilitiesTab">
+        <TabItem Title="@Localization[nameof(Resource.Character_Abilities)]" @ref="AbilitiesTab" Tag="abilities">
             <AbilitiesSection Character="Character" />
         </TabItem>
-        <TabItem Title="@Localization[nameof(Resource.Character_Inventory)]" @ref="InventoryTab">
+        <TabItem Title="@Localization[nameof(Resource.Character_Inventory)]" @ref="InventoryTab" Tag="inventory">
             <div class="notification">
                 <p>Основная информация о персонаже.</p>
             </div>
         </TabItem>
-        <TabItem Title="@Localization[nameof(Resource.Character_Details)]" @ref="DetailsTab">
+        <TabItem Title="@Localization[nameof(Resource.Character_Details)]" @ref="DetailsTab" Tag="details">
             <div class="notification">
                 <p>Детальная информация о персонаже.</p>
             </div>
@@ -35,11 +35,12 @@
 
     public Character? Character { get; set; } = default!;
 
-    public Tab Tab { get; set; } = default!;
-    public TabItem CharacterTab { get; set; } = default!;
-    public TabItem AbilitiesTab { get; set; } = default!;
-    public TabItem InventoryTab { get; set; } = default!;
-    public TabItem DetailsTab { get; set; } = default!;
+    private Tab Tab { get; set; } = default!;
+    private TabItem CharacterTab { get; set; } = default!;
+    private TabItem AbilitiesTab { get; set; } = default!;
+    private TabItem InventoryTab { get; set; } = default!;
+    private TabItem DetailsTab { get; set; } = default!;
+    private List<TabItem> TabItems => [CharacterTab, AbilitiesTab, InventoryTab, DetailsTab];
 
     protected override async Task OnInitializedAsync()
     {
@@ -59,15 +60,17 @@
 
         if(ActiveTab is not null)
         {
-            TabItem tabToActivate = ActiveTab switch
-            {
-                "abilities" => AbilitiesTab,
-                "inventory" => InventoryTab,
-                "details" => DetailsTab,
-                _ => CharacterTab
-            };
+            TabItem? tabItemToActivate = TabItems.FirstOrDefault(x => x.Tag == ActiveTab);
 
-            Tab.ActivateItem(tabToActivate);
+            if(tabItemToActivate is not null)
+            {
+                Tab.ActivateItem(tabItemToActivate);
+            }
         }
+    }
+
+    private void UpdateUriBySelectedTab(TabItem tab)
+    {
+        Navigation.NavigateTo($"/characters/{CharacterId}/{tab.Tag}");
     }
 }

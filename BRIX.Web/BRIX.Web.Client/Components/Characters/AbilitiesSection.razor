@@ -1,4 +1,6 @@
-﻿<div class="container">
+﻿@using BRIX.Web.Client.Components.Characters.Abilities
+
+<div class="container">
     <button class="button is-large is-fullwidth block" @onclick="AddAbility">
         <i class="fa fa-plus-circle"></i>
     </button>
@@ -31,7 +33,8 @@
 
     private void EditAbility(Ability ability)
     {
-        Navigation.NavigateTo($"/characters/{Character.Id}/abilities/{ability.Id}");
+        int abilityNumber = Character.Abilities.IndexOf(ability);
+        Navigation.NavigateTo($"/characters/{Character.Id}/abilities/{abilityNumber}");
     }
 
     private async void RemoveAbility(Ability ability)
