@@ -15,7 +15,7 @@
 <div class="box">
     <p class="title">@Localization[nameof(Resource.Abilities_Activation)]</p>
     <p class="block">
-        Плейсхолдер настроек активации. Этой способности нужно Х очков активации и не требуется перезарядка.
+        @Ability.Activation.ToLexisAsync().GetAwaiter().GetResult()
     </p>
     <button class="button is-fullwidth" @onclick="EditActivation">@Localization[nameof(Resource.Common_Edit)]</button>
 </div>
@@ -63,7 +63,7 @@
 
     private void EditActivation(MouseEventArgs e)
     {
-        string stop = "";
+        Navigation.NavigateToRelative("activation");
     }
 
     public class EffectVM(EffectBase effect, string lexis)

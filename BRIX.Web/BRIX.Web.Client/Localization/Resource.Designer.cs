@@ -70,11 +70,47 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Action points.
+        /// </summary>
+        public static string Abilities_ActionPoints {
+            get {
+                return ResourceManager.GetString("Abilities_ActionPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Almost any ability is used by spending action points. The more action points an ability spends, the cheaper it will be in experience points..
+        /// </summary>
+        public static string Abilities_ActionPointsHint {
+            get {
+                return ResourceManager.GetString("Abilities_ActionPointsHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Activation.
         /// </summary>
         public static string Abilities_Activation {
             get {
                 return ResourceManager.GetString("Abilities_Activation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Triggers.
+        /// </summary>
+        public static string Abilities_ActivationTriggers {
+            get {
+                return ResourceManager.GetString("Abilities_ActivationTriggers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cooldown.
+        /// </summary>
+        public static string Abilities_Cooldown {
+            get {
+                return ResourceManager.GetString("Abilities_Cooldown", resourceCulture);
             }
         }
         

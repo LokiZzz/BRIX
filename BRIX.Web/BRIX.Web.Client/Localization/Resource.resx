@@ -325,4 +325,16 @@
   <data name="Common_Warning" xml:space="preserve">
     <value>Warning!</value>
   </data>
+  <data name="Abilities_ActionPoints" xml:space="preserve">
+    <value>Action points</value>
+  </data>
+  <data name="Abilities_Cooldown" xml:space="preserve">
+    <value>Cooldown</value>
+  </data>
+  <data name="Abilities_ActivationTriggers" xml:space="preserve">
+    <value>Triggers</value>
+  </data>
+  <data name="Abilities_ActionPointsHint" xml:space="preserve">
+    <value>Almost any ability is used by spending action points. The more action points an ability spends, the cheaper it will be in experience points.</value>
+  </data>
 </root>

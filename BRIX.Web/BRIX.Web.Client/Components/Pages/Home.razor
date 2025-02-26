@@ -14,9 +14,14 @@
             <TextAreaField Label="Описание" Placeholder="Какой-то текст c ограничением в 200 символов..." @bind-Value="textAreaFieldValue" MaxLength="200" />
             <TextAreaField Label="Второе описание" Placeholder="Какой-то текст без ограничений..."/>
             <DiceField Placeholder="Урон" @bind-Dice="dicePool" />
+            <NumericField Label="Целое число" @bind-Value="integerFieldValue"/>
+            <FractionalField Label="Дробное число" @bind-Value="doubleFieldValue" />
+            <NumericField Label="Целое число 2" />
             <div class="box block">
                 <p>Значение в поле с текстом: @textFieldValue</p>
                 <p>Значение в поле c дайсами: @(dicePool?.ToString())</p>
+                <p>Значение в поле c целым: @(integerFieldValue.ToString())</p>
+                <p>Значение в поле c дробным: @(doubleFieldValue.ToString())</p>
             </div>
         </div>
         <div class="column"></div>
@@ -67,6 +72,8 @@
     private string alertResult = string.Empty;
     private int valueChangedByNumeric = 55;
     private DicePool dicePool = new(2, (2, 6));
+    private int integerFieldValue = 3;
+    private double doubleFieldValue = 35.76;
 
     private DropdownItem SelectedDropdownItem { get; set; } = default!;
 

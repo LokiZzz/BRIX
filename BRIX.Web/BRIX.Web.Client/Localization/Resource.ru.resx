@@ -324,4 +324,16 @@
   <data name="Common_Warning" xml:space="preserve">
     <value>Внимание!</value>
   </data>
+  <data name="Abilities_ActionPoints" xml:space="preserve">
+    <value>Очки действий</value>
+  </data>
+  <data name="Abilities_Cooldown" xml:space="preserve">
+    <value>Перезарядка</value>
+  </data>
+  <data name="Abilities_ActivationTriggers" xml:space="preserve">
+    <value>Триггеры</value>
+  </data>
+  <data name="Abilities_ActionPointsHint" xml:space="preserve">
+    <value>Чтобы использовать почти любую способность,персонаж тратит очки действий. Чем больше очков действий необходимо потратить, тем дешевле будет способность в очках опыта.</value>
+  </data>
 </root>

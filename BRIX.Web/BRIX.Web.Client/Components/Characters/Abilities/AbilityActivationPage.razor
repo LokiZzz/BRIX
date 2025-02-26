@@ -1,0 +1,45 @@
+﻿@inherits AbilityPageBase
+
+@page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}/activation"
+
+<p class="title">@Localization[nameof(Resource.Abilities_Activation)]</p>
+
+<div class="box">
+    <p class="title">@Localization[nameof(Resource.Abilities_ActionPoints)]</p>
+    <p>@Localization[nameof(Resource.Abilities_ActionPointsHint)]</p>
+    <NumericField 
+        Label="@Localization[nameof(Resource.Abilities_ActionPoints)]"
+        @bind-Value="Ability.Activation.ActionPoints" @bind-Value:after="Layout.Refresh"/>
+    <div class="columns is-mobile">
+        <div class="column">
+            <button class="button" @onclick="@(() => SetActionPoints(1))">1</button>
+        </div>
+        <div class="column">
+            <button class="button" @onclick="@(() => SetActionPoints(2))">2</button>
+        </div>
+        <div class="column">
+            <button class="button" @onclick="@(() => SetActionPoints(3))">3</button>
+        </div>
+        <div class="column">
+            <button class="button" @onclick="@(() => SetActionPoints(4))">4</button>
+        </div>
+        <div class="column">
+            <button class="button" @onclick="@(() => SetActionPoints(5))">5</button>
+        </div>
+    </div>
+</div>
+
+<div class="box">
+    <p class="title">@Localization[nameof(Resource.Abilities_Cooldown)]</p>
+</div>
+
+<div class="box">
+    <p class="title">@Localization[nameof(Resource.Abilities_ActivationTriggers)]</p>
+</div>
+
+@code {
+    private void SetActionPoints(int actionPoints)
+    {
+        Ability.Activation.ActionPoints = actionPoints;
+    }
+}
