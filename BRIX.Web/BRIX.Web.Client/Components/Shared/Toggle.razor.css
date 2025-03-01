@@ -1,6 +1,7 @@
-﻿:root {
-    --circle-size: calc(var(--bulma-control-height) - 10px);
-    --circle-margin: 5px;
+﻿::deep {
+    --circle-size-diff: 0.75rem;
+    --circle-size: calc(var(--bulma-control-height) - var(--circle-size-diff));
+    --circle-margin: calc(var(--circle-size-diff) / 2);
 }
 
 .toggle {
@@ -16,8 +17,8 @@
 
     .toggle .toggle-icon {
         position: absolute;
-        height: calc(var(--bulma-control-height) - 10px); /* Размер иконки */
-        width: calc(var(--bulma-control-height) - 10px); /* Размер иконки */
+        height: var(--circle-size); /* Размер иконки */
+        width: var(--circle-size); /* Размер иконки */
         background-color: var(--bulma-label-color);
         color: var(--bulma-border-weak);
         border-radius: 50%;
@@ -25,9 +26,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        text-align: center;
         top: 50%;
         transform: translateY(-50%);
-        left: 5px; /* Отступ слева */
+        left: var(--circle-margin); /* Отступ слева */
         transition: all 0.4s ease;
     }
 
@@ -36,7 +38,7 @@
     }
 
         .toggle.active .toggle-icon {
-            left: calc(100% - (var(--bulma-control-height) - 10px) - 5px); /* Отступ справа */
+            left: calc(100% - var(--circle-size) - var(--circle-margin)); /* Отступ справа */
             background-color: var(--bulma-label-color);
             color: var(--bulma-text-color);
         }
