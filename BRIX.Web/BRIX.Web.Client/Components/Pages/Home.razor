@@ -17,11 +17,13 @@
             <NumericField Label="Целое число" @bind-Value="integerFieldValue"/>
             <FractionalField Label="Дробное число" @bind-Value="doubleFieldValue" />
             <NumericField Label="Целое число 2" />
+            <Toggle @bind-Value="booleanField" Label="Поле с флагом"/>
             <div class="box block">
                 <p>Значение в поле с текстом: @textFieldValue</p>
                 <p>Значение в поле c дайсами: @(dicePool?.ToString())</p>
                 <p>Значение в поле c целым: @(integerFieldValue.ToString())</p>
                 <p>Значение в поле c дробным: @(doubleFieldValue.ToString())</p>
+                <p>Значение в поле c флагом: @(booleanField.ToString())</p>
             </div>
         </div>
         <div class="column"></div>
@@ -74,6 +76,7 @@
     private DicePool dicePool = new(2, (2, 6));
     private int integerFieldValue = 3;
     private double doubleFieldValue = 35.76;
+    private bool booleanField = true;
 
     private DropdownItem SelectedDropdownItem { get; set; } = default!;
 

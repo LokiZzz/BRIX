@@ -1,0 +1,40 @@
+﻿<div class="field">
+    <label class="label">@Label</label>
+    <div class="control">
+        <div class="toggle @activeClass" @onclick="OnClick">
+            <div class="toggle-icon">
+                <i class="@iconClass"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    private string activeClass => Value ? "active" : string.Empty;
+    private string iconClass => Value ? OnIcon : OffIcon;
+
+    [Parameter]
+    public bool Value { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ValueChanged { get; set; }
+
+    [Parameter]
+    public string Label { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Text { get; set; } = string.Empty;
+
+    [Parameter]
+    public string OffIcon { get; set; } = "fas fa-xmark";
+
+    [Parameter]
+    public string OnIcon { get; set; } = "fas fa-check";
+
+    private void OnClick(MouseEventArgs args)
+    {
+        Value = !Value;
+        ValueChanged.InvokeAsync(Value);
+    }
+}

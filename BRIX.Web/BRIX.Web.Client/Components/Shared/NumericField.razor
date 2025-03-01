@@ -5,8 +5,7 @@
         type="@InputType"
         value="@Value"
         placeholder="@Placeholder"
-        @oninput="OnInput" 
-        @onchange="OnChange"/>
+        @oninput="OnInput"/>
         <span class="icon is-small is-right is-danger">
             <i class="fas fa-hashtag"></i>
         </span>
@@ -61,10 +60,5 @@
         }
 
         await StringValueChanged.InvokeAsync(StringValue);
-    }
-
-    private async Task OnChange(ChangeEventArgs args)
-    {
-        await ValueChanged.InvokeAsync(Value);
     }
 }
