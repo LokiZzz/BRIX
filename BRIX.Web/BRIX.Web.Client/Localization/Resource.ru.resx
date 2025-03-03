@@ -336,4 +336,16 @@
   <data name="Abilities_ActionPointsHint" xml:space="preserve">
     <value>Чтобы использовать почти любую способность,персонаж тратит очки действий. Чем больше очков действий необходимо потратить, тем дешевле будет способность в очках опыта.</value>
   </data>
+  <data name="Abilities_CooldownHint" xml:space="preserve">
+    <value>Укажите какое количество раз в день можно использовать способность прежде, чем ей понадобится перезарядка.</value>
+  </data>
+  <data name="Abilities_EnableCooldown" xml:space="preserve">
+    <value>Включение перезарядки</value>
+  </data>
+  <data name="Abilities_EnableCooldownText" xml:space="preserve">
+    <value>Количество использований в день ограничено.</value>
+  </data>
+  <data name="Ability_UsesCount" xml:space="preserve">
+    <value>Количество зарядов</value>
+  </data>
 </root>

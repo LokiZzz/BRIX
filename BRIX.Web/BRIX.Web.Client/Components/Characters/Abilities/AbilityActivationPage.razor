@@ -5,10 +5,10 @@
 <p class="title">@Localization[nameof(Resource.Abilities_Activation)]</p>
 
 <div class="box">
-    <div class="block">
+    <div class="column">
         <p class="title">@Localization[nameof(Resource.Abilities_ActionPoints)]</p>
         <p class="block">@Localization[nameof(Resource.Abilities_ActionPointsHint)]</p>
-        <NumericField
+        <Field
             Label="@Localization[nameof(Resource.Abilities_ActionPoints)]" 
             @bind-Value="Ability.Activation.ActionPoints" @bind-Value:after="Layout.Refresh"/>
         <div class="is-display-flex is-gap-2">
@@ -20,19 +20,47 @@
         </div>
     </div>
 
-    <div class="block">
+    <div class="column">
         <p class="title">@Localization[nameof(Resource.Abilities_Cooldown)]</p>
+        <p class="block">@Localization[nameof(Resource.Abilities_CooldownHint)]</p>
+        <Toggle 
+        Label="@Localization[nameof(Resource.Abilities_EnableCooldown)]"
+        Text="@Localization[nameof(Resource.Abilities_EnableCooldownText)]"
+        @bind-Value="hasCooldown" 
+        OnValueChanged="OnHasCooldownChanged"/>
+
+        @if(hasCooldown)
+        {
+            <Field 
+                Label="@Localization[nameof(Resource.Ability_UsesCount)]" 
+                @bind-Value="Ability.Activation.UsesCountPerDay" @bind-Value:after="Layout.Refresh"/>
+        }
     </div>
 
-    <div class="block">
+    <div class="column">
         <p class="title">@Localization[nameof(Resource.Abilities_ActivationTriggers)]</p>
     </div>
 </div>
 
 @code {
+    private bool hasCooldown;
+    private Toggle hasCooldownToggle = default!;
+
     private void SetActionPoints(int actionPoints)
     {
         Ability.Activation.ActionPoints = actionPoints;
+        Layout.Refresh();
+    }
+
+    protected override void OnInitialized()
+    {
+        hasCooldown = Ability.Activation.HasCooldown;
+    }
+
+    private void OnHasCooldownChanged(bool hasCooldownNewValue)
+    {
+        hasCooldown = hasCooldownNewValue;
+        Ability.Activation.UsesCountPerDay = hasCooldown ? 1 : 0;
         Layout.Refresh();
     }
 }

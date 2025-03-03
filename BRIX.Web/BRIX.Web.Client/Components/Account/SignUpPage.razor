@@ -9,15 +9,15 @@
 
             <ValidationSummary class="notification block is-danger" />
 
-            <TextField InputType="email"
+            <Field InputType="email"
                        Label="@Localization[nameof(Resource.Account_Email)]"
                        @bind-Value="RegisterModel.Email" />
 
-            <TextField InputType="password"
+            <Field InputType="password"
                        Label="@Localization[nameof(Resource.Account_Password)]"
                        @bind-Value="RegisterModel.Password" />
 
-            <TextField InputType="password"
+            <Field InputType="password"
                        Label="@Localization[nameof(Resource.Account_ConfirmPassword)]"
                        @bind-Value="RegisterModel.ConfirmPassword" />
 

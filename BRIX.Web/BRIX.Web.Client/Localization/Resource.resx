@@ -337,4 +337,16 @@
   <data name="Abilities_ActionPointsHint" xml:space="preserve">
     <value>Almost any ability is used by spending action points. The more action points an ability spends, the cheaper it will be in experience points.</value>
   </data>
+  <data name="Abilities_CooldownHint" xml:space="preserve">
+    <value>Specify how many uses per day are availiable for ability.</value>
+  </data>
+  <data name="Abilities_EnableCooldown" xml:space="preserve">
+    <value>Enable cooldown</value>
+  </data>
+  <data name="Abilities_EnableCooldownText" xml:space="preserve">
+    <value>The number of uses per day is limited.</value>
+  </data>
+  <data name="Ability_UsesCount" xml:space="preserve">
+    <value>Uses count</value>
+  </data>
 </root>

@@ -30,7 +30,7 @@ namespace BRIX.Library.Abilities
 
         public bool HasCooldown => UsesCountPerDay != 0;
 
-        public bool NoCooldown => UsesCountPerDay == 0;
+        public bool NoCooldown => UsesCountPerDay <= 0;
 
         public List<(ETriggerProbability Probability, string Comment)> Triggers { get; set; } = [];
 

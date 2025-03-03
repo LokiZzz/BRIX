@@ -1,0 +1,113 @@
+﻿@using System.Globalization
+@typeparam TFieldType
+
+<div class="field">
+    <label class="label">@Label</label>
+    <div class="control has-icons-right">
+        <input class="input @validityClass @ClassPostfix"
+               type="@InputType"
+               value="@Value"
+               placeholder="@Placeholder"
+               @oninput="OnInput" />
+        <span class="icon is-small is-right is-danger">
+            <i class="fas @filedIconType"></i>
+        </span>
+    </div>
+</div>
+
+@code {
+    private string validityClass = string.Empty;
+    private string invalidClass = "is-danger";
+
+    private string filedIconType => Value switch
+    {
+        string => "fa-t",
+        int => "fa-hashtag",
+        double => "fa-percent",
+        _ => ""
+    };
+
+    [Parameter]
+    public string ClassPostfix { get; set; } = string.Empty;
+
+    [Parameter]
+    public string InputType { get; set; } = "text";
+
+    [Parameter]
+    public string Label { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Placeholder { get; set; } = string.Empty;
+
+    [Parameter]
+    public TFieldType? Value { get; set; } = default;
+
+    [Parameter]
+    public EventCallback<TFieldType> ValueChanged { get; set; }
+
+    [Parameter]
+    public string? StringValue { get; set; }
+
+    [Parameter]
+    public EventCallback<string> StringValueChanged { get; set; }
+
+    private async Task OnInput(ChangeEventArgs e)
+    {
+        StringValue = e?.Value?.ToString();
+
+        if (!string.IsNullOrEmpty(StringValue))
+        {
+            if (TryParse(StringValue, out TFieldType? parsed) && parsed is not null)
+            {
+                Value = parsed;
+                await ValueChanged.InvokeAsync(Value);
+
+                validityClass = string.Empty;
+            }
+            else
+            {
+                validityClass = invalidClass;
+            }
+        }
+
+        await StringValueChanged.InvokeAsync(StringValue);
+    }
+
+    private bool TryParse(string input, out TFieldType? parsed)
+    {
+        parsed = default;
+        object? parsedObject = null;
+
+        if(typeof(TFieldType).Equals(typeof(string)))
+        {
+            parsedObject = (object)input;
+        }
+        else if (typeof(TFieldType).Equals(typeof(int)))
+        {
+            if (int.TryParse(input, out int intValue))
+            {
+                parsedObject = (object)intValue;
+            }
+        }
+        else if (typeof(TFieldType).Equals(typeof(double)))
+        {
+            if (double.TryParse(
+                input.Replace(',', '.'),
+                NumberStyles.Any,
+                CultureInfo.InvariantCulture,
+                out double doubleValue))
+            {
+                parsedObject = (object)doubleValue;
+            }
+        }
+
+        if(parsedObject is not null && parsedObject.GetType().Equals(typeof(TFieldType)))
+        {
+            parsed = (TFieldType)parsedObject;
+
+            return true;
+        }
+
+        return false;
+    }
+}

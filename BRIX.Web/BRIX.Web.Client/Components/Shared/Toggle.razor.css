@@ -15,8 +15,8 @@
     transition: all 0.4s ease;
 }
 
-    .toggle .toggle-icon {
-        position: absolute;
+    .toggle .toggle-icon-container {
+        position: relative;
         height: var(--circle-size); /* Размер иконки */
         width: var(--circle-size); /* Размер иконки */
         background-color: var(--bulma-label-color);
@@ -37,8 +37,29 @@
         background: var(--bulma-success);
     }
 
-        .toggle.active .toggle-icon {
+        .toggle.active .toggle-icon-container {
             left: calc(100% - var(--circle-size) - var(--circle-margin)); /* Отступ справа */
             background-color: var(--bulma-label-color);
             color: var(--bulma-text-color);
         }
+
+.bordered-area {
+    border-color: hsl(260, 14%,calc(24% + 0%));
+    border-radius: var(--bulma-input-radius);
+    border-style: solid;
+    border-width: var(--bulma-control-border-width);
+    padding: 0.75rem;
+}
+
+.toggle-icon {
+    opacity: 1;
+    transition: opacity 0.1s ease-out;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .toggle-icon.hidden {
+        opacity: 0;
+    }

@@ -115,6 +115,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Specify how many uses per day are availiable for ability..
+        /// </summary>
+        public static string Abilities_CooldownHint {
+            get {
+                return ResourceManager.GetString("Abilities_CooldownHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Effects.
         /// </summary>
         public static string Abilities_Effects {
@@ -124,11 +133,38 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable cooldown.
+        /// </summary>
+        public static string Abilities_EnableCooldown {
+            get {
+                return ResourceManager.GetString("Abilities_EnableCooldown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The number of uses per day is limited..
+        /// </summary>
+        public static string Abilities_EnableCooldownText {
+            get {
+                return ResourceManager.GetString("Abilities_EnableCooldownText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not enough EXP for ability..
         /// </summary>
         public static string Abilities_NotEnoughExpForAbility {
             get {
                 return ResourceManager.GetString("Abilities_NotEnoughExpForAbility", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uses count.
+        /// </summary>
+        public static string Ability_UsesCount {
+            get {
+                return ResourceManager.GetString("Ability_UsesCount", resourceCulture);
             }
         }
         

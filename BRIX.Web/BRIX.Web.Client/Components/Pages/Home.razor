@@ -8,16 +8,14 @@
     <div class="block columns">
         <div class="column">
             <h1 class="title">Разные виды полей</h1>
-            <TextField Label="Название" Placeholder="Способность 1" @bind-Value="textFieldValue"/>
-            <TextField Label="Второе название" Placeholder="Способность 2" />
-            <TextField Label="Третье название" Placeholder="Способность 3" />
+            <Field Label="Универсальное поле с текстом" @bind-Value="textFieldValue"/>
+            <Field Label="Универсальное поле с числом" @bind-Value="integerFieldValue" />
+            <Field Label="Универсальное поле с дробью" @bind-Value="doubleFieldValue" />
+            <Field Label="Название" Placeholder="Способность 1" @bind-Value="textFieldValue" />
             <TextAreaField Label="Описание" Placeholder="Какой-то текст c ограничением в 200 символов..." @bind-Value="textAreaFieldValue" MaxLength="200" />
             <TextAreaField Label="Второе описание" Placeholder="Какой-то текст без ограничений..."/>
             <DiceField Placeholder="Урон" @bind-Dice="dicePool" />
-            <NumericField Label="Целое число" @bind-Value="integerFieldValue"/>
-            <FractionalField Label="Дробное число" @bind-Value="doubleFieldValue" />
-            <NumericField Label="Целое число 2" />
-            <Toggle @bind-Value="booleanField" Label="Поле с флагом"/>
+            <Toggle @bind-Value="booleanField" Label="Поле с флагом" Text="Хотите ли вы установить занчение этого флага в значение True? Если установите, то соответствующее поле будет иметь именно это значение."/>
             <div class="box block">
                 <p>Значение в поле с текстом: @textFieldValue</p>
                 <p>Значение в поле c дайсами: @(dicePool?.ToString())</p>
@@ -26,8 +24,6 @@
                 <p>Значение в поле c флагом: @(booleanField.ToString())</p>
             </div>
         </div>
-        <div class="column"></div>
-        <div class="column"></div>
     </div>
 
     <div class="block">
