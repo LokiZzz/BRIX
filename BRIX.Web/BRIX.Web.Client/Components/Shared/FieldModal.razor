@@ -1,0 +1,91 @@
+﻿@implements IDisposable
+
+<div class="modal @isActiveClass">
+    <div class="modal-background" @onclick="Cancel"></div>
+    <div class="modal-content">
+        <div class="card">
+            <header class="card-header">
+                <p class="card-header-title">@title</p>
+            </header>
+            <div class="card-content">
+                <div class="content">
+                    <p class="block">@message</p>
+                    <Field Label="@label" @bind-Value="value" OnKeyPressed="KeyPressed" @ref="field"/>
+                </div>
+            </div>
+            <footer class="card-footer">
+                <a class="card-footer-item" @onclick="Ok">
+                    @Localization[nameof(Resource.Common_Ok)]
+                </a>
+                <a class="card-footer-item" @onclick="Cancel">
+                    @Localization[nameof(Resource.Common_Cancel)]
+                </a>
+            </footer>
+        </div>
+    </div>
+</div>
+
+@code {
+    string value = string.Empty;
+    string isActiveClass = string.Empty;
+    string title = string.Empty;
+    string message = string.Empty;
+    string label = string.Empty;
+    Action<FieldResult>? callback;
+    Field<string> field = default!;
+
+    public void Show(FieldParameters parameters)
+    {
+        title = parameters.Title;
+        message = parameters.Message;
+        callback = parameters.Callback;
+        value = parameters.InitialValue;
+        label = parameters.Label;
+
+        isActiveClass = "is-active";
+
+        StateHasChanged();
+    }
+
+    public void Close()
+    {
+        isActiveClass = string.Empty;
+
+        StateHasChanged();
+    }
+
+    private void Cancel(MouseEventArgs e)
+    {
+        Close();
+        callback?.Invoke(new FieldResult { Result = null });
+    }
+
+    private void Ok(MouseEventArgs e)
+    {
+        Close();
+        callback?.Invoke(new FieldResult { Result = value });
+    }
+
+    protected override void OnInitialized()
+    {
+        Modal.OnField += Show;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await field.FocusAsync();
+    }
+
+    public void Dispose()
+    {
+        Modal.OnField -= Show;
+    }
+
+    private void KeyPressed(KeyboardEventArgs args)
+    {
+        if (args.Code == "Enter" || args.Code == "NumpadEnter")
+        {
+            Ok(new MouseEventArgs());
+        }
+    }
+}

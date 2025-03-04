@@ -7,6 +7,7 @@
         public event Action<NumericParameters>? OnNumeric;
         public event Action<Notification>? OnNotification;
         public event Action<List<Notification>>? OnNotifications;
+        public event Action<FieldParameters>? OnField;
 
         private bool _isBusy = false;
         public bool IsBusy
@@ -46,5 +47,6 @@
             });
         }
 
+        public void Field(FieldParameters parameters) => OnField?.Invoke(parameters);
     }
 }

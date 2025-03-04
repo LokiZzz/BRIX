@@ -8,7 +8,9 @@
                type="@InputType"
                value="@Value"
                placeholder="@Placeholder"
-               @oninput="OnInput" />
+               @oninput="OnInput" 
+               @onkeypress="OnKeyPressedHandler" 
+               @ref="input"/>
         <span class="icon is-small is-right is-danger">
             <i class="fas @filedIconType"></i>
         </span>
@@ -16,6 +18,8 @@
 </div>
 
 @code {
+    private ElementReference input = default!;
+
     private string validityClass = string.Empty;
     private string invalidClass = "is-danger";
 
@@ -50,6 +54,11 @@
 
     [Parameter]
     public EventCallback<string> StringValueChanged { get; set; }
+
+    [Parameter]
+    public Action<KeyboardEventArgs>? OnKeyPressed { get; set; }
+
+    public async Task FocusAsync() => await input.FocusAsync();
 
     private async Task OnInput(ChangeEventArgs e)
     {
@@ -109,5 +118,10 @@
         }
 
         return false;
+    }
+
+    private void OnKeyPressedHandler(KeyboardEventArgs args)
+    {
+        OnKeyPressed?.Invoke(args);
     }
 }

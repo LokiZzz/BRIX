@@ -8,10 +8,12 @@
     <div class="block columns">
         <div class="column">
             <h1 class="title">Разные виды полей</h1>
+            <input value="TEXT-TEXT" @ref="input"></input>
+            <button @onclick="@(async () => await input.FocusAsync())">FOCUS</button>
             <Field Label="Универсальное поле с текстом" @bind-Value="textFieldValue"/>
             <Field Label="Универсальное поле с числом" @bind-Value="integerFieldValue" />
             <Field Label="Универсальное поле с дробью" @bind-Value="doubleFieldValue" />
-            <Field Label="Название" Placeholder="Способность 1" @bind-Value="textFieldValue" />
+            <Field @bind-Value="doubleFieldValue" />
             <TextAreaField Label="Описание" Placeholder="Какой-то текст c ограничением в 200 символов..." @bind-Value="textAreaFieldValue" MaxLength="200" />
             <TextAreaField Label="Второе описание" Placeholder="Какой-то текст без ограничений..."/>
             <DiceField Placeholder="Урон" @bind-Dice="dicePool" />
@@ -30,6 +32,7 @@
         <h1 class="title">Вызов алерта!</h1>
         <p class="block">Результат алерта: «@alertResult»</p>
         <p class="block">Результат нумерика: «@valueChangedByNumeric.ToString()»</p>
+        <p class="block">Результат филда: «@fieldModalValue»</p>
         <button class="button" @onclick="AlertYesNo">Да / Нет</button>
         <button class="button" @onclick="AlertOk">Ok</button>
         <button class="button" @onclick="Numeric">Нумерик</button>
@@ -37,6 +40,7 @@
         <button class="button" @onclick="@(() => PushNotic(ENotificationType.Success))">Запушить Успех</button>
         <button class="button" @onclick="@(() => PushNotic(ENotificationType.Warning))">Запушить Предупреждение</button>
         <button class="button" @onclick="@(() => PushNotic(ENotificationType.Error))">Запушить Ошибку</button>
+        <button class="button" @onclick="OpenFieldModal">Открыть филд модал</button>
     </div>
 
     <div class="block">
@@ -73,6 +77,8 @@
     private int integerFieldValue = 3;
     private double doubleFieldValue = 35.76;
     private bool booleanField = true;
+    private string fieldModalValue = string.Empty;
+    ElementReference input;
 
     private DropdownItem SelectedDropdownItem { get; set; } = default!;
 
@@ -138,5 +144,18 @@
     private void PushNotic(ENotificationType type)
     {
         Modal.PushNotification(new() { Type = type, Message = $"[{type:G}] Сообщение!!! С текстом!!!" });
+    }
+
+    private void OpenFieldModal(MouseEventArgs args)
+    {
+        Modal.Field(new() { 
+            Title = "Тайтл", 
+            Message = "Какое-то сообщение для модалки с полем. Может быть длинное, а может быть короткое, зависит от цели.", 
+            Label = "Лейбл",
+            Callback = (x) => {
+                fieldModalValue = x.Result ?? string.Empty;
+                StateHasChanged();
+            }
+        });
     }
 }
