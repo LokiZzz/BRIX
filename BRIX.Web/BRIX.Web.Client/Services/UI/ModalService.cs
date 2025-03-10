@@ -8,6 +8,7 @@
         public event Action<Notification>? OnNotification;
         public event Action<List<Notification>>? OnNotifications;
         public event Action<FieldParameters>? OnField;
+        public event Action<OptionsModalParameters>? OnOption;
 
         private bool _isBusy = false;
         public bool IsBusy
@@ -48,5 +49,7 @@
         }
 
         public void Field(FieldParameters parameters) => OnField?.Invoke(parameters);
+
+        public void Options(OptionsModalParameters parameters) => OnOption?.Invoke(parameters);
     }
 }

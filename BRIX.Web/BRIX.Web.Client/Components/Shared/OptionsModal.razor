@@ -1,0 +1,106 @@
+﻿@implements IDisposable
+
+<div class="modal @isActiveClass">
+    <div class="modal-background" @onclick="Cancel"></div>
+    <div class="modal-content">
+        <div class="card">
+            <header class="card-header">
+                <p class="card-header-title">@title</p>
+            </header>
+            <div class="card-content">
+                <div class="content">
+                    <p class="block">@message</p>
+                    @foreach (ModalOption option in options)
+                    {
+                        <div class="option-container @(option.IsSelected ? "active-option" : string.Empty)" 
+                        @onclick=@(() => Select(option))>
+                            <p>@option.Title</p>
+                        </div>
+                    }
+                </div>
+            </div>
+            <footer class="card-footer">
+                <a class="card-footer-item" @onclick="Ok">
+                    @Localization[nameof(Resource.Common_Ok)]
+                </a>
+                @if(isMultipleSelect)
+                {
+                    <a class="card-footer-item" @onclick="Clear">
+                        @Localization[nameof(Resource.Common_Clear)]
+                    </a>
+                }
+                <a class="card-footer-item" @onclick="Cancel">
+                    @Localization[nameof(Resource.Common_Cancel)]
+                </a>
+            </footer>
+        </div>
+    </div>
+</div>
+
+@code {
+    List<ModalOption> options = [];
+    string title = string.Empty;
+    string message = string.Empty;
+    Action<OptionsModalResult>? callback;
+    bool isMultipleSelect;
+    string isActiveClass = string.Empty;
+
+    public void Show(OptionsModalParameters parameters)
+    {
+        title = parameters.Title;
+        message = parameters.Message;
+        callback = parameters.Callback;
+        options = parameters.Items;
+        isMultipleSelect = parameters.MultipleSelect;
+
+        isActiveClass = "is-active";
+
+        StateHasChanged();
+    }
+
+    public void Close()
+    {
+        isActiveClass = string.Empty;
+
+        StateHasChanged();
+    }
+
+    private void Select(ModalOption option)
+    {
+        option.IsSelected = !option.IsSelected;
+
+        if (!isMultipleSelect)
+        {
+            options.Where(x => x != option).ToList().ForEach(x => x.IsSelected = false);
+        }
+    }
+
+    private void Clear(MouseEventArgs e)
+    {
+        options.ToList().ForEach(x => x.IsSelected = false);
+    }
+
+    private void Cancel(MouseEventArgs e)
+    {
+        Close();
+        callback?.Invoke(new OptionsModalResult());
+    }
+
+    private void Ok(MouseEventArgs e)
+    {
+        Close();
+        callback?.Invoke(new OptionsModalResult() { SelectedItems = options.Where(x => x.IsSelected).ToList() });
+    }
+
+    private string GetIsActiveOptionClass(ModalOption option) => option.IsSelected ? "active-option" : string.Empty;
+
+    protected override void OnInitialized()
+    {
+        Modal.OnOption += Show;
+    }
+
+    public void Dispose()
+    {
+        Modal.OnOption -= Show;
+    }
+}

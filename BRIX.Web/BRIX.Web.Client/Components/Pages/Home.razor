@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using BRIX.Library.DiceValue
+@using BRIX.Library.Effects
 @using BRIX.Web.Client.Components.Shared
 
 <PageTitle>@Localization[nameof(Resource.Tab_Home)]</PageTitle>
@@ -8,8 +9,6 @@
     <div class="block columns">
         <div class="column">
             <h1 class="title">Разные виды полей</h1>
-            <input value="TEXT-TEXT" @ref="input"></input>
-            <button @onclick="@(async () => await input.FocusAsync())">FOCUS</button>
             <Field Label="Универсальное поле с текстом" @bind-Value="textFieldValue"/>
             <Field Label="Универсальное поле с числом" @bind-Value="integerFieldValue" />
             <Field Label="Универсальное поле с дробью" @bind-Value="doubleFieldValue" />
@@ -33,6 +32,14 @@
         <p class="block">Результат алерта: «@alertResult»</p>
         <p class="block">Результат нумерика: «@valueChangedByNumeric.ToString()»</p>
         <p class="block">Результат филда: «@fieldModalValue»</p>
+        <p class="block">Результат сингл опшна: «@singleModalOption?.Impact?.ToString()»</p>
+        <p class="block">
+            <span>Результат мультипл опшна: </span>
+            @foreach(DamageEffect option in multipleModalOption)
+            {
+                <span>«@option.Impact.ToString()»; </span>
+            }
+        </p>
         <button class="button" @onclick="AlertYesNo">Да / Нет</button>
         <button class="button" @onclick="AlertOk">Ok</button>
         <button class="button" @onclick="Numeric">Нумерик</button>
@@ -41,6 +48,8 @@
         <button class="button" @onclick="@(() => PushNotic(ENotificationType.Warning))">Запушить Предупреждение</button>
         <button class="button" @onclick="@(() => PushNotic(ENotificationType.Error))">Запушить Ошибку</button>
         <button class="button" @onclick="OpenFieldModal">Открыть филд модал</button>
+        <button class="button" @onclick="OpenOptionModalSingle">Открыть сингл опшн модал</button>
+        <button class="button" @onclick="OpenOptionModalMultiple">Открыть мультипл опшн модал</button>
     </div>
 
     <div class="block">
@@ -79,6 +88,8 @@
     private bool booleanField = true;
     private string fieldModalValue = string.Empty;
     ElementReference input;
+    DamageEffect? singleModalOption; 
+    List<DamageEffect> multipleModalOption = [];
 
     private DropdownItem SelectedDropdownItem { get; set; } = default!;
 
@@ -157,5 +168,80 @@
                 StateHasChanged();
             }
         });
+    }
+
+    private void OpenOptionModalSingle(MouseEventArgs args)
+    {
+        OptionsModalParameters parameters = new ()
+        {
+            Title = "Тайтл",
+            Message = "Месседж",
+            Items =
+            [
+                new() { Title = "Один ка четыре", Value = new DamageEffect() { Impact = new((1, 4)) } },
+                new() { Title = "Один ка шесть", Value = new DamageEffect() { Impact = new((1, 6)) } },
+                new() { Title = "Один ка восемь", Value = new DamageEffect() { Impact = new((1, 8)) } },
+                new() { Title = "Один ка десять", Value = new DamageEffect() { Impact = new((1, 10)) } },
+                new() { Title = "Один ка двенадцать", Value = new DamageEffect() { Impact = new((1, 12)) } }
+            ],
+            Callback = ApplySingleOption
+        };
+
+        if (singleModalOption is not null)
+        {
+            ModalOption? selectedOption = parameters.Items
+                .FirstOrDefault(x => x.GetValueOrDefault<DamageEffect>()?.Id == singleModalOption?.Id);
+
+            if (selectedOption is not null)
+            {
+                selectedOption.IsSelected = true;
+            }
+        }
+
+        Modal.Options(parameters);
+    }
+
+    private void ApplySingleOption(OptionsModalResult result)
+    {
+        DamageEffect? option = result.GetSingleOrDefault<DamageEffect>();
+
+        if(option is not null)
+        {
+            singleModalOption = option;    
+        }
+
+        StateHasChanged();
+    }
+
+    private void OpenOptionModalMultiple(MouseEventArgs args)
+    {
+        Modal.Options(new OptionsModalParameters
+            {
+                Title = "Тайтл",
+                Message = "Месседж",
+                Items =
+                [
+                    new() { Title = "Один ка четыре", Value = new DamageEffect() { Impact = new((1, 4)) } },
+                    new() { Title = "Один ка шесть", Value = new DamageEffect() { Impact = new((1, 6)) } },
+                    new() { Title = "Один ка восемь", Value = new DamageEffect() { Impact = new((1, 8)) } },
+                    new() { Title = "Один ка десять", Value = new DamageEffect() { Impact = new((1, 10)) } },
+                    new() { Title = "Один ка двенадцать", Value = new DamageEffect() { Impact = new((1, 12)) } }
+                ],
+                Callback = ApplyMultipleOption,
+                MultipleSelect = true
+            }
+        );
+    }
+
+    private void ApplyMultipleOption(OptionsModalResult result)
+    {
+        List<DamageEffect>? options = result.GetAll<DamageEffect>();
+
+        if (options is not null)
+        {
+            multipleModalOption = options;
+        }
+
+        StateHasChanged();
     }
 }
