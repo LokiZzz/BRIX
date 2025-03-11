@@ -1,3 +1,31 @@
-﻿.option-container.active-option {
-    background-color: aqua;
+﻿.card-content{
+    padding: 0;
+}
+
+.option-container {
+    height: 3rem;
+    border-top: 1px solid var(--bulma-border-weak);
+    transition: background-color 0.6s ease
+}
+
+    .option-container p {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: var(--bulma-card-content-padding);
+        user-select: none;
+        color: var(--bulma-link-text);
+        transition: color 0.4s ease
+    }
+
+.option-container.active-option {
+    background-color: hsl(var(--bulma-link-h),var(--bulma-link-s),var(--bulma-link-l)) !important;
+}
+
+    .option-container.active-option p {
+        color: var(--bulma-text-strong);
+    }
+
+.options-message {
+    margin: var(--bulma-card-content-padding);
 }
