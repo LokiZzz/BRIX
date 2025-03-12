@@ -8,31 +8,28 @@
                 <p class="card-header-title">@title</p>
             </header>
             <div class="card-content">
-                <div class="content">
-                    <p class="options-message block">@message</p>
-                    @foreach (ModalOption option in options)
-                    {
-                        <div class="option-container @(option.IsSelected ? "active-option" : string.Empty)" 
-                        @onclick=@(() => Select(option))>
-                            <p>@option.Title</p>
-                        </div>
-                    }
-                </div>
-            </div>
-            <footer class="card-footer">
-                <a class="card-footer-item" @onclick="Ok">
-                    @Localization[nameof(Resource.Common_Ok)]
-                </a>
-                @if(isMultipleSelect)
+                @foreach (ModalOption option in options)
                 {
+                    <div class="option-container @(option.IsSelected ? "active-option" : string.Empty)" 
+                    @onclick=@(() => Select(option))>
+                        <p>@option.Title</p>
+                    </div>
+                }
+            </div>
+            @if(isMultipleSelect)
+            {
+                <footer class="card-footer">
+                    <a class="card-footer-item" @onclick="Ok">
+                        @Localization[nameof(Resource.Common_Ok)]
+                    </a>
                     <a class="card-footer-item" @onclick="Clear">
                         @Localization[nameof(Resource.Common_Clear)]
                     </a>
-                }
-                <a class="card-footer-item" @onclick="Cancel">
-                    @Localization[nameof(Resource.Common_Cancel)]
-                </a>
-            </footer>
+                    <a class="card-footer-item" @onclick="Cancel">
+                        @Localization[nameof(Resource.Common_Cancel)]
+                    </a>
+                </footer>
+            }
         </div>
     </div>
 </div>
@@ -72,6 +69,7 @@
         if (!isMultipleSelect)
         {
             options.Where(x => x != option).ToList().ForEach(x => x.IsSelected = false);
+            Ok();
         }
     }
 
@@ -86,7 +84,7 @@
         callback?.Invoke(new OptionsModalResult());
     }
 
-    private void Ok(MouseEventArgs e)
+    private void Ok()
     {
         Close();
         callback?.Invoke(new OptionsModalResult() { SelectedItems = options.Where(x => x.IsSelected).ToList() });
