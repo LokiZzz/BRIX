@@ -346,7 +346,40 @@
   <data name="Abilities_EnableCooldownText" xml:space="preserve">
     <value>The number of uses per day is limited.</value>
   </data>
-  <data name="Ability_UsesCount" xml:space="preserve">
+  <data name="Abilities_UsesCount" xml:space="preserve">
     <value>Uses count</value>
+  </data>
+  <data name="Abilities_TriggersHint" xml:space="preserve">
+    <value>An ability can be activated automatically if you add activation triggers. A activation trigger is an event that must occur for an ability to activate without spending action points. With each added trigger the ability will became more expensive.</value>
+  </data>
+  <data name="Common_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Abilities_TriggerProbability" xml:space="preserve">
+    <value>Trigger probability</value>
+  </data>
+  <data name="ETriggerProbability_Low" xml:space="preserve">
+    <value>Low probability</value>
+  </data>
+  <data name="ETriggerProbability_Medium" xml:space="preserve">
+    <value>Medium probability</value>
+  </data>
+  <data name="ETriggerProbability_High" xml:space="preserve">
+    <value>High probability</value>
+  </data>
+  <data name="Abilities_ActivationTrigger" xml:space="preserve">
+    <value>Activation trigger</value>
+  </data>
+  <data name="Abilities_Trigger" xml:space="preserve">
+    <value>Trigger</value>
+  </data>
+  <data name="Abilities_EnterTriggerHint_Low" xml:space="preserve">
+    <value>Enter low probability trigger, like «character was attaced by undead».</value>
+  </data>
+  <data name="Abilities_EnterTriggerHint_Medium" xml:space="preserve">
+    <value>Enter medium probability trigger, like «character was attaced from range».</value>
+  </data>
+  <data name="Abilities_EnterTriggerHint_High" xml:space="preserve">
+    <value>Enter high probability trigger, like «character takes damage».</value>
   </data>
 </root>

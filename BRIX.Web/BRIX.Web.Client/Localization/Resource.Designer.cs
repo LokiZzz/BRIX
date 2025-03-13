@@ -97,6 +97,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activation trigger.
+        /// </summary>
+        public static string Abilities_ActivationTrigger {
+            get {
+                return ResourceManager.GetString("Abilities_ActivationTrigger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Triggers.
         /// </summary>
         public static string Abilities_ActivationTriggers {
@@ -151,6 +160,33 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter high probability trigger, like «character takes damage»..
+        /// </summary>
+        public static string Abilities_EnterTriggerHint_High {
+            get {
+                return ResourceManager.GetString("Abilities_EnterTriggerHint_High", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter low probability trigger, like «character was attaced by undead»..
+        /// </summary>
+        public static string Abilities_EnterTriggerHint_Low {
+            get {
+                return ResourceManager.GetString("Abilities_EnterTriggerHint_Low", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter medium probability trigger, like «character was attaced from range»..
+        /// </summary>
+        public static string Abilities_EnterTriggerHint_Medium {
+            get {
+                return ResourceManager.GetString("Abilities_EnterTriggerHint_Medium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not enough EXP for ability..
         /// </summary>
         public static string Abilities_NotEnoughExpForAbility {
@@ -160,11 +196,38 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trigger.
+        /// </summary>
+        public static string Abilities_Trigger {
+            get {
+                return ResourceManager.GetString("Abilities_Trigger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trigger probability.
+        /// </summary>
+        public static string Abilities_TriggerProbability {
+            get {
+                return ResourceManager.GetString("Abilities_TriggerProbability", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An ability can be activated automatically if you add activation triggers. A activation trigger is an event that must occur for an ability to activate without spending action points. With each added trigger the ability will became more expensive..
+        /// </summary>
+        public static string Abilities_TriggersHint {
+            get {
+                return ResourceManager.GetString("Abilities_TriggersHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Uses count.
         /// </summary>
-        public static string Ability_UsesCount {
+        public static string Abilities_UsesCount {
             get {
-                return ResourceManager.GetString("Ability_UsesCount", resourceCulture);
+                return ResourceManager.GetString("Abilities_UsesCount", resourceCulture);
             }
         }
         
@@ -457,6 +520,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string Common_Add {
+            get {
+                return ResourceManager.GetString("Common_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Common_Cancel {
@@ -615,6 +687,33 @@ namespace BRIX.Web.Client.Localization {
         public static string Effect_DamageHint {
             get {
                 return ResourceManager.GetString("Effect_DamageHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to High probability.
+        /// </summary>
+        public static string ETriggerProbability_High {
+            get {
+                return ResourceManager.GetString("ETriggerProbability_High", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Low probability.
+        /// </summary>
+        public static string ETriggerProbability_Low {
+            get {
+                return ResourceManager.GetString("ETriggerProbability_Low", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medium probability.
+        /// </summary>
+        public static string ETriggerProbability_Medium {
+            get {
+                return ResourceManager.GetString("ETriggerProbability_Medium", resourceCulture);
             }
         }
         

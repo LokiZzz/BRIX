@@ -8,7 +8,7 @@
 
         public bool MultipleSelect { get; set; }
 
-        public required List<ModalOption> Items { get; set; } = [];
+        public required List<ModalOption> Options { get; set; } = [];
 
         public required Action<OptionsModalResult> Callback { get; set; }
     }

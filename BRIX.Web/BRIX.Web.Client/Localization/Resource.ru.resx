@@ -345,7 +345,40 @@
   <data name="Abilities_EnableCooldownText" xml:space="preserve">
     <value>Количество использований в день ограничено.</value>
   </data>
-  <data name="Ability_UsesCount" xml:space="preserve">
+  <data name="Abilities_UsesCount" xml:space="preserve">
     <value>Количество зарядов</value>
+  </data>
+  <data name="Abilities_TriggersHint" xml:space="preserve">
+    <value>Способность может быть активирована автоматически, если вы добавите триггеры активации. Триггер активации - это событие, которое должно произойти, чтобы способность активировалась без затрат очков действия. С каждым добавленным триггером способность будет становиться дороже.</value>
+  </data>
+  <data name="Common_Add" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="Abilities_TriggerProbability" xml:space="preserve">
+    <value>Вероятность триггера</value>
+  </data>
+  <data name="ETriggerProbability_Low" xml:space="preserve">
+    <value>Низкая вероятность</value>
+  </data>
+  <data name="ETriggerProbability_Medium" xml:space="preserve">
+    <value>Средняя вероятность</value>
+  </data>
+  <data name="ETriggerProbability_High" xml:space="preserve">
+    <value>Высокая вероятность</value>
+  </data>
+  <data name="Abilities_ActivationTrigger" xml:space="preserve">
+    <value>Триггер активации</value>
+  </data>
+  <data name="Abilities_Trigger" xml:space="preserve">
+    <value>Триггер</value>
+  </data>
+  <data name="Abilities_EnterTriggerHint_Low" xml:space="preserve">
+    <value>Введите триггер с низкой вероятностью, например «Персонаж атакован нежитью».</value>
+  </data>
+  <data name="Abilities_EnterTriggerHint_Medium" xml:space="preserve">
+    <value>Введите триггер со средней вероятностью, например «Персонаж атакован с расстояния».</value>
+  </data>
+  <data name="Abilities_EnterTriggerHint_High" xml:space="preserve">
+    <value>Введите триггер с высокой вероятностью, например «Персонаж получил урон».</value>
   </data>
 </root>

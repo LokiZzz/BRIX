@@ -9,8 +9,8 @@
         <p class="title">@Localization[nameof(Resource.Abilities_ActionPoints)]</p>
         <p class="block">@Localization[nameof(Resource.Abilities_ActionPointsHint)]</p>
         <Field
-            Label="@Localization[nameof(Resource.Abilities_ActionPoints)]" 
-            @bind-Value="Ability.Activation.ActionPoints" @bind-Value:after="Layout.Refresh"/>
+        Label="@Localization[nameof(Resource.Abilities_ActionPoints)]" 
+        @bind-Value="Ability.Activation.ActionPoints" @bind-Value:after="Layout.Refresh"/>
         <div class="is-display-flex is-gap-2">
             <button class="button is-fullwidth" @onclick="@(() => SetActionPoints(1))">1</button>
             <button class="button is-fullwidth" @onclick="@(() => SetActionPoints(2))">2</button>
@@ -32,13 +32,24 @@
         @if(hasCooldown)
         {
             <Field 
-                Label="@Localization[nameof(Resource.Ability_UsesCount)]" 
-                @bind-Value="Ability.Activation.UsesCountPerDay" @bind-Value:after="Layout.Refresh"/>
+            Label="@Localization[nameof(Resource.Abilities_UsesCount)]" 
+            @bind-Value="Ability.Activation.UsesCountPerDay" @bind-Value:after="RefreshWithCooldown"/>
         }
     </div>
 
     <div class="column">
         <p class="title">@Localization[nameof(Resource.Abilities_ActivationTriggers)]</p>
+        <p class="block">@Localization[nameof(Resource.Abilities_TriggersHint)]</p>
+
+        @foreach ((ETriggerProbability Probability, string Comment) trigger in Ability.Activation.Triggers)
+        {
+            <div class="notification">
+                <button class="delete" @onclick="@(() => RemoveTrigger(trigger))"></button>
+                <p>@trigger.Comment</p>
+            </div>
+        }
+
+        <button class="button" @onclick="AddTrigger">@Localization[nameof(Resource.Common_Add)]</button>
     </div>
 </div>
 
@@ -62,5 +73,92 @@
         hasCooldown = hasCooldownNewValue;
         Ability.Activation.UsesCountPerDay = hasCooldown ? 1 : 0;
         Layout.Refresh();
+    }
+
+    /// <summary>
+    /// Спрятать поле и выключить флаг, если введён 0.
+    /// </summary>
+    private void RefreshWithCooldown()
+    {
+        Layout.Refresh();
+
+        if (!Ability.Activation.HasCooldown)
+        {
+            hasCooldown = false;
+        }
+    }
+
+    private void AddTrigger(MouseEventArgs args)
+    {
+        OptionsModalParameters parameters = new()
+        {
+            Title = Localization[nameof(Resource.Abilities_ActivationTriggers)],
+            Callback = ApplyProbabilityAndAskText,
+            Options =
+            [
+                new ModalOption
+                {
+                    Value = ETriggerProbability.High,
+                    Title = Localization[nameof(Resource.ETriggerProbability_High)]
+                },
+                new ModalOption
+                {
+                    Value = ETriggerProbability.Medium,
+                    Title = Localization[nameof(Resource.ETriggerProbability_Medium)]
+                },
+                new ModalOption
+                {
+                    Value = ETriggerProbability.Low,
+                    Title = Localization[nameof(Resource.ETriggerProbability_Low)]
+                },
+            ]
+        };
+
+        Modal.Options(parameters);
+    }
+
+    private void ApplyProbabilityAndAskText(OptionsModalResult result)
+    {
+        if (result.SelectedItems is null || !result.SelectedItems.Any())
+        {
+            return;
+        }
+
+        ETriggerProbability choosedProbabilty = (ETriggerProbability)result.SelectedItems.First().Value;
+
+        Modal.Field(
+            new FieldParameters
+            {
+                Title = Localization[nameof(Resource.Abilities_ActivationTrigger)],
+                Label = Localization[nameof(Resource.Abilities_Trigger)],
+                Message = GetTriggerProbabilityHint(choosedProbabilty),
+                Callback = (result) => ApplyEnteredTrigger(choosedProbabilty, result)
+            }
+        );
+    }
+
+    private void ApplyEnteredTrigger(ETriggerProbability probability, FieldResult fieldResult)
+    {
+        if (fieldResult.Result is not null)
+        {
+            Ability.Activation.Triggers.Add((probability, fieldResult.Result));
+            Layout.Refresh();
+        }
+    }
+
+    private void RemoveTrigger((ETriggerProbability Probability, string Comment) triggerToRemove)
+    {
+        Ability.Activation.Triggers.Remove(triggerToRemove);
+    }
+
+    private string GetTriggerProbabilityHint(ETriggerProbability eTriggerProbability)
+    {
+        return eTriggerProbability switch
+        {
+            ETriggerProbability.High => Localization[nameof(Resource.Abilities_EnterTriggerHint_High)],
+            ETriggerProbability.Medium => Localization[nameof(Resource.Abilities_EnterTriggerHint_Medium)],
+            ETriggerProbability.Low => Localization[nameof(Resource.Abilities_EnterTriggerHint_Low)],
+            _ => string.Empty
+        };
     }
 }

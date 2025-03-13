@@ -33,9 +33,9 @@
 
         public void PushErrors(IEnumerable<string> errors)
         {
-            List<Notification> notifications = errors.Select(x =>
+            List<Notification> notifications = [.. errors.Select(x =>
                 new Notification { Type = ENotificationType.Error, Message = x }
-            ).ToList();
+            )];
 
             OnNotifications?.Invoke(notifications);
         }

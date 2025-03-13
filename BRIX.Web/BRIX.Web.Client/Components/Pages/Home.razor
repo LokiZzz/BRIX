@@ -176,7 +176,7 @@
         {
             Title = "Тайтл",
             Message = "Месседж",
-            Items =
+            Options =
             [
                 new() { Title = "Один ка четыре", Value = new DamageEffect() { Impact = new((1, 4)) } },
                 new() { Title = "Один ка шесть", Value = new DamageEffect() { Impact = new((1, 6)) } },
@@ -189,7 +189,7 @@
 
         if (singleModalOption is not null)
         {
-            ModalOption? selectedOption = parameters.Items
+            ModalOption? selectedOption = parameters.Options
                 .FirstOrDefault(x => x.GetValueOrDefault<DamageEffect>()?.Id == singleModalOption?.Id);
 
             if (selectedOption is not null)
@@ -219,7 +219,7 @@
             {
                 Title = "Тайтл",
                 Message = "Месседж",
-                Items =
+                Options =
                 [
                     new() { Title = "Один ка четыре", Value = new DamageEffect() { Impact = new((1, 4)) } },
                     new() { Title = "Один ка шесть", Value = new DamageEffect() { Impact = new((1, 6)) } },
