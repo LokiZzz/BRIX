@@ -8,7 +8,7 @@
     </div>
     <Tab Class="is-centered is-boxed" @ref="Tab" OnActiveTabChanged="UpdateUriBySelectedTab">
         <TabItem Title="@Localization[nameof(Resource.Character)]" @ref="CharacterTab">
-            <MainSection Character="Character" />
+            <MainSection Character="Character" OnCharacterChanged="StateHasChanged"/>
         </TabItem>
         <TabItem Title="@Localization[nameof(Resource.Character_Abilities)]" @ref="AbilitiesTab" Tag="abilities">
             <AbilitiesSection Character="Character" />

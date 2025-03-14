@@ -50,15 +50,18 @@
     </div>
     <div class="card-footer">
         <progress 
-            class="progress @GetHealthBarColor() is-small m-3" 
-            value="@Character?.CurrentHealth" 
-            max="@Character?.MaxHealth" />
+        class="progress @GetHealthBarColor() is-small m-3" 
+        value="@Character?.CurrentHealth" 
+        max="@Character?.MaxHealth" />
     </div>
 </div>
 
 @code {
     [Parameter]
     public Character? Character { get; set; } = default!;
+
+    [Parameter]
+    public Action? OnCharacterChanged { get; set; }
 
     public int NextLevelOn => ExperienceCalculator.GetExpForLevel(Character?.Level + 1 ?? 0);
 
@@ -76,6 +79,7 @@
             Character.Experience = value;
             await CharacterManager.SaveAsync(Character);
             StateHasChanged();
+            OnCharacterChanged?.Invoke();
         }
     }
 
@@ -86,6 +90,7 @@
             Character.CurrentHealth = Character.MaxHealth;
             await CharacterManager.SaveAsync(Character);
             StateHasChanged();
+            OnCharacterChanged?.Invoke();
         }
     }
 
@@ -103,6 +108,7 @@
             Character.CurrentHealth = value;
             await CharacterManager.SaveAsync(Character);
             StateHasChanged();
+            OnCharacterChanged?.Invoke();
         }
     }
 
