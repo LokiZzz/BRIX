@@ -115,6 +115,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to reset all unsaved changes?.
+        /// </summary>
+        public static string Abilities_AreYouSureReset {
+            get {
+                return ResourceManager.GetString("Abilities_AreYouSureReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cooldown.
         /// </summary>
         public static string Abilities_Cooldown {
@@ -633,6 +642,15 @@ namespace BRIX.Web.Client.Localization {
         public static string Common_Remove {
             get {
                 return ResourceManager.GetString("Common_Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string Common_Reset {
+            get {
+                return ResourceManager.GetString("Common_Reset", resourceCulture);
             }
         }
         

@@ -19,6 +19,7 @@
             <p>Осталось: EXP</p> *@
             <progress class="progress" value="@cost" max="@overall" />
             <button class="button" @onclick="SaveAsync">@Localization[nameof(Resource.Common_Save)]</button>
+            <button class="button" @onclick="Reset">@Localization[nameof(Resource.Common_Reset)]</button>
         </div>
     </div>
 </CascadingValue>
@@ -35,6 +36,8 @@
 
     public Ability Ability => AbilityNumber is null ? new()
         : CharacterManager.EditingCharacter?.Abilities.ElementAtOrDefault(AbilityNumber.Value) ?? new();
+
+    public Action? OnReset { get; set; }
 
     /// <summary>
     /// Обновить состояние лейаута.
@@ -59,6 +62,32 @@
                 Message = Localization[nameof(Resource.Abilities_NotEnoughExpForAbility)],
                 Title = Localization[nameof(Resource.Common_Warning)],
             });
+        }
+    }
+
+    /// <summary>
+    /// Сбросить все изменения, сделанные в способности.
+    /// </summary>
+    private void Reset()
+    {
+        Modal.Alert(
+            new AlertParameters
+            {
+                Title = Localization[nameof(Resource.Common_Warning)],
+                Message = Localization[nameof(Resource.Abilities_AreYouSureReset)],
+                Callback = ResetInternal,
+                Mode = EAlertMode.YesNo
+            }
+        );
+    }
+
+    private void ResetInternal(AlertResult result)
+    {
+        if (result.IsPositive)
+        {
+            CharacterManager.Reset();
+            OnReset?.Invoke();
+            StateHasChanged();
         }
     }
 }

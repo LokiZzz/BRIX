@@ -381,4 +381,10 @@
   <data name="Abilities_EnterTriggerHint_High" xml:space="preserve">
     <value>Введите триггер с высокой вероятностью, например «Персонаж получил урон».</value>
   </data>
+  <data name="Common_Reset" xml:space="preserve">
+    <value>Сбросить</value>
+  </data>
+  <data name="Abilities_AreYouSureReset" xml:space="preserve">
+    <value>Вы уверены, что хотите сбросить все несохранённые изменения?</value>
+  </data>
 </root>

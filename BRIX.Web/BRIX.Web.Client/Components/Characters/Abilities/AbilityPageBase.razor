@@ -7,8 +7,6 @@
     [Parameter]
     public Guid CharacterId { get; set; }
 
-    private int? _number;
-
     [Parameter]
     public int? AbilityNumber { get; set; }
 
@@ -17,7 +15,12 @@
 
     public Character Character => CharacterManager.EditingCharacter ?? new();
 
-    protected override async Task OnInitializedAsync()
+    /// <summary>
+    /// Базовая инициализация для страницы редактирования способности. Работает так, что пользователь даже перейдя по 
+    /// адресу напрямую, например, по ссылке, спровоцирует полноценную инициализацию необходимых свойств.
+    /// </summary>
+    /// <returns></returns>
+    public async Task InitializeAsync()
     {
         // Если персонаж для редактирования не выбран или не совпадает, то выбрать.
         if (CharacterManager.EditingCharacter is null || CharacterManager.EditingCharacter.Id != CharacterId)
@@ -25,14 +28,14 @@
             await CharacterManager.EditCharacterAsync(CharacterId);
         }
 
-        if(CharacterManager.EditingCharacter is null)
+        if (CharacterManager.EditingCharacter is null)
         {
             Navigation.NavigateTo("/404");
 
             return;
         }
 
-        // Если айди способности в параметрах не указан, значит её нужно создать и добавить персонажу, 
+        // Если айди способности в параметрах не указан, значит её нужно создать и добавить персонажу,
         // а потом установить её айди.
         if (AbilityNumber is null)
         {
@@ -52,7 +55,24 @@
         Layout.AbilityNumber = AbilityNumber;
         Layout.CharacterId = CharacterId;
 
+        // Конкретная страница-наследник тоже может дополнительно что-то инициализировать, например найти по праметрам
+        // из роутинга нужный эффект или аспект в способности.
+        InitializeAlso();
+
         Layout.Refresh();
+    }
+
+    /// <summary>
+    /// Дополнительная инициализация для страниц редактирования способности: аспектов, эффектов и других настроек.
+    /// </summary>
+    protected virtual void InitializeAlso() { }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Страница подписывается на сброс по кнопке в лейауте, чтобы инициализировать всё заново, если пользователь
+        // решит сбросить все изменения.
+        Layout.OnReset = async () => await InitializeAsync();
+        await InitializeAsync();
     }
 
     protected override void OnParametersSet()

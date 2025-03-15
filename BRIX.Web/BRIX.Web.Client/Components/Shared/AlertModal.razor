@@ -21,11 +21,11 @@
                         </a>
                         break;
                     case EAlertMode.YesNo:
-                        <a class="card-footer-item" @onclick="No">
-                            @Localization[nameof(Resource.Common_No)]
-                        </a>
                         <a class="card-footer-item" @onclick="Yes">
                             @Localization[nameof(Resource.Common_Yes)]
+                        </a>
+                        <a class="card-footer-item" @onclick="No">
+                            @Localization[nameof(Resource.Common_No)]
                         </a>
                         break;
                 }

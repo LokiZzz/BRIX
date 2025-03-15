@@ -7,8 +7,8 @@
     <p class="title">@Localization[nameof(Resource.Effect_DamageEffect)]</p>
     <p class="block">@Localization[nameof(Resource.Effect_DamageHint)]</p>
     <DiceField 
-        Placeholder="@Localization[nameof(Resource.Effect_DamageEffect)]"
-        @bind-Dice="Effect.Impact" @bind-Dice:after="Layout.Refresh" />
+    Placeholder="@Localization[nameof(Resource.Effect_DamageEffect)]"
+    @bind-Dice="Effect.Impact" @bind-Dice:after="Layout.Refresh" />
 </div>
 
 @code {
@@ -16,18 +16,16 @@
     [SupplyParameterFromQuery(Name = "n")]
     public int EffectOrderNumber { get; set; }
 
-    public DamageEffect Effect { get; set; } = default!;
+    public DamageEffect Effect { get; set; } = new ();
 
     // TODO: Можно вынести инициализацию эффекта в базовый класс страницы эффекта (EffectPageBase)
     // Но нужно сделать это через дженерик (так вроде можно)
 
-    protected override void OnInitialized()
+    protected override void InitializeAlso()
     {
-        base.OnInitialized();
-
         Effect = Ability.GetEffectByIndex<DamageEffect>(EffectOrderNumber);
 
-        if(Effect is null)
+        if (Effect is null)
         {
             Navigation.NavigateTo("/404");
         }

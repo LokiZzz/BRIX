@@ -382,4 +382,10 @@
   <data name="Abilities_EnterTriggerHint_High" xml:space="preserve">
     <value>Enter high probability trigger, like «character takes damage».</value>
   </data>
+  <data name="Common_Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Abilities_AreYouSureReset" xml:space="preserve">
+    <value>Are you sure you want to reset all unsaved changes?</value>
+  </data>
 </root>

@@ -94,6 +94,7 @@
     {
         base.OnParametersSet();
         labelClass = string.IsNullOrEmpty(StringValue) && !isFocused ? placeholderClass : floatingClass;
+        StringValue = Dice?.ToString();
     }
 
     private void SetValidState()
