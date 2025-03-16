@@ -4,15 +4,17 @@
 @inherits LayoutComponentBase
 
 <CascadingValue Value="this">
-    <div class="section">
+    <div class="section ability-layout-container">
         <div class="box">
             <p>Здесь будут хлебные крошки, типа:</p>
             <p>Гоблин боблин -> Способности -> Выстрел из бумпалки -> Урон -> Выбор целей</p>
         </div>
 
-        @Body
+        <div class="ability-layout-content">
+            @Body
+        </div>
 
-        <div class="box">
+        <footer class="box cost-footer">
             <p class="title">@Localization[nameof(Resource.Abilities_AbilityCost)]</p>
             <p>@cost EXP</p>
             @* <p>Уже занято: EXP</p>
@@ -20,7 +22,7 @@
             <progress class="progress" value="@cost" max="@overall" />
             <button class="button" @onclick="SaveAsync">@Localization[nameof(Resource.Common_Save)]</button>
             <button class="button" @onclick="Reset">@Localization[nameof(Resource.Common_Reset)]</button>
-        </div>
+        </footer>
     </div>
 </CascadingValue>
 

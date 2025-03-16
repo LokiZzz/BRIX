@@ -14,10 +14,10 @@
 
 .button {
     width: 100%;
-    box-shadow: 0rem 0.8rem 0.8rem 0rem rgba(0, 0, 0, 0.75);
+    box-shadow: 0rem 0.8rem 0.8rem 0rem rgba(0, 0, 0, 0.5);
 }
 
 .notification {
     --bulma-block-spacing: 1rem;
-    box-shadow: 0rem 0.8rem 0.8rem 0rem rgba(0, 0, 0, 0.75);
+    box-shadow: 0rem 0.8rem 0.8rem 0rem rgba(0, 0, 0, 0.5);
 }

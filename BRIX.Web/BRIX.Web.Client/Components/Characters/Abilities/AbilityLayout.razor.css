@@ -1,0 +1,21 @@
+﻿::deep {
+    --ability-page-footer-height: 14rem;
+    --ability-page-footer-drowned: -1rem;
+}
+
+.cost-footer {
+    position: fixed;
+    bottom: var(--ability-page-footer-drowned);
+    height: var(--ability-page-footer-height);
+    width: 100%;
+    right: 0;
+    max-width: 1024px;
+}
+
+.ability-layout-container {
+    padding-bottom: 0;
+}
+
+.ability-layout-content {
+    padding-bottom: calc(var(--ability-page-footer-height) + var(--bulma-block-spacing) + var(--ability-page-footer-drowned));
+}
