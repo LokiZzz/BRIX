@@ -205,6 +205,24 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Already spent:.
+        /// </summary>
+        public static string Abilities_MonitorAlreadySpent {
+            get {
+                return ResourceManager.GetString("Abilities_MonitorAlreadySpent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Availiable:.
+        /// </summary>
+        public static string Abilities_MonitorAvailiable {
+            get {
+                return ResourceManager.GetString("Abilities_MonitorAvailiable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not enough EXP for ability..
         /// </summary>
         public static string Abilities_NotEnoughExpForAbility {

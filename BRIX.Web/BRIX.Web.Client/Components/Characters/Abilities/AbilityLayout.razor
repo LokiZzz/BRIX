@@ -15,20 +15,31 @@
         </div>
 
         <footer class="box cost-footer">
-            <p class="title">@Localization[nameof(Resource.Abilities_AbilityCost)]</p>
-            <p>@cost EXP</p>
-            @* <p>Уже занято: EXP</p>
-            <p>Осталось: EXP</p> *@
-            <progress class="progress" value="@cost" max="@overall" />
-            <button class="button" @onclick="SaveAsync">@Localization[nameof(Resource.Common_Save)]</button>
-            <button class="button" @onclick="Reset">@Localization[nameof(Resource.Common_Reset)]</button>
+            <div class="is-flex is-flex-direction-row is-justify-content-space-between">
+                <p class="title">@Localization[nameof(Resource.Abilities_AbilityCost)]</p>
+                <p class="title">@cost EXP</p>
+            </div>
+            <div class="progress-container mb-2">
+                <progress class="progress is-warning" value="@(cost + alreadySpent)" max="@overall" />
+                <progress class="progress is-success spent-progress" value="@alreadySpent" max="@overall" />
+            </div>
+            <div class="is-flex is-flex-direction-row is-justify-content-space-between block">
+                <p>@Localization[nameof(Resource.Abilities_MonitorAlreadySpent)] @alreadySpent EXP</p>
+                <p>@Localization[nameof(Resource.Abilities_MonitorAvailiable)] @availiable EXP</p>
+            </div>
+            <div class="buttons is-flex is-justify-content-flex-end">
+                <button class="button" @onclick="Reset">@Localization[nameof(Resource.Common_Reset)]</button>
+                <button class="button is-primary" @onclick="SaveAsync">@Localization[nameof(Resource.Common_Save)]</button>
+            </div>
         </footer>
     </div>
 </CascadingValue>
 
 @code {
-    private int? cost => Ability?.ExpCost();
-    private int? overall => CharacterManager.EditingCharacter?.Experience;
+    private int cost => Ability?.ExpCost() ?? default;
+    private int overall => CharacterManager.EditingCharacter?.Experience ?? default;
+    private int alreadySpent => GetAlreadySpent();
+    private int availiable => CharacterManager.EditingCharacter?.AvailableExp ?? default;
 
     public Guid CharacterId { get; set; }
 
@@ -91,5 +102,15 @@
             OnReset?.Invoke();
             StateHasChanged();
         }
+    }
+
+    private int GetAlreadySpent()
+    {
+        if (CharacterManager.EditingCharacter is null || Ability is null)
+        {
+            return default;
+        }
+
+        return CharacterManager.EditingCharacter.GetSpentExp(excludeAbilityId: Ability.Id);
     }
 }

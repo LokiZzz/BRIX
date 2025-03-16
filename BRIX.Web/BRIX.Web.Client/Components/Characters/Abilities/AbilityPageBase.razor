@@ -10,8 +10,9 @@
     [Parameter]
     public int? AbilityNumber { get; set; }
 
-    public Ability Ability => AbilityNumber is null ? new()
-    : CharacterManager.EditingCharacter?.Abilities.ElementAtOrDefault(AbilityNumber.Value) ?? new();
+    public Ability Ability => AbilityNumber is null 
+        ? new()
+        : CharacterManager.EditingCharacter?.Abilities.ElementAtOrDefault(AbilityNumber.Value) ?? new();
 
     public Character Character => CharacterManager.EditingCharacter ?? new();
 

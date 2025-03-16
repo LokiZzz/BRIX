@@ -7,7 +7,7 @@
 <div class="box">
     <div class="column">
         <p class="title">@Localization[nameof(Resource.Abilities_ActionPoints)]</p>
-        @if (Ability?.Activation?.Triggers?.Any() == false)
+        @if (Ability.Activation.Triggers.Any() == false)
         {
             <p class="block">@Localization[nameof(Resource.Abilities_ActionPointsHint)]</p>
             <Field

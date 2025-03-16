@@ -391,4 +391,10 @@
   <data name="Abilities_ActionPointsTriggersExplain" xml:space="preserve">
     <value>If the ability has activation triggers, the character can only actively use the ability for 3 action points.</value>
   </data>
+  <data name="Abilities_MonitorAlreadySpent" xml:space="preserve">
+    <value>Already spent:</value>
+  </data>
+  <data name="Abilities_MonitorAvailiable" xml:space="preserve">
+    <value>Availiable:</value>
+  </data>
 </root>

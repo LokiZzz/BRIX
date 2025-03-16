@@ -390,4 +390,10 @@
   <data name="Abilities_ActionPointsTriggersExplain" xml:space="preserve">
     <value>Если у способности настроены триггеры активации, то персонаж может активно использовать способность только за три очка действия.</value>
   </data>
+  <data name="Abilities_MonitorAlreadySpent" xml:space="preserve">
+    <value>Уже занято:</value>
+  </data>
+  <data name="Abilities_MonitorAvailiable" xml:space="preserve">
+    <value>Осталось:</value>
+  </data>
 </root>

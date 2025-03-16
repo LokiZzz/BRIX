@@ -46,7 +46,7 @@ namespace BRIX.Library.Characters
             return base.GetMaxHealth() + HealthFromExp;
         }
 
-        private int GetSpentExp(Guid? excludeAbilityId = null)
+        public int GetSpentExp(Guid? excludeAbilityId = null)
         {
             return Abilities
                 .Where(x => excludeAbilityId == null || x.Id != excludeAbilityId)
