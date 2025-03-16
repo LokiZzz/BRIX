@@ -8,8 +8,9 @@
     bottom: var(--ability-page-footer-drowned);
     height: var(--ability-page-footer-height);
     width: 100%;
-    right: 0;
-    max-width: 1024px;
+    right: 50%;
+    transform: translateX(50%);
+    max-width: 1400px;
 }
 
 .ability-layout-container {

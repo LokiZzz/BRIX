@@ -387,4 +387,7 @@
   <data name="Abilities_AreYouSureReset" xml:space="preserve">
     <value>Вы уверены, что хотите сбросить все несохранённые изменения?</value>
   </data>
+  <data name="Abilities_ActionPointsTriggersExplain" xml:space="preserve">
+    <value>Если у способности настроены триггеры активации, то персонаж может активно использовать способность только за три очка действия.</value>
+  </data>
 </root>

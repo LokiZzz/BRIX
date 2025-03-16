@@ -388,4 +388,7 @@
   <data name="Abilities_AreYouSureReset" xml:space="preserve">
     <value>Are you sure you want to reset all unsaved changes?</value>
   </data>
+  <data name="Abilities_ActionPointsTriggersExplain" xml:space="preserve">
+    <value>If the ability has activation triggers, the character can only actively use the ability for 3 action points.</value>
+  </data>
 </root>

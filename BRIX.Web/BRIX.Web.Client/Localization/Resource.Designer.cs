@@ -88,6 +88,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If the ability has activation triggers, the character can only actively use the ability for 3 action points..
+        /// </summary>
+        public static string Abilities_ActionPointsTriggersExplain {
+            get {
+                return ResourceManager.GetString("Abilities_ActionPointsTriggersExplain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Activation.
         /// </summary>
         public static string Abilities_Activation {

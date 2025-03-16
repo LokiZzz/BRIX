@@ -7,17 +7,24 @@
 <div class="box">
     <div class="column">
         <p class="title">@Localization[nameof(Resource.Abilities_ActionPoints)]</p>
-        <p class="block">@Localization[nameof(Resource.Abilities_ActionPointsHint)]</p>
-        <Field
-        Label="@Localization[nameof(Resource.Abilities_ActionPoints)]" 
-        @bind-Value="Ability.Activation.ActionPoints" @bind-Value:after="Layout.Refresh"/>
-        <div class="is-display-flex is-gap-2">
-            <button class="button is-fullwidth" @onclick="@(() => SetActionPoints(1))">1</button>
-            <button class="button is-fullwidth" @onclick="@(() => SetActionPoints(2))">2</button>
-            <button class="button is-fullwidth" @onclick="@(() => SetActionPoints(3))">3</button>
-            <button class="button is-fullwidth" @onclick="@(() => SetActionPoints(4))">4</button>
-            <button class="button is-fullwidth" @onclick="@(() => SetActionPoints(5))">5</button>
-        </div>
+        @if (Ability?.Activation?.Triggers?.Any() == false)
+        {
+            <p class="block">@Localization[nameof(Resource.Abilities_ActionPointsHint)]</p>
+            <Field
+            Label="@Localization[nameof(Resource.Abilities_ActionPoints)]" 
+            @bind-Value="Ability.Activation.ActionPoints" @bind-Value:after="Layout.Refresh"/>
+            <div class="is-display-flex is-gap-2">
+                <button class="button is-fullwidth" @onclick="@(() => SetActionPoints(1))">1</button>
+                <button class="button is-fullwidth" @onclick="@(() => SetActionPoints(2))">2</button>
+                <button class="button is-fullwidth" @onclick="@(() => SetActionPoints(3))">3</button>
+                <button class="button is-fullwidth" @onclick="@(() => SetActionPoints(4))">4</button>
+                <button class="button is-fullwidth" @onclick="@(() => SetActionPoints(5))">5</button>
+            </div>
+        }
+        else
+        {
+            <p class="block">@Localization[nameof(Resource.Abilities_ActionPointsTriggersExplain)]</p>
+        }
     </div>
 
     <div class="column">
@@ -80,12 +87,12 @@
     /// </summary>
     private void RefreshWithCooldown()
     {
-        Layout.Refresh();
-
         if (!Ability.Activation.HasCooldown)
         {
             hasCooldown = false;
         }
+
+        Layout.Refresh();
     }
 
     private void AddTrigger(MouseEventArgs args)
@@ -142,6 +149,12 @@
         if (fieldResult.Result is not null)
         {
             Ability.Activation.Triggers.Add((probability, fieldResult.Result));
+
+            if (Ability.Activation.ActionPoints != 3)
+            {
+                Ability.Activation.ActionPoints = 3;
+            }
+
             Layout.Refresh();
         }
     }
@@ -149,6 +162,7 @@
     private void RemoveTrigger((ETriggerProbability Probability, string Comment) triggerToRemove)
     {
         Ability.Activation.Triggers.Remove(triggerToRemove);
+        Layout.Refresh();
     }
 
     private string GetTriggerProbabilityHint(ETriggerProbability eTriggerProbability)
