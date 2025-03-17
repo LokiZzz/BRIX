@@ -1,4 +1,6 @@
-﻿@page "/error"
+﻿@using BRIX.Web.Client.Services.Http
+
+@page "/error"
 
 <section class="hero is-danger is-fullheight">
     <div class="hero-body">
@@ -29,5 +31,11 @@
         base.OnInitialized();
 
         Modal.IsBusy = false;
+
+        if (Exception is UnauthorizedRequestException)
+        {
+            ErrorBoundary?.Recover();
+            Navigation.NavigateTo("/sign-in");
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Net.Http.Formatting;
 using BRIX.GameService.Contracts.Common;
+using System.Net;
 
 namespace BRIX.Web.Client.Services.Http
 {
@@ -30,8 +31,13 @@ namespace BRIX.Web.Client.Services.Http
         {
             try
             {
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    throw new UnauthorizedRequestException();
+                }
+
                 response.EnsureSuccessStatusCode();
-                
+
                 return await response.BuildJsonResponseAsync<TResponse>();
             }
             catch (HttpRequestException)
