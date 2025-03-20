@@ -7,39 +7,37 @@ namespace BRIX.Web.Client.Models.Characters
 {
     public class Aspects
     {
-        public static Dictionary<Type, AspectViewModel> Collection => new()
+        public static Dictionary<Type, AspectVM> Collection => new()
         {
-            { typeof(TargetSelectionAspect), new AspectViewModel() {
-                Name = "",
-                PageRoute = ""
+            { typeof(TargetSelectionAspect), new AspectVM() {
+                Route = "tse", Icon = ""
             }},
-            { typeof(TargetSizeAspect), new AspectViewModel() {
-                Name = "",
-                PageRoute = ""
+            { typeof(TargetSizeAspect), new AspectVM() {
+                Route = "size", Icon = ""
             }},
-            { typeof(ActivationConditionsAspect), new AspectViewModel() {
-                Name = "",
-                PageRoute = ""
+            { typeof(ActivationConditionsAspect), new AspectVM() {
+                Route = "cond", Icon = ""
             }},
-            { typeof(DurationAspect), new AspectViewModel() {
-                Name = "",
-                PageRoute = ""
+            { typeof(DurationAspect), new AspectVM() {
+                Route = "dur", Icon = ""
             }},
-            { typeof(AOEAspect), new AspectViewModel() {
-                Name = "",
-                PageRoute = ""
+            { typeof(AOEAspect), new AspectVM() {
+                Route = "aoe", Icon = ""
             }},
-            { typeof(VampirismAspect), new AspectViewModel() {
-                Name = "",
-                PageRoute = ""
+            { typeof(VampirismAspect), new AspectVM() {
+                Route = "vamp", Icon = ""
             }},
         };
     }
 
-    public class AspectViewModel
+    public class AspectVM
     {
-        public string Name { get; set; }
+        public string Title { get; set; } = string.Empty;
 
-        public string PageRoute { get; set; }
+        public string LexisDescription { get; set; } = string.Empty;
+
+        public string Icon { get; set; } = string.Empty;
+
+        public string Route { get; set; } = string.Empty;
     }
 }
