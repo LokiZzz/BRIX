@@ -1,0 +1,65 @@
+﻿<p class="buttons">
+    @foreach(OptionsTabItem item in Items)
+    {
+        <button class="button is-large @GetIsActiveTabClass(item)" @onclick="@(() => ActivateItem(item))">
+            @if (!string.IsNullOrEmpty(item.Icon))
+            {
+                <span class="icon is-medium">
+                    <i class="@item.Icon"></i>
+                </span>
+            }
+            else if (!string.IsNullOrEmpty(item.Image))
+            {
+                <span class="icon is-medium">
+                    <img src="@item.Image" />
+                </span>
+            }
+            else
+            {
+                <span>@Items.IndexOf(item).ToString()</span>
+            }
+        </button>
+    }
+</p>
+
+<CascadingValue Value="this">
+    @ChildContent
+</CascadingValue>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public Action<OptionsTabItem>? OnActiveTabChanged { get; set; }
+
+    public OptionsTabItem ActiveItem { get; set; } = default!;
+
+    List<OptionsTabItem> Items = [];
+
+    public string _modalIsActiveClass = string.Empty;
+
+    public void AddItem(OptionsTabItem item)
+    {
+        Items.Add(item);
+
+        if (Items.Count == 1)
+        {
+            ActiveItem = item;
+        }
+
+        StateHasChanged();
+    }
+
+    public void ActivateItem(OptionsTabItem item)
+    {
+        if (Items.Contains(item))
+        {
+            ActiveItem = item;
+            StateHasChanged();
+            OnActiveTabChanged?.Invoke(item);
+        }
+    }
+
+    private string GetIsActiveTabClass(OptionsTabItem item) => item == ActiveItem ? "is-active" : string.Empty;
+}

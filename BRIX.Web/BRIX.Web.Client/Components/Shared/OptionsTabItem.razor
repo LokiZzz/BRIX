@@ -1,0 +1,30 @@
+﻿@if (Parent.ActiveItem == this)
+{
+    @ChildContent
+}
+
+@code {
+    [CascadingParameter]
+    private OptionsTab Parent { get; set; } = default!;
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string Icon { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Image { get; set; } = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        if (Parent == null)
+        {
+            throw new ArgumentNullException(nameof(Parent), "OptionsTabItem должен быть расположен в OptionsTab.");
+        }
+
+        base.OnInitialized();
+
+        Parent.AddItem(this);
+    }
+}
