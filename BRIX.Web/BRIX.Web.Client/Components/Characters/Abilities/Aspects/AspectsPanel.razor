@@ -3,14 +3,18 @@
 
 <div class="box">
     <p class="title">@Localization[nameof(Resource.Abilities_Aspects)]</p>
-    @foreach (AspectVM aspect in aspects)
-    {
-        <p class="has-text-weight-bold">
-            <span><i class="@aspect.Icon"></i></span>
-            <span>@aspect.Title</span>
-        </p>
-        <LexisBlock Model="aspect.Model" />
-    }
+    <OptionsTab>
+        @foreach (AspectVM aspect in aspects)
+        {
+            <OptionsTabItem Icon="@aspect.Icon">
+                <p class="has-text-weight-bold block">
+                    @aspect.Title
+                </p>
+                <LexisBlock Model="aspect.Model" />
+                <button class="button" onclick="@(() => GoToAspect(aspect))">@Localization[nameof(Resource.Common_Edit)]</button>
+            </OptionsTabItem>
+        }
+    </OptionsTab>
 </div>
 
 @code {
@@ -40,5 +44,10 @@
             Icon = fromDictionary.Icon,
             Route = fromDictionary.Route
         };
+    }
+
+    private void GoToAspect(AspectVM aspect)
+    {
+        Navigation.NavigateToRelative(aspect.Route);
     }
 }
