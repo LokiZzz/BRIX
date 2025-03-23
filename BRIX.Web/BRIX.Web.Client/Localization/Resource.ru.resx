@@ -396,4 +396,25 @@
   <data name="Abilities_MonitorAvailiable" xml:space="preserve">
     <value>Осталось:</value>
   </data>
+  <data name="Abilities_Aspect_TargetSelectionAspect" xml:space="preserve">
+    <value>Выбор цели</value>
+  </data>
+  <data name="Abilities_Aspect_TargetSizeAspect" xml:space="preserve">
+    <value>Размеры целей</value>
+  </data>
+  <data name="Abilities_Aspect_ActivationConditionsAspect" xml:space="preserve">
+    <value>Условия активации</value>
+  </data>
+  <data name="Abilities_Aspect_DurationAspect" xml:space="preserve">
+    <value>Длительность</value>
+  </data>
+  <data name="Abilities_Aspect_AOEAspect" xml:space="preserve">
+    <value>Область действия</value>
+  </data>
+  <data name="Abilities_Aspect_VampirismAspect" xml:space="preserve">
+    <value>Вампиризм</value>
+  </data>
+  <data name="Abilities_Aspects" xml:space="preserve">
+    <value>Аспекты</value>
+  </data>
 </root>

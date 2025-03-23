@@ -14,9 +14,7 @@
 @* Активация *@
 <div class="box">
     <p class="title">@Localization[nameof(Resource.Abilities_Activation)]</p>
-    <div class="content block">
-        @((MarkupString)Ability.Activation.ToLexisAsync().GetAwaiter().GetResult())
-    </div>
+    <LexisBlock Model="Ability.Activation" />
     <button class="button is-fullwidth" @onclick="EditActivation">@Localization[nameof(Resource.Common_Edit)]</button>
 </div>
 

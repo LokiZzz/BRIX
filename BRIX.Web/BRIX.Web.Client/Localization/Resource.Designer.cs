@@ -133,6 +133,69 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activation conditions.
+        /// </summary>
+        public static string Abilities_Aspect_ActivationConditionsAspect {
+            get {
+                return ResourceManager.GetString("Abilities_Aspect_ActivationConditionsAspect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Area of effect.
+        /// </summary>
+        public static string Abilities_Aspect_AOEAspect {
+            get {
+                return ResourceManager.GetString("Abilities_Aspect_AOEAspect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration.
+        /// </summary>
+        public static string Abilities_Aspect_DurationAspect {
+            get {
+                return ResourceManager.GetString("Abilities_Aspect_DurationAspect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target selection.
+        /// </summary>
+        public static string Abilities_Aspect_TargetSelectionAspect {
+            get {
+                return ResourceManager.GetString("Abilities_Aspect_TargetSelectionAspect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Targets sizes.
+        /// </summary>
+        public static string Abilities_Aspect_TargetSizeAspect {
+            get {
+                return ResourceManager.GetString("Abilities_Aspect_TargetSizeAspect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vampirism.
+        /// </summary>
+        public static string Abilities_Aspect_VampirismAspect {
+            get {
+                return ResourceManager.GetString("Abilities_Aspect_VampirismAspect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aspects.
+        /// </summary>
+        public static string Abilities_Aspects {
+            get {
+                return ResourceManager.GetString("Abilities_Aspects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cooldown.
         /// </summary>
         public static string Abilities_Cooldown {

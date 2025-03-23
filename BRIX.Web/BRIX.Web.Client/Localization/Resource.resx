@@ -397,4 +397,25 @@
   <data name="Abilities_MonitorAvailiable" xml:space="preserve">
     <value>Availiable:</value>
   </data>
+  <data name="Abilities_Aspect_TargetSelectionAspect" xml:space="preserve">
+    <value>Target selection</value>
+  </data>
+  <data name="Abilities_Aspect_TargetSizeAspect" xml:space="preserve">
+    <value>Targets sizes</value>
+  </data>
+  <data name="Abilities_Aspect_ActivationConditionsAspect" xml:space="preserve">
+    <value>Activation conditions</value>
+  </data>
+  <data name="Abilities_Aspect_DurationAspect" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="Abilities_Aspect_AOEAspect" xml:space="preserve">
+    <value>Area of effect</value>
+  </data>
+  <data name="Abilities_Aspect_VampirismAspect" xml:space="preserve">
+    <value>Vampirism</value>
+  </data>
+  <data name="Abilities_Aspects" xml:space="preserve">
+    <value>Aspects</value>
+  </data>
 </root>

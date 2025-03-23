@@ -11,6 +11,8 @@
     @bind-Dice="Effect.Impact" @bind-Dice:after="Layout.Refresh" />
 </div>
 
+<AspectsPanel Aspects="Effect.Aspects"/>
+
 @code {
     [Parameter]
     [SupplyParameterFromQuery(Name = "n")]

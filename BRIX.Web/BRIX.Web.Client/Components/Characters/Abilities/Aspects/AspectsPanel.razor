@@ -1,7 +1,17 @@
 ﻿@using BRIX.Library.Aspects.Base
 @using BRIX.Web.Client.Models.Characters
 
-<h3>AspectsPanel</h3>
+<div class="box">
+    <p class="title">@Localization[nameof(Resource.Abilities_Aspects)]</p>
+    @foreach (AspectVM aspect in aspects)
+    {
+        <p class="has-text-weight-bold">
+            <span><i class="@aspect.Icon"></i></span>
+            <span>@aspect.Title</span>
+        </p>
+        <LexisBlock Model="aspect.Model" />
+    }
+</div>
 
 @code {
     private List<AspectVM> aspects = [];
@@ -15,16 +25,20 @@
 
         if (Aspects is not null && Aspects.Any())
         {
-            IEnumerable<Task<AspectVM>> aspectsTasks = Aspects.Select(async x => await GetVMFromAspectBaseAsync(x));
-            aspects = (await Task.WhenAll(aspectsTasks)).ToList();
+            aspects = Aspects.Select(GetVMFromAspectBase).ToList();
         }
     }
 
-    private async Task<AspectVM> GetVMFromAspectBaseAsync(AspectBase aspect)
+    private AspectVM GetVMFromAspectBase(AspectBase aspect)
     {
+        AspectVM fromDictionary = BRIX.Web.Client.Models.Characters.Aspects.Collection[aspect.GetType()];
+
         return new AspectVM
         {
-            LexisDescription = await aspect.ToLexisAsync(),
+            Model = aspect,
+            Title = Localization[$"Abilities_Aspect_{aspect.GetType().Name}"],
+            Icon = fromDictionary.Icon,
+            Route = fromDictionary.Route
         };
     }
 }
