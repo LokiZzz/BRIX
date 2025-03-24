@@ -1,0 +1,31 @@
+﻿@inherits AbilityPageBase
+
+@page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects/{EffectNumber:int}/tse"
+
+<div class="box">
+    <p class="title">@Localization[nameof(Resource.Abilities_Aspect_TargetSelectionAspect)]</p>
+    <p class="block">@Localization[nameof(Resource.Abilities_Aspect_TargetSelectionAspect)]</p>
+    // Настройки аспекта
+</div>
+
+@code {
+    [Parameter]
+    public int EffectNumber { get; set; }
+
+    TargetSelectionAspect aspect = new();
+
+    protected override void InitializeAlso()
+    {
+        EffectBase? effect = Ability.GetEffectByIndex(EffectNumber);
+        TargetSelectionAspect? foundAspect = effect?.GetAspect<TargetSelectionAspect>();
+
+        if (foundAspect is null)
+        {
+            Navigation.NavigateTo("/404");
+        }
+        else
+        {
+            aspect = foundAspect;
+        }
+    }
+}
