@@ -1,22 +1,28 @@
 ﻿@inherits AbilityPageBase
 
-@page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects/{EffectNumber:int}/tse"
+@page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects/{DamageType}/{EffectNumber:int}/tse"
 
 <div class="box">
-    <p class="title">@Localization[nameof(Resource.Abilities_Aspect_TargetSelectionAspect)]</p>
     <p class="block">@Localization[nameof(Resource.Abilities_Aspect_TargetSelectionAspect)]</p>
-    // Настройки аспекта
+    <OptionsTab Mode="EOptionsTabMode.Stack" >
+        <OptionsTabItem Title="@Localization[nameof(Resource.ETargetSelectionStrategy_NTargetsAtDistanсeL)]"
+                        OnSelected="@(() => SelectStrategy(ETargetSelectionStrategy.NTargetsAtDistanсeL))"/>
+        <OptionsTabItem Title="@Localization[nameof(Resource.ETargetSelectionStrategy_Area)]"
+                        OnSelected="@(() => SelectStrategy(ETargetSelectionStrategy.Area))" />
+        <OptionsTabItem Title="@Localization[nameof(Resource.ETargetSelectionStrategy_CharacterHimself)]"
+                        OnSelected="@(() => SelectStrategy(ETargetSelectionStrategy.CharacterHimself))" />
+    </OptionsTab>
 </div>
 
 @code {
-    [Parameter]
-    public int EffectNumber { get; set; }
+    [SupplyParameterFromQuery(Name = "n")]
+    public int EffectOrderNumber { get; set; }
 
     TargetSelectionAspect aspect = new();
 
     protected override void InitializeAlso()
     {
-        EffectBase? effect = Ability.GetEffectByIndex(EffectNumber);
+        EffectBase? effect = Ability.GetEffectByIndex(EffectOrderNumber);
         TargetSelectionAspect? foundAspect = effect?.GetAspect<TargetSelectionAspect>();
 
         if (foundAspect is null)
@@ -27,5 +33,10 @@
         {
             aspect = foundAspect;
         }
+    }
+
+    private void SelectStrategy(ETargetSelectionStrategy strategy)
+    {
+        aspect.Strategy = strategy;
     }
 }

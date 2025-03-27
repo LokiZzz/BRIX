@@ -418,4 +418,16 @@
   <data name="Abilities_Aspects" xml:space="preserve">
     <value>Aspects</value>
   </data>
+  <data name="Abilities_TSEStrategy" xml:space="preserve">
+    <value>Strategy</value>
+  </data>
+  <data name="ETargetSelectionStrategy_NTargetsAtDistanсeL" xml:space="preserve">
+    <value>Multiple targets at distance</value>
+  </data>
+  <data name="ETargetSelectionStrategy_Area" xml:space="preserve">
+    <value>All targets in area</value>
+  </data>
+  <data name="ETargetSelectionStrategy_CharacterHimself" xml:space="preserve">
+    <value>Character himself</value>
+  </data>
 </root>

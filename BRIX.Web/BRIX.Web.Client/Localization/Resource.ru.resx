@@ -417,4 +417,16 @@
   <data name="Abilities_Aspects" xml:space="preserve">
     <value>Аспекты</value>
   </data>
+  <data name="Abilities_TSEStrategy" xml:space="preserve">
+    <value>Стратегия</value>
+  </data>
+  <data name="ETargetSelectionStrategy_NTargetsAtDistanсeL" xml:space="preserve">
+    <value>Несколько целей на расстоянии</value>
+  </data>
+  <data name="ETargetSelectionStrategy_Area" xml:space="preserve">
+    <value>Все цели в области</value>
+  </data>
+  <data name="ETargetSelectionStrategy_CharacterHimself" xml:space="preserve">
+    <value>Цель — сам персонаж</value>
+  </data>
 </root>

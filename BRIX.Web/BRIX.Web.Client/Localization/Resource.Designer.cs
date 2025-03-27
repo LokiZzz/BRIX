@@ -322,6 +322,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Strategy.
+        /// </summary>
+        public static string Abilities_TSEStrategy {
+            get {
+                return ResourceManager.GetString("Abilities_TSEStrategy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Uses count.
         /// </summary>
         public static string Abilities_UsesCount {
@@ -795,6 +804,33 @@ namespace BRIX.Web.Client.Localization {
         public static string Effect_DamageHint {
             get {
                 return ResourceManager.GetString("Effect_DamageHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All targets in area.
+        /// </summary>
+        public static string ETargetSelectionStrategy_Area {
+            get {
+                return ResourceManager.GetString("ETargetSelectionStrategy_Area", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Character himself.
+        /// </summary>
+        public static string ETargetSelectionStrategy_CharacterHimself {
+            get {
+                return ResourceManager.GetString("ETargetSelectionStrategy_CharacterHimself", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multiple targets at distance.
+        /// </summary>
+        public static string ETargetSelectionStrategy_NTargetsAtDistanсeL {
+            get {
+                return ResourceManager.GetString("ETargetSelectionStrategy_NTargetsAtDistanсeL", resourceCulture);
             }
         }
         
