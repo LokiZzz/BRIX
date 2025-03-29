@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Common_Language" xml:space="preserve">
-    <value>Язык</value>
-  </data>
   <data name="Common_Characters" xml:space="preserve">
     <value>Персонажи</value>
   </data>
@@ -428,5 +425,59 @@
   </data>
   <data name="ETargetSelectionStrategy_CharacterHimself" xml:space="preserve">
     <value>Цель — сам персонаж</value>
+  </data>
+  <data name="Common_Language" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="ETargetSelectionStrategy_NTargetsAtDistanсeL_Hint" xml:space="preserve">
+    <value>С этой стратегией эффект будет применён к заданному количеству целей, которые расположены не дальше определённого расстояния. Каждая цель должна быть уникальной.</value>
+  </data>
+  <data name="ETargetSelectionStrategy_CharacterHimself_Hint" xml:space="preserve">
+    <value>Целью является сам персонаж.</value>
+  </data>
+  <data name="ETargetSelectionStrategy_Area_Hint" xml:space="preserve">
+    <value>С этой стратегией эффект будет применён ко всем целям, находящимся в пределах указанной области. Размеры области указываются в метрах. Область может быть расположена под любым углом относительно персонажа. Расстоянием до области считается расстояние от персонажа до ближайшей точки этой области.</value>
+  </data>
+  <data name="Abilities_NumberOfTargets" xml:space="preserve">
+    <value>Число целей</value>
+  </data>
+  <data name="Abilities_DistanceInMeters" xml:space="preserve">
+    <value>Расстояние в метрах</value>
+  </data>
+  <data name="Abilities_TargetChain" xml:space="preserve">
+    <value>Цепь целей</value>
+  </data>
+  <data name="Common_Characters1" xml:space="preserve">
+    <value>Персонажи</value>
+  </data>
+  <data name="Abilities_TargetChain_Hint" xml:space="preserve">
+    <value>Цели могут составлять цепи. Это значит, что после того, как к цели применяется эффект, он также может быть применён к следующей цели на заданном расстоянии от предыдущей и так далее. К каждой цели в рамках цепи эффект может быть применён только один раз. Расстояние указывается в метрах. Максимальное количество целей в цепи и расстояние между целями ограничено. Персонаж сам выбирает порядок целей в цепи.</value>
+  </data>
+  <data name="Abilities_EnableTargetChain" xml:space="preserve">
+    <value>Включить цепочки целей?</value>
+  </data>
+  <data name="Abilities_RandomTargetSelection" xml:space="preserve">
+    <value>Случайный выбор целей</value>
+  </data>
+  <data name="Abilities_RandomTargetSelection_Hint" xml:space="preserve">
+    <value>Если будет выбран режим случайного выбора целей, то игрок при использовании способности будет должен выбирать случайную цель из тех, которые удоволетворяют остальным условиям. Это усложнит планирование действий, но зато сделает способность дешевле.\</value>
+  </data>
+  <data name="Abilities_IsTargetSelectionIsRandom" xml:space="preserve">
+    <value>Выбор целей производится случайным образом?</value>
+  </data>
+  <data name="Abilities_ChainMaxDistanceBetweenTargets" xml:space="preserve">
+    <value>Максимальное расстояние между целями</value>
+  </data>
+  <data name="Abilities_ChainMaxCountOfTargets" xml:space="preserve">
+    <value>Максимальное количество целей</value>
+  </data>
+  <data name="Abilities_TargetVisibility" xml:space="preserve">
+    <value>Видимость цели</value>
+  </data>
+  <data name="Abilities_TargetVisibility_Hint" xml:space="preserve">
+    <value>Если данная опция включена, то эффекты будет применены только к тем целям, которых персонаж может видеть. При этом считается, что угол обзора персонажа — 180 градусов. Персонаж может решить в какую сторону он смотрит непосредственно перед активацией способности. В цепях целей достаточно видеть первую цель.</value>
+  </data>
+  <data name="Abilities_ShouldCharacterSeeTarget" xml:space="preserve">
+    <value>Должен ли персонаж видеть цель?</value>
   </data>
 </root>

@@ -1,23 +1,21 @@
 ﻿@inherits AbilityPageBase
 
-@page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects/dmg"
+@page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects/dmg/{EffectOrderNumber:int}"
 
 <div class="box">
     <p class="title">@Localization[nameof(Resource.Effect_DamageEffect)]</p>
     <p class="block">@Localization[nameof(Resource.Effect_DamageHint)]</p>
-    <DiceField 
-    Placeholder="@Localization[nameof(Resource.Effect_DamageEffect)]"
-    @bind-Dice="Effect.Impact" @bind-Dice:after="Layout.Refresh" />
+    <DiceField Placeholder="@Localization[nameof(Resource.Effect_DamageEffect)]"
+               @bind-Dice="Effect.Impact" @bind-Dice:after="Layout.Refresh" />
 </div>
 
-<AspectsPanel Aspects="Effect.Aspects"/>
+<AspectsPanel Aspects="Effect.Aspects" />
 
 @code {
     [Parameter]
-    [SupplyParameterFromQuery(Name = "n")]
     public int EffectOrderNumber { get; set; }
 
-    public DamageEffect Effect { get; set; } = new ();
+    public DamageEffect Effect { get; set; } = new();
 
     // TODO: Можно вынести инициализацию эффекта в базовый класс страницы эффекта (EffectPageBase)
     // Но нужно сделать это через дженерик (так вроде можно)

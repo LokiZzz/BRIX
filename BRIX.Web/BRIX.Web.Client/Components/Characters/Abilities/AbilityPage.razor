@@ -50,7 +50,7 @@
     {
         int effectIndex = Ability.GetEffectIndex(effect);
         string route = EffectsDictionary.GetRoute(effect);
-        Navigation.NavigateToRelative($"effects/{route}?n={effectIndex}");
+        Navigation.NavigateToRelative($"effects/{route}/{effectIndex}");
     }
 
     private void RemoveEffect(EffectBase effect)

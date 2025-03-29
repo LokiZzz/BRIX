@@ -1,0 +1,1467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Abilities" xml:space="preserve">
+    <value>Способности</value>
+  </data>
+  <data name="AbilitiesList_Help" xml:space="preserve">
+    <value>Сдвиньте карточку способности вправо, чтобы редактировать способность или сдвиньте карточку влево, чтобы её удалить.</value>
+  </data>
+  <data name="AbilityCost" xml:space="preserve">
+    <value>Стоимость:</value>
+  </data>
+  <data name="AbilityEXPOverflowMessage" xml:space="preserve">
+    <value>Вы не можете сохранить такие параметры у способности, так как у вас не хватает для этого очков опыта. Ослабьте способность или выйдите из редактирования без сохранения, используя кнопку «Назад» в верхнем левом углу.</value>
+  </data>
+  <data name="AbilityNeedToRecharge" xml:space="preserve">
+    <value>Количество использований в день ограничено.</value>
+  </data>
+  <data name="AbilityPower" xml:space="preserve">
+    <value>Мощность</value>
+  </data>
+  <data name="AbleToMove" xml:space="preserve">
+    <value>Персонаж может свободно двигаться</value>
+  </data>
+  <data name="AbleToTalk" xml:space="preserve">
+    <value>Персонаж может говорить</value>
+  </data>
+  <data name="ActionPointAspectHint" xml:space="preserve">
+    <value>Практически любые способности ипользуются посредством траты очков действий. Чем больше очков действий тратит способность, тем дешевле она будет в очках опыта.</value>
+  </data>
+  <data name="ActionPoints" xml:space="preserve">
+    <value>Очки действия</value>
+  </data>
+  <data name="ActionPointsMustBeThreeIfTriggersExists" xml:space="preserve">
+    <value>Очки действий должны равняться трём, если у способности есть триггеры активации.</value>
+  </data>
+  <data name="Activate" xml:space="preserve">
+    <value>Активировать</value>
+  </data>
+  <data name="ActivationCondition" xml:space="preserve">
+    <value>Условие активации</value>
+  </data>
+  <data name="ActivationConditionsHint" xml:space="preserve">
+    <value>Эффект будет применён, только если к моменту активации способности все указанные условия будут соблюдены.</value>
+  </data>
+  <data name="ActivationConditionWarning" xml:space="preserve">
+    <value>Такое условие активации уже есть.</value>
+  </data>
+  <data name="ActivationSettings" xml:space="preserve">
+    <value>Настройки активации</value>
+  </data>
+  <data name="ActivationTrigger" xml:space="preserve">
+    <value>Триггер активации</value>
+  </data>
+  <data name="ActivationTriggers" xml:space="preserve">
+    <value>Триггеры активации</value>
+  </data>
+  <data name="ActivationTriggersHint" xml:space="preserve">
+    <value>Способность может быть активирована автоматически, если добавить к ней триггеры активации. Триггер — это событие, которое должно произойти, чтобы способность активировалась без траты очков действий. С каждым добавленным триггером способность будет дороже.</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="AddCondition" xml:space="preserve">
+    <value>Добавить условие</value>
+  </data>
+  <data name="AddHealth" xml:space="preserve">
+    <value>Увеличить здоровье</value>
+  </data>
+  <data name="AddHealthHint" xml:space="preserve">
+    <value>Вы можете увеличить количество очков здоровья у своего персонажа, вливая в него очки опыта. Будьте внимательны, шкала стоимости является прогрессивной и чем больше вы будете вливать опыта в здоровье, тем дороже будет каждое очко здоровья.</value>
+  </data>
+  <data name="AddHealthNotEnoughExpAlert" xml:space="preserve">
+    <value>У вас не хватает очков опыта, чтобы добвить персонажу такое количество здоровья.</value>
+  </data>
+  <data name="AddInventoryItem" xml:space="preserve">
+    <value>Добавить предмет</value>
+  </data>
+  <data name="AdditionalHealth" xml:space="preserve">
+    <value>Дополнительное здоровье</value>
+  </data>
+  <data name="AddNPC" xml:space="preserve">
+    <value>Добавить NPC</value>
+  </data>
+  <data name="AddOrEditAbilityPageTitle_Add" xml:space="preserve">
+    <value>Новая способность</value>
+  </data>
+  <data name="AddOrEditAbilityPageTitle_Edit" xml:space="preserve">
+    <value>Изменить способность</value>
+  </data>
+  <data name="AddOrEditAbilityPageTitle_Upgrade" xml:space="preserve">
+    <value>Улучшить способность</value>
+  </data>
+  <data name="AddOrEditCharacterPageTitle_Add" xml:space="preserve">
+    <value>Новый персонаж</value>
+  </data>
+  <data name="AddOrEditCharacterPageTitle_Edit" xml:space="preserve">
+    <value>Персонаж</value>
+  </data>
+  <data name="AddProject" xml:space="preserve">
+    <value>Добавить проект</value>
+  </data>
+  <data name="AddRestriction" xml:space="preserve">
+    <value>Добавить ограничение</value>
+  </data>
+  <data name="AddSize" xml:space="preserve">
+    <value>Добавить размер</value>
+  </data>
+  <data name="AddStatus" xml:space="preserve">
+    <value>Добавить статус</value>
+  </data>
+  <data name="AlertNPCCannotHaveRecharge" xml:space="preserve">
+    <value>NPC не может </value>
+  </data>
+  <data name="AlertSameEffectExists" xml:space="preserve">
+    <value>Эффект такого типа уже есть в способности. Добавьте другой эффект или измените существующий, чтобы достичь желаемого результата.</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Внешность</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Применить</value>
+  </data>
+  <data name="ArbitraryPath" xml:space="preserve">
+    <value>Произвольный путь</value>
+  </data>
+  <data name="Area" xml:space="preserve">
+    <value>Область</value>
+  </data>
+  <data name="AreaBinding" xml:space="preserve">
+    <value>Привязка области</value>
+  </data>
+  <data name="AreaBindingHint" xml:space="preserve">
+    <value>Область, которая существует некоторое время, остаётся на месте и привязывается к некоторой точке в пространстве. Но так же она может быть привзяана к персонажу или предмету и перемещаться вместе с объектом привязки.</value>
+  </data>
+  <data name="AreaMovingDistance" xml:space="preserve">
+    <value>Перемещение в метрах</value>
+  </data>
+  <data name="AreasCount" xml:space="preserve">
+    <value>Количество областей</value>
+  </data>
+  <data name="AreaSpreadsAroundCorners" xml:space="preserve">
+    <value>Область огибает углы.</value>
+  </data>
+  <data name="AskAdjust" xml:space="preserve">
+    <value>Скорректировать?</value>
+  </data>
+  <data name="AskDeleteContainerWithContent" xml:space="preserve">
+    <value>Удалить содержимое контейнера?</value>
+  </data>
+  <data name="AskDeleteMaterialSupport" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить материальное обеспечение способности «{0}»?</value>
+  </data>
+  <data name="AskDeleteProject" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить проект «{0}»?</value>
+  </data>
+  <data name="AskDeleteStatus" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить статус «{0}»?</value>
+  </data>
+  <data name="AskIfYouWantToConcord" xml:space="preserve">
+    <value>Вы уверены, что хотите согласовать аспект? Этот аспект будет синхронизирован с другими эффектами и старые настройки будут сброшены.</value>
+  </data>
+  <data name="AskToDeleteInventoryItem" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить «{0}»?</value>
+  </data>
+  <data name="AskWantToResetAllCharactersData" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить все данные о персонажах?</value>
+  </data>
+  <data name="AspectActionPoints" xml:space="preserve">
+    <value>Очки действий</value>
+  </data>
+  <data name="AspectActivationConditions" xml:space="preserve">
+    <value>Условия активации</value>
+  </data>
+  <data name="AspectAOE" xml:space="preserve">
+    <value>Область эффекта</value>
+  </data>
+  <data name="AspectAOEDistance" xml:space="preserve">
+    <value>Расстояние (D)</value>
+  </data>
+  <data name="AspectAOEHint" xml:space="preserve">
+    <value>Область действия эффекта. Например, форма области с труднопроходимой местностью, форма щита или область, в которую могут быть призваны существа.</value>
+  </data>
+  <data name="AspectCooldown" xml:space="preserve">
+    <value>Время перезарядки</value>
+  </data>
+  <data name="AspectObstacle" xml:space="preserve">
+    <value>Препятствия</value>
+  </data>
+  <data name="AspectRoundDuration" xml:space="preserve">
+    <value>Длительность</value>
+  </data>
+  <data name="Aspects" xml:space="preserve">
+    <value>Аспекты</value>
+  </data>
+  <data name="AspectTargetChain" xml:space="preserve">
+    <value>Цепи целей</value>
+  </data>
+  <data name="AspectTargetSelection" xml:space="preserve">
+    <value>Выбор цели</value>
+  </data>
+  <data name="AspectVampirism" xml:space="preserve">
+    <value>Вампиризм</value>
+  </data>
+  <data name="AspectVampirismHint" xml:space="preserve">
+    <value>Исцеляет персонажа на процент от урона, который он нанёс.</value>
+  </data>
+  <data name="Attack" xml:space="preserve">
+    <value>Атака</value>
+  </data>
+  <data name="Average" xml:space="preserve">
+    <value>Среднее:</value>
+  </data>
+  <data name="Backstory" xml:space="preserve">
+    <value>Предыстория</value>
+  </data>
+  <data name="BeAlive" xml:space="preserve">
+    <value>Должна быть живой</value>
+  </data>
+  <data name="BeAnObject" xml:space="preserve">
+    <value>Должна быть предметом</value>
+  </data>
+  <data name="BeViable" xml:space="preserve">
+    <value>Должна быть дееспособной</value>
+  </data>
+  <data name="Big" xml:space="preserve">
+    <value>Большой</value>
+  </data>
+  <data name="BrickWall" xml:space="preserve">
+    <value>Кирпичная стена</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Обзор...</value>
+  </data>
+  <data name="Burrow" xml:space="preserve">
+    <value>Пермещение сквозь материю</value>
+  </data>
+  <data name="CannotReset" xml:space="preserve">
+    <value>Не перезаряжается (одноразовая)</value>
+  </data>
+  <data name="ChangeLanguage" xml:space="preserve">
+    <value>Изменить язык</value>
+  </data>
+  <data name="Character" xml:space="preserve">
+    <value>Персонаж</value>
+  </data>
+  <data name="CharacterAbilitiesPageTitle" xml:space="preserve">
+    <value>Способности</value>
+  </data>
+  <data name="CharacterCanDisableEffect" xml:space="preserve">
+    <value>Персонаж может отменить эффект?</value>
+  </data>
+  <data name="CharacterCanDisableEffectHint" xml:space="preserve">
+    <value>Возможна опция, когда персонаж может не тратя ресурсов отменить длительный эффект, который сам создал, но такая опция удорожает способность.</value>
+  </data>
+  <data name="CharacterDetails" xml:space="preserve">
+    <value>Детали</value>
+  </data>
+  <data name="CharacterHealth" xml:space="preserve">
+    <value>Здоровье персонажа</value>
+  </data>
+  <data name="CharacterListPageTitle" xml:space="preserve">
+    <value>Список персонажей</value>
+  </data>
+  <data name="CharacterList_Help" xml:space="preserve">
+    <value>Коснитесь карточки персонажа, чтобы выбрать его, сдвиньте карточку вправо, чтобы редактировать персонажа или сдвиньте карточку влево, чтобы его удалить.</value>
+  </data>
+  <data name="CharacterMovigSpeed" xml:space="preserve">
+    <value>Скорость (м/ОД)</value>
+  </data>
+  <data name="CharacterMustSeeTarget" xml:space="preserve">
+    <value>Персонаж должен видеть цель.</value>
+  </data>
+  <data name="CharacterSpeed_Help" xml:space="preserve">
+    <value>Скорость персонажа — это расстояние в метрах, которое он может пройти за один раунд, не затрачивая очки действий. Также персонаж может дополнительно тратить очки действий и перемещаться на расстояние, равное одной пятой от скорости за каждое очко действия, это расстояние измеряется в м/ОД или в «модах». При перемещении по клеткам мод или сумма модов округляется до целого числа.</value>
+  </data>
+  <data name="CharacterStatusesPageHelp" xml:space="preserve">
+    <value>Чтобы редактировать статус, сдвиньте карточку статуса вправо, чтобы удалить, сдвиньте её влево.</value>
+  </data>
+  <data name="CharacterTab" xml:space="preserve">
+    <value>Персонаж</value>
+  </data>
+  <data name="CharacterTabAbilities" xml:space="preserve">
+    <value>Способности</value>
+  </data>
+  <data name="CharacterTabDetails" xml:space="preserve">
+    <value>Детали</value>
+  </data>
+  <data name="CharacterTabInventory" xml:space="preserve">
+    <value>Инвентарь</value>
+  </data>
+  <data name="ChooseLanguage" xml:space="preserve">
+    <value>Выберите язык</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Очистить</value>
+  </data>
+  <data name="Climb" xml:space="preserve">
+    <value>Лазание</value>
+  </data>
+  <data name="Coins" xml:space="preserve">
+    <value>Монеты</value>
+  </data>
+  <data name="Colossal" xml:space="preserve">
+    <value>Колоссальный</value>
+  </data>
+  <data name="CommonDescription" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="CommonName" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="Concord" xml:space="preserve">
+    <value>Согласовать</value>
+  </data>
+  <data name="Consumable" xml:space="preserve">
+    <value>Расходник</value>
+  </data>
+  <data name="Container" xml:space="preserve">
+    <value>Контейнер</value>
+  </data>
+  <data name="Cooldown" xml:space="preserve">
+    <value>Время перезарядки</value>
+  </data>
+  <data name="CooldownAspectHint" xml:space="preserve">
+    <value>Укажите ограничено ли количество использований способности в день и какое количество использований в день доступно.</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Скоприровать</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>Количество</value>
+  </data>
+  <data name="CountPostfix" xml:space="preserve">
+    <value>шт.</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Создать</value>
+  </data>
+  <data name="CreateNewCharacter" xml:space="preserve">
+    <value>Создать персонажа</value>
+  </data>
+  <data name="CreateStatusFromAbility" xml:space="preserve">
+    <value>Из способности...</value>
+  </data>
+  <data name="Creatures" xml:space="preserve">
+    <value>Существа</value>
+  </data>
+  <data name="CurrentAdjustment" xml:space="preserve">
+    <value>Сейчас (+0%)</value>
+  </data>
+  <data name="CurrentCharacterPageTitle" xml:space="preserve">
+    <value>Персонаж</value>
+  </data>
+  <data name="CurrentLanguage" xml:space="preserve">
+    <value>Текущий язык приложения</value>
+  </data>
+  <data name="Damage" xml:space="preserve">
+    <value>Урон</value>
+  </data>
+  <data name="DamageEffectPageHint" xml:space="preserve">
+    <value>Каждый раз, когда вы используете свою способность, бросайте набор костей, указанный ниже, чтобы определить, сколько урона нанесла способность.</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>День</value>
+  </data>
+  <data name="DaysCountFormat" xml:space="preserve">
+    <value>{0} дней</value>
+  </data>
+  <data name="DeleteAbilityQuestion" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить способность?</value>
+  </data>
+  <data name="DeleteCharacterQuestion" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить этого персонажа?</value>
+  </data>
+  <data name="DeleteEffectQuestion" xml:space="preserve">
+    <value>Вы точно хотите удалить этот эффект?</value>
+  </data>
+  <data name="DenseVegetation" xml:space="preserve">
+    <value>Густая растительность</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="DesiredPower" xml:space="preserve">
+    <value>Желаемая мощность</value>
+  </data>
+  <data name="DicePoolEditorNoDices" xml:space="preserve">
+    <value>Формула пуста, чтобы добавить элементы в формулу, нажмите кнопку «Изменить».</value>
+  </data>
+  <data name="DiceRollOptions" xml:space="preserve">
+    <value>Опции броска:</value>
+  </data>
+  <data name="DiceValuePopupHint" xml:space="preserve">
+    <value>Введите значение в формате, обычно используемом для формул с игральными костями. Например, 3d6 + 2d4 + 5. В таких формулах число перед «d» означает количество костей, а число после «d» — количество граней на костях. Вы можете использовать нестандартные кости, такие как d11 или d19, если хотите.</value>
+  </data>
+  <data name="DiceValuePopupPlaceholder" xml:space="preserve">
+    <value>Формула</value>
+  </data>
+  <data name="DiceValuePopupTitle" xml:space="preserve">
+    <value>Кости</value>
+  </data>
+  <data name="Discord" xml:space="preserve">
+    <value>Рассогласовать</value>
+  </data>
+  <data name="Disposable" xml:space="preserve">
+    <value>Одноразовость</value>
+  </data>
+  <data name="DistanceToArea" xml:space="preserve">
+    <value>Расстояние до области</value>
+  </data>
+  <data name="DurationHint" xml:space="preserve">
+    <value>Вы можете указать время, в течение которого будет действовать эффект.</value>
+  </data>
+  <data name="EasyActivationCondition" xml:space="preserve">
+    <value>Условие низкой сложности</value>
+  </data>
+  <data name="EasyDifficulty" xml:space="preserve">
+    <value>Низкая сложность</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
+  <data name="EditAbility_Help" xml:space="preserve">
+    <value>Чтобы добавить эффект, нажмите большую кнопку с плюсом в списке эффектов. Чтобы удалить эффект, сдвиньте его карточку влево, чтобы его редактировать — вправо. Если у способности есть материальное обеспечение, вы можете удалить его элемент при помощи двойного касания.</value>
+  </data>
+  <data name="EditInventoryItem" xml:space="preserve">
+    <value>Изменить предмет</value>
+  </data>
+  <data name="EditNPC" xml:space="preserve">
+    <value>Изменить NPC</value>
+  </data>
+  <data name="EditProject" xml:space="preserve">
+    <value>Изменить проект</value>
+  </data>
+  <data name="EditStatus" xml:space="preserve">
+    <value>Изменить статус</value>
+  </data>
+  <data name="EffectAcceleration" xml:space="preserve">
+    <value>Ускорение</value>
+  </data>
+  <data name="EffectAccelerationHint" xml:space="preserve">
+    <value>Увеличивает максимальное количество очков действия у цели.</value>
+  </data>
+  <data name="EffectAmplification" xml:space="preserve">
+    <value>Усиление</value>
+  </data>
+  <data name="EffectAmplificationHint" xml:space="preserve">
+    <value>Увеличивает урон, который наносит цель.</value>
+  </data>
+  <data name="EffectCancelation" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="EffectCancelationHint" xml:space="preserve">
+    <value>Предотвращает активацию способности целью. Эффект срабатывает только если способность с этим эффектом была активирована реакцией или триггером. Отменяемая способность по мощности не должна превышать ограничение в указанных очках опыта.</value>
+  </data>
+  <data name="EffectCleanse" xml:space="preserve">
+    <value>Очищение</value>
+  </data>
+  <data name="EffectCleanseHint" xml:space="preserve">
+    <value>Снятие статусов с цели. Может быть снято несколько статусов. Какие именно статусы будут сняты решает персонаж, но каждый статус не должен превышать ограничение мощности.</value>
+  </data>
+  <data name="EffectDamage" xml:space="preserve">
+    <value>Урон</value>
+  </data>
+  <data name="EffectDangerousTerrain" xml:space="preserve">
+    <value>Опасная местность</value>
+  </data>
+  <data name="EffectDangerousTerrainHint" xml:space="preserve">
+    <value>Создаёт область, наносящую урон персонажу, который начал в ней ход или переместился в ней на 1 метр.</value>
+  </data>
+  <data name="EffectDeceleration" xml:space="preserve">
+    <value>Замедление</value>
+  </data>
+  <data name="EffectDecelerationHint" xml:space="preserve">
+    <value>Уменьшает максимальное количество очков действия у цели.</value>
+  </data>
+  <data name="EffectDefense" xml:space="preserve">
+    <value>Защита</value>
+  </data>
+  <data name="EffectDefenseHint" xml:space="preserve">
+    <value>Любой урон по цели уменьшается на указанное значение.</value>
+  </data>
+  <data name="EffectDifficultTerrain" xml:space="preserve">
+    <value>Сложная местность</value>
+  </data>
+  <data name="EffectDifficultTerrainHint" xml:space="preserve">
+    <value>Создаёт местность с заданным классом сложности</value>
+  </data>
+  <data name="EffectDuration" xml:space="preserve">
+    <value>Длительность эффекта</value>
+  </data>
+  <data name="EffectExhaustion" xml:space="preserve">
+    <value>Истощение</value>
+  </data>
+  <data name="EffectFortify" xml:space="preserve">
+    <value>Укрепление</value>
+  </data>
+  <data name="EffectHeal" xml:space="preserve">
+    <value>Лечение</value>
+  </data>
+  <data name="EffectInvisibility" xml:space="preserve">
+    <value>Невидимость</value>
+  </data>
+  <data name="EffectInvisibilityHint" xml:space="preserve">
+    <value>Делает цели невидимыми.</value>
+  </data>
+  <data name="EffectMoveArea" xml:space="preserve">
+    <value>Перемещение области</value>
+  </data>
+  <data name="EffectMoveAreaHint" xml:space="preserve">
+    <value>Перемещает область действия способность на заданное расстояние в любом направлении.</value>
+  </data>
+  <data name="EffectMoveCharacter" xml:space="preserve">
+    <value>Перемещение персонажа</value>
+  </data>
+  <data name="EffectMoveCharacterHint" xml:space="preserve">
+    <value>Эффект позволяет персонажу менять своё положение в пространстве по правилам перемещения. Скорость перемещения обозначает расстояние, на которое персонаж может переместиться, потратив одно очко действия.</value>
+  </data>
+  <data name="EffectMoveTarget" xml:space="preserve">
+    <value>Перемещение цели</value>
+  </data>
+  <data name="EffectMoveTargetHint" xml:space="preserve">
+    <value>Перемещает цель по заданному пути на заданное расстояние.</value>
+  </data>
+  <data name="EffectMuteness" xml:space="preserve">
+    <value>Немота</value>
+  </data>
+  <data name="EffectMutenessHint" xml:space="preserve">
+    <value>Не даёт цели использовать способности, в которых указано условие активации при котором персонаж должен мочь говорить. Эффект будет применён к цели, только если её здоровье равно указанному значению или меньше него.</value>
+  </data>
+  <data name="EffectParalysis" xml:space="preserve">
+    <value>Паралич</value>
+  </data>
+  <data name="EffectParalysisHint" xml:space="preserve">
+    <value>Не даёт цели использовать способности, в которых указано условие активации при котором персонаж должен мочь двигаться. Также цель с параличом не может передвигаться никак, кроме как с использованием способностей, у которых нет такого условия активации. Эффект будет применён к цели, только если её здоровье менее или равно указанному значению.</value>
+  </data>
+  <data name="EffectPeriodicDamage" xml:space="preserve">
+    <value>Периодический урон</value>
+  </data>
+  <data name="EffectPeriodicDamageHint" xml:space="preserve">
+    <value>Наносит цели урон раз в раунд определённое количество раундов.</value>
+  </data>
+  <data name="EffectPeriodicHeal" xml:space="preserve">
+    <value>Периодическое лечение</value>
+  </data>
+  <data name="EffectPeriodicHealHint" xml:space="preserve">
+    <value>Лечит цель в конце каждого её хода на протяжении некоторой длительности.</value>
+  </data>
+  <data name="EffectProvoke" xml:space="preserve">
+    <value>Провокация</value>
+  </data>
+  <data name="EffectProvokeHint" xml:space="preserve">
+    <value>Цель, на которую наложен эффект, на протяжении длительности эффекта может атаковать и накладывать негативные эффекты только на провокатора и не может вредить другим цели.</value>
+  </data>
+  <data name="EffectProvokeHint2" xml:space="preserve">
+    <value>Спровоцированная цель всё ещё может вредить другим своим противникам, если одновременно с этим она вредит провокатору. Например, используя способности с областью действия или способности, применяющиеся к целям по цепочке.</value>
+  </data>
+  <data name="EffectProvokeHint3" xml:space="preserve">
+    <value>Если цель спровоцирована несколькими провокаторами, то она может вредить любому из них на своё усмотрение.</value>
+  </data>
+  <data name="EffectReduction" xml:space="preserve">
+    <value>Ослабление</value>
+  </data>
+  <data name="EffectReductionHint" xml:space="preserve">
+    <value>Уменьшает урон, который наносит цель.</value>
+  </data>
+  <data name="EffectRevenge" xml:space="preserve">
+    <value>Возмездие</value>
+  </data>
+  <data name="EffectRevengeHint" xml:space="preserve">
+    <value>Персонаж заявляет активацию и начинает накапливать входящий урон заданное количество раундов. До истечения этого времени персонаж может реакцией нанести весь накопленный урон противникам.</value>
+  </data>
+  <data name="Effects" xml:space="preserve">
+    <value>Эффекты</value>
+  </data>
+  <data name="EffectSelfDamage" xml:space="preserve">
+    <value>Саморазрушение</value>
+  </data>
+  <data name="EffectSelfDamageHint" xml:space="preserve">
+    <value>Наносит урон самому персонажу и делает способность дешевле. Максимальнвый урон, который наносит персонажу его способность, не должен превышать максимальное значение его здоровья. По списку эффектов «Саморазрушение» применяется последним в очереди. Усиление не влияет на урон, который наносится персонажу таким образом.</value>
+  </data>
+  <data name="EffectShield" xml:space="preserve">
+    <value>Щит</value>
+  </data>
+  <data name="EffectShieldHint" xml:space="preserve">
+    <value>Эффект создаёт щит, который защищает находящиеся за ним цели от урона. Имеет прочность, выраженную в очках здоровья.</value>
+  </data>
+  <data name="EffectSummonCreature" xml:space="preserve">
+    <value>Призыв существ</value>
+  </data>
+  <data name="EffectSummonCreatureHint" xml:space="preserve">
+    <value>Призывает существ на поле боя.</value>
+  </data>
+  <data name="EffectVulnerability" xml:space="preserve">
+    <value>Уязвимость</value>
+  </data>
+  <data name="EffectVulnerabilityHint" xml:space="preserve">
+    <value>Любой урон по цели увеличивается на указанное значение.</value>
+  </data>
+  <data name="EffectWin" xml:space="preserve">
+    <value>Победа</value>
+  </data>
+  <data name="Encounter" xml:space="preserve">
+    <value>Столкновение</value>
+  </data>
+  <data name="EnterHardActivationCondition" xml:space="preserve">
+    <value>Укажите сложно воспроизводимое условие или условие высокой редкости.</value>
+  </data>
+  <data name="EnterHighProbabilityTrigger" xml:space="preserve">
+    <value>Введите триггер с высокой вероятностью, например: «Персонаж получил урон».</value>
+  </data>
+  <data name="EnterHighRarityRestriction" xml:space="preserve">
+    <value>Введите признак высокой редкости, продолжая предложение: «Цель...». Например: «Должна иметь татуировку», «Должна быть драконом», «Должна быть рождена в июне».</value>
+  </data>
+  <data name="EnterLowActivationCondition" xml:space="preserve">
+    <value>Укажите легко воспроизводимое условие или условие малой редкости.</value>
+  </data>
+  <data name="EnterLowProbabilityTrigger" xml:space="preserve">
+    <value>Введите триггер с низкой вероятностью, например: «Персонажа атакует нежить».</value>
+  </data>
+  <data name="EnterLowRarityRestriction" xml:space="preserve">
+    <value>Введите признак низкой редкости, продолжая предложение: «Цель...». Например: «Должна быть женского пола», «Должна быть эльфом», «Должна иметь душу», «Должна быть предметом из дерева».</value>
+  </data>
+  <data name="EnterMediumActivationCondition" xml:space="preserve">
+    <value>Укажите с трудом воспроизводимое условие или условие средней редкости.</value>
+  </data>
+  <data name="EnterMediumRarityRestriction" xml:space="preserve">
+    <value>Введите признак средней редкости, продолжая предложение: «Цель...». Например: «Должна быть в доспехах», «Должна находится в воде», «Должна дышать».</value>
+  </data>
+  <data name="EnterStandartProbabilityTrigger" xml:space="preserve">
+    <value>Введите триггер со стандартной вероятностью, например: «Союзника атаковали издали».</value>
+  </data>
+  <data name="Equipment" xml:space="preserve">
+    <value>Снаряжение</value>
+  </data>
+  <data name="ETriggerProbability_High" xml:space="preserve">
+    <value>Высокая вероятность</value>
+  </data>
+  <data name="ETriggerProbability_Low" xml:space="preserve">
+    <value>Низкая вероятность</value>
+  </data>
+  <data name="ETriggerProbability_Medium" xml:space="preserve">
+    <value>Стандартная вероятность</value>
+  </data>
+  <data name="ExhaustionEffectPageHint" xml:space="preserve">
+    <value>Временно уменьшает количество максимальных очков здоровья цели. Шкала стоимости прогрессивная и зависит от количества, на которое увеличивается здоровье. Количество, на которое уменьшится здоровье может определяться броском костей.</value>
+  </data>
+  <data name="EXP" xml:space="preserve">
+    <value>EXP</value>
+  </data>
+  <data name="EXPAlreadySpent" xml:space="preserve">
+    <value>Уже занято:</value>
+  </data>
+  <data name="Experience" xml:space="preserve">
+    <value>Опыт</value>
+  </data>
+  <data name="ExperienceLeft" xml:space="preserve">
+    <value>Опыта осталось:</value>
+  </data>
+  <data name="ExperienceOverall" xml:space="preserve">
+    <value>Опыта всего:</value>
+  </data>
+  <data name="ExperienceToLevelup" xml:space="preserve">
+    <value>Опыт</value>
+  </data>
+  <data name="EXPLeft" xml:space="preserve">
+    <value>Осталось: </value>
+  </data>
+  <data name="EXPSpentToSpeed" xml:space="preserve">
+    <value>Затраченный опыт:</value>
+  </data>
+  <data name="EXPStillAvailiable" xml:space="preserve">
+    <value>Осталось:</value>
+  </data>
+  <data name="FastAdjustment" xml:space="preserve">
+    <value>Быстрая настройка</value>
+  </data>
+  <data name="FastNPCCreation" xml:space="preserve">
+    <value>Быстрое создание</value>
+  </data>
+  <data name="Fly" xml:space="preserve">
+    <value>Полёт</value>
+  </data>
+  <data name="FortifyEffectPageHint" xml:space="preserve">
+    <value>Временно увеличивает количество максимальных очков здоровья цели. Шкала стоимости прогрессивная и зависит от количества, на которое увеличивается здоровье. Количество бонусных очков здоровья может определяться броском костей.</value>
+  </data>
+  <data name="FreeExperience" xml:space="preserve">
+    <value>Свободно</value>
+  </data>
+  <data name="Gigantic" xml:space="preserve">
+    <value>Гигантский</value>
+  </data>
+  <data name="HardActivationCondition" xml:space="preserve">
+    <value>Условие высокой сложности</value>
+  </data>
+  <data name="HardDifficulty" xml:space="preserve">
+    <value>Высокая сложность</value>
+  </data>
+  <data name="HaveNoActiveStatuses" xml:space="preserve">
+    <value>У персонажа нет активных статусов.</value>
+  </data>
+  <data name="Heal" xml:space="preserve">
+    <value>Лечение</value>
+  </data>
+  <data name="HealDiceImpactHint" xml:space="preserve">
+    <value>Каждый раз, когда вы используете свою способность, бросайте набор костей, указанный ниже, чтобы определить, сколько очков здоровья восстановила способность.</value>
+  </data>
+  <data name="Health" xml:space="preserve">
+    <value>Здоровье</value>
+  </data>
+  <data name="HealthModificator" xml:space="preserve">
+    <value>Модификатор</value>
+  </data>
+  <data name="HealthSpentAllExp" xml:space="preserve">
+    <value>Влить весь опыт</value>
+  </data>
+  <data name="HealthSpentExp" xml:space="preserve">
+    <value>Влитые очки опыта</value>
+  </data>
+  <data name="HealthThreshold" xml:space="preserve">
+    <value>Порог здоровья</value>
+  </data>
+  <data name="HearTarget" xml:space="preserve">
+    <value>Должна быть слышимой</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Помощь</value>
+  </data>
+  <data name="HideTooltip" xml:space="preserve">
+    <value>Скрыть подсказку</value>
+  </data>
+  <data name="HighRarityProperty" xml:space="preserve">
+    <value>Должна иметь признак высокой редкости</value>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>Час</value>
+  </data>
+  <data name="HoursCountFormat" xml:space="preserve">
+    <value>{0} часов</value>
+  </data>
+  <data name="Huge" xml:space="preserve">
+    <value>Огромный</value>
+  </data>
+  <data name="HundredYears" xml:space="preserve">
+    <value>100 лет</value>
+  </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>Инвентарь</value>
+  </data>
+  <data name="InventoryAbilitiesWillRisePrice" xml:space="preserve">
+    <value>От этого матераильного обеспечения зависят некоторые способности, если вы удалите его, то они станут занимать больше очков опыта. Удалить?</value>
+  </data>
+  <data name="InventoryAdjustCoinsHint" xml:space="preserve">
+    <value>Вы изменили стоимость предмета и можете автоматически скорректировать количество монет, доступных персонажу, в соответствии с новым значением.</value>
+  </data>
+  <data name="InventoryAskAdjustCoinsAlert" xml:space="preserve">
+    <value>Вы изменили количество расходников и можете автоматически скорректировать количество монет, доступных персонажу, в соответствии с новым значением. Скорректировать?</value>
+  </data>
+  <data name="InventoryItemCost" xml:space="preserve">
+    <value>Стоимость в монетах</value>
+  </data>
+  <data name="InventoryItemIsAvailiable" xml:space="preserve">
+    <value>Снаряжение доступно персонажу?</value>
+  </data>
+  <data name="InventoryItemProperties" xml:space="preserve">
+    <value>Параметры предмета</value>
+  </data>
+  <data name="InventoryItemType" xml:space="preserve">
+    <value>Вид предмета</value>
+  </data>
+  <data name="InventoryItemWasConatinerAlert" xml:space="preserve">
+    <value>Изменяемый предмет был контейнером и содержал в себе другие предметы. У него поменялся тип и теперь он не может хранить своё содержимое, удалить это содержимое?</value>
+  </data>
+  <data name="InventoryNotEnoughCoinsAlert" xml:space="preserve">
+    <value>У вас в инвентаре недостаточно монет, чтобы сохранить в нём такой предмет. Измените стоимость предмета или отключите флаг «Скорретировать», чтобы стоимость предмета не повлияла на количество монет в инвентаре.</value>
+  </data>
+  <data name="InventoryNotEnoughEXPForChanges" xml:space="preserve">
+    <value>От данного материального обеспечения зависят некоторые способности и у персонажа не хватает очков опыта, чтобы применить такие изменения.</value>
+  </data>
+  <data name="InventoryNotEnoughEXPForDelete" xml:space="preserve">
+    <value>Вам не хватит очков опыта на текущие способности, если вы удалите этот предмет. Сначала отредактируйте зависимые от этого предмета способности или удалите их.</value>
+  </data>
+  <data name="InventorySameNameAlert" xml:space="preserve">
+    <value>Вы не указали название или в инвентаре уже есть предмет с таким названием.</value>
+  </data>
+  <data name="Inventory_Help" xml:space="preserve">
+    <value>Коснитесь элемента в инвентаре, чтобы редактировать его, коснитесь дважды, чтобы удалить или проведите по названию элемента слева направо, чтобы открыть описание. Проведя по элементу справа налево, можно изменить его количество.</value>
+  </data>
+  <data name="IsAreaCanBound" xml:space="preserve">
+    <value>Область может быть привязана</value>
+  </data>
+  <data name="IsAreaDisposable" xml:space="preserve">
+    <value>Область срабатывает один раз и пропадает?</value>
+  </data>
+  <data name="IsShieldPermeable" xml:space="preserve">
+    <value>Щит может быть проницаем?</value>
+  </data>
+  <data name="IsShieldTransparent" xml:space="preserve">
+    <value>Щит прозрачен?</value>
+  </data>
+  <data name="ItemName" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="LeatherArmor" xml:space="preserve">
+    <value>Кожаная броня</value>
+  </data>
+  <data name="Legendary" xml:space="preserve">
+    <value>Легендарный</value>
+  </data>
+  <data name="LevelFormat" xml:space="preserve">
+    <value>Уровень {0}</value>
+  </data>
+  <data name="ListIsEmpty" xml:space="preserve">
+    <value>Список пуст...</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="LogWasCopiedSuccessfully" xml:space="preserve">
+    <value>Лог был успешно скопирован в буфер обмена.</value>
+  </data>
+  <data name="LowRarityProperty" xml:space="preserve">
+    <value>Должна иметь признак малой редкости</value>
+  </data>
+  <data name="LuckPoints" xml:space="preserve">
+    <value>Удача</value>
+  </data>
+  <data name="MAPUnit" xml:space="preserve">
+    <value>м/ОД</value>
+  </data>
+  <data name="MarkOfFate" xml:space="preserve">
+    <value>Метка судьбы</value>
+  </data>
+  <data name="MarkOfFateHint" xml:space="preserve">
+    <value>Введите метку судьбы, которую вам назначил мастер игры.</value>
+  </data>
+  <data name="MarksOfFate" xml:space="preserve">
+    <value>Метки судьбы</value>
+  </data>
+  <data name="MaterialSupport" xml:space="preserve">
+    <value>Материальное обеспечение</value>
+  </data>
+  <data name="MaxAreaPower" xml:space="preserve">
+    <value>Максимальная мощность</value>
+  </data>
+  <data name="MaxCanceledStatusesCount" xml:space="preserve">
+    <value>Количество</value>
+  </data>
+  <data name="MaxStatusPower" xml:space="preserve">
+    <value>Максимальная мощность</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Средний</value>
+  </data>
+  <data name="MediumActivationCondition" xml:space="preserve">
+    <value>Условие средней сложности</value>
+  </data>
+  <data name="MediumRarityProperty" xml:space="preserve">
+    <value>Должна иметь признак средней редкости</value>
+  </data>
+  <data name="MetalArmor" xml:space="preserve">
+    <value>Металлический доспех</value>
+  </data>
+  <data name="Miniature" xml:space="preserve">
+    <value>Миниатюрный</value>
+  </data>
+  <data name="Minute" xml:space="preserve">
+    <value>Минута</value>
+  </data>
+  <data name="MinutesCountFormat" xml:space="preserve">
+    <value>{0} минут</value>
+  </data>
+  <data name="Monstrous" xml:space="preserve">
+    <value>Монструозный</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Месяц</value>
+  </data>
+  <data name="MoveTargetDistance" xml:space="preserve">
+    <value>Дистанция</value>
+  </data>
+  <data name="MoveTargetPath" xml:space="preserve">
+    <value>Путь</value>
+  </data>
+  <data name="MovingType" xml:space="preserve">
+    <value>Тип перемещения</value>
+  </data>
+  <data name="MuchMorePowerfullObstacle" xml:space="preserve">
+    <value>Какое-то очень мощное препятствие</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="NewCharacterHealth" xml:space="preserve">
+    <value>Здоровье персонажа:</value>
+  </data>
+  <data name="NightmareDifficulty" xml:space="preserve">
+    <value>Кошмарная сложность</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="NoMoreThanOneSelfDamageEffectMessage" xml:space="preserve">
+    <value>Способность может иметь только один эффект, наносящий урон самому персонажу.</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>n/a</value>
+  </data>
+  <data name="NoneCooldown" xml:space="preserve">
+    <value>Не требует перезарядки</value>
+  </data>
+  <data name="NoPath" xml:space="preserve">
+    <value>Телепортация</value>
+  </data>
+  <data name="NormalDifficulty" xml:space="preserve">
+    <value>Нормальная сложность</value>
+  </data>
+  <data name="NoSpecialActivationConditions" xml:space="preserve">
+    <value>Для этого эффекта не указаны никакие особые условия активации.</value>
+  </data>
+  <data name="NotEnoughEXP" xml:space="preserve">
+    <value>Не хватает очков опыта!</value>
+  </data>
+  <data name="NotEnoughEXPForSpeed" xml:space="preserve">
+    <value>Недостаточно очков опыта для таких изменений скорости.</value>
+  </data>
+  <data name="NoTriggers" xml:space="preserve">
+    <value>У этой способности нет триггеров активации.</value>
+  </data>
+  <data name="NPC" xml:space="preserve">
+    <value>NPC</value>
+  </data>
+  <data name="NPCAttackDistance" xml:space="preserve">
+    <value>Дистанция атаки</value>
+  </data>
+  <data name="NPCName" xml:space="preserve">
+    <value>Имя или название</value>
+  </data>
+  <data name="NPCPower" xml:space="preserve">
+    <value>Мощность:</value>
+  </data>
+  <data name="NPCPowerField" xml:space="preserve">
+    <value>Мощность</value>
+  </data>
+  <data name="NPCSpeed" xml:space="preserve">
+    <value>Скорость (мод)</value>
+  </data>
+  <data name="ObstacleBetweenTargetsInChain" xml:space="preserve">
+    <value>Препятствия между целями</value>
+  </data>
+  <data name="ObstacleEquivalent" xml:space="preserve">
+    <value>Эквивалент препятствия</value>
+  </data>
+  <data name="Obstacles" xml:space="preserve">
+    <value>Препятствия</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="OnlyYoursAbilities" xml:space="preserve">
+    <value>Можно перемещать только свои области?</value>
+  </data>
+  <data name="OtherSettings" xml:space="preserve">
+    <value>Другие настройки</value>
+  </data>
+  <data name="PaperSheet" xml:space="preserve">
+    <value>Лист бумаги</value>
+  </data>
+  <data name="Party" xml:space="preserve">
+    <value>Партия</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="PlayerHaveNoCharacter" xml:space="preserve">
+    <value>Судя по этой пустой странице, вы пока ещё не создали ни одного персонажа. Это повод воспользоваться специальной кнопкой, которая расположена снизу. При помощи неё можно разрешить это временное недоразумение.</value>
+  </data>
+  <data name="PlayerHaveNoCharacterTitle" xml:space="preserve">
+    <value>Здесь ничего нет...</value>
+  </data>
+  <data name="Portrait" xml:space="preserve">
+    <value>Портрет</value>
+  </data>
+  <data name="PortraitHint" xml:space="preserve">
+    <value>Нажмите кнопку «Обзор» и выберите файл с портретом персонажа. Выбрав изображение, вы можете настроить отображение потрета на странице главного персонажа. Для этого приблизьте, отдалите или переместите изображение в окне, расположенном ниже.</value>
+  </data>
+  <data name="PortraitSettings" xml:space="preserve">
+    <value>Настройка портрета</value>
+  </data>
+  <data name="Project" xml:space="preserve">
+    <value>Проект</value>
+  </data>
+  <data name="ProjectCurrentSteps" xml:space="preserve">
+    <value>Шагов выполнено</value>
+  </data>
+  <data name="Projects" xml:space="preserve">
+    <value>Проекты</value>
+  </data>
+  <data name="ProjectsHelp" xml:space="preserve">
+    <value>Проекты персонажа — это дела, для которых необходимо отслеживать прогресс. Чтобы добавить проект, нажмите кнопку со знаком плюс, расположенную ниже. Чтобы редактировать проект, сдвиньте карточку проекта вправо, чтобы удалить — влево. Вы можете открыть описание проекта, нажав на его название. Вы можете увеличить прогресс на один шаг, нажав на круглую шкалу прогресса единожды или уменьшить его на один шаг, нажав дважды.</value>
+  </data>
+  <data name="ProjectSteps" xml:space="preserve">
+    <value>Шагов всего</value>
+  </data>
+  <data name="ReadLog" xml:space="preserve">
+    <value>Прочитать лог</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Запомнить меня</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="RemoveNPCQuestion" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить этого NPC?</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Сбросить</value>
+  </data>
+  <data name="ResetCharactersData" xml:space="preserve">
+    <value>Сбросить данные о персонажах</value>
+  </data>
+  <data name="ResetHelpCards" xml:space="preserve">
+    <value>Показать скрытые подсказки</value>
+  </data>
+  <data name="RevengeDuration" xml:space="preserve">
+    <value>Длительность в раундах</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>Раунд</value>
+  </data>
+  <data name="RoundsCount" xml:space="preserve">
+    <value>Количество раундов</value>
+  </data>
+  <data name="RoundsCountFormat" xml:space="preserve">
+    <value>{0} раундов</value>
+  </data>
+  <data name="SameProjectExistsWarning" xml:space="preserve">
+    <value>Проект с таким названием уже существует.</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="SeeTarget" xml:space="preserve">
+    <value>Должна быть видимой</value>
+  </data>
+  <data name="SelectCharacterPortrait" xml:space="preserve">
+    <value>Выберите портрет персонажа</value>
+  </data>
+  <data name="SelectLanguagePageTitle" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="Set" xml:space="preserve">
+    <value>Установить</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="SettingsPageTitle" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="ShieldDurability" xml:space="preserve">
+    <value>Прочность щита</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Авторизоваться</value>
+  </data>
+  <data name="SignInButton" xml:space="preserve">
+    <value>Вперед</value>
+  </data>
+  <data name="SignInPageTitle" xml:space="preserve">
+    <value>Авторизация</value>
+  </data>
+  <data name="Small" xml:space="preserve">
+    <value>Маленький</value>
+  </data>
+  <data name="Speed" xml:space="preserve">
+    <value>Скорость</value>
+  </data>
+  <data name="SpeedAdjustment" xml:space="preserve">
+    <value>Настройка скорости</value>
+  </data>
+  <data name="Spread" xml:space="preserve">
+    <value>Разброс:</value>
+  </data>
+  <data name="Statuses" xml:space="preserve">
+    <value>Статусы</value>
+  </data>
+  <data name="StatusName" xml:space="preserve">
+    <value>Название статуса</value>
+  </data>
+  <data name="Straight" xml:space="preserve">
+    <value>По прямой в любом направлении</value>
+  </data>
+  <data name="StraightFromCharacter" xml:space="preserve">
+    <value>По прямой от персонажа</value>
+  </data>
+  <data name="StraightToCharacter" xml:space="preserve">
+    <value>По прямой к персонажу</value>
+  </data>
+  <data name="Strategy" xml:space="preserve">
+    <value>Стратегия</value>
+  </data>
+  <data name="Swim" xml:space="preserve">
+    <value>Плавание</value>
+  </data>
+  <data name="Switch" xml:space="preserve">
+    <value>Сменить</value>
+  </data>
+  <data name="TargetChainEnable" xml:space="preserve">
+    <value>Включить цепи целей.</value>
+  </data>
+  <data name="TargetChainHint" xml:space="preserve">
+    <value>Цели могут составлять цепи. Это значит, что после того, как к цели применяется эффект, он также может быть применён к следующей цели на заданном расстоянии от предыдущей и так далее. К каждой цели в рамках цепи эффект может быть применён только один раз. Расстояние указывается в метрах. Максимальное количество целей в цепи и расстояние между целями ограничено. Персонаж сам выбирает порядок целей в цепи.</value>
+  </data>
+  <data name="TargetChainMaxCount" xml:space="preserve">
+    <value>Максимальное количество целей</value>
+  </data>
+  <data name="TargetChainMaxDistance" xml:space="preserve">
+    <value>Максимальное расстояние между целями</value>
+  </data>
+  <data name="TargetChainObstacleHint" xml:space="preserve">
+    <value>Эффект не может быть применён к следующей цели в цепи, если между ней и предыдущей целью находится препятствие с указанным эквивалентом прочности или прочнее.</value>
+  </data>
+  <data name="TargetHearsCharacter" xml:space="preserve">
+    <value>Должна слышать персонажа</value>
+  </data>
+  <data name="TargetProperty" xml:space="preserve">
+    <value>Признак цели</value>
+  </data>
+  <data name="TargetSeesCharacter" xml:space="preserve">
+    <value>Должна видеть персонажа</value>
+  </data>
+  <data name="TargetSelectionAreaA" xml:space="preserve">
+    <value>Длина (А)</value>
+  </data>
+  <data name="TargetSelectionAreaB" xml:space="preserve">
+    <value>Ширина (B)</value>
+  </data>
+  <data name="TargetSelectionAreaC" xml:space="preserve">
+    <value>Высота (C)</value>
+  </data>
+  <data name="TargetSelectionAreaH" xml:space="preserve">
+    <value>Высота (H)</value>
+  </data>
+  <data name="TargetSelectionAreaN" xml:space="preserve">
+    <value>Количество вокселей (N)</value>
+  </data>
+  <data name="TargetSelectionAreaObstacleCharacterAndArea" xml:space="preserve">
+    <value>Между персонажем и областью</value>
+  </data>
+  <data name="TargetSelectionAreaObstacleHint" xml:space="preserve">
+    <value>Эффект не может быть применён, если между персонажем и ближайшей точкой области действия находится препятствие равное по прочности выбранному эквиваленту или прочнее него. Так же к цели не может быть применён эффект, если между ней и эпицентром области действия находится препятствие равное по прочности эквиваленту или прочнее него. Прочность для этих двух видов препятствий настраивается отдельно.</value>
+  </data>
+  <data name="TargetSelectionAreaObstacleTargetAndEpicenter" xml:space="preserve">
+    <value>Между эпицентром и целью</value>
+  </data>
+  <data name="TargetSelectionAreaR" xml:space="preserve">
+    <value>Радиус (R)</value>
+  </data>
+  <data name="TargetSelectionEcludeTargetsField" xml:space="preserve">
+    <value>Количество исключённый целей</value>
+  </data>
+  <data name="TargetSelectionEcludeTargetsHint" xml:space="preserve">
+    <value>Существует возможность тонкой настройки области, при которой некоторые, выбранные персонажем, цели в области не будут подвержены эффекту. Чем больше таких целей персонаж может исключить, тем дороже способность.</value>
+  </data>
+  <data name="TargetSelectionExcludeTargets" xml:space="preserve">
+    <value>Исключение целей</value>
+  </data>
+  <data name="TargetSelectionIsRandom" xml:space="preserve">
+    <value>Случайный выбор цели</value>
+  </data>
+  <data name="TargetSelectionIsRandomCheckBox" xml:space="preserve">
+    <value>Цели выбираются случайным образом</value>
+  </data>
+  <data name="TargetSelectionIsRandomHint" xml:space="preserve">
+    <value>Если будет выбран режим случайного выбора целей, то игрок при использовании способности будет должен выбирать случайную цель из тех, которые удоволетворяют остальным условиям. Это усложнит планирование действий, но зато сделает способность дешевле.</value>
+  </data>
+  <data name="TargetSelectionNTADObstacleHint" xml:space="preserve">
+    <value>Эффект не может быть применён к цели, если между ней и персонажем находится препятствие равное эквиваленту прочности или прочнее него.</value>
+  </data>
+  <data name="TargetSelectionRestrictionWarning" xml:space="preserve">
+    <value>Ограничение такого типа уже добавлено.</value>
+  </data>
+  <data name="TargetSelectionStratedyArea" xml:space="preserve">
+    <value>Все цели в области</value>
+  </data>
+  <data name="TargetSelectionStratedyAreaDistance" xml:space="preserve">
+    <value>Расстояние до области в метрах (D)</value>
+  </data>
+  <data name="TargetSelectionStratedyAreaHint" xml:space="preserve">
+    <value>С этой стратегией эффект применяется на располагающиеся в заданной области цели. Все параметры области указываются в метрах. Область может быть размещена под любым углом относительно персонажа, а расстояние до области — это расстояние от персонажа до ближайшей точки этой области.</value>
+  </data>
+  <data name="TargetSelectionStratedyCharacter" xml:space="preserve">
+    <value>Цель — это сам персонаж</value>
+  </data>
+  <data name="TargetSelectionStratedyCharacterHint" xml:space="preserve">
+    <value>Целью является сам персонаж, использующий способность.</value>
+  </data>
+  <data name="TargetSelectionStratedyNTAD" xml:space="preserve">
+    <value>Несколько целей на расстоянии</value>
+  </data>
+  <data name="TargetSelectionStratedyNTADCount" xml:space="preserve">
+    <value>Количество целей</value>
+  </data>
+  <data name="TargetSelectionStratedyNTADDistance" xml:space="preserve">
+    <value>Расстояние в метрах</value>
+  </data>
+  <data name="TargetSelectionStratedyNTADHint" xml:space="preserve">
+    <value>С этой стратегией эффект применяется на ограниченное количество целей, которые распологаются не далее чем на заданном расстоянии. Нельзя выбрать одну и ту же цель несколько раз.</value>
+  </data>
+  <data name="TargetSelectionStrategyHint" xml:space="preserve">
+    <value>Необходимо выбрать стратегию выбора цели, всего их две:</value>
+  </data>
+  <data name="TargetSelectionVoxelHint" xml:space="preserve">
+    <value>Воксель — это куб 1х1 метр. Из таких вокселей можно составлять массив — фигуру области, в которой к целям будет применяться эффект. На рисунке в качестве примера составлена область из пяти вокселей. Максимальное расстояние между соседними вокселями не должно превышать расстояние от персонажа до области.</value>
+  </data>
+  <data name="TargetsSizes" xml:space="preserve">
+    <value>Размеры целей</value>
+  </data>
+  <data name="TargetsSizesHint" xml:space="preserve">
+    <value>Выберете размеры целей, на которые будет действовать способность. Способность не сможет быть применена к целям любой другой категории размера.</value>
+  </data>
+  <data name="TargetThreeDot" xml:space="preserve">
+    <value>Цель...</value>
+  </data>
+  <data name="TargetVisibility" xml:space="preserve">
+    <value>Видимость цели</value>
+  </data>
+  <data name="TargetVisibilityAREAHint" xml:space="preserve">
+    <value>Если данная опция включена, то персонаж может расположить область действия в пределах дистанции, только если видит место, где будет расположен геометрический центр области. В цепях целей достаточно видеть первую цель.</value>
+  </data>
+  <data name="TargetVisibilityNTADHint" xml:space="preserve">
+    <value>Если данная опция включена, то эффекты будет применены только к тем целям, которых персонаж может видеть. При этом считается, что угол обзора персонажа — 180 градусов. Персонаж может решить в какую сторону он смотрит непосредственно перед активацией способности. В цепях целей достаточно видеть первую цель.</value>
+  </data>
+  <data name="Teleportation" xml:space="preserve">
+    <value>Телепортация</value>
+  </data>
+  <data name="TemporaryHealth" xml:space="preserve">
+    <value>Временные изменения</value>
+  </data>
+  <data name="TenYears" xml:space="preserve">
+    <value>10 лет</value>
+  </data>
+  <data name="TerrainDifficultyClass" xml:space="preserve">
+    <value>Класс сложности</value>
+  </data>
+  <data name="TheTarget" xml:space="preserve">
+    <value>Цель...</value>
+  </data>
+  <data name="TheTargetCanBeAnything" xml:space="preserve">
+    <value>Может быть кем угодно и чем угодно.</value>
+  </data>
+  <data name="ThickSteelPlate" xml:space="preserve">
+    <value>Толстая стальная плита</value>
+  </data>
+  <data name="Thing" xml:space="preserve">
+    <value>Вещь</value>
+  </data>
+  <data name="TimeUnit" xml:space="preserve">
+    <value>Единица времени</value>
+  </data>
+  <data name="Tiny" xml:space="preserve">
+    <value>Крохотный</value>
+  </data>
+  <data name="Titanic" xml:space="preserve">
+    <value>Титанический</value>
+  </data>
+  <data name="TooMuchSelfharmMessage" xml:space="preserve">
+    <value>Максимальный урон самому персонажу не должен превышать его максимальное количество очков здоровья.</value>
+  </data>
+  <data name="Trigger" xml:space="preserve">
+    <value>Триггер</value>
+  </data>
+  <data name="TriggerProbability" xml:space="preserve">
+    <value>Вероятность триггера</value>
+  </data>
+  <data name="UsesCount" xml:space="preserve">
+    <value>Количество использований</value>
+  </data>
+  <data name="VampirismPercent" xml:space="preserve">
+    <value>Процент</value>
+  </data>
+  <data name="VoxelArrayIsArbitrary" xml:space="preserve">
+    <value>Воксели каждый раз располагаются произвольно</value>
+  </data>
+  <data name="Walk" xml:space="preserve">
+    <value>Ходьба</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Внимание</value>
+  </data>
+  <data name="Week" xml:space="preserve">
+    <value>Неделя</value>
+  </data>
+  <data name="WinEffectPageHint" xml:space="preserve">
+    <value>Этот эффект позволяет победить в игре BRIX. Мгновенно и бесповоротно. Дополнительное действие этого эффекта может быть обсуждено внутри каждой конкретной партии игроков отдельно.</value>
+  </data>
+  <data name="WoodenPlank" xml:space="preserve">
+    <value>Деревянная доска</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Год</value>
+  </data>
+  <data name="YearsCountFormat" xml:space="preserve">
+    <value>{0} лет</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="DaysLeft" xml:space="preserve">
+    <value>Осталось дней</value>
+  </data>
+  <data name="HoursLeft" xml:space="preserve">
+    <value>Часов осталось</value>
+  </data>
+  <data name="MinutesLeft" xml:space="preserve">
+    <value>Минут осталось</value>
+  </data>
+  <data name="YearsLeft" xml:space="preserve">
+    <value>Лет осталось</value>
+  </data>
+  <data name="Artifact" xml:space="preserve">
+    <value>Артефакт</value>
+  </data>
+  <data name="Defense" xml:space="preserve">
+    <value>Защита</value>
+  </data>
+  <data name="Distance" xml:space="preserve">
+    <value>Дистанция</value>
+  </data>
+  <data name="ArtifactCost" xml:space="preserve">
+    <value>Стоимость артефакта</value>
+  </data>
+  <data name="Features" xml:space="preserve">
+    <value>Особенности</value>
+  </data>
+  <data name="AbilityConsumesArtifact" xml:space="preserve">
+    <value>Способность расходует артефакт.</value>
+  </data>
+  <data name="ArtifactLevel" xml:space="preserve">
+    <value>Уровень артефакта</value>
+  </data>
+  <data name="AspectTargetSize" xml:space="preserve">
+    <value>Размеры целей</value>
+  </data>
+</root>

@@ -196,6 +196,24 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max targets count.
+        /// </summary>
+        public static string Abilities_ChainMaxCountOfTargets {
+            get {
+                return ResourceManager.GetString("Abilities_ChainMaxCountOfTargets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max distance between targets.
+        /// </summary>
+        public static string Abilities_ChainMaxDistanceBetweenTargets {
+            get {
+                return ResourceManager.GetString("Abilities_ChainMaxDistanceBetweenTargets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cooldown.
         /// </summary>
         public static string Abilities_Cooldown {
@@ -210,6 +228,15 @@ namespace BRIX.Web.Client.Localization {
         public static string Abilities_CooldownHint {
             get {
                 return ResourceManager.GetString("Abilities_CooldownHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distance in meters.
+        /// </summary>
+        public static string Abilities_DistanceInMeters {
+            get {
+                return ResourceManager.GetString("Abilities_DistanceInMeters", resourceCulture);
             }
         }
         
@@ -241,6 +268,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable target chain?.
+        /// </summary>
+        public static string Abilities_EnableTargetChain {
+            get {
+                return ResourceManager.GetString("Abilities_EnableTargetChain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter high probability trigger, like «character takes damage»..
         /// </summary>
         public static string Abilities_EnterTriggerHint_High {
@@ -268,6 +304,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is target selection is random?.
+        /// </summary>
+        public static string Abilities_IsTargetSelectionIsRandom {
+            get {
+                return ResourceManager.GetString("Abilities_IsTargetSelectionIsRandom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Already spent:.
         /// </summary>
         public static string Abilities_MonitorAlreadySpent {
@@ -291,6 +336,78 @@ namespace BRIX.Web.Client.Localization {
         public static string Abilities_NotEnoughExpForAbility {
             get {
                 return ResourceManager.GetString("Abilities_NotEnoughExpForAbility", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of targets.
+        /// </summary>
+        public static string Abilities_NumberOfTargets {
+            get {
+                return ResourceManager.GetString("Abilities_NumberOfTargets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Random target selection.
+        /// </summary>
+        public static string Abilities_RandomTargetSelection {
+            get {
+                return ResourceManager.GetString("Abilities_RandomTargetSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the random target selection mode is selected, then the player, when using the ability, will have to select a random target from those that satisfy the other conditions. This will complicate the planning of actions, but it will make the ability cheaper..
+        /// </summary>
+        public static string Abilities_RandomTargetSelection_Hint {
+            get {
+                return ResourceManager.GetString("Abilities_RandomTargetSelection_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Should the character see the target?.
+        /// </summary>
+        public static string Abilities_ShouldCharacterSeeTarget {
+            get {
+                return ResourceManager.GetString("Abilities_ShouldCharacterSeeTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target chain.
+        /// </summary>
+        public static string Abilities_TargetChain {
+            get {
+                return ResourceManager.GetString("Abilities_TargetChain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Targets can form chains. This means that once an effect is applied to a target, it can also be applied to the next target at a given distance from the previous one, and so on. The effect can only be applied once to each target within the chain. The distance is indicated in meters. The maximum number of targets in a chain and the distance between targets is limited. The character himself chooses the order of the targets in the chain..
+        /// </summary>
+        public static string Abilities_TargetChain_Hint {
+            get {
+                return ResourceManager.GetString("Abilities_TargetChain_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target visibility.
+        /// </summary>
+        public static string Abilities_TargetVisibility {
+            get {
+                return ResourceManager.GetString("Abilities_TargetVisibility", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If this option is enabled, the effects will be applied only to those targets that the character can see. It is assumed that the viewing angle of the character is 180 degrees. The character can decide which way he is looking just before activating the ability. In chains, it is enough to see the first target..
+        /// </summary>
+        public static string Abilities_TargetVisibility_Hint {
+            get {
+                return ResourceManager.GetString("Abilities_TargetVisibility_Hint", resourceCulture);
             }
         }
         
@@ -655,6 +772,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Characters.
+        /// </summary>
+        public static string Common_Characters1 {
+            get {
+                return ResourceManager.GetString("Common_Characters1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
         public static string Common_Clear {
@@ -817,6 +943,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to With this strategy the effect is applying to targets located in the specified are. All area parameters are specified in meters. An area can be placed at any angle relative to character. The area distance is the distance from the character to the nearest point of that area..
+        /// </summary>
+        public static string ETargetSelectionStrategy_Area_Hint {
+            get {
+                return ResourceManager.GetString("ETargetSelectionStrategy_Area_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Character himself.
         /// </summary>
         public static string ETargetSelectionStrategy_CharacterHimself {
@@ -826,11 +961,29 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The target is the character himself..
+        /// </summary>
+        public static string ETargetSelectionStrategy_CharacterHimself_Hint {
+            get {
+                return ResourceManager.GetString("ETargetSelectionStrategy_CharacterHimself_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Multiple targets at distance.
         /// </summary>
         public static string ETargetSelectionStrategy_NTargetsAtDistanсeL {
             get {
                 return ResourceManager.GetString("ETargetSelectionStrategy_NTargetsAtDistanсeL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With this strategy the effect is applied to a limited number of targets that are no farther than the set range. All targets must be unique..
+        /// </summary>
+        public static string ETargetSelectionStrategy_NTargetsAtDistanсeL_Hint {
+            get {
+                return ResourceManager.GetString("ETargetSelectionStrategy_NTargetsAtDistanсeL_Hint", resourceCulture);
             }
         }
         

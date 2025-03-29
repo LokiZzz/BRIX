@@ -1,12 +1,12 @@
 ﻿@inherits AbilityPageBase
 
-@page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects/{DamageType}/{EffectNumber:int}/tse"
+@page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects/{EffectType}/{EffectOrderNumber:int}/tse"
 
 <div class="box">
-    <p class="block">@Localization[nameof(Resource.Abilities_Aspect_TargetSelectionAspect)]</p>
-    <OptionsTab Mode="EOptionsTabMode.Stack" >
+    <p class="title block">@Localization[nameof(Resource.Abilities_Aspect_TargetSelectionAspect)]</p>
+    <OptionsTab Mode="EOptionsTabMode.Stack">
         <OptionsTabItem Title="@Localization[nameof(Resource.ETargetSelectionStrategy_NTargetsAtDistanсeL)]"
-                        OnSelected="@(() => SelectStrategy(ETargetSelectionStrategy.NTargetsAtDistanсeL))"/>
+                        OnSelected="@(() => SelectStrategy(ETargetSelectionStrategy.NTargetsAtDistanсeL))" />
         <OptionsTabItem Title="@Localization[nameof(Resource.ETargetSelectionStrategy_Area)]"
                         OnSelected="@(() => SelectStrategy(ETargetSelectionStrategy.Area))" />
         <OptionsTabItem Title="@Localization[nameof(Resource.ETargetSelectionStrategy_CharacterHimself)]"
@@ -14,8 +14,58 @@
     </OptionsTab>
 </div>
 
+@if (aspect.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
+{
+    <div class="box">
+        <p class="title block">
+
+            @Localization[nameof(Resource.ETargetSelectionStrategy_NTargetsAtDistanсeL)]
+        </p>
+        <p class="block">@Localization[nameof(Resource.ETargetSelectionStrategy_NTargetsAtDistanсeL_Hint)]</p>
+        <Field @bind-Value="aspect.NTAD.TargetsCount" @bind-Value:after="Layout.Refresh"
+               Label="@Localization[nameof(Resource.Abilities_NumberOfTargets)]" />
+        <Field @bind-Value="aspect.NTAD.DistanceInMeters" @bind-Value:after="Layout.Refresh"
+               Label="@Localization[nameof(Resource.Abilities_DistanceInMeters)]" />
+    </div>
+
+    <div class="box">
+        <p class="title block">@Localization[nameof(Resource.Abilities_RandomTargetSelection)]</p>
+        <p class="block">@Localization[nameof(Resource.Abilities_RandomTargetSelection_Hint)]</p>
+        <Toggle @bind-Value="aspect.NTAD.IsTargetSelectionIsRandom" @bind-Value:after="Layout.Refresh"
+                Text="@Localization[nameof(Resource.Abilities_IsTargetSelectionIsRandom)]" />
+    </div>
+}
+
+@if (aspect.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL || aspect.Strategy == ETargetSelectionStrategy.Area)
+{
+    <div class="box">
+        <p class="title block">@Localization[nameof(Resource.Abilities_TargetChain)]</p>
+        <p class="block">@Localization[nameof(Resource.Abilities_TargetChain_Hint)]</p>
+        <Toggle @bind-Value="aspect.TargetChain.IsChainEnabled" @bind-Value:after="Layout.Refresh"
+                Text="@Localization[nameof(Resource.Abilities_EnableTargetChain)]" />
+
+        @if (aspect.TargetChain.IsChainEnabled)
+        {
+            <Field @bind-Value="aspect.TargetChain.MaxDistanceBetweenTargets" @bind-Value:after="Layout.Refresh"
+                   Label="@Localization[nameof(Resource.Abilities_ChainMaxDistanceBetweenTargets)]" />
+            <Field @bind-Value="aspect.TargetChain.MaxTargetsCount" @bind-Value:after="Layout.Refresh"
+                   Label="@Localization[nameof(Resource.Abilities_ChainMaxCountOfTargets)]" />
+        }
+    </div>
+
+    <div class="box">
+        <p class="title block">@Localization[nameof(Resource.Abilities_TargetVisibility)]</p>
+        <p class="block">@Localization[nameof(Resource.Abilities_TargetVisibility_Hint)]</p>
+        <Toggle @bind-Value="aspect.NeedToSeeTarget" @bind-Value:after="Layout.Refresh"
+                Text="@Localization[nameof(Resource.Abilities_ShouldCharacterSeeTarget)]" />
+    </div>
+}
+
 @code {
-    [SupplyParameterFromQuery(Name = "n")]
+    [Parameter]
+    public string EffectType { get; set; } = string.Empty;
+
+    [Parameter]
     public int EffectOrderNumber { get; set; }
 
     TargetSelectionAspect aspect = new();
@@ -38,5 +88,6 @@
     private void SelectStrategy(ETargetSelectionStrategy strategy)
     {
         aspect.Strategy = strategy;
+        StateHasChanged();
     }
 }

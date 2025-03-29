@@ -10,6 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="Localization\Localization.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Localization\Localization.resx">
+      <SubType>Designer</SubType>
+      <LastGenOutput>Localization.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </AdditionalFiles>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.3" />
@@ -31,6 +43,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Localization\Localization.Designer.cs">
+      <DependentUpon>Localization.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Localization\Resource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -39,6 +56,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Localization\Localization.ru.resx">
+      <SubType>Designer</SubType>
+      <Generator></Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Localization\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
