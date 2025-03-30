@@ -1,11 +1,13 @@
-﻿@if (Parent.ActiveItem == this)
+﻿@typeparam TValue
+
+@if (Parent.ActiveItem == this)
 {
     @ChildContent
 }
 
 @code {
     [CascadingParameter]
-    private OptionsTab Parent { get; set; } = default!;
+    private OptionsTab<TValue> Parent { get; set; } = default!;
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
@@ -20,7 +22,7 @@
     public string Image { get; set; } = string.Empty;
 
     [Parameter]
-    public Action? OnSelected { get; set; }
+    public TValue? Value { get; set; }
 
     protected override void OnInitialized()
     {

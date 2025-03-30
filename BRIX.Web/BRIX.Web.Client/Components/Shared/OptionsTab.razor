@@ -1,9 +1,15 @@
-﻿@if(Mode == EOptionsTabMode.Squares)
+﻿@* Компонент-селектор с вкладками, для которого элементы и соответствующие им значения указываются вручную. Каждая 
+вкладка может иметь своё содержимое. Используется, например, в списке аспектов, в настройке стратегии выбора целей и в 
+выборе настроек области действия.*@
+
+@typeparam TValue
+
+@if (Mode == EOptionsTabMode.Squares)
 {
     <p class="buttons">
-        @foreach (OptionsTabItem item in Items)
+        @foreach (OptionsTabItem<TValue> item in Items)
         {
-            <button class="button is-large @GetIsActiveTabClass(item)" @onclick="@(() => ActivateItem(item))">
+            <button class="button is-large @GetIsActiveTabClass(item)" @onclick="@(async () => await ActivateItemAsync(item))">
                 @if (!string.IsNullOrEmpty(item.Icon))
                 {
                     <span class="icon is-medium">
@@ -24,14 +30,13 @@
         }
     </p>
 }
-else if(Mode == EOptionsTabMode.Stack)
+else if (Mode == EOptionsTabMode.Stack)
 {
     <div class="is-flex is-flex-direction-column is-gap-1">
-        @foreach (OptionsTabItem item in Items)
+        @foreach (OptionsTabItem<TValue> item in Items)
         {
-            <button 
-            class="button is-justify-content-start @GetIsActiveTabClass(item)" 
-            @onclick="@(() => ActivateItem(item))">
+            <button class="button is-justify-content-start @GetIsActiveTabClass(item)"
+                    @onclick="@(async () => await ActivateItemAsync(item))">
                 @item.Title
             </button>
         }
@@ -50,15 +55,21 @@ else if(Mode == EOptionsTabMode.Stack)
     public RenderFragment? ChildContent { get; set; }
 
     [Parameter]
-    public Action<OptionsTabItem>? OnActiveTabChanged { get; set; }
+    public Action<OptionsTabItem<TValue>>? OnActiveTabChanged { get; set; }
 
-    public OptionsTabItem ActiveItem { get; set; } = default!;
+    [Parameter]
+    public TValue? SelectedValue { get; set; }
 
-    List<OptionsTabItem> Items = [];
+    [Parameter]
+    public EventCallback<TValue?> SelectedValueChanged { get; set; }
+
+    public OptionsTabItem<TValue> ActiveItem { get; set; } = default!;
+
+    List<OptionsTabItem<TValue>> Items = [];
 
     public string _modalIsActiveClass = string.Empty;
 
-    public void AddItem(OptionsTabItem item)
+    public void AddItem(OptionsTabItem<TValue> item)
     {
         Items.Add(item);
 
@@ -70,16 +81,17 @@ else if(Mode == EOptionsTabMode.Stack)
         StateHasChanged();
     }
 
-    public void ActivateItem(OptionsTabItem item)
+    public async Task ActivateItemAsync(OptionsTabItem<TValue> item)
     {
         if (Items.Contains(item))
         {
             ActiveItem = item;
-            StateHasChanged();
+            SelectedValue = item.Value;
             OnActiveTabChanged?.Invoke(item);
-            ActiveItem.OnSelected?.Invoke();
+            await SelectedValueChanged.InvokeAsync(SelectedValue);
+            StateHasChanged();
         }
     }
 
-    private string GetIsActiveTabClass(OptionsTabItem item) => item == ActiveItem ? "is-active" : string.Empty;
+    private string GetIsActiveTabClass(OptionsTabItem<TValue> item) => item == ActiveItem ? "is-active" : string.Empty;
 }

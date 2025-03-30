@@ -3,18 +3,18 @@
 
 <div class="box">
     <p class="title">@Localization[nameof(Resource.Abilities_Aspects)]</p>
-    <OptionsTab>
+    <OptionsTabEmpty>
         @foreach (AspectVM aspect in aspects)
         {
-            <OptionsTabItem Icon="@aspect.Icon">
+            <OptionsTabEmptyItem Icon="@aspect.Icon">
                 <p class="has-text-weight-bold block">
                     @aspect.Title
                 </p>
                 <LexisBlock Model="aspect.Model" />
                 <button class="button" onclick="@(() => GoToAspect(aspect))">@Localization[nameof(Resource.Common_Edit)]</button>
-            </OptionsTabItem>
+            </OptionsTabEmptyItem>
         }
-    </OptionsTab>
+    </OptionsTabEmpty>
 </div>
 
 @code {

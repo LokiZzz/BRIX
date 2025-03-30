@@ -4,13 +4,18 @@
 
 <div class="box">
     <p class="title block">@Localization[nameof(Resource.Abilities_Aspect_TargetSelectionAspect)]</p>
-    <OptionsTab Mode="EOptionsTabMode.Stack">
+    
+    <p class="title block">@aspect.Strategy</p>
+
+    <OptionsTab Mode="EOptionsTabMode.Stack"
+                TValue="ETargetSelectionStrategy"
+                @bind-SelectedValue="aspect.Strategy" @bind-SelectedValue:after="Layout.Refresh">
         <OptionsTabItem Title="@Localization[nameof(Resource.ETargetSelectionStrategy_NTargetsAtDistanсeL)]"
-                        OnSelected="@(() => SelectStrategy(ETargetSelectionStrategy.NTargetsAtDistanсeL))" />
+                        Value="ETargetSelectionStrategy.NTargetsAtDistanсeL" />
         <OptionsTabItem Title="@Localization[nameof(Resource.ETargetSelectionStrategy_Area)]"
-                        OnSelected="@(() => SelectStrategy(ETargetSelectionStrategy.Area))" />
+                        Value="ETargetSelectionStrategy.Area" />
         <OptionsTabItem Title="@Localization[nameof(Resource.ETargetSelectionStrategy_CharacterHimself)]"
-                        OnSelected="@(() => SelectStrategy(ETargetSelectionStrategy.CharacterHimself))" />
+                        Value="ETargetSelectionStrategy.CharacterHimself" />
     </OptionsTab>
 </div>
 
@@ -83,11 +88,5 @@
         {
             aspect = foundAspect;
         }
-    }
-
-    private void SelectStrategy(ETargetSelectionStrategy strategy)
-    {
-        aspect.Strategy = strategy;
-        StateHasChanged();
     }
 }
