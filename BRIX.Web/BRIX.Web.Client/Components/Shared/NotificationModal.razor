@@ -1,31 +1,33 @@
 ﻿@implements IDisposable
 
-<div class="modal is-active">
-    <div class="modal-background"></div>
-    <div class="modal-content ml-auto mr-0">
-        <div class="container">
-            @foreach (Notification notification in Notifications)
-            {
-                string notificationTypeClass = notification.Type switch
+@if (Notifications?.Any() == true)
+{
+    <div class="modal is-active">
+        <div class="modal-content ml-auto mr-0">
+            <div class="container">
+                @foreach (Notification notification in Notifications)
                 {
-                    ENotificationType.Success => "is-success",
-                    ENotificationType.Warning => "is-warning",
-                    ENotificationType.Error => "is-danger",
-                    _ => string.Empty
-                };
+                    string notificationTypeClass = notification.Type switch
+                    {
+                        ENotificationType.Success => "is-success",
+                        ENotificationType.Warning => "is-warning",
+                        ENotificationType.Error => "is-danger",
+                        _ => string.Empty
+                    };
 
-                <div class="notification @notificationTypeClass">@notification.Message</div>
-            }
+                    <div class="notification @notificationTypeClass">@notification.Message</div>
+                }
 
-            @if (Notifications?.Count > 0)
-            {
-                <button class="button" @onclick="Clear">
-                    @Localization[nameof(Resource.Common_Clear)]
-                </button>
-            }
+                @if (Notifications?.Count > 0)
+                {
+                    <button class="button" @onclick="Clear">
+                        @Localization[nameof(Resource.Common_Clear)]
+                    </button>
+                }
+            </div>
         </div>
     </div>
-</div>
+}
 
 @code {
     public LimitedQueue<Notification> Notifications { get; set; } = new(4);

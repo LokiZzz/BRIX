@@ -36,7 +36,7 @@ else if (Mode == EOptionsTabMode.Stack)
         @foreach (OptionsTabItem<TValue> item in Items)
         {
             <button class="button is-justify-content-start @GetIsActiveTabClass(item)"
-                    @onclick="@(async () => await ActivateItemAsync(item))">
+            @onclick="@(async () => await ActivateItemAsync(item))">
                 @item.Title
             </button>
         }
