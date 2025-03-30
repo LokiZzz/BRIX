@@ -36,7 +36,7 @@ else if (Mode == EOptionsTabMode.Stack)
         @foreach (OptionsTabItem<TValue> item in Items)
         {
             <button class="button is-justify-content-start @GetIsActiveTabClass(item)"
-            @onclick="@(async () => await ActivateItemAsync(item))">
+                    @onclick="@(async () => await ActivateItemAsync(item))">
                 @item.Title
             </button>
         }
@@ -73,7 +73,7 @@ else if (Mode == EOptionsTabMode.Stack)
     {
         Items.Add(item);
 
-        if (Items.Count == 1)
+        if (SelectedValue != null && EqualityComparer<TValue>.Default.Equals(item.Value, SelectedValue))
         {
             ActiveItem = item;
         }
@@ -94,4 +94,37 @@ else if (Mode == EOptionsTabMode.Stack)
     }
 
     private string GetIsActiveTabClass(OptionsTabItem<TValue> item) => item == ActiveItem ? "is-active" : string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        await SetActiveItemFromSelectedValue();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (SelectedValue != null &&
+            (ActiveItem == null || !EqualityComparer<TValue>.Default.Equals(ActiveItem.Value, SelectedValue)))
+        {
+            await SetActiveItemFromSelectedValue();
+        }
+    }
+
+    private async Task SetActiveItemFromSelectedValue()
+    {
+        if (SelectedValue != null && Items.Any())
+        {
+            OptionsTabItem<TValue>? itemToSelect = Items.FirstOrDefault(x => 
+                EqualityComparer<TValue>.Default.Equals(x.Value, SelectedValue));
+
+            if (itemToSelect != null)
+            {
+                await ActivateItemAsync(itemToSelect);
+            }
+            else
+            {
+                await ActivateItemAsync(Items[0]);
+            }
+        }
+    }
 }
