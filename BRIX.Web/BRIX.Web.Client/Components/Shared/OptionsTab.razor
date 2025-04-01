@@ -36,7 +36,7 @@ else if (Mode == EOptionsTabMode.Stack)
         @foreach (OptionsTabItem<TValue> item in Items)
         {
             <button class="button is-justify-content-start @GetIsActiveTabClass(item)"
-                    @onclick="@(async () => await ActivateItemAsync(item))">
+            @onclick="@(async () => await ActivateItemAsync(item))">
                 @item.Title
             </button>
         }
@@ -65,11 +65,11 @@ else if (Mode == EOptionsTabMode.Stack)
 
     public OptionsTabItem<TValue> ActiveItem { get; set; } = default!;
 
-    List<OptionsTabItem<TValue>> Items = [];
+    protected List<OptionsTabItem<TValue>> Items = [];
 
     public string _modalIsActiveClass = string.Empty;
 
-    public void AddItem(OptionsTabItem<TValue> item)
+    public virtual void AddItem(OptionsTabItem<TValue> item)
     {
         Items.Add(item);
 
@@ -103,8 +103,7 @@ else if (Mode == EOptionsTabMode.Stack)
 
     protected override async Task OnParametersSetAsync()
     {
-        if (SelectedValue != null &&
-            (ActiveItem == null || !EqualityComparer<TValue>.Default.Equals(ActiveItem.Value, SelectedValue)))
+        if (ActiveItem == null || !EqualityComparer<TValue>.Default.Equals(ActiveItem.Value, SelectedValue))
         {
             await SetActiveItemFromSelectedValue();
         }
@@ -112,19 +111,22 @@ else if (Mode == EOptionsTabMode.Stack)
 
     private async Task SetActiveItemFromSelectedValue()
     {
-        if (SelectedValue != null && Items.Any())
+        if (Items.Any())
         {
-            OptionsTabItem<TValue>? itemToSelect = Items.FirstOrDefault(x => 
-                EqualityComparer<TValue>.Default.Equals(x.Value, SelectedValue));
+            if (SelectedValue != null)
+            {
+                OptionsTabItem<TValue>? itemToSelect = Items.FirstOrDefault(x =>
+                    EqualityComparer<TValue>.Default.Equals(x.Value, SelectedValue));
 
-            if (itemToSelect != null)
-            {
-                await ActivateItemAsync(itemToSelect);
+                if (itemToSelect != null)
+                {
+                    await ActivateItemAsync(itemToSelect);
+
+                    return;
+                }
             }
-            else
-            {
-                await ActivateItemAsync(Items[0]);
-            }
+
+            await ActivateItemAsync(Items[0]);
         }
     }
 }

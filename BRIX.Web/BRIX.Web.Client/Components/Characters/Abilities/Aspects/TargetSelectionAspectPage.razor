@@ -2,6 +2,11 @@
 
 @page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects/{EffectType}/{EffectOrderNumber:int}/tse"
 
+@if (aspect is null)
+{
+    return;
+}
+
 <div class="box">
     <p class="title block">@Localization[nameof(Resource.Abilities_Aspect_TargetSelectionAspect)]</p>
     
@@ -73,7 +78,7 @@
     [Parameter]
     public int EffectOrderNumber { get; set; }
 
-    TargetSelectionAspect aspect = new();
+    TargetSelectionAspect? aspect;
 
     protected override void InitializeAlso()
     {
