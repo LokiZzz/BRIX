@@ -9,8 +9,6 @@
 
 <div class="box">
     <p class="title block">@Localization[nameof(Resource.Abilities_Aspect_TargetSelectionAspect)]</p>
-    
-    <p class="title block">@aspect.Strategy</p>
 
     <OptionsTab Mode="EOptionsTabMode.Stack"
                 TValue="ETargetSelectionStrategy"
@@ -23,6 +21,14 @@
                         Value="ETargetSelectionStrategy.CharacterHimself" />
     </OptionsTab>
 </div>
+
+@if (aspect.Strategy == ETargetSelectionStrategy.CharacterHimself)
+{
+    <div class="box">
+        <p class="title block">@Localization[nameof(Resource.ETargetSelectionStrategy_CharacterHimself)]</p>
+        <p class="block">@Localization[nameof(Resource.ETargetSelectionStrategy_CharacterHimself_Hint)]</p>
+    </div>
+}
 
 @if (aspect.Strategy == ETargetSelectionStrategy.NTargetsAtDistanсeL)
 {
