@@ -4,11 +4,11 @@ namespace BRIX.Library.Mathematics
 {
     public class VolumeShape
     {
-        private readonly Brick _brick = new();
-        private readonly Sphere _sphere = new();
-        private readonly Cylinder _cylinder = new();
-        private readonly Cone _cone = new();
-        private readonly VoxelArray _voxelArray = new();
+        public readonly Brick Brick = new();
+        public readonly Sphere Sphere = new();
+        public readonly Cylinder Cylinder = new();
+        public readonly Cone Cone = new();
+        public readonly VoxelArray VoxelArray = new();
 
         public EAreaType ShapeType { get; set; } = EAreaType.Brick;
 
@@ -19,15 +19,15 @@ namespace BRIX.Library.Mathematics
                 switch (ShapeType)
                 {
                     case EAreaType.Brick:
-                        return _brick;
+                        return Brick;
                     case EAreaType.Sphere:
-                        return _sphere;
+                        return Sphere;
                     case EAreaType.Cylinder:
-                        return _cylinder;
+                        return Cylinder;
                     case EAreaType.Cone:
-                        return _cone;
+                        return Cone;
                     case EAreaType.VoxelArray:
-                        return _voxelArray;
+                        return VoxelArray;
                     default:
                         throw new Exception($"Неконсистетное состояние модели {nameof(VolumeShape)}"); ;
                 }

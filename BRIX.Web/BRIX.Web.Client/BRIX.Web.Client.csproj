@@ -66,4 +66,9 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\abilities\" />
+    <Folder Include="wwwroot\assets\inventory\" />
+  </ItemGroup>
+
 </Project>

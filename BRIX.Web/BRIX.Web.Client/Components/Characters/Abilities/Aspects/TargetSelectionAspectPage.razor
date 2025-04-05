@@ -34,7 +34,6 @@
 {
     <div class="box">
         <p class="title block">
-
             @Localization[nameof(Resource.ETargetSelectionStrategy_NTargetsAtDistanсeL)]
         </p>
         <p class="block">@Localization[nameof(Resource.ETargetSelectionStrategy_NTargetsAtDistanсeL_Hint)]</p>
@@ -49,6 +48,80 @@
         <p class="block">@Localization[nameof(Resource.Abilities_RandomTargetSelection_Hint)]</p>
         <Toggle @bind-Value="aspect.NTAD.IsTargetSelectionIsRandom" @bind-Value:after="Layout.Refresh"
                 Text="@Localization[nameof(Resource.Abilities_IsTargetSelectionIsRandom)]" />
+    </div>
+}
+
+@if (aspect.Strategy == ETargetSelectionStrategy.Area)
+{
+    <div class="box">
+        <p class="title block">@Localization[nameof(Resource.ETargetSelectionStrategy_Area)]</p>
+        <p class="block">@Localization[nameof(Resource.ETargetSelectionStrategy_Area_Hint)]</p>
+        <Toggle @bind-Value="aspect.AreaSettings.SpreadsAroundCorners" @bind-Value:after="Layout.Refresh"
+                Text="@Localization[nameof(Resource.Abilities_AbilitySpreadsAroundCorners)]" />
+        <Field @bind-Value="aspect.AreaSettings.DistanceToAreaInMeters" @bind-Value:after="Layout.Refresh"
+               Label="@Localization[nameof(Resource.Abilities_DistanceToAreaInMeters)]" />
+        <p class="title block">@Localization[nameof(Resource.Abilities_Area)]</p>
+        <OptionsTab TValue="EAreaType" @bind-SelectedValue="aspect.AreaSettings.Area.ShapeType">
+            <OptionsTabItem Image="assets/abilities/brick_icon.svg" Value="EAreaType.Brick">
+                <figure class="image is-128x128 is-5by3">
+                    <img src="assets/abilities/brick_scheme.svg" />
+                </figure>
+                <div class="columns">
+                    <Field @bind-Value="aspect.AreaSettings.Area.Brick.A" @bind-Value:after="Layout.Refresh"
+                           Label="@Localization[nameof(Resource.Abilities_LengthA)]" />
+                    <Field @bind-Value="aspect.AreaSettings.Area.Brick.B" @bind-Value:after="Layout.Refresh"
+                           Label="@Localization[nameof(Resource.Abilities_WidthB)]" />
+                    <Field @bind-Value="aspect.AreaSettings.Area.Brick.C" @bind-Value:after="Layout.Refresh"
+                           Label="@Localization[nameof(Resource.Abilities_HeightC)]" />
+                </div>
+            </OptionsTabItem>
+            <OptionsTabItem Image="assets/abilities/sphere_icon.svg" Value="EAreaType.Sphere">
+                <figure class="image is-128x128 is-5by3">
+                    <img src="assets/abilities/sphere_scheme.svg" />
+                </figure>
+                <Field @bind-Value="aspect.AreaSettings.Area.Sphere.R" @bind-Value:after="Layout.Refresh"
+                       Label="@Localization[nameof(Resource.Abilities_RadiusR)]" />
+            </OptionsTabItem>
+            <OptionsTabItem Image="assets/abilities/cylinder_icon.svg" Value="EAreaType.Cylinder">
+                <figure class="image is-128x128 is-5by3">
+                    <img src="assets/abilities/cylinder_scheme.svg" />
+                </figure>
+                <div class="columns">
+                    <Field @bind-Value="aspect.AreaSettings.Area.Cylinder.R" @bind-Value:after="Layout.Refresh"
+                           Label="@Localization[nameof(Resource.Abilities_RadiusR)]" />
+                    <Field @bind-Value="aspect.AreaSettings.Area.Cylinder.H" @bind-Value:after="Layout.Refresh"
+                           Label="@Localization[nameof(Resource.Abilities_HeightH)]" />
+                </div>
+            </OptionsTabItem>
+            <OptionsTabItem Image="assets/abilities/cone_icon.svg" Value="EAreaType.Cone">
+                <figure class="image is-128x128 is-5by3">
+                    <img src="assets/abilities/cone_scheme.svg" />
+                </figure>
+                <div class="columns">
+                    <Field @bind-Value="aspect.AreaSettings.Area.Cone.R" @bind-Value:after="Layout.Refresh"
+                           Label="@Localization[nameof(Resource.Abilities_RadiusR)]" />
+                    <Field @bind-Value="aspect.AreaSettings.Area.Cone.H" @bind-Value:after="Layout.Refresh"
+                           Label="@Localization[nameof(Resource.Abilities_HeightH)]" />
+                </div>
+            </OptionsTabItem>
+            <OptionsTabItem Image="assets/abilities/cross_icon.svg" Value="EAreaType.VoxelArray">
+                <figure class="image is-128x128 is-5by3">
+                    <img src="assets/abilities/cross_scheme.svg" />
+                </figure>
+                <p class="block">@Localization[nameof(Resource.Abilities_VoxelArrayHint)]</p>
+                <Field @bind-Value="aspect.AreaSettings.Area.VoxelArray.N" @bind-Value:after="Layout.Refresh"
+                       Label="@Localization[nameof(Resource.Abilities_NumberOfVoxelsN)]" />
+                <Toggle @bind-Value="aspect.AreaSettings.Area.VoxelArray.IsArbitrary" @bind-Value:after="Layout.Refresh"
+                        Text="@Localization[nameof(Resource.Abilities_IsVoxelsArbitrary)]" />
+            </OptionsTabItem>
+        </OptionsTab>
+    </div>
+
+    <div class="box">
+        <p class="title block">@Localization[nameof(Resource.Abilities_ExcludeTargets)]</p>
+        <p class="block">@Localization[nameof(Resource.Abilities_ExcludeTargets_Hint)]</p>
+        <Field @bind-Value="aspect.AreaSettings.ExcludedTargetsCount" @bind-Value:after="Layout.Refresh"
+               Label="@Localization[nameof(Resource.Abilities_ExcludedTargetsCount)]" />
     </div>
 }
 

@@ -70,6 +70,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is ability spreads around corners?.
+        /// </summary>
+        public static string Abilities_AbilitySpreadsAroundCorners {
+            get {
+                return ResourceManager.GetString("Abilities_AbilitySpreadsAroundCorners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Action points.
         /// </summary>
         public static string Abilities_ActionPoints {
@@ -120,6 +129,15 @@ namespace BRIX.Web.Client.Localization {
         public static string Abilities_ActivationTriggers {
             get {
                 return ResourceManager.GetString("Abilities_ActivationTriggers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Area.
+        /// </summary>
+        public static string Abilities_Area {
+            get {
+                return ResourceManager.GetString("Abilities_Area", resourceCulture);
             }
         }
         
@@ -241,6 +259,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Distance to area (D).
+        /// </summary>
+        public static string Abilities_DistanceToAreaInMeters {
+            get {
+                return ResourceManager.GetString("Abilities_DistanceToAreaInMeters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Effects.
         /// </summary>
         public static string Abilities_Effects {
@@ -304,11 +331,74 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Excluded targets count.
+        /// </summary>
+        public static string Abilities_ExcludedTargetsCount {
+            get {
+                return ResourceManager.GetString("Abilities_ExcludedTargetsCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exclude targets.
+        /// </summary>
+        public static string Abilities_ExcludeTargets {
+            get {
+                return ResourceManager.GetString("Abilities_ExcludeTargets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It is possible to fine-tune the area so that certain targets in the area selected by the character will not be affected. The more such targets a character can exclude, the more expensive the ability..
+        /// </summary>
+        public static string Abilities_ExcludeTargets_Hint {
+            get {
+                return ResourceManager.GetString("Abilities_ExcludeTargets_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height (C).
+        /// </summary>
+        public static string Abilities_HeightC {
+            get {
+                return ResourceManager.GetString("Abilities_HeightC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height (H).
+        /// </summary>
+        public static string Abilities_HeightH {
+            get {
+                return ResourceManager.GetString("Abilities_HeightH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is target selection is random?.
         /// </summary>
         public static string Abilities_IsTargetSelectionIsRandom {
             get {
                 return ResourceManager.GetString("Abilities_IsTargetSelectionIsRandom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are the voxels positioned arbitrary each time?.
+        /// </summary>
+        public static string Abilities_IsVoxelsArbitrary {
+            get {
+                return ResourceManager.GetString("Abilities_IsVoxelsArbitrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Length (A).
+        /// </summary>
+        public static string Abilities_LengthA {
+            get {
+                return ResourceManager.GetString("Abilities_LengthA", resourceCulture);
             }
         }
         
@@ -345,6 +435,24 @@ namespace BRIX.Web.Client.Localization {
         public static string Abilities_NumberOfTargets {
             get {
                 return ResourceManager.GetString("Abilities_NumberOfTargets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of voxels (N).
+        /// </summary>
+        public static string Abilities_NumberOfVoxelsN {
+            get {
+                return ResourceManager.GetString("Abilities_NumberOfVoxelsN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Radius (R).
+        /// </summary>
+        public static string Abilities_RadiusR {
+            get {
+                return ResourceManager.GetString("Abilities_RadiusR", resourceCulture);
             }
         }
         
@@ -453,6 +561,24 @@ namespace BRIX.Web.Client.Localization {
         public static string Abilities_UsesCount {
             get {
                 return ResourceManager.GetString("Abilities_UsesCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A voxel is a 1x1 meter cube. From such voxels, you can make an array — the figure of the area in which the effect will be applied to the targets. In the picture an area of ​​five voxels is composed as an example. The maximum distance between adjacent voxels should not exceed the distance from the character to the area..
+        /// </summary>
+        public static string Abilities_VoxelArrayHint {
+            get {
+                return ResourceManager.GetString("Abilities_VoxelArrayHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width (B).
+        /// </summary>
+        public static string Abilities_WidthB {
+            get {
+                return ResourceManager.GetString("Abilities_WidthB", resourceCulture);
             }
         }
         
@@ -943,7 +1069,7 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to With this strategy the effect is applying to targets located in the specified are. All area parameters are specified in meters. An area can be placed at any angle relative to character. The area distance is the distance from the character to the nearest point of that area..
+        ///   Looks up a localized string similar to With this strategy, the effect is applied to targets located in the specified area. All area parameters are specified in meters. An area can be placed at any angle relative to the character, and the area distance is the distance from the character to the nearest point in that area..
         /// </summary>
         public static string ETargetSelectionStrategy_Area_Hint {
             get {
@@ -979,7 +1105,7 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to With this strategy the effect is applied to a limited number of targets that are no farther than the set range. All targets must be unique..
+        ///   Looks up a localized string similar to With this strategy, the effect is applied to a limited number of targets that are no further than the set range. You can not choose same target multiple times..
         /// </summary>
         public static string ETargetSelectionStrategy_NTargetsAtDistanсeL_Hint {
             get {

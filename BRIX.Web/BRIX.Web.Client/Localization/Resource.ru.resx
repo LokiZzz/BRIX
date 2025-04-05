@@ -430,13 +430,13 @@
     <value>Язык</value>
   </data>
   <data name="ETargetSelectionStrategy_NTargetsAtDistanсeL_Hint" xml:space="preserve">
-    <value>С этой стратегией эффект будет применён к заданному количеству целей, которые расположены не дальше определённого расстояния. Каждая цель должна быть уникальной.</value>
+    <value>С этой стратегией эффект применяется на ограниченное количество целей, которые распологаются не далее чем на заданном расстоянии. Нельзя выбрать одну и ту же цель несколько раз.</value>
   </data>
   <data name="ETargetSelectionStrategy_CharacterHimself_Hint" xml:space="preserve">
     <value>Целью является сам персонаж.</value>
   </data>
   <data name="ETargetSelectionStrategy_Area_Hint" xml:space="preserve">
-    <value>С этой стратегией эффект будет применён ко всем целям, находящимся в пределах указанной области. Размеры области указываются в метрах. Область может быть расположена под любым углом относительно персонажа. Расстоянием до области считается расстояние от персонажа до ближайшей точки этой области.</value>
+    <value>С этой стратегией эффект применяется на располагающиеся в заданной области цели. Все параметры области указываются в метрах. Область может быть размещена под любым углом относительно персонажа, а расстояние до области — это расстояние от персонажа до ближайшей точки этой области.</value>
   </data>
   <data name="Abilities_NumberOfTargets" xml:space="preserve">
     <value>Число целей</value>
@@ -479,5 +479,47 @@
   </data>
   <data name="Abilities_ShouldCharacterSeeTarget" xml:space="preserve">
     <value>Должен ли персонаж видеть цель?</value>
+  </data>
+  <data name="Abilities_ExcludeTargets" xml:space="preserve">
+    <value>Исключение целей</value>
+  </data>
+  <data name="Abilities_ExcludeTargets_Hint" xml:space="preserve">
+    <value>Существует возможность тонкой настройки области, при которой некоторые, выбранные персонажем, цели в области не будут подвержены эффекту. Чем больше таких целей персонаж может исключить, тем дороже способность.</value>
+  </data>
+  <data name="Abilities_ExcludedTargetsCount" xml:space="preserve">
+    <value>Количество целей</value>
+  </data>
+  <data name="Abilities_AbilitySpreadsAroundCorners" xml:space="preserve">
+    <value>Способность огибает углы?</value>
+  </data>
+  <data name="Abilities_DistanceToAreaInMeters" xml:space="preserve">
+    <value>Расстояние до области (D)</value>
+  </data>
+  <data name="Abilities_Area" xml:space="preserve">
+    <value>Область</value>
+  </data>
+  <data name="Abilities_LengthA" xml:space="preserve">
+    <value>Длина (А)</value>
+  </data>
+  <data name="Abilities_WidthB" xml:space="preserve">
+    <value>Ширина (В)</value>
+  </data>
+  <data name="Abilities_HeightC" xml:space="preserve">
+    <value>Высота (С)</value>
+  </data>
+  <data name="Abilities_RadiusR" xml:space="preserve">
+    <value>Радиус (R)</value>
+  </data>
+  <data name="Abilities_HeightH" xml:space="preserve">
+    <value>Высота (H)</value>
+  </data>
+  <data name="Abilities_NumberOfVoxelsN" xml:space="preserve">
+    <value>Количество вокселей (N)</value>
+  </data>
+  <data name="Abilities_VoxelArrayHint" xml:space="preserve">
+    <value>Воксель — это куб 1х1 метр. Из таких вокселей можно составлять массив — фигуру области, в которой к целям будет применяться эффект. На рисунке в качестве примера составлена область из пяти вокселей. Максимальное расстояние между соседними вокселями не должно превышать расстояние от персонажа до области.</value>
+  </data>
+  <data name="Abilities_IsVoxelsArbitrary" xml:space="preserve">
+    <value>Воксели каждый раз располагаются произвольным образом?</value>
   </data>
 </root>
