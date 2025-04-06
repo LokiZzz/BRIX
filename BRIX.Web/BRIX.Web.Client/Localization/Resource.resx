@@ -394,22 +394,22 @@
   <data name="Abilities_MonitorAvailiable" xml:space="preserve">
     <value>Availiable:</value>
   </data>
-  <data name="Abilities_Aspect_TargetSelectionAspect" xml:space="preserve">
+  <data name="Abilities_TargetSelectionAspect" xml:space="preserve">
     <value>Target selection</value>
   </data>
-  <data name="Abilities_Aspect_TargetSizeAspect" xml:space="preserve">
+  <data name="Abilities_TargetSizeAspect" xml:space="preserve">
     <value>Targets sizes</value>
   </data>
-  <data name="Abilities_Aspect_ActivationConditionsAspect" xml:space="preserve">
+  <data name="Abilities_ActivationConditionsAspect" xml:space="preserve">
     <value>Activation conditions</value>
   </data>
-  <data name="Abilities_Aspect_DurationAspect" xml:space="preserve">
+  <data name="Abilities_DurationAspect" xml:space="preserve">
     <value>Duration</value>
   </data>
-  <data name="Abilities_Aspect_AOEAspect" xml:space="preserve">
+  <data name="Abilities_AOEAspect" xml:space="preserve">
     <value>Area of effect</value>
   </data>
-  <data name="Abilities_Aspect_VampirismAspect" xml:space="preserve">
+  <data name="Abilities_VampirismAspect" xml:space="preserve">
     <value>Vampirism</value>
   </data>
   <data name="Abilities_Aspects" xml:space="preserve">
@@ -522,5 +522,17 @@
   </data>
   <data name="Abilities_IsVoxelsArbitrary" xml:space="preserve">
     <value>Are the voxels positioned arbitrary each time?</value>
+  </data>
+  <data name="Abilities_DurationAspect_Hint" xml:space="preserve">
+    <value>You can specify the number of rounds that the effect will last or repeat.</value>
+  </data>
+  <data name="Abilities_RoundsCount" xml:space="preserve">
+    <value>Rounds count</value>
+  </data>
+  <data name="Abilities_DurationAspectCanCancel" xml:space="preserve">
+    <value>Can the character cancel the effect?</value>
+  </data>
+  <data name="Abilities_DurationAspectCanCancel_Hint" xml:space="preserve">
+    <value>There is an option when a character can cancel a long-term effect that he himself creted without spending action points, but this option increases the cost of the ability.</value>
   </data>
 </root>

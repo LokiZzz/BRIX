@@ -1,7 +1,4 @@
-﻿@using BRIX.Library.Aspects.Base
-@using BRIX.Web.Client.Models.Characters
-
-<div class="box">
+﻿<div class="box">
     <p class="title">@Localization[nameof(Resource.Abilities_Aspects)]</p>
     <OptionsTabEmpty>
         @foreach (AspectVM aspect in aspects)
@@ -40,7 +37,7 @@
         return new AspectVM
         {
             Model = aspect,
-            Title = Localization[$"Abilities_Aspect_{aspect.GetType().Name}"],
+            Title = Localization[$"Abilities_{aspect.GetType().Name}"],
             Icon = fromDictionary.Icon,
             Route = fromDictionary.Route
         };

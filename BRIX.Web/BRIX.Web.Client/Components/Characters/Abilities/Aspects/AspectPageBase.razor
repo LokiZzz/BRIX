@@ -1,0 +1,28 @@
+﻿@inherits AbilityPageBase
+
+@typeparam TAspect where TAspect : AspectBase
+
+@code {
+    [Parameter]
+    public string EffectType { get; set; } = string.Empty;
+
+    [Parameter]
+    public int EffectOrderNumber { get; set; }
+
+    protected TAspect? aspect;
+
+    protected override void InitializeAlso()
+    {
+        EffectBase? effect = Ability.GetEffectByIndex(EffectOrderNumber);
+        TAspect? foundAspect = effect?.GetAspect<TAspect>();
+
+        if (foundAspect is null)
+        {
+            Navigation.NavigateTo("/404");
+        }
+        else
+        {
+            aspect = foundAspect;
+        }
+    }
+}

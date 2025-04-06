@@ -1,4 +1,4 @@
-﻿@inherits AbilityPageBase
+﻿@inherits AspectPageBase<TargetSelectionAspect>
 
 @page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects/{EffectType}/{EffectOrderNumber:int}/tse"
 
@@ -8,7 +8,7 @@
 }
 
 <div class="box">
-    <p class="title block">@Localization[nameof(Resource.Abilities_Aspect_TargetSelectionAspect)]</p>
+    <p class="title block">@Localization[nameof(Resource.Abilities_TargetSelectionAspect)]</p>
 
     <OptionsTab Mode="EOptionsTabMode.Stack"
                 TValue="ETargetSelectionStrategy"
@@ -148,29 +148,4 @@
         <Toggle @bind-Value="aspect.NeedToSeeTarget" @bind-Value:after="Layout.Refresh"
                 Text="@Localization[nameof(Resource.Abilities_ShouldCharacterSeeTarget)]" />
     </div>
-}
-
-@code {
-    [Parameter]
-    public string EffectType { get; set; } = string.Empty;
-
-    [Parameter]
-    public int EffectOrderNumber { get; set; }
-
-    TargetSelectionAspect? aspect;
-
-    protected override void InitializeAlso()
-    {
-        EffectBase? effect = Ability.GetEffectByIndex(EffectOrderNumber);
-        TargetSelectionAspect? foundAspect = effect?.GetAspect<TargetSelectionAspect>();
-
-        if (foundAspect is null)
-        {
-            Navigation.NavigateTo("/404");
-        }
-        else
-        {
-            aspect = foundAspect;
-        }
-    }
 }

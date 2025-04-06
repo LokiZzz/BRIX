@@ -115,6 +115,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activation conditions.
+        /// </summary>
+        public static string Abilities_ActivationConditionsAspect {
+            get {
+                return ResourceManager.GetString("Abilities_ActivationConditionsAspect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Activation trigger.
         /// </summary>
         public static string Abilities_ActivationTrigger {
@@ -133,6 +142,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Area of effect.
+        /// </summary>
+        public static string Abilities_AOEAspect {
+            get {
+                return ResourceManager.GetString("Abilities_AOEAspect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Area.
         /// </summary>
         public static string Abilities_Area {
@@ -147,60 +165,6 @@ namespace BRIX.Web.Client.Localization {
         public static string Abilities_AreYouSureReset {
             get {
                 return ResourceManager.GetString("Abilities_AreYouSureReset", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Activation conditions.
-        /// </summary>
-        public static string Abilities_Aspect_ActivationConditionsAspect {
-            get {
-                return ResourceManager.GetString("Abilities_Aspect_ActivationConditionsAspect", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Area of effect.
-        /// </summary>
-        public static string Abilities_Aspect_AOEAspect {
-            get {
-                return ResourceManager.GetString("Abilities_Aspect_AOEAspect", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Duration.
-        /// </summary>
-        public static string Abilities_Aspect_DurationAspect {
-            get {
-                return ResourceManager.GetString("Abilities_Aspect_DurationAspect", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Target selection.
-        /// </summary>
-        public static string Abilities_Aspect_TargetSelectionAspect {
-            get {
-                return ResourceManager.GetString("Abilities_Aspect_TargetSelectionAspect", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Targets sizes.
-        /// </summary>
-        public static string Abilities_Aspect_TargetSizeAspect {
-            get {
-                return ResourceManager.GetString("Abilities_Aspect_TargetSizeAspect", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Vampirism.
-        /// </summary>
-        public static string Abilities_Aspect_VampirismAspect {
-            get {
-                return ResourceManager.GetString("Abilities_Aspect_VampirismAspect", resourceCulture);
             }
         }
         
@@ -264,6 +228,42 @@ namespace BRIX.Web.Client.Localization {
         public static string Abilities_DistanceToAreaInMeters {
             get {
                 return ResourceManager.GetString("Abilities_DistanceToAreaInMeters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration.
+        /// </summary>
+        public static string Abilities_DurationAspect {
+            get {
+                return ResourceManager.GetString("Abilities_DurationAspect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can specify the number of rounds that the effect will last or repeat..
+        /// </summary>
+        public static string Abilities_DurationAspect_Hint {
+            get {
+                return ResourceManager.GetString("Abilities_DurationAspect_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can the character cancel the effect?.
+        /// </summary>
+        public static string Abilities_DurationAspectCanCancel {
+            get {
+                return ResourceManager.GetString("Abilities_DurationAspectCanCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is an option when a character can cancel a long-term effect that he himself creted without spending action points, but this option increases the cost of the ability..
+        /// </summary>
+        public static string Abilities_DurationAspectCanCancel_Hint {
+            get {
+                return ResourceManager.GetString("Abilities_DurationAspectCanCancel_Hint", resourceCulture);
             }
         }
         
@@ -475,6 +475,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rounds count.
+        /// </summary>
+        public static string Abilities_RoundsCount {
+            get {
+                return ResourceManager.GetString("Abilities_RoundsCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Should the character see the target?.
         /// </summary>
         public static string Abilities_ShouldCharacterSeeTarget {
@@ -498,6 +507,24 @@ namespace BRIX.Web.Client.Localization {
         public static string Abilities_TargetChain_Hint {
             get {
                 return ResourceManager.GetString("Abilities_TargetChain_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target selection.
+        /// </summary>
+        public static string Abilities_TargetSelectionAspect {
+            get {
+                return ResourceManager.GetString("Abilities_TargetSelectionAspect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Targets sizes.
+        /// </summary>
+        public static string Abilities_TargetSizeAspect {
+            get {
+                return ResourceManager.GetString("Abilities_TargetSizeAspect", resourceCulture);
             }
         }
         
@@ -561,6 +588,15 @@ namespace BRIX.Web.Client.Localization {
         public static string Abilities_UsesCount {
             get {
                 return ResourceManager.GetString("Abilities_UsesCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vampirism.
+        /// </summary>
+        public static string Abilities_VampirismAspect {
+            get {
+                return ResourceManager.GetString("Abilities_VampirismAspect", resourceCulture);
             }
         }
         

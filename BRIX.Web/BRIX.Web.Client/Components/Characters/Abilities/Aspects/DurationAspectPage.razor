@@ -1,0 +1,18 @@
+﻿@inherits AspectPageBase<DurationAspect>
+
+@page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects/{EffectType}/{EffectOrderNumber:int}/dur"
+
+@if (aspect is null)
+{
+    return;
+}
+
+<div class="box">
+    <p class="title block">@Localization[nameof(Resource.Abilities_DurationAspect)]</p>
+    <p class="block">@Localization[nameof(Resource.Abilities_DurationAspect_Hint)]</p>
+    <Field @bind-Value="aspect.Duration" @bind-Value:after="Layout.Refresh"
+           Label="@Localization[nameof(Resource.Abilities_RoundsCount)]" />
+    <p class="block">@Localization[nameof(Resource.Abilities_DurationAspectCanCancel_Hint)]</p>
+    <Toggle @bind-Value="aspect.CanDisableStatus" @bind-Value:after="Layout.Refresh"
+            Text="@Localization[nameof(Resource.Abilities_DurationAspectCanCancel)]" />
+</div>

@@ -393,22 +393,22 @@
   <data name="Abilities_MonitorAvailiable" xml:space="preserve">
     <value>Осталось:</value>
   </data>
-  <data name="Abilities_Aspect_TargetSelectionAspect" xml:space="preserve">
+  <data name="Abilities_TargetSelectionAspect" xml:space="preserve">
     <value>Выбор цели</value>
   </data>
-  <data name="Abilities_Aspect_TargetSizeAspect" xml:space="preserve">
+  <data name="Abilities_TargetSizeAspect" xml:space="preserve">
     <value>Размеры целей</value>
   </data>
-  <data name="Abilities_Aspect_ActivationConditionsAspect" xml:space="preserve">
+  <data name="Abilities_ActivationConditionsAspect" xml:space="preserve">
     <value>Условия активации</value>
   </data>
-  <data name="Abilities_Aspect_DurationAspect" xml:space="preserve">
+  <data name="Abilities_DurationAspect" xml:space="preserve">
     <value>Длительность</value>
   </data>
-  <data name="Abilities_Aspect_AOEAspect" xml:space="preserve">
+  <data name="Abilities_AOEAspect" xml:space="preserve">
     <value>Область действия</value>
   </data>
-  <data name="Abilities_Aspect_VampirismAspect" xml:space="preserve">
+  <data name="Abilities_VampirismAspect" xml:space="preserve">
     <value>Вампиризм</value>
   </data>
   <data name="Abilities_Aspects" xml:space="preserve">
@@ -521,5 +521,17 @@
   </data>
   <data name="Abilities_IsVoxelsArbitrary" xml:space="preserve">
     <value>Воксели каждый раз располагаются произвольным образом?</value>
+  </data>
+  <data name="Abilities_DurationAspect_Hint" xml:space="preserve">
+    <value>Вы можете указать количество раундов, которое эффект будет действовать или повторяться.</value>
+  </data>
+  <data name="Abilities_RoundsCount" xml:space="preserve">
+    <value>Количество раундов</value>
+  </data>
+  <data name="Abilities_DurationAspectCanCancel" xml:space="preserve">
+    <value>Персонаж может отменить эффект?</value>
+  </data>
+  <data name="Abilities_DurationAspectCanCancel_Hint" xml:space="preserve">
+    <value>Если эта опция включена,то персонаж может отменить эффект с указанным временем действия не затрачивая очков действий. Но с такой опцией способность станет дороже.</value>
   </data>
 </root>
