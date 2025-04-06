@@ -1,0 +1,23 @@
+﻿@inherits AbilityPageBase
+
+@typeparam TEffect where TEffect : EffectBase
+
+@code {
+    [Parameter]
+    public int EffectOrderNumber { get; set; }
+
+    public TEffect? Effect;
+
+    // TODO: Можно вынести инициализацию эффекта в базовый класс страницы эффекта (EffectPageBase)
+    // Но нужно сделать это через дженерик (так вроде можно)
+
+    protected override void InitializeAlso()
+    {
+        Effect = Ability.GetEffectByIndex<TEffect>(EffectOrderNumber);
+
+        if (Effect is null)
+        {
+            Navigation.NavigateTo("/404");
+        }
+    }
+}

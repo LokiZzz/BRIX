@@ -310,7 +310,7 @@
   <data name="Effect_DamageEffect" xml:space="preserve">
     <value>Damage</value>
   </data>
-  <data name="Effect_DamageHint" xml:space="preserve">
+  <data name="Effect_DamageEffect_Hint" xml:space="preserve">
     <value>Each time you use your ability, roll a set of dice, which you specify below, to determine how much damage the ability has done.</value>
   </data>
   <data name="Abilities_AbilityCost" xml:space="preserve">
@@ -534,5 +534,11 @@
   </data>
   <data name="Abilities_DurationAspectCanCancel_Hint" xml:space="preserve">
     <value>There is an option when a character can cancel a long-term effect that he himself creted without spending action points, but this option increases the cost of the ability.</value>
+  </data>
+  <data name="Effect_HealEffect" xml:space="preserve">
+    <value>Heal</value>
+  </data>
+  <data name="Effect_HealEffect_Hint" xml:space="preserve">
+    <value />
   </data>
 </root>

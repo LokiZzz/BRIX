@@ -18,6 +18,6 @@
         Ability.AddEffect(newEffect);
         int effectIndex = Ability.GetEffectIndex(newEffect);
 
-        Navigation.NavigateToRelative($"{effect.Route}?n={effectIndex}");
+        Navigation.NavigateToRelative($"{effect.Route}/{effectIndex}");
     }
 }

@@ -1089,9 +1089,27 @@ namespace BRIX.Web.Client.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Each time you use your ability, roll a set of dice, which you specify below, to determine how much damage the ability has done..
         /// </summary>
-        public static string Effect_DamageHint {
+        public static string Effect_DamageEffect_Hint {
             get {
-                return ResourceManager.GetString("Effect_DamageHint", resourceCulture);
+                return ResourceManager.GetString("Effect_DamageEffect_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heal.
+        /// </summary>
+        public static string Effect_HealEffect {
+            get {
+                return ResourceManager.GetString("Effect_HealEffect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Effect_HealEffect_Hint {
+            get {
+                return ResourceManager.GetString("Effect_HealEffect_Hint", resourceCulture);
             }
         }
         

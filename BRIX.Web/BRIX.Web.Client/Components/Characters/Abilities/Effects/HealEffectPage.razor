@@ -1,0 +1,17 @@
+﻿@inherits EffectPageBase<HealEffect>
+
+@page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects/heal/{EffectOrderNumber:int}"
+
+@if (Effect is null)
+{
+    return;
+}
+
+<div class="box">
+    <p class="title">@Localization[nameof(Resource.Effect_HealEffect)]</p>
+    <p class="block">@Localization[nameof(Resource.Effect_HealEffect_Hint)]</p>
+    <DiceField Placeholder="@Localization[nameof(Resource.Effect_HealEffect)]"
+               @bind-Dice="Effect.Impact" @bind-Dice:after="Layout.Refresh" />
+</div>
+
+<AspectsPanel Aspects="Effect.Aspects" />
