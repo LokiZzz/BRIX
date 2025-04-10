@@ -21,15 +21,15 @@ namespace BRIX.GameService.Controllers.Characters
         public async Task<IActionResult> Get([FromQuery] List<Guid>? id)
         {
             User user = await _accountService.GetCurrentUserGuaranteed();
-            List<Character> characters = await _characterRepository.Get(user.Id, id);
+            List<Character> characters = await _characterRepository.GetCharacterAsync(user.Id, id);
 
             // TODO: УДАЛИТЬ ЭТО
-            if((await _characterRepository.Get(user.Id)).Count == 0)
+            if((await _characterRepository.GetCharacterAsync(user.Id)).Count == 0)
             {
-                await _characterRepository.Push(user.Id, new Character { Name = "Siliel", Experience = 900 });
-                await _characterRepository.Push(user.Id, new Character { Name = "Loki", Experience = 1500 });
-                await _characterRepository.Push(user.Id, new Character { Name = "Boblin", Experience = 150 });
-                characters = await _characterRepository.Get(user.Id, id);
+                await _characterRepository.PushCharacterAsync(user.Id, new Character { Name = "Siliel", Experience = 900 });
+                await _characterRepository.PushCharacterAsync(user.Id, new Character { Name = "Loki", Experience = 1500 });
+                await _characterRepository.PushCharacterAsync(user.Id, new Character { Name = "Boblin", Experience = 150 });
+                characters = await _characterRepository.GetCharacterAsync(user.Id, id);
             }
 
             return Ok(characters);
@@ -39,7 +39,7 @@ namespace BRIX.GameService.Controllers.Characters
         public async Task<IActionResult> Put([FromBody] Character character)
         {
             User user = await _accountService.GetCurrentUserGuaranteed();
-            await _characterRepository.Push(user.Id, character);
+            await _characterRepository.PushCharacterAsync(user.Id, character);
 
             return Ok();
         }
@@ -47,7 +47,7 @@ namespace BRIX.GameService.Controllers.Characters
         [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery] Guid id)
         {
-            await _characterRepository.Delete(id);
+            await _characterRepository.DeleteCharacterAsync(id);
             
             return Ok();
         }

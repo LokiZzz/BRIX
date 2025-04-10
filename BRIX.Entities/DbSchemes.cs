@@ -8,7 +8,7 @@
         public const string Accounts = "acc";
 
         /// <summary>
-        /// Игровые персонажи
+        /// Персонажи
         /// </summary>
         public const string Characters = "chr";
     }

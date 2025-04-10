@@ -10,14 +10,15 @@
     [Parameter]
     public int? AbilityNumber { get; set; }
 
-    public Ability Ability => AbilityNumber is null 
-        ? new()
-        : CharacterManager.EditingCharacter?.Abilities.ElementAtOrDefault(AbilityNumber.Value) ?? new();
+    [Parameter]
+    public string OwnerType { get; set; } = string.Empty;
 
-    public Character Character => CharacterManager.EditingCharacter ?? new();
+    public Ability Ability => GetAbility();
+
+    EAbilityOwner ownerType;
 
     /// <summary>
-    /// Базовая инициализация для страницы редактирования способности. Работает так, что пользователь даже перейдя по 
+    /// Инициализация для любой страницы редактирования способности. Работает так, что пользователь даже перейдя по 
     /// адресу напрямую, например, по ссылке, спровоцирует полноценную инициализацию необходимых свойств.
     /// </summary>
     /// <returns></returns>
@@ -70,6 +71,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        RouteToAbilityOwnerMap.TryGetValue(OwnerType, out ownerType);
+
         // Страница подписывается на сброс по кнопке в лейауте, чтобы инициализировать всё заново, если пользователь
         // решит сбросить все изменения.
         Layout.OnReset = async () => await InitializeAsync();
@@ -78,12 +81,34 @@
 
     protected override void OnParametersSet()
     {
-        if (AbilityNumber is null)
+        if (AbilityNumber is null && Layout.AbilityNumber is not null)
         {
-            if (Layout.AbilityNumber is not null)
-            {
-                AbilityNumber = Layout.AbilityNumber;
-            }
+            AbilityNumber = Layout.AbilityNumber;
         }
+    }
+
+    private Ability GetAbility()
+    {
+        return ownerType switch
+        {
+            EAbilityOwner.Character => AbilityNumber is null
+                ? new()
+                : CharacterManager.EditingCharacter?.Abilities.ElementAtOrDefault(AbilityNumber.Value) ?? new(),
+            _ => throw new NotImplementedException($"На странице не реализована поставка способности для {OwnerType}")
+        };
+    }
+
+    public Dictionary<string, EAbilityOwner> RouteToAbilityOwnerMap => new()
+    {
+        {"character", EAbilityOwner.Character },
+        {"npc", EAbilityOwner.Character },
+        {"artifact", EAbilityOwner.Character },
+    };
+
+    public enum EAbilityOwner
+    {
+        Character = 0,
+        NPC = 1,
+        Artifact = 2
     }
 }

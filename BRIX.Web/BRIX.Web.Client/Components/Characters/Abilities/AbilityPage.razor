@@ -1,14 +1,14 @@
 ﻿@inherits AbilityPageBase
 
-@page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}"
-@page "/characters/{CharacterId:guid}/abilities/new"
+@page "/{OwnerType}/{CharacterId:guid}/abilities/{AbilityNumber:int}"
+@page "/{OwnerType}/{CharacterId:guid}/abilities/new"
 
 @using BRIX.Web.Client.Models.Characters
 
 @* Название и описание *@
 <div class="box">
     <Field Label="@Localization[nameof(Resource.Common_Name)]" @bind-Value="Ability.Name" />
-    <TextAreaField Label="@Localization[nameof(Resource.Common_Description)]" @bind-Value="Ability.Description" MaxLength="150"/>
+    <TextAreaField Label="@Localization[nameof(Resource.Common_Description)]" @bind-Value="Ability.Description" MaxLength="150" />
 </div>
 
 @* Активация *@
@@ -24,7 +24,7 @@
     <i class="fa fa-plus-circle"></i>
 </button>
 
-@foreach(EffectBase effect in Ability.Effects)
+@foreach (EffectBase effect in Ability.Effects)
 {
     <div class="box">
         <p class="title">@Localization[effect.GetType().GetLocalizedName()]</p>
@@ -43,7 +43,7 @@
 @code {
     private void AddEffect()
     {
-        Navigation.NavigateTo($"/characters/{CharacterId}/abilities/{AbilityNumber}/effects");
+        Navigation.NavigateToRelative($"effects");
     }
 
     private void EditEffect(EffectBase effect)

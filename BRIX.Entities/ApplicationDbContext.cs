@@ -20,6 +20,11 @@ namespace BRIX.GameService.Entities
         public DbSet<PlayerCharacter> PlayerCharacters { get; set; } = default!;
 
         /// <summary>
+        /// NPC
+        /// </summary>
+        public DbSet<NPC> NPCs { get; set; } = default!;
+
+        /// <summary>
         /// Попытки подтверждения аккаунта через эмейл.
         /// </summary>
         public DbSet<EmailConfirmationTries> EmailConfirmationTries { get; set; } = default!;
@@ -27,7 +32,7 @@ namespace BRIX.GameService.Entities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserCharacterConfiguration).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(PlayerCharacterConfiguration).Assembly);
 
             // Переопределение названий таблиц Identity
             modelBuilder.Entity<User>().ToTable(nameof(User), DbSchemes.Accounts);

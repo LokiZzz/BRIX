@@ -14,7 +14,15 @@ namespace BRIX.GameService.Entities.Users
         /// Персонажи пользователя.
         /// </summary>
         public HashSet<PlayerCharacter> Characters { get; set; } = [];
-   
+
+        /// <summary>
+        /// NPC пользователя.
+        /// </summary>
+        public HashSet<NPC> NPCs { get; set; } = [];
+
+        /// <summary>
+        /// Попытки подтвердить электронную почту.
+        /// </summary>
         public HashSet<EmailConfirmationTries> EmailConfirmationTries { get; set; } = [];
     }
 
