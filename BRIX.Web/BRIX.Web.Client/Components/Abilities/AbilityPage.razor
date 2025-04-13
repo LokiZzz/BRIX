@@ -3,8 +3,6 @@
 @page "/{OwnerType}/{CharacterId:guid}/abilities/{AbilityNumber:int}"
 @page "/{OwnerType}/{CharacterId:guid}/abilities/new"
 
-@using BRIX.Web.Client.Models.Characters
-
 @* Название и описание *@
 <div class="box">
     <Field Label="@Localization[nameof(Resource.Common_Name)]" @bind-Value="Ability.Name" />

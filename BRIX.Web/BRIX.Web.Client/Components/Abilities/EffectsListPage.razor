@@ -1,8 +1,6 @@
-﻿@using BRIX.Web.Client.Models.Characters;
+﻿@inherits AbilityPageBase
 
-@inherits AbilityPageBase
-
-@page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects"
+@page "/{OwnerType}/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects"
 
 @foreach (EffectDictionaryVM effect in EffectsDictionary.Collection)
 {

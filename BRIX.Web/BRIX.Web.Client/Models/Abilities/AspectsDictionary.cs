@@ -2,9 +2,9 @@
 using BRIX.Library.Aspects;
 using BRIX.Library.Aspects.Base;
 
-namespace BRIX.Web.Client.Models.Characters
+namespace BRIX.Web.Client.Models.Abilities
 {
-    public class Aspects
+    public class AspectsDictionary
     {
         public static Dictionary<Type, AspectVM> Collection => new()
         {

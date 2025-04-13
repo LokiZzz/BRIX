@@ -20,6 +20,7 @@ namespace BRIX.Web.Client.Extensions
         public static void AddServices(this IServiceCollection services)
         {
             services.AddScoped<CharacterManager>();
+            services.AddScoped<NPCManager>();
             services.AddSingleton<ModalService>();
         }
 

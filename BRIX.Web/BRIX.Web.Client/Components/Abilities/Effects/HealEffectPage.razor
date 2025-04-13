@@ -1,6 +1,6 @@
 ﻿@inherits EffectPageBase<HealEffect>
 
-@page "/characters/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects/heal/{EffectOrderNumber:int}"
+@page "/{OwnerType}/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects/heal/{EffectOrderNumber:int}"
 
 @if (Effect is null)
 {

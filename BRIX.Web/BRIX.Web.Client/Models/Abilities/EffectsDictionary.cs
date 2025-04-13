@@ -1,6 +1,6 @@
 ﻿using BRIX.Library.Effects;
 
-namespace BRIX.Web.Client.Models.Characters
+namespace BRIX.Web.Client.Models.Abilities
 {
     public static class EffectsDictionary
     {

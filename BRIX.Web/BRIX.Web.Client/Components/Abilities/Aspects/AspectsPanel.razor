@@ -32,7 +32,7 @@
 
     private AspectVM GetVMFromAspectBase(AspectBase aspect)
     {
-        AspectVM fromDictionary = BRIX.Web.Client.Models.Characters.Aspects.Collection[aspect.GetType()];
+        AspectVM fromDictionary = AspectsDictionary.Collection[aspect.GetType()];
 
         return new AspectVM
         {
