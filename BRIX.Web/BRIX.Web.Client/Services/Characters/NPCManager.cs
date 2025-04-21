@@ -116,30 +116,30 @@ namespace BRIX.Web.Client.Services.Characters
             await SaveAsync(EditingNPC ?? throw new Exception("No editing NPC."));
 
         /// <summary>
-        /// Забрать персонажа с сервера и войти в режим редактирования.
+        /// Забрать персонажа с сервера и войти в режим редактирования. Если персонаж на сервере не найден — создать.
         /// </summary>
         public async Task EditNPCAsync(Guid id)
         {
-            NPC? npc = await GetAsync(id);
-
-            if (npc is not null)
-            {
-                EditNPC(npc);
-            }
+            NPC npc = await GetAsync(id) ?? new NPC();
+            EditNPC(npc);
         }
 
         /// <summary>
         /// Войти в режим редактирования. Персонаж копируется в свойство EditingCharacter и в любой момент
         /// изменения можно будет сбросить методов Reset, обнулив свойство и заново забрав персонажа с сервера.
         /// </summary>
-        public void EditNPC(NPC npc)
+        public void EditNPC(NPC? npc = null)
         {
-            if(EditingNPC is not null)
+            if(npc is not null)
             {
                 Reset();
+                EditingNPC = npc.Copy();
+            }
+            else
+            {
+                EditingNPC = new NPC();
             }
 
-            EditingNPC = npc.Copy();
             _navigation.LocationChanged += ResetIfExitEditing;
         }
 

@@ -1,7 +1,13 @@
 ﻿using BRIX.Lexica;
+using BRIX.Library.Characters;
 using BRIX.Library.Effects;
+using Newtonsoft.Json;
 
-EffectBase effect = new DamageEffect() { Impact = new(3, (2, 6)) };
-string lexis = await effect.ToLexisAsync(); 
+Character character = new();
+string json = JsonConvert.SerializeObject(character);
+Character? deserialized =  JsonConvert.DeserializeObject<Character>(json);
 
-Console.ReadLine();
+Guid original = character.Id;
+Guid? deserializedGuid = deserialized?.Id;
+
+bool allIsFine = original == deserializedGuid;

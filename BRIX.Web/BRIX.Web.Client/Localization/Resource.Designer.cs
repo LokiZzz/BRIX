@@ -1006,6 +1006,24 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NPC.
+        /// </summary>
+        public static string Common_NPC {
+            get {
+                return ResourceManager.GetString("Common_NPC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NPC&apos;s.
+        /// </summary>
+        public static string Common_NPCs {
+            get {
+                return ResourceManager.GetString("Common_NPCs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
         public static string Common_Ok {
@@ -1020,6 +1038,15 @@ namespace BRIX.Web.Client.Localization {
         public static string Common_Open {
             get {
                 return ResourceManager.GetString("Common_Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Power.
+        /// </summary>
+        public static string Common_Power {
+            get {
+                return ResourceManager.GetString("Common_Power", resourceCulture);
             }
         }
         
@@ -1105,7 +1132,7 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Each time you use the ability, roll the set of dice listed below to determine how many health points the ability restored..
         /// </summary>
         public static string Effect_HealEffect_Hint {
             get {
@@ -1191,6 +1218,33 @@ namespace BRIX.Web.Client.Localization {
         public static string ETriggerProbability_Medium {
             get {
                 return ResourceManager.GetString("ETriggerProbability_Medium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string NPC_Description {
+            get {
+                return ResourceManager.GetString("NPC_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Helath.
+        /// </summary>
+        public static string NPC_Health {
+            get {
+                return ResourceManager.GetString("NPC_Health", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string NPC_Name {
+            get {
+                return ResourceManager.GetString("NPC_Name", resourceCulture);
             }
         }
         

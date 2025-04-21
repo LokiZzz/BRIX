@@ -1,0 +1,74 @@
+﻿@page "/npcs"
+
+<div class="section">
+    <div class="container">
+        <h1 class="title">@Localization[nameof(Resource.Common_NPCs)]</h1>
+
+        @if (_npcs is not null)
+        {
+            <button class="button is-large is-fullwidth block" @onclick="@(async () => Add())">
+                <i class="fa fa-plus-circle"></i>
+            </button>
+
+            @foreach (NPC npc in _npcs)
+            {
+                <div class="box block">
+                    <p class="title">@npc.Name</p>
+                    <p class="subtitle">@Localization[nameof(Resource.Common_Power)]: @npc.Power</p>
+                    <div class="buttons">
+                        <button class="button" @onclick="@(() => Open(npc))">
+                            @Localization[nameof(Resource.Common_Open)]
+                        </button>
+                        <button class="button" @onclick="@(() => Edit(npc))">
+                            @Localization[nameof(Resource.Common_Edit)]
+                        </button>
+                        <button class="button is-danger" @onclick="@(() => Delete(npc))">
+                            @Localization[nameof(Resource.Common_Remove)]
+                        </button>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Characters is loading.</p>
+        }
+    </div>
+</div>
+
+@code {
+    private List<NPC>? _npcs = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _npcs = await NPCManager.GetAllAsync();
+    }
+
+    private void Add()
+    {
+        NPCManager.Reset();
+        NPCManager.EditNPC();
+        Navigation.NavigateTo($"/npcs/{NPCManager.EditingNPC?.Id}");
+    }
+
+    private void Edit(NPC npc)
+    {
+        NPCManager.EditNPC(npc);
+        Navigation.NavigateTo($"/npcs/{NPCManager.EditingNPC?.Id}");
+    }
+
+    private async Task Delete(NPC npc)
+    {
+        OperationResult result = await NPCManager.DeleteAsync(npc);
+
+        if (result.Successfull)
+        {
+            _npcs?.Remove(npc);
+        }
+    }
+
+    private void Open(NPC npc)
+    {
+        Navigation.NavigateTo($"/npcs/{npc.Id}");
+    }
+}

@@ -48,24 +48,25 @@ namespace BRIX.GameService.Services.Characters
         public async Task PushCharacterAsync(Guid userId, Character character)
         {
             using ApplicationDbContext context = _contextFactory.CreateDbContext();
-            string characterJson = JsonConvert.SerializeObject(character, _jsonSettings);
+            string json = JsonConvert.SerializeObject(character, _jsonSettings);
 
-            if (character.Id != default)
+            if (character.Id == default)
             {
-                PlayerCharacter? existingCharacter = context.PlayerCharacters
-                    .FirstOrDefault(x => x.Id == character.Id);
+                character.Id = Guid.NewGuid();
+            }
 
-                if (existingCharacter != null)
-                {
-                    existingCharacter.CharacterJsonData = characterJson;
-                }
+            PlayerCharacter? existingCharacter = context.PlayerCharacters.FirstOrDefault(x => x.Id == character.Id);
+
+            if (existingCharacter is not null)
+            {
+                existingCharacter.CharacterJsonData = json;
             }
             else
             {
                 context.PlayerCharacters.Add(new PlayerCharacter
                 {
                     UserId = userId,
-                    CharacterJsonData = characterJson
+                    CharacterJsonData = json
                 });
             }
 
@@ -127,15 +128,16 @@ namespace BRIX.GameService.Services.Characters
             using ApplicationDbContext context = _contextFactory.CreateDbContext();
             string json = JsonConvert.SerializeObject(npc, _jsonSettings);
 
-            if (npc.Id != default)
+            if (npc.Id == default)
             {
-                NPCDao? existingCharacter = context.NPCs
-                    .FirstOrDefault(x => x.Id == npc.Id);
+                npc.Id = Guid.NewGuid();
+            }
 
-                if (existingCharacter != null)
-                {
-                    existingCharacter.NPCJsonData = json;
-                }
+            NPCDao? existingNPC = context.NPCs.FirstOrDefault(x => x.Id == npc.Id);
+
+            if (existingNPC is not null)
+            {
+                existingNPC.NPCJsonData = json;
             }
             else
             {

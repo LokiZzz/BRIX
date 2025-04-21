@@ -132,14 +132,18 @@ namespace BRIX.Web.Client.Services.Characters
         /// Войти в режим редактирования. Персонаж копируется в свойство EditingCharacter и в любой момент
         /// изменения можно будет сбросить методов Reset, обнулив свойство и заново забрав персонажа с сервера.
         /// </summary>
-        public void EditCharacter(Character characterToEdit)
+        public void EditCharacter(Character? characterToEdit = null)
         {
-            if(EditingCharacter is not null)
+            if(characterToEdit is not null)
             {
                 Reset();
+                EditingCharacter = characterToEdit.Copy();
+            }
+            else
+            {
+                EditingCharacter = new Character();
             }
 
-            EditingCharacter = characterToEdit.Copy();
             _navigation.LocationChanged += ResetIfExitEditing;
         }
 

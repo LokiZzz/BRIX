@@ -21,10 +21,10 @@
             <AuthorizeView>
                 <Authorized>
                     <NavLink class="navbar-item" ActiveClass="is-active" href="/characters" Match="NavLinkMatch.Prefix">
-                        Characters
+                        @Localization[nameof(Resource.Common_Characters)]
                     </NavLink>
-                    <NavLink class="navbar-item" ActiveClass="is-active" href="/npc" Match="NavLinkMatch.Prefix">
-                        NPC's
+                    <NavLink class="navbar-item" ActiveClass="is-active" href="/npcs" Match="NavLinkMatch.Prefix">
+                        @Localization[nameof(Resource.Common_NPCs)]
                     </NavLink>
                 </Authorized>
             </AuthorizeView>

@@ -5,6 +5,8 @@ namespace BRIX.Library.Characters
 {
     public class NPC : CharacterBase
     {
+        public string Description { get; set; } = string.Empty;
+
         public int SetHealth { get; set; } = 10;
 
         public override int RawMaxHealth => SetHealth;

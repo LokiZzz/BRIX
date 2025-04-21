@@ -540,4 +540,22 @@
   <data name="Effect_HealEffect_Hint" xml:space="preserve">
     <value>Каждый раз, когда вы используете свою способность, бросайте набор костей, который укажите ниже, чтобы определить сколько очков здоровья восстановила способность.</value>
   </data>
+  <data name="Common_NPCs" xml:space="preserve">
+    <value>NPC</value>
+  </data>
+  <data name="Common_Power" xml:space="preserve">
+    <value>Мощь</value>
+  </data>
+  <data name="Common_NPC" xml:space="preserve">
+    <value>NPC</value>
+  </data>
+  <data name="NPC_Name" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="NPC_Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="NPC_Health" xml:space="preserve">
+    <value>Здоровье</value>
+  </data>
 </root>
