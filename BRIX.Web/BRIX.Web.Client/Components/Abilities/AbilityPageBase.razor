@@ -24,29 +24,11 @@
     /// <returns></returns>
     public async Task InitializeAsync()
     {
-        // Если персонаж для редактирования не выбран или не совпадает, то выбрать.
-        if (CharacterManager.EditingCharacter is null || CharacterManager.EditingCharacter.Id != OwnerId)
-        {
-            await CharacterManager.EditCharacterAsync(OwnerId);
-        }
+        int? abilityNumber = await CharacterManager.EditAbility(OwnerId, AbilityNumber);
 
-        if (CharacterManager.EditingCharacter is null)
-        {
-            Navigation.NavigateTo("/404");
+        // Отсюда начинается логика, которая не зависит от типа владельца способности. Это хорошо!
 
-            return;
-        }
-
-        // Если айди способности в параметрах не указан, значит её нужно создать и добавить персонажу,
-        // а потом установить её айди.
-        if (AbilityNumber is null)
-        {
-            Ability newAbility = new();
-            CharacterManager.EditingCharacter?.AddAbility(newAbility);
-            AbilityNumber = CharacterManager.EditingCharacter!.Abilities.IndexOf(newAbility);
-        }
-
-        if (CharacterManager.EditingCharacter?.Abilities.ElementAtOrDefault(AbilityNumber.Value) is null)
+        if (abilityNumber is null)
         {
             Navigation.NavigateTo("/404");
 
@@ -54,13 +36,9 @@
         }
 
         // Проставляем данные в лейауте
-        Layout.AbilityNumber = AbilityNumber;
+        Layout.AbilityNumber = AbilityNumber = abilityNumber;
         Layout.OwnerId = OwnerId;
-
-        // Конкретная страница-наследник тоже может дополнительно что-то инициализировать, например найти по праметрам
-        // из роутинга нужный эффект или аспект в способности.
         InitializeAlso();
-
         Layout.Refresh();
     }
 

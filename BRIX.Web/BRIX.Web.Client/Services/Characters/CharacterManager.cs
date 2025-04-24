@@ -1,4 +1,5 @@
-﻿using BRIX.Library.Characters;
+﻿using BRIX.Library.Abilities;
+using BRIX.Library.Characters;
 using BRIX.Utility.Extensions;
 using BRIX.Web.Client.Extensions;
 using BRIX.Web.Client.Models.Common;
@@ -151,6 +152,44 @@ namespace BRIX.Web.Client.Services.Characters
         {
             EditingCharacter = null;
             _navigation.LocationChanged -= ResetIfExitEditing;
+        }
+
+        /// <summary>
+        /// Инициализация процесса редактирования для способности. Позволяет идемпотентно инциализировать нужные
+        /// свойства. Инициалзиация произойдёт корректно, даже если пользователь перейдёт по адресу напрямую, например,
+        /// по ссылке. Если порядковый номер способности не указан, то метод добавит персонажу новую способность.
+        /// </summary>
+        /// <returns>
+        /// Порядковый номер способности, необходимый при навигации, если что-то пошло не так, то вернёт null
+        /// </returns>
+        public async Task<int?> EditAbility(Guid characterId, int? abilityNumber = null)
+        {
+            // Если персонаж для редактирования не выбран или не совпадает, то выбрать.
+            if (EditingCharacter is null || EditingCharacter.Id != characterId)
+            {
+                await EditCharacterAsync(characterId);
+            }
+
+            if (EditingCharacter is null)
+            {
+                return null;
+            }
+
+            // Если айди способности в параметрах не указан, значит её нужно создать и добавить персонажу,
+            // а потом установить её айди.
+            if (abilityNumber is null)
+            {
+                Ability newAbility = new();
+                EditingCharacter?.AddAbility(newAbility);
+                abilityNumber = EditingCharacter!.Abilities.IndexOf(newAbility);
+            }
+
+            if (EditingCharacter?.Abilities.ElementAtOrDefault(abilityNumber.Value) is null)
+            {
+                return null;
+            }
+
+            return abilityNumber;
         }
 
         private void ResetIfExitEditing(object? sender, LocationChangedEventArgs e)
