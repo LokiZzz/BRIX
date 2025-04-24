@@ -1,6 +1,6 @@
 ﻿@inherits AbilityPageBase
 
-@page "/{OwnerType}/{CharacterId:guid}/abilities/{AbilityNumber:int}/effects"
+@page "/{OwnerType}/{OwnerId:guid}/abilities/{AbilityNumber:int}/effects"
 
 @foreach (EffectDictionaryVM effect in EffectsDictionary.Collection)
 {

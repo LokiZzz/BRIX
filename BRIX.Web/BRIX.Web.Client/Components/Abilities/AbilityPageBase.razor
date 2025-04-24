@@ -5,17 +5,17 @@
     public AbilityLayout Layout { get; set; } = default!;
 
     [Parameter]
-    public Guid CharacterId { get; set; }
-
-    [Parameter]
-    public int? AbilityNumber { get; set; }
+    public Guid OwnerId { get; set; }
 
     [Parameter]
     public string OwnerType { get; set; } = string.Empty;
 
-    public Ability Ability => GetAbility();
+    [Parameter]
+    public int? AbilityNumber { get; set; }
 
-    EAbilityOwner ownerType;
+    protected Ability Ability => GetAbility();
+
+    private EAbilityOwner ownerType;
 
     /// <summary>
     /// Инициализация для любой страницы редактирования способности. Работает так, что пользователь даже перейдя по 
@@ -25,9 +25,9 @@
     public async Task InitializeAsync()
     {
         // Если персонаж для редактирования не выбран или не совпадает, то выбрать.
-        if (CharacterManager.EditingCharacter is null || CharacterManager.EditingCharacter.Id != CharacterId)
+        if (CharacterManager.EditingCharacter is null || CharacterManager.EditingCharacter.Id != OwnerId)
         {
-            await CharacterManager.EditCharacterAsync(CharacterId);
+            await CharacterManager.EditCharacterAsync(OwnerId);
         }
 
         if (CharacterManager.EditingCharacter is null)
@@ -55,7 +55,7 @@
 
         // Проставляем данные в лейауте
         Layout.AbilityNumber = AbilityNumber;
-        Layout.CharacterId = CharacterId;
+        Layout.OwnerId = OwnerId;
 
         // Конкретная страница-наследник тоже может дополнительно что-то инициализировать, например найти по праметрам
         // из роутинга нужный эффект или аспект в способности.

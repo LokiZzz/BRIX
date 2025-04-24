@@ -41,7 +41,7 @@
     private int alreadySpent => GetAlreadySpent();
     private int availiable => CharacterManager.EditingCharacter?.AvailableExp ?? default;
 
-    public Guid CharacterId { get; set; }
+    public Guid OwnerId { get; set; }
 
     public Character? Character => CharacterManager.EditingCharacter;
 
@@ -66,7 +66,7 @@
         if (CharacterManager.EditingCharacter?.AvailableExp > 0)
         {
             await CharacterManager.SaveAsync();
-            Navigation.NavigateTo($"/characters/{CharacterId}/abilities");
+            Navigation.NavigateTo($"/characters/{OwnerId}/abilities");
         }
         else
         {

@@ -1,6 +1,6 @@
 ﻿@page "/npcs/{Id:guid}"
 
-@if (_npc is null)
+@if (NPC is null)
 {
     return;
 }
@@ -8,13 +8,13 @@
 <div class="section">
     <div class="box block">
         <h1 class="title">@Localization[nameof(Resource.Common_NPCs)]</h1>
-        <Field @bind-Value="_npc.Name" Label="@Localization[nameof(Resource.NPC_Name)]" />
-        <TextAreaField @bind-Value="_npc.Description" Label="@Localization[nameof(Resource.Common_Description)]" />
-        <Field @bind-Value="_npc.SetHealth"
+        <Field @bind-Value="NPC.Name" Label="@Localization[nameof(Resource.NPC_Name)]" />
+        <TextAreaField @bind-Value="NPC.Description" Label="@Localization[nameof(Resource.Common_Description)]" />
+        <Field @bind-Value="NPC.SetHealth"
         @bind-Value:after="StateHasChanged"
         Label="@Localization[nameof(Resource.NPC_Health)]" />
 
-        <p class="title">Power: @_npc.Power</p>
+        <p class="title">Power: @NPC.Power</p>
 
         <div class="buttons is-justify-content-right">
             <button class="button" @onclick="Back">
@@ -25,25 +25,45 @@
             </button>
         </div>
     </div>
+
+    <button class="button is-large is-fullwidth block" @onclick="AddAbility">
+        <i class="fa fa-plus-circle"></i>
+    </button>
+
+    @foreach (Ability ability in NPC.Abilities)
+    {
+        <div class="box block">
+            <p class="title">@ability.Name</p>
+            <p class="subtitle">@ability.ExpCost() EXP</p>
+            <div class="buttons">
+                <button class="button" @onclick="@(() => EditAbility(ability))">
+                    @Localization[nameof(Resource.Common_Edit)]
+                </button>
+                <button class="button is-danger" @onclick="@(() => RemoveAbility(ability))">
+                    @Localization[nameof(Resource.Common_Remove)]
+                </button>
+            </div>
+        </div>
+    }
 </div>
 
 @code {
     [Parameter]
     public Guid Id { get; set; }
 
-    private NPC _npc { get; set; } = default!;
+    private NPC NPC { get; set; } = default!;
 
     protected override void OnParametersSet()
     {
-        if(_npc is null)
+        if (NPC is null)
         {
-            _npc = NPCManager.EditingNPC ?? new NPC();
+            NPC = NPCManager.EditingNPC ?? new NPC();
         }
     }
 
     public async Task Save()
     {
-        OperationResult result = await NPCManager.SaveAsync(_npc);
+        OperationResult result = await NPCManager.SaveAsync(NPC);
 
         if (result.Successfull)
         {
@@ -52,4 +72,21 @@
     }
 
     public void Back() => Navigation.NavigateTo("/npcs");
+
+    private void AddAbility(MouseEventArgs e)
+    {
+        Navigation.NavigateTo($"/npcs/{NPC.Id}/abilities/new");
+    }
+
+    private void EditAbility(Ability ability)
+    {
+        int abilityNumber = NPC.Abilities.IndexOf(ability);
+        Navigation.NavigateTo($"/npcs/{NPC.Id}/abilities/{abilityNumber}");
+    }
+
+    private async void RemoveAbility(Ability ability)
+    {
+        NPC.RemoveAbility(ability);
+        await NPCManager.SaveAsync(NPC);
+    }
 }
