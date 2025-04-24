@@ -24,7 +24,12 @@
     /// <returns></returns>
     public async Task InitializeAsync()
     {
-        int? abilityNumber = await CharacterManager.EditAbility(OwnerId, AbilityNumber);
+        int? abilityNumber = ownerType switch
+        {
+            EAbilityOwner.Character => await CharacterManager.EditAbility(OwnerId, AbilityNumber),
+            EAbilityOwner.NPC => await NPCManager.EditAbility(OwnerId, AbilityNumber),
+            _ => throw new NotImplementedException($"Не реализовано редактирование способности для {ownerType}")
+        };
 
         // Отсюда начинается логика, которая не зависит от типа владельца способности. Это хорошо!
 
