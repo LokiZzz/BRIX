@@ -12,16 +12,13 @@
 </div>
 
 @code {
+    [Parameter]
+    public Ability? Ability { get; set; }
+
     private int cost => Ability?.ExpCost() ?? default;
     private int overall => CharacterManager.EditingCharacter?.Experience ?? default;
     private int alreadySpent => GetAlreadySpent();
     private int availiable => CharacterManager.EditingCharacter?.AvailableExp ?? default;
-
-    [Parameter]
-    public Character? Character { get; set; }
-
-    [Parameter]
-    public Ability? Ability { get; set; }
 
     private int GetAlreadySpent()
     {
