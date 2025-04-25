@@ -1,0 +1,35 @@
+﻿<div class="is-flex is-flex-direction-row is-justify-content-space-between">
+    <p class="title">@Localization[nameof(Resource.Abilities_AbilityCost)]</p>
+    <p class="title">@cost EXP</p>
+</div>
+<div class="progress-container mb-2">
+    <progress class="progress is-warning" value="@(cost + alreadySpent)" max="@overall" />
+    <progress class="progress is-success spent-progress" value="@alreadySpent" max="@overall" />
+</div>
+<div class="is-flex is-flex-direction-row is-justify-content-space-between block">
+    <p>@Localization[nameof(Resource.Abilities_MonitorAlreadySpent)] @alreadySpent EXP</p>
+    <p>@Localization[nameof(Resource.Abilities_MonitorAvailiable)] @availiable EXP</p>
+</div>
+
+@code {
+    private int cost => Ability?.ExpCost() ?? default;
+    private int overall => CharacterManager.EditingCharacter?.Experience ?? default;
+    private int alreadySpent => GetAlreadySpent();
+    private int availiable => CharacterManager.EditingCharacter?.AvailableExp ?? default;
+
+    [Parameter]
+    public Character? Character { get; set; }
+
+    [Parameter]
+    public Ability? Ability { get; set; }
+
+    private int GetAlreadySpent()
+    {
+        if (CharacterManager.EditingCharacter is null || Ability is null)
+        {
+            return default;
+        }
+
+        return CharacterManager.EditingCharacter.GetSpentExp(excludeAbilityId: Ability.Id);
+    }
+}

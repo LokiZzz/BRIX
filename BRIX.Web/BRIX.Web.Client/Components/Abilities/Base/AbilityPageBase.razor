@@ -43,6 +43,8 @@
         // Проставляем данные в лейауте
         Layout.AbilityNumber = AbilityNumber = abilityNumber;
         Layout.OwnerId = OwnerId;
+        Layout.OwnerType = ownerType;
+
         InitializeAlso();
         Layout.Refresh();
     }
@@ -77,6 +79,10 @@
             EAbilityOwner.Character => AbilityNumber is null
                 ? new()
                 : CharacterManager.EditingCharacter?.Abilities.ElementAtOrDefault(AbilityNumber.Value) ?? new(),
+            EAbilityOwner.NPC => AbilityNumber is null
+                ? new()
+                : NPCManager.EditingNPC?.Abilities.ElementAtOrDefault(AbilityNumber.Value) ?? new(),
+
             _ => throw new NotImplementedException($"На странице не реализована поставка способности для {OwnerType}")
         };
     }
@@ -87,11 +93,4 @@
         {"npcs", EAbilityOwner.NPC },
         {"artifacts", EAbilityOwner.Artifact },
     };
-
-    public enum EAbilityOwner
-    {
-        Character = 0,
-        NPC = 1,
-        Artifact = 2
-    }
 }

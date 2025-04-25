@@ -15,18 +15,10 @@
         </div>
 
         <footer class="box cost-footer">
-            <div class="is-flex is-flex-direction-row is-justify-content-space-between">
-                <p class="title">@Localization[nameof(Resource.Abilities_AbilityCost)]</p>
-                <p class="title">@cost EXP</p>
-            </div>
-            <div class="progress-container mb-2">
-                <progress class="progress is-warning" value="@(cost + alreadySpent)" max="@overall" />
-                <progress class="progress is-success spent-progress" value="@alreadySpent" max="@overall" />
-            </div>
-            <div class="is-flex is-flex-direction-row is-justify-content-space-between block">
-                <p>@Localization[nameof(Resource.Abilities_MonitorAlreadySpent)] @alreadySpent EXP</p>
-                <p>@Localization[nameof(Resource.Abilities_MonitorAvailiable)] @availiable EXP</p>
-            </div>
+            @if (OwnerType == EAbilityOwner.Character)
+            {
+                <CharacterAbilityStats Character="Character" Ability="Ability"/>
+            }
             <div class="buttons is-flex is-justify-content-flex-end">
                 <button class="button" @onclick="Reset">@Localization[nameof(Resource.Common_Reset)]</button>
                 <button class="button is-primary" @onclick="SaveAsync">@Localization[nameof(Resource.Common_Save)]</button>
@@ -42,6 +34,8 @@
     private int availiable => CharacterManager.EditingCharacter?.AvailableExp ?? default;
 
     public Guid OwnerId { get; set; }
+
+    public EAbilityOwner OwnerType { get; set; }
 
     public Character? Character => CharacterManager.EditingCharacter;
 
@@ -61,7 +55,20 @@
         StateHasChanged();
     }
 
-    private async Task SaveAsync(MouseEventArgs e)
+    private async Task SaveAsync()
+    {
+        switch(OwnerType)
+        {
+            case EAbilityOwner.Character:
+                await SaveForCharacterAsync();
+                break;
+            case EAbilityOwner.NPC:
+                await SaveForNPCAsync();
+                break;
+        }
+    }
+
+    private async Task SaveForCharacterAsync()
     {
         if (CharacterManager.EditingCharacter?.AvailableExp > 0)
         {
@@ -70,12 +77,19 @@
         }
         else
         {
-            Modal.Alert(new AlertParameters {
+            Modal.Alert(new AlertParameters
+            {
                 Mode = EAlertMode.Ok,
                 Message = Localization[nameof(Resource.Abilities_NotEnoughExpForAbility)],
                 Title = Localization[nameof(Resource.Common_Warning)],
             });
         }
+    }
+
+    private async Task SaveForNPCAsync()
+    {
+        await NPCManager.SaveAsync();
+        Navigation.NavigateTo($"/npcs/{OwnerId}/abilities");
     }
 
     /// <summary>
