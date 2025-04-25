@@ -17,7 +17,7 @@
         <footer class="box cost-footer">
             @if (OwnerType == EAbilityOwner.Character)
             {
-                <CharacterAbilityStats Ability="Ability"/>
+                <CharacterAbilityStats @ref="characterAbilityStats" AbilityNumber="AbilityNumber"/>
             }
             <div class="buttons is-flex is-justify-content-flex-end">
                 <button class="button" @onclick="Reset">@Localization[nameof(Resource.Common_Reset)]</button>
@@ -28,29 +28,24 @@
 </CascadingValue>
 
 @code {
-    private int cost => Ability?.ExpCost() ?? default;
-    private int overall => CharacterManager.EditingCharacter?.Experience ?? default;
-    private int alreadySpent => GetAlreadySpent();
-    private int availiable => CharacterManager.EditingCharacter?.AvailableExp ?? default;
-
     public Guid OwnerId { get; set; }
 
     public EAbilityOwner OwnerType { get; set; }
 
     public int? AbilityNumber { get; set; }
 
-    public Ability Ability => AbilityNumber is null ? new()
-        : CharacterManager.EditingCharacter?.Abilities.ElementAtOrDefault(AbilityNumber.Value) ?? new();
-
     public Action? OnReset { get; set; }
 
+    private CharacterAbilityStats? characterAbilityStats;
+
     /// <summary>
-    /// Обновить состояние лейаута.
+    /// Обновить состояние лейаута и соответствующего блока со статистикой способности.
     /// Не вызывать из OnParametersSet или OnParametersSetAsync, иначе будет stack overflow.
     /// </summary>
     public void Refresh()
     {
         StateHasChanged();
+        characterAbilityStats?.Refresh();
     }
 
     private async Task SaveAsync()
@@ -114,15 +109,5 @@
             OnReset?.Invoke();
             StateHasChanged();
         }
-    }
-
-    private int GetAlreadySpent()
-    {
-        if (CharacterManager.EditingCharacter is null || Ability is null)
-        {
-            return default;
-        }
-
-        return CharacterManager.EditingCharacter.GetSpentExp(excludeAbilityId: Ability.Id);
     }
 }

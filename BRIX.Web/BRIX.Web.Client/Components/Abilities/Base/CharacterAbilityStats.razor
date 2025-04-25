@@ -13,7 +13,12 @@
 
 @code {
     [Parameter]
-    public Ability? Ability { get; set; }
+    public int? AbilityNumber { get; set; }
+
+    public Ability Ability => AbilityNumber is null ? new()
+        : CharacterManager.EditingCharacter?.Abilities.ElementAtOrDefault(AbilityNumber.Value) ?? new();
+
+    public void Refresh() => StateHasChanged();
 
     private int cost => Ability?.ExpCost() ?? default;
     private int overall => CharacterManager.EditingCharacter?.Experience ?? default;
