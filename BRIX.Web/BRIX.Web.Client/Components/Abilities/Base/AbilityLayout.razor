@@ -105,7 +105,16 @@
     {
         if (result.IsPositive)
         {
-            CharacterManager.Reset();
+            switch (OwnerType)
+            {
+                case EAbilityOwner.Character:
+                    CharacterManager.Reset();
+                    break;
+                case EAbilityOwner.NPC:
+                    NPCManager.Reset();
+                    break;
+            }
+
             OnReset?.Invoke();
             StateHasChanged();
         }
