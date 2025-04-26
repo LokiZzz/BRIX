@@ -1,28 +1,4 @@
-﻿::deep {
-    --ability-page-footer-height: 14rem;
-    --ability-page-footer-drowned: -1rem;
-}
-
-.cost-footer {
-    position: fixed;
-    bottom: var(--ability-page-footer-drowned);
-    height: var(--ability-page-footer-height);
-    width: 100%;
-    right: 50%;
-    transform: translateX(50%);
-    max-width: 1400px;
-    z-index: 5;
-}
-
-.ability-layout-container {
-    padding-bottom: 0;
-}
-
-.ability-layout-content {
-    padding-bottom: calc(var(--ability-page-footer-height) + var(--bulma-block-spacing) + var(--ability-page-footer-drowned));
-}
-
-.progress-container {
+﻿.progress-container {
     position: relative;
     height: var(--bulma-size-normal);
 }

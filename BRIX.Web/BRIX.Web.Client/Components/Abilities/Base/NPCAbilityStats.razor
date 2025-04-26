@@ -1,0 +1,33 @@
+﻿@implements IAbilityStatsComponent
+
+<div class="is-flex is-flex-direction-row is-justify-content-space-between">
+    <p class="title">@Localization[nameof(Resource.Abilities_AbilityCost)]</p>
+    <p class="title">@cost EXP</p>
+</div>
+<div class="is-flex is-flex-direction-row is-justify-content-space-between block">
+    <p>@Localization[nameof(Resource.Common_Power)]: @NPCManager.EditingNPC?.Power EXP</p>
+</div>
+
+@code {
+    [Parameter]
+    public int? AbilityNumber { get; set; }
+
+    public Ability Ability => AbilityNumber is null ? new()
+        : NPCManager.EditingNPC?.Abilities.ElementAtOrDefault(AbilityNumber.Value) ?? new();
+
+    public void Refresh() => StateHasChanged();
+
+    public async Task SaveAsync()
+    {
+        Guid? id = NPCManager.EditingNPC?.Id;
+        await CharacterManager.SaveAsync();
+        Navigation.NavigateTo($"/npcs/{id}/abilities");
+    }
+
+    public void Reset()
+    {
+        NPCManager.Reset();
+    }
+
+    private int cost => Ability?.ExpCost() ?? default;
+}

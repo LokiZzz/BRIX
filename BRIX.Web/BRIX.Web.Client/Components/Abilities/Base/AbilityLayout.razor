@@ -20,6 +20,11 @@
                 abilityStats = characterAbilityStats;
                 <CharacterAbilityStats @ref="characterAbilityStats" AbilityNumber="AbilityNumber" />
             }
+            @if (OwnerType == EAbilityOwner.NPC)
+            {
+                abilityStats = npcAbilityStats;
+                <NPCAbilityStats @ref="npcAbilityStats" AbilityNumber="AbilityNumber" />
+            }
 
             <div class="buttons is-flex is-justify-content-flex-end">
                 <button class="button" @onclick="Reset">@Localization[nameof(Resource.Common_Reset)]</button>
@@ -36,6 +41,7 @@
 
     public Action? OnReset { get; set; }
 
+    private NPCAbilityStats? npcAbilityStats;
     private CharacterAbilityStats? characterAbilityStats;
     private IAbilityStatsComponent? abilityStats;
 

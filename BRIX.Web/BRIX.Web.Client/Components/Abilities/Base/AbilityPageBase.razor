@@ -7,6 +7,8 @@
     [Parameter]
     public Guid OwnerId { get; set; }
 
+    private EAbilityOwner ownerType;
+    
     [Parameter]
     public string OwnerType { get; set; } = string.Empty;
 
@@ -15,14 +17,34 @@
 
     protected Ability Ability => GetAbility();
 
-    private EAbilityOwner ownerType;
+    /// <summary>
+    /// Дополнительная инициализация для страниц редактирования способности: аспектов, эффектов и других настроек.
+    /// </summary>
+    protected virtual void InitializeAlso() { }
+
+    protected override async Task OnInitializedAsync()
+    {
+        RouteToAbilityOwnerMap.TryGetValue(OwnerType, out ownerType);
+
+        // Страница подписывается на сброс по кнопке в лейауте, чтобы инициализировать всё заново, если пользователь
+        // решит сбросить все изменения.
+        Layout.OnReset = async () => await InitializeAsync();
+        await InitializeAsync();
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (AbilityNumber is null && Layout.AbilityNumber is not null)
+        {
+            AbilityNumber = Layout.AbilityNumber;
+        }
+    }
 
     /// <summary>
-    /// Инициализация для любой страницы редактирования способности. Работает так, что пользователь даже перейдя по 
+    /// Инициализация для любой страницы редактирования способности. Работает так, что пользователь даже перейдя по
     /// адресу напрямую, например, по ссылке, спровоцирует полноценную инициализацию необходимых свойств.
     /// </summary>
-    /// <returns></returns>
-    public async Task InitializeAsync()
+    private async Task InitializeAsync()
     {
         int? abilityNumber = ownerType switch
         {
@@ -48,29 +70,6 @@
         Layout.Refresh();
     }
 
-    /// <summary>
-    /// Дополнительная инициализация для страниц редактирования способности: аспектов, эффектов и других настроек.
-    /// </summary>
-    protected virtual void InitializeAlso() { }
-
-    protected override async Task OnInitializedAsync()
-    {
-        RouteToAbilityOwnerMap.TryGetValue(OwnerType, out ownerType);
-
-        // Страница подписывается на сброс по кнопке в лейауте, чтобы инициализировать всё заново, если пользователь
-        // решит сбросить все изменения.
-        Layout.OnReset = async () => await InitializeAsync();
-        await InitializeAsync();
-    }
-
-    protected override void OnParametersSet()
-    {
-        if (AbilityNumber is null && Layout.AbilityNumber is not null)
-        {
-            AbilityNumber = Layout.AbilityNumber;
-        }
-    }
-
     private Ability GetAbility()
     {
         return ownerType switch
@@ -86,7 +85,7 @@
         };
     }
 
-    public Dictionary<string, EAbilityOwner> RouteToAbilityOwnerMap => new()
+    private Dictionary<string, EAbilityOwner> RouteToAbilityOwnerMap => new()
     {
         {"characters", EAbilityOwner.Character },
         {"npcs", EAbilityOwner.NPC },

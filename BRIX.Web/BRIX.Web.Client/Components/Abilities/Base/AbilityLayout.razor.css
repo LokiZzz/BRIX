@@ -21,24 +21,3 @@
 .ability-layout-content {
     padding-bottom: calc(var(--ability-page-footer-height) + var(--bulma-block-spacing) + var(--ability-page-footer-drowned));
 }
-
-.progress-container {
-    position: relative;
-    height: var(--bulma-size-normal);
-}
-
-.progress {
-    position: absolute;
-}
-
-.spent-progress::-webkit-progress-bar {
-    background-color: transparent;
-}
-
-.spent-progress::-moz-progress-bar {
-    background-color: transparent;
-}
-
-.spent-progress::-ms-fill {
-    background-color: transparent;
-}
