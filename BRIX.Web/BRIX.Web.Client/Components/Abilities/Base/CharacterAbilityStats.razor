@@ -1,4 +1,6 @@
-﻿<div class="is-flex is-flex-direction-row is-justify-content-space-between">
+﻿@implements IAbilityStatsComponent
+
+<div class="is-flex is-flex-direction-row is-justify-content-space-between">
     <p class="title">@Localization[nameof(Resource.Abilities_AbilityCost)]</p>
     <p class="title">@cost EXP</p>
 </div>
@@ -19,6 +21,30 @@
         : CharacterManager.EditingCharacter?.Abilities.ElementAtOrDefault(AbilityNumber.Value) ?? new();
 
     public void Refresh() => StateHasChanged();
+
+    public async Task SaveAsync()
+    {
+        if (CharacterManager.EditingCharacter?.AvailableExp > 0)
+        {
+            Guid chacracterId = CharacterManager.EditingCharacter.Id;
+            await CharacterManager.SaveAsync();
+            Navigation.NavigateTo($"/characters/{chacracterId}/abilities");
+        }
+        else
+        {
+            Modal.Alert(new AlertParameters
+            {
+                Mode = EAlertMode.Ok,
+                Message = Localization[nameof(Resource.Abilities_NotEnoughExpForAbility)],
+                Title = Localization[nameof(Resource.Common_Warning)],
+            });
+        }
+    }
+
+    public void Reset()
+    {
+        CharacterManager.Reset();
+    }
 
     private int cost => Ability?.ExpCost() ?? default;
     private int overall => CharacterManager.EditingCharacter?.Experience ?? default;

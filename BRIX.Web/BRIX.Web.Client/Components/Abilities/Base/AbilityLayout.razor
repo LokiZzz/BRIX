@@ -17,8 +17,10 @@
         <footer class="box cost-footer">
             @if (OwnerType == EAbilityOwner.Character)
             {
-                <CharacterAbilityStats @ref="characterAbilityStats" AbilityNumber="AbilityNumber"/>
+                abilityStats = characterAbilityStats;
+                <CharacterAbilityStats @ref="characterAbilityStats" AbilityNumber="AbilityNumber" />
             }
+
             <div class="buttons is-flex is-justify-content-flex-end">
                 <button class="button" @onclick="Reset">@Localization[nameof(Resource.Common_Reset)]</button>
                 <button class="button is-primary" @onclick="SaveAsync">@Localization[nameof(Resource.Common_Save)]</button>
@@ -28,8 +30,6 @@
 </CascadingValue>
 
 @code {
-    public Guid OwnerId { get; set; }
-
     public EAbilityOwner OwnerType { get; set; }
 
     public int? AbilityNumber { get; set; }
@@ -37,6 +37,7 @@
     public Action? OnReset { get; set; }
 
     private CharacterAbilityStats? characterAbilityStats;
+    private IAbilityStatsComponent? abilityStats;
 
     /// <summary>
     /// Обновить состояние лейаута и соответствующего блока со статистикой способности.
@@ -45,44 +46,15 @@
     public void Refresh()
     {
         StateHasChanged();
-        characterAbilityStats?.Refresh();
+        abilityStats?.Refresh();
     }
 
     private async Task SaveAsync()
     {
-        switch(OwnerType)
+        if (abilityStats is not null)
         {
-            case EAbilityOwner.Character:
-                await SaveForCharacterAsync();
-                break;
-            case EAbilityOwner.NPC:
-                await SaveForNPCAsync();
-                break;
+            await abilityStats.SaveAsync();
         }
-    }
-
-    private async Task SaveForCharacterAsync()
-    {
-        if (CharacterManager.EditingCharacter?.AvailableExp > 0)
-        {
-            await CharacterManager.SaveAsync();
-            Navigation.NavigateTo($"/characters/{OwnerId}/abilities");
-        }
-        else
-        {
-            Modal.Alert(new AlertParameters
-            {
-                Mode = EAlertMode.Ok,
-                Message = Localization[nameof(Resource.Abilities_NotEnoughExpForAbility)],
-                Title = Localization[nameof(Resource.Common_Warning)],
-            });
-        }
-    }
-
-    private async Task SaveForNPCAsync()
-    {
-        await NPCManager.SaveAsync();
-        Navigation.NavigateTo($"/npcs/{OwnerId}/abilities");
     }
 
     /// <summary>
@@ -90,8 +62,7 @@
     /// </summary>
     private void Reset()
     {
-        Modal.Alert(
-            new AlertParameters
+        Modal.Alert(new AlertParameters
             {
                 Title = Localization[nameof(Resource.Common_Warning)],
                 Message = Localization[nameof(Resource.Abilities_AreYouSureReset)],
@@ -105,18 +76,9 @@
     {
         if (result.IsPositive)
         {
-            switch (OwnerType)
-            {
-                case EAbilityOwner.Character:
-                    CharacterManager.Reset();
-                    break;
-                case EAbilityOwner.NPC:
-                    NPCManager.Reset();
-                    break;
-            }
-
+            abilityStats?.Reset();
             OnReset?.Invoke();
-            StateHasChanged();
+            Refresh();
         }
     }
 }

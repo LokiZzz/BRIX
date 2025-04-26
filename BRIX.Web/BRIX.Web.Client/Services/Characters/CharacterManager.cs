@@ -15,6 +15,8 @@ namespace BRIX.Web.Client.Services.Characters
 {
     public class CharacterManager
     {
+        private Guid DebugGuid = Guid.NewGuid();
+
         private readonly ModalService _modalService;
         private readonly NavigationManager _navigation;
         private readonly HttpClientBuilder _httpClientBuilder;
