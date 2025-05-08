@@ -16,9 +16,6 @@
                     <p class="title">@npc.Name</p>
                     <p class="subtitle">@Localization[nameof(Resource.Common_Power)]: @npc.Power</p>
                     <div class="buttons">
-                        <button class="button" @onclick="@(() => Open(npc))">
-                            @Localization[nameof(Resource.Common_Open)]
-                        </button>
                         <button class="button" @onclick="@(() => Edit(npc))">
                             @Localization[nameof(Resource.Common_Edit)]
                         </button>
@@ -65,10 +62,5 @@
         {
             _npcs?.Remove(npc);
         }
-    }
-
-    private void Open(NPC npc)
-    {
-        Navigation.NavigateTo($"/npcs/{npc.Id}");
     }
 }
