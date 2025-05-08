@@ -39,6 +39,20 @@
 
 
 @code {
+    protected override void InitializeAlso()
+    {
+        base.InitializeAlso();
+
+        if (Navigation.Uri.Contains("/abilities/new"))
+        {
+            Navigation.NavigateTo(
+                $"/{OwnerType}/{OwnerId}/abilities/{AbilityNumber}",
+                forceLoad: false,
+                replace: true
+            );
+        }
+    }
+
     private void AddEffect()
     {
         Navigation.NavigateToRelative($"effects");
@@ -60,13 +74,6 @@
     private void EditActivation(MouseEventArgs e)
     {
         Navigation.NavigateToRelative("activation");
-    }
-
-    public class EffectVM(EffectBase effect, string lexis)
-    {
-        public EffectBase Effect { get; set; } = effect;
-
-        public string Lexis { get; set; } = lexis;
     }
 }
 
