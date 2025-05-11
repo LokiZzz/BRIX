@@ -53,12 +53,21 @@
 
     private NPC NPC { get; set; } = default!;
 
-    protected override void OnParametersSet()
+    protected override async Task OnInitializedAsync()
     {
-        if (NPC is null)
+        if(NPCManager.EditingNPC is null)
         {
-            NPC = NPCManager.EditingNPC ?? new NPC();
+            await NPCManager.EditNPCAsync(Id);
         }
+
+        if (NPCManager.EditingNPC is null)
+        {
+            Navigation.NavigateTo("/404");
+
+            return;
+        }
+        
+        NPC = NPCManager.EditingNPC;
     }
 
     public async Task Save()
@@ -87,6 +96,6 @@
     private async void RemoveAbility(Ability ability)
     {
         NPC.RemoveAbility(ability);
-        await NPCManager.SaveAsync(NPC);
+        await NPCManager.SaveAsync();
     }
 }
