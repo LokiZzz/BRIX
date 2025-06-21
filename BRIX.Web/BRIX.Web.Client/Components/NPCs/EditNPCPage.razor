@@ -1,0 +1,50 @@
+﻿@page "/npcs/{Id:guid}/edit"
+
+@if (NPC is null)
+{
+    return;
+}
+
+<div class="section">
+    <div class="box block">
+        <h1 class="title">@Localization[nameof(Resource.Common_NPCs)]</h1>
+        <Field @bind-Value="NPC.Name" Label="@Localization[nameof(Resource.NPC_Name)]" />
+        <TextAreaField @bind-Value="NPC.Description" Label="@Localization[nameof(Resource.Common_Description)]" />
+        <Field @bind-Value="NPC.SetHealth"
+               @bind-Value:after="StateHasChanged"
+               Label="@Localization[nameof(Resource.NPC_Health)]" />
+
+        <div class="buttons is-justify-content-right">
+            <button class="button" @onclick="Back">
+                @Localization[nameof(Resource.Common_Cancel)]
+            </button>
+            <button class="button is-primary" @onclick=Save>
+                @Localization[nameof(Resource.Common_Save)]
+            </button>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+
+    private NPC NPC { get; set; } = default!;
+
+    protected override void OnInitialized()
+    {
+        NPC = NPCManager.EditingNPC ?? new();
+    }
+
+    public async Task Save()
+    {
+        OperationResult result = await NPCManager.SaveAsync(NPC);
+
+        if (result.Successfull)
+        {
+            Navigation.NavigateTo("/npcs");
+        }
+    }
+
+    public void Back() => Navigation.NavigateTo("/npcs");
+}

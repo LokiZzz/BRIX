@@ -7,23 +7,10 @@
 
 <div class="section">
     <div class="box block">
-        <h1 class="title">@Localization[nameof(Resource.Common_NPCs)]</h1>
-        <Field @bind-Value="NPC.Name" Label="@Localization[nameof(Resource.NPC_Name)]" />
-        <TextAreaField @bind-Value="NPC.Description" Label="@Localization[nameof(Resource.Common_Description)]" />
-        <Field @bind-Value="NPC.SetHealth"
-        @bind-Value:after="StateHasChanged"
-        Label="@Localization[nameof(Resource.NPC_Health)]" />
-
+        <p class="title block">@NPC.Name</p>
+        <p class="block">@NPC.Description</p>
         <p class="title">Power: @NPC.Power</p>
-
-        <div class="buttons is-justify-content-right">
-            <button class="button" @onclick="Back">
-                @Localization[nameof(Resource.Common_Cancel)]
-            </button>
-            <button class="button is-primary" @onclick=Save>
-                @Localization[nameof(Resource.Common_Save)]
-            </button>
-        </div>
+        <button class="button" @onclick="EditNPC">@Localization[nameof(Resource.Common_Edit)]</button>
     </div>
 
     <button class="button is-large is-fullwidth block" @onclick="AddAbility">
@@ -55,32 +42,23 @@
 
     protected override async Task OnInitializedAsync()
     {
-        if(NPCManager.EditingNPC is null)
-        {
-            await NPCManager.EditNPCAsync(Id);
-        }
+        NPC? npc = await NPCManager.GetAsync(Id);
 
-        if (NPCManager.EditingNPC is null)
+        if(npc is not null)
+        {
+            NPC = npc;
+        }
+        else
         {
             Navigation.NavigateTo("/404");
-
-            return;
         }
-        
-        NPC = NPCManager.EditingNPC;
     }
 
-    public async Task Save()
+    private void EditNPC()
     {
-        OperationResult result = await NPCManager.SaveAsync(NPC);
-
-        if (result.Successfull)
-        {
-            Navigation.NavigateTo("/npcs");
-        }
+        NPCManager.EditNPC(NPC);
+        Navigation.NavigateTo($"/npcs/{Id}/edit");
     }
-
-    public void Back() => Navigation.NavigateTo("/npcs");
 
     private void AddAbility(MouseEventArgs e)
     {
