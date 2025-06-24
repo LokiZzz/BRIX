@@ -11,7 +11,8 @@
     <p class="title">@Localization[nameof(Resource.Effect_HealEffect)]</p>
     <p class="block">@Localization[nameof(Resource.Effect_HealEffect_Hint)]</p>
     <DiceField Placeholder="@Localization[nameof(Resource.Effect_HealEffect)]"
-               @bind-Dice="Effect.Impact" @bind-Dice:after="Layout.Refresh" />
+               @bind-Dice="Effect.Impact" @bind-Dice:after="Layout.Refresh"
+               DefaultDiceValue="@new((1, 4))"/>
 </div>
 
 <AspectsPanel Aspects="Effect.Aspects" />
