@@ -17,12 +17,11 @@
 
     public void Refresh() => StateHasChanged();
 
-    public Task SaveAsync()
+    public async Task SaveAsync()
     {
         Guid? id = NPCManager.EditingNPC?.Id;
+        await NPCManager.SaveAsync();
         Navigation.NavigateTo($"/npcs/{id}");
-
-        return Task.CompletedTask;
     }
 
     public void Reset()

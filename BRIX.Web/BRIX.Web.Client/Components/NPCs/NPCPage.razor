@@ -9,7 +9,6 @@
     <div class="box block">
         <p class="title block">@NPC.Name</p>
         <p class="block">@NPC.Description</p>
-        <p class="title">Power: @NPC.Power</p>
         <button class="button" @onclick="EditNPC">@Localization[nameof(Resource.Common_Edit)]</button>
     </div>
 
@@ -74,6 +73,6 @@
     private async void RemoveAbility(Ability ability)
     {
         NPC.RemoveAbility(ability);
-        await NPCManager.SaveAsync();
+        await NPCManager.SaveAsync(NPC);
     }
 }

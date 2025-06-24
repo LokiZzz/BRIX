@@ -37,10 +37,13 @@
     public EventCallback<string> StringValueChanged { get; set; }
 
     [Parameter]
-    public DicePool? Dice { get; set; } = new ();
+    public DicePool? Dice { get; set; }
 
     [Parameter]
     public EventCallback<DicePool> DiceChanged { get; set; }
+
+    [Parameter]
+    public DicePool? DefaultDiceValue { get; set; }
 
     private string labelClass = placeholderClass;
     private string inputIconClass = string.Empty;
@@ -84,9 +87,16 @@
         await StringValueChanged.InvokeAsync(StringValue);
     }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         base.OnInitialized();
+
+        if (Dice is null || Dice.IsEmpty)
+        {
+            Dice = DefaultDiceValue is null ? new() : DefaultDiceValue;
+            await DiceChanged.InvokeAsync(Dice);
+        }
+
         StringValue = Dice?.ToString();
     }
 

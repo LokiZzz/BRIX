@@ -1,0 +1,11 @@
+﻿<footer class="box box-footer">
+    @if (ChildContent is not null)
+    {
+        @ChildContent
+    }
+</footer>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

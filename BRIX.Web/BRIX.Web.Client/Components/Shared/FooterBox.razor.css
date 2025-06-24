@@ -1,0 +1,15 @@
+﻿::deep {
+    --ability-page-footer-height: 14rem;
+    --ability-page-footer-drowned: -1rem;
+}
+
+.box-footer {
+    position: fixed;
+    bottom: var(--ability-page-footer-drowned);
+    height: var(--ability-page-footer-height);
+    width: 100%;
+    right: 50%;
+    transform: translateX(50%);
+    max-width: 1400px;
+    z-index: 5;
+}
