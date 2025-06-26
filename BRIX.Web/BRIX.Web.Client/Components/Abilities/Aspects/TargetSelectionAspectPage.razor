@@ -1,6 +1,7 @@
 ﻿@inherits AspectPageBase<TargetSelectionAspect>
 
 @page "/{OwnerType}/{OwnerId:guid}/abilities/{AbilityNumber:int}/effects/{EffectType}/{EffectOrderNumber:int}/tse"
+@using BRIX.Web.Client.Components.Shared.Inputs
 
 @if (aspect is null)
 {

@@ -2,23 +2,23 @@
 
 <div class="footer-box-container">
     <div class="footer-box-body-content">
-        @if (ChildContent is not null)
+        @if (Content is not null)
         {
-            @ChildContent
+            @Content
         }
     </div>
     <footer class="box footer-box-footer-content">
-        @if (FooterContent is not null)
+        @if (Footer is not null)
         {
-            @FooterContent
+            @Footer
         }
     </footer>
 </div>
 
 @code {
     [Parameter]
-    public RenderFragment? ChildContent { get; set; }
+    public RenderFragment? Content { get; set; }
 
     [Parameter]
-    public RenderFragment? FooterContent { get; set; }
+    public RenderFragment? Footer { get; set; }
 }

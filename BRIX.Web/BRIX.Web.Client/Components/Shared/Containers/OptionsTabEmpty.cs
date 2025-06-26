@@ -1,9 +1,6 @@
-﻿
+﻿using Newtonsoft.Json.Linq;
 
-
-using Newtonsoft.Json.Linq;
-
-namespace BRIX.Web.Client.Components.Shared
+namespace BRIX.Web.Client.Components.Shared.Containers
 {
     /// <summary>
     /// Пустой вариант компонента для случаев, когда переход по закладкам не должен присваивать значение какому-либо 

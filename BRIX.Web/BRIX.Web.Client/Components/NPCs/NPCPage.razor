@@ -6,31 +6,58 @@
 }
 
 <div class="section">
-    <div class="box block">
-        <p class="title block">@NPC.Name</p>
-        <p class="block">@NPC.Description</p>
-        <button class="button" @onclick="EditNPC">@Localization[nameof(Resource.Common_Edit)]</button>
-    </div>
-
-    <button class="button is-large is-fullwidth block" @onclick="AddAbility">
-        <i class="fa fa-plus-circle"></i>
-    </button>
-
-    @foreach (Ability ability in NPC.Abilities)
-    {
-        <div class="box block">
-            <p class="title">@ability.Name</p>
-            <p class="subtitle">@ability.ExpCost() EXP</p>
-            <div class="buttons">
-                <button class="button" @onclick="@(() => EditAbility(ability))">
-                    @Localization[nameof(Resource.Common_Edit)]
-                </button>
-                <button class="button is-danger" @onclick="@(() => RemoveAbility(ability))">
-                    @Localization[nameof(Resource.Common_Remove)]
-                </button>
+    <FooterBox>
+        <Content>
+            <div class="box block">
+                @* <p class="title block">@NPC.Name</p>
+                <p class="block">@NPC.Description</p>
+                <button class="button" @onclick="EditNPC">@Localization[nameof(Resource.Common_Edit)]</button> *@
+                <Field @bind-Value="NPC.Name"
+                       Label="@Localization[Resource.Common_Name]"
+                       @bind-Value:after="@(() => npcChanged = true)" />
+                <TextAreaField @bind-Value="NPC.Description"
+                               MaxLength="500"
+                               Label="@Localization[Resource.Common_Description]"
+                               @bind-Value:after="@(() => npcChanged = true)" />
+                <Field @bind-Value="NPC.SetHealth"
+                       Label="@Localization[Resource.NPC_Health]"
+                       @bind-Value:after="@(() => npcChanged = true)" />
             </div>
-        </div>
-    }
+
+            <button class="button is-large is-fullwidth block" @onclick="AddAbility">
+                <i class="fa fa-plus-circle"></i>
+            </button>
+
+            @foreach (Ability ability in NPC.Abilities)
+            {
+                <div class="box block">
+                    <p class="title">@ability.Name</p>
+                    <p class="subtitle">@ability.ExpCost() EXP</p>
+                    <div class="buttons">
+                        <button class="button" @onclick="@(() => EditAbility(ability))">
+                            @Localization[nameof(Resource.Common_Edit)]
+                        </button>
+                        <button class="button is-danger" @onclick="@(() => RemoveAbility(ability))">
+                            @Localization[nameof(Resource.Common_Remove)]
+                        </button>
+                    </div>
+                </div>
+            }
+        </Content>
+        <Footer>
+            <div class="is-flex is-flex-direction-row is-justify-content-space-between">
+                <p class="title">@Localization[nameof(Resource.Common_Power)]</p>
+                <p class="title">@NPC.Power EXP</p>
+            </div>
+            @if (npcChanged)
+            {
+                <div class="buttons is-flex is-justify-content-flex-end">
+                    <button class="button" @onclick="ResetAsync">@Localization[nameof(Resource.Common_Reset)]</button>
+                    <button class="button is-primary" @onclick="SaveAsync">@Localization[nameof(Resource.Common_Save)]</button>
+                </div>
+            }
+        </Footer>
+    </FooterBox>
 </div>
 
 @code {
@@ -39,11 +66,13 @@
 
     private NPC NPC { get; set; } = default!;
 
+    private bool npcChanged = false;
+
     protected override async Task OnInitializedAsync()
     {
         NPC? npc = await NPCManager.GetAsync(Id);
 
-        if(npc is not null)
+        if (npc is not null)
         {
             NPC = npc;
         }
@@ -74,5 +103,17 @@
     {
         NPC.RemoveAbility(ability);
         await NPCManager.SaveAsync(NPC);
+    }
+
+    private async Task SaveAsync()
+    {
+        await NPCManager.SaveAsync(NPC);
+        npcChanged = false;
+    }
+
+    private async Task ResetAsync()
+    {
+        await OnInitializedAsync();
+        npcChanged = false;
     }
 }

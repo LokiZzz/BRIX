@@ -1,4 +1,4 @@
-﻿namespace BRIX.Web.Client.Components.Shared
+﻿namespace BRIX.Web.Client.Components.Shared.Inputs
 {
     public enum EOptionsTabMode
     {

@@ -6,6 +6,14 @@
 <PageTitle>@Localization[nameof(Resource.Tab_Home)]</PageTitle>
 
 <div class="section">
+    <div class="block">
+        <h1 class="title">Контейнер видимости</h1>
+        <VisibilityContainer @bind-IsVisible="visContainerVisibility">
+            <h1 class="title">Видно!</h1>
+        </VisibilityContainer>
+        <button class="button" @onclick="@(() => visContainerVisibility = !visContainerVisibility)">Переключить видимость</button>
+    </div>
+
     <div class="block columns">
         <div class="column">
             <h1 class="title">Разные виды полей</h1>
@@ -81,6 +89,7 @@
 
 @code
 {
+    private bool visContainerVisibility = true;
     private string textFieldValue = "Text field value";
     private string textAreaFieldValue = "Text field value that was set by @code, code is pretty long.";
     private string alertResult = string.Empty;
