@@ -1,11 +1,24 @@
-﻿<footer class="box box-footer">
-    @if (ChildContent is not null)
-    {
-        @ChildContent
-    }
-</footer>
+﻿@* Контейнер с закреплённым снизу футером, который будет всегда на виду. *@
+
+<div class="footer-box-container">
+    <div class="footer-box-body-content">
+        @if (ChildContent is not null)
+        {
+            @ChildContent
+        }
+    </div>
+    <footer class="box footer-box-footer-content">
+        @if (FooterContent is not null)
+        {
+            @FooterContent
+        }
+    </footer>
+</div>
 
 @code {
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public RenderFragment? FooterContent { get; set; }
 }

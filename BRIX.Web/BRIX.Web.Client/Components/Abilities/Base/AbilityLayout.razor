@@ -10,27 +10,28 @@
             <p>Гоблин боблин -> Способности -> Выстрел из бумпалки -> Урон -> Выбор целей</p>
         </div>
 
-        <div class="ability-layout-content">
-            @Body
-        </div>
+        <FooterBox>
+            <ChildContent>
+                @Body
+            </ChildContent>
+            <FooterContent>
+                @if (OwnerType == EAbilityOwner.Character)
+                {
+                    abilityStats = characterAbilityStats;
+                    <CharacterAbilityStats @ref="characterAbilityStats" AbilityNumber="AbilityNumber" />
+                }
+                @if (OwnerType == EAbilityOwner.NPC)
+                {
+                    abilityStats = npcAbilityStats;
+                    <NPCAbilityStats @ref="npcAbilityStats" AbilityNumber="AbilityNumber" />
+                }
 
-        <footer class="box cost-footer">
-            @if (OwnerType == EAbilityOwner.Character)
-            {
-                abilityStats = characterAbilityStats;
-                <CharacterAbilityStats @ref="characterAbilityStats" AbilityNumber="AbilityNumber" />
-            }
-            @if (OwnerType == EAbilityOwner.NPC)
-            {
-                abilityStats = npcAbilityStats;
-                <NPCAbilityStats @ref="npcAbilityStats" AbilityNumber="AbilityNumber" />
-            }
-
-            <div class="buttons is-flex is-justify-content-flex-end">
-                <button class="button" @onclick="Reset">@Localization[nameof(Resource.Common_Reset)]</button>
-                <button class="button is-primary" @onclick="SaveAsync">@Localization[nameof(Resource.Common_Save)]</button>
-            </div>
-        </footer>
+                <div class="buttons is-flex is-justify-content-flex-end">
+                    <button class="button" @onclick="Reset">@Localization[nameof(Resource.Common_Reset)]</button>
+                    <button class="button is-primary" @onclick="SaveAsync">@Localization[nameof(Resource.Common_Save)]</button>
+                </div>
+            </FooterContent>
+        </FooterBox>
     </div>
 </CascadingValue>
 
@@ -69,12 +70,12 @@
     private void Reset()
     {
         Modal.Alert(new AlertParameters
-            {
-                Title = Localization[nameof(Resource.Common_Warning)],
-                Message = Localization[nameof(Resource.Abilities_AreYouSureReset)],
-                Callback = ResetInternal,
-                Mode = EAlertMode.YesNo
-            }
+        {
+            Title = Localization[nameof(Resource.Common_Warning)],
+            Message = Localization[nameof(Resource.Abilities_AreYouSureReset)],
+            Callback = ResetInternal,
+            Mode = EAlertMode.YesNo
+        }
         );
     }
 

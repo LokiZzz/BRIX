@@ -1,12 +1,20 @@
 ﻿::deep {
-    --ability-page-footer-height: 14rem;
-    --ability-page-footer-drowned: -1rem;
+    --footer-height: 14rem;
+    --footer-drowned: -1rem;
 }
 
-.box-footer {
+.footer-box-container {
+    padding-bottom: 0;
+}
+
+.footer-box-body-content {
+    padding-bottom: calc(var(--footer-height) + var(--bulma-block-spacing) + var(--footer-drowned));
+}
+
+.footer-box-footer-content {
     position: fixed;
-    bottom: var(--ability-page-footer-drowned);
-    height: var(--ability-page-footer-height);
+    height: var(--footer-height);
+    bottom: var(--footer-drowned);
     width: 100%;
     right: 50%;
     transform: translateX(50%);
