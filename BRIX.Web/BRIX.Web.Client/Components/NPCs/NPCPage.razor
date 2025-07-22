@@ -9,9 +9,6 @@
     <FooterBox>
         <Content>
             <div class="box block">
-                @* <p class="title block">@NPC.Name</p>
-                <p class="block">@NPC.Description</p>
-                <button class="button" @onclick="EditNPC">@Localization[nameof(Resource.Common_Edit)]</button> *@
                 <Field @bind-Value="NPC.Name"
                        Label="@Localization[Resource.Common_Name]"
                        @bind-Value:after="@(() => npcChanged = true)" />
@@ -70,9 +67,15 @@
 
     protected override async Task OnInitializedAsync()
     {
-        NPC? npc = await NPCManager.GetAsync(Id);
+        NPC? npc = NPCManager.EditingNPC;
 
-        if (npc is not null)
+        if (npc is null)
+        {
+            npc = await NPCManager.GetAsync(Id);
+            NPCManager.EditNPC(npc);
+        }
+
+        if (npc is not null && npc?.Id == Id)
         {
             NPC = npc;
         }
@@ -80,12 +83,6 @@
         {
             Navigation.NavigateTo("/404");
         }
-    }
-
-    private void EditNPC()
-    {
-        NPCManager.EditNPC(NPC);
-        Navigation.NavigateTo($"/npcs/{Id}/edit");
     }
 
     private void AddAbility(MouseEventArgs e)

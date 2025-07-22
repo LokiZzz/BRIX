@@ -17,12 +17,10 @@
             <Footer>
                 @if (OwnerType == EAbilityOwner.Character)
                 {
-                    abilityStats = characterAbilityStats;
                     <CharacterAbilityStats @ref="characterAbilityStats" AbilityNumber="AbilityNumber" />
                 }
                 @if (OwnerType == EAbilityOwner.NPC)
                 {
-                    abilityStats = npcAbilityStats;
                     <NPCAbilityStats @ref="npcAbilityStats" AbilityNumber="AbilityNumber" />
                 }
 
@@ -44,7 +42,19 @@
 
     private NPCAbilityStats? npcAbilityStats;
     private CharacterAbilityStats? characterAbilityStats;
-    private IAbilityStatsComponent? abilityStats;
+
+    private IAbilityStatsComponent? abilityStats
+    {
+        get
+        {
+            return OwnerType switch
+            {
+                EAbilityOwner.NPC => npcAbilityStats,
+                EAbilityOwner.Character => characterAbilityStats,
+                _ => null
+            };
+        }
+    }
 
     /// <summary>
     /// Обновить состояние лейаута и соответствующего блока со статистикой способности.
@@ -69,13 +79,14 @@
     /// </summary>
     private void Reset()
     {
-        Modal.Alert(new AlertParameters
-        {
-            Title = Localization[nameof(Resource.Common_Warning)],
-            Message = Localization[nameof(Resource.Abilities_AreYouSureReset)],
-            Callback = ResetInternal,
-            Mode = EAlertMode.YesNo
-        }
+        Modal.Alert(
+            new AlertParameters
+            {
+                Title = Localization[nameof(Resource.Common_Warning)],
+                Message = Localization[nameof(Resource.Abilities_AreYouSureReset)],
+                Callback = ResetInternal,
+                Mode = EAlertMode.YesNo
+            }
         );
     }
 

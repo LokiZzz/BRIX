@@ -24,8 +24,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        RouteToAbilityOwnerMap.TryGetValue(OwnerType, out ownerType);
-
         // Страница подписывается на сброс по кнопке в лейауте, чтобы инициализировать всё заново, если пользователь
         // решит сбросить все изменения.
         Layout.OnReset = async () => await InitializeAsync();
@@ -46,6 +44,8 @@
     /// </summary>
     private async Task InitializeAsync()
     {
+        RouteToAbilityOwnerMap.TryGetValue(OwnerType, out ownerType);
+
         int? abilityNumber = ownerType switch
         {
             EAbilityOwner.Character => await CharacterManager.EditAbility(OwnerId, AbilityNumber),
