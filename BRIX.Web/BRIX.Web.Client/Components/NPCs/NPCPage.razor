@@ -85,8 +85,9 @@
         }
     }
 
-    private void AddAbility(MouseEventArgs e)
+    private async Task AddAbility(MouseEventArgs e)
     {
+        await SaveAsync();
         Navigation.NavigateTo($"/npcs/{NPC.Id}/abilities/new");
     }
 

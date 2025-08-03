@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
+using System.Linq;
 
 namespace BRIX.Web.Client.Services.Characters
 {
@@ -164,7 +165,7 @@ namespace BRIX.Web.Client.Services.Characters
         /// <returns>
         /// Порядковый номер способности, необходимый при навигации, если что-то пошло не так, то вернёт null
         /// </returns>
-        public async Task<int?> EditAbility(Guid characterId, int? abilityNumber = null)
+        public async Task<int?> AddOrEditAbility(Guid characterId, int? abilityNumber = null)
         {
             // Если персонаж для редактирования не выбран или не совпадает, то выбрать.
             if (EditingCharacter is null || EditingCharacter.Id != characterId)
@@ -174,7 +175,7 @@ namespace BRIX.Web.Client.Services.Characters
 
             if (EditingCharacter is null)
             {
-                return null;
+                throw new Exception("Не удалось войти в режим редактирования персонажа.");
             }
 
             // Если айди способности в параметрах не указан, значит её нужно создать и добавить персонажу,
@@ -186,9 +187,9 @@ namespace BRIX.Web.Client.Services.Characters
                 abilityNumber = EditingCharacter!.Abilities.IndexOf(newAbility);
             }
 
-            if (EditingCharacter?.Abilities.ElementAtOrDefault(abilityNumber.Value) is null)
+            if (abilityNumber is null || EditingCharacter?.Abilities.ElementAtOrDefault(abilityNumber.Value) is null)
             {
-                return null;
+                throw new Exception("Не удалось войти в режим редактирования способности.");
             }
 
             return abilityNumber;

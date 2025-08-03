@@ -11,14 +11,11 @@ namespace BRIX.GameService.Services.Characters
 {
     public class CharacterRepository(
         IDbContextFactory<ApplicationDbContext> contextFactory,
-        JsonSerializerSettings jsonSerializerSettings) : ICharacterRepository
+        JsonSerializerSettings jsonSettings) : ICharacterRepository
     {
-        private readonly IDbContextFactory<ApplicationDbContext> _contextFactory = contextFactory;
-        private readonly JsonSerializerSettings _jsonSettings = jsonSerializerSettings;
-
         public async Task<List<Character>> GetCharacterAsync(Guid userId, List<Guid>? characterIds = null)
         {
-            using ApplicationDbContext context = _contextFactory.CreateDbContext();
+            using ApplicationDbContext context = contextFactory.CreateDbContext();
             List<PlayerCharacter> playerCharacters = [];
 
             if (characterIds != null && characterIds.Count != 0)
@@ -34,21 +31,18 @@ namespace BRIX.GameService.Services.Characters
                     .ToListAsync();
             }
 
-            List<Character> characters = playerCharacters
+            List<Character> characters = [.. playerCharacters
                 .Select(DeserializeCharacter)
                 .Where(x => x != null)
-                .Cast<Character>()
-                .ToList();
+                .Cast<Character>()];
 
             return characters;
-        }
-
-        
+        }    
 
         public async Task PushCharacterAsync(Guid userId, Character character)
         {
-            using ApplicationDbContext context = _contextFactory.CreateDbContext();
-            string json = JsonConvert.SerializeObject(character, _jsonSettings);
+            using ApplicationDbContext context = contextFactory.CreateDbContext();
+            string json = JsonConvert.SerializeObject(character, jsonSettings);
 
             if (character.Id == default)
             {
@@ -65,6 +59,7 @@ namespace BRIX.GameService.Services.Characters
             {
                 context.PlayerCharacters.Add(new PlayerCharacter
                 {
+                    Id = character.Id,
                     UserId = userId,
                     CharacterJsonData = json
                 });
@@ -75,7 +70,7 @@ namespace BRIX.GameService.Services.Characters
 
         public async Task DeleteCharacterAsync(Guid characterId)
         {
-            using ApplicationDbContext context = _contextFactory.CreateDbContext();
+            using ApplicationDbContext context = contextFactory.CreateDbContext();
             PlayerCharacter? existingCharacter = context.PlayerCharacters.FirstOrDefault(x => x.Id == characterId);
 
             if (existingCharacter is not null)
@@ -87,7 +82,7 @@ namespace BRIX.GameService.Services.Characters
 
         public async Task DeleteNPCAsync(Guid npcId)
         {
-            using ApplicationDbContext context = _contextFactory.CreateDbContext();
+            using ApplicationDbContext context = contextFactory.CreateDbContext();
             NPCDao? existingNPC = context.NPCs.FirstOrDefault(x => x.Id == npcId);
 
             if (existingNPC is not null)
@@ -99,7 +94,7 @@ namespace BRIX.GameService.Services.Characters
 
         public async Task<List<NPC>> GetNPCAsync(Guid userId, List<Guid>? npcIds = null)
         {
-            using ApplicationDbContext context = _contextFactory.CreateDbContext();
+            using ApplicationDbContext context = contextFactory.CreateDbContext();
             List<NPCDao> npcs = [];
 
             if (npcIds != null && npcIds.Count != 0)
@@ -125,8 +120,8 @@ namespace BRIX.GameService.Services.Characters
 
         public async Task PushNPCAsync(Guid userId, NPC npc)
         {
-            using ApplicationDbContext context = _contextFactory.CreateDbContext();
-            string json = JsonConvert.SerializeObject(npc, _jsonSettings);
+            using ApplicationDbContext context = contextFactory.CreateDbContext();
+            string json = JsonConvert.SerializeObject(npc, jsonSettings);
 
             if (npc.Id == default)
             {
@@ -143,6 +138,7 @@ namespace BRIX.GameService.Services.Characters
             {
                 context.NPCs.Add(new NPCDao
                 {
+                    Id = npc.Id,
                     UserId = userId,
                     NPCJsonData = json
                 });
@@ -154,7 +150,7 @@ namespace BRIX.GameService.Services.Characters
         private Character? DeserializeCharacter(PlayerCharacter playerCharacter)
         {
             Character? character = JsonConvert.DeserializeObject<Character>(
-                playerCharacter.CharacterJsonData, _jsonSettings
+                playerCharacter.CharacterJsonData, jsonSettings
             );
 
             if (character != null)
@@ -168,7 +164,7 @@ namespace BRIX.GameService.Services.Characters
         private NPC? DeserializeNPC(NPCDao npcDao)
         {
             NPC? npc = JsonConvert.DeserializeObject<NPC>(
-                npcDao.NPCJsonData, _jsonSettings
+                npcDao.NPCJsonData, jsonSettings
             );
 
             if (npc != null)

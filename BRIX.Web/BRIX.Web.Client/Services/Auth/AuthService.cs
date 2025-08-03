@@ -12,8 +12,6 @@ using BRIX.Web.Client.Options;
 using Microsoft.Extensions.Options;
 using BRIX.Web.Problems;
 using BRIX.Web.Client.Services.UI;
-using System.Runtime.CompilerServices;
-using Azure;
 
 namespace BRIX.Web.Client.Services.Auth
 {

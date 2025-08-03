@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
+using System.Linq;
 
 namespace BRIX.Web.Client.Services.Characters
 {
@@ -121,7 +122,13 @@ namespace BRIX.Web.Client.Services.Characters
         /// </summary>
         public async Task EditNPCAsync(Guid id)
         {
-            NPC npc = await GetAsync(id) ?? new NPC();
+            NPC? npc = await GetAsync(id);
+
+            if (npc is null)
+            {
+                npc = new();
+            }
+
             EditNPC(npc);
         }
 
@@ -158,7 +165,7 @@ namespace BRIX.Web.Client.Services.Characters
         /// <returns>
         /// Порядковый номер способности, необходимый при навигации, если что-то пошло не так, то вернёт null
         /// </returns>
-        public async Task<int?> EditAbility(Guid npcId, int? abilityNumber = null)
+        public async Task<int?> AddOrEditAbility(Guid npcId, int? abilityNumber = null)
         {
             // Если персонаж для редактирования не выбран или не совпадает, то выбрать.
             if (EditingNPC is null || EditingNPC.Id != npcId)
@@ -168,7 +175,7 @@ namespace BRIX.Web.Client.Services.Characters
 
             if (EditingNPC is null)
             {
-                return null;
+                throw new Exception("Не удалось войти в режим редактирования персонажа.");
             }
 
             // Если айди способности в параметрах не указан, значит её нужно создать и добавить персонажу,
@@ -180,9 +187,9 @@ namespace BRIX.Web.Client.Services.Characters
                 abilityNumber = EditingNPC!.Abilities.IndexOf(newAbility);
             }
 
-            if (EditingNPC?.Abilities.ElementAtOrDefault(abilityNumber.Value) is null)
+            if (abilityNumber is null || EditingNPC?.Abilities.ElementAtOrDefault(abilityNumber.Value) is null)
             {
-                return null;
+                throw new Exception("Не удалось войти в режим редактирования способности.");
             }
 
             return abilityNumber;

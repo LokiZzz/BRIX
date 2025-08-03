@@ -48,8 +48,8 @@
 
         int? abilityNumber = ownerType switch
         {
-            EAbilityOwner.Character => await CharacterManager.EditAbility(OwnerId, AbilityNumber),
-            EAbilityOwner.NPC => await NPCManager.EditAbility(OwnerId, AbilityNumber),
+            EAbilityOwner.Character => await CharacterManager.AddOrEditAbility(OwnerId, AbilityNumber),
+            EAbilityOwner.NPC => await NPCManager.AddOrEditAbility(OwnerId, AbilityNumber),
             _ => throw new NotImplementedException($"Не реализовано редактирование способности для {ownerType}")
         };
 
