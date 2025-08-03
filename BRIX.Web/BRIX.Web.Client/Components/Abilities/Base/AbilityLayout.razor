@@ -4,33 +4,30 @@
 @inherits LayoutComponentBase
 
 <CascadingValue Value="this">
-    <div class="section">
-        <div class="box">
-            <p>Здесь будут хлебные крошки, типа:</p>
-            <p>Гоблин боблин -> Способности -> Выстрел из бумпалки -> Урон -> Выбор целей</p>
-        </div>
+    <FooterBox>
+        <Content>
+            <div class="box">
+                <p>Здесь будут хлебные крошки, типа:</p>
+                <p>Гоблин боблин -> Способности -> Выстрел из бумпалки -> Урон -> Выбор целей</p>
+            </div>
+            @Body
+        </Content>
+        <Footer>
+            @if (OwnerType == EAbilityOwner.Character)
+            {
+                <CharacterAbilityStats @ref="characterAbilityStats" AbilityNumber="AbilityNumber" />
+            }
+            @if (OwnerType == EAbilityOwner.NPC)
+            {
+                <NPCAbilityStats @ref="npcAbilityStats" AbilityNumber="AbilityNumber" />
+            }
 
-        <FooterBox>
-            <Content>
-                @Body
-            </Content>
-            <Footer>
-                @if (OwnerType == EAbilityOwner.Character)
-                {
-                    <CharacterAbilityStats @ref="characterAbilityStats" AbilityNumber="AbilityNumber" />
-                }
-                @if (OwnerType == EAbilityOwner.NPC)
-                {
-                    <NPCAbilityStats @ref="npcAbilityStats" AbilityNumber="AbilityNumber" />
-                }
-
-                <div class="buttons is-flex is-justify-content-flex-end">
-                    <button class="button" @onclick="Reset">@Localization[nameof(Resource.Common_Reset)]</button>
-                    <button class="button is-primary" @onclick="SaveAsync">@Localization[nameof(Resource.Common_Save)]</button>
-                </div>
-            </Footer>
-        </FooterBox>
-    </div>
+            <div class="buttons is-flex is-justify-content-flex-end">
+                <button class="button" @onclick="Reset">@Localization[nameof(Resource.Common_Reset)]</button>
+                <button class="button is-primary" @onclick="SaveAsync">@Localization[nameof(Resource.Common_Save)]</button>
+            </div>
+        </Footer>
+    </FooterBox>
 </CascadingValue>
 
 @code {
