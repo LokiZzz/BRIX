@@ -8,6 +8,7 @@ namespace BRIX.Web.Client.Models.Abilities
         [
             new (typeof(DamageEffect), "dmg"),
             new (typeof(HealEffect), "heal"),
+            new (typeof(SummonCreatureEffect), "smn"),
         ];
 
         public static EffectBase Create(this Type effectType)

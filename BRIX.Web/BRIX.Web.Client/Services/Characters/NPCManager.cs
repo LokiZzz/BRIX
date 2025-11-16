@@ -1,5 +1,6 @@
 ﻿using BRIX.Library.Abilities;
 using BRIX.Library.Characters;
+using BRIX.Library.Effects;
 using BRIX.Utility.Extensions;
 using BRIX.Web.Client.Extensions;
 using BRIX.Web.Client.Models.Common;
@@ -38,6 +39,8 @@ namespace BRIX.Web.Client.Services.Characters
         /// Временное хранилище для изменяемого неигрового персонажа.
         /// </summary>
         public NPC? EditingNPC { get; private set; }
+
+        public SummoningParameters? SummoningCallbackParameters { get; private set; }
 
         public async Task<List<NPC>> GetAllAsync()
         {
@@ -151,6 +154,15 @@ namespace BRIX.Web.Client.Services.Characters
             _navigation.LocationChanged += ResetIfExitEditing;
         }
 
+        public void EditNPC(SummoningParameters summoning)
+        {
+            EditingNPC = summoning.EditingCharacter
+                .Abilities[summoning.AbilityNumber]
+                .GetEffectByIndex<SummonCreatureEffect>(summoning.AbilityNumber)
+                .Creatures[summoning.CreatureNumber]
+                .Creature;
+        }
+
         public void Reset()
         {
             EditingNPC = null;
@@ -202,5 +214,14 @@ namespace BRIX.Web.Client.Services.Characters
                 Reset();
             }
         }
+    }
+
+    public class SummoningParameters
+    {
+        public required Character EditingCharacter { get; set; }
+
+        public int AbilityNumber { get; set; }
+
+        public int CreatureNumber { get; set; }
     }
 }

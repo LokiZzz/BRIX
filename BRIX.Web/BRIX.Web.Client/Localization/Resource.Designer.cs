@@ -1141,6 +1141,24 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Summon.
+        /// </summary>
+        public static string Effect_SummonCreatureEffect {
+            get {
+                return ResourceManager.GetString("Effect_SummonCreatureEffect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summons creatures to the battlefield..
+        /// </summary>
+        public static string Effect_SummonCreatureEffect_Hint {
+            get {
+                return ResourceManager.GetString("Effect_SummonCreatureEffect_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All targets in area.
         /// </summary>
         public static string ETargetSelectionStrategy_Area {

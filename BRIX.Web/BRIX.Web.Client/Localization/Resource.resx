@@ -559,4 +559,10 @@
   <data name="NPC_Health" xml:space="preserve">
     <value>Helath</value>
   </data>
+  <data name="Effect_SummonCreatureEffect" xml:space="preserve">
+    <value>Summon</value>
+  </data>
+  <data name="Effect_SummonCreatureEffect_Hint" xml:space="preserve">
+    <value>Summons creatures to the battlefield.</value>
+  </data>
 </root>

@@ -558,4 +558,10 @@
   <data name="NPC_Health" xml:space="preserve">
     <value>Здоровье</value>
   </data>
+  <data name="Effect_SummonCreatureEffect" xml:space="preserve">
+    <value>Призыв</value>
+  </data>
+  <data name="Effect_SummonCreatureEffect_Hint" xml:space="preserve">
+    <value>Призывает существ на поле боя.</value>
+  </data>
 </root>

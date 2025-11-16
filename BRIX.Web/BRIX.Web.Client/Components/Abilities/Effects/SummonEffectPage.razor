@@ -1,0 +1,30 @@
+﻿@inherits EffectPageBase<SummonCreatureEffect>
+
+@page "/{OwnerType}/{OwnerId:guid}/abilities/{AbilityNumber:int}/effects/smn/{EffectOrderNumber:int}"
+
+@if (Effect is null)
+{
+    return;
+}
+
+<div class="box">
+    <p class="title">@Localization[nameof(Resource.Effect_SummonCreatureEffect)]</p>
+    <p class="block">@Localization[nameof(Resource.Effect_SummonCreatureEffect_Hint)]</p>
+    
+</div>
+
+<div class="box">
+    <button class="button is-large is-fullwidth block" @onclick="AddCreature">
+        <i class="fa fa-plus-circle"></i>
+    </button>
+</div>
+
+<AspectsPanel Aspects="Effect.Aspects" />
+
+@code
+{
+    private void AddCreature()
+    {
+        
+    }
+}

@@ -92,7 +92,7 @@ namespace BRIX.GameService.Extensions
             services.AddEndpointsApiExplorer();
 
             services.AddSwaggerGen(options => {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "JWTToken_Auth_API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "BRIX API", Version = "v1" });
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme() 
                 {
                     Name = "Authorization",
