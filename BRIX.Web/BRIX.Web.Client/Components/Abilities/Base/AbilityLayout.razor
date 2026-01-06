@@ -21,7 +21,10 @@
             {
                 <NPCAbilityStats @ref="npcAbilityStats" AbilityNumber="AbilityNumber" />
             }
-
+            @if (OwnerType == EAbilityOwner.Summon)
+            {
+                <SummonAbilityStats @ref="summonAbilityStats" AbilityNumber="AbilityNumber" />
+            }
             <div class="buttons is-flex is-justify-content-flex-end">
                 <button class="button" @onclick="Reset">@Localization[nameof(Resource.Common_Reset)]</button>
                 <button class="button is-primary" @onclick="SaveAsync">@Localization[nameof(Resource.Common_Save)]</button>
@@ -37,8 +40,9 @@
 
     public Action? OnReset { get; set; }
 
-    private NPCAbilityStats? npcAbilityStats;
     private CharacterAbilityStats? characterAbilityStats;
+    private NPCAbilityStats? npcAbilityStats;
+    private SummonAbilityStats? summonAbilityStats;
 
     private IAbilityStatsComponent? abilityStats
     {
@@ -46,8 +50,9 @@
         {
             return OwnerType switch
             {
-                EAbilityOwner.NPC => npcAbilityStats,
                 EAbilityOwner.Character => characterAbilityStats,
+                EAbilityOwner.NPC => npcAbilityStats,
+                EAbilityOwner.Summon => summonAbilityStats,
                 _ => null
             };
         }

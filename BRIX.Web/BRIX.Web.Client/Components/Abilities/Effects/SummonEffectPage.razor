@@ -10,14 +10,23 @@
 <div class="box">
     <p class="title">@Localization[nameof(Resource.Effect_SummonCreatureEffect)]</p>
     <p class="block">@Localization[nameof(Resource.Effect_SummonCreatureEffect_Hint)]</p>
-    
 </div>
 
-<div class="box">
-    <button class="button is-large is-fullwidth block" @onclick="AddCreature">
-        <i class="fa fa-plus-circle"></i>
-    </button>
-</div>
+
+<button class="button is-large is-fullwidth block" @onclick="AddCreature">
+    <i class="fa fa-plus-circle"></i>
+</button>
+
+@if (Effect.Creatures.Count > 0)
+{
+    foreach (CreaturesGroup creatureGroup in Effect.Creatures)
+    {
+        <div class="box">
+            <p class="title">@creatureGroup.Creature.Name (x @creatureGroup.Count)</p>
+            <p class="block">@Localization[nameof(Resource.Common_Power)]: @creatureGroup.Creature.Power</p>
+        </div>
+    }
+}
 
 <AspectsPanel Aspects="Effect.Aspects" />
 
@@ -25,6 +34,29 @@
 {
     private void AddCreature()
     {
-        
+        CreaturesGroup newCeratureGroup = new();
+
+        // Временный код для облегчения тестирования, удалить
+        newCeratureGroup.Creature.Name = "Новое призываемое существо ";
+        newCeratureGroup.Creature.Description = newCeratureGroup.Creature.Id.ToString();
+        Ability smash = new();
+        smash.AddEffect(new DamageEffect { Impact = new(1, (1, 4)) });
+        newCeratureGroup.Creature.AddAbility(smash);
+
+        Effect?.Creatures.Add(newCeratureGroup);
+
+        NPCManager.EditNPC(
+            new SummoningParameters()
+            {
+                EditingCharacter = CharacterManager.EditingCharacter
+                    ?? throw new Exception("Editing character not found."),
+                AbilityIndex = AbilityNumber
+                    ?? throw new Exception("Editing ability not found."),
+                CreatureIndex = Effect?.Creatures.IndexOf(newCeratureGroup)
+                    ?? throw new Exception("Editing creature not found."),
+            }
+        );
+
+        Navigation.NavigateTo($"/npcs/{newCeratureGroup.Creature.Id}");
     }
 }

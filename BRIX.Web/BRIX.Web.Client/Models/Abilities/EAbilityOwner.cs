@@ -7,6 +7,7 @@
     {
         Character = 0,
         NPC = 1,
-        Artifact = 2
+        Artifact = 2,
+        Summon = 3,
     }
 }

@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
-using System.Linq;
 
 namespace BRIX.Web.Client.Services.Characters
 {
@@ -156,11 +155,12 @@ namespace BRIX.Web.Client.Services.Characters
 
         public void EditNPC(SummoningParameters summoning)
         {
-            EditingNPC = summoning.EditingCharacter
-                .Abilities[summoning.AbilityNumber]
-                .GetEffectByIndex<SummonCreatureEffect>(summoning.AbilityNumber)
-                .Creatures[summoning.CreatureNumber]
+            NPC npcToEdit = summoning.EditingCharacter
+                .Abilities[summoning.AbilityIndex]
+                .GetEffectByIndex<SummonCreatureEffect>(summoning.AbilityIndex)
+                .Creatures[summoning.CreatureIndex]
                 .Creature;
+            EditNPC(npcToEdit);
         }
 
         public void Reset()
@@ -220,8 +220,8 @@ namespace BRIX.Web.Client.Services.Characters
     {
         public required Character EditingCharacter { get; set; }
 
-        public int AbilityNumber { get; set; }
+        public int AbilityIndex { get; set; }
 
-        public int CreatureNumber { get; set; }
+        public int CreatureIndex { get; set; }
     }
 }

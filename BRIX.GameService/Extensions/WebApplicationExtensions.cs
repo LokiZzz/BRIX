@@ -1,5 +1,4 @@
 ﻿using BRIX.GameService.Options;
-using System.Runtime.CompilerServices;
 
 namespace BRIX.GameService.Extensions
 {
@@ -15,15 +14,6 @@ namespace BRIX.GameService.Extensions
                 .AllowAnyHeader()
                 .AllowAnyMethod()
             );
-        }
-
-        public static void UseDevSwagger(this WebApplication app)
-        {
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
         }
     }
 }

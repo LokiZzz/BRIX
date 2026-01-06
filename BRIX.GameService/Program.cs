@@ -15,7 +15,6 @@ builder.Services.AddCors();
 builder.Services.AddDatabase(config);
 builder.Services.AddAuth(config);
 builder.Services.AddServices();
-builder.Services.AddSwaggerWithJWT();
 builder.Services.AddLogging(config);
 builder.Services.AddExceptionHandling();
 
@@ -24,7 +23,6 @@ WebApplication app = builder.Build();
 app.UseCors(config);
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseDevSwagger();
 app.UseHttpsRedirection();
 app.MapControllers();
 app.UseExceptionHandler();

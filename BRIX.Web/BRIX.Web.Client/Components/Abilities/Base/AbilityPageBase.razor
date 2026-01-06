@@ -49,7 +49,7 @@
         int? abilityNumber = ownerType switch
         {
             EAbilityOwner.Character => await CharacterManager.AddOrEditAbility(OwnerId, AbilityNumber),
-            EAbilityOwner.NPC => await NPCManager.AddOrEditAbility(OwnerId, AbilityNumber),
+            EAbilityOwner.NPC or EAbilityOwner.Summon => await NPCManager.AddOrEditAbility(OwnerId, AbilityNumber),
             _ => throw new NotImplementedException($"Не реализовано редактирование способности для {ownerType}")
         };
 
@@ -77,7 +77,7 @@
             EAbilityOwner.Character => AbilityNumber is null
                 ? new()
                 : CharacterManager.EditingCharacter?.Abilities.ElementAtOrDefault(AbilityNumber.Value) ?? new(),
-            EAbilityOwner.NPC => AbilityNumber is null
+            EAbilityOwner.Summon or EAbilityOwner.Summon => AbilityNumber is null
                 ? new()
                 : NPCManager.EditingNPC?.Abilities.ElementAtOrDefault(AbilityNumber.Value) ?? new(),
 
@@ -90,5 +90,6 @@
         {"characters", EAbilityOwner.Character },
         {"npcs", EAbilityOwner.NPC },
         {"artifacts", EAbilityOwner.Artifact },
+        {"summon", EAbilityOwner.Summon },
     };
 }
