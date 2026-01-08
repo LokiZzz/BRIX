@@ -155,12 +155,7 @@ namespace BRIX.Web.Client.Services.Characters
 
         public void EditNPC(SummoningParameters summoning)
         {
-            NPC npcToEdit = summoning.EditingCharacter
-                .Abilities[summoning.AbilityIndex]
-                .GetEffectByIndex<SummonCreatureEffect>(summoning.AbilityIndex)
-                .Creatures[summoning.CreatureIndex]
-                .Creature;
-            EditNPC(npcToEdit);
+            EditNPC(summoning.Summon);
         }
 
         public void Reset()
@@ -220,8 +215,9 @@ namespace BRIX.Web.Client.Services.Characters
     {
         public required Character EditingCharacter { get; set; }
 
-        public int AbilityIndex { get; set; }
+        public required Guid CreatureId { get; set; }
 
-        public int CreatureIndex { get; set; }
+        public NPC? Summon => EditingCharacter.GetSummon(CreatureId)
+            ?? throw new Exception("Summoning creature not found");
     }
 }

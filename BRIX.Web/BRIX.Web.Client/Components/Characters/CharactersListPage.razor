@@ -1,4 +1,4 @@
-﻿@page "/characters"
+﻿@page "/character"
 
 <div class="section">
     <div class="container">
@@ -47,13 +47,13 @@
     private void Add()
     {
         CharacterManager.Reset();
-        Navigation.NavigateTo("/characters/edit");
+        Navigation.NavigateTo("/character/edit");
     }
 
     private void Edit(Character character)
     {
         CharacterManager.EditCharacter(character);
-        Navigation.NavigateTo("/characters/edit");
+        Navigation.NavigateTo("/character/edit");
     }
 
     private async Task Delete(Character character)
@@ -68,6 +68,6 @@
 
     private void Open(Character character)
     {
-        Navigation.NavigateTo($"/characters/{character.Id}");
+        Navigation.NavigateTo($"/character/{character.Id}");
     }
 }

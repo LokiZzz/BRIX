@@ -28,7 +28,7 @@
         {
             Guid chacracterId = CharacterManager.EditingCharacter.Id;
             await CharacterManager.SaveAsync();
-            Navigation.NavigateTo($"/characters/{chacracterId}/abilities");
+            Navigation.NavigateTo($"/character/{chacracterId}/abilities");
         }
         else
         {

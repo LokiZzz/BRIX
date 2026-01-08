@@ -1,4 +1,4 @@
-﻿@page "/npcs/{Id:guid}/edit"
+﻿@page "/npc/{Id:guid}/edit"
 
 @if (NPC is null)
 {
@@ -42,9 +42,9 @@
 
         if (result.Successfull)
         {
-            Navigation.NavigateTo("/npcs");
+            Navigation.NavigateTo("/npc");
         }
     }
 
-    public void Back() => Navigation.NavigateTo("/npcs");
+    public void Back() => Navigation.NavigateTo("/npc");
 }

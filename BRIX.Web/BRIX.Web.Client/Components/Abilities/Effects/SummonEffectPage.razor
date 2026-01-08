@@ -50,13 +50,10 @@
             {
                 EditingCharacter = CharacterManager.EditingCharacter
                     ?? throw new Exception("Editing character not found."),
-                AbilityIndex = AbilityNumber
-                    ?? throw new Exception("Editing ability not found."),
-                CreatureIndex = Effect?.Creatures.IndexOf(newCeratureGroup)
-                    ?? throw new Exception("Editing creature not found."),
+                CreatureId = newCeratureGroup.Creature.Id,
             }
         );
 
-        Navigation.NavigateTo($"/npcs/{newCeratureGroup.Creature.Id}");
+        Navigation.NavigateTo($"/summon/{newCeratureGroup.Creature.Id}");
     }
 }

@@ -1,4 +1,4 @@
-﻿@page "/npcs"
+﻿@page "/npc"
 
 <div class="section">
     <div class="container">
@@ -45,13 +45,13 @@
     {
         NPCManager.Reset();
         NPCManager.EditNPC();
-        Navigation.NavigateTo($"/npcs/{NPCManager.EditingNPC?.Id}");
+        Navigation.NavigateTo($"/npc/{NPCManager.EditingNPC?.Id}");
     }
 
     private void Edit(NPC npc)
     {
         NPCManager.EditNPC(npc);
-        Navigation.NavigateTo($"/npcs/{npc.Id}");
+        Navigation.NavigateTo($"/npc/{npc.Id}");
     }
 
     private async Task Delete(NPC npc)

@@ -26,13 +26,13 @@
 
     private void AddAbility(MouseEventArgs e)
     {
-        Navigation.NavigateTo($"/characters/{Character.Id}/abilities/new");
+        Navigation.NavigateTo($"/character/{Character.Id}/abilities/new");
     }
 
     private void EditAbility(Ability ability)
     {
         int abilityNumber = Character.Abilities.IndexOf(ability);
-        Navigation.NavigateTo($"/characters/{Character.Id}/abilities/{abilityNumber}");
+        Navigation.NavigateTo($"/character/{Character.Id}/abilities/{abilityNumber}");
     }
 
     private async void RemoveAbility(Ability ability)

@@ -15,6 +15,10 @@
     [Parameter]
     public int? AbilityNumber { get; set; }
 
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "ch")]
+    public Guid? CharacterId { get; set; }
+
     protected Ability Ability => GetAbility();
 
     /// <summary>
@@ -87,9 +91,9 @@
 
     private Dictionary<string, EAbilityOwner> RouteToAbilityOwnerMap => new()
     {
-        {"characters", EAbilityOwner.Character },
-        {"npcs", EAbilityOwner.NPC },
-        {"artifacts", EAbilityOwner.Artifact },
+        {"character", EAbilityOwner.Character },
+        {"npc", EAbilityOwner.NPC },
+        {"artifact", EAbilityOwner.Artifact },
         {"summon", EAbilityOwner.Summon },
     };
 }

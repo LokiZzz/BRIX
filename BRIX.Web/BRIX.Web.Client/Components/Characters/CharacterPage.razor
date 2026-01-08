@@ -1,5 +1,5 @@
-﻿@page "/characters/{CharacterId:guid}"
-@page "/characters/{CharacterId:guid}/{ActiveTab}"
+﻿@page "/character/{CharacterId:guid}"
+@page "/character/{CharacterId:guid}/{ActiveTab}"
 
 <div class="section">
     <div class="container block">
@@ -71,6 +71,6 @@
 
     private void UpdateUriBySelectedTab(TabItem tab)
     {
-        Navigation.NavigateTo($"/characters/{CharacterId}/{tab.Tag}");
+        Navigation.NavigateTo($"/character/{CharacterId}/{tab.Tag}");
     }
 }

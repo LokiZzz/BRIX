@@ -1,5 +1,5 @@
-﻿@page "/npcs/{Id:guid}"
-@page "/summon/{CharacterId:guid}/{AbilityIndex:int}/{EffectIndex:int}/{CreatureIndex:int}"
+﻿@page "/npc/{Id:guid}"
+@page "/summon/{Id:guid}"
 
 @if (NPC is null)
 {
@@ -61,32 +61,45 @@
     public Guid Id { get; set; }
 
     [Parameter]
+    [SupplyParameterFromQuery]
     public Guid CharacterId { get; set; }
 
-    [Parameter]
-    public Guid AbilityIndex { get; set; }
-
-    [Parameter]
-    public Guid EffectIndex { get; set; }
-
-    [Parameter]
-    public Guid CreatureIndex { get; set; }
-
     private NPC NPC { get; set; } = default!;
-
     private bool npcChanged = false;
+    private ENPCPageMode mode = ENPCPageMode.NPC;
 
     protected override async Task OnInitializedAsync()
     {
+        mode = GetMode();
         NPC? npc = NPCManager.EditingNPC;
 
         if (npc is null)
         {
-            npc = await NPCManager.GetAsync(Id);
-            NPCManager.EditNPC(npc);
+            if (mode == ENPCPageMode.NPC)
+            {
+                npc = await NPCManager.GetAsync(Id);
+                NPCManager.EditNPC(npc);
+            }
+            else if (mode == ENPCPageMode.Summon)
+            {
+                // Теоретически сюда переходят из эффекта призыва и NPC должен быть уже на редактировании
+                // эта инициализация здесь на всякий случай, если вдруг сюда с нуля переходят, например из закладок
+                CharacterManager.EditCharacter(
+                    await CharacterManager.GetAsync(CharacterId)
+                );
+
+                NPCManager.EditNPC(
+                    new SummoningParameters()
+                    {
+                        EditingCharacter = CharacterManager.EditingCharacter
+                            ?? throw new Exception("Editing character not found."),
+                        CreatureId = Id,
+                    }
+                );
+            }
         }
 
-        if (npc is not null && npc?.Id == Id)
+        if (npc is not null)
         {
             NPC = npc;
         }
@@ -99,16 +112,17 @@
     private async Task AddAbility(MouseEventArgs e)
     {
         await SaveAsync();
-        Navigation.NavigateTo($"/npcs/{NPC.Id}/abilities/new");
+        Navigation.NavigateToRelative($"/abilities/new");
     }
 
-    private void EditAbility(Ability ability)
+    private async Task EditAbility(Ability ability)
     {
+        await SaveAsync();
         int abilityNumber = NPC.Abilities.IndexOf(ability);
-        Navigation.NavigateTo($"/npcs/{NPC.Id}/abilities/{abilityNumber}");
+        Navigation.NavigateToRelative($"/abilities/{abilityNumber}");
     }
 
-    private async void RemoveAbility(Ability ability)
+    private async Task RemoveAbility(Ability ability)
     {
         NPC.RemoveAbility(ability);
         await NPCManager.SaveAsync(NPC);
@@ -124,5 +138,16 @@
     {
         await OnInitializedAsync();
         npcChanged = false;
+    }
+
+    private ENPCPageMode GetMode()
+    {
+        return Navigation.Uri.Contains("npc") ? ENPCPageMode.NPC : ENPCPageMode.Summon;
+    }
+
+    private enum ENPCPageMode
+    {
+        NPC = 0,
+        Summon = 1
     }
 }

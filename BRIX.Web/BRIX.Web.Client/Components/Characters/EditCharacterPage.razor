@@ -1,4 +1,4 @@
-﻿@page "/characters/edit"
+﻿@page "/character/edit"
 
 <div class="section">
     <div class="container">
@@ -51,9 +51,9 @@
 
         if (result.Successfull)
         {
-            Navigation.NavigateTo("/characters");
+            Navigation.NavigateTo("/character");
         }
     }
 
-    public void Back() => Navigation.NavigateTo("/characters");
+    public void Back() => Navigation.NavigateTo("/character");
 }

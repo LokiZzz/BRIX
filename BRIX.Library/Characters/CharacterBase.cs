@@ -102,6 +102,16 @@ namespace BRIX.Library.Characters
             set => _currentHealth = value;
         }
 
+        public NPC? GetSummon(Guid summonId)
+        {
+            return Abilities
+                ?.SelectMany(x => x.Effects)
+                .OfType<SummonCreatureEffect>()
+                .SelectMany(x => x.Creatures)
+                .Select(x => x?.Creature)
+                .SingleOrDefault(x => x?.Id == summonId);
+        }
+
         protected virtual int GetMaxHealth()
         {
             return RawMaxHealth + MaxHealthBonuses + MaxHealthPenalties;

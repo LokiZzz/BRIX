@@ -21,7 +21,7 @@
     {
         Guid? id = NPCManager.EditingNPC?.Id;
         await NPCManager.SaveAsync();
-        Navigation.NavigateTo($"/npcs/{id}");
+        Navigation.NavigateTo($"/npc/{id}");
     }
 
     public void Reset()
