@@ -565,4 +565,7 @@
   <data name="Effect_SummonCreatureEffect_Hint" xml:space="preserve">
     <value>Summons creatures to the battlefield.</value>
   </data>
+  <data name="Effect_SummonCreatureEffect_New" xml:space="preserve">
+    <value>New summoning creature</value>
+  </data>
 </root>

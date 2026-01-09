@@ -1464,4 +1464,7 @@
   <data name="AspectTargetSize" xml:space="preserve">
     <value>Размеры целей</value>
   </data>
+  <data name="EffectSummonCreatureNew" xml:space="preserve">
+    <value>Новое призываемое существо</value>
+  </data>
 </root>

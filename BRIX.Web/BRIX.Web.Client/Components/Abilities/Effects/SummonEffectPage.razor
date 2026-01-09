@@ -13,9 +13,15 @@
 </div>
 
 
-<button class="button is-large is-fullwidth block" @onclick="AddCreature">
-    <i class="fa fa-plus-circle"></i>
-</button>
+<div class="container">
+    <button class="button is-large block" @onclick="AddCreature">
+        <i class="fa fa-plus-circle"></i>
+    </button>
+    <button class="button is-large block">
+        Скопировать существующего
+    </button>
+</div>
+
 
 @if (Effect.Creatures.Count > 0)
 {
@@ -24,6 +30,9 @@
         <div class="box">
             <p class="title">@creatureGroup.Creature.Name (x @creatureGroup.Count)</p>
             <p class="block">@Localization[nameof(Resource.Common_Power)]: @creatureGroup.Creature.Power</p>
+            <button class="button" @onclick="() => EditCreature(creatureGroup)">
+                @Localization[nameof(Resource.Common_Edit)]
+            </button>
         </div>
     }
 }
@@ -35,25 +44,22 @@
     private void AddCreature()
     {
         CreaturesGroup newCeratureGroup = new();
-
-        // Временный код для облегчения тестирования, удалить
-        newCeratureGroup.Creature.Name = "Новое призываемое существо ";
-        newCeratureGroup.Creature.Description = newCeratureGroup.Creature.Id.ToString();
-        Ability smash = new();
-        smash.AddEffect(new DamageEffect { Impact = new(1, (1, 4)) });
-        newCeratureGroup.Creature.AddAbility(smash);
-
+        int number = (Effect?.Creatures.Count ?? 0) + 1;
+        newCeratureGroup.Creature.Name = $"{Localization[Resource.Effect_SummonCreatureEffect_New]} {number}";
         Effect?.Creatures.Add(newCeratureGroup);
+    }
 
+    private void EditCreature(CreaturesGroup creatureGroup)
+    {
         NPCManager.EditNPC(
             new SummoningParameters()
             {
                 EditingCharacter = CharacterManager.EditingCharacter
                     ?? throw new Exception("Editing character not found."),
-                CreatureId = newCeratureGroup.Creature.Id,
+                CreatureId = creatureGroup.Creature.Id,
             }
         );
 
-        Navigation.NavigateTo($"/summon/{newCeratureGroup.Creature.Id}");
+        Navigation.NavigateTo($"/summon/{creatureGroup.Creature.Id}?chr={CharacterManager.EditingCharacter.Id}");
     }
 }

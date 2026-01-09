@@ -13,7 +13,7 @@ namespace BRIX.Library.Abilities
         public string Description { get; set; } = string.Empty;
 
         protected readonly List<EffectBase> _effects = [];
-        public IReadOnlyCollection<EffectBase> Effects => _effects;
+        public IReadOnlyList<EffectBase> Effects => _effects;
 
         public readonly List<AspectBase> ConcordedAspects = [];
 

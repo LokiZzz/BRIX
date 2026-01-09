@@ -213,11 +213,25 @@ namespace BRIX.Web.Client.Services.Characters
 
     public class SummoningParameters
     {
+        // Позже можно выделить интерфейс для типов, имеющих способности и здесь ссылаться через него
         public required Character EditingCharacter { get; set; }
 
         public required Guid CreatureId { get; set; }
 
-        public NPC? Summon => EditingCharacter.GetSummon(CreatureId)
+        public NPC? Summon => EditingCharacter.FindSummon(CreatureId, out _, out _)
             ?? throw new Exception("Summoning creature not found");
+
+        public string GetSaveCallbackRoute()
+        {
+            // Если саммонер — персонаж
+            NPC? summon = EditingCharacter.FindSummon(CreatureId, out int? abilityIndex, out int? effectIndex);
+
+            if (summon is not null && abilityIndex is not null  && effectIndex is not null)
+            {
+                return $"/character/{EditingCharacter.Id}/abilities/{abilityIndex}/effects/smn/{effectIndex}";
+            }
+
+            throw new Exception("Cannot find save summon callback route.");
+        }
     }
 }

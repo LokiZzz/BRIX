@@ -61,8 +61,16 @@
     public Guid Id { get; set; }
 
     [Parameter]
-    [SupplyParameterFromQuery]
-    public Guid CharacterId { get; set; }
+    [SupplyParameterFromQuery(Name = "chr")]
+    public Guid? CharacterSummonerId { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "npc")]
+    public Guid? NPCSummonerId { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "art")]
+    public Guid? ArtifactSummonerId { get; set; }
 
     private NPC NPC { get; set; } = default!;
     private bool npcChanged = false;
@@ -82,20 +90,23 @@
             }
             else if (mode == ENPCPageMode.Summon)
             {
-                // Теоретически сюда переходят из эффекта призыва и NPC должен быть уже на редактировании
-                // эта инициализация здесь на всякий случай, если вдруг сюда с нуля переходят, например из закладок
-                CharacterManager.EditCharacter(
-                    await CharacterManager.GetAsync(CharacterId)
-                );
+                if (CharacterSummonerId is not null)
+                {
+                    // Теоретически сюда переходят из эффекта призыва и NPC должен быть уже на редактировании
+                    // эта инициализация здесь на всякий случай, если вдруг сюда с нуля переходят, например из закладок
+                    CharacterManager.EditCharacter(
+                        await CharacterManager.GetAsync(CharacterSummonerId.Value)
+                    );
 
-                NPCManager.EditNPC(
-                    new SummoningParameters()
-                    {
-                        EditingCharacter = CharacterManager.EditingCharacter
-                            ?? throw new Exception("Editing character not found."),
-                        CreatureId = Id,
-                    }
-                );
+                    NPCManager.EditNPC(
+                        new SummoningParameters()
+                            {
+                                EditingCharacter = CharacterManager.EditingCharacter
+                                    ?? throw new Exception("Editing character not found."),
+                                CreatureId = Id,
+                            }
+                    );
+                }
             }
         }
 
@@ -112,25 +123,38 @@
     private async Task AddAbility(MouseEventArgs e)
     {
         await SaveAsync();
-        Navigation.NavigateToRelative($"/abilities/new");
+        Navigation.NavigateToRelative($"/abilities/new" + GetOwnerParameter());
     }
 
     private async Task EditAbility(Ability ability)
     {
         await SaveAsync();
         int abilityNumber = NPC.Abilities.IndexOf(ability);
-        Navigation.NavigateToRelative($"/abilities/{abilityNumber}");
+        Navigation.NavigateToRelative($"/abilities/{abilityNumber}" + GetOwnerParameter());
     }
 
     private async Task RemoveAbility(Ability ability)
     {
         NPC.RemoveAbility(ability);
-        await NPCManager.SaveAsync(NPC);
+        await SaveAsync();
     }
 
     private async Task SaveAsync()
     {
-        await NPCManager.SaveAsync(NPC);
+        if (mode == ENPCPageMode.NPC)
+        {
+            await NPCManager.SaveAsync(NPC);
+        }
+        else if (mode == ENPCPageMode.Summon)
+        {
+            if (NPCManager.SummoningCallbackParameters is null)
+            {
+                throw new Exception("Editing summoning effect is missing.");
+            }
+
+            Navigation.NavigateTo(NPCManager.SummoningCallbackParameters.GetSaveCallbackRoute());
+        }
+
         npcChanged = false;
     }
 
@@ -138,6 +162,24 @@
     {
         await OnInitializedAsync();
         npcChanged = false;
+    }
+
+    private string GetOwnerParameter()
+    {
+        if (CharacterSummonerId is not null)
+        {
+            return $"?chr={CharacterSummonerId}";
+        }
+        else if (NPCSummonerId is not null)
+        {
+            return $"?npc={NPCSummonerId}";
+        }
+        else if (ArtifactSummonerId is not null)
+        {
+            return $"?art={ArtifactSummonerId}";
+        }
+
+        return string.Empty;
     }
 
     private ENPCPageMode GetMode()

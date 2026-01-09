@@ -1464,4 +1464,7 @@
   <data name="AspectTargetSize" xml:space="preserve">
     <value>Targets sizes</value>
   </data>
+  <data name="EffectSummonCreatureNew" xml:space="preserve">
+    <value>New summoning creature</value>
+  </data>
 </root>

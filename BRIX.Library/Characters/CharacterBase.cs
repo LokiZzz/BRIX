@@ -102,14 +102,26 @@ namespace BRIX.Library.Characters
             set => _currentHealth = value;
         }
 
-        public NPC? GetSummon(Guid summonId)
+        public NPC? FindSummon(Guid summonId, out int? abilityIndex, out int? effectIndex)
         {
-            return Abilities
-                ?.SelectMany(x => x.Effects)
-                .OfType<SummonCreatureEffect>()
-                .SelectMany(x => x.Creatures)
-                .Select(x => x?.Creature)
-                .SingleOrDefault(x => x?.Id == summonId);
+            foreach (Ability ability in Abilities)
+            {
+                var effects = ability.Effects.OfType<SummonCreatureEffect>();
+                var effect = effects.FirstOrDefault(x => x.Creatures.Any(x => x.Creature.Id == summonId));
+
+                if (effect is not null)
+                {
+                    abilityIndex = Abilities.IndexOf(ability);
+                    effectIndex = ability.Effects.ToList().IndexOf(effect);
+
+                    return effect.Creatures.FirstOrDefault(x => x.Creature.Id == summonId)?.Creature;
+                }
+            }
+
+            abilityIndex = null;
+            effectIndex = null;
+
+            return null;
         }
 
         protected virtual int GetMaxHealth()
