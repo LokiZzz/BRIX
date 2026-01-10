@@ -10,43 +10,32 @@ using BRIX.Web.Client.Services.UI;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Options;
 
 namespace BRIX.Web.Client.Services.Characters
 {
-    public class NPCManager
+    public class NPCManager(
+        HttpClientBuilder httpClientBuilder,
+        IOptions<GameServiceOptions> gameServiceOptions,
+        ModalService modalService,
+        NavigationManager navigation)
     {
-        private readonly ModalService _modalService;
-        private readonly NavigationManager _navigation;
-        private readonly HttpClientBuilder _httpClientBuilder;
-
-        private readonly string _baseAddress;
-
-        public NPCManager(
-            HttpClientBuilder httpClientBuilder,
-            IOptions<GameServiceOptions> gameServiceOptions,
-            ModalService modalService,
-            NavigationManager navigation)
-        {
-            _httpClientBuilder = httpClientBuilder;
-            _modalService = modalService;
-            _navigation = navigation;
-            _baseAddress = gameServiceOptions.Value.ServiceAddress;
-        }
+        private readonly string _baseAddress = gameServiceOptions.Value.ServiceAddress;
 
         /// <summary>
         /// Временное хранилище для изменяемого неигрового персонажа.
         /// </summary>
         public NPC? EditingNPC { get; private set; }
 
-        public SummoningParameters? SummoningCallbackParameters { get; private set; }
+        public SummonDescriptor? Summon { get; private set; }
 
         public async Task<List<NPC>> GetAllAsync()
         {
-            _modalService.IsBusy = true;
-            using HttpClient http = await _httpClientBuilder.CreateAsync(_baseAddress);
+            modalService.IsBusy = true;
+            using HttpClient http = await httpClientBuilder.CreateAsync(_baseAddress);
             JsonResponse<List<NPC>> response = await http.GetJsonAsync<List<NPC>>("api/npc");
-            _modalService.IsBusy = false;
+            modalService.IsBusy = false;
 
             OperationResult result = response.ToOperationResult();
 
@@ -55,18 +44,18 @@ namespace BRIX.Web.Client.Services.Characters
                 return response.Payload ?? [];
             }
 
-            _modalService.PushErrors(result.Errors);
+            modalService.PushErrors(result.Errors);
 
             return [];
         }
 
         public async Task<NPC?> GetAsync(Guid id)
         {
-            _modalService.IsBusy = true;
+            modalService.IsBusy = true;
             string uri = QueryHelpers.AddQueryString("api/npc", "id", id.ToString());
-            using HttpClient http = await _httpClientBuilder.CreateAsync(_baseAddress);
+            using HttpClient http = await httpClientBuilder.CreateAsync(_baseAddress);
             JsonResponse<List<NPC>> response = await http.GetJsonAsync<List<NPC>>(uri);
-            _modalService.IsBusy = false;
+            modalService.IsBusy = false;
 
             OperationResult result = response.ToOperationResult();
 
@@ -75,30 +64,30 @@ namespace BRIX.Web.Client.Services.Characters
                 return response.Payload?.FirstOrDefault();
             }
 
-            _modalService.PushErrors(result.Errors);
+            modalService.PushErrors(result.Errors);
 
             return null;
         }
 
         public async Task<OperationResult> DeleteAsync(NPC npc)
         {
-            _modalService.IsBusy = true;
+            modalService.IsBusy = true;
 
-            using HttpClient http = await _httpClientBuilder.CreateAsync(_baseAddress);
+            using HttpClient http = await httpClientBuilder.CreateAsync(_baseAddress);
             JsonResponse response = await http.DeleteJsonAsync($"api/npc?id={npc.Id}");
 
             OperationResult result = response.ToOperationResult();
 
-            _modalService.PushErrors(result.Errors);
-            _modalService.IsBusy = false;
+            modalService.PushErrors(result.Errors);
+            modalService.IsBusy = false;
 
             return result;
         }
 
         public async Task<OperationResult> SaveAsync(NPC npc)
         {
-            _modalService.IsBusy = true;
-            using HttpClient http = await _httpClientBuilder.CreateAsync(_baseAddress);
+            modalService.IsBusy = true;
+            using HttpClient http = await httpClientBuilder.CreateAsync(_baseAddress);
             JsonResponse response = await http.PutJsonAsync("api/npc", npc);
             OperationResult result = response.ToOperationResult();
 
@@ -107,8 +96,8 @@ namespace BRIX.Web.Client.Services.Characters
                 Reset();
             }    
 
-            _modalService.PushErrors(result.Errors);
-            _modalService.IsBusy = false;
+            modalService.PushErrors(result.Errors);
+            modalService.IsBusy = false;
 
             return result;
         }
@@ -118,6 +107,12 @@ namespace BRIX.Web.Client.Services.Characters
         /// </summary>
         public async Task<OperationResult> SaveAsync() => 
             await SaveAsync(EditingNPC ?? throw new Exception("No editing NPC."));
+
+        public void SaveSummon()
+        {
+            Summon?.UpdateSummon(EditingNPC ?? throw new Exception("No editing NPC to update summon."));
+            Reset();
+        }
 
         /// <summary>
         /// Забрать персонажа с сервера и войти в режим редактирования. Если персонаж на сервере не найден — создать.
@@ -150,18 +145,19 @@ namespace BRIX.Web.Client.Services.Characters
                 EditingNPC = new NPC();
             }
 
-            _navigation.LocationChanged += ResetIfExitEditing;
+            navigation.LocationChanged += ResetIfExitEditing;
         }
 
-        public void EditNPC(SummoningParameters summoning)
+        public void EditSummon(SummonDescriptor summoning)
         {
+            Summon = summoning;
             EditNPC(summoning.Summon);
         }
 
         public void Reset()
         {
             EditingNPC = null;
-            _navigation.LocationChanged -= ResetIfExitEditing;
+            navigation.LocationChanged -= ResetIfExitEditing;
         }
 
         /// <summary>
@@ -211,15 +207,35 @@ namespace BRIX.Web.Client.Services.Characters
         }
     }
 
-    public class SummoningParameters
+    public class SummonDescriptor
     {
         // Позже можно выделить интерфейс для типов, имеющих способности и здесь ссылаться через него
         public required Character EditingCharacter { get; set; }
 
         public required Guid CreatureId { get; set; }
 
-        public NPC? Summon => EditingCharacter.FindSummon(CreatureId, out _, out _)
+        public NPC? Summon => EditingCharacter.FindSummon(CreatureId, out _, out _, out _)
             ?? throw new Exception("Summoning creature not found");
+
+        public void UpdateSummon(NPC newSummon)
+        {
+            NPC? summon = EditingCharacter
+                .FindSummon(CreatureId, out int? abilityIndex, out int? effectIndex, out int? creatureIndex);
+
+            if (summon is not null && abilityIndex is not null && effectIndex is not null && creatureIndex is not null)
+            {
+                newSummon.Id = CreatureId;
+                EditingCharacter
+                    .Abilities[abilityIndex.Value]
+                    .GetEffectByIndex<SummonCreatureEffect>(effectIndex.Value)
+                    .Creatures[creatureIndex.Value]
+                    .Creature = newSummon;
+            }
+            else
+            {
+                throw new Exception("Existing summon to update is not found.");
+            }
+        }
 
         public string GetSaveCallbackRoute()
         {

@@ -88,18 +88,16 @@
                 npc = await NPCManager.GetAsync(Id);
                 NPCManager.EditNPC(npc);
             }
-            else if (mode == ENPCPageMode.Summon)
+            else if (mode == ENPCPageMode.Summon && NPCManager.Summon is null)
             {
                 if (CharacterSummonerId is not null)
                 {
-                    // Теоретически сюда переходят из эффекта призыва и NPC должен быть уже на редактировании
-                    // эта инициализация здесь на всякий случай, если вдруг сюда с нуля переходят, например из закладок
                     CharacterManager.EditCharacter(
                         await CharacterManager.GetAsync(CharacterSummonerId.Value)
                     );
 
                     NPCManager.EditNPC(
-                        new SummoningParameters()
+                        new SummoningDescriptor
                             {
                                 EditingCharacter = CharacterManager.EditingCharacter
                                     ?? throw new Exception("Editing character not found."),
@@ -147,12 +145,13 @@
         }
         else if (mode == ENPCPageMode.Summon)
         {
-            if (NPCManager.SummoningCallbackParameters is null)
+            if (NPCManager.Summon is null)
             {
                 throw new Exception("Editing summoning effect is missing.");
             }
 
-            Navigation.NavigateTo(NPCManager.SummoningCallbackParameters.GetSaveCallbackRoute());
+            NPCManager
+            Navigation.NavigateTo(NPCManager.Summon.GetSaveCallbackRoute());
         }
 
         npcChanged = false;

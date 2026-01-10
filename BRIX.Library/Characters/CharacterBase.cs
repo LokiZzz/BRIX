@@ -1,5 +1,6 @@
 ﻿using BRIX.Library.Abilities;
 using BRIX.Library.Effects;
+using System.Linq;
 
 namespace BRIX.Library.Characters
 {
@@ -102,7 +103,7 @@ namespace BRIX.Library.Characters
             set => _currentHealth = value;
         }
 
-        public NPC? FindSummon(Guid summonId, out int? abilityIndex, out int? effectIndex)
+        public NPC? FindSummon(Guid summonId, out int? abilityIndex, out int? effectIndex, out int? creatureGroupIndex)
         {
             foreach (Ability ability in Abilities)
             {
@@ -113,13 +114,17 @@ namespace BRIX.Library.Characters
                 {
                     abilityIndex = Abilities.IndexOf(ability);
                     effectIndex = ability.Effects.ToList().IndexOf(effect);
+                    CreaturesGroup? group = effect.Creatures.FirstOrDefault(x => x.Creature.Id == summonId)
+                        ?? throw new Exception("Creature group is missing.");
+                    creatureGroupIndex = effect.Creatures.IndexOf(group);
 
-                    return effect.Creatures.FirstOrDefault(x => x.Creature.Id == summonId)?.Creature;
+                    return group.Creature;
                 }
             }
 
             abilityIndex = null;
             effectIndex = null;
+            creatureGroupIndex = null;
 
             return null;
         }

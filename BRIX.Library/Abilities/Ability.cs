@@ -36,6 +36,7 @@ namespace BRIX.Library.Abilities
             {
                 effectsCountPenaltyCoef += (effectiveEffectsCount - 1) * deltaPerEffect;
             }
+
             int effectsPositiveCost = GetEffectsCost();
             // На эффекты с отрицательной стоимостью (саморазрушение) не влияют настройки активации.
             // Поэтому они считаются отдельно.

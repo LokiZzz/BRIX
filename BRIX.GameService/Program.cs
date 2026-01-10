@@ -1,5 +1,4 @@
 using BRIX.GameService.Extensions;
-using BRIX.GameService.Services.Utility;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
