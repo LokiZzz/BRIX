@@ -96,8 +96,8 @@
                         await CharacterManager.GetAsync(CharacterSummonerId.Value)
                     );
 
-                    NPCManager.EditNPC(
-                        new SummoningDescriptor
+                    NPCManager.EditSummon(
+                        new SummonDescriptor
                             {
                                 EditingCharacter = CharacterManager.EditingCharacter
                                     ?? throw new Exception("Editing character not found."),
@@ -150,7 +150,7 @@
                 throw new Exception("Editing summoning effect is missing.");
             }
 
-            NPCManager
+            NPCManager.SaveSummon();
             Navigation.NavigateTo(NPCManager.Summon.GetSaveCallbackRoute());
         }
 
