@@ -9,7 +9,6 @@ using BRIX.Web.Client.Services.UI;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Options;
 
 namespace BRIX.Web.Client.Services.Characters
@@ -20,6 +19,8 @@ namespace BRIX.Web.Client.Services.Characters
         ModalService modalService,
         NavigationManager navigation)
     {
+        public Guid DebuggingId { get; set; } = Guid.NewGuid();
+
         private readonly string _baseAddress = gameServiceOptions.Value.ServiceAddress;
 
         /// <summary>
@@ -156,6 +157,7 @@ namespace BRIX.Web.Client.Services.Characters
         public void Reset()
         {
             EditingNPC = null;
+            Summon = null;
             navigation.LocationChanged -= ResetIfExitEditing;
         }
 

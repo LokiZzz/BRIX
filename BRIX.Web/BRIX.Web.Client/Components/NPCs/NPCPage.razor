@@ -92,9 +92,12 @@
             {
                 if (CharacterSummonerId is not null)
                 {
-                    CharacterManager.EditCharacter(
-                        await CharacterManager.GetAsync(CharacterSummonerId.Value)
-                    );
+                    if (CharacterManager.EditingCharacter is null)
+                    {
+                        CharacterManager.EditCharacter(
+                            await CharacterManager.GetAsync(CharacterSummonerId.Value)
+                        );
+                    }
 
                     NPCManager.EditSummon(
                         new SummonDescriptor
@@ -104,6 +107,8 @@
                                 CreatureId = Id,
                             }
                     );
+
+                    npc = NPCManager.EditingNPC;
                 }
             }
         }

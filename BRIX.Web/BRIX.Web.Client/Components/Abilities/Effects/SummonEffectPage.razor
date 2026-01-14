@@ -47,23 +47,18 @@
     private void AddCreature()
     {
         CreaturesGroup newCreatureGroup = new();
-        int number = (Effect?.Creatures.Count ?? 0) + 1;
         newCreatureGroup.Count = 1;
-        newCreatureGroup.Creature.Name = $"{Localization[Resource.Effect_SummonCreatureEffect_New]} {number}";
+        newCreatureGroup.Creature.Name = $"{Localization[Resource.Effect_SummonCreatureEffect_New]}";
         Effect?.Creatures.Add(newCreatureGroup);
         Layout.Refresh();
     }
 
     private void EditCreature(CreaturesGroup creatureGroup)
     {
-        NPCManager.EditSummon(
-            new SummonDescriptor()
-            {
-                EditingCharacter = CharacterManager.EditingCharacter
-                    ?? throw new Exception("Editing character not found."),
-                CreatureId = creatureGroup.Creature.Id,
-            }
-        );
+        if (CharacterManager?.EditingCharacter?.Id is null)
+        {
+            throw new Exception("Editing charactyer is missing");
+        }
 
         Navigation.NavigateTo($"/summon/{creatureGroup.Creature.Id}?chr={CharacterManager.EditingCharacter.Id}");
     }

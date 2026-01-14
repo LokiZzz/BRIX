@@ -568,4 +568,7 @@
   <data name="Effect_SummonCreatureEffect_New" xml:space="preserve">
     <value>New summoning creature</value>
   </data>
+  <data name="NPC_NewNPC" xml:space="preserve">
+    <value>New NPC</value>
+  </data>
 </root>

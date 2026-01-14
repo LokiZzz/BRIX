@@ -1276,6 +1276,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New NPC.
+        /// </summary>
+        public static string NPC_NewNPC {
+            get {
+                return ResourceManager.GetString("NPC_NewNPC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Such email already taken..
         /// </summary>
         public static string Problem_DuplicateUserName {

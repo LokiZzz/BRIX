@@ -6,7 +6,7 @@
 
         @if (_npcs is not null)
         {
-            <button class="button is-large is-fullwidth block" @onclick="@(async () => Add())">
+            <button class="button is-large is-fullwidth block" @onclick="@(async () => await Add())">
                 <i class="fa fa-plus-circle"></i>
             </button>
 
@@ -34,23 +34,27 @@
 </div>
 
 @code {
-    private List<NPC>? _npcs = null;
+    private List<NPC> _npcs = new();
 
     protected override async Task OnInitializedAsync()
     {
         _npcs = await NPCManager.GetAllAsync();
     }
 
-    private void Add()
+    private async Task Add()
     {
-        NPCManager.Reset();
-        NPCManager.EditNPC();
-        Navigation.NavigateTo($"/npc/{NPCManager.EditingNPC?.Id}");
+        NPC newNPC = new() { Name = Localization[Resource.NPC_NewNPC] };
+        OperationResult result = await NPCManager.SaveAsync(newNPC);
+
+        if (result.Successfull)
+        {
+            _npcs.Add(newNPC);
+        }
+
     }
 
     private void Edit(NPC npc)
     {
-        NPCManager.EditNPC(npc);
         Navigation.NavigateTo($"/npc/{npc.Id}");
     }
 
