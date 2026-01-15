@@ -155,8 +155,9 @@
                 throw new Exception("Editing summoning effect is missing.");
             }
 
+            string callbackRoute = NPCManager.Summon.GetSaveCallbackRoute();
             NPCManager.SaveSummon();
-            Navigation.NavigateTo(NPCManager.Summon.GetSaveCallbackRoute());
+            Navigation.NavigateTo(callbackRoute);
         }
 
         npcChanged = false;

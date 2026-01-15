@@ -197,7 +197,7 @@ namespace BRIX.Web.Client.Services.Characters
 
         private void ResetIfExitEditing(object? sender, LocationChangedEventArgs e)
         {
-            if (!e.Location.Contains("/abilities/"))
+            if (!(e.Location.Contains("/abilities/") || e.Location.Contains("/summon/")))
             {
                 Reset();
             }

@@ -13,6 +13,9 @@ namespace BRIX.Web.Client.Services.Characters
         public NPC? Summon => EditingCharacter.FindSummon(CreatureId, out _, out _, out _)
             ?? throw new Exception("Summoning creature not found");
 
+        /// <summary>
+        /// Заменяет призываемое существо в эффекте новым.
+        /// </summary>
         public void UpdateSummon(NPC newSummon)
         {
             NPC? summon = EditingCharacter

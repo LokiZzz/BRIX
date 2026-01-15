@@ -148,10 +148,13 @@ namespace BRIX.Web.Client.Services.Characters
             navigation.LocationChanged += ResetIfExitEditing;
         }
 
-        public void EditSummon(SummonDescriptor summoning)
+        public void EditSummon(SummonDescriptor summonDescriptor)
         {
-            Summon = summoning;
-            EditNPC(summoning.Summon);
+            Reset();
+            Summon = summonDescriptor;
+            EditingNPC = summonDescriptor.Summon.Copy();
+
+            navigation.LocationChanged += ResetIfExitEditing;
         }
 
         public void Reset()
@@ -201,7 +204,7 @@ namespace BRIX.Web.Client.Services.Characters
 
         private void ResetIfExitEditing(object? sender, LocationChangedEventArgs e)
         {
-            if (!e.Location.Contains("/abilities/"))
+            if (!(e.Location.Contains("/abilities/") || e.Location.Contains("/summon/")))
             {
                 Reset();
             }
