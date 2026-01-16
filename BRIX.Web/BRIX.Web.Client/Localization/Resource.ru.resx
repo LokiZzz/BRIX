@@ -570,4 +570,7 @@
   <data name="NPC_NewNPC" xml:space="preserve">
     <value>Новый NPC</value>
   </data>
+  <data name="Abilities_NewAbility" xml:space="preserve">
+    <value>Новая способность</value>
+  </data>
 </root>

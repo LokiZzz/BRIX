@@ -79,43 +79,36 @@
     protected override async Task OnInitializedAsync()
     {
         mode = GetMode();
-        NPC? npc = NPCManager.EditingNPC;
 
-        if (npc is null)
+        if (mode == ENPCPageMode.NPC)
         {
-            if (mode == ENPCPageMode.NPC)
+            await NPCManager.EditNPCAsync(Id);
+        }
+        else if (mode == ENPCPageMode.Summon && NPCManager.Summon is null)
+        {
+            if (CharacterSummonerId is not null)
             {
-                npc = await NPCManager.GetAsync(Id);
-                NPCManager.EditNPC(npc);
-            }
-            else if (mode == ENPCPageMode.Summon && NPCManager.Summon is null)
-            {
-                if (CharacterSummonerId is not null)
+                if (CharacterManager.EditingCharacter is null)
                 {
-                    if (CharacterManager.EditingCharacter is null)
-                    {
-                        CharacterManager.EditCharacter(
-                            await CharacterManager.GetAsync(CharacterSummonerId.Value)
-                        );
-                    }
-
-                    NPCManager.EditSummon(
-                        new SummonDescriptor
-                            {
-                                EditingCharacter = CharacterManager.EditingCharacter
-                                    ?? throw new Exception("Editing character not found."),
-                                CreatureId = Id,
-                            }
+                    CharacterManager.EditCharacter(
+                        await CharacterManager.GetAsync(CharacterSummonerId.Value)
                     );
-
-                    npc = NPCManager.EditingNPC;
                 }
+
+                NPCManager.EditSummon(
+                    new SummonDescriptor
+                    {
+                        EditingCharacter = CharacterManager.EditingCharacter
+                            ?? throw new Exception("Editing character not found."),
+                        CreatureId = Id,
+                    }
+                );
             }
         }
 
-        if (npc is not null)
+        if (NPCManager.EditingNPC is not null)
         {
-            NPC = npc;
+            NPC = NPCManager.EditingNPC;
         }
         else
         {
@@ -125,13 +118,16 @@
 
     private async Task AddAbility(MouseEventArgs e)
     {
-        await SaveAsync();
-        Navigation.NavigateToRelative($"/abilities/new" + GetOwnerParameter());
+        //Убрать, может вернуть через вопрос в модалке
+        //await SaveAsync();
+        Ability newAbility = new() { Name = Localization[Resource.Abilities_NewAbility] };
+        NPC.Abilities.Add(newAbility);
     }
 
     private async Task EditAbility(Ability ability)
     {
-        await SaveAsync();
+        //Убрать, может вернуть через вопрос в модалке
+        //await SaveAsync();
         int abilityNumber = NPC.Abilities.IndexOf(ability);
         Navigation.NavigateToRelative($"/abilities/{abilityNumber}" + GetOwnerParameter());
     }
@@ -139,7 +135,6 @@
     private async Task RemoveAbility(Ability ability)
     {
         NPC.RemoveAbility(ability);
-        await SaveAsync();
     }
 
     private async Task SaveAsync()

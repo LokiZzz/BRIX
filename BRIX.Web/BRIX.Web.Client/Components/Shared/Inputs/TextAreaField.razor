@@ -53,8 +53,6 @@
         await ValueChanged.InvokeAsync(Value);
     }
 
-    private ElementReference textareaRef;
-
     private string textareaId = "textarea-" + Guid.NewGuid().ToString("N");
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

@@ -81,11 +81,11 @@
             EAbilityOwner.Character => AbilityNumber is null
                 ? new()
                 : CharacterManager.EditingCharacter?.Abilities.ElementAtOrDefault(AbilityNumber.Value) ?? new(),
-            EAbilityOwner.Summon or EAbilityOwner.Summon => AbilityNumber is null
+            EAbilityOwner.NPC or EAbilityOwner.Summon => AbilityNumber is null
                 ? new()
                 : NPCManager.EditingNPC?.Abilities.ElementAtOrDefault(AbilityNumber.Value) ?? new(),
 
-            _ => throw new NotImplementedException($"На странице не реализована поставка способности для {OwnerType}")
+            _ => throw new NotImplementedException($"На странице не реализовано получение способности для {OwnerType}")
         };
     }
 

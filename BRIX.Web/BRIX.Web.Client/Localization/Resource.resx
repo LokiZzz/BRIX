@@ -571,4 +571,7 @@
   <data name="NPC_NewNPC" xml:space="preserve">
     <value>New NPC</value>
   </data>
+  <data name="Abilities_NewAbility" xml:space="preserve">
+    <value>New ability</value>
+  </data>
 </root>

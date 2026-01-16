@@ -421,6 +421,15 @@ namespace BRIX.Web.Client.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New ability.
+        /// </summary>
+        public static string Abilities_NewAbility {
+            get {
+                return ResourceManager.GetString("Abilities_NewAbility", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not enough EXP for ability..
         /// </summary>
         public static string Abilities_NotEnoughExpForAbility {
