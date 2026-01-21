@@ -16,8 +16,16 @@
     public int? AbilityNumber { get; set; }
 
     [Parameter]
-    [SupplyParameterFromQuery(Name = "ch")]
-    public Guid? CharacterId { get; set; }
+    [SupplyParameterFromQuery(Name = "chr")]
+    public Guid? CharacterSummonerId { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "npc")]
+    public Guid? NPCSummonerId { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "art")]
+    public Guid? ArtifactSummonerId { get; set; }
 
     protected Ability Ability => GetAbility();
 

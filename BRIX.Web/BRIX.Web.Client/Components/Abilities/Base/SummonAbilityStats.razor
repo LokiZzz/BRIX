@@ -19,7 +19,19 @@
 
     public async Task SaveAsync()
     {
-        // Сохранить и вернуться к редактированию эффекта призыва
+        if (NPCManager.Summoning?.Summon is null)
+        {
+            throw new Exception("Editing summoning effect is missing.");
+        }
+
+        if (CharacterManager.EditingCharacter is null)
+        {
+            throw new Exception("Editing character is missing.");
+        }
+
+        Guid summonId = NPCManager.Summoning.Summon.Id;
+        NPCManager.SaveSummon();
+        Navigation.NavigateTo($"/summon/{summonId}?chr={CharacterManager.EditingCharacter.Id}");
     }
 
     public void Reset()

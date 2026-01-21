@@ -9,7 +9,8 @@ namespace BRIX.Web.Client.Services.UI
             this NavigationManager navigation,
             [StringSyntax(StringSyntaxAttribute.Uri)] string relativeUri,
             bool forceLoad = false,
-            bool replace = false)
+            bool replace = false,
+            bool holdQueryParams = true)
         {
             if (relativeUri.StartsWith('/'))
             {
@@ -19,9 +20,9 @@ namespace BRIX.Web.Client.Services.UI
             string queryParameters = string.Empty;
             string currentUri = navigation.Uri;
 
-            if (currentUri.Contains('?'))
+            if (currentUri.Contains('?') && holdQueryParams)
             {
-                string[] splitted = currentUri.Split();
+                string[] splitted = currentUri.Split('?');
                 currentUri = splitted[0];
                 queryParameters = '?' + splitted[1];
             }

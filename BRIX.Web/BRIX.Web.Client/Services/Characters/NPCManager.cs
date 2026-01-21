@@ -28,7 +28,7 @@ namespace BRIX.Web.Client.Services.Characters
         /// </summary>
         public NPC? EditingNPC { get; private set; }
 
-        public SummonDescriptor? Summon { get; private set; }
+        public SummonDescriptor? Summoning { get; private set; }
 
         public async Task<List<NPC>> GetAllAsync()
         {
@@ -102,17 +102,8 @@ namespace BRIX.Web.Client.Services.Characters
             return result;
         }
 
-        /// <summary>
-        /// Сохранить изменения, сделанные в EditingCharacter.
-        /// </summary>
         public async Task<OperationResult> SaveAsync() => 
             await SaveAsync(EditingNPC ?? throw new Exception("No editing NPC."));
-
-        public void SaveSummon()
-        {
-            Summon?.UpdateSummon(EditingNPC ?? throw new Exception("No editing NPC to update summon."));
-            Reset();
-        }
 
         /// <summary>
         /// Забрать персонажа с сервера и войти в режим редактирования. Если персонаж на сервере не найден — создать.
@@ -133,7 +124,7 @@ namespace BRIX.Web.Client.Services.Characters
         /// Войти в режим редактирования. Персонаж копируется в свойство EditingCharacter и в любой момент
         /// изменения можно будет сбросить методов Reset, обнулив свойство и заново забрав персонажа с сервера.
         /// </summary>
-        public void EditNPC(NPC? npc = null)
+        public void EditNPC(NPC? npc)
         {
             if(npc is not null)
             {
@@ -148,20 +139,19 @@ namespace BRIX.Web.Client.Services.Characters
             navigation.LocationChanged += ResetIfExitEditing;
         }
 
+        public void SaveSummon()
+        {
+            Summoning?.UpdateSummon(EditingNPC ?? throw new Exception("No editing NPC to update summon."));
+            Reset();
+        }
+
         public void EditSummon(SummonDescriptor summonDescriptor)
         {
             Reset();
-            Summon = summonDescriptor;
+            Summoning = summonDescriptor;
             EditingNPC = summonDescriptor.Summon.Copy();
 
             navigation.LocationChanged += ResetIfExitEditing;
-        }
-
-        public void Reset()
-        {
-            EditingNPC = null;
-            Summon = null;
-            navigation.LocationChanged -= ResetIfExitEditing;
         }
 
         /// <summary>
@@ -185,8 +175,7 @@ namespace BRIX.Web.Client.Services.Characters
                 throw new Exception("Не удалось войти в режим редактирования персонажа.");
             }
 
-            // Если айди способности в параметрах не указан, значит её нужно создать и добавить персонажу,
-            // а потом установить её айди.
+            // Если айди способности в параметрах не указан, значит её нужно создать и добавить.
             if (abilityNumber is null)
             {
                 Ability newAbility = new();
@@ -200,6 +189,13 @@ namespace BRIX.Web.Client.Services.Characters
             }
 
             return abilityNumber;
+        }
+
+        public void Reset()
+        {
+            EditingNPC = null;
+            Summoning = null;
+            navigation.LocationChanged -= ResetIfExitEditing;
         }
 
         private void ResetIfExitEditing(object? sender, LocationChangedEventArgs e)

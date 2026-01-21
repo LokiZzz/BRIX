@@ -10,15 +10,15 @@
     <Content>
         <div class="box block">
             <Field @bind-Value="NPC.Name"
-                    Label="@Localization[Resource.Common_Name]"
-                    @bind-Value:after="@(() => npcChanged = true)" />
+                   Label="@Localization[Resource.Common_Name]"
+                   @bind-Value:after="@(() => npcChanged = true)" />
             <TextAreaField @bind-Value="NPC.Description"
-                            MaxLength="500"
-                            Label="@Localization[Resource.Common_Description]"
-                            @bind-Value:after="@(() => npcChanged = true)" />
+                           MaxLength="500"
+                           Label="@Localization[Resource.Common_Description]"
+                           @bind-Value:after="@(() => npcChanged = true)" />
             <Field @bind-Value="NPC.SetHealth"
-                    Label="@Localization[Resource.NPC_Health]"
-                    @bind-Value:after="@(() => npcChanged = true)" />
+                   Label="@Localization[Resource.NPC_Health]"
+                   @bind-Value:after="@(() => npcChanged = true)" />
         </div>
 
         <button class="button is-large is-fullwidth block" @onclick="AddAbility">
@@ -84,7 +84,7 @@
         {
             await NPCManager.EditNPCAsync(Id);
         }
-        else if (mode == ENPCPageMode.Summon && NPCManager.Summon is null)
+        else if (mode == ENPCPageMode.Summon)
         {
             if (CharacterSummonerId is not null)
             {
@@ -122,6 +122,7 @@
         //await SaveAsync();
         Ability newAbility = new() { Name = Localization[Resource.Abilities_NewAbility] };
         NPC.Abilities.Add(newAbility);
+        npcChanged = true;
     }
 
     private async Task EditAbility(Ability ability)
@@ -129,12 +130,13 @@
         //Убрать, может вернуть через вопрос в модалке
         //await SaveAsync();
         int abilityNumber = NPC.Abilities.IndexOf(ability);
-        Navigation.NavigateToRelative($"/abilities/{abilityNumber}" + GetOwnerParameter());
+        Navigation.NavigateToRelative($"/abilities/{abilityNumber}");
     }
 
     private async Task RemoveAbility(Ability ability)
     {
         NPC.RemoveAbility(ability);
+        npcChanged = true;
     }
 
     private async Task SaveAsync()
@@ -145,12 +147,12 @@
         }
         else if (mode == ENPCPageMode.Summon)
         {
-            if (NPCManager.Summon is null)
+            if (NPCManager.Summoning is null)
             {
                 throw new Exception("Editing summoning effect is missing.");
             }
 
-            string callbackRoute = NPCManager.Summon.GetSaveCallbackRoute();
+            string callbackRoute = NPCManager.Summoning.GetSaveCallbackRoute();
             NPCManager.SaveSummon();
             Navigation.NavigateTo(callbackRoute);
         }
